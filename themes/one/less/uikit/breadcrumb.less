@@ -7,21 +7,17 @@
 // Variables
 // ========================================================================
 
-@breadcrumb-disabled-color:                     @global-muted-color;
-@breadcrumb-divider-margin:                     12px;
-
-//
-// New
-//
-
 @breadcrumb-font-size:                          round((@global-font-size * 0.85)); // 12px / 14px
+
+@breadcrumb-disabled-color:                     fade(@global-muted-color, 50%);
+@breadcrumb-divider-margin:                     12px;
 
 
 // Component
 // ========================================================================
 
 .hook-breadcrumb() {
-    font-size: @breadcrumb-font-size;
+    color: @global-muted-color;
     text-transform: uppercase;
 }
 
@@ -35,4 +31,12 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-breadcrumb-misc() {}
+.hook-breadcrumb-misc() {
+
+    .uk-breadcrumb > li > a { color: @global-muted-color; }
+    .uk-breadcrumb > li > a:hover {
+        color: @global-color;
+        text-decoration: none;
+    }
+
+}

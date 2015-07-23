@@ -13,21 +13,15 @@
 
 @datepicker-table-color:                        @global-color;
 
-@datepicker-table-hover-background:             @global-default-hover-background;
+@datepicker-table-hover-background:             @global-default-background;
 @datepicker-table-hover-color:                  @global-color;
-@datepicker-table-onclick-background:           @global-default-active-background;
+@datepicker-table-onclick-background:           @global-default-hover-background;
 @datepicker-table-onclick-color:                @global-color;
 
 @datepicker-table-active-background:            @global-primary-background;
 @datepicker-table-active-color:                 @global-contrast-color;
 
 @datepicker-table-muted-color:                  @global-muted-color;
-
-//
-// New
-//
-
-@datepicker-hover-border:                       rgba(0,0,0,0.16);
 
 
 // Component
@@ -37,12 +31,9 @@
 
 .hook-datepicker-nav-item() {}
 
-.hook-datepicker-table-item() {
-    border: 1px solid transparent;
-    border-radius: @global-border-radius;
-}
+.hook-datepicker-table-item() { border-radius: @global-border-radius; }
 
-.hook-datepicker-table-item-hover() { border-color: @datepicker-hover-border; }
+.hook-datepicker-table-item-hover() {}
 
 .hook-datepicker-table-item-onclick() {}
 

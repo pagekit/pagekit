@@ -10,25 +10,18 @@
 @pagination-padding-vertical:                   5px;
 @pagination-padding-horizontal:                 7px;
 @pagination-line-height:                        @global-line-height;
-@pagination-background:                         @global-default-background;
-@pagination-color:                              @global-color;
-@pagination-hover-background:                   @global-default-hover-background;
+@pagination-background:                         transparent;
+@pagination-color:                              @global-muted-color;
+@pagination-hover-background:                   transparent;
 @pagination-hover-color:                        @global-color;
-@pagination-onclick-background:                 @global-default-active-background;
+@pagination-onclick-background:                 transparent;
 @pagination-onclick-color:                      @global-color;
 
-@pagination-active-background:                  @global-primary-background;
-@pagination-active-color:                       @global-contrast-color;
+@pagination-active-background:                  transparent;
+@pagination-active-color:                       @global-color;
 
-@pagination-disabled-background:                @global-default-hover-background;
+@pagination-disabled-background:                transparent;
 @pagination-disabled-color:                     @global-muted-color;
-
-//
-// New
-//
-
-@pagination-border:                             rgba(0,0,0,0.1);
-@pagination-hover-border:                       rgba(0,0,0,0.15);
 
 
 // Component
@@ -38,23 +31,20 @@
 // Items
 //
 
-.hook-pagination-item() {
-    border: 1px solid @pagination-border;
-    border-radius: @global-border-radius;
-}
+.hook-pagination-item() {}
 
 // Link
-.hook-pagination-link() {}
+.hook-pagination-link() { border-bottom: 2px solid transparent; }
 
-.hook-pagination-link-hover() { border-color: @pagination-hover-border; }
+.hook-pagination-link-hover() {}
 
 .hook-pagination-link-active() {}
 
 // Active
-.hook-pagination-active() { border-color: transparent; }
+.hook-pagination-active() { border-bottom: 2px solid @global-primary-background; }
 
 // Disabled
-.hook-pagination-disabled() { border: 1px solid @pagination-border; }
+.hook-pagination-disabled() {}
 
 
 // Miscellaneous

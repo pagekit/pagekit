@@ -8,15 +8,18 @@
 // ========================================================================
 
 @table-margin-vertical:                         @global-margin;
-@table-padding-vertical:                        10px;
-@table-padding-horizontal:                      10px;
+@table-padding-vertical:                        16px;
+@table-padding-horizontal:                      12px;
 
 @table-caption-color:                           @global-muted-color;
 @table-caption-font-size:                       round((@global-font-size * 0.85)); // 12px / 14px
 
 @table-striped-background:                      #fafafa;
 
-@table-hover-background:                        darken(@table-striped-background, 4%);
+@table-condensed-padding-vertical:              10px;
+@table-condensed-padding-horizontal:            12px;
+
+@table-hover-background:                        #ffffdd;
 
 //
 // New
@@ -45,10 +48,11 @@
 .hook-table-misc() {
 
     .uk-table th {
-        border-bottom: 1px solid @table-border;
+    	border-bottom: 1px solid @table-border;
         font-size: round((@global-font-size * 0.85)); // 12px / 14px
         text-transform: uppercase;
         font-weight: normal;
+        color: @global-muted-color;
     }
 
     .uk-table :not(:first-child) > th { padding-top: @table-padding-vertical + @global-margin; }
@@ -57,6 +61,13 @@
 
     .uk-table tfoot { border-top: 1px solid @table-border; }
 
+    .uk-table-middle img + a { vertical-align: middle; }
+
     .uk-table-condensed th { padding: @table-condensed-padding-vertical @table-condensed-padding-horizontal; }
+
+    .uk-table tbody tr {
+        -webkit-transition: background-color 0.05s linear;
+        transition: background-color 0.05s linear;
+    }
 
 }

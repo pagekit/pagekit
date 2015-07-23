@@ -7,45 +7,50 @@
 // Variables
 // ========================================================================
 
+@nav-padding-vertical:                          6px;
+@nav-padding-horizontal:                        25px;
+
 @nav-header-padding-vertical:                   @nav-padding-vertical;
 @nav-header-padding-horizontal:                 @nav-padding-horizontal;
 @nav-header-font-size:                          round((@global-font-size * 0.85)); // 12px / 14px
 @nav-header-font-weight:                        normal;
 @nav-header-margin-top:                         @global-margin;
 
-@nav-divider-margin-horizontal:                 @nav-padding-horizontal;
+@nav-divider-margin-vertical:                   15px;
+@nav-divider-margin-horizontal:                 0;
 
 @nav-subtitle-font-size:                        round((@global-font-size * 0.85)); // 12px / 14px
 @nav-subtitle-line-height:                      round((@nav-subtitle-font-size * 1.46)); // 18px / 20px
 
-@nav-sub-padding-left:                          @nav-padding-horizontal;
+@nav-sub-padding-left:                          (@nav-padding-horizontal + @nav-nested-padding-left);
 
 @nav-parent-icon-width:                         @global-line-height;
 
 @nav-side-color:                                @global-color;
+@nav-side-hover-background:                     @global-default-background;
 @nav-side-hover-color:                          @global-color;
-@nav-side-active-background:                    @global-primary-background;
-@nav-side-active-color:                         @global-contrast-color;
-@nav-side-header-color:                         @global-color;
+@nav-side-active-background:                    @global-default-background;
+@nav-side-active-color:                         @global-color;
+@nav-side-header-color:                         @global-muted-color;
 @nav-side-divider-border:                       @global-border;
-@nav-side-nested-color:                         @global-link-color;
-@nav-side-nested-hover-color:                   @global-link-hover-color;
+@nav-side-nested-color:                         @global-muted-color;
+@nav-side-nested-hover-color:                   @global-color;
 
 @nav-dropdown-color:                            @global-color;
 @nav-dropdown-hover-background:                 @global-primary-background;
 @nav-dropdown-hover-color:                      @global-contrast-color;
-@nav-dropdown-header-color:                     @global-muted-color;
+@nav-dropdown-header-color:                     @global-color;
 @nav-dropdown-divider-border:                   @global-border;
-@nav-dropdown-nested-color:                     @global-link-color;
-@nav-dropdown-nested-hover-color:               @global-link-hover-color;
+@nav-dropdown-nested-color:                     @global-muted-color;
+@nav-dropdown-nested-hover-color:               @global-color;
 
 @nav-navbar-color:                              @global-color;
-@nav-navbar-hover-background:                   @global-primary-background;
-@nav-navbar-hover-color:                        @global-contrast-color;
-@nav-navbar-header-color:                       @global-muted-color;
+@nav-navbar-hover-background:                   @global-default-background;
+@nav-navbar-hover-color:                        @global-color;
+@nav-navbar-header-color:                       @global-color;
 @nav-navbar-divider-border:                     @global-border;
-@nav-navbar-nested-color:                       @global-link-color;
-@nav-navbar-nested-hover-color:                 @global-link-hover-color;
+@nav-navbar-nested-color:                       @global-muted-color;
+@nav-navbar-nested-hover-color:                 @global-color;
 
 @nav-offcanvas-color:                           @offcanvas-panel-link-color;
 @nav-offcanvas-hover-background:                lighten(@offcanvas-bar-background, 5%);
@@ -89,7 +94,7 @@
 // Items
 //
 
-.hook-nav-side() {}
+.hook-nav-side() { padding: 8px 16px; }
 
 // Hover
 .hook-nav-side-hover() {}
@@ -101,7 +106,7 @@
 // Sub-object: `uk-nav-header`
 //
 
-.hook-nav-side-header() {}
+.hook-nav-side-header() { padding: 8px 16px; }
 
 //
 // Sub-object: `uk-nav-divider`
