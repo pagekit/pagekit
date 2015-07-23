@@ -11,32 +11,37 @@
 @panel-title-font-size:                         round((@global-font-size * 1.28)); // 18px / 20px
 @panel-title-line-height:                       round((@panel-title-font-size * 1.32)); // 24px / 26px
 @panel-title-font-weight:                       300;
-@panel-title-color:                             @global-color;
+@panel-title-color:                             @global-dark-color;
 
 @panel-teaser-margin-bottom:                    @panel-box-padding;
 
 @panel-box-padding:                             25px;
 @panel-box-background:                          @global-background;
 @panel-box-color:                               @global-color;
-@panel-box-title-color:                         @global-color;
-@panel-box-teaser-margin:                       -(@panel-box-padding + 1);
+@panel-box-title-color:                         @global-dark-color;
+
+@panel-box-teaser-margin:                       -(@panel-box-padding);
+
+@panel-box-badge-top:                           0;
 
 @panel-box-primary-background:                  @global-default-hover-background;
 @panel-box-primary-color:                       @global-color;
-@panel-box-primary-title-color:                 @global-color;
+@panel-box-primary-title-color:                 @global-dark-color;
 
 @panel-box-secondary-background:                @global-default-background;
 @panel-box-secondary-color:                     @global-color;
-@panel-box-secondary-title-color:               @global-color;
+@panel-box-secondary-title-color:               @global-dark-color;
 
 @panel-hover-padding:                           25px;
 @panel-hover-color:                             @global-color;
 @panel-hover-hover-color:                       @global-color;
 @panel-hover-hover-background:                  @global-background;
-@panel-hover-teaser-margin:                     -(@panel-hover-padding + 1);
+@panel-hover-teaser-margin:                     -(@panel-hover-padding);
+
+@panel-hover-badge-top:                         0;
 
 @panel-header-title-border:                     @global-border;
-@panel-header-title-color:                      @global-color;
+@panel-header-title-color:                      @global-dark-color;
 
 @panel-divider-gutter:                          @global-grid-gutter;
 @panel-divider-gutter-large:                    @global-grid-gutter-large;
@@ -96,4 +101,11 @@
 // Miscellaneous
 // ========================================================================
 
-.hook-panel-misc() {}
+.hook-panel-misc() {
+
+    .uk-panel-space .uk-panel-badge {
+        top: 0;
+        right: 0;
+    }
+
+}

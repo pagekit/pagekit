@@ -25,7 +25,7 @@
 
 @base-heading-font-family:                      "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @base-heading-font-weight:                      300;
-@base-heading-color:                            @global-color;
+@base-heading-color:                            @global-dark-color;
 @base-heading-margin-top:                       @global-margin-large;
 @base-h1-font-size:                             round((@global-font-size * 2.6)); // 36px / 42px
 @base-h1-line-height:                           round((@base-h1-font-size * 1.154)); // 42px / 48px
@@ -66,7 +66,10 @@
 // Body
 // ========================================================================
 
-.hook-base-body() {}
+.hook-base-body() {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 
 // Text-level semantics
