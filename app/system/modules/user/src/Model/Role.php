@@ -147,7 +147,7 @@ class Role implements RoleInterface, \JsonSerializable
      * {@inheritdoc}
      */
     public function __toString() {
-        return $this->name;
+        return (string) $this->name;
     }
 
     /**

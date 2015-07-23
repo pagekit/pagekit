@@ -48,8 +48,8 @@ class User implements UserInterface, \JsonSerializable
     /** @Column(type="json_array") */
     protected $data;
 
-    /** @ManyToMany(targetEntity="Role", keyFrom="id", keyTo="id", tableThrough="@system_user_role", keyThroughFrom="user_id", keyThroughTo="role_id") */
-    protected $roles;
+    /** @Column(type="simple_array") */
+    protected $roles = [];
 
     /**
      * @var array
@@ -205,46 +205,19 @@ class User implements UserInterface, \JsonSerializable
         $this->activation = $activation;
     }
 
-    /**
-     * @return RoleInterface[]
-     * @throws \Exception
-     */
     public function getRoles()
     {
-        if (null === $this->roles) {
-            throw new \Exception('Unable to retrieve roles. You\'ll need to add the roles to this user first.');
-        }
-
         return $this->roles;
     }
 
-    /**
-     * Sets the user's roles.
-     *
-     * @param RoleInterface[] $roles
-     */
     public function setRoles($roles)
     {
         $this->roles = $roles;
     }
 
-    /**
-     * Check if the user has a role.
-     *
-     * @param  RoleInterface|int $role
-     * @return boolean
-     */
     public function hasRole($role)
     {
-        $id = $role instanceof RoleInterface ? $role->getId() : $role;
-
-        foreach ($this->getRoles() as $role) {
-            if ($id == $role->getId()) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array($role, $this->roles);
     }
 
     /**
@@ -305,13 +278,13 @@ class User implements UserInterface, \JsonSerializable
      */
     public function hasPermission($permission)
     {
-        if (null === $this->permissions) {
+        if ($this->permissions === null) {
 
             $this->permissions = [];
-
-            foreach ($this->getRoles() as $role) {
+            foreach (self::findRoles($this) as $role) {
                 $this->permissions = array_merge($this->permissions, $role->getPermissions());
             }
+
         }
 
         return in_array($permission, $this->permissions);
@@ -401,44 +374,16 @@ class User implements UserInterface, \JsonSerializable
         unset($user['password']);
         unset($user['activation']);
 
-        if ($user['roles']) {
-            $user['roles'] = array_map(function($role) { return (string) $role->getId(); }, $user['roles']);
-        }
-
         return $user;
     }
 
     /**
-     * Save related user roles.
-     *
      * @PostSave
      */
     public function postSave()
     {
-        if (is_array($this->roles)) {
-            self::getConnection()->transactional(function ($connection) {
-
-                $connection->delete('@system_user_role', ['user_id' => $this->getId()]);
-
-                if (!array_key_exists(Role::ROLE_AUTHENTICATED, $this->roles)) {
-                    $this->roles[Role::ROLE_AUTHENTICATED] = self::getManager()->find('Pagekit\User\Model\Role', Role::ROLE_AUTHENTICATED);
-                }
-
-                foreach ($this->roles as $role) {
-                    $connection->insert('@system_user_role', ['user_id' => $this->getId(), 'role_id' => $role->getId()]);
-                }
-
-            });
+        if (!$this->hasRole(Role::ROLE_AUTHENTICATED)) {
+            $this->roles[] = Role::ROLE_AUTHENTICATED;
         }
-    }
-
-    /**
-     * Delete all orphaned user role relations.
-     *
-     * @PostDelete
-     */
-    public function postDelete()
-    {
-        self::getConnection()->delete('@system_user_role', ['user_id' => $this->getId()]);
     }
 }

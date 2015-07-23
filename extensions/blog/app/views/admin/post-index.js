@@ -58,7 +58,7 @@ module.exports = Vue.extend({
         save: function (post) {
             this.resource.save({ id: post.id }, { post: post }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Post saved.'));
             });
         },
 
@@ -72,7 +72,7 @@ module.exports = Vue.extend({
 
             this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Posts saved.'));
             });
         },
 
@@ -80,7 +80,7 @@ module.exports = Vue.extend({
 
             this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                UIkit.notify(this.$trans('Posts deleted.'));
             });
         },
 
@@ -115,8 +115,7 @@ module.exports = Vue.extend({
         },
 
         getSelected: function() {
-            var vm = this;
-            return this.posts.filter(function(post) { return vm.selected.indexOf(post.id.toString()) !== -1; });
+            return this.posts.filter(function(post) { return this.selected.indexOf(post.id.toString()) !== -1; }, this);
         },
 
         getStatusText: function(post) {

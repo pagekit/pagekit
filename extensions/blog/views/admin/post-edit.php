@@ -52,7 +52,7 @@
                         <select id="form-status" class="uk-width-1-1" v-model="post.status" options="statuses"></select>
                     </div>
                 </div>
-                <div class="uk-form-row" v-if="canEditAll">
+                <div class="uk-form-row" v-if="data.canEditAll">
                     <label for="form-author" class="uk-form-label">{{ 'Author' | trans }}</label>
                     <div class="uk-form-controls">
                         <select id="form-author" class="uk-width-1-1" v-model="post.user_id" options="authors"></select>

@@ -23,7 +23,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Users'),
-                'name'  => 'system/user:views/admin/user-index.php'
+                'name' => 'system/user:views/admin/user-index.php'
             ],
             '$data' => [
                 'statuses' => User::getStatuses(),
@@ -46,7 +46,7 @@ class UserController
         if (!$id) {
 
             $user = new User;
-            $user->setRoles([Role::find(Role::ROLE_AUTHENTICATED)]);
+            $user->setRoles([Role::ROLE_AUTHENTICATED]);
 
         } else if (!$user = User::find($id)) {
             App::abort(404, 'User not found.');
@@ -55,15 +55,15 @@ class UserController
         return [
             '$view' => [
                 'title' => $id ? __('Edit User') : __('Add User'),
-                'name'  => 'system/user:views/admin/user-edit.php'
+                'name' => 'system/user:views/admin/user-edit.php'
             ],
             '$data' => [
-                'user'     => $user,
+                'user' => $user,
                 'statuses' => User::getStatuses(),
-                'roles'    => array_values($this->getRoles($user)),
-                'config'  => [
+                'roles' => array_values($this->getRoles($user)),
+                'config' => [
                     'emailVerification' => App::module('system/user')->config('require_verification'),
-                    'currentUser'       => App::user()->getId()
+                    'currentUser' => App::user()->getId()
                 ]
             ]
         ];
@@ -77,11 +77,11 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Permissions'),
-                'name'  => 'system/user:views/admin/permission-index.php'
+                'name' => 'system/user:views/admin/permission-index.php'
             ],
             '$data' => [
                 'permissions' => App::module('system/user')->getPermissions(),
-                'roles'       => array_values(Role::query()->orderBy('priority')->get())
+                'roles' => array_values(Role::query()->orderBy('priority')->get())
             ]
         ];
     }
@@ -95,14 +95,14 @@ class UserController
         return [
             '$view' => [
                 'title' => __('Roles'),
-                'name'  => 'system/user:views/admin/role-index.php'
+                'name' => 'system/user:views/admin/role-index.php'
             ],
             '$config' => [
                 'role' => $id
             ],
             '$data' => [
                 'permissions' => App::module('system/user')->getPermissions(),
-                'roles'       => array_values(Role::query()->orderBy('priority')->get())
+                'roles' => array_values(Role::query()->orderBy('priority')->get())
             ]
         ];
     }
@@ -115,7 +115,7 @@ class UserController
         return [
             '$view' => [
                 'title' => __('User Settings'),
-                'name'  => 'system/user:views/admin/settings.php'
+                'name' => 'system/user:views/admin/settings.php'
             ],
             '$data' => [
                 'config' => App::module('system/user')->config()
@@ -132,7 +132,7 @@ class UserController
     protected function getRoles(User $user = null)
     {
         $roles = [];
-        $self = $user && $user->getId() === App::user()->getId();
+        $self  = $user && $user->getId() === App::user()->getId();
         foreach (Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get() as $role) {
 
             $r = $role->jsonSerialize();

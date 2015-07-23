@@ -22,11 +22,11 @@ return [
 
     'session' => [
 
-        'storage'  => 'database',
+        'storage' => 'database',
         'lifetime' => 900,
-        'files'    => "$path/tmp/sessions",
-        'table'    => '@system_session',
-        'cookie'   => [
+        'files' => "$path/tmp/sessions",
+        'table' => '@system_session',
+        'cookie' => [
             'name' => 'pagekit_session',
         ]
 
@@ -38,10 +38,20 @@ return [
 
             'sqlite' => [
 
-                'driver'  => 'pdo_sqlite',
-                'path'    => "$path/app/database/pagekit.db",
+                'driver' => 'pdo_sqlite',
+                'path' => "$path/app/database/pagekit.db",
                 'charset' => 'utf8',
-                'prefix'  => ''
+                'prefix' => '',
+                'driverOptions' => [
+                    'userDefinedFunctions' => [
+                        'REGEXP' => [
+                            'callback' => function($pattern, $subject) {
+                                return preg_match("/$pattern/", $subject);
+                            },
+                            'numArgs' => 2
+                        ]
+                    ]
+                ]
 
             ],
 
@@ -62,15 +72,15 @@ return [
             'cache' => [
 
                 'storage' => 'auto',
-                'path'    => "$path/tmp/cache",
-                'prefix'  => sha1($path)
+                'path' => "$path/tmp/cache",
+                'prefix' => sha1($path)
 
             ],
 
             'cache.phpfile' => [
 
                 'storage' => 'phpfile',
-                'path'    => "$path/tmp/cache"
+                'path' => "$path/tmp/cache"
 
             ]
 

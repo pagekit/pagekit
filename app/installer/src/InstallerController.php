@@ -34,7 +34,7 @@ class InstallerController
         return [
             '$view' => [
                 'title' => __('Pagekit Installer'),
-                'name'  => 'app/installer/views/install.php'
+                'name' => 'app/installer/views/install.php'
             ]
         ];
     }
@@ -114,18 +114,14 @@ class InstallerController
             }
 
             App::db()->insert('@system_user', [
-                'name'       => $user['username'],
-                'username'   => $user['username'],
-                'password'   => App::get('auth.password')->hash($user['password']),
-                'status'     => 1,
-                'email'      => $user['email'],
-                'registered' => new \DateTime
+                'name' => $user['username'],
+                'username' => $user['username'],
+                'password' => App::get('auth.password')->hash($user['password']),
+                'status' => 1,
+                'email' => $user['email'],
+                'registered' => new \DateTime,
+                'roles' => [2, 3]
             ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
-
-            $id = App::db()->lastInsertId();
-
-            App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 2]);
-            App::db()->insert('@system_user_role', ['user_id' => $id, 'role_id' => 3]);
 
             if ($sampleData = App::module('installer')->config('sampleData')) {
 

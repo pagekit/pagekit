@@ -5,7 +5,6 @@ namespace Pagekit\User\Controller;
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
 use Pagekit\Module\Module;
-use Pagekit\User\Model\Role;
 use Pagekit\User\Model\User;
 
 class RegistrationController
@@ -67,7 +66,6 @@ class RegistrationController
             $user->setEmail(@$data['email']);
             $user->setPassword(App::get('auth.password')->hash($password));
             $user->setStatus(User::STATUS_BLOCKED);
-            $user->setRoles(Role::where(['id' => Role::ROLE_AUTHENTICATED])->get());
 
             $token = App::get('auth.random')->generateString(32);
             $admin = $this->module->config('registration') == 'approval';

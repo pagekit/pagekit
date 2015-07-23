@@ -4,7 +4,6 @@ namespace Pagekit\User\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Exception;
-use Pagekit\Database\Connection;
 use Pagekit\User\Model\Role;
 use Pagekit\User\Model\User;
 
@@ -42,10 +41,7 @@ class UserApiController
         }
 
         if ($role) {
-            $query->whereExists(function ($query) use ($role) {
-                $query->from('@system_user_role ur')
-                    ->where(['@system_user.id = ur.user_id', 'ur.role_id' => (int) $role]);
-            });
+            $query->where('roles REGEXP '.App::db()->quote("(^|,)($role)($|,)"));
         }
 
         if ($access) {
@@ -61,7 +57,7 @@ class UserApiController
         $count   = $query->count();
         $pages   = ceil($count / $limit);
         $page    = max(0, min($pages - 1, $page));
-        $users   = array_values($query->offset($page * $limit)->limit($limit)->related('roles')->orderBy($order[1], $order[2])->get());
+        $users   = array_values($query->offset($page * $limit)->limit($limit)->orderBy($order[1], $order[2])->get());
 
         return compact('users', 'pages', 'count');
     }
@@ -99,7 +95,6 @@ class UserApiController
                 }
 
                 $user = new User;
-                $user->setRoles([]);
                 $user->setRegistered(new \DateTime);
             }
 
@@ -125,18 +120,12 @@ class UserApiController
                 $user->setPassword(App::get('auth.password')->hash($password));
             }
 
-            if (isset($data['roles'])) {
+            $key    = array_search(Role::ROLE_ADMINISTRATOR, @$data['roles'] ?: []);
+            $add    = false !== $key && !$user->isAdministrator();
+            $remove = false === $key && $user->isAdministrator();
 
-                $roles  = $data['roles'];
-                $key    = array_search(Role::ROLE_ADMINISTRATOR, $roles);
-                $add    = false !== $key && !$user->isAdministrator();
-                $remove = false === $key && $user->isAdministrator();
-
-                if (($self && $remove) || !App::user()->isAdministrator() && ($remove || $add)) {
-                    App::abort(403, 'Cannot add/remove Admin Role.');
-                }
-
-                $user->setRoles($roles ? Role::query()->whereIn('id', $roles)->get() : []);
+            if (($self && $remove) || !App::user()->isAdministrator() && ($remove || $add)) {
+                App::abort(403, 'Cannot add/remove Admin Role.');
             }
 
             unset($data['access'], $data['login'], $data['registered']);
@@ -192,24 +181,5 @@ class UserApiController
         }
 
         return ['message' => 'success'];
-    }
-
-    /**
-     * Gets the permission SQL.
-     *
-     * @param  string $permission
-     * @return string
-     */
-    protected function getPermissionSql($permission)
-    {
-        /** @var Connection $db */
-        $db   = App::db();
-        $expr = $db->getExpressionBuilder();
-        $col  = $db->getDatabasePlatform()->getConcatExpression($db->quote(','), 'r.permissions', $db->quote(','));
-
-        return (string) $expr->orX(
-            $expr->eq('r.id', Role::ROLE_ADMINISTRATOR),
-            $expr->comparison($col, 'LIKE', App::db()->quote("%,$permission,%"))
-        );
     }
 }

@@ -14,8 +14,6 @@ class User implements UserInterface
 
     protected $authenticated;
 
-    protected $roles = ['key' => 'the user role'];
-    
     public function getId() {
     	return $this->id;
     }
@@ -36,10 +34,5 @@ class User implements UserInterface
     public function setAuthenticated()
     {
         $this->authenticated = true;;
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
     }
 }

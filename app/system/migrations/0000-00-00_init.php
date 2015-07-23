@@ -90,14 +90,6 @@ return [
             });
         }
 
-        if ($util->tableExists('@system_user_role') === false) {
-            $util->createTable('@system_user_role', function($table) {
-                $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10]);
-                $table->addColumn('role_id', 'integer', ['unsigned' => true, 'length' => 10]);
-                $table->setPrimaryKey(['user_id', 'role_id']);
-            });
-        }
-
         if ($util->tableExists('@system_widget') === false) {
             $util->createTable('@system_widget', function($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);

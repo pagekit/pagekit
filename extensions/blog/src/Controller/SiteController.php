@@ -31,22 +31,21 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        App::on('blog.post.postLoad', function ($event) {
-            $post = $event->getEntity();
-            $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
-        });
+        $query = Post::where(['status = ?', 'date < ?', Post::getAccessQuery(App::user())], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
 
-        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
-
-        if (!$limit = $this->blog->config('posts_per_page')) {
+        if (!$limit = $this->blog->config('posts.posts_per_page')) {
             $limit = 10;
         }
 
-        $count = $query->count();
+        $count = $query->count('id');
         $total = ceil($count / $limit);
         $page  = max(1, min($total, $page));
 
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
+
+        foreach ($posts = $query->get() as $post) {
+            $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
+        }
 
         return [
             '$view' => [
@@ -59,7 +58,7 @@ class SiteController
                     'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
                 ]
             ],
-            'posts' => $query->get(),
+            'posts' => $posts,
             'params' => $this->blog->config(),
             'total' => $total,
             'page' => $page
@@ -72,7 +71,7 @@ class SiteController
     public function postAction($id = 0)
     {
         if (!$post = Post::where(['id = ?', 'status = ?', 'date < ?'], [$id, Post::STATUS_PUBLISHED, new \DateTime])->related('user')->first()) {
-            App::abort(404, __('Post with id "%id%" not found!', ['%id%' => $id]));
+            App::abort(404, __('Post not found!'));
         }
 
         if (!$post->hasAccess(App::user())) {

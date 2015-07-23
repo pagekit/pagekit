@@ -7,8 +7,6 @@ use Pagekit\Blog\Model\Comment;
 use Pagekit\Blog\Model\Post;
 use Pagekit\User\Model\Role;
 
-use Symfony\Component\Finder\Exception\AccessDeniedException;
-
 /**
  * @Access(admin=true)
  */
@@ -66,10 +64,21 @@ class BlogController
 
             $user = App::user();
             if(!$user->hasAccess('blog: manage all posts') && $post->getUserId() !== $user->getId()) {
-
-                throw new AccessDeniedException("You do not have access to edit this post");
-
+                App::abort(403, __('Insufficient User Rights.'));
             }
+
+            $roles = App::db()->createQueryBuilder()
+                ->from('@system_role')
+                ->where(['id' => Role::ROLE_ADMINISTRATOR])
+                ->orWhere('permissions REGEXP '.App::db()->quote('(^|,)(blog: manage all posts|blog: manage own posts)($|,)'))
+                ->execute('id')
+                ->fetchAll(\PDO::FETCH_COLUMN);
+
+            $authors = App::db()->createQueryBuilder()
+                ->from('@system_user')
+                ->where('roles REGEXP '.App::db()->quote('(^|,)('.implode('|', $roles).')($|,)'))
+                ->execute('id, username')
+                ->fetchAll();
 
             return [
                 '$view' => [
@@ -80,12 +89,8 @@ class BlogController
                     'post'     => $post,
                     'statuses' => Post::getStatuses(),
                     'roles'    => array_values(Role::findAll()),
-                    'canEditAll' => App::user()->hasAccess('blog: manage all posts'),
-                    'authors'  => App::db()->createQueryBuilder()
-                        ->from('@system_user')
-                        ->where('id IN (SELECT user_id FROM @system_user_role WHERE role_id > 2)')
-                        ->execute('id, username')
-                        ->fetchAll()
+                    'canEditAll' => $user->hasAccess('blog: manage all posts'),
+                    'authors'  => $authors
                 ],
                 'post' => $post
             ];

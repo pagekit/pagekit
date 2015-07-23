@@ -4,6 +4,7 @@ namespace Pagekit\Debug\DataCollector;
 
 use DebugBar\DataCollector\DataCollectorInterface;
 use Pagekit\Auth\Auth;
+use Pagekit\User\Model\User;
 
 class AuthDataCollector implements DataCollectorInterface
 {
@@ -49,7 +50,7 @@ class AuthDataCollector implements DataCollectorInterface
                 'authenticated' => $user->isAuthenticated(),
                 'user_class'    => get_class($user),
                 'user'          => $user->getUsername(),
-                'roles'         => array_map(function ($role) { return $role->getName(); }, $user->getRoles()),
+                'roles'         => array_map(function ($role) { return $role->getName(); }, User::findRoles($user)), // TODO interface does not match
             ];
         }
     }

@@ -49,7 +49,7 @@ class UserProvider implements UserProviderInterface
             unset($credentials['password']);
         }
 
-        return User::where($credentials)->related('roles')->first();
+        return User::where($credentials)->first();
     }
 
     /**

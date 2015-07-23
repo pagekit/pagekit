@@ -2,6 +2,8 @@
 
 namespace Pagekit\User\Model;
 
+use Pagekit\Application as App;
+
 trait AccessTrait
 {
     /** @Column(type="simple_array") */
@@ -16,20 +18,20 @@ trait AccessTrait
     }
 
     /**
-     * @param $roles int[]
+     * @param int[] $roles
      */
     public function setRoles($roles)
     {
-        $this->roles = $roles;
+        $this->roles = array_unique($roles);
     }
 
     /**
-     * @param  RoleInterface $role
+     * @param  int $role
      * @return bool
      */
-    public function hasRole(RoleInterface $role)
+    public function hasRole($role)
     {
-        return in_array($role->getId(), $this->getRoles());
+        return in_array($role, $this->roles);
     }
 
     /**
@@ -38,6 +40,18 @@ trait AccessTrait
      */
     public function hasAccess(UserInterface $user)
     {
-        return !$roles = $this->getRoles() or array_intersect(array_keys($user->getRoles()), $roles);
+        return !$this->roles or array_intersect($user->getRoles(), $this->roles);
+    }
+
+    /**
+     * Gets the roles SQL query part.
+     *
+     * @param  UserInterface $user
+     * @param  string        $field
+     * @return string|null
+     */
+    public static function getAccessQuery(UserInterface $user, $field = 'roles')
+    {
+        return "{$field} IS NULL OR $field REGEXP ".App::db()->quote("(^|,)(".implode('|', $user->getRoles()).")($|,)");
     }
 }

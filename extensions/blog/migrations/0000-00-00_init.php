@@ -25,6 +25,7 @@ return [
                 $table->addUniqueIndex(['slug'], 'BLOG_POST_SLUG');
                 $table->addIndex(['title'], 'BLOG_POST_TITLE');
                 $table->addIndex(['user_id'], 'BLOG_POST_USER_ID');
+                $table->addIndex(['date'], 'BLOG_POST_DATE');
             });
         }
 
