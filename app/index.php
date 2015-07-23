@@ -12,5 +12,5 @@ if (!isset($_SERVER['HTTP_MOD_REWRITE'])) {
     $_SERVER['HTTP_MOD_REWRITE'] = 'On';
 }
 
-$app = require_once __DIR__.'/app/app.php';
+$app = require_once __DIR__.'/app.php';
 $app->run();

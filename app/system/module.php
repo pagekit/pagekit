@@ -19,7 +19,6 @@ return [
         'system/view',
         'system/cache',
         'system/comment',
-        'system/console',
         'system/content',
         'system/dashboard',
         'system/editor',

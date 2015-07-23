@@ -16,7 +16,7 @@ Options -Indexes
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule .* pagekit.php [L]
+    RewriteRule .* index.php [L]
 
     <IfModule mod_env.c>
         SetEnv HTTP_MOD_REWRITE On

@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/console',
+    'name' => 'console',
 
     'autoload' => [
 

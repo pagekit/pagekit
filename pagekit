@@ -7,7 +7,7 @@ if (PHP_SAPI != 'cli') {
 	exit('Script needs to be run from Command Line Interface (cli)');
 }
 
-$app = require_once __DIR__.'/app/app.php';
+$app = require_once __DIR__.'/app/index.php';
 $app->boot();
 
 $console = new Console($app, 'Pagekit', $app['version']);
