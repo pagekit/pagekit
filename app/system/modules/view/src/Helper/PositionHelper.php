@@ -44,18 +44,7 @@ class PositionHelper extends Helper
 
         $parameters['widgets'] = Widget::findActive($name);
 
-        if (!$view) {
-
-            $result = '';
-
-            foreach ($parameters['widgets'] as $widget) {
-                $result .= $widget->get('result');
-            }
-
-            return $result;
-        }
-
-        return $this->view->render($view, $parameters);
+        return $this->view->render($view ?: 'system/site/position.php', $parameters);
     }
 
     /**
