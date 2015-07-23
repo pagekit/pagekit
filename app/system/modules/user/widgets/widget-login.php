@@ -21,13 +21,7 @@ return [
 
     'render' => function ($widget) use ($app) {
 
-        $user = $app['user'];
-
-        if ($user->isAuthenticated()) {
-            $redirect = $widget->get('redirect_logout') ?: $app['url']->current(true);
-            return $app['view']('logout', compact('widget', 'user', 'options', 'redirect'));
-        }
-
+        $user              = $app['user'];
         $redirect          = $widget->get('redirect_login') ?: $app['url']->current(true);
         $last_username     = $app['session']->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
