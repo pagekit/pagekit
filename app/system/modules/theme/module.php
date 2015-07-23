@@ -41,7 +41,7 @@ return [
             ]);
 
             $subsets = 'latin,latin-ext';
-            $subset  = '';
+            $subset  = __('_subset');
 
             if ('cyrillic' == $subset) {
     			$subsets .= ',cyrillic,cyrillic-ext';
