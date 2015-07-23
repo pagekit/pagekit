@@ -1,10 +1,7 @@
 <?php
 
 /**
- * Theme configuration file.
- *
- * @link http://pagekit.com/docs/themes - basic explanation of theme development
- * @link http://pagekit.com/docs/configuration - full documentation of config options
+ * Configuration
  */
 return [
 
@@ -13,7 +10,7 @@ return [
     'type' => 'theme',
 
     /**
-     * Overwrite default template files with templates provided by the theme and define stream wrappers for shorter path access.
+     * Define resources
      */
     'resources' => [
 
@@ -23,7 +20,7 @@ return [
     ],
 
     /**
-     * Menu positions provided by this theme.
+     * Define menu positions
      */
     'menus' => [
 
@@ -33,7 +30,7 @@ return [
     ],
 
     /**
-     * Widget positions provided by this theme. These positions will be rendered in different locations of the theme's template.
+     * Define widget positions
      */
     'positions' => [
 
@@ -50,7 +47,7 @@ return [
     'settings' => 'settings-theme',
 
     /**
-     * Define default settings values and views where end users can change these values.
+     * Define settings
      */
     'config' => [
 
