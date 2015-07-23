@@ -112,7 +112,7 @@ $view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify']
             </div>
 
             <p>
-                <input class="uk-button uk-button-primary" type="submit" value="{{ 'Submit comment' | trans }}" accesskey="s">
+                <button class="uk-button uk-button-primary" type="submit" accesskey="s">{{ 'Submit comment' | trans }}</button>
                 <a href="#" v-on="click: cancel">{{ 'Cancel' | trans }}</a>
             </p>
 
