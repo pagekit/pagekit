@@ -26,7 +26,7 @@ class Widget implements WidgetInterface
     protected $type;
 
     /** @Column(type="integer") */
-    protected $status = 0;
+    protected $status = 1;
 
     /** @Column(name="nodes", type="simple_array") */
     protected $nodes = [];

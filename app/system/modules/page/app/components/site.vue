@@ -96,6 +96,12 @@
             };
         },
 
+        ready: function() {
+
+            if (!this.node.id) this.node.status = 1;
+
+        },
+
         events: {
 
             save: function (data) {
