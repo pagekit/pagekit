@@ -9,6 +9,7 @@
         <?php $view->script('jquery') ?>
         <?php $view->script('uikit') ?>
         <?php $view->script('uikit-sticky') ?>
+        <?php $view->script('theme', 'theme:js/theme.js') ?>
     </head>
     <body>
 
