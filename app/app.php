@@ -33,9 +33,9 @@ $app['module']->addLoader(new AutoLoader($loader));
 $app['module']->addLoader(new ConfigLoader($config));
 
 if ($app->inConsole()) {
-    require __DIR__.'/console/index.php';
+    require __DIR__.'/console/app.php';
 } elseif (!$app['config.file']) {
-    require __DIR__.'/installer/index.php';
+    require __DIR__.'/installer/app.php';
 } else {
-    require __DIR__.'/system/index.php';
+    require __DIR__.'/system/app.php';
 }
