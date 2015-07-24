@@ -2,7 +2,7 @@
 
     <h1 class="uk-article-title"><?= $post->getTitle() ?></h1>
 
-    <div class="uk-margin"><?= $post->getContent() ?></div>
+    <?= $post->getContent() ?>
 
     <?= $view->render('blog:views/site/comments.php') ?>
 
