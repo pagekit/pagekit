@@ -10,9 +10,11 @@
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('username') ?>" autofocus>
     </div>
+
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('password') ?>">
     </div>
+    
     <div class="uk-form-row">
         <button class="uk-button uk-button-primary uk-width-1-1" type="submit"><?= __('Login') ?></button>
     </div>

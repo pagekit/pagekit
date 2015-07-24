@@ -107,7 +107,9 @@
         <div id="tm-footer" class="tm-footer uk-block uk-block-secondary uk-contrast">
             <div class="uk-container uk-container-center uk-text-center">
 
-                <?= $view->position('footer', 'position-grid.php') ?>
+                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                    <?= $view->position('footer', 'position-grid.php') ?>
+                </section>
 
             </div>
         </div>
