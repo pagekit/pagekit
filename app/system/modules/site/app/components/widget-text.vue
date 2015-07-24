@@ -11,7 +11,7 @@
             <div class="uk-form-row">
                 <v-editor value="{{@ widget.data.content }}" options="{{ {markdown : widget.data.markdown} }}"></v-editor>
                 <p>
-                    <label><input type="checkbox" name="widget[data][markdown]" v-model="widget.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
+                    <label><input type="checkbox" v-model="widget.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
                 </p>
             </div>
 

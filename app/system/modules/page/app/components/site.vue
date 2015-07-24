@@ -11,6 +11,9 @@
 
             <div class="uk-form-row">
                 <v-editor value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
+                <p>
+                    <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
+                </p>
             </div>
 
         </div>
@@ -52,17 +55,6 @@
                         <p v-repeat="role: roles" class="uk-form-controls-condensed">
                             <label><input type="checkbox" value="{{ role.id }}" v-checkbox="node.roles"> {{ role.name }}</label>
                         </p>
-                    </div>
-                </div>
-
-                <div class="uk-form-row">
-                    <span class="uk-form-label">{{ 'Options' | trans }}</span>
-
-                    <div class="uk-form-controls">
-                        <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
-                    </div>
-                    <div class="uk-form-controls">
-                        <label><input type="checkbox" v-model="node.data.menu_hide"> {{ 'Hide in menu' | trans }}</label>
                     </div>
                 </div>
 
