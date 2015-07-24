@@ -3,7 +3,7 @@
 $output = [];
 $count  = count($widgets);
 
-$output[] = '<div class="uk-grid uk-grid-width-medium-1-'.$count.'">';
+$output[] = '<div class="uk-grid-width-medium-1-'.$count.'">';
 
 foreach ($widgets as $widget) {
 
