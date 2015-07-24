@@ -4,7 +4,7 @@ namespace Pagekit\Comment\Model;
 
 use Pagekit\Database\ORM\ModelTrait;
 
-trait NodeModelTrait
+trait CommentModelTrait
 {
     use ModelTrait;
 
