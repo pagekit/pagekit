@@ -121,7 +121,7 @@ class InstallerController
                 'email' => $user['email'],
                 'registered' => new \DateTime,
                 'roles' => [2, 3]
-            ], ['string', 'string', 'string', 'string', 'string', 'datetime']);
+            ], ['string', 'string', 'string', 'string', 'string', 'datetime', 'simple_array']);
 
             if ($sampleData = App::module('installer')->config('sampleData')) {
 
