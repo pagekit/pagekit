@@ -69,7 +69,6 @@ var Dashboard = Vue.extend({
                     });
             }
         });
-
     },
 
     filters: {
@@ -116,6 +115,12 @@ var Dashboard = Vue.extend({
         },
 
         getTypes: function () {
+
+            // normalize
+            _.forIn(this.$options.components.__proto__, function (component, name) {
+                component.options.name = component.options.name || name;
+            });
+
             return _(this.$options.components.__proto__)
                 .filter(function (component) {
                     return _.has(component, 'options.type')
