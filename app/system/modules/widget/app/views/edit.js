@@ -9,6 +9,11 @@ module.exports = {
         UIkit.tab(this.$$.tab, {connect: this.$$.content});
         // this.$set('widget.data', _.defaults({}, this.widget.data, this.type.defaults));
 
+        // set position from get param
+        if (!this.widget.id) {
+            var match = RegExp('[?&]position=([^&]*)').exec(location.search);
+            this.widget.position = (match && decodeURIComponent(match[1].replace(/\+/g, ' '))) || '';
+        }
     },
 
     computed: {
