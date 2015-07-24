@@ -5,4 +5,5 @@
     <?php endif ?>
 
     <?= $page->getContent() ?>
+    
 </article>
