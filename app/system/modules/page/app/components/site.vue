@@ -19,10 +19,10 @@
             <div class="uk-panel">
 
                 <div class="uk-form-row">
-                    <label for="form-navigation-title" class="uk-form-label">{{ 'Navigation Title' | trans }}</label>
+                    <label for="form-menu-title" class="uk-form-label">{{ 'Menu Title' | trans }}</label>
 
                     <div class="uk-form-controls">
-                        <input id="form-navigation-title" class="uk-form-width-large" type="text" v-model="node.title">
+                        <input id="form-menu-title" class="uk-form-width-large" type="text" v-model="node.title">
                     </div>
                 </div>
 
