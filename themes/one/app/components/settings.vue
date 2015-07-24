@@ -18,14 +18,14 @@
         <div class="uk-form-row">
             <span class="uk-form-label">Sidebar</span>
             <div class="uk-form-controls uk-form-controls-text">
-                <label><input type="checkbox" v-model="sidebar-first"> Show the sidebar before the content.</label>
+                <label><input type="checkbox" v-model="package.config['sidebar-first']"> Show the sidebar before the content.</label>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-hero-image" class="uk-form-label">Hero Image</label>
             <div class="uk-form-controls">
-                <input id="form-hero-image" class="uk-width-1-1" type="text" v-model="hero-image">
+                <input-image source="{{@ package.config['hero-image'] }}"></input-image>
                 <p class="uk-form-help-block">{{ 'Choose a background image for the hero position.' | trans }}</p>
             </div>
         </div>
