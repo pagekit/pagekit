@@ -93,7 +93,7 @@ return [
 
         'blog' => [
             'label' => 'Blog',
-            'icon' => 'extensions/blog/extension.svg',
+            'icon' => 'extensions/blog/image.svg',
             'url' => '@blog/post',
             'active' => '@blog/post*',
             'access' => 'blog: manage own posts || blog: manage all posts || blog: manage comments || blog: manage settings',

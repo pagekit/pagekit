@@ -24,7 +24,7 @@ class PackageController
 
     public function themesAction()
     {
-        $packages = App::package()->all('theme');
+        $packages = App::package()->all('pagekit-theme');
 
         foreach ($packages as $package) {
             if ($module = App::module($package->getName())) {
@@ -55,7 +55,7 @@ class PackageController
 
     public function extensionsAction()
     {
-        $packages = App::package()->all('extension');
+        $packages = App::package()->all('pagekit-extension');
 
         foreach ($packages as $package) {
             if ($module = App::module($package->getName())) {
