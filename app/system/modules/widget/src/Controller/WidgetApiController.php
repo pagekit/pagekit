@@ -60,7 +60,7 @@ class WidgetApiController
     public function saveAction($data, $id = 0)
     {
         if (!$id) {
-            $widget = new Widget();
+            $widget = Widget::create();
         } else if (!$widget = Widget::find($id)) {
             throw new NotFoundException('Widget not found.');
         }

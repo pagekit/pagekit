@@ -45,7 +45,7 @@ class UserController
     {
         if (!$id) {
 
-            $user = new User;
+            $user = User::create();
             $user->setRoles([Role::ROLE_AUTHENTICATED]);
 
         } else if (!$user = User::find($id)) {

@@ -45,7 +45,7 @@ class NodeController
     public function saveAction($data, $id = 0)
     {
         if (!$node = Node::find($id)) {
-            $node = new Node;
+            $node = Node::create();
             unset($data['id']);
         }
 

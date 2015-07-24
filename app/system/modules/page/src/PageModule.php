@@ -22,7 +22,7 @@ class PageModule extends Module
         $defaults = $node->get('defaults', []);
 
         if (!isset($defaults['id']) or !$page = Page::find($defaults['id'])) {
-            $page = new Page();
+            $page = Page::create();
         }
 
         return $page;

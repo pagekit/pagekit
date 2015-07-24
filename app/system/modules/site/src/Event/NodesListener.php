@@ -59,7 +59,7 @@ class NodesListener implements EventSubscriberInterface
         foreach ((array) $module->get('nodes') as $type => $route) {
             if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
 
-                $node = new Node();
+                $node = Node::create();
                 $node->setTitle($route['label']);
                 $node->setSlug($this->slugify($route['label']));
                 $node->setType($type);

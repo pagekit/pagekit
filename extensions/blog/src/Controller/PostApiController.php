@@ -76,7 +76,7 @@ class PostApiController
                 App::abort(404, __('Post not found.'));
             }
 
-            $post = new Post;
+            $post = Post::create();
         }
 
         if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {

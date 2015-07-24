@@ -108,7 +108,7 @@ class CommentApiController
                 App::abort(403, __('Insufficient User Rights.'));
             }
 
-            $comment = new Comment;
+            $comment = Comment::create();
 
             if ($this->user->isAuthenticated()) {
                 $data['author'] = $this->user->getName();

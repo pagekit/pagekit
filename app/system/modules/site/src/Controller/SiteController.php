@@ -46,7 +46,7 @@ class SiteController
         if (is_numeric($id)) {
             $node = Node::find($id);
         } else {
-            $node = new Node();
+            $node = Node::create();
             $node->setType($id);
 
             if ($menu && !App::menu($menu)) {

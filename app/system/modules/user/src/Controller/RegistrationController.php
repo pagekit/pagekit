@@ -59,7 +59,7 @@ class RegistrationController
                 throw new Exception(__('Invalid Password.'));
             }
 
-            $user = new User;
+            $user = User::create();
             $user->setRegistered(new \DateTime);
             $user->setName(@$data['name']);
             $user->setUsername(@$data['username']);

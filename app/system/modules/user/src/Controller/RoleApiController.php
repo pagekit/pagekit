@@ -41,7 +41,7 @@ class RoleApiController
                 App::abort(404, __('Role not found.'));
             }
 
-            $role = new Role;
+            $role = Role::create();
         }
 
         $role->save($data);

@@ -52,7 +52,7 @@ class BlogController
 
                 $module = App::module('blog');
 
-                $post = new Post;
+                $post = Post::create();
                 $post->setUser(App::user());
                 $post->setStatus(Post::STATUS_DRAFT);
                 $post->setDate(new \DateTime);

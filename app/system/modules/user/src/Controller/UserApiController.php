@@ -94,7 +94,7 @@ class UserApiController
                     App::abort(400, __('Password required.'));
                 }
 
-                $user = new User;
+                $user = User::create();
                 $user->setRegistered(new \DateTime);
             }
 
