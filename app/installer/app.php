@@ -9,7 +9,7 @@ if ($failed = $requirements->getFailedRequirements()) {
     exit;
 }
 
-$app['module']->addPath(__DIR__.'/module.php');
+$app['module']->addPath(__DIR__.'/index.php');
 $app['module']->addLoader(new ConfigLoader(require __DIR__.'/config.php'));
 $app['module']->load('installer');
 

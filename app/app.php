@@ -25,8 +25,8 @@ $app['autoloader'] = $loader;
 date_default_timezone_set('UTC');
 
 $app['module']->addPath([
-    __DIR__.'/modules/*/module.php',
-    __DIR__.'/system/module.php'
+    __DIR__.'/modules/*/index.php',
+    __DIR__.'/system/index.php'
 ]);
 
 $app['module']->addLoader(new AutoLoader($loader));

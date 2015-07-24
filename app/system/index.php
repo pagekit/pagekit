@@ -8,7 +8,7 @@ return [
 
     'main' => 'Pagekit\\System\\SystemModule',
 
-    'include' => 'modules/*/module.php',
+    'include' => 'modules/*/index.php',
 
     'require' => [
 
