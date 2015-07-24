@@ -69,7 +69,8 @@ module.exports = Vue.extend({
 
     components: {
 
-        link: require('../components/link.vue')
+        link: require('../components/link.vue'),
+        appearance: require('../components/site-appearance.vue')
 
     }
 
