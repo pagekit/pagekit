@@ -18,8 +18,8 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 .tm-navbar {
-    border-bottom: 1px solid @global-border;
     background: @navbar-background;
+    box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
 }
 
 /* Navbar as overlay */
@@ -80,5 +80,15 @@ html { overflow-y: scroll; }
 /*
  * Footer
  */
+
+/* Phone landscape and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-footer {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+}
 
 .tm-footer .uk-panel + .uk-panel { margin-top: @global-grid-gutter; }
