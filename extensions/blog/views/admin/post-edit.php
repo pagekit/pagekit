@@ -47,6 +47,12 @@
                 </div>
 
                 <div class="uk-form-row">
+                    <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input id="form-slug" class="uk-width-1-1" type="text" v-model="post.slug">
+                    </div>
+                </div>
+                <div class="uk-form-row">
                     <label for="form-status" class="uk-form-label">{{ 'Status' | trans }}</label>
                     <div class="uk-form-controls">
                         <select id="form-status" class="uk-width-1-1" v-model="post.status" options="statuses"></select>
@@ -75,12 +81,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="uk-form-row">
-                    <label for="form-slug" class="uk-form-label">{{ 'Slug' | trans }}</label>
-                    <div class="uk-form-controls">
-                        <input id="form-slug" class="uk-width-1-1" type="text" v-model="post.slug">
                     </div>
                 </div>
                 <div class="uk-form-row">
