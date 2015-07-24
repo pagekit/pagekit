@@ -83,6 +83,7 @@ return [
                 $table->addColumn('login', 'datetime', ['notnull' => false]);
                 $table->addColumn('access', 'datetime', ['notnull' => false]);
                 $table->addColumn('activation', 'string', ['length' => 255, 'notnull' => false]);
+                $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
                 $table->addUniqueIndex(['username'], 'SYSTEM_USER_USERNAME');
