@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
-        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.type == 'extension'">
+        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.type == 'pagekit-extension'">
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
             <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
@@ -30,7 +30,7 @@
             <p>{{ package.description }}</p>
 
             <ul class="uk-list">
-                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
+                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package | folder }}</li>
                 <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
                 <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
                 <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
@@ -70,10 +70,14 @@
                 if (!extra.image) {
                     return this.$url.static('app/system/assets/images/placeholder-icon.svg');
                 } else if (!extra.image.match(/^(https?:)?\//)) {
-                    return this.$url.static(pkg.type + 's/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                    return pkg.url + '/' + extra.image;
                 }
 
                 return extra.image;
+            },
+
+            folder: function (pkg) {
+                return pkg.url && pkg.url.match(/[^\/]+$/gi);
             }
 
         },

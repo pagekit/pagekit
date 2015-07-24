@@ -2,6 +2,8 @@
 
 namespace Pagekit\System\Package;
 
+use Pagekit\Application as App;
+
 class PackageManager implements \ArrayAccess, \IteratorAggregate
 {
     /**
@@ -85,6 +87,7 @@ class PackageManager implements \ArrayAccess, \IteratorAggregate
 
             if (isset($path)) {
                 $data['path'] = $path;
+                $data['url']  = App::url()->getStatic($path);
             }
 
             return new Package($data);

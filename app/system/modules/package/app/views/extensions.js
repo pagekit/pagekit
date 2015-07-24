@@ -23,7 +23,7 @@ module.exports = Vue.extend({
         icon: function (pkg) {
 
             if (pkg.extra && pkg.extra.image) {
-                return this.$url.static('extensions/:name/:image', {name: pkg.name, image: pkg.extra.image});
+                return pkg.url + '/' + pkg.extra.image;
             } else {
                 return this.$url.static('app/system/assets/images/placeholder-icon.svg');
             }
@@ -105,6 +105,10 @@ module.exports = Vue.extend({
 
         empty: function (packages) {
             return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
+        },
+
+        folder: function (pkg) {
+            return pkg.url.match(/[^\/]+$/gi);
         }
 
     },

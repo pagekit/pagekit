@@ -54,7 +54,7 @@
                         <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
-                    <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>
+                    <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg | folder }}</td>
                     <td class="uk-text-right">
                         <div class="uk-invisible">
                             <ul class="uk-subnav pk-subnav-icon">

@@ -21,11 +21,13 @@ module.exports = Vue.extend({
     methods: {
 
         icon: function (pkg) {
-            if (pkg.extra.image) {
-                return this.$url.static('themes/:name/:image', {name: pkg.name, image: pkg.extra.image});
+
+            if (pkg.extra && pkg.extra.image) {
+                return pkg.url + '/' + pkg.extra.image;
             } else {
                 return this.$url.static('app/system/assets/images/placeholder-800x600.svg');
             }
+
         },
 
         load: function () {
