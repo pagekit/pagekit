@@ -47,10 +47,10 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero']; ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero-image']; ?>');">
             <div class="uk-container uk-container-center">
 
-                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                <section class="uk-grid uk-grid-match" data-uk-grid-margin>
                     <?= $view->position('hero', 'position-grid.php') ?>
                 </section>
 
@@ -62,7 +62,7 @@
         <div id="tm-top" class="tm-top uk-block uk-block-muted">
             <div class="uk-container uk-container-center">
 
-                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                <section class="uk-grid uk-grid-match" data-uk-grid-margin>
                     <?= $view->position('top', 'position-grid.php') ?>
                 </section>
 
@@ -95,7 +95,7 @@
         <div id="tm-bottom" class="tm-bottom uk-block uk-block-muted">
             <div class="uk-container uk-container-center">
 
-                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                <section class="uk-grid uk-grid-match" data-uk-grid-margin>
                     <?= $view->position('bottom', 'position-grid.php') ?>
                 </section>
 
@@ -107,7 +107,7 @@
         <div id="tm-footer" class="tm-footer uk-block uk-block-secondary uk-contrast">
             <div class="uk-container uk-container-center uk-text-center">
 
-                <section class="uk-grid" data-uk-grid-match="{target:'> div > .uk-panel'}" data-uk-grid-margin>
+                <section class="uk-grid uk-grid-match" data-uk-grid-margin>
                     <?= $view->position('footer', 'position-grid.php') ?>
                 </section>
 
