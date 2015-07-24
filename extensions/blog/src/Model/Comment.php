@@ -5,7 +5,7 @@ namespace Pagekit\Blog\Model;
 use Pagekit\Comment\Model\Comment as BaseComment;
 
 /**
- * @Entity(tableClass="@blog_comment", eventPrefix="blog.comment")
+ * @Entity(tableClass="@blog_comment")
  */
 class Comment extends BaseComment implements \JsonSerializable
 {

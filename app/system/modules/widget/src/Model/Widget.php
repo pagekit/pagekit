@@ -7,7 +7,7 @@ use Pagekit\System\Model\DataTrait;
 use Pagekit\User\Model\AccessTrait;
 
 /**
- * @Entity(tableClass="@system_widget", eventPrefix="system.widget")
+ * @Entity(tableClass="@system_widget")
  */
 class Widget implements WidgetInterface
 {

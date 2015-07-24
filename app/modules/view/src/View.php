@@ -2,8 +2,9 @@
 
 namespace Pagekit\View;
 
-use Pagekit\Event\EventDispatcher;
 use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Event\EventInterface;
+use Pagekit\Event\PrefixEventDispatcher;
 use Pagekit\View\Event\ViewEvent;
 use Pagekit\View\Helper\HelperInterface;
 use Symfony\Component\Templating\DelegatingEngine;
@@ -32,11 +33,6 @@ class View
     protected $helpers = [];
 
     /**
-     * @var string
-     */
-    protected $prefix = 'view.';
-
-    /**
      * Constructor.
      *
      * @param EventDispatcherInterface $events
@@ -44,7 +40,7 @@ class View
      */
     public function __construct(EventDispatcherInterface $events = null, EngineInterface $engine = null)
     {
-        $this->events = $events ?: new EventDispatcher();
+        $this->events = $events ?: new PrefixEventDispatcher('view.');
         $this->engine = $engine ?: new DelegatingEngine();
     }
 
@@ -160,7 +156,7 @@ class View
      */
     public function on($event, $listener, $priority = 0)
     {
-        $this->events->on($this->prefix.$event, $listener, $priority);
+        $this->events->on($event, $listener, $priority);
     }
 
     /**
@@ -172,10 +168,6 @@ class View
      */
     public function trigger($event, array $arguments = [])
     {
-        if (is_string($event)) {
-            $event = $this->prefix.$event;
-        }
-
         return $this->events->trigger($event, $arguments);
     }
 
@@ -184,14 +176,14 @@ class View
      */
     public function render($name, array $parameters = [])
     {
-        $event = new ViewEvent($this->prefix.'render', $name);
+        $event = new ViewEvent('render', $name);
         $event->setParameters(array_replace($this->globals, $parameters));
 
         $this->events->trigger($event, [$this]);
 
         if (!$event->isPropagationStopped()) {
             $name = preg_replace('/\.php$/i', '', $name);
-            $this->events->trigger($event->setName($this->prefix.$name), [$this]);
+            $this->events->trigger($event->setName($name), [$this]);
         }
 
         if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {

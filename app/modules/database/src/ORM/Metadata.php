@@ -32,8 +32,6 @@ class Metadata
     protected $fields = [];
 
     /**
-     * An array to look up field names from column names.
-     *
      * @var array
      */
     protected $fieldNames = [];
@@ -96,6 +94,20 @@ class Metadata
     public function getClass()
     {
         return $this->class;
+    }
+
+    /**
+     * Gets the entity's reflection class.
+     *
+     * @return \ReflectionClass
+     */
+    public function getReflectionClass()
+    {
+        if ($this->reflClass === null) {
+            $this->reflClass = new \ReflectionClass($this->class);
+        }
+
+        return $this->reflClass;
     }
 
     /**
@@ -288,7 +300,7 @@ class Metadata
      */
     public function getEventPrefix()
     {
-        return $this->eventPrefix;
+        return $this->eventPrefix ?: strtolower($this->getReflectionClass()->getShortName());
     }
 
     /**
@@ -330,8 +342,6 @@ class Metadata
      */
     protected function setConfig(array $config)
     {
-        $this->reflClass = new \ReflectionClass($this->class);
-
         if (isset($config['fields'])) {
             foreach ($config['fields'] as $name => $field) {
                 $this->validateField($config['fields'][$name]);
@@ -403,7 +413,7 @@ class Metadata
     {
         if (isset($relation['targetEntity'])) {
 
-            $namespace = $this->reflClass->getNamespaceName();
+            $namespace = $this->getReflectionClass()->getNamespaceName();
 
             if (strlen($namespace) > 0 && strpos($relation['targetEntity'], '\\') === false) {
                 $relation['targetEntity'] = $namespace . '\\' . $relation['targetEntity'];

@@ -5,6 +5,7 @@ namespace Pagekit\Database\ORM;
 use Doctrine\Common\Cache\Cache;
 use Pagekit\Database\Connection;
 use Pagekit\Database\ORM\Loader\LoaderInterface;
+use Pagekit\Event\EventDispatcherInterface;
 
 class MetadataManager
 {
@@ -12,6 +13,11 @@ class MetadataManager
      * @var Connection
      */
     protected $connection;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $events;
 
     /**
      * @var LoaderInterface
@@ -40,9 +46,10 @@ class MetadataManager
      *
      * @param Connection $connection
      */
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, EventDispatcherInterface $events)
     {
         $this->connection = $connection;
+        $this->events     = $events;
     }
 
     /**
@@ -122,6 +129,8 @@ class MetadataManager
             } else {
                 $this->load($class);
             }
+
+            $this->subscribe($this->metadata[$name]);
         }
 
         return $this->metadata[$name];
@@ -201,5 +210,19 @@ class MetadataManager
         }
 
         return $parents;
+    }
+
+    /**
+     * Subscribes model lifecycle callbacks.
+     *
+     * @param Metadata $metadata
+     */
+    protected function subscribe(Metadata $metadata)
+    {
+        foreach ($metadata->getEvents() as $event => $methods) {
+            foreach ($methods as $method) {
+                $this->events->on($metadata->getEventPrefix().'.'.$event, [$metadata->getClass(), $method]);
+            }
+        }
     }
 }

@@ -2,14 +2,12 @@
 
 namespace Pagekit\User\Model;
 
-use Pagekit\Database\ORM\ModelTrait;
-
 /**
- * @Entity(tableClass="@system_role", eventPrefix="user.role")
+ * @Entity(tableClass="@system_role")
  */
 class Role implements RoleInterface, \JsonSerializable
 {
-    use ModelTrait;
+    use RoleModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -163,15 +161,5 @@ class Role implements RoleInterface, \JsonSerializable
         $role['isAdministrator'] = $this->isAdministrator();
 
         return $role;
-    }
-
-    /**
-     * @PreSave
-     */
-    public function preSave()
-    {
-        if (!$this->id) {
-            $this->setPriority(self::getConnection()->fetchColumn('SELECT MAX(priority) + 1 FROM @system_role'));
-        }
     }
 }

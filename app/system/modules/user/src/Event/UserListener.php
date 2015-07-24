@@ -43,10 +43,10 @@ class UserListener implements EventSubscriberInterface
         return [
             'auth.login' => 'onUserLogin',
             'terminate' => 'onUserAccess',
-            'user.role.postSave' => 'onUserChange',
-            'user.role.postDelete' => 'onUserChange',
-            'user.postSave' => 'onUserChange',
-            'user.postDelete' => 'onUserChange'
+            'model.role.saved' => 'onUserChange',
+            'model.role.deleted' => 'onUserChange',
+            'model.user.saved' => 'onUserChange',
+            'model.user.deleted' => 'onUserChange'
         ];
     }
 }

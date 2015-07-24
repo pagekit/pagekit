@@ -6,7 +6,7 @@ use Pagekit\Application\Exception;
 use Pagekit\System\Model\DataTrait;
 
 /**
- * @Entity(tableClass="@system_user", eventPrefix="user")
+ * @Entity(tableClass="@system_user")
  */
 class User implements UserInterface, \JsonSerializable
 {
@@ -375,15 +375,5 @@ class User implements UserInterface, \JsonSerializable
         unset($user['activation']);
 
         return $user;
-    }
-
-    /**
-     * @PostSave
-     */
-    public function postSave()
-    {
-        if (!$this->hasRole(Role::ROLE_AUTHENTICATED)) {
-            $this->roles[] = Role::ROLE_AUTHENTICATED;
-        }
     }
 }

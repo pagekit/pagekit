@@ -8,7 +8,7 @@ use Pagekit\System\Model\NodeTrait;
 use Pagekit\User\Model\AccessTrait;
 
 /**
- * @Entity(tableClass="@system_node", eventPrefix="site.node")
+ * @Entity(tableClass="@system_node")
  */
 class Node implements NodeInterface, \JsonSerializable
 {
@@ -150,67 +150,6 @@ class Node implements NodeInterface, \JsonSerializable
     public function setMenu($menu)
     {
         $this->menu = $menu;
-    }
-
-    /**
-     * @PreSave
-     */
-    public function preSave()
-    {
-        $db = self::getConnection();
-
-        $i  = 2;
-        $id = $this->id;
-
-        if (!$this->slug) {
-            $this->slug = $this->getTitle();
-        }
-
-        while (self::where(['slug = ?', 'parent_id= ?'], [$this->slug, $this->parentId])->where(function ($query) use ($id) {
-            if ($id) $query->where('id <> ?', [$id]);
-        })->first()) {
-            $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
-        }
-
-        // Update own path
-        $path = '/'.$this->getSlug();
-        if ($this->parentId && $parent = self::find($this->parentId) and $parent->getMenu() === $this->menu) {
-            $path = $parent->getPath().$path;
-        } else {
-            // set Parent to 0, if old parent is not found
-            $this->setParentId(0);
-        }
-        $this->setPath($path);
-
-        if ($this->id) {
-            // Update children's paths
-            foreach (self::where(['parent_id' => $this->id])->get() as $child) {
-                if (0 !== strpos($child->getPath(), $this->path.'/') || $this->getMenu() !== $this->menu) {
-                    $child->setMenu($this->menu);
-                    $child->save();
-                }
-            }
-        } else {
-            // Set priority
-            $this->priority = 1 + $db->createQueryBuilder()
-                    ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
-                    ->from('@system_node')
-                    ->where(['parent_id' => $this->parentId])
-                    ->execute()
-                    ->fetchColumn();
-        }
-    }
-
-    /**
-     * @PreDelete
-     */
-    public function preDelete()
-    {
-        // Update children's parents
-        foreach (self::where('parent_id = ?', [$this->id])->get() as $child) {
-            $child->setParentId($this->parentId);
-            $child->save();
-        }
     }
 
     /**

@@ -6,6 +6,6 @@ namespace Pagekit\Database\ORM\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-final class PostSave implements Annotation
+final class Deleted implements Annotation
 {
 }

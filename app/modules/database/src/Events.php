@@ -5,72 +5,65 @@ namespace Pagekit\Database;
 final class Events
 {
     /**
-     * This event occurs after the database was connected.
+     * This event occurs after an entity is loaded.
      *
      * @var string
      */
-    const postConnect = 'postConnect';
-
-    /**
-     * This event occurs before an entity is loaded.
-     *
-     * @var string
-     */
-    const postLoad = 'postLoad';
+    const INIT = 'init';
 
     /**
      * This event occurs before an entity is saved.
      *
      * @var string
      */
-    const preSave = 'preSave';
+    const SAVING = 'saving';
 
     /**
      * This event occurs after an entity is saved.
      *
      * @var string
      */
-    const postSave = 'postSave';
+    const SAVED = 'saved';
 
     /**
      * This event occurs before a new entity is saved.
      *
      * @var string
      */
-    const preCreate = 'preCreate';
+    const CREATING = 'creating';
 
     /**
      * This event occurs after a new entity is saved.
      *
      * @var string
      */
-    const postCreate = 'postCreate';
+    const CREATED = 'created';
 
     /**
      * This event occurs before an existing entity is updated.
      *
      * @var string
      */
-    const preUpdate = 'preUpdate';
+    const UPDATING = 'updating';
 
     /**
      * This event occurs after an existing entity is updated.
      *
      * @var string
      */
-    const postUpdate = 'postUpdate';
+    const UPDATED = 'updated';
 
     /**
      * This event occurs before an existing entity is deleted.
      *
      * @var string
      */
-    const preDelete = 'preDelete';
+    const DELETING = 'deleting';
 
     /**
      * This event occurs after an existing entity is deleted.
      *
      * @var string
      */
-    const postDelete = 'postDelete';
+    const DELETED = 'deleted';
 }

@@ -52,7 +52,7 @@ return [
             $scripts->register('page-site', 'system/page:app/bundle/site.js', ['~site-edit', 'editor']);
         },
 
-        'site.node.preSave' => function($event, $node) use ($app) {
+        'model.node.saving' => function($event, $node) use ($app) {
 
             if ('page' !== $node->getType() or null === $data = $app['request']->get('page')) {
                 return;
@@ -66,7 +66,7 @@ return [
 
         },
 
-        'site.node.postDelete' => function($event, $node) use ($app) {
+        'model.node.deleted' => function($event, $node) use ($app) {
 
             if ('page' !== $node->getType()) {
                 return;

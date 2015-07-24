@@ -158,9 +158,9 @@ abstract class Comment implements CommentInterface
     }
 
     /**
-     * @PreDelete
+     * @Deleting
      */
-    public function preDelete()
+    public function Deleting()
     {
         self::where(['parent_id = :old_parent'], [':old_parent' => $this->id])->update(['parent_id' => $this->parent_id]);
     }

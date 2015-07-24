@@ -41,6 +41,17 @@ trait ModelTrait
     }
 
     /**
+     * Creates a new instance of this model.
+     *
+     * @param  array $data
+     * @return Metadata
+     */
+    public static function create($data)
+    {
+        return static::getManager()->load(self::getMetadata(), $data);
+    }
+
+    /**
      * Create a new QueryBuilder instance.
      *
      * @return QueryBuilder

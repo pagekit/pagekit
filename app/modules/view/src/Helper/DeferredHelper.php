@@ -53,12 +53,8 @@ class DeferredHelper implements HelperInterface
 
         $this->events->on('response', function ($e, $request, $response) use ($view) {
 
-            $dispatcher = $e->getDispatcher();
-
             foreach ($this->deferred as $name => $event) {
-
-                // TODO fix prefix
-                $dispatcher->trigger($event->setName("view.$name"), [$view]);
+                $view->trigger($event->setName($name), [$view]);
                 $response->setContent(str_replace($this->placeholder[$name], $event->getResult(), $response->getContent()));
             }
 

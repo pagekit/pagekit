@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Event\PrefixEventDispatcher;
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Helper\DataHelper;
@@ -25,7 +26,7 @@ return [
 
         $app['view'] = function ($app) {
 
-            $view = new View($app['events']);
+            $view = new View(new PrefixEventDispatcher('view.', $app['events']));
             $view->addEngine(new PhpEngine());
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
@@ -100,6 +101,7 @@ return [
 
         'controller' => [function ($event) use ($app) {
 
+            $view   = $app['view'];
             $layout = true;
             $result = $event->getControllerResult();
 
@@ -118,17 +120,17 @@ return [
                             unset($value['layout']);
                         }
 
-                        $app['view']->meta($value);
+                        $view->meta($value);
 
                     } elseif ($key[0] === '$') {
 
-                        $app['view']->data($key, $value);
+                        $view->data($key, $value);
 
                     }
                 }
 
                 if (isset($name)) {
-                    $response = $result = $app['view']->render($name, $result);
+                    $response = $result = $view->render($name, $result);
                 }
             }
 
@@ -137,14 +139,14 @@ return [
             }
 
             if (is_string($layout)) {
-                $app['view']->map('layout', $layout);
+                $view->map('layout', $layout);
             }
 
             if ($layout) {
 
-                $app['view']->section('content', (string) $result);
+                $view->section('content', (string) $result);
 
-                if (null !== $result = $app['view']->render('layout')) {
+                if (null !== $result = $view->render('layout')) {
                     $response = $result;
                 }
             }

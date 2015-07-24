@@ -34,7 +34,8 @@ class EntityEvent extends Event
      */
     public function __construct($name, $entity, Metadata $metadata, EntityManager $manager)
     {
-        $this->name     = $name;
+        parent::__construct($name);
+
         $this->entity   = $entity;
         $this->metadata = $metadata;
         $this->manager  = $manager;

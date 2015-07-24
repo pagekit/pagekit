@@ -151,7 +151,7 @@ return [
 
         },
 
-        'site.node.postLoad' => function ($event, $node) use ($app) {
+        'model.node.init' => function ($event, $node) use ($app) {
             if ('link' === $node->getType() && $node->get('redirect')) {
                 $node->setLink($node->getPath());
             }

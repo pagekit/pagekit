@@ -4,7 +4,6 @@ namespace Pagekit\Blog;
 
 use Pagekit\Application as App;
 use Pagekit\Blog\Model\Post;
-use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Routing\ParamsResolverInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 

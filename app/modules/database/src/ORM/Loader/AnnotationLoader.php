@@ -106,8 +106,8 @@ class AnnotationLoader implements LoaderInterface
                 continue;
             }
 
-            // @PreSave, @PostSave, @PreUpdate, @PostUpdate, @PreDelete, @PostDelete, @PostLoad
-            foreach (['PreSave', 'PostSave', 'PreUpdate', 'PostUpdate', 'PreDelete', 'PostDelete', 'PostLoad'] as $event) {
+            // @Saving, @Saved, @Updating, @Updated, @Deleting, @Deleted, @Created, @Creating, @Init
+            foreach (['Saving', 'Saved', 'Updating', 'Updated', 'Deleting', 'Deleted', 'Created', 'Creating', 'Init'] as $event) {
                 if ($annotation = $this->getAnnotation($method, $event)) {
                     $config['events'][lcfirst($event)][] = $name;
                 }

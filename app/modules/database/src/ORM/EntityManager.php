@@ -5,6 +5,8 @@ namespace Pagekit\Database\ORM;
 use Pagekit\Database\Connection;
 use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Database\Events;
+use Pagekit\Event\EventDispatcherInterface;
+use Pagekit\Event\PrefixEventDispatcher;
 
 class EntityManager
 {
@@ -19,9 +21,9 @@ class EntityManager
     protected $metadata;
 
     /**
-     * @var string
+     * @var EventDispatcherInterface
      */
-    protected $eventClass;
+    protected $events;
 
     /**
      * @var EntityManager
@@ -31,20 +33,15 @@ class EntityManager
     /**
      * Creates a new Manager instance
      *
-     * @param  Connection      $connection
-     * @param  MetadataManager $metadata
-     * @param  string          $eventClass
-     * @throws \RuntimeException
+     * @param  Connection               $connection
+     * @param  MetadataManager          $metadata
+     * @param  EventDispatcherInterface $events
      */
-    public function __construct(Connection $connection, MetadataManager $metadata, $eventClass = 'Pagekit\Database\Event\EntityEvent')
+    public function __construct(Connection $connection, MetadataManager $metadata, EventDispatcherInterface $events = null)
     {
-        if (!is_a($eventClass, 'Pagekit\Database\Event\EntityEvent', true)) {
-            throw new \RuntimeException(sprintf('The Event Class %s is not a subclass of "Pagekit\Database\Event\EntityEvent"', $eventClass));
-        }
-
         $this->connection = $connection;
         $this->metadata   = $metadata;
-        $this->eventClass = $eventClass;
+        $this->events     = $events ?: new PrefixEventDispatcher('model.');
 
         static::$instance = $this;
     }
@@ -91,7 +88,7 @@ class EntityManager
     {
         $callable = "{$entity}::find";
         if (is_callable($callable)) {
-            return call_user_func("{$entity}::find", $identifier);
+            return call_user_func($callable, $identifier);
         }
     }
 
@@ -151,29 +148,28 @@ class EntityManager
 
         $metadata->setValues($entity, $data);
 
-        $this->dispatchEvent(Events::preSave, $entity, $metadata);
+        $this->trigger(Events::SAVING, $entity, $metadata);
 
         if (!$id = $metadata->getValue($entity, $identifier, true)) {
 
-
-            $this->dispatchEvent(Events::preCreate, $entity, $metadata);
+            $this->trigger(Events::CREATING, $entity, $metadata);
 
             $this->connection->insert($metadata->getTable(), $metadata->getValues($entity, true, true));
 
             $metadata->setValue($entity, $identifier, $this->connection->lastInsertId(), true);
 
-            $this->dispatchEvent(Events::postCreate, $entity, $metadata);
+            $this->trigger(Events::CREATED, $entity, $metadata);
 
         } else {
 
-            $this->dispatchEvent(Events::preUpdate, $entity, $metadata);
+            $this->trigger(Events::UPDATING, $entity, $metadata);
 
             $this->connection->update($metadata->getTable(), $metadata->getValues($entity, true, true), [$identifier => $id]);
 
-            $this->dispatchEvent(Events::postUpdate, $entity, $metadata);
+            $this->trigger(Events::UPDATED, $entity, $metadata);
         }
 
-        $this->dispatchEvent(Events::postSave, $entity, $metadata);
+        $this->trigger(Events::SAVED, $entity, $metadata);
     }
 
     /**
@@ -189,11 +185,11 @@ class EntityManager
 
         if ($value = $metadata->getValue($entity, $identifier, true)) {
 
-            $this->dispatchEvent(Events::preDelete, $entity, $metadata);
+            $this->trigger(Events::DELETING, $entity, $metadata);
 
             $this->connection->delete($metadata->getTable(), [$identifier => $value]);
 
-            $this->dispatchEvent(Events::postDelete, $entity, $metadata);
+            $this->trigger(Events::DELETED, $entity, $metadata);
 
             $metadata->setValue($entity, $identifier, null, true);
 
@@ -212,7 +208,7 @@ class EntityManager
     public function hydrateOne($statement, Metadata $metadata)
     {
         if ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            return $this->load($metadata, $row);
+            return $this->load($metadata, $row, true, true);
         }
 
         return false;
@@ -231,7 +227,7 @@ class EntityManager
         $identifier = $metadata->getIdentifier();
 
         while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
-            $entity = $this->load($metadata, $row);
+            $entity = $this->load($metadata, $row, true, true);
             $result[$metadata->getValue($entity, $identifier)] = $entity;
         }
 
@@ -243,14 +239,16 @@ class EntityManager
      *
      * @param  Metadata $metadata
      * @param  array    $data
+     * @param  bool     $column
+     * @param  bool     $convert
      * @return object
      */
-    public function load(Metadata $metadata, array $data)
+    public function load(Metadata $metadata, array $data, $column = false, $convert = false)
     {
         $entity = $metadata->newInstance();
-        $metadata->setValues($entity, $data, true, true);
+        $metadata->setValues($entity, $data, $column, $convert);
 
-        $this->dispatchEvent(Events::postLoad, $entity, $metadata);
+        $this->trigger(Events::INIT, $entity, $metadata);
 
         return $entity;
     }
@@ -263,18 +261,9 @@ class EntityManager
      * @param  Metadata $metadata
      * @return bool
      */
-    public function dispatchEvent($name, $entity, Metadata $metadata)
+    public function trigger($name, $entity, Metadata $metadata)
     {
-        $prefix = $metadata->getEventPrefix();
-        $event  = new $this->eventClass(($prefix ? $prefix.'.' : '').$name, $entity, $metadata, $this);
-
-        if ($events = $metadata->getEvents() and isset($events[$name])) {
-            foreach ($events[$name] as $callback) {
-                call_user_func_array([$entity, $callback], [$event]);
-            }
-        }
-
-        $this->connection->getEventDispatcher()->trigger($event, [$entity]);
+        $this->events->trigger(new EntityEvent("{$metadata->getEventPrefix()}.{$name}", $entity, $metadata, $this), [$entity]);
     }
 
     /**

@@ -18,8 +18,8 @@ class CommentListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'blog.comment.postSave' => 'onCommentChange',
-            'blog.comment.postDelete' => 'onCommentChange'
+            'model.comment.saved' => 'onCommentChange',
+            'model.comment.deleted' => 'onCommentChange'
         ];
     }
 }

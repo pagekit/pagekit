@@ -101,4 +101,67 @@ trait NodeModelTrait
 
         return $root;
     }
+
+    /**
+     * @Saving
+     */
+    public static function saving($event, NodeInterface $node)
+    {
+        $db = self::getConnection();
+
+        $i  = 2;
+        $id = $node->getId();
+
+        if (!$node->getSlug()) {
+            $node->setSlug($node->getTitle());
+        }
+
+        while (self::where(['slug = ?', 'parent_id= ?'], [$node->getSlug(), $node->getParentId()])->where(function ($query) use ($id) {
+            if ($id) $query->where('id <> ?', [$id]);
+        })->first()) {
+            $node->setSlug(preg_replace('/-\d+$/', '', $node->getSlug()).'-'.$i++);
+        }
+
+        // Update own path
+        $path = '/'.$node->getSlug();
+        if ($node->getParentId() && $parent = self::find($node->getParentId()) and $parent->getMenu() === $node->getMenu()) {
+            $path = $parent->getPath().$path;
+        } else {
+            // set Parent to 0, if old parent is not found
+            $node->setParentId(0);
+        }
+        $node->setPath($path);
+
+        if ($id) {
+            // Update children's paths
+            foreach (self::where(['parent_id' => $id])->get() as $child) {
+                if (0 !== strpos($child->getPath(), $node->getPath().'/') || $child->getMenu() !== $node->getMenu()) {
+                    $child->setMenu($node->getMenu());
+                    $child->save();
+                }
+            }
+        } else {
+            // Set priority
+            $node->setPriority(
+                1 + $db->createQueryBuilder()
+                    ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
+                    ->from('@system_node')
+                    ->where(['parent_id' => $node->getParentId()])
+                    ->execute()
+                    ->fetchColumn()
+            );
+        }
+    }
+
+    /**
+     * @Deleting
+     */
+    public static function deleting($event, NodeInterface $node)
+    {
+        // Update children's parents
+        foreach (self::where('parent_id = ?', [$node->getId()])->get() as $child) {
+            $child->setParentId($node->getParentId());
+            $child->save();
+        }
+    }
 }

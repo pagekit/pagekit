@@ -4,17 +4,16 @@ namespace Pagekit\Blog\Model;
 
 use Pagekit\Application as App;
 use Pagekit\Comment\CommentsTrait;
-use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Model\DataTrait;
 use Pagekit\User\Model\AccessTrait;
 use Pagekit\User\Model\User;
 
 /**
- * @Entity(tableClass="@blog_post", eventPrefix="blog.post")
+ * @Entity(tableClass="@blog_post")
  */
 class Post implements \JsonSerializable
 {
-    use AccessTrait, CommentsTrait, DataTrait, ModelTrait;
+    use AccessTrait, CommentsTrait, DataTrait, PostModelTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
@@ -245,55 +244,5 @@ class Post implements \JsonSerializable
         $post['url']          = App::url('@blog/id', ['id' => $this->id ?: 0], 'base');
 
         return $post;
-    }
-
-    /**
-     * @PreSave
-     */
-    public function preSave()
-    {
-        $this->modified = new \DateTime;
-
-        $i  = 2;
-        $id = $this->id;
-
-        while (self::where('slug = ?', [$this->slug])->where(function ($query) use ($id) {
-            if ($id) {
-                $query->where('id <> ?', [$id]);
-            }
-        })->first()) {
-            $this->slug = preg_replace('/-\d+$/', '', $this->slug).'-'.$i++;
-        }
-    }
-
-    /**
-     * @PreDelete
-     */
-    public function preDelete()
-    {
-        self::getConnection()->delete('@blog_comment', ['post_id' => $this->getId()]);
-    }
-
-    /**
-     * Updates the comments info on post.
-     *
-     * @param int $id
-     */
-    public static function updateCommentInfo($id)
-    {
-        $query = Comment::where(['post_id' => $id, 'status' => Comment::STATUS_APPROVED]);
-
-        self::where(compact('id'))->update([
-                'comment_count' => $query->count()
-            ]
-        );
-    }
-
-    /**
-     * Get all users who have written an article
-     */
-    public static function getAuthors()
-    {
-        return self::query()->select('user_id', 'name')->groupBy('user_id', 'name')->join('@system_user', 'user_id = @system_user.id')->execute()->fetchAll();
     }
 }

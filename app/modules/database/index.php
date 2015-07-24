@@ -5,6 +5,7 @@ use Doctrine\DBAL\Logging\DebugStack;
 use Pagekit\Database\ORM\EntityManager;
 use Pagekit\Database\ORM\Loader\AnnotationLoader;
 use Pagekit\Database\ORM\MetadataManager;
+use Pagekit\Event\PrefixEventDispatcher;
 
 return [
 
@@ -21,14 +22,7 @@ return [
             $dbs = [];
 
             foreach ($this->config['connections'] as $name => $params) {
-
-                $params = array_replace($default, $params);
-
-                if ($this->config['default'] === $name) {
-                    $params['events'] = $app['events'];
-                }
-
-                $dbs[$name] = DriverManager::getConnection($params);
+                 $dbs[$name] = DriverManager::getConnection(array_replace($default, $params));
             }
 
             return $dbs;
@@ -39,16 +33,20 @@ return [
         };
 
         $app['db.em'] = function ($app) {
-            return new EntityManager($app['db'], $app['db.metas']);
+            return new EntityManager($app['db'], $app['db.metas'], $app['db.events']);
         };
 
         $app['db.metas'] = function ($app) {
 
-            $manager = new MetadataManager($app['db']);
+            $manager = new MetadataManager($app['db'], $app['db.events']);
             $manager->setLoader(new AnnotationLoader);
             $manager->setCache($app['cache.phpfile']);
 
             return $manager;
+        };
+
+        $app['db.events'] = function ($app) {
+            return new PrefixEventDispatcher('model.', $app['events']);
         };
 
         $app['db.debug_stack'] = function ($app) {

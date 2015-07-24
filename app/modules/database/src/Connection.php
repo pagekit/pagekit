@@ -7,20 +7,11 @@ use Doctrine\DBAL\Cache\QueryCacheProfile;
 use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection as BaseConnection;
 use Doctrine\DBAL\Driver;
-use Pagekit\Event\EventDispatcher;
-use Pagekit\Event\EventDispatcherInterface;
 
 class Connection extends BaseConnection
 {
     const SINGLE_QUOTED_TEXT = '\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'';
     const DOUBLE_QUOTED_TEXT = '"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"';
-
-    /**
-     * The event dispatcher.
-     *
-     * @var EventDispatcherInterface
-     */
-    protected $events;
 
     /**
      * The database utility.
@@ -71,8 +62,6 @@ class Connection extends BaseConnection
             }
         }
 
-        $this->events = isset($params['events']) ? $params['events'] : new EventDispatcher;
-
         if (isset($params['prefix'])) {
             $this->prefix = $params['prefix'];
         }
@@ -83,16 +72,6 @@ class Connection extends BaseConnection
         ];
 
         parent::__construct($params, $driver, $config, $eventManager);
-    }
-
-    /**
-     * Gets the event dispatcher.
-     *
-     * @return EventDispatcherInterface
-     */
-    public function getEventDispatcher()
-    {
-        return $this->events;
     }
 
     /**
@@ -173,18 +152,6 @@ class Connection extends BaseConnection
     public function fetchAllObjects($statement, array $params = [], $class = 'stdClass', $args = [])
     {
         return $this->executeQuery($statement, $params)->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class, $args);
-    }
-
-    /**
-     * @{inheritdoc}
-     */
-    public function connect()
-    {
-        if (!parent::isConnected()) {
-            $this->events->trigger(new Event\ConnectionEvent($this));
-        }
-
-        return parent::connect();
     }
 
     /**

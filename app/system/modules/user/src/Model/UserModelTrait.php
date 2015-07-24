@@ -66,4 +66,16 @@ trait UserModelTrait
 
         return array_intersect_key($cached, array_flip($roles));
     }
+
+    /**
+     * @Saved
+     */
+    public static function saved($event, UserInterface $user)
+    {
+        if (!$user->hasRole(Role::ROLE_AUTHENTICATED)) {
+            $roles = $user->getRoles();
+            $roles[] = Role::ROLE_AUTHENTICATED;
+            $user->setRoles($roles);
+        }
+    }
 }
