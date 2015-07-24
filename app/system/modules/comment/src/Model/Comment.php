@@ -1,14 +1,13 @@
 <?php
 
 namespace Pagekit\Comment\Model;
-use Pagekit\Database\ORM\ModelTrait;
 
 /**
  * @MappedSuperclass
  */
 abstract class Comment implements CommentInterface
 {
-    use ModelTrait;
+    use CommentModelTrait;
 
     /** @Column(type="integer") @Id */
     protected $id;
@@ -155,14 +154,6 @@ abstract class Comment implements CommentInterface
     public function setParentId($parentId)
     {
         $this->parent_id = $parentId;
-    }
-
-    /**
-     * @Deleting
-     */
-    public function Deleting()
-    {
-        self::where(['parent_id = :old_parent'], [':old_parent' => $this->id])->update(['parent_id' => $this->parent_id]);
     }
 
     public function __toString()
