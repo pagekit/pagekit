@@ -54,7 +54,8 @@ return [
         },
 
         'view.styles' => function ($event, $styles) {
-            $styles->register('codemirror', 'vendor/assets/codemirror/codemirror.css');
+            $styles->register('codemirror-hint', 'vendor/assets/codemirror/hint.css');
+            $styles->register('codemirror', 'vendor/assets/codemirror/codemirror.css', ['codemirror-hint']);
         },
 
         'view.scripts' => function ($event, $scripts) use ($app) {
