@@ -103,7 +103,7 @@ class PackageController
         App::trigger('enable', [$module]);
         App::trigger("enable.$name", [$module]);
 
-        if ($package->getType() == 'theme') {
+        if ($package->getType() == 'pagekit-theme') {
             App::config('system')->set('site.theme', $name);
         } elseif ($package->getType() == 'pagekit-extension') {
             App::config('system')->push('extensions', $name);
@@ -130,7 +130,7 @@ class PackageController
         App::trigger('disable', [$module]);
         App::trigger("disable.$name", [$module]);
 
-        if ($package->getType() == 'extension') {
+        if ($package->getType() == 'pagekit-extension') {
             App::config('system')->pull('extensions', $name);
         }
 
@@ -201,11 +201,11 @@ class PackageController
                 $this->disableAction($name);
             }
 
-            if ($package->get('type') == 'extension') {
+            if ($package->get('type') == 'pagekit-extension') {
                 $this->installer->install($package, App::get('path.extensions'));
             }
 
-            if ($package->get('type') == 'theme') {
+            if ($package->get('type') == 'pagekit-theme') {
                 $this->installer->install($package, App::get('path.themes'));
             }
 
