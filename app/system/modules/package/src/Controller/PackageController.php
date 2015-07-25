@@ -105,7 +105,7 @@ class PackageController
 
         if ($package->getType() == 'theme') {
             App::config('system')->set('site.theme', $name);
-        } elseif ($package->getType() == 'extension') {
+        } elseif ($package->getType() == 'pagekit-extension') {
             App::config('system')->push('extensions', $name);
         }
 
