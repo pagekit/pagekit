@@ -52,7 +52,7 @@ class EventsDataCollector implements DataCollectorInterface
 
 
     /**
-     * @param CLosure|object|array $listener
+     * @param Closure|object|array $listener
      *
      * @return array|string
      */
