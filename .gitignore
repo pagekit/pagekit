@@ -3,8 +3,6 @@
 /app/system/modules/theme/css/*
 /extensions/*
 !/extensions/blog
-!/extensions/hello
-!/extensions/page
 /themes/*
 !/themes/one
 /themes/one/css/*
