@@ -7,7 +7,7 @@
         <?= __('Written by %name% on %date%', ['%name%' => $post->getUser()->getName(), '%date%' => '<time datetime="'.$intl->date($post->getDate(), 'iso').'">'.$intl->date($post->getDate()).'</time>' ]) ?>
     </p>
 
-    <?= ($post->getExcerpt()) ? $post->getExcerpt() : $post->getContent() ?>
+    <div class="uk-margin"><?= ($post->getExcerpt()) ? $post->getExcerpt() : $post->getContent() ?></div>
 
     <ul class="uk-subnav">
 
