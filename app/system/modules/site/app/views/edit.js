@@ -56,6 +56,7 @@ window.Site = module.exports = {
                 UIkit.notify(this.$trans('%type% saved.', {type: this.type.label}));
 
             }, function (data) {
+
                 UIkit.notify(data, 'danger');
             });
         }
