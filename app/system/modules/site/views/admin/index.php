@@ -83,7 +83,7 @@
     </div>
 
     <v-modal v-ref="modal">
-        <form class="uk-form-stacked" name="form" v-on="valid: saveMenu(edit)">
+        <form class="uk-form uk-form-stacked" name="form" v-on="valid: saveMenu(edit)">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Add Menu' | trans }}</h2>
