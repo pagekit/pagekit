@@ -7,14 +7,11 @@ use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Site\Model\Node;
 use Pagekit\User\Model\Role;
 
-/**
- * @Access("site: manage site")
- */
 class NodeController
 {
     /**
      * @Route("site/page", name="page")
-     * @Access(admin=true)
+     * @Access("site: manage site", admin=true)
      */
     public function indexAction()
     {
@@ -36,7 +33,7 @@ class NodeController
 
     /**
      * @Route("site/page/edit", name="page/edit")
-     * @Access(admin=true)
+     * @Access("site: manage site", admin=true)
      * @Request({"id", "menu"})
      */
     public function editAction($id = '', $menu = '')
@@ -80,7 +77,7 @@ class NodeController
 
     /**
      * @Route("site/settings")
-     * @Access(admin=true)
+     * @Access("site: manage settings", admin=true)
      */
     public function settingsAction()
     {
@@ -98,6 +95,7 @@ class NodeController
     /**
      * @Route("api/site/link", name="api/link")
      * @Request({"link"})
+     * @Access("site: manage site")
      */
     public function linkAction($link)
     {

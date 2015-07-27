@@ -63,6 +63,10 @@ return [
         ],
         'site: maintenance access' => [
             'title' => 'Use the site in maintenance mode'
+        ],
+        'site: manage settings' => [
+            'title' => 'Manage settings',
+            'description' => 'View and change settings'
         ]
 
     ],
