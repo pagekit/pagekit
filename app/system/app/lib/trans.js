@@ -47,6 +47,10 @@ module.exports = function (Vue) {
 
         var delta = reference - value, format, i, len;
 
+        if (delta <  MINUTE) {
+            return this.$trans('Just now');
+        }
+
         for (i = -1, len = formats.length; ++i < len;) {
 
             format = formats[i];
