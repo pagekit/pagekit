@@ -130,39 +130,13 @@ class Theme extends Module implements \JsonSerializable
     }
 
     /**
-     * Gets the widget config.
-     *
-     * @param  integer $id
-     * @return array
-     */
-    public function getWidget($id = 0)
-    {
-        $config  = $this->config("widgets.$id", []);
-        $default = $this->config("widget", []);
-
-        return array_replace($default, $config);
-    }
-
-    /**
-     * Sets the widget config.
-     *
-     * @param array   $data
-     * @param integer $id
-     */
-    public function configWidget(array $data, $id)
-    {
-        $this->config['widgets'][$id] = $data;
-        $this->save();
-    }
-
-    /**
      * Saves the theme config.
      *
      * @return array
      */
     public function save()
     {
-        App::config('theme')->set($this->name, $this->config(['menus', 'positions', 'widgets']));
+        App::config('theme')->set($this->name, $this->config(['menus', 'positions']));
     }
 
     /**

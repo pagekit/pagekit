@@ -70,12 +70,10 @@ return [
         },
 
         'model.widget.init' => function ($event, $widget) use ($app) {
-            $widget->theme = $app['theme']->getWidget($widget->getId());
             $widget->position = $app['theme']->findPosition($widget->getId());
         },
 
         'model.widget.saved' => function ($event, $widget) use ($app) {
-            $app['theme']->configWidget($widget->theme, $widget->getId());
             $app['theme']->assignPosition($widget->position, $widget->getId());
         }
     ]

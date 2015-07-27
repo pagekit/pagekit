@@ -36,8 +36,6 @@ class WidgetController
         if (!$widget) {
             $widget = Widget::create();
             $widget->setType($type);
-            $widget->position = '';
-            $widget->theme = App::theme()->getWidget();
         }
 
         return [

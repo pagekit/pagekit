@@ -69,10 +69,6 @@ class WidgetApiController
             $widget->position = $data['position'];
         }
 
-        if (isset($data['theme'])) {
-            $widget->theme = $data['theme'];
-        }
-
         $widget->save($data);
 
         return ['message' => __('Widget saved.'), 'widget' => Widget::find($widget->getId())];
