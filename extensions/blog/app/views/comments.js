@@ -120,10 +120,10 @@ module.exports = {
 
                     this.$resource('api/blog/comment/:id').save({id: 0}, {comment: comment}, function (data) {
                         this.cancel(e);
-                        this.load().success(function() {
-                            window.location.hash = 'comment-'+data.comment.id;
+                        this.load().success(function () {
+                            window.location.hash = 'comment-' + data.comment.id;
                         });
-                    }, function() {
+                    }, function () {
                         // TODO better error messages
                         this.$set('error', this.$trans('Unable to comment. Please try again later.'))
                     });
