@@ -1,4 +1,4 @@
-module.exports = {
+window.Settings = module.exports = {
 
     data: function () {
         return window.$settings;
@@ -16,7 +16,7 @@ module.exports = {
 
             var sections = [], section;
 
-            _.forIn(module.exports.components, function (component, name) {
+            _.forIn(this.$options.components, function (component, name) {
 
                 section = component.options.section;
 
@@ -62,5 +62,3 @@ jQuery(function () {
     (new Vue(module.exports)).$mount('#settings');
 
 });
-
-window.Settings = module.exports;

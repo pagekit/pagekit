@@ -17,7 +17,7 @@
                     <input-link class="uk-form-width-large" url="{{@ widget.data.redirect_login}}"></input-link>
                 </div>
             </div>
-            
+
             <div class="uk-form-row">
                 <label class="uk-form-label">{{ 'Logout Redirect' | trans }}</label>
                 <div class="uk-form-controls">
@@ -48,12 +48,10 @@
 
         replace: false,
 
-        props: ['widget', 'config', 'form'],
-
-        template: __vue_template__
+        props: ['widget', 'config', 'form']
 
     };
 
-    window.Widgets.component('widget-login', module.exports);
+    window.Widgets.components['widget-login'] = module.exports;
 
 </script>

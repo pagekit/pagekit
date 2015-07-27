@@ -1,4 +1,4 @@
-module.exports = {
+window.Dashboard = module.exports = {
 
     data: function () {
         return _.extend({editing: false}, window.$data);
@@ -118,7 +118,7 @@ module.exports = {
 
             var types = [], type;
 
-            _.forIn(module.exports.components, function (component, name) {
+            _.forIn(this.$options.components, function (component, name) {
 
                 type = component.options.type;
 
@@ -149,5 +149,3 @@ jQuery(function () {
     new Vue(module.exports).$mount('#dashboard');
 
 });
-
-window.Dashboard = module.exports;

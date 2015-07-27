@@ -78,12 +78,14 @@ module.exports = {
             }, this);
         }
 
-    }
+    },
+
+    mixins: [window.Widgets]
 
 };
 
-$(function () {
+jQuery(function () {
 
-    (new Widgets(module.exports)).$mount('#widget-edit');
+    (new Vue(module.exports)).$mount('#widget-edit');
 
 });

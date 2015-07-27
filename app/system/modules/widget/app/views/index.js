@@ -158,12 +158,14 @@ module.exports = {
 
         }
 
-    }
+    },
+
+    mixins: [window.Widgets]
 
 };
 
-$(function () {
+jQuery(function () {
 
-    (new Widgets(module.exports)).$mount('#widgets');
+    (new Vue(module.exports)).$mount('#widgets');
 
 });

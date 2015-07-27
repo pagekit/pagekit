@@ -106,12 +106,10 @@
                 }));
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Widgets.component('widget-menu', module.exports);
+    window.Widgets.components['widget-menu'] = module.exports;
 
 </script>

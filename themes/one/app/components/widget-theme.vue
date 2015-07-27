@@ -50,12 +50,10 @@
             priority: 50
         },
 
-        props: ['widget', 'config'],
-
-        template: __vue_template__
+        props: ['widget', 'config']
 
     };
 
-    window.Widgets.component('theme-settings', module.exports)
+    window.Widgets.components['theme-settings'] = module.exports;
 
 </script>

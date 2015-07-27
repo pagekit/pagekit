@@ -1,4 +1,4 @@
-module.exports = window.Widgets = Vue.extend({
+window.Widgets = module.exports = {
 
     data: function () {
         return {
@@ -55,4 +55,4 @@ module.exports = window.Widgets = Vue.extend({
 
     }
 
-});
+};
