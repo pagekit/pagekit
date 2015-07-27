@@ -78,7 +78,7 @@ module.exports = {
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                UIkit.notify(this.$trans('Roles reordered.'));
+                // UIkit.notify(this.$trans('Roles reordered.'));
             }, function (data) {
                 UIkit.notify(data, 'danger');
             });

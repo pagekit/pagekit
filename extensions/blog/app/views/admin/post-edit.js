@@ -39,12 +39,39 @@ var App = Vue.extend({
         time: {
 
             get: function() {
-                return this.$date(this.post.date, {time: 'short'});
+
+                var t = this.$date(this.post.date, {time: 'short'}),
+                    h = t.split(':')[0];
+
+                if (h.length == 1) {
+                    t = '0'+t;
+                }
+
+                return t;
             },
 
             set: function(time) {
+
+                time = (function(time_str, t, hours, minutes, meridian) {
+
+                    // Convert a string like 11:30 PM to 24h format
+                    t        = time_str.match(/(\d+):(\d+) (\w)/);
+                    hours    = Number(t[1]);
+                    minutes  = Number(t[2]);
+                    meridian = t[3].toLowerCase();
+
+                    if (meridian == 'p' && hours < 12) {
+                      hours = hours + 12;
+                    } else if (meridian == 'a' && hours == 12) {
+                      hours = hours - 12;
+                    }
+
+                    return [hours, minutes];
+
+                })(time);
+
                 var date = new Date(this.post.date);
-                date.setHours(time.substr(0, 2), time.substr(3, 2));
+                date.setHours(time[0], time[1]);
                 this.$set('post.date', date.toISOString());
             }
 

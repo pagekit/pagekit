@@ -6,6 +6,8 @@ module.exports = {
 
         save: function(e) {
 
+            var vm = this;
+
             this.$http.post('admin/system/settings/config', { name: 'system/user', config: this.config }, function() {
                  UIkit.notify(vm.$trans('Settings saved.'));
             }).error(function(data) {
