@@ -6,7 +6,8 @@ module.exports = {
             tree: {},
             comments: [],
             count: 0,
-            reply: 0
+            reply: 0,
+            error: false
         }, window.$comments);
     },
 
@@ -19,7 +20,7 @@ module.exports = {
 
         load: function () {
 
-            this.Comments.query({post: this.config.post}, function (data) {
+            return this.Comments.query({post: this.config.post}, function (data) {
                 this.$set('comments', data.comments);
                 this.$set('tree', _.groupBy(data.comments, 'parent_id'));
                 this.$set('post', data.posts[0]);
@@ -115,12 +116,16 @@ module.exports = {
                         comment['email'] = this.email;
                     }
 
-                    // TODO handle errors
+                    this.$set('error', false);
+
                     this.$resource('api/blog/comment/:id').save({id: 0}, {comment: comment}, function (data) {
                         this.cancel(e);
-                        this.load();
-
-                        UIkit.notify(this.$trans('Thanks for commenting.'));
+                        this.load().success(function () {
+                            window.location.hash = 'comment-' + data.comment.id;
+                        });
+                    }, function () {
+                        // TODO better error messages
+                        this.$set('error', this.$trans('Unable to comment. Please try again later.'))
                     });
                 }
 

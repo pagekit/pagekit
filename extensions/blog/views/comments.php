@@ -1,5 +1,5 @@
 <?php
-$view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify'])
+$view->script('comments', 'blog:app/bundle/comments.js', 'vue')
 ?>
 
 <div id="comments" class="uk-margin" v-if="config.enabled || comments.length">
@@ -64,6 +64,8 @@ $view->script('comments', 'blog:app/bundle/comments.js', ['vue', 'uikit-notify']
     <div class="uk-margin">
 
         <h2 class="uk-h3">{{ 'Leave a comment' | trans }}</h2>
+
+        <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
         <form class="uk-form uk-form-stacked" name="replyForm" v-if="user.canComment" v-on="valid: save">
 

@@ -62,6 +62,7 @@
 
             select: function() {
                 this.source = this.$.finder.getSelected()[0];
+                this.$dispatch('image-selected', this.source);
                 this.$.modal.close();
             },
 

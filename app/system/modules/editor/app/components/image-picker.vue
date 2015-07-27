@@ -48,7 +48,15 @@
         },
 
         ready: function () {
+
             this.$.modal.open();
+
+            this.$on('image-selected', function(path) {
+
+                if (path && !this.image.alt) {
+                    this.image.alt = path.split('/').slice(-1)[0];
+                }
+            })
         },
 
         methods: {
@@ -58,11 +66,8 @@
             },
 
             update: function (e) {
-                e.preventDefault();
 
-                if (this.image.src && !this.image.alt) {
-                    this.image.alt = this.image.src.split('/').slice(-1)[0];
-                }
+                e.preventDefault();
 
                 this.$.modal.close();
                 this.$emit('select', this.image);
