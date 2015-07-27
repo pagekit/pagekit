@@ -87,7 +87,7 @@ class NodeController
                 'name'  => 'system/site/admin/settings.php'
             ],
             '$data' => [
-                'config' => App::module('system/site')->config(['title', 'description', 'maintenance.', 'icons.', 'code.'])
+                'config' => App::module('system/site')->config(['title', 'description', 'maintenance.', 'sitelogo', 'icons.', 'code.'])
             ]
         ];
     }

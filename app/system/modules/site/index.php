@@ -117,7 +117,9 @@ return [
         'code' => [
             'header' => '',
             'footer' => ''
-        ]
+        ],
+
+        'sitelogo' => ''
 
     ],
 
