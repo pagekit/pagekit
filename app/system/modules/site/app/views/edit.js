@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+window.Site = module.exports = {
 
     data: function () {
         return _.merge({}, window.$data);
@@ -13,16 +13,17 @@ module.exports = Vue.extend({
 
         sections: function () {
 
-            var sections = [], type = this.$get('type.id');
+            var type = this.$get('type.id'), sections = [], section;
 
             _.forIn(this.$options.components, function (component, name) {
 
-                var section = component.options.section;
+                section = component.options.section;
 
                 if (section && (!section.active || type && type.match(section.active))) {
                     section.name = name;
                     sections.push(section);
                 }
+
             });
 
             return sections;
@@ -47,7 +48,7 @@ module.exports = Vue.extend({
             this.Nodes.save({id: this.node.id}, data, function (data) {
 
                 if (!this.node.id) {
-                    window.history.replaceState({}, '', this.$url('admin/site/page/edit', {id: data.node.id}))
+                    window.history.replaceState({}, '', this.$url('admin/site/page/edit', {id: data.node.id}));
                 }
 
                 this.$set('node', data.node);
@@ -74,10 +75,10 @@ module.exports = Vue.extend({
 
     }
 
-});
+};
 
-$(function () {
+jQuery(function () {
 
-    (new module.exports()).$mount('#site-edit');
+    (new Vue(module.exports)).$mount('#site-edit');
 
 });

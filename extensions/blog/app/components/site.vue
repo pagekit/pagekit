@@ -18,12 +18,10 @@
             label: 'Settings',
             priority: 0,
             active: '^blog$'
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Site.component('blog', module.exports);
+    window.Site.components['blog'] = module.exports;
 
 </script>

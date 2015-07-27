@@ -121,12 +121,10 @@
 
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Site.component('page', module.exports);
+    window.Site.components['page'] = module.exports;
 
 </script>

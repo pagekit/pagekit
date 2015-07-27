@@ -2,28 +2,6 @@ module.exports = [
 
     {
         entry: {
-            "edit": "./app/views/edit"
-        },
-        output: {
-            filename: "./app/bundle/[name].js",
-            library: "Site"
-        },
-        externals: {
-            "lodash": "_",
-            "jquery": "jQuery",
-            "uikit": "UIkit",
-            "vue": "Vue"
-        },
-        module: {
-            loaders: [
-                { test: /\.html$/, loader: "html" },
-                { test: /\.vue$/, loader: "vue" }
-            ]
-        }
-    },
-
-    {
-        entry: {
             "panel-link": "./app/components/panel-link.vue"
         },
         output: {
@@ -40,6 +18,7 @@ module.exports = [
 
     {
         entry: {
+            "edit": "./app/views/edit",
             "index": "./app/views/index",
             "settings": "./app/views/settings",
             "input-link": "./app/components/input-link.vue",
