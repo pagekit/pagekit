@@ -45,6 +45,10 @@
             if (this.behavior === 'redirect') {
                 this.node.link = this.node.data.redirect;
             }
+
+            if (!this.node.id) {
+                this.node.status = 1;
+            }
         },
 
         computed: {
