@@ -47,7 +47,7 @@ module.exports = Vue.extend({
             this.Nodes.save({id: this.node.id}, data, function (data) {
 
                 if (!this.node.id) {
-                    window.history.replaceState({}, '', this.$url('admin/site/edit', {id: data.node.id}))
+                    window.history.replaceState({}, '', this.$url('admin/site/page/edit', {id: data.node.id}))
                 }
 
                 this.$set('node', data.node);

@@ -8,7 +8,7 @@ module.exports = window.Widgets = Vue.extend({
     },
 
     created: function () {
-        this.resource = this.$resource('api/widget/:id');
+        this.resource = this.$resource('api/site/widget/:id');
     },
 
     methods: {

@@ -47,11 +47,11 @@ module.exports = {
             e.preventDefault();
 
             this.$broadcast('save', {widget: this.widget});
-            this.$resource('api/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
+            this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
 
                 if (!this.widget.id) {
-                    window.history.replaceState({}, '', this.$url('admin/widget/edit', {id: data.widget.id}))
+                    window.history.replaceState({}, '', this.$url('admin/site/widget/edit', {id: data.widget.id}))
                 }
 
                 this.$set('widget', data.widget);

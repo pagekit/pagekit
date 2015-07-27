@@ -21,15 +21,15 @@ return [
 
         '/' => [
             'name' => '@site',
-            'controller' => 'Pagekit\\Site\\Controller\\SiteController'
+            'controller' => 'Pagekit\\Site\\Controller\\NodeController'
         ],
         '/api/site/menu' => [
             'name' => '@site/api/menu',
-            'controller' => 'Pagekit\\Site\\Controller\\MenuController'
+            'controller' => 'Pagekit\\Site\\Controller\\MenuApiController'
         ],
         '/api/site/node' => [
             'name' => '@site/api/node',
-            'controller' => 'Pagekit\\Site\\Controller\\NodeController'
+            'controller' => 'Pagekit\\Site\\Controller\\NodeApiController'
         ]
 
     ],
@@ -57,7 +57,7 @@ return [
         'site' => [
             'label' => 'Site',
             'icon' => 'system/site:assets/images/icon-site.svg',
-            'url' => '@site',
+            'url' => '@site/page',
             'access' => 'site: manage site',
             'active' => '@site*',
             'priority' => 105
@@ -65,8 +65,8 @@ return [
         'site: pages' => [
             'label' => 'Pages',
             'parent' => 'site',
-            'url' => '@site',
-            'active' => '@site(/edit)?'
+            'url' => '@site/page',
+            'active' => '@site/page(/edit)?'
         ],
         'site: settings' => [
             'label' => 'Settings',

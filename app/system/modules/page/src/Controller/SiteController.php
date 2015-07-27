@@ -22,7 +22,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __($page->getTitle()),
-                'name'  => 'system/page:views/index.php'
+                'name'  => 'system/page:views/page.php'
             ],
             'page' => $page
         ];

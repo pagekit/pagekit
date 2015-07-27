@@ -11,7 +11,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-margin-small-right" href="<?= $view->url('@widget') ?>">{{ widget.title ? 'Close' : 'Cancel' | trans }}</a>
+            <a class="uk-button uk-margin-small-right" href="<?= $view->url('@site/widget') ?>">{{ widget.title ? 'Close' : 'Cancel' | trans }}</a>
             <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
         </div>

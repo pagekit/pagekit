@@ -16,8 +16,8 @@ return [
             'name' => '@system/finder',
             'controller' => 'Pagekit\\Finder\\Controller\\FinderController'
         ],
-        '/system/storage' => [
-            'name' => '@system/storage',
+        '/site/storage' => [
+            'name' => '@site/storage',
             'controller' => 'Pagekit\\Finder\\Controller\\StorageController'
         ]
 
@@ -71,7 +71,7 @@ return [
         'system: storage' => [
             'label' => 'Storage',
             'parent' => 'site',
-            'url' => '@system/storage',
+            'url' => '@site/storage',
             'access' => 'system: manage storage',
             'priority' => 10
         ]

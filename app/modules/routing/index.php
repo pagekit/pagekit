@@ -89,7 +89,8 @@ return [
 
     'require' => [
 
-        'kernel'
+        'kernel',
+        'filter'
 
     ],
 

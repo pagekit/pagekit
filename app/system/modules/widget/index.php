@@ -14,12 +14,12 @@ return [
 
     'routes' => [
 
-        '/widget' => [
-            'name' => '@widget',
+        '/site/widget' => [
+            'name' => '@site/widget',
             'controller' => 'Pagekit\\Widget\\Controller\\WidgetController'
         ],
-        '/api/widget' => [
-            'name' => '@widget/api',
+        '/api/site/widget' => [
+            'name' => '@site/api/widget',
             'controller' => 'Pagekit\\Widget\\Controller\\WidgetApiController'
         ]
 
@@ -44,9 +44,9 @@ return [
         'site: widgets' => [
             'label' => 'Widgets',
             'parent' => 'site',
-            'url' => '@widget',
+            'url' => '@site/widget',
             'access' => 'system: manage widgets',
-            'active' => '@widget(/edit)?'
+            'active' => '@site/widget(/edit)?'
         ]
 
     ],

@@ -54,7 +54,7 @@
                         <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/site/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
+                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/sitepage//edit', { id: id, menu: menu.id })">{{ label }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
             </div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
             <div class="pk-table-min-width-100">
-                <a v-attr="href: $url('admin/site/edit', { id: node.id })">{{ node.title }}</a>
+                <a v-attr="href: $url('admin/site/page/edit', { id: node.id })">{{ node.title }}</a>
             </div>
             <div class="pk-table-width-minimum">
                 <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" v-on="click: setFrontpage(node)"></a>

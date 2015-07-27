@@ -10,7 +10,7 @@ use Pagekit\Site\Model\Node;
 /**
  * @Access("site: manage site")
  */
-class MenuController
+class MenuApiController
 {
     /**
      * @var Config
