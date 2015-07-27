@@ -26,7 +26,8 @@ class SystemModule extends Module
         $app['db.em']; // -TODO- fix me
 
         $theme = $this->config('site.theme');
-        foreach (array_merge($this->config['extensions'], [$theme]) as $module) {
+
+        foreach (array_merge($this->config['extensions'], (array) $theme) as $module) {
             try {
                 $app['module']->load($module);
             } catch (\RuntimeException $e) {
