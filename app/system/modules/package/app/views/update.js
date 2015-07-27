@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function() {
         return _.extend({
@@ -83,10 +83,10 @@ module.exports = Vue.extend({
 
     }
 
-});
+};
 
-$(function () {
+jQuery(function () {
 
-    (new module.exports()).$mount('#update');
+    (new Vue(module.exports)).$mount('#update');
 
 });

@@ -104,12 +104,12 @@
 
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    Vue.component('input-video', module.exports);
+    Vue.component('input-video', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

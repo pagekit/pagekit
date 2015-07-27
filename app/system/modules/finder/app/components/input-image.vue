@@ -69,12 +69,12 @@
                 this.source = ''
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    Vue.component('input-image', module.exports);
+    Vue.component('input-image', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

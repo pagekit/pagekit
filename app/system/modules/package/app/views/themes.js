@@ -1,8 +1,4 @@
-module.exports = Vue.extend({
-
-    mixins: [
-        require('../lib/package')
-    ],
+window.Themes = module.exports = {
 
     data: function () {
         return _.extend(window.$data, {
@@ -119,14 +115,16 @@ module.exports = Vue.extend({
         'package-details': require('../components/package-details.vue'),
         'package-upload': require('../components/package-upload.vue')
 
-    }
+    },
 
-});
+    mixins: [
+        require('../lib/package')
+    ]
 
-window.Themes = module.exports;
+};
 
-$(function () {
+jQuery(function () {
 
-    (new module.exports).$mount('#themes');
+    (new Vue(module.exports)).$mount('#themes');
 
 });

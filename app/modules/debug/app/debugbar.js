@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var Debugbar = require('./debugbar.vue');
+var Debugbar = Vue.extend(require('./debugbar.vue'));
 
 Debugbar.component('system', require('./components/system.vue'));
 Debugbar.component('routes', require('./components/routes.vue'));

@@ -52,12 +52,10 @@
                 });
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Links.component('page', module.exports);
+    window.Links.components['page'] = module.exports;
 
 </script>

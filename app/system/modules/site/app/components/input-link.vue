@@ -33,7 +33,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         props: ['link', 'name', 'class', 'id', 'required'],
 
@@ -95,8 +95,10 @@
 
         }
 
-    });
+    };
 
-    Vue.component('input-link', module.exports);
+    Vue.component('input-link', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

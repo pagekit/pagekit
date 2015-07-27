@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function() {
         return _.merge({
@@ -124,8 +124,10 @@ module.exports = Vue.extend({
 
     }
 
-});
+};
 
 jQuery(function () {
-    (new module.exports()).$mount('#post');
+
+    (new Vue(module.exports)).$mount('#post');
+
 });

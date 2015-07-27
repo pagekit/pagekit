@@ -1,8 +1,4 @@
-module.exports = Vue.extend({
-
-    mixins: [
-        require('../lib/package')
-    ],
+window.Extensions = module.exports = {
 
     data: function () {
         return _.extend(window.$data, {
@@ -11,7 +7,7 @@ module.exports = Vue.extend({
             updates: null,
             search: '',
             status: ''
-        })
+        });
     },
 
     ready: function () {
@@ -118,14 +114,16 @@ module.exports = Vue.extend({
         'package-details': require('../components/package-details.vue'),
         'package-upload': require('../components/package-upload.vue')
 
-    }
+    },
 
-});
+    mixins: [
+        require('../lib/package')
+    ]
 
-window.Extensions = module.exports;
+};
 
-$(function () {
+jQuery(function () {
 
-    (new module.exports).$mount('#extensions');
+    (new Vue(module.exports)).$mount('#extensions');
 
 });

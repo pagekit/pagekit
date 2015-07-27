@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function () {
         return _.merge({
@@ -10,7 +10,7 @@ module.exports = Vue.extend({
             user: window.$pagekit.user,
             replyComment: {},
             editComment: {}
-        }, window.$data)
+        }, window.$data);
     },
 
     created: function () {
@@ -177,8 +177,10 @@ module.exports = Vue.extend({
 
     }
 
-});
+};
 
 jQuery(function () {
-    (new module.exports()).$mount('#comments');
+
+    (new Vue(module.exports)).$mount('#comments');
+
 });

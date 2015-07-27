@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.src">
-    
+
         <img width="60" height="60" alt="{{ 'Placeholder Video' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add video' | trans }}</p>
 
@@ -37,7 +37,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         props: ['index'],
 
@@ -107,6 +107,6 @@
 
         }
 
-    });
+    };
 
 </script>

@@ -39,7 +39,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         data: function () {
             return {
@@ -65,6 +65,6 @@
 
         }
 
-    });
+    };
 
 </script>

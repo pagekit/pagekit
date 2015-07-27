@@ -2,7 +2,7 @@
  * Editor Video plugin.
  */
 
-var Picker = require('./video-picker.vue');
+var Picker = Vue.extend(require('./video-picker.vue'));
 
 module.exports = {
 

@@ -43,12 +43,10 @@
                 })});
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Links.component('blog', module.exports);
+    window.Links.components['blog'] = module.exports;
 
 </script>

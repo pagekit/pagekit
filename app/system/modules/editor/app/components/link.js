@@ -2,7 +2,7 @@
  * Editor Link plugin.
  */
 
-var Picker = require('./link-picker.vue');
+var Picker = Vue.extend(require('./link-picker.vue'));
 
 module.exports = {
 

@@ -68,7 +68,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         replace : true,
 
@@ -352,8 +352,10 @@
 
         }
 
-    });
+    };
 
-    Vue.component('panel-finder', module.exports);
+    Vue.component('panel-finder', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

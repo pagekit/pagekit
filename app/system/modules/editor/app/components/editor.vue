@@ -6,7 +6,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         props: ['type', 'value', 'options'],
 
@@ -51,8 +51,10 @@
 
         }
 
-    });
+    };
 
-    Vue.component('v-editor', module.exports);
+    Vue.component('v-editor', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

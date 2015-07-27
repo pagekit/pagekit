@@ -13,9 +13,9 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    window.Links = module.exports = {
 
-        data: function() {
+        data: function () {
             return {
                 type: false,
                 link: ''
@@ -25,7 +25,7 @@
         watch: {
 
             type: {
-                handler: function(type) {
+                handler: function (type) {
                     if (!type && this.types.length) {
                         this.type = this.types[0].value;
                     }
@@ -37,7 +37,7 @@
 
         computed: {
 
-            types: function() {
+            types: function () {
 
                 var types = [];
 
@@ -52,10 +52,14 @@
                 return _.sortBy(types, 'text');
             }
 
-        }
+        },
 
+        components: {}
+
+    };
+
+    Vue.component('panel-link', function (resolve) {
+        resolve(module.exports);
     });
-
-    Vue.component('panel-link', module.exports);
 
 </script>

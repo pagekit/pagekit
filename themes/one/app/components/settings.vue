@@ -54,12 +54,10 @@
                 });
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Themes.component('settings-theme', module.exports);
+    window.Themes.components['settings-theme'] = module.exports;
 
 </script>

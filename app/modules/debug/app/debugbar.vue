@@ -23,10 +23,9 @@
 <script>
 
     var $ = require('jquery');
-    var Vue = require('vue');
     var config = window.$debugbar;
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         el: function () {
             return document.createElement('div');
@@ -100,6 +99,6 @@
 
         }
 
-    });
+    };
 
 </script>

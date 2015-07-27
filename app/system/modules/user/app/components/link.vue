@@ -27,12 +27,10 @@
 
         ready: function () {
             this.$set('link', '@user/login');
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Links.component('user', module.exports);
+    window.Links.components['user'] = module.exports;
 
 </script>

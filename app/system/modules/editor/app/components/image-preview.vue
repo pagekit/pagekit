@@ -28,7 +28,7 @@
 
 <script>
 
-    module.exports = Vue.extend({
+    module.exports = {
 
         props: ['index'],
 
@@ -52,6 +52,6 @@
 
         }
 
-    });
+    };
 
 </script>
