@@ -16,6 +16,6 @@ class CacheController
     {
         App::module('system/cache')->clearCache($caches);
 
-        return ['message' => __('Cache cleared!')];
+        return ['message' => 'success'];
     }
 }

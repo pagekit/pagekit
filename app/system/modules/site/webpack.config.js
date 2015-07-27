@@ -23,7 +23,9 @@ module.exports = [
             "settings": "./app/views/settings",
             "input-link": "./app/components/input-link.vue",
             "widget-menu": "./app/components/widget-menu.vue",
-            "widget-text": "./app/components/widget-text.vue"
+            "widget-text": "./app/components/widget-text.vue",
+            "page-site": "./app/components/page-site.vue",
+            "page-link": "./app/components/page-link.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

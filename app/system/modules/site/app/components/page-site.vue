@@ -110,7 +110,7 @@
                 handler: function (id) {
 
                     if (id) {
-                        this.$resource('api/page/:id').get({id: id}, function (page) {
+                        this.$resource('api/site/page/:id').get({id: id}, function (page) {
                             this.$set('page', page);
                         });
                     }

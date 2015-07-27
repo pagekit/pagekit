@@ -49,8 +49,13 @@ return [
         '/api/user' => [
             'name' => '@user/api',
             'controller' => [
-                'Pagekit\\User\\Controller\\RoleApiController',
                 'Pagekit\\User\\Controller\\UserApiController'
+            ]
+        ],
+        '/api/user/role' => [
+            'name' => '@user/api/role',
+            'controller' => [
+                'Pagekit\\User\\Controller\\RoleApiController'
             ]
         ]
 

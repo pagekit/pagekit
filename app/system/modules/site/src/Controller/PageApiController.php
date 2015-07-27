@@ -1,14 +1,14 @@
 <?php
 
-namespace Pagekit\Page\Controller;
+namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Page\Model\Page;
+use Pagekit\Site\Model\Page;
 
 /**
  * @Access("site: manage pages")
  */
-class PageController
+class PageApiController
 {
     /**
      * @Route("/", methods="GET")

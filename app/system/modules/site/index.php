@@ -2,6 +2,7 @@
 
 use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
+use Pagekit\Site\Event\PageListener;
 
 return [
 
@@ -14,6 +15,16 @@ return [
     'autoload' => [
 
         'Pagekit\\Site\\' => 'src'
+
+    ],
+
+    'nodes' => [
+
+        'page' => [
+            'name' => '@page',
+            'label' => 'Page',
+            'controller' => 'Pagekit\\Site\\Controller\\PageController::indexAction'
+        ]
 
     ],
 
@@ -30,6 +41,11 @@ return [
         '/api/site/node' => [
             'name' => '@site/api/node',
             'controller' => 'Pagekit\\Site\\Controller\\NodeApiController'
+        ],
+
+        '/api/site/page' => [
+            'name' => '@site/api/page',
+            'controller' => 'Pagekit\\Site\\Controller\\PageApiController'
         ]
 
     ],
@@ -107,13 +123,16 @@ return [
         'boot' => function ($event, $app) {
             $app->subscribe(
                 new MaintenanceListener(),
-                new NodesListener()
+                new NodesListener(),
+                new PageListener()
             );
         },
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
             $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
+            $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
+            $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
         },
 
         'site' => function () use ($app) {
@@ -149,12 +168,6 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
-        },
-
-        'model.node.init' => function ($event, $node) use ($app) {
-            if ('link' === $node->getType() && $node->get('redirect')) {
-                $node->setLink($node->getPath());
-            }
         }
 
     ]

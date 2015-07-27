@@ -1,11 +1,11 @@
 <?php
 
-namespace Pagekit\Page\Controller;
+namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Page\Model\Page;
+use Pagekit\Site\Model\Page;
 
-class SiteController
+class PageController
 {
     public function indexAction($id = 0)
     {
@@ -22,7 +22,7 @@ class SiteController
         return [
             '$view' => [
                 'title' => __($page->getTitle()),
-                'name'  => 'system/page:views/page.php'
+                'name'  => 'system/site:views/page.php'
             ],
             'page' => $page
         ];

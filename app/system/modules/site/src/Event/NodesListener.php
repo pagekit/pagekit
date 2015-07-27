@@ -71,6 +71,14 @@ class NodesListener implements EventSubscriberInterface
         }
     }
 
+
+    public function onNodeInit($event, $node)
+    {
+        if ('link' === $node->getType() && $node->get('redirect')) {
+            $node->setLink($node->getPath());
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -78,7 +86,8 @@ class NodesListener implements EventSubscriberInterface
     {
         return [
             'request' => ['onRequest', 110],
-            'enable' => 'onEnable'
+            'enable' => 'onEnable',
+            'model.node.init' => 'onNodeInit'
         ];
     }
 

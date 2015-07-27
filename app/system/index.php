@@ -26,7 +26,6 @@ return [
         'system/info',
         'system/mail',
         'system/package',
-        'system/page',
         'system/settings',
         'system/site',
         'system/theme',

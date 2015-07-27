@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Page\Model;
+namespace Pagekit\Site\Model;
 
 use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Model\DataTrait;

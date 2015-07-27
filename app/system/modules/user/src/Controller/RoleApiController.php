@@ -7,7 +7,6 @@ use Pagekit\User\Model\Role;
 
 /**
  * @Access("user: manage user permissions")
- * @Route("role", name="role")
  */
 class RoleApiController
 {

@@ -28,7 +28,7 @@
 
         created: function () {
             //TODO don't retrieve entire page objects
-            this.$resource('api/page').get(function (pages) {
+            this.$resource('api/site/page').get(function (pages) {
                 this.pages = pages;
                 if (pages.length) {
                     this.page = pages[0].id;
