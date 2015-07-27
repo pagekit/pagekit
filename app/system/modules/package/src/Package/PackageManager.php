@@ -85,6 +85,10 @@ class PackageManager implements \ArrayAccess, \IteratorAggregate
 
         if (is_array($data) && isset($data['name'])) {
 
+            if (!isset($data['module'])) {
+                $data['module'] = basename($data['name']);
+            }
+
             if (isset($path)) {
                 $data['path'] = $path;
                 $data['url']  = App::url()->getStatic($path);
@@ -178,8 +182,6 @@ class PackageManager implements \ArrayAccess, \IteratorAggregate
                 }
 
                 $this->packages[$package->getName()] = $package;
-
-                $package->set('module', is_array($module = include $package->get('path').'/index.php') && isset($module['name']) ? $module['name'] : false);
             }
         }
     }

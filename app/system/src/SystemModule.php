@@ -25,8 +25,8 @@ class SystemModule extends Module
 
         $app['db.em']; // -TODO- fix me
 
-        $theme = (array) $this->config('site.theme');
-        foreach ($this->config['extensions'] + $theme as $module) {
+        $theme = $this->config('site.theme');
+        foreach (array_merge($this->config['extensions'], [$theme]) as $module) {
             try {
                 $app['module']->load($module);
             } catch (\RuntimeException $e) {
@@ -34,7 +34,7 @@ class SystemModule extends Module
             }
         }
 
-        $app['theme'] = $app['module']->get(current($theme));
+        $app['theme'] = $app['module']->get($theme);
 
         $app->extend('migrator', function($migrator) {
             return $migrator->setLoader(new FilesystemLoader());

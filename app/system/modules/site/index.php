@@ -42,7 +42,6 @@ return [
             'name' => '@site/api/node',
             'controller' => 'Pagekit\\Site\\Controller\\NodeApiController'
         ],
-
         '/api/site/page' => [
             'name' => '@site/api/page',
             'controller' => 'Pagekit\\Site\\Controller\\PageApiController'

@@ -102,9 +102,9 @@ class PackageController
         App::trigger("enable.{$module->name}", [$module]);
 
         if ($package->getType() == 'pagekit-theme') {
-            App::config('system')->set('site.theme', [$name => $module->name]);
+            App::config('system')->set('site.theme', $module->name);
         } elseif ($package->getType() == 'pagekit-extension') {
-            App::config('system')->set("extensions.{$name}", $module->name);
+            App::config('system')->push('extensions', $module->name);
         }
 
         App::exception()->setHandler($handler);
@@ -129,7 +129,7 @@ class PackageController
         App::trigger("disable.{$module->name}", [$module]);
 
         if ($package->getType() == 'pagekit-extension') {
-            App::config('system')->remove("extensions.{$name}");
+            App::config('system')->pull('extensions', $module->name);
         }
 
         App::module('system/cache')->clearCache();
