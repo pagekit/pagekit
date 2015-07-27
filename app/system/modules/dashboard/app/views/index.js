@@ -116,11 +116,11 @@ window.Dashboard = module.exports = {
 
         getTypes: function () {
 
-            var types = [], type;
+            var types = [];
 
             _.forIn(this.$options.components, function (component, name) {
 
-                type = component.options.type;
+                var options = component.options || {}, type = options.type;
 
                 if (type) {
                     type.component = name;

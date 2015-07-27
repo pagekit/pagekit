@@ -20,12 +20,16 @@ module.exports = {
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], options;
 
             _.forIn(this.$options.components, function (component) {
-                if (component.options.section) {
-                    sections.push(component.options.section);
+
+                options = component.options || {};
+
+                if (options.section) {
+                    sections.push(options.section);
                 }
+
             });
 
             return sections;

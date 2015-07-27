@@ -43,15 +43,21 @@ window.Themes = module.exports = {
         },
 
         settings: function (pkg) {
+
             if (!pkg.settings) {
                 return;
             }
 
-            var view;
+            var view, options;
+
             _.forIn(this.$options.components, function (component, name) {
-                if (component.options.settings && pkg.settings === name) {
+
+                options = component.options || {};
+
+                if (options.settings && pkg.settings === name) {
                     view = name;
                 }
+
             });
 
             if (view) {

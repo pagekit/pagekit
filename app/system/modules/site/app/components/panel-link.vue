@@ -39,12 +39,14 @@
 
             types: function () {
 
-                var types = [];
+                var types = [], options;
 
                 _.forIn(this.$options.components, function (component, name) {
 
-                    if (component.options.link) {
-                        types.push({ text: component.options.link.label, value: name });
+                    options = component.options || {};
+
+                    if (options.link) {
+                        types.push({ text: options.link.label, value: name });
                     }
 
                 });

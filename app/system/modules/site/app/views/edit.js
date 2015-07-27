@@ -13,11 +13,11 @@ window.Site = module.exports = {
 
         sections: function () {
 
-            var type = this.$get('type.id'), sections = [], section;
+            var type = this.$get('type.id'), sections = [];
 
             _.forIn(this.$options.components, function (component, name) {
 
-                section = component.options.section;
+                var options = component.options || {}, section = options.section;
 
                 if (section && (!section.active || type && type.match(section.active))) {
                     section.name = name;

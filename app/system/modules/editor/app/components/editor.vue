@@ -31,7 +31,7 @@
 
             _.forIn(this.$options.components, function (component) {
 
-                if (component.options.plugin) {
+                if (component.options && component.options.plugin) {
                     this.editor.$addChild({ inherit: true }, component);
                 }
 

@@ -14,11 +14,11 @@ window.Settings = module.exports = {
 
         sections: function () {
 
-            var sections = [], section;
+            var sections = [];
 
             _.forIn(this.$options.components, function (component, name) {
 
-                section = component.options.section;
+                var options = component.options || {}, section = options.section;
 
                 if (section) {
                     section.name = name;
