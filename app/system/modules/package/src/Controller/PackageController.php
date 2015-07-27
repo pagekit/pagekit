@@ -27,24 +27,22 @@ class PackageController
         $packages = App::package()->all('pagekit-theme');
 
         foreach ($packages as $package) {
-            if ($module = App::module($package->getName())) {
+            if ($module = App::module($package->get('module'))) {
 
                 if ($settings = $module->get('settings') and $settings[0] === '@') {
                     $settings = App::url($settings);
                 }
 
+                $package->set('enabled', true);
                 $package->set('settings', $settings);
                 $package->set('config', $module->config);
-
             }
-
-            $package->set('enabled', (bool) $module);
         }
 
         return [
             '$view' => [
                 'title' => __('Themes'),
-                'name'  => 'system:modules/package/views/themes.php'
+                'name' => 'system:modules/package/views/themes.php'
             ],
             '$data' => [
                 'api' => App::module('system/package')->config('api'),
@@ -58,7 +56,7 @@ class PackageController
         $packages = App::package()->all('pagekit-extension');
 
         foreach ($packages as $package) {
-            if ($module = App::module($package->getName())) {
+            if ($module = App::module($package->get('module'))) {
 
                 if ($settings = $module->get('settings') and $settings[0] === '@') {
                     $settings = App::url($settings);
@@ -74,7 +72,7 @@ class PackageController
         return [
             '$view' => [
                 'title' => __('Extensions'),
-                'name'  => 'system:modules/package/views/extensions.php'
+                'name' => 'system:modules/package/views/extensions.php'
             ],
             '$data' => [
                 'api' => App::module('system/package')->config('api'),
@@ -94,19 +92,19 @@ class PackageController
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
-        App::module()->load($name);
+        App::module()->load($package->get('module'));
 
-        if (!$module = App::module($name)) {
-            App::abort(400, __('Unable to enable "%name%".', ['%name%' => $name]));
+        if (!$module = App::module($package->get('module'))) {
+            App::abort(400, __('Unable to enable "%name%".', ['%name%' => $package->get('title')]));
         }
 
         App::trigger('enable', [$module]);
-        App::trigger("enable.$name", [$module]);
+        App::trigger("enable.{$module->name}", [$module]);
 
         if ($package->getType() == 'pagekit-theme') {
-            App::config('system')->set('site.theme', $name);
+            App::config('system')->set('site.theme', [$name => $module->name]);
         } elseif ($package->getType() == 'pagekit-extension') {
-            App::config('system')->push('extensions', $name);
+            App::config('system')->set("extensions.{$name}", $module->name);
         }
 
         App::exception()->setHandler($handler);
@@ -123,15 +121,15 @@ class PackageController
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
-        if (!$module = App::module($name)) {
-            App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $name]));
+        if (!$module = App::module($package->get('module'))) {
+            App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $package->get('title')]));
         }
 
         App::trigger('disable', [$module]);
-        App::trigger("disable.$name", [$module]);
+        App::trigger("disable.{$module->name}", [$module]);
 
         if ($package->getType() == 'pagekit-extension') {
-            App::config('system')->pull('extensions', $name);
+            App::config('system')->remove("extensions.{$name}");
         }
 
         App::module('system/cache')->clearCache();
@@ -197,7 +195,7 @@ class PackageController
             $package = $this->loadPackage($path = "{$temp}/{$path}");
             $name    = $package->getName();
 
-            if ($enabled = (bool) App::module($name)) {
+            if ($enabled = (bool) App::module($package->get('module'))) {
                 $this->disableAction($name);
             }
 
@@ -239,18 +237,18 @@ class PackageController
             App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
         }
 
-        if (!App::module($name)) {
-            App::module()->load($name);
+        if (!App::module($package->get('module'))) {
+            App::module()->load($package->get('module'));
         }
 
-        if (!$module = App::module($name)) {
-            App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $name]));
+        if (!$module = App::module($package->get('module'))) {
+            App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $package->get('title')]));
         }
 
         $this->disableAction($name);
 
         App::trigger('uninstall', [$module]);
-        App::trigger("uninstall.$name", [$module]);
+        App::trigger("uninstall.{$module->name}", [$module]);
 
         $this->installer->uninstall($package);
 

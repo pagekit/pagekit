@@ -165,6 +165,8 @@ class PackageManager implements \ArrayAccess, \IteratorAggregate
      */
     protected function loadPackages()
     {
+        $app = App::getInstance();
+
         foreach ($this->paths as $path) {
 
             $paths = glob($path, GLOB_NOSORT) ?: [];
@@ -176,6 +178,8 @@ class PackageManager implements \ArrayAccess, \IteratorAggregate
                 }
 
                 $this->packages[$package->getName()] = $package;
+
+                $package->set('module', is_array($module = include $package->get('path').'/index.php') && isset($module['name']) ? $module['name'] : false);
             }
         }
     }

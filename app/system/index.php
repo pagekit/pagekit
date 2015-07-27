@@ -73,7 +73,7 @@ return [
 
         'site' => [
             'locale' => 'en_US',
-            'theme' => 'one'
+            'theme' => ['pagekit/one' =>'one']
         ],
 
         'admin' => [
