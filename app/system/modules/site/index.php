@@ -119,7 +119,7 @@ return [
             'footer' => ''
         ],
 
-        'sitelogo' => ''
+        'logo' => ''
 
     ],
 
