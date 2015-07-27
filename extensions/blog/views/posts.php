@@ -3,6 +3,10 @@
 
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->getId()]) ?>"><?= $post->getTitle() ?></a></h1>
 
+    <?php if ($image = $post->get('image')): ?>
+    <img src="<?=$image?>" />
+    <?php endif ?>
+
     <p class="uk-article-meta">
         <?= __('Written by %name% on %date%', ['%name%' => $post->getUser()->getName(), '%date%' => '<time datetime="'.$intl->date($post->getDate(), 'iso').'">'.$intl->date($post->getDate()).'</time>' ]) ?>
     </p>
