@@ -54,7 +54,7 @@
                         <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/sitepage//edit', { id: id, menu: menu.id })">{{ label }}</a></li>
+                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/site/page/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
                             </ul>
                         </div>
                     </div>
