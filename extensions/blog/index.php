@@ -149,8 +149,7 @@ return [
 
             'posts_per_page' => 20,
             'comments_enabled' => true,
-            'markdown_enabled' => true,
-            'show_title' => true
+            'markdown_enabled' => true
 
         ],
 
