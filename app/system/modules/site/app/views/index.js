@@ -253,8 +253,8 @@ module.exports = {
             return _.reject(menus, 'id', 'trash');
         },
 
-        fixed: function(menus, custom) {
-            return _[custom === false ? 'filter' : 'reject'](menus, 'fixed', true);
+        divided: function(menus) {
+            return _.reject(menus, 'fixed', true).concat({divider:true}, _.filter(menus, 'fixed', true))
         }
 
     },

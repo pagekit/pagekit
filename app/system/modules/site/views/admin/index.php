@@ -8,20 +8,12 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side">
-                    <li class="uk-visible-hover" v-class="uk-active: isActive(menu)" v-repeat="menu: menus | fixed">
-                        <a v-on="click: selectMenu(menu)">{{ menu.label }}</a>
-                        <ul class="uk-subnav pk-subnav-icon uk-hidden">
+                    <li class="uk-visible-hover" v-class="uk-active: isActive(menu), uk-nav-divider: menu.divider" v-repeat="menu: menus | divided">
+                        <a v-on="click: selectMenu(menu)" v-if="!menu.divider">{{ menu.label }}</a>
+                        <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed && !menu.divider">
                             <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: editMenu(menu)"></a></li>
                             <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: removeMenu(menu)" v-confirm="'Delete menu?'"></a></li>
                         </ul>
-                    </li>
-                </ul>
-
-                <hr>
-
-                <ul class="uk-nav uk-nav-side">
-                    <li v-class="uk-active: isActive(menu)" v-repeat="menu: menus | fixed false">
-                        <a v-on="click: selectMenu(menu)">{{ menu.label }}</a>
                     </li>
                 </ul>
 
