@@ -30,7 +30,6 @@
     module.exports = {
 
         section: {
-            name: 'widget-text',
             label: 'Settings',
             active: 'system/widget-text',
             priority: 0

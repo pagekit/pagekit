@@ -24,7 +24,6 @@
     module.exports = {
 
         section: {
-            name: 'appearance',
             label: 'Appearance',
             priority: 90
         },

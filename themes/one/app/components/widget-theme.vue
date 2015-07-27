@@ -45,7 +45,6 @@
     module.exports = {
 
         section: {
-            name: 'theme-settings',
             label: 'Theme',
             priority: 50
         },
@@ -54,6 +53,6 @@
 
     };
 
-    window.Widgets.components['theme-settings'] = module.exports;
+    window.Widgets.components['theme'] = module.exports;
 
 </script>

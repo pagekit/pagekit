@@ -40,7 +40,6 @@
     module.exports = {
 
         section: {
-            name: 'widget-login',
             label: 'Settings',
             active: 'system/widget-login',
             priority: 0

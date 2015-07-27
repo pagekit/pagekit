@@ -20,7 +20,6 @@
     module.exports = {
 
         section: {
-            name: 'assignment',
             label: 'Assignment',
             priority: 100
         },

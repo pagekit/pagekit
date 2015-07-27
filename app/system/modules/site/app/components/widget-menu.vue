@@ -82,7 +82,6 @@
     module.exports = {
 
         section: {
-            name: 'widget-menu',
             label: 'Settings',
             active: 'system/widget-menu',
             priority: 0
