@@ -151,12 +151,10 @@
                 });
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Dashboard.component('user', module.exports)
+    window.Dashboard.components['user'] = module.exports;
 
 </script>

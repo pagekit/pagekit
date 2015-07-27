@@ -6,16 +6,10 @@ module.exports = [
         },
         output: {
             filename: "./app/bundle/[name].js",
-            library: "Dashboard"
-        },
-        externals: {
-            "lodash": "_",
-            "jquery": "jQuery",
-            "uikit": "UIkit",
-            "vue": "Vue"
         },
         module: {
             loaders: [
+                { test: /\.html$/, loader: "html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
         }

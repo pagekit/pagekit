@@ -1,4 +1,4 @@
-var Dashboard = Vue.extend({
+module.exports = {
 
     data: function () {
         return _.extend({editing: false}, window.$data);
@@ -116,19 +116,20 @@ var Dashboard = Vue.extend({
 
         getTypes: function () {
 
-            // normalize
-            _.forIn(this.$options.components.__proto__, function (component, name) {
-                component.options.name = component.options.name || name;
+            var types = [], type;
+
+            _.forIn(module.exports.components, function (component, name) {
+
+                type = component.options.type;
+
+                if (type) {
+                    type.component = name;
+                    types.push(type);
+                }
+
             });
 
-            return _(this.$options.components.__proto__)
-                .filter(function (component) {
-                    return _.has(component, 'options.type')
-                })
-                .map(function (component) {
-                    return _.merge(component.options.type, {component: component.options.name})
-                })
-                .value();
+            return types;
         }
 
     },
@@ -141,12 +142,12 @@ var Dashboard = Vue.extend({
 
     }
 
+};
+
+jQuery(function () {
+
+    new Vue(module.exports).$mount('#dashboard');
+
 });
 
-$(function () {
-
-    new Dashboard().$mount('#dashboard');
-
-});
-
-module.exports = Dashboard;
+window.Dashboard = module.exports;
