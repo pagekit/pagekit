@@ -251,6 +251,10 @@ module.exports = {
 
         trash: function (menus) {
             return _.reject(menus, 'id', 'trash');
+        },
+
+        fixed: function(menus, custom) {
+            return _[custom === false ? 'filter' : 'reject'](menus, 'fixed', true);
         }
 
     },
