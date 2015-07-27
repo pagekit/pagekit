@@ -121,12 +121,10 @@
 
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Settings.component('system/mail', module.exports);
+    window.Settings.components['system/mail'] = module.exports;
 
 </script>

@@ -5,14 +5,7 @@ module.exports = [
             "settings": "./app/settings"
         },
         output: {
-            filename: "./app/bundle/[name].js",
-            library: "Settings"
-        },
-        externals: {
-            "vue": "Vue",
-            "lodash": "_",
-            "jquery": "jQuery",
-            "uikit": "UIkit"
+            filename: "./app/bundle/[name].js"
         },
         module: {
             loaders: [

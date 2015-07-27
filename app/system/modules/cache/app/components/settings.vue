@@ -102,12 +102,10 @@
                 this.$.modal.close();
             }
 
-        },
-
-        template: __vue_template__
+        }
 
     };
 
-    window.Settings.component('system/cache', module.exports);
+    window.Settings.components['system/cache'] = module.exports;
 
 </script>

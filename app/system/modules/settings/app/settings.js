@@ -1,4 +1,4 @@
-module.exports = Vue.extend({
+module.exports = {
 
     data: function () {
         return window.$settings;
@@ -14,15 +14,17 @@ module.exports = Vue.extend({
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], section;
 
-            _.forIn(this.$options.components, function (component, name) {
+            _.forIn(module.exports.components, function (component, name) {
 
-                var section = component.options.section;
+                section = component.options.section;
+
                 if (section) {
                     section.name = name;
                     sections.push(section);
                 }
+
             });
 
             return sections;
@@ -53,10 +55,12 @@ module.exports = Vue.extend({
 
     }
 
+};
+
+jQuery(function () {
+
+    (new Vue(module.exports)).$mount('#settings');
+
 });
 
-$(function () {
-
-    (new module.exports()).$mount('#settings');
-
-});
+window.Settings = module.exports;
