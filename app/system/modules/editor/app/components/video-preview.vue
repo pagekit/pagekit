@@ -3,7 +3,7 @@
     <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.src">
 
         <img width="60" height="60" alt="{{ 'Placeholder Video' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
-        <p class="uk-text-muted uk-margin-small-top">{{ 'Add video' | trans }}</p>
+        <p class="uk-text-muted uk-margin-small-top">{{ 'Add Video' | trans }}</p>
 
         <a class="uk-position-cover" v-on="click: config()"></a>
 
@@ -15,13 +15,12 @@
 
     </div>
 
-    <div class="uk-panel uk-visible-hover uk-overlay-hover uk-display-inline-block" v-if="video.src">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="video.src">
 
-        <div class="uk-overlay">
-            <img class="uk-width-1-1" v-attr="src: imageSrc" v-if="imageSrc">
-            <video class="uk-width-1-1" v-attr="src: videoSrc" v-if="videoSrc"></video>
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
-        </div>
+        <img class="uk-width-1-1" v-attr="src: imageSrc" v-if="imageSrc">
+        <video class="uk-width-1-1" v-attr="src: videoSrc" v-if="videoSrc"></video>
+
+        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
         <a class="uk-position-cover" v-on="click: config()"></a>
 
