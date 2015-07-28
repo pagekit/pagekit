@@ -6,6 +6,7 @@ use Pagekit\Routing\Event\AliasListener;
 use Pagekit\Routing\Event\ConfigureRouteListener;
 use Pagekit\Routing\Event\RouterListener;
 use Pagekit\Routing\Loader\RoutesLoader;
+use Pagekit\Routing\Middleware;
 use Pagekit\Routing\Request\ParamFetcher;
 use Pagekit\Routing\Request\ParamFetcherListener;
 use Pagekit\Routing\Router;
@@ -27,7 +28,7 @@ return [
         };
 
         $app['middleware'] = function ($app) {
-            return new Routes($app['events']);
+            return new Middleware($app['events']);
         };
 
         $app['module']->addLoader(function ($name, $module) use ($app) {
