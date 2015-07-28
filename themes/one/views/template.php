@@ -48,7 +48,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero-image']; ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-block uk-contrast uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero-image']; ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
