@@ -82,7 +82,7 @@ $view->script('comments', 'blog:app/bundle/comments.js', 'vue')
             <div class="uk-form-row" v-if="!user.isAuthenticated">
                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="email" v-valid="email">
+                    <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="email" v-valid="email, required">
                     <p class="uk-form-help-block uk-text-danger" v-show="replyForm.email.invalid">{{ 'Email invalid.' | trans }}</p>
                 </div>
             </div>

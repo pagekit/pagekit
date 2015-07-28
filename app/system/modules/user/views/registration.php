@@ -25,7 +25,7 @@
     <div class="uk-form-row">
         <label for="form-email" class="uk-form-label"><?= __('Email') ?></label>
         <div class="uk-form-controls">
-            <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="user.email" v-valid="email">
+            <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="user.email" v-valid="email, required">
             <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid"><?= __('Email address is invalid.') ?></p>
         </div>
     </div>

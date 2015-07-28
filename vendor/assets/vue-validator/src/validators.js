@@ -20,19 +20,19 @@ exports.float = function (value) {
 };
 
 exports.alpha = function (value) {
-    return /^[A-Z]+$/i.test(value);
+    return /^([A-Z]+)?$/i.test(value);
 };
 
 exports.alphaNum = function (value) {
-    return /^[0-9A-Z]+$/i.test(value);
+    return /^([0-9A-Z]+)?$/i.test(value);
 };
 
 exports.email = function (value) {
-    return /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i.test(value);
+    return /^([a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*)?$/i.test(value);
 };
 
 exports.url = function (value) {
-    return /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/.test(value);
+    return /^((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?)?$/.test(value);
 };
 
 exports.minLength = function (value, arg) {

@@ -94,12 +94,12 @@
                             <button class="uk-button uk-button-primary" type="submit">
                                 <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
                                     <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
-                                    <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
-                                    <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
+                                        <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
+                                        <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                         c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
                                         C10.756,10.852,10.628,10.9,10.5,10.9z"/>
                                     </svg>
-                                </path>
+                                </span>
                             </button>
                         </p>
                     </form>
@@ -132,7 +132,7 @@
                         <div class="uk-form-row">
                             <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                             <div class="uk-form-controls">
-                                <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-valid="email">
+                                <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-valid="email, required">
                                 <p class="uk-form-help-block uk-text-danger" v-show="formUser.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                             </div>
                         </div>
@@ -140,12 +140,12 @@
                             <button class="uk-button uk-button-primary" type="submit">
                                 <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
                                     <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
-                                    <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
-                                    <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
+                                        <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
+                                        <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                         c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
                                         C10.756,10.852,10.628,10.9,10.5,10.9z"/>
                                     </svg>
-                                </path>
+                                </span>
                             </button>
                         </p>
                     </form>
@@ -175,12 +175,12 @@
                             <button class="uk-button uk-button-primary" type="submit">
                                 <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
                                     <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
-                                    <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
-                                    <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
+                                        <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
+                                        <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                         c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
                                         C10.756,10.852,10.628,10.9,10.5,10.9z"/>
                                     </svg>
-                                </path>
+                                </span>
                             </button>
                         </p>
                     </form>
