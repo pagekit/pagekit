@@ -13,7 +13,7 @@
 !/vendor/assets/marked
 !/vendor/assets/vue-validator
 /config.php
-/composer.phar
+*composer.phar
 /composer.lock
 /pagekit*.zip
 node_modules
