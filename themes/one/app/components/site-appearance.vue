@@ -38,4 +38,6 @@
 
     }
 
+    window.Site.components['appearance'] = module.exports;
+
 </script>

@@ -69,13 +69,17 @@ return [
 
     'events' => [
 
-        'view.scripts' => function ($event, $scripts) {
-            $scripts->register('widget-theme', 'theme:app/bundle/widget-theme.js', '~widgets');
-        },
-
         'view.system/site/admin/settings' => function ($event, $view) {
             $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');
             $view->data('$theme', $this);
+        },
+
+        'view.system/site/admin/edit' => function ($event, $view) {
+            $view->script('site-appearance', 'theme:app/bundle/site-appearance.js', 'site-edit');
+        },
+
+        'view.system/widget/edit' => function ($event, $view) {
+            $view->script('widget-appearance', 'theme:app/bundle/widget-appearance.js', 'widget-edit');
         }
 
     ]

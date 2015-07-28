@@ -27,7 +27,8 @@ return [
 
     'resources' => [
 
-        'widget:' => ''
+        'system/widget:' => '',
+        'views:system/widget' => 'views'
 
     ],
 
@@ -66,7 +67,7 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('widgets', 'widget:app/bundle/widgets.js', 'vue');
+            $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
         },
 
         'model.widget.init' => function ($event, $widget) use ($app) {

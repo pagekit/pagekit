@@ -17,7 +17,7 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'widget:views/index.php'
+                'name'  => 'system/widget/index.php'
             ],
             '$data' => [
                 'theme' => App::theme(),
@@ -41,7 +41,7 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'widget:views/edit.php'
+                'name'  => 'system/widget/edit.php'
             ],
             '$data' => [
                 'widget' => $widget,
