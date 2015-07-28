@@ -3,16 +3,13 @@
     <div class="uk-form-horizontal">
 
         <div class="uk-form-row">
-            <label class="uk-form-label"></label>
-            <div class="uk-form-controls uk-form-controls-text">
-                <label><input type="checkbox" v-model="all" disabled> {{'Show on all pages'}}</label>
-            </div>
-        </div>
-
-        <div class="uk-form-row" v-repeat="menu: menus" v-show="menu.getNodes().length">
-            <label class="uk-form-label">{{ menu.label }}</label>
+            <label class="uk-form-label">Pages</label>
             <div class="uk-form-controls uk-form-controls-text">
                 <ul class="uk-list uk-margin-top-remove">
+                    <li><label><input type="checkbox" v-model="all" disabled> {{'All Pages'}}</label></li>
+                </ul>
+                <ul class="uk-list uk-margin-top-remove" v-repeat="menu: menus" v-show="menu.getNodes().length">
+                    <li class="uk-nav-header">{{ menu.label }}</li>
                     <node v-repeat="node: menu.getNodes()"></node>
                 </ul>
             </div>
