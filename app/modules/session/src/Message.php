@@ -2,9 +2,9 @@
 
 namespace Pagekit\Session;
 
-use Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
-class Message extends AutoExpireFlashBag
+class Message extends FlashBag
 {
     /**
      * Detailed debug information
