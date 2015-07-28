@@ -42,7 +42,7 @@ return [
 
         'request' => [function ($event, $request) use ($app) {
 
-            $baseUrl = $request->getSchemeAndHttpHost().$request->getBaseUrl();
+            $baseUrl = $request->getSchemeAndHttpHost().$request->getBasePath();
 
             $app['file']->registerAdapter('file', new FileAdapter($this->config['path'], $baseUrl));
 
