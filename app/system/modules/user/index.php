@@ -95,7 +95,7 @@ return [
             'label' => 'Users',
             'icon' => 'system/user:assets/images/icon-users.svg',
             'url' => '@user',
-            'active' => '@user*',
+            'active' => '@user(/*)?',
             'access' => 'user: manage users || user: manage user permissions',
             'priority' => 115
         ],
