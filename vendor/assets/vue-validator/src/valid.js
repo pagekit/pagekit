@@ -6,6 +6,8 @@ var _ = require('./util');
 
 module.exports = {
 
+    isLiteral: true,
+
     bind: function () {
         Vue.nextTick(this.init.bind(this));
     },

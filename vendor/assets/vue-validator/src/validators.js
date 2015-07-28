@@ -2,9 +2,17 @@
  * Validate functions.
  */
 
-exports.required = function (value) {
-    if (typeof value == 'boolean') return value;
-    return !((value === null) || (value.length === 0));
+exports.required = function (value, required) {
+
+    if (!(typeof required == 'boolean')) {
+        required = true;
+    }
+
+    if (typeof value == 'boolean') {
+        return value;
+    }
+
+    return !required || !((value === null) || (value.length === 0));
 };
 
 exports.numeric = function (value) {
