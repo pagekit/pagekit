@@ -21,7 +21,7 @@
 
                     <?php if($app['module']['system/site']->config('logo')): ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $app['module']['system/site']->config('logo') ?>" alt="logo">
+                        <img src="<?= $app['module']['system/site']->config('logo') ?>" alt="">
                     </a>
                     <?php endif ?>
 
