@@ -129,7 +129,7 @@
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
             <div class="pk-table-min-width-100">
                 <a v-attr="href: $url('admin/site/page/edit', { id: node.id })">{{ node.title }}</a>
-                <span class="uk-text-muted uk-text-small" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
+                <span class="uk-text-muted uk-text-small uk-margin-small-left" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
             </div>
             <div class="pk-table-width-minimum">
                 <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" v-on="click: setFrontpage(node)"></a>
