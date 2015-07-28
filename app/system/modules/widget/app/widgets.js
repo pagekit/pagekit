@@ -27,13 +27,16 @@ window.Widgets = module.exports = {
 
         copy: function () {
 
-            var widgets = _.merge([], this.getSelected());
+            var widgets = _.merge([], this.get('selected'));
 
             widgets.forEach(function (widget) {
                 delete widget.id;
             });
 
-            this.resource.save({id: 'bulk'}, {widgets: widgets}, this.load);
+            this.resource.save({id: 'bulk'}, {widgets: widgets}, this.load).success(function(){
+                this.$set('selected', []);
+                UIkit.notify('Widget(s) copied.');
+            });
         },
 
         remove: function () {
