@@ -36,6 +36,28 @@ class Container implements \ArrayAccess
     }
 
     /**
+     * Set shortcut.
+     *
+     * @see offsetSet()
+     */
+    public function __invoke($name, $value)
+    {
+        $this->offsetSet($name, $value);
+    }
+
+    /**
+     * Gets a parameter/service or calls the invoke method.
+     *
+     * @param  string $name
+     * @param  array  $args
+     * @return mixed
+     */
+    public function __call($name, $args)
+    {
+        return $args ? call_user_func_array($this->offsetGet($name), $args) : $this->offsetGet($name);
+    }
+
+    /**
      * Sets a closure as a factory service.
      *
      * @param string   $name
@@ -73,7 +95,7 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Gets a parameter or service without resolving.
+     * Gets a parameter/service without resolving.
      *
      * @param  string $name
      * @return mixed
@@ -100,7 +122,7 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Checks if a parameter or service is defined.
+     * Checks if a parameter/service is defined.
      *
      * @param  string $name
      * @return bool
@@ -111,7 +133,7 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Gets a parameter or service.
+     * Gets a parameter/service.
      *
      * @param  string $name
      * @return mixed
@@ -138,7 +160,7 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Sets a parameter or service.
+     * Sets a parameter/service.
      *
      * @param string $name
      * @param mixed  $value
@@ -155,7 +177,7 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Removes a parameter or service.
+     * Removes a parameter/service.
      *
      * @param string $name
      */
