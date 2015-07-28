@@ -25,7 +25,7 @@ class UninstallCommand extends Command
      */
     protected function configure()
     {
-        $this->addArgument('package', InputArgument::REQUIRED, '[Package name]');
+        $this->addArgument('packages', InputArgument::IS_ARRAY, '[Package name]');
     }
 
     /**
@@ -33,8 +33,8 @@ class UninstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $argument = $this->argument('package');
-        $command = sprintf('php %s/app/updater/index.php -p %s -r', $this->container['path'], $argument);
+        $packages = $this->argument('packages');
+        $command = sprintf('php %s/app/updater/index.php -p "%s" -r', $this->container['path'],  implode(' ', $packages));
 
         exec($command);
     }

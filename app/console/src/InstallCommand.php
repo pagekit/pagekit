@@ -25,7 +25,7 @@ class InstallCommand extends Command
      */
     protected function configure()
     {
-        $this->addArgument('package', InputArgument::IS_ARRAY, '[Package name] [Version constraint]');
+        $this->addArgument('packages', InputArgument::IS_ARRAY, '[Package name]:[Version constraint]');
     }
 
     /**
@@ -33,12 +33,11 @@ class InstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $arguments = $this->argument('package');
+        $packages = $this->argument('packages');
 
-        $command = sprintf('php %s/app/updater/index.php -p %s -v %s',
+        $command = sprintf('php %s/app/updater/index.php -p "%s"',
             $this->container['path'],
-            $arguments[0],                               // Name
-            isset($arguments[1]) ? $arguments[1] : '');  // Version
+            implode(' ', $packages));
 
         exec($command);
     }
