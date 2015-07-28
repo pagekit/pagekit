@@ -2,15 +2,14 @@
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
         <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
-        <p class="uk-text-muted uk-margin-small-top">{{ 'Add image' | trans }}</p>
+        <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
 
-    <div class="uk-panel uk-visible-hover uk-overlay-hover" v-if="source">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="source">
 
-        <div class="uk-overlay pk-image-max-height">
-            <img v-attr="src: $url.static(source)">
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
-        </div>
+        <img v-attr="src: $url.static(source)">
+
+        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
         <a class="uk-position-cover" v-on="click: pick()"></a>
 

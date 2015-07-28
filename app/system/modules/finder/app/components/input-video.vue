@@ -1,18 +1,25 @@
 <template>
 
-    <a class="uk-placeholder uk-text-center uk-display-block" v-if="!source" v-on="click: pick()">
+    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
         <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
-
-        <p class="uk-text-muted uk-margin-small-top">{{ 'Select video' | trans }}</p>
+        <p class="uk-text-muted uk-margin-small-top">{{ 'Select Video' | trans }}</p>
     </a>
 
-    <div class="uk-panel uk-overlay-hover uk-flex uk-flex-center uk-flex-middle uk-margin" v-if="source">
-        <div class="uk-overlay">
-            <img class="uk-width-1-1" v-attr="src: image" v-if="image">
-            <video class="uk-width-1-1" v-attr="src: video" v-if="video"></video>
-            <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
-        </div>
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="source">
+
+        <img v-attr="src: image" v-if="image">
+        <video class="uk-width-1-1" v-attr="src: video" v-if="video"></video>
+
+        <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
+
         <a class="uk-position-cover" v-on="click: pick()"></a>
+
+        <div class="uk-panel-badge pk-panel-badge uk-hidden">
+            <ul class="uk-subnav pk-subnav-icon">
+                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a></li>
+            </ul>
+        </div>
+
     </div>
 
     <v-modal v-ref="modal" large>
