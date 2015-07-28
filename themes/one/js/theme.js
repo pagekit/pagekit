@@ -20,7 +20,7 @@
 
             UIkit.$win.on('load resize', fn());
 
-        })(jQuery('#tm-footer'));
+        })($('#tm-footer'));
 
     });
 
