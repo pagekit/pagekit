@@ -1,6 +1,6 @@
 <?php $view->style('codemirror'); $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
-<form id="widget-edit" class="uk-form" name="widgetForm" v-on="submit: save" v-cloak>
+<form id="widget-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>

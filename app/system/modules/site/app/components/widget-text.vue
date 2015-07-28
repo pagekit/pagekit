@@ -35,7 +35,9 @@
             priority: 0
         },
 
-        props: ['widget', 'config', 'form']
+        inherit: true,
+
+        props: ['widget', 'config']
 
     }
 

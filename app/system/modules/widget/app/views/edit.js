@@ -52,11 +52,6 @@ module.exports = {
 
             e.preventDefault();
 
-            if (!this.widget.title) {
-                UIkit.notify(this.$trans('Please define a widget title'), 'danger');
-                return;
-            }
-
             this.$broadcast('save', {widget: this.widget});
             this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
