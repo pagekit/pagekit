@@ -37,7 +37,12 @@ jQuery(function ($) {
 
     });
 
+    // offcanvas menu
+    menu.$addChild({el: '#offcanvas', inherit: true});
+    menu.$addChild({el: '#offcanvas-flip', inherit: true});
+
     // show system messages
+    UIkit.notify.message.defaults.timeout = 2000;
     $('.pk-system-messages').children().each(function () {
 
         var message = $(this), data = message.data();
@@ -51,13 +56,7 @@ jQuery(function ($) {
         message.remove();
     });
 
-    // offcanvas menu
-    menu.$addChild({el: '#offcanvas', inherit: true});
-    menu.$addChild({el: '#offcanvas-flip', inherit: true});
-
     // UIkit overrides
-    UIkit.notify.message.defaults.timeout = 2000;
-
     UIkit.modal.alert = function (content, options) {
 
         options = UIkit.$.extend(true, {modal: false, title: false, labels: UIkit.modal.labels}, options);
