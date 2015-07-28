@@ -12,11 +12,6 @@
     <body>
 
         <header id="header" class="tm-header">
-
-            <!-- <div class="tm-brand uk-flex uk-flex-middle">
-                <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="Pagekit">
-            </div> -->
-
             <div class="uk-container uk-container-center">
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-hidden-small">
@@ -78,8 +73,6 @@
 
         <div id="offcanvas" class="uk-offcanvas">
             <div class="uk-offcanvas-bar">
-
-                <!-- <img src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo.svg') ?>" width="24" height="29" alt="<?= __('Pagekit') ?>"> -->
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header" v-show="subnav">{{ item.label | trans }}</li>
