@@ -80,7 +80,7 @@
 }
 
 
-/* Modifier: Side Nav Large
+/* Modifier: Side Nav Large (System: Settings + Info, Site: Settings)
 ========================================================================== */
 
 .pk-nav-large > li > a {
@@ -89,7 +89,7 @@
 }
 
 
-/* Side Nav Sortable (Roles)
+/* Side Nav Sortable (Users: Roles)
 ========================================================================== */
 
 .pk-sortable-dragged-list > * {
@@ -242,7 +242,7 @@
 .pk-icon-large-comment { background-image: url("../../assets/images/icon-large-comment.svg"); }
 
 /*
- * Link Hover with Icon and Text
+ * Link Hover with Icon and Text (Link Picker + Blog)
  */
 
 .pk-link-icon {
@@ -256,7 +256,7 @@
 .pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
 
 /*
- * Form Icon
+ * Form Icon (Blog: Post Edit)
  */
 
 .uk-form-icon > [class*='pk-icon-'] {
@@ -268,7 +268,7 @@
 }
 
 
-/* Modifier `pk-subnav-icon`
+/* Modifier: Subnav Icon
 ========================================================================== */
 
 /*
@@ -300,7 +300,7 @@
 .pk-subnav-icon > * > :focus { color: @global-color; }
 
 
-/* Panel Badge Modifiers (System Themes)
+/* Panel Badge Modifiers (Image Picker Fields + System: Themes)
 ========================================================================== */
 
 /*
@@ -314,7 +314,7 @@
 }
 
 /*
- * Background Modifier
+ * Position Modifier
  */
 
 .pk-panel-badge-bottom-right {
@@ -341,7 +341,7 @@
 }
 
 
-/* Modifier `pk-table-large`
+/* Modifier Table Large` (Blog: Comments)
 ========================================================================== */
 
 .pk-table-large th,
@@ -351,7 +351,7 @@
 }
 
 
-/* Modifier `pk-table-collapse`
+/* Modifier Table Collapse (Site: Pages: In Nestable)
 ========================================================================== */
 
 .pk-table-collapse {
@@ -360,7 +360,7 @@
 }
 
 
-/* Sub-modifier `pk-table-width-*`
+/* Table Modifiers
 ========================================================================== */
 
 /*
@@ -398,7 +398,7 @@
 .pk-table-max-width-150 { max-width: 150px; }
 
 
-/* Sub-modifier `pk-table-order`
+/* Modifier Table Order
 ========================================================================== */
 
 .pk-table-order:hover { cursor: pointer; }
@@ -416,7 +416,7 @@
 .pk-table-order.uk-active [class*='pk-icon-'] { opacity: 1; }
 
 
-/* Modifier `pk-filter`
+/* Filter
 ========================================================================== */
 
 .pk-filter:hover > * { color: #666; }
@@ -427,7 +427,7 @@
 }
 
 
-/* Sub-modifier `pk-table-fake`
+/* Table Fake (Site: Pages + Widgets)
 ========================================================================== */
 
 .pk-table-fake {
@@ -473,19 +473,8 @@
 }
 
 
-/* Thumbnail (Finder + Image Picker)
+/* Thumbnail Placeholder (Finder + Image Picker)
  ========================================================================== */
-
-.pk-thumbnail {
-    height: 180px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: cover;
-}
-
-/*
- * Placeholder
- */
 
 .pk-thumbnail-folder {
     background-color: @global-primary-background;
@@ -496,11 +485,6 @@
 .pk-thumbnail-file {
     background-color: #cfd2d8;
     background-image: url("../../assets/images/icon-file-large.svg");
-    background-size: 80px 80px;
-}
-
-.pk-thumbnail-image {
-    background-image: url("../../assets/images/placeholder-icon.svg");
     background-size: 80px 80px;
 }
 
@@ -515,7 +499,7 @@
 }
 
 
-/* Panel Teaser
+/* Panel Teaser (Dashboard)
  ========================================================================== */
 
 .pk-panel-teaser {
@@ -534,6 +518,10 @@
     background: @global-primary-background url("../../assets/images/dashboard-location.jpg") 0 0 no-repeat;
     background-size: cover;
 }
+
+
+/* Overlay Background (System: Themes + Marketplace)
+ ========================================================================== */
 
 .pk-overlay-background { background: rgba(255,255,255,0.2); }
 
@@ -597,6 +585,17 @@
 }
 
 .pk-form-link > input { padding-right: 100px !important; }
+
+
+/* Editor (Site: Settings)
+========================================================================== */
+
+.pk-editor {
+    padding: @form-padding;
+    border: @form-border-width solid @form-border;
+    background: @form-background;
+    border-radius: @global-border-radius;
+}
 
 
 /* Remove `box-shadow` from Drag'n Drop target
@@ -688,15 +687,4 @@
     0% { stroke: @global-primary-hover-background; }
     50% { stroke: @global-primary-hover-background; }
     100% { stroke: @global-primary-hover-background; }
-}
-
-
-/* Editor
-========================================================================== */
-
-.pk-editor {
-    padding: @form-padding;
-    border: @form-border-width solid @form-border;
-    background: @form-background;
-    border-radius: @global-border-radius;
 }
