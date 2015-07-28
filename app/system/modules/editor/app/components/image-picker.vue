@@ -54,7 +54,7 @@
             this.$on('image-selected', function(path) {
 
                 if (path && !this.image.alt) {
-                    this.image.alt = path.split('/').slice(-1)[0];
+                    this.image.alt = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '');
                 }
             })
         },
