@@ -70,11 +70,7 @@
             priority: 10
         },
 
-        props: ['config'],
-
-        ready: function () {
-            console.log(this.config);
-        }
+        props: ['config']
 
     }
 

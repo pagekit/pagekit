@@ -1,4 +1,4 @@
-module.exports = {
+window.Site = module.exports = {
 
     data: window.$data,
 

@@ -44,7 +44,7 @@ return [
 
     ],
 
-    'settings' => 'settings-theme',
+    'settings' => '@site/settings#site-theme',
 
     /**
      * Define settings
@@ -70,8 +70,12 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('theme-widget', 'theme:app/bundle/widget-theme.js', '~widgets');
-            $scripts->register('theme-settings', 'theme:app/bundle/settings.js', '~themes');
+            $scripts->register('widget-theme', 'theme:app/bundle/widget-theme.js', '~widgets');
+        },
+
+        'view.system/site/admin/settings' => function ($event, $view) {
+            $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');
+            $view->data('$theme', $this);
         }
 
     ]
