@@ -2,7 +2,7 @@
 <article class="uk-article">
 
     <?php if ($image = $post->get('image')): ?>
-    <img src="<?=$image?>" />
+    <img src="<?=$image?>">
     <?php endif ?>
 
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->getId()]) ?>"><?= $post->getTitle() ?></a></h1>
