@@ -6,8 +6,6 @@ var _ = require('./util');
 
 module.exports = {
 
-    isLiteral: true,
-
     bind: function () {
         Vue.nextTick(this.init.bind(this));
     },
@@ -32,7 +30,6 @@ module.exports = {
         this.name      = _.camelize(name);
         this.form      = _.camelize(form);
         this.type      = this.arg || this.expression;
-        this.args      = this.arg ? this.expression : '';
         this.value     = el.value;
         this.validator = getValidators(this.vm)[this.type];
 
@@ -67,6 +64,10 @@ module.exports = {
         }
 
         this.vm.$validator.bind(this);
+    },
+
+    update: function(value) {
+        this.args = value;
     },
 
     validate: function () {

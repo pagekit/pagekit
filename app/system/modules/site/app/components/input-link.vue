@@ -2,7 +2,7 @@
 
     <div v-attr="class: class">
         <div class="pk-form-link uk-width-1-1">
-            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-valid="required: {{ isRequired }}" v-el="input" lazy>
+            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-valid="required: isRequired" v-el="input" lazy>
             <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>

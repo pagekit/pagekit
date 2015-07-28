@@ -2,17 +2,17 @@
  * Validate functions.
  */
 
-exports.required = function (value, required) {
+exports.required = function (value, arg) {
 
-    if (!(typeof required == 'boolean')) {
-        required = true;
+    if (!(typeof arg == 'boolean')) {
+        arg = true;
     }
 
     if (typeof value == 'boolean') {
-        return value;
+        return !arg || value;
     }
 
-    return !required || !((value === null) || (value.length === 0));
+    return !arg || !((value === null) || (value.length === 0));
 };
 
 exports.numeric = function (value) {
