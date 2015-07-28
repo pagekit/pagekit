@@ -6,7 +6,7 @@
             <label class="uk-form-label">Pages</label>
             <div class="uk-form-controls uk-form-controls-text">
                 <ul class="uk-list uk-margin-top-remove">
-                    <li><label><input type="checkbox" v-model="all" disabled> {{'All Pages'}}</label></li>
+                    <li>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</li>
                 </ul>
                 <ul class="uk-list uk-margin-top-remove" v-repeat="menu: menus" v-show="menu.getNodes().length">
                     <li class="uk-nav-header">{{ menu.label }}</li>
