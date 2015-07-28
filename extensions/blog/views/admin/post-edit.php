@@ -30,7 +30,7 @@
             <div class="uk-form-row">
                 <label class="uk-form-label">{{ 'Excerpt' | trans }}</label>
                 <div class="uk-form-controls">
-                    <textarea class="uk-width-1-1" type="text" placeholder="{{ 'Enter Excerpt' | trans }}" rows="5" v-model="post.excerpt"></textarea>
+                    <v-editor id="post-content" value="{{@ post.excerpt }}" options="{{ {markdown : post.data.markdown} }}"></v-editor>
                 </div>
             </div>
 
