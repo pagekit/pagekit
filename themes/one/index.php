@@ -34,7 +34,6 @@ return [
      */
     'positions' => [
 
-        'logo' => 'Logo',
         'hero' => 'Hero',
         'top' => 'Top',
         'sidebar' => 'Sidebar',

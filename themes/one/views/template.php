@@ -19,9 +19,9 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($view->position()->exists('logo')) : ?>
+                    <?php if($app['module']['system/site']->config('logo')): ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <?= $view->position('logo') ?>
+                        <img src="<?= $app['module']['system/site']->config('logo') ?>" alt="logo">
                     </a>
                     <?php endif ?>
 
