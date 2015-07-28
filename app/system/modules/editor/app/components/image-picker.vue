@@ -15,7 +15,7 @@
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-src" class="uk-width-1-1" type="text" v-model="image.src">
+                        <input id="form-src" class="uk-width-1-1" type="text" v-model="image.src" lazy>
                     </div>
                 </div>
 
