@@ -80,6 +80,12 @@
                     <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                        <div class="pk-table-width-100">
+                            <div class="uk-form-select pk-filter" data-uk-form-select>
+                                <span>{{ 'Pages' | trans }}</span>
+                                <select v-model="config.filter.node" options="nodes"></select>
+                            </div>
+                        </div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
@@ -94,6 +100,9 @@
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
+                                </div>
+                                <div class="pk-table-width-100">
+                                    {{ !widget.nodes.length ? 'All':'Selected' | trans }}
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">

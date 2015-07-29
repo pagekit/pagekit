@@ -21,7 +21,11 @@ class WidgetController
             ],
             '$data' => [
                 'theme' => App::theme(),
-                'types' => App::widget()->getTypes()
+                'types' => App::widget()->getTypes(),
+                'config' => [
+                    'menus' => App::menu(),
+                    'nodes' => array_values(Node::query()->get())
+                ]
             ]
         ];
     }

@@ -7,6 +7,8 @@ module.exports = {
     }, window.$data),
 
     ready: function () {
+
+        UIkit.init();
         this.load();
     },
 
@@ -25,6 +27,26 @@ module.exports = {
 
         empty: function () {
             return !this.position && !this.get('assigned').length;
+        },
+
+        nodes: function () {
+
+            var options = [{text: this.$trans('Pages'), value: ''}],
+                nodes   = _($data.config.nodes).groupBy('menu').value(),
+                opts;
+
+            Object.keys(nodes).forEach(function(menu){
+
+                opts = [];
+
+                nodes[menu].forEach(function(node){
+                    opts.push({text:node.title, value:node.id});
+                });
+
+                options.push({label: menu, options:opts});
+            });
+
+            return options;
         }
 
     },
@@ -112,11 +134,20 @@ module.exports = {
 
         infilter: function(widget) {
 
-            if (!this.config.filter.search) {
-                return true;
+            if (this.config.filter.search) {
+                return widget.title.toLowerCase().indexOf(this.config.filter.search.toLowerCase()) != -1;
             }
 
-            return widget.title.toLowerCase().indexOf(this.config.filter.search.toLowerCase()) != -1;
+            if (this.config.filter.node && widget.nodes.length) {
+
+                var selected = Number(this.config.filter.node), ret = false;
+
+                return widget.nodes.filter(function(node){
+                    return (Number(node) === selected)
+                }).length;
+            }
+
+            return true;
         }
 
     },
