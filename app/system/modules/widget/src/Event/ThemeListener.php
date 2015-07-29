@@ -8,14 +8,14 @@ use Pagekit\Event\EventSubscriberInterface;
 class ThemeListener implements EventSubscriberInterface
 {
     /**
-     * @var Theme
+     * @var \Pagekit\System\Theme
      */
     protected $theme;
 
     /**
      * Constructor.
      *
-     * @param Theme $theme
+     * @param \Pagekit\System\Theme $theme
      */
     public function __construct(Theme $theme)
     {
@@ -23,32 +23,33 @@ class ThemeListener implements EventSubscriberInterface
     }
 
     /**
-     * Sets the widget theme config.
+     * Sets the widget theme data.
      *
-     * @param $event
-     * @param $widget
+     * @param \Pagekit\Event\Event $event
+     * @param \Pagekit\Widget\Model\Widget $widget
      */
     public function onInit($event, $widget)
     {
-        $config  = $this->theme->config("widgets.".$widget->getId(), []);
+        $config  = $this->theme->get("data.widgets.".$widget->getId(), []);
         $default = $this->theme->config("widget", []);
 
         $widget->theme = array_replace($default, $config);
     }
 
     /**
-     * Saves the widget theme config.
+     * Saves the widget theme data.
      *
-     * @param $event
-     * @param $widget
+     * @param \Pagekit\Event\Event $event
+     * @param \Pagekit\Widget\Model\Widget $widget
+     * @param array $data
      */
-    public function onSaved($event, $widget)
+    public function onSaved($event, $widget, $data)
     {
-        if (!isset($widget->theme)) {
+        if (!isset($data['theme'])) {
             return;
         }
 
-        $this->theme->config['widgets'][$widget->getId()] = $widget->theme;
+        $this->theme->options['data']['widgets'][$widget->getId()] = $data['theme'];
         $this->theme->save();
     }
 

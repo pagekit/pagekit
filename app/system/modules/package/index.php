@@ -24,15 +24,18 @@ return [
 
         $app['module']->addLoader(function ($name, $module) use ($app) {
 
-            if (isset($module['type']) && $module['type'] == 'extension') {
+            if ($module['type'] == 'extension') {
                 $app['locator']->add("{$module['name']}:", $module['path']);
                 $app['locator']->add("views:{$module['name']}", "{$module['path']}/views");
+            }
+
+            if ($module['type'] == 'theme') {
+                $module['data'] = $app->config('theme')->get($name, []);
             }
 
             return $module;
         });
 
-        $app['module']->addLoader(new ConfigLoader($app['config']->get('theme')->toArray()));
         $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\System\Theme'));
         $app['module']->addFactory('extension', new ModuleFactory($app));
 

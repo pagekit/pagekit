@@ -35,7 +35,7 @@ class Theme extends Module implements \JsonSerializable
             $menus[$name] = [
                 'name' => $name,
                 'label' => $label,
-                'assigned' => $this->config("menus.$name", null)
+                'assigned' => $this->get("data.menus.$name", null)
             ];
         }
 
@@ -50,7 +50,7 @@ class Theme extends Module implements \JsonSerializable
      */
     public function assignMenu(array $positions, $id)
     {
-        $menus = $this->config('menus', []);
+        $menus = $this->get('data.menus', []);
 
         foreach ($this->getMenus() as $name => $menu) {
             if (in_array($name, $positions)) {
@@ -60,7 +60,7 @@ class Theme extends Module implements \JsonSerializable
             }
         }
 
-        $this->config['menus'] = $menus;
+        $this->options['data']['menus'] = $menus;
         $this->save();
     }
 
@@ -77,7 +77,7 @@ class Theme extends Module implements \JsonSerializable
             $positions[$name] = [
                 'name' => $name,
                 'label' => $label,
-                'assigned' => $this->config("positions.$name", [])
+                'assigned' => $this->get("data.positions.$name", [])
             ];
         }
 
@@ -92,7 +92,7 @@ class Theme extends Module implements \JsonSerializable
      */
     public function findPosition($id)
     {
-        foreach ($this->config('positions', []) as $name => $assigned) {
+        foreach ($this->get('data.positions', []) as $name => $assigned) {
             if (in_array($id, $assigned)) {
                 return $name;
             }
@@ -109,7 +109,7 @@ class Theme extends Module implements \JsonSerializable
      */
     public function assignPosition($position, $id)
     {
-        $positions = $this->config('positions', []);
+        $positions = $this->get('data.positions', []);
 
         if (!is_array($id) && $position === $this->findPosition($id)) {
             return;
@@ -125,18 +125,18 @@ class Theme extends Module implements \JsonSerializable
             $positions[$position][] = $id;
         }
 
-        $this->config['positions'] = $positions;
+        $this->options['data']['positions'] = $positions;
         $this->save();
     }
 
     /**
-     * Saves the theme config.
+     * Saves the theme data.
      *
      * @return array
      */
     public function save()
     {
-        App::config('theme')->set($this->name, $this->config(['menus', 'positions']));
+        App::config('theme')->set($this->name, $this->get('data'));
     }
 
     /**
