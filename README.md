@@ -24,7 +24,7 @@ Make sure you have the following tools installed: [Composer](https://getcomposer
 Clone the repository.
 
 ```
-git clone git://github.com/pagekit/pagekit.git
+git clone --branch develop git://github.com/pagekit/pagekit.git
 ```
 
 Navigate to the cloned directory and install PHP dependencies.
@@ -33,13 +33,13 @@ Navigate to the cloned directory and install PHP dependencies.
 composer install
 ```
 
-Install JavaScript dependencies.
+Install build tool dependencies.
 
 ```
 npm install
 ```
 
-Install frontend dependencies.
+Install asset dependencies (CSS & JS).
 
 ```
 bower install
