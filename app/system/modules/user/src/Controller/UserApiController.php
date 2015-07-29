@@ -41,7 +41,7 @@ class UserApiController
         }
 
         if ($role) {
-            $query->whereInSimpleArray('roles', $role);
+            $query->whereInSet('roles', $role);
         }
 
         if ($access) {

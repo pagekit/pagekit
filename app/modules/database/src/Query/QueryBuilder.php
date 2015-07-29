@@ -4,6 +4,7 @@ namespace Pagekit\Database\Query;
 
 use Closure;
 use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Types\Type;
 use Pagekit\Database\Connection;
 use PDO;
@@ -236,7 +237,7 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a "where" for a simple array column.
+     * Creates and adds a "where FIND_IN_SET" equivalent to the query.
      *
      * @param  string $column
      * @param  mixed  $values
@@ -244,11 +245,17 @@ class QueryBuilder
      * @param  string $type
      * @return self
      */
-    public function whereInSimpleArray($column, $values, $not = false, $type = null)
+    public function whereInSet($column, $values, $not = false, $type = null)
     {
         $not    = $not ? ' NOT' : '';
-        $values = implode('|', (array) $values);
+        $values = (array) $values;
 
+        if (count($values) === 1 && $this->connection->getDatabasePlatform() instanceof MySqlPlatform) {
+            $value = $this->connection->quote(current($values));
+            return $this->addWhere("{$not} FIND_IN_SET({$value}, {$column})", [], $type);
+        }
+
+        $values = implode('|', (array) $values);
         return $this->addWhere("{$column}{$not} REGEXP ".$this->connection->quote("(^|,)({$values})($|,)"), [], $type);
     }
 

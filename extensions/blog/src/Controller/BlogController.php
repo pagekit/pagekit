@@ -70,13 +70,13 @@ class BlogController
             $roles = App::db()->createQueryBuilder()
                 ->from('@system_role')
                 ->where(['id' => Role::ROLE_ADMINISTRATOR])
-                ->whereInSimpleArray('permissions', ['blog: manage all posts', 'blog: manage own posts'], false, 'OR')
+                ->whereInSet('permissions', ['blog: manage all posts', 'blog: manage own posts'], false, 'OR')
                 ->execute('id')
                 ->fetchAll(\PDO::FETCH_COLUMN);
 
             $authors = App::db()->createQueryBuilder()
                 ->from('@system_user')
-                ->whereInSimpleArray('roles', $roles)
+                ->whereInSet('roles', $roles)
                 ->execute('id, username')
                 ->fetchAll();
 

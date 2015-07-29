@@ -32,7 +32,7 @@ class SiteController
         }
 
         $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->where(function($query) {
-            return $query->where('roles IS NULL')->whereInSimpleArray('roles', App::user()->getRoles(), false, 'OR');
+            return $query->where('roles IS NULL')->whereInSet('roles', App::user()->getRoles(), false, 'OR');
         })->related('user');
 
         if (!$limit = $this->blog->config('posts.posts_per_page')) {

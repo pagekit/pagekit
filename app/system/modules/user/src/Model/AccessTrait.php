@@ -56,6 +56,6 @@ trait AccessTrait
         $db = self::getConnection();
         $platform = $db->getDatabasePlatform();
 
-        return $db->executeUpdate('UPDATE '.self::getMetadata()->getTable().' SET roles = '.$platform->getTrimExpression("REPLACE (".$platform->getConcatExpression($db->quote(','), 'roles', $db->quote(',')).", ',{$role},', ',')", 3, $db->quote(',')));
+        return $db->executeUpdate('UPDATE '.self::getMetadata()->getTable().' SET roles = ('.$platform->getTrimExpression("REPLACE (".$platform->getConcatExpression($db->quote(','), 'roles', $db->quote(',')).", ',{$role},', ',')", 3, $db->quote(',')).' OR NULL)');
     }
 }
