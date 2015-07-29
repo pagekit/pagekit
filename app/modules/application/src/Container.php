@@ -36,16 +36,6 @@ class Container implements \ArrayAccess
     }
 
     /**
-     * Set shortcut.
-     *
-     * @see offsetSet()
-     */
-    public function __invoke($name, $value)
-    {
-        $this->offsetSet($name, $value);
-    }
-
-    /**
      * Gets a parameter/service or calls the invoke method.
      *
      * @param  string $name
