@@ -70,13 +70,13 @@ class BlogController
             $roles = App::db()->createQueryBuilder()
                 ->from('@system_role')
                 ->where(['id' => Role::ROLE_ADMINISTRATOR])
-                ->orWhere('permissions REGEXP '.App::db()->quote('(^|,)(blog: manage all posts|blog: manage own posts)($|,)'))
+                ->whereInSimpleArray('permissions', ['blog: manage all posts', 'blog: manage own posts'], false, 'OR')
                 ->execute('id')
                 ->fetchAll(\PDO::FETCH_COLUMN);
 
             $authors = App::db()->createQueryBuilder()
                 ->from('@system_user')
-                ->where('roles REGEXP '.App::db()->quote('(^|,)('.implode('|', $roles).')($|,)'))
+                ->whereInSimpleArray('roles', $roles)
                 ->execute('id, username')
                 ->fetchAll();
 

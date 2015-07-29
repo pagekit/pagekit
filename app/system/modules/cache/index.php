@@ -41,7 +41,7 @@ return [
                 'file'   => ['name' => 'File', 'supported' => in_array('file', $supported)]
             ];
 
-            $caches['auto']['name'] = 'Auto ('.$caches[end($supported)]['name'].')';
+            $caches['auto']['name'] = "Auto ({$caches[end($supported)]['name']})";
 
             $view->data('$caches', $caches);
             $view->data('$settings', ['config' => [$this->name => $this->config(['caches.cache.storage', 'nocache'])]]);
