@@ -36,6 +36,12 @@
 
                     <h2 class="uk-margin-remove">{{ position ? position.label : 'All' | trans }}</h2>
 
+                    <div class="pk-search">
+                        <div class="uk-search">
+                            <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
+                        </div>
+                    </div>
+
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
                             <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
@@ -81,7 +87,7 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" inline-template>
-                        <li v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}">
+                        <li v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>

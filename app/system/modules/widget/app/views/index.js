@@ -2,7 +2,8 @@ module.exports = {
 
     data: $.extend(true, {
         position: undefined,
-        selected: []
+        selected: [],
+        config: {filter:{search:''}}
     }, window.$data),
 
     ready: function () {
@@ -107,6 +108,15 @@ module.exports = {
             this.resource.save({id: widget.id}, {widget: widget}, function () {
                 UIkit.notify(this.$trans('Widget saved.'));
             });
+        },
+
+        infilter: function(widget) {
+
+            if (!this.config.filter.search) {
+                return true;
+            }
+
+            return widget.title.toLowerCase().indexOf(this.config.filter.search.toLowerCase()) != -1;
         }
 
     },
