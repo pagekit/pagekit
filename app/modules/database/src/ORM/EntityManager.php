@@ -3,7 +3,6 @@
 namespace Pagekit\Database\ORM;
 
 use Pagekit\Database\Connection;
-use Pagekit\Database\Event\EntityEvent;
 use Pagekit\Database\Events;
 use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Event\PrefixEventDispatcher;
@@ -148,28 +147,28 @@ class EntityManager
 
         $metadata->setValues($entity, $data);
 
-        $this->trigger(Events::SAVING, $entity, $metadata);
+        $this->trigger(Events::SAVING, $metadata, [$entity, $data]);
 
         if (!$id = $metadata->getValue($entity, $identifier, true)) {
 
-            $this->trigger(Events::CREATING, $entity, $metadata);
+            $this->trigger(Events::CREATING, $metadata, [$entity, $data]);
 
             $this->connection->insert($metadata->getTable(), $metadata->getValues($entity, true, true));
 
             $metadata->setValue($entity, $identifier, $this->connection->lastInsertId(), true);
 
-            $this->trigger(Events::CREATED, $entity, $metadata);
+            $this->trigger(Events::CREATED, $metadata, [$entity, $data]);
 
         } else {
 
-            $this->trigger(Events::UPDATING, $entity, $metadata);
+            $this->trigger(Events::UPDATING, $metadata, [$entity, $data]);
 
             $this->connection->update($metadata->getTable(), $metadata->getValues($entity, true, true), [$identifier => $id]);
 
-            $this->trigger(Events::UPDATED, $entity, $metadata);
+            $this->trigger(Events::UPDATED, $metadata, [$entity, $data]);
         }
 
-        $this->trigger(Events::SAVED, $entity, $metadata);
+        $this->trigger(Events::SAVED, $metadata, [$entity, $data]);
     }
 
     /**
@@ -185,11 +184,11 @@ class EntityManager
 
         if ($value = $metadata->getValue($entity, $identifier, true)) {
 
-            $this->trigger(Events::DELETING, $entity, $metadata);
+            $this->trigger(Events::DELETING, $metadata, [$entity]);
 
             $this->connection->delete($metadata->getTable(), [$identifier => $value]);
 
-            $this->trigger(Events::DELETED, $entity, $metadata);
+            $this->trigger(Events::DELETED, $metadata, [$entity]);
 
             $metadata->setValue($entity, $identifier, null, true);
 
@@ -248,7 +247,7 @@ class EntityManager
         $entity = $metadata->newInstance();
         $metadata->setValues($entity, $data, $column, $convert);
 
-        $this->trigger(Events::INIT, $entity, $metadata);
+        $this->trigger(Events::INIT, $metadata, [$entity]);
 
         return $entity;
     }
@@ -257,13 +256,13 @@ class EntityManager
      * Dispatches an event to all registered listeners.
      *
      * @param  string   $name
-     * @param  mixed    $entity
      * @param  Metadata $metadata
+     * @param  array    $arguments
      * @return bool
      */
-    public function trigger($name, $entity, Metadata $metadata)
+    public function trigger($name, Metadata $metadata, array $arguments)
     {
-        $this->events->trigger(new EntityEvent("{$metadata->getEventPrefix()}.{$name}", $entity, $metadata, $this), [$entity]);
+        $this->events->trigger("{$metadata->getEventPrefix()}.{$name}", $arguments);
     }
 
     /**
