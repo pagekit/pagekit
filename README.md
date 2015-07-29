@@ -15,7 +15,7 @@ Pagekit is a modular and lightweight CMS built with Symfony components.
 Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver. Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
 
-*Fresh \*.zip packages coming soon.*
+*Fresh packages coming soon.*
 
 ## Install Pagekit from Source
 
@@ -27,7 +27,7 @@ Clone the repository.
 git clone git://github.com/pagekit/pagekit.git
 ```
 
-Navigate to the cloned directory and install the PHP dependencies.
+Navigate to the cloned directory and install PHP dependencies.
 
 ```
 composer install
