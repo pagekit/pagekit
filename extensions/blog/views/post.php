@@ -6,7 +6,7 @@
 
     <h1 class="uk-article-title"><?= $post->getTitle() ?></h1>
 
-    <?php if ($post->getExcerpt()): ?>
+    <?php if ($app['module']['blog']->config('posts.excerpt_onpage') && $post->getExcerpt()): ?>
     <div class="uk-margin"><?= $post->getExcerpt() ?></div>
     <?php endif ?>
 
