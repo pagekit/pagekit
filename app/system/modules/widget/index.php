@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Widget\Event\ThemeListener;
+
 return [
 
     'name' => 'system/widget',
@@ -65,6 +67,10 @@ return [
     ],
 
     'events' => [
+
+        'boot' => function ($event, $app) {
+            $app->subscribe(new ThemeListener($app['theme']));
+        },
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
