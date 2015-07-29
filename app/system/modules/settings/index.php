@@ -99,8 +99,8 @@ return [
                     'system' => $app['system']->config(['site.', 'admin.', 'timezone'])
                 ],
                 'config' => [
-                    'application' => $app['module']->get('application')->config(['debug']),
-                    'debug' => $app['module']->get('debug')->config(['enabled'])
+                    'application' => $app->module('application')->config(['debug']),
+                    'debug' => $app->module('debug')->config(['enabled'])
                 ]
             ]);
 

@@ -58,8 +58,8 @@ class SiteController
                     'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
                 ]
             ],
+            'blog' => $this->blog,
             'posts' => $posts,
-            'params' => $this->blog->config(),
             'total' => $total,
             'page' => $page
         ];
@@ -86,8 +86,6 @@ class SiteController
                 'title' => __($post->getTitle()),
                 'name' => 'blog/post.php'
             ],
-            'post' => $post,
-            'blog' => $this->blog,
             '$comments' => [
                 'config' => [
                     'post' => $post->getId(),
@@ -101,7 +99,9 @@ class SiteController
                     'canComment' => $user->hasAccess('blog: post comments'),
                 ],
 
-            ]
+            ],
+            'blog' => $this->blog,
+            'post' => $post
         ];
     }
 
