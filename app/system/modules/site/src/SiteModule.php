@@ -33,6 +33,11 @@ class SiteModule extends Module
 
             return $menus;
         };
+
+        $app->extend('view', function ($view) {
+            return $view->addGlobal('site', $this);
+        });
+
     }
 
     /**

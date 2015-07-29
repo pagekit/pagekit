@@ -19,9 +19,9 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($app->module('system/site')->config('logo')): ?>
+                    <?php if ($site->config('logo')): ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $app->module('system/site')->config('logo') ?>" alt="">
+                        <img src="<?= $site->config('logo') ?>" alt="">
                     </a>
                     <?php endif ?>
 
@@ -48,7 +48,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-block uk-contrast uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config['hero-image']; ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-block uk-contrast uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config('hero-image'); ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -82,7 +82,7 @@
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
-                    <aside class="uk-width-medium-1-4 <?= $theme->config['sidebar-first'] ? 'uk-flex-order-first-medium' : ''; ?>">
+                    <aside class="uk-width-medium-1-4 <?= $theme->config('sidebar-first') ? 'uk-flex-order-first-medium' : ''; ?>">
                         <?= $view->position('sidebar', 'position-panel.php') ?>
                     </aside>
                     <?php endif ?>
