@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <?php if ($view->position()->exists('logo') || $view->menu()->exists('primary')) : ?>
+        <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
         <div class="tm-navbar" data-uk-sticky="{showup: true, animation: 'uk-animation-slide-top'}">
             <div class="uk-container uk-container-center">
 
@@ -22,9 +22,9 @@
                     </a>
                     <?php endif ?>
 
-                    <?php if ($view->menu()->exists('primary')) : ?>
+                    <?php if ($view->menu()->exists('main')) : ?>
                     <div class="uk-navbar-flip uk-hidden-small">
-                        <?= $view->menu('primary', 'menu-navbar.php') ?>
+                        <?= $view->menu('main', 'menu-navbar.php') ?>
                     </div>
                     <?php endif ?>
 

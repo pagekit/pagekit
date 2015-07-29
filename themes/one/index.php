@@ -24,7 +24,7 @@ return [
      */
     'menus' => [
 
-        'primary' => 'Primary',
+        'main' => 'Main',
         'offcanvas' => 'Offcanvas'
 
     ],
