@@ -3,13 +3,13 @@
     <div class="uk-form-horizontal">
 
         <div class="uk-form-row">
-            <label class="uk-form-label">Pages</label>
+            <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <ul class="uk-list uk-margin-top-remove">
                     <li>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</li>
                 </ul>
                 <ul class="uk-list uk-margin-top-remove" v-repeat="menu: menus" v-show="menu.getNodes().length">
-                    <li class="uk-nav-header">{{ menu.label }}</li>
+                    <li class="pk-list-header">{{ menu.label }}</li>
                     <node v-repeat="node: menu.getNodes()"></node>
                 </ul>
             </div>
