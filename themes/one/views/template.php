@@ -16,7 +16,7 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($logo = $site->config('logo')): ?>
+                    <?php if ($logo = $site->config('logo')) : ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
                         <img src="<?= $this->escape($logo) ?>" alt="">
                     </a>
@@ -32,9 +32,9 @@
                     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                     <?php endif ?>
 
-                    <?php if ($view->position()->exists('logo')) : ?>
+                    <?php if ($logo): ?>
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <?= $view->position('logo') ?>
+                        <img src="<?= $this->escape($logo) ?>" alt="">
                     </a>
                     <?php endif ?>
 
