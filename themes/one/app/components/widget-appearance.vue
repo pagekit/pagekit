@@ -25,20 +25,6 @@
                     <option value="uk-panel-box uk-panel-box-primary">{{ 'Box Primary' | trans }}</option>
                     <option value="uk-panel-box uk-panel-box-secondary">{{ 'Box Secondary' | trans }}</option>
                     <option value="uk-panel-header">{{ 'Header' | trans }}</option>
-                    <option value="uk-panel-space">{{ 'Space' | trans }}</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="uk-form-row">
-            <label for="form-theme-badge" class="uk-form-label">{{ 'Badge' | trans }}</label>
-            <div class="uk-form-controls">
-                <input id="form-theme-badge" class="uk-form-width-small" type="text" v-model="widget.theme.badge.text">
-                <select class="uk-form-width-small" v-model="widget.theme.badge.type">
-                    <option value="uk-panel-badge uk-badge">{{ 'Default' | trans }}</option>
-                    <option value="uk-panel-badge uk-badge uk-badge-success">{{ 'Success' | trans }}</option>
-                    <option value="uk-panel-badge uk-badge uk-badge-warning">{{ 'Warning' | trans }}</option>
-                    <option value="uk-panel-badge uk-badge uk-badge-danger">{{ 'Danger' | trans }}</option>
                 </select>
             </div>
         </div>
