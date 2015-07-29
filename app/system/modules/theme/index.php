@@ -29,8 +29,8 @@ return [
             }
 
             $view->data('$pagekit', [
-                'editor' => $app['module']['system/editor']->config('editor'),
-                'storage' => $app['module']['system/finder']->config('storage'),
+                'editor' => $app->module('system/editor')->config('editor'),
+                'storage' => $app->module('system/finder')->config('storage'),
                 'user' => [
                     'id' => $app['user']->getId(),
                     'name' => $app['user']->getName(),

@@ -76,7 +76,7 @@ class CommentApiController
         foreach ($comments as $i => $comment) {
 
             $p = $comment->getPost();
-            if (($post && !$p) || !$p->hasAccess($this->user) || !($p->isPublished() || $this->user->hasAccess('blog: manage comments'))) {
+            if ($post && (!$p || !$p->hasAccess($this->user) || !($p->isPublished() || $this->user->hasAccess('blog: manage comments')))) {
                 App::abort(403, __('Post not found.'));
             }
 

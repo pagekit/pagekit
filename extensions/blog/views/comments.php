@@ -74,7 +74,7 @@ $view->script('comments', 'blog:app/bundle/comments.js', 'vue')
             <div class="uk-form-row" v-if="!user.isAuthenticated">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-form-width-large" type="text" name="author" v-model="author" v-valid="name">
+                    <input id="form-name" class="uk-form-width-large" type="text" name="author" v-model="author" v-valid="required: config.requireinfo">
                     <p class="uk-form-help-block uk-text-danger" v-show="replyForm.author.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>
@@ -82,7 +82,7 @@ $view->script('comments', 'blog:app/bundle/comments.js', 'vue')
             <div class="uk-form-row" v-if="!user.isAuthenticated">
                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="email" v-valid="email, required">
+                    <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="email" v-valid="email, required: config.requireinfo">
                     <p class="uk-form-help-block uk-text-danger" v-show="replyForm.email.invalid">{{ 'Email invalid.' | trans }}</p>
                 </div>
             </div>

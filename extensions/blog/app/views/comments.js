@@ -129,18 +129,6 @@ module.exports = {
                     });
                 }
 
-            },
-
-            validators: {
-
-                name: function (value) {
-                    return !this.config.requireinfo || Vue.validators['required'](value);
-                },
-
-                email: function (value) {
-                    return !this.config.requireinfo && !Vue.validators['required'](value) || Vue.validators['email'](value);
-                }
-
             }
 
         }
