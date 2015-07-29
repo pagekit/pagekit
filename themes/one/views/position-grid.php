@@ -1,17 +1,15 @@
-<?php
+<?php foreach ($widgets as $widget) : ?>
+<div class="uk-width-medium-1-<?= count($widgets) ?>">
 
-$output = [];
-$count  = count($widgets);
+    <div class="uk-panel <?= $widget->theme['panel'] ?><?= $widget->theme['alignment'] ? ' uk-text-center' : '' ?>">
 
-foreach ($widgets as $widget) {
+        <?php if (!$widget->get('title_hide')) : ?>
+        <h3 class="<?= $widget->theme['title_size'] ?>"><?= $widget->getTitle() ?></h3>
+        <?php endif ?>
 
-    $output[] = '<div class="uk-width-medium-1-'.$count.'">';
-    $output[] =     '<div class="uk-panel">';
-    $output[] =         !$widget->get('title_hide') ? '<h3>'.$widget->getTitle().'</h3>' : '';
-    $output[] =         $widget->get('result');
-    $output[] =     '</div>';
-    $output[] = '</div>';
+        <?= $widget->get('result') ?>
 
-}
+    </div>
 
-echo implode("\n", $output);
+</div>
+<?php endforeach ?>

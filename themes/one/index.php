@@ -56,10 +56,7 @@ return [
         'widget' => [
 
             'panel' => '',
-            'badge' => [
-                'text' => '',
-                'type' => 'uk-panel-badge uk-badge'
-            ],
+            'title_size' => 'uk-panel-title',
             'alignment' => ''
 
         ]
