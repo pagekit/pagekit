@@ -24,15 +24,15 @@ class QueryBuilder
      */
     protected $parts = [
         'select' => [],
-        'from'   => null,
-        'join'   => [],
-        'set'    => [],
-        'where'  => null,
-        'group'  => [],
+        'from' => null,
+        'join' => [],
+        'set' => [],
+        'where' => null,
+        'group' => [],
         'having' => null,
-        'order'  => [],
+        'order' => [],
         'offset' => null,
-        'limit'  => null
+        'limit' => null
     ];
 
     /**
@@ -142,7 +142,7 @@ class QueryBuilder
      */
     public function where($condition, array $params = [])
     {
-        return $this->addWhere($condition, $params, CompositeExpression::TYPE_AND);
+        return $this->addWhere($condition, $params);
     }
 
     /**
@@ -160,10 +160,10 @@ class QueryBuilder
     /**
      * Creates and adds a "where in" to the query.
      *
-     * @param  string  $column
-     * @param  mixed   $values
-     * @param  bool    $not
-     * @param  string  $type
+     * @param  string $column
+     * @param  mixed  $values
+     * @param  bool   $not
+     * @param  string $type
      * @return self
      */
     public function whereIn($column, $values, $not = false, $type = null)
@@ -186,7 +186,7 @@ class QueryBuilder
 
         $not = $not ? ' NOT' : '';
 
-        return $this->addWhere("{$column}{$not} IN ({$values})", $params, $type ?: CompositeExpression::TYPE_AND);
+        return $this->addWhere("{$column}{$not} IN ({$values})", $params, $type);
     }
 
     /**
@@ -220,7 +220,7 @@ class QueryBuilder
 
         $not = $not ? 'NOT ' : '';
 
-        return $this->addWhere("{$not}EXISTS ({$exists})", $query->params(), $type ?: CompositeExpression::TYPE_AND);
+        return $this->addWhere("{$not}EXISTS ({$exists})", $query->params(), $type);
     }
 
     /**
@@ -236,16 +236,37 @@ class QueryBuilder
     }
 
     /**
-     * Creates and adds a "where" to the query.
+     * Creates and adds a "where" for a simple array column.
      *
-     * @param  mixed $condition
-     * @param  array $params
-     * @param  int   $type
+     * @param  string $column
+     * @param  mixed  $values
+     * @param  bool   $not
+     * @param  string $type
      * @return self
      */
-    protected function addWhere($condition, array $params, $type)
+    public function whereInSimpleArray($column, $values, $not = false, $type = null)
+    {
+        $not    = $not ? ' NOT' : '';
+        $values = implode('|', (array) $values);
+
+        return $this->addWhere("{$column}{$not} REGEXP ".$this->connection->quote("(^|,)({$values})($|,)"), [], $type);
+    }
+
+    /**
+     * Creates and adds a "where" to the query.
+     *
+     * @param  mixed  $condition
+     * @param  array  $params
+     * @param  string $type
+     * @return self
+     */
+    protected function addWhere($condition, array $params, $type = null)
     {
         $args = [];
+
+        if (null === $type) {
+            $type = CompositeExpression::TYPE_AND;
+        }
 
         if (is_string($condition)) {
             $condition = [$condition];
@@ -256,9 +277,9 @@ class QueryBuilder
             foreach ($condition as $key => $value) {
 
                 if (!is_numeric($key)) {
-                    $name = $this->parameter($key);
+                    $name          = $this->parameter($key);
                     $params[$name] = $value;
-                    $value = "$key = :$name";
+                    $value         = "$key = :$name";
                 }
 
                 $args[] = $value;
@@ -349,7 +370,7 @@ class QueryBuilder
     /**
      * Sets the offset of the query.
      *
-     * @param  int  $offset
+     * @param  int $offset
      * @return self
      */
     public function offset($offset)
@@ -572,7 +593,7 @@ class QueryBuilder
     public function update(array $values)
     {
         foreach ($values as $key => $value) {
-            $name = $this->parameter($key);
+            $name          = $this->parameter($key);
             $values[$name] = $value;
             $this->addPart('set', "$key = :$name");
         }
@@ -736,7 +757,7 @@ class QueryBuilder
     protected function guessParamTypes(array $params = [])
     {
         $types = [];
-        foreach($params as $key => $param) {
+        foreach ($params as $key => $param) {
             if ($param instanceof \DateTime) {
                 $types[is_int($key) ? $key + 1 : $key] = Type::DATETIME;
             }

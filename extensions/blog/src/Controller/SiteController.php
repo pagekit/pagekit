@@ -31,7 +31,9 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        $query = Post::where(['status = ?', 'date < ?', Post::getAccessQuery(App::user())], [Post::STATUS_PUBLISHED, new \DateTime])->related('user');
+        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->where(function($query) {
+            return $query->where('roles IS NULL')->whereInSimpleArray('roles', App::user()->getRoles(), false, 'OR');
+        })->related('user');
 
         if (!$limit = $this->blog->config('posts.posts_per_page')) {
             $limit = 10;

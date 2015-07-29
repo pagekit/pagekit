@@ -41,7 +41,7 @@ class UserApiController
         }
 
         if ($role) {
-            $query->where('roles REGEXP '.App::db()->quote("(^|,)($role)($|,)"));
+            $query->whereInSimpleArray('roles', $role);
         }
 
         if ($access) {

@@ -42,16 +42,4 @@ trait AccessTrait
     {
         return !$this->roles or array_intersect($user->getRoles(), $this->roles);
     }
-
-    /**
-     * Gets the roles SQL query part.
-     *
-     * @param  UserInterface $user
-     * @param  string        $field
-     * @return string|null
-     */
-    public static function getAccessQuery(UserInterface $user, $field = 'roles')
-    {
-        return "{$field} IS NULL OR $field REGEXP ".App::db()->quote("(^|,)(".implode('|', $user->getRoles()).")($|,)");
-    }
 }
