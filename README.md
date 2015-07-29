@@ -12,55 +12,67 @@ Pagekit is a modular and lightweight CMS built with Symfony components.
 
 ## Getting started
 
-Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver.
-Create a database for Pagekit.
+Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver. Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
 
-## Developers
+*Fresh \*.zip packages coming soon.*
 
-**The `develop` version is undergoing heavy work at the moment. We invite you to join the fun 
-and get the current version running on your system. Be aware that those versions are bleeding
-edge. They can and will break from one day to the next and are not suited for use in production.**
+## Install Pagekit from Source
 
-First of all, install [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix).
+Make sure you have the following tools installed: [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix), [npm](https://www.npmjs.com/), [Bower](http://bower.io/), [Webpack](http://webpack.github.io/), [Gulp](http://gulpjs.com/).
 
-If you haven't done so already, clone the Pagekit git repo.
+Clone the repository.
+
 ```
 git clone --branch develop git://github.com/pagekit/pagekit.git
 ```
 
-To install the PHP dependencies of the project, navigate to the cloned directory and run the composer `install` command
+Navigate to the cloned directory and install the PHP dependencies.
+
 ```
 composer install
-#or if you don't have composer installed globally:
-php path/to/composer.phar install
 ```
 
-Pagekit uses [npm](https://www.npmjs.com/) for JavaScript dependencies. Make sure you also have 
-[Bower](http://bower.io/) and [Webpack](http://webpack.github.io/) installed, which are called automatically during `npm install`.
+Install JavaScript dependencies.
 
 ```
 npm install
 ```
 
-Pagekit uses [Gulp](http://gulpjs.com/) to compile the included LESS assets to CSS.
+Install frontend dependencies.
 
 ```
-gulp compile
+bower install
+```
+
+Compile the included LESS assets to CSS (or run `gulp watch` if you want to watch local file changes).
+
+```
+gulp
+```
+
+Bundle the included JS components (or run `webpack --watch` if you want to watch local file changes)
+
+```
+webpack
 ```
 
 When these commands have finished, point your browser to the Pagekit URL on your web server and follow the installer.
 
-To update Pagekit, you need to pull the Pagekit git repo and run the composer `update` command
+## Stay up to date
+
+If you've set up Pagekit from source, run these commands to get new commits and to rebuild everything you need.
 
 ```
 git pull
 composer update
+npm install
+bower update
+gulp
+webpack
 ```
 
-You may also clear the `tmp/cache` folder.
-
-### CLI
+## CLI
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
 ```
