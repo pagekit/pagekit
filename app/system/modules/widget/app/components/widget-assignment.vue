@@ -24,7 +24,7 @@
     module.exports = {
 
         section: {
-            label: 'Assignment',
+            label: 'Visibility',
             priority: 100
         },
 
