@@ -15,12 +15,8 @@ window.Widgets = module.exports = {
 
         load: function () {
 
-            this.resource.query(function (data) {
+            return this.resource.query(function (data) {
                 this.$set('widgets', data);
-            });
-
-            this.resource.query({id: 'config'}, function (data) {
-                this.$set('configs', data);
             });
 
         },

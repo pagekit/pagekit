@@ -32,16 +32,6 @@ class WidgetApiController
     }
 
     /**
-     * @Route("/config", methods="GET")
-     */
-    public function configAction()
-    {
-        $module = App::module('system/widget');
-
-        return $module->config('widget.config', []) + ['defaults' => $module->config('widget.defaults')];
-    }
-
-    /**
      * @Request({"position", "ids": "array"}, csrf=true)
      */
     public function assignAction($position, $ids)
