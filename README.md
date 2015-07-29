@@ -45,13 +45,13 @@ Install frontend dependencies.
 bower install
 ```
 
-Compile the included LESS assets to CSS (or run `gulp watch` if you want to watch local file changes).
+Compile LESS assets (run `gulp watch` to watch for local file changes).
 
 ```
 gulp
 ```
 
-Bundle the included JS components (or run `webpack --watch` if you want to watch local file changes)
+Bundle JS modules (run `webpack --watch` to watch for local file changes)
 
 ```
 webpack
