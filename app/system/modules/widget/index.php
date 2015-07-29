@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Widget\Event\ThemeListener;
+use Pagekit\Widget\Model\Widget;
 
 return [
 
@@ -82,6 +83,10 @@ return [
 
         'model.widget.saved' => function ($event, $widget) use ($app) {
             $app['theme']->assignPosition($widget->position, $widget->getId());
+        },
+
+        'model.role.deleted' => function ($event, $role) {
+            Widget::removeRole($role);
         }
     ]
 

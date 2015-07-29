@@ -79,6 +79,11 @@ class NodesListener implements EventSubscriberInterface
         }
     }
 
+    public function onRoleDelete($event, $role)
+    {
+        Node::removeRole($role);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -87,7 +92,8 @@ class NodesListener implements EventSubscriberInterface
         return [
             'request' => ['onRequest', 110],
             'enable' => 'onEnable',
-            'model.node.init' => 'onNodeInit'
+            'model.node.init' => 'onNodeInit',
+            'model.role.deleted' => 'onRoleDelete'
         ];
     }
 

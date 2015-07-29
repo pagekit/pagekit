@@ -1,7 +1,7 @@
 <?php
 
 use Pagekit\Blog\Content\ReadmorePlugin;
-use Pagekit\Blog\Event\CommentListener;
+use Pagekit\Blog\Event\PostListener;
 use Pagekit\Blog\Event\RouteListener;
 
 return [
@@ -170,7 +170,7 @@ return [
         'boot' => function ($event, $app) {
             $app->subscribe(
                 new RouteListener,
-                new CommentListener,
+                new PostListener(),
                 new ReadmorePlugin
             );
         },
