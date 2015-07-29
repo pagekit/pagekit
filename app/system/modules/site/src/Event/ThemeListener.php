@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Widget\Event;
+namespace Pagekit\Site\Event;
 
 use Pagekit\System\Theme;
 use Pagekit\Event\EventSubscriberInterface;
@@ -23,33 +23,33 @@ class ThemeListener implements EventSubscriberInterface
     }
 
     /**
-     * Sets the widget theme data.
+     * Sets the node theme data.
      *
      * @param \Pagekit\Event\Event $event
-     * @param \Pagekit\Widget\Model\Widget $widget
+     * @param \Pagekit\Site\Model\NodeInterface $node
      */
-    public function onWidgetInit($event, $widget)
+    public function onNodeInit($event, $node)
     {
-        $config  = $this->theme->get("data.widgets.".$widget->getId(), []);
-        $default = $this->theme->config("widget", []);
+        $config  = $this->theme->get("data.nodes.".$node->getId(), []);
+        $default = $this->theme->config("node", []);
 
-        $widget->theme = array_replace($default, $config);
+        $node->theme = array_replace($default, $config);
     }
 
     /**
-     * Saves the widget theme data.
+     * Saves the node theme data.
      *
      * @param \Pagekit\Event\Event $event
-     * @param \Pagekit\Widget\Model\Widget $widget
+     * @param \Pagekit\Site\Model\NodeInterface $node
      * @param array $data
      */
-    public function onWidgetSaved($event, $widget, $data)
+    public function onNodeSaved($event, $node, $data)
     {
         if (!isset($data['theme'])) {
             return;
         }
 
-        $this->theme->options['data']['widgets'][$widget->getId()] = $data['theme'];
+        $this->theme->options['data']['nodes'][$node->getId()] = $data['theme'];
         $this->theme->save();
     }
 
@@ -59,8 +59,8 @@ class ThemeListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'model.widget.init' => 'onWidgetInit',
-            'model.widget.saved' => 'onWidgetSaved'
+            'model.node.init' => 'onNodeInit',
+            'model.node.saved' => 'onNodeSaved'
         ];
     }
 }

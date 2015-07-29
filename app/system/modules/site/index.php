@@ -3,6 +3,7 @@
 use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
+use Pagekit\Site\Event\ThemeListener;
 
 return [
 
@@ -127,43 +128,14 @@ return [
 
         'boot' => function ($event, $app) {
             $app->subscribe(
+                new ThemeListener($app['theme']),
                 new MaintenanceListener(),
                 new NodesListener(),
                 new PageListener()
             );
         },
 
-        'view.scripts' => function ($event, $scripts) {
-            $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
-            $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
-            $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
-            $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
-        },
-
         'site' => function () use ($app) {
-
-            $app->on('view.meta', function ($event, $meta) use ($app) {
-
-                if ($app->isAdmin()) {
-                    return;
-                }
-
-                if ($icon = $this->config('icons.favicon')) {
-                    $meta->add('link:favicon', [
-                        'href' => $app['url']->getStatic($icon),
-                        'rel' => 'shortcut icon',
-                        'type' => 'image/x-icon'
-                    ]);
-                }
-
-                if ($icon = $this->config('icons.appicon')) {
-                    $meta->add('link:appicon', [
-                        'href' => $app['url']->getStatic($icon),
-                        'rel' => 'apple-touch-icon-precomposed'
-                    ]);
-                }
-
-            });
 
             $app->on('view.head', function ($event, $view) use ($app) {
                 $event->addResult($this->config('code.header'));
@@ -173,6 +145,32 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
+        },
+
+        'view.meta' => function ($event, $meta) use ($app) {
+
+            if ($icon = $this->config('icons.favicon')) {
+                $meta->add('link:favicon', [
+                    'href' => $app['url']->getStatic($icon),
+                    'rel' => 'shortcut icon',
+                    'type' => 'image/x-icon'
+                ]);
+            }
+
+            if ($icon = $this->config('icons.appicon')) {
+                $meta->add('link:appicon', [
+                    'href' => $app['url']->getStatic($icon),
+                    'rel' => 'apple-touch-icon-precomposed'
+                ]);
+            }
+
+        },
+
+        'view.scripts' => function ($event, $scripts) {
+            $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
+            $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
+            $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
+            $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
         }
 
     ]
