@@ -157,9 +157,6 @@ class Node implements NodeInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $node = $this->toJson();
-        $node['url'] = $this->getUrl('base');
-
-        return $node;
+        return $this->toJson(['url' => $this->getUrl('base')]);
     }
 }

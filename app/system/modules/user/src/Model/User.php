@@ -369,11 +369,6 @@ class User implements UserInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $user = $this->toJson();
-
-        unset($user['password']);
-        unset($user['activation']);
-
-        return $user;
+        return $this->toJson([], ['password', 'activation']);
     }
 }

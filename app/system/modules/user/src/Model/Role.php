@@ -153,13 +153,13 @@ class Role implements RoleInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $role = $this->toJson();
+        $data = [
+            'isLocked' => $this->isLocked(),
+            'isAnonymous' => $this->isAnonymous(),
+            'isAuthenticated' => $this->isAuthenticated(),
+            'isAdministrator' => $this->isAdministrator()
+        ];
 
-        $role['isLocked'] = $this->isLocked();
-        $role['isAnonymous'] = $this->isAnonymous();
-        $role['isAuthenticated'] = $this->isAuthenticated();
-        $role['isAdministrator'] = $this->isAdministrator();
-
-        return $role;
+        return $this->toJson($data);
     }
 }

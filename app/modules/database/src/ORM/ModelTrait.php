@@ -114,24 +114,19 @@ trait ModelTrait
     }
 
     /**
-     * {@inheritdoc}
+     * Gets array for JSON serialize.
+     *
+     * @param  array $data
+     * @param  array $ignore
+     * @return array
      */
-    public function jsonSerialize()
-    {
-        return $this->toJson();
-    }
-
-    protected function toJson()
+    public function toJson(array $data = [], array $ignore = [])
     {
         $metadata = static::getMetadata();
-        $result = [];
 
-        foreach ($metadata->getFields() as $field) {
+        foreach (get_object_vars($this) as $name => $value) {
 
-            $name = $field['name'];
-            $value = $this->$name;
-
-            switch ($field['type']) {
+            switch ($metadata->getField($name, 'type')) {
                 case 'json_array':
                     $value = $value ?: new \stdClass();
                     break;
@@ -140,14 +135,17 @@ trait ModelTrait
                     break;
             }
 
-            $result[$name] = $value;
-
+            $data[$name] = $value;
         }
 
-        foreach (array_keys($metadata->getRelationMappings()) as $name) {
-            $result[$name] = $this->$name;
-        }
+        return array_diff_key($data, $metadata->getRelationMappings(), array_flip($ignore));
+    }
 
-        return $result;
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->toJson();
     }
 }

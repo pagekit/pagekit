@@ -225,24 +225,22 @@ class Post implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $post = $this->toJson();
+        $data = [
+            'url' => App::url('@blog/id', ['id' => $this->id ?: 0], 'base'),
+            'isPublished' => $this->isPublished(),
+            'isAccessible' => $this->isAccessible()
+        ];
 
-        if ($post['user']) {
-            $post['author'] = $post['user']->getUsername();
-            unset($post['user']);
+        if ($this->user) {
+            $data['author'] = $this->user->getUsername();
         }
 
-        if ($post['comments']) {
-            $post['comments_pending'] = count(array_filter($post['comments'], function ($comment) {
+        if ($this->comments) {
+            $data['comments_pending'] = count(array_filter($this->comments, function ($comment) {
                 return $comment->getStatus() == Comment::STATUS_PENDING;
             }));
-            unset($post['comments']);
         }
 
-        $post['isPublished']  = $this->isPublished();
-        $post['isAccessible'] = $this->isAccessible();
-        $post['url']          = App::url('@blog/id', ['id' => $this->id ?: 0], 'base');
-
-        return $post;
+        return $this->toJson($data);
     }
 }

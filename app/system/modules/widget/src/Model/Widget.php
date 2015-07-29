@@ -83,15 +83,4 @@ class Widget implements WidgetInterface
     {
         $this->nodes = $nodes;
     }
-
-    public function jsonSerialize()
-    {
-        $widget = get_object_vars($this);
-
-        if (!$widget['data']) {
-            $widget['data'] = new \stdClass();
-        }
-
-        return $widget;
-    }
 }
