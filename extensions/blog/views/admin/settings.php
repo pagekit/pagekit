@@ -80,23 +80,15 @@
                     </div>
 
                     <div class="uk-form-row">
-                        <span class="uk-form-label">{{ 'Default post settings' | trans }}</span>
+                        <span class="uk-form-label">{{ 'Excerpt' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
-                            <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" v-model="config.posts.markdown_enabled"> {{ 'Enable Markdown' | trans }}</label>
-                            </p>
-                            <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" v-model="config.posts.comments_enabled"> {{ 'Enable Comments' | trans }}</label>
-                            </p>
+                            <label><input type="checkbox" v-model="config.posts.excerpt_hide"> {{ 'Hide excerpt on post page' | trans }}</label>
                         </div>
                     </div>
 
                     <div class="uk-form-row">
                         <span class="uk-form-label">{{ 'Default post settings' | trans }}</span>
                         <div class="uk-form-controls uk-form-controls-text">
-                            <p class="uk-form-controls-condensed">
-                                <label><input type="checkbox" v-model="config.posts.excerpt_onpage"> {{ 'Hide excerpt on post page' | trans }}</label>
-                            </p>
                             <p class="uk-form-controls-condensed">
                                 <label><input type="checkbox" v-model="config.posts.markdown_enabled"> {{ 'Enable Markdown' | trans }}</label>
                             </p>
