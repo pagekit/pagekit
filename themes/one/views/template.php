@@ -6,10 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= $view->render('head') ?>
         <?php $view->style('theme', 'theme:css/theme.css') ?>
-        <?php $view->script('jquery') ?>
-        <?php $view->script('uikit') ?>
-        <?php $view->script('uikit-sticky') ?>
-        <?php $view->script('theme', 'theme:js/theme.js') ?>
+        <?php $view->script('theme', 'theme:js/theme.js', 'uikit-sticky') ?>
     </head>
     <body>
 
@@ -19,9 +16,9 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($site->config('logo')): ?>
+                    <?php if ($logo = $site->config('logo')): ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $site->config('logo') ?>" alt="">
+                        <img src="<?= $this->escape($logo) ?>" alt="">
                     </a>
                     <?php endif ?>
 
