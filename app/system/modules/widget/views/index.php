@@ -77,7 +77,7 @@
             <div class="uk-overflow-container">
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length">
+                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length, pk-table-fake-border: emptyafterfilter">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100">
@@ -102,7 +102,7 @@
                                     <span v-if="!type">{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-100">
-                                    {{ !widget.nodes.length ? 'All':'Selected' | trans }}
+                                    {{ !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? 'selected':'selected') | trans }}
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
@@ -117,13 +117,7 @@
 
                 </div>
 
-                <div class="pk-table-fake pk-table-fake-header pk-table-fake-border" v-show="empty">
-                    <div class="pk-table-width-minimum"><input type="checkbox"></div>
-                    <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
-                    <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
-                    <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
-                </div>
-                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="empty">{{ 'No widgets found.' | trans }}</h3>
+                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="empty || emptyafterfilter">{{ 'No widgets found.' | trans }}</h3>
 
             </div>
 

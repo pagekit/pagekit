@@ -3,10 +3,12 @@ module.exports = {
     data: $.extend(true, {
         position: undefined,
         selected: [],
-        config: {filter:{search:''}}
+        config: {filter:{search:'', node:''}}
     }, window.$data),
 
     ready: function () {
+
+        this.$set('indexedNodes', _($data.config.nodes).groupBy('id').value());
 
         UIkit.init();
         this.load();
@@ -27,6 +29,15 @@ module.exports = {
 
         empty: function () {
             return !this.position && !this.get('assigned').length;
+        },
+
+        emptyafterfilter: function() {
+
+            var vm = this;
+
+            return !this.widgets.filter(function(widget){
+                return vm.infilter(widget);
+            }).length;
         },
 
         nodes: function () {
@@ -148,6 +159,11 @@ module.exports = {
             }
 
             return true;
+        },
+
+        getNode: function(id) {
+
+            return indexedNodes[id] || {};
         }
 
     },
