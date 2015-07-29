@@ -24,7 +24,7 @@ return [
 
         'view.layout' => function ($event, $view) use ($app) {
 
-            if (!$app['isAdmin']) {
+            if (!$app->isAdmin()) {
                 return;
             }
 

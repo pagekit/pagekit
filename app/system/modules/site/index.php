@@ -144,7 +144,7 @@ return [
 
             $app->on('view.meta', function ($event, $meta) use ($app) {
 
-                if ($app['isAdmin']) {
+                if ($app->isAdmin()) {
                     return;
                 }
 

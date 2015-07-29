@@ -109,9 +109,9 @@ return [
 
                 $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
-                $app->extend('translator', function ($translator) use ($app) {
+                $app->extend('translator', function ($translator) use ($app, $admin) {
 
-                    $locale = $this->config($app['isAdmin'] ? 'admin.locale' : 'site.locale');
+                    $locale = $this->config($admin ? 'admin.locale' : 'site.locale');
                     $app['intl']->setDefaultLocale($locale);
                     $translator->setLocale($locale);
                     $this->loadLocale($locale, $translator);
@@ -127,7 +127,7 @@ return [
                     return;
                 }
 
-                $app->trigger($app['isAdmin'] ? 'admin' : 'site', [$request]);
+                $app->trigger($app->isAdmin() ? 'admin' : 'site', [$request]);
 
             }]
 
@@ -168,7 +168,7 @@ return [
                 return;
             }
 
-            if ($theme = $app['isAdmin'] ? $app['module']['system/theme'] : $app['theme'] ? : null) {
+            if ($theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'] ? : null) {
                 $event->setParameter('theme', $theme);
                 $event->setTemplate($theme->getLayout());
             }

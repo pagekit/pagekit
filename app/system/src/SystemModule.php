@@ -21,7 +21,7 @@ class SystemModule extends Module
             return Finder::create();
         });
 
-        $app['module']['auth']->config['rememberme.key'] = $this->config('key');
+        $app->module('auth')->config['rememberme.key'] = $this->config('key');
 
         $app['db.em']; // -TODO- fix me
 
@@ -35,7 +35,7 @@ class SystemModule extends Module
             }
         }
 
-        $app['theme'] = $app['module']->get($theme);
+        $app['theme'] = $app->module($theme);
 
         $app->extend('migrator', function($migrator) {
             return $migrator->setLoader(new FilesystemLoader());
