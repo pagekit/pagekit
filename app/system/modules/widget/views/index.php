@@ -36,12 +36,6 @@
 
                     <h2 class="uk-margin-remove">{{ position ? position.label : 'All' | trans }}</h2>
 
-                    <div class="pk-search">
-                        <div class="uk-search">
-                            <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
-                        </div>
-                    </div>
-
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
                             <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
@@ -57,6 +51,12 @@
                             </li>
                             <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
                         </ul>
+                    </div>
+
+                    <div class="pk-search">
+                        <div class="uk-search">
+                            <input class="uk-search-field" type="text" v-model="config.filter.search" debounce="300">
+                        </div>
                     </div>
 
                 </div>
