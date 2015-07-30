@@ -7,7 +7,7 @@ use Pagekit\Util\Arr;
 trait DataTrait
 {
     /** @Column(type="json_array") */
-    protected $data;
+    public $data;
 
     /**
      * Gets a data value.
