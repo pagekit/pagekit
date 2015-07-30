@@ -46,15 +46,6 @@ abstract class Comment
         $this->created = new \DateTime;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function setParent(Comment $parent)
-    {
-        $this->parent = $parent;
-        $this->parent_id = $parent->getId();
-    }
-
     public function __toString()
     {
         return 'Comment #'.$this->id;

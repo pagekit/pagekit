@@ -3,7 +3,6 @@
 namespace Pagekit\Blog\Model;
 
 use Pagekit\Application as App;
-use Pagekit\Comment\CommentsTrait;
 use Pagekit\System\Model\DataTrait;
 use Pagekit\User\Model\AccessTrait;
 use Pagekit\User\Model\User;
@@ -13,7 +12,7 @@ use Pagekit\User\Model\User;
  */
 class Post implements \JsonSerializable
 {
-    use AccessTrait, CommentsTrait, DataTrait, PostModelTrait;
+    use AccessTrait, DataTrait, PostModelTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
