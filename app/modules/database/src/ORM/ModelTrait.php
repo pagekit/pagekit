@@ -6,6 +6,8 @@ use Pagekit\Database\Connection;
 
 trait ModelTrait
 {
+    use PropertyTrait;
+
     /**
      * Gets the related EntityManager.
      *
