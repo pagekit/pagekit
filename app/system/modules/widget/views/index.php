@@ -102,7 +102,7 @@
                                     <span v-if="!type">{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-100">
-                                    {{ !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? 'selected':'selected') | trans }}
+                                    {{ getSingleNodeTitle(widget) | trans }}
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">

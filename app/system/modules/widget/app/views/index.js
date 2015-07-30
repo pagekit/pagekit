@@ -161,9 +161,9 @@ module.exports = {
             return true;
         },
 
-        getNode: function(id) {
+        getSingleNodeTitle: function(widget) {
 
-            return indexedNodes[id] || {};
+            return !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'selected');
         }
 
     },
