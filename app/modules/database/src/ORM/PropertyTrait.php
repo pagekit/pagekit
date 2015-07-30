@@ -16,8 +16,16 @@ trait PropertyTrait
      */
     public function __get($name)
     {
-        if (isset(static::$properties[$name])) {
-            return call_user_func(static::$properties[$name]['get']);
+        if (isset(static::$properties[$name]['get'])) {
+
+            $get = static::$properties[$name]['get'];
+
+            if ($get instanceof \Closure) {
+                $get = $get->bindTo($this, $this);
+            }
+
+            return call_user_func($get);
+
         } else {
             trigger_error(sprintf('Undefined property: %s::$%s', __CLASS__, $name), E_USER_NOTICE);
         }
@@ -32,7 +40,15 @@ trait PropertyTrait
     public function __set($name, $value)
     {
         if (isset(static::$properties[$name]['set'])) {
-            call_user_func(static::$properties[$name]['set'], $value);
+
+            $set = static::$properties[$name]['set'];
+
+            if ($set instanceof \Closure) {
+                $set = $set->bindTo($this, $this);
+            }
+
+            call_user_func($set, $value);
+
         } else {
             $this->$name = $value;
         }
