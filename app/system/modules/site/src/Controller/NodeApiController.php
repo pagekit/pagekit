@@ -127,7 +127,7 @@ class NodeApiController
      */
     public function frontpageAction($id)
     {
-        if (!$node = Node::find($id) or !$type = App::module('system/site')->getType($node->type())) {
+        if (!$node = Node::find($id) or !$type = App::module('system/site')->getType($node->type)) {
             App::abort(404, __('Node not found.'));
         }
 
