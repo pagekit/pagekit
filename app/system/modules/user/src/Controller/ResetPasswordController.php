@@ -49,14 +49,14 @@ class ResetPasswordController
                 throw new Exception(__('Your account has not been activated or is blocked.'));
             }
 
-            $user->setActivation(App::get('auth.random')->generateString(32));
+            $user->activation = App::get('auth.random')->generateString(32);
 
-            $url = App::url('@user/resetpassword/confirm', ['user' => $user->getUsername(), 'key' => $user->getActivation()], true);
+            $url = App::url('@user/resetpassword/confirm', ['user' => $user->username, 'key' => $user->activation], true);
 
             try {
 
                 $mail = App::mailer()->create();
-                $mail->setTo($user->getEmail())
+                $mail->setTo($user->email)
                      ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
                      ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
                      ->send();
@@ -111,8 +111,8 @@ class ResetPasswordController
                     throw new Exception(__('Invalid password.'));
                 }
 
-                $user->setPassword(App::get('auth.password')->hash($password));
-                $user->setActivation(null);
+                $user->password = App::get('auth.password')->hash($password);
+                $user->activation = null;
                 $user->save();
 
                 App::message()->success(__('Your password has been reset.'));

@@ -41,7 +41,7 @@ class AuthorizationListener implements EventSubscriberInterface
     public function onAuthorize(AuthorizeEvent $event)
     {
         if ($event->getUser()->isBlocked()) {
-            throw new AuthException($event->getUser()->getAccess() ? __('Your account is blocked.') : __('Your account has not been activated.'));
+            throw new AuthException($event->getUser()->access ? __('Your account is blocked.') : __('Your account has not been activated.'));
         }
     }
 

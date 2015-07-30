@@ -7,23 +7,7 @@ use Pagekit\Application as App;
 trait AccessTrait
 {
     /** @Column(type="simple_array") */
-    protected $roles = [];
-
-    /**
-     * @return int[]
-     */
-    public function getRoles()
-    {
-        return (array) $this->roles;
-    }
-
-    /**
-     * @param int[] $roles
-     */
-    public function setRoles($roles)
-    {
-        $this->roles = array_unique($roles);
-    }
+    public $roles = [];
 
     /**
      * @param  int $role
@@ -35,22 +19,22 @@ trait AccessTrait
     }
 
     /**
-     * @param  UserInterface $user
+     * @param  User $user
      * @return bool
      */
-    public function hasAccess(UserInterface $user)
+    public function hasAccess(User $user)
     {
-        return !$this->roles or array_intersect($user->getRoles(), $this->roles);
+        return !$this->roles or array_intersect($user->roles, $this->roles);
     }
 
     /**
-     * @param  RoleInterface|int $role
+     * @param  Role|int $role
      * @return int
      */
     public static function removeRole($role)
     {
-        if ($role instanceof RoleInterface) {
-            $role = $role->getId();
+        if ($role instanceof Role) {
+            $role = $role->id;
         }
 
         $db = self::getConnection();

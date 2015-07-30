@@ -61,7 +61,7 @@ class WidgetApiController
 
         $widget->save($data);
 
-        return ['message' => __('Widget saved.'), 'widget' => Widget::find($widget->getId())];
+        return ['message' => __('Widget saved.'), 'widget' => Widget::find($widget->id)];
     }
 
     /**

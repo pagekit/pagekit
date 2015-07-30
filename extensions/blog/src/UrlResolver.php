@@ -64,7 +64,7 @@ class UrlResolver implements ParamsResolverInterface
             }
 
             $this->addCache($post);
-            $id = $post->getId();
+            $id = $post->id;
         }
 
         $parameters['id'] = $id;
@@ -112,15 +112,15 @@ class UrlResolver implements ParamsResolverInterface
 
     protected function addCache($post)
     {
-        $this->cacheEntries[$post->getId()] = [
-            'id'     => $post->getId(),
-            'slug'   => $post->getSlug(),
-            'year'   => $post->getDate()->format('Y'),
-            'month'  => $post->getDate()->format('m'),
-            'day'    => $post->getDate()->format('d'),
-            'hour'   => $post->getDate()->format('H'),
-            'minute' => $post->getDate()->format('i'),
-            'second' => $post->getDate()->format('s'),
+        $this->cacheEntries[$post->id] = [
+            'id'     => $post->id,
+            'slug'   => $post->slug,
+            'year'   => $post->date->format('Y'),
+            'month'  => $post->date->format('m'),
+            'day'    => $post->date->format('d'),
+            'hour'   => $post->date->format('H'),
+            'minute' => $post->date->format('i'),
+            'second' => $post->date->format('s'),
         ];
 
         $this->cacheDirty = true;

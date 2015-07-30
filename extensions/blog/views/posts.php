@@ -8,7 +8,7 @@
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= $post->title ?></a></h1>
 
     <p class="uk-article-meta">
-        <?= __('Written by %name% on %date%', ['%name%' => $post->user->getName(), '%date%' => '<time datetime="'.$intl->date($post->date, 'iso').'">'.$intl->date($post->date).'</time>' ]) ?>
+        <?= __('Written by %name% on %date%', ['%name%' => $post->user->name, '%date%' => '<time datetime="'.$intl->date($post->date, 'iso').'">'.$intl->date($post->date).'</time>' ]) ?>
     </p>
 
     <div class="uk-margin"><?= $post->excerpt ?: $post->content ?></div>
@@ -19,8 +19,8 @@
         <li><a href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= __('Continue Reading') ?></a></li>
         <?php endif ?>
 
-        <?php if ($post->isCommentable() || $post->getCommentCount()) : ?>
-        <li><a href="<?= $view->url('@blog/id#comments', ['id' => $post->id]) ?>"><?= _c('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post->getCommentCount(), ['%num%' => $post->getCommentCount()]) ?></a></li>
+        <?php if ($post->isCommentable() || $post->comment_count) : ?>
+        <li><a href="<?= $view->url('@blog/id#comments', ['id' => $post->id]) ?>"><?= _c('{0} No comments|{1} %num% Comment|]1,Inf[ %num% Comments', $post->comment_count, ['%num%' => $post->comment_count]) ?></a></li>
         <?php endif ?>
 
     </ul>

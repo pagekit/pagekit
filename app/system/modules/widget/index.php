@@ -70,7 +70,9 @@ return [
     'events' => [
 
         'boot' => function ($event, $app) {
-            $app->subscribe(new ThemeListener($app['theme']));
+            if ($app['theme']) {
+                $app->subscribe(new ThemeListener($app['theme']));
+            }
         },
 
         'view.scripts' => function ($event, $scripts) {
@@ -78,11 +80,11 @@ return [
         },
 
         'model.widget.init' => function ($event, $widget) use ($app) {
-            $widget->position = $app['theme']->findPosition($widget->getId());
+            $widget->position = $app['theme']->findPosition($widget->id);
         },
 
         'model.widget.saved' => function ($event, $widget) use ($app) {
-            $app['theme']->assignPosition($widget->position, $widget->getId());
+            $app['theme']->assignPosition($widget->position, $widget->id);
         },
 
         'model.role.deleted' => function ($event, $role) {

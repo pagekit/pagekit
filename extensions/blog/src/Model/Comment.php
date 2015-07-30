@@ -35,7 +35,7 @@ class Comment extends BaseComment implements \JsonSerializable
         $this->post = $post;
 
         if ($post) {
-            $this->post_id = $post->getId();
+            $this->post_id = $post->id;
         }
     }
 

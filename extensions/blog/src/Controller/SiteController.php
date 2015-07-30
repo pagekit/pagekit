@@ -32,7 +32,7 @@ class SiteController
         }
 
         $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->where(function($query) {
-            return $query->where('roles IS NULL')->whereInSet('roles', App::user()->getRoles(), false, 'OR');
+            return $query->where('roles IS NULL')->whereInSet('roles', App::user()->roles, false, 'OR');
         })->related('user');
 
         if (!$limit = $this->blog->config('posts.posts_per_page')) {
@@ -97,7 +97,7 @@ class SiteController
                     'max_depth' => $this->blog->config('comments.max_depth')
                 ],
                 'user' => [
-                    'name' => $user->getName(),
+                    'name' => $user->name,
                     'isAuthenticated' => $user->isAuthenticated(),
                     'canComment' => $user->hasAccess('blog: post comments'),
                 ],
@@ -138,7 +138,7 @@ class SiteController
                     'link' => App::url('@blog/id', ['id' => $post->id], true),
                     'description' => App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
                     'date' => $post->date,
-                    'author' => [$post->user->getName(), $post->user->getEmail()],
+                    'author' => [$post->user->name, $post->user->email],
                     'id' => App::url('@blog/id', ['id' => $post->id], true)
                 ])
             );

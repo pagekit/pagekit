@@ -35,11 +35,10 @@ class WidgetController
      */
     public function editAction($id = 0, $type = null)
     {
-        $widget = Widget::find($id);
-
-        if (!$widget) {
-            $widget = Widget::create();
-            $widget->setType($type);
+        if (!$id) {
+            $widget = Widget::create(['type' => $type]);
+        } else if (!$widget = Widget::find($id)) {
+            App::abort(404, 'Widget not found.');
         }
 
         return [

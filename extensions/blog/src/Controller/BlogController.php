@@ -52,18 +52,19 @@ class BlogController
 
                 $module = App::module('blog');
 
-                $post = Post::create();
-                $post->setUser(App::user());
-                $post->setStatus(Post::STATUS_DRAFT);
-                $post->setDate(new \DateTime);
-                $post->setUser(App::user());
-                $post->setCommentStatus((bool) $module->config('posts.comments_enabled'));
+                $post = Post::create([
+                    'user' => App::user(),
+                    'status' => Post::STATUS_DRAFT,
+                    'date' => new \DateTime(),
+                    'comment_status' => (bool) $module->config('posts.comments_enabled')
+                ]);
+
                 $post->set('title', $module->config('posts.show_title'));
                 $post->set('markdown', $module->config('posts.markdown_enabled'));
             }
 
             $user = App::user();
-            if(!$user->hasAccess('blog: manage all posts') && $post->getUserId() !== $user->getId()) {
+            if(!$user->hasAccess('blog: manage all posts') && $post->user_id !== $user->id) {
                 App::abort(403, __('Insufficient User Rights.'));
             }
 
@@ -113,7 +114,7 @@ class BlogController
 
         return [
             '$view' => [
-                'title' => $post ? __('Comments on %title%', ['%title%' => $post->getTitle()]) : __('Comments'),
+                'title' => $post ? __('Comments on %title%', ['%title%' => $post->title]) : __('Comments'),
                 'name'  => 'blog:views/admin/comment-index.php'
             ],
             '$data'   => [

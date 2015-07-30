@@ -128,11 +128,16 @@ return [
 
         'boot' => function ($event, $app) {
             $app->subscribe(
-                new ThemeListener($app['theme']),
                 new MaintenanceListener(),
                 new NodesListener(),
                 new PageListener()
             );
+
+            if ($app['theme']) {
+                $app->subscribe(
+                    new ThemeListener($app['theme'])
+                );
+            }
         },
 
         'site' => function () use ($app) {

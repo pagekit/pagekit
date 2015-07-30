@@ -48,7 +48,7 @@ class AdminController
             App::abort(400, __('Missing order data.'));
         }
 
-        $user = User::find(App::user()->getId());
+        $user = User::find(App::user()->id);
         $user->set('admin.menu', $order);
         $user->save();
 

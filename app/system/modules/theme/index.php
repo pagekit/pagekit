@@ -28,14 +28,16 @@ return [
                 return;
             }
 
+            $user = $app['user'];
+
             $view->data('$pagekit', [
                 'editor' => $app->module('system/editor')->config('editor'),
                 'storage' => $app->module('system/finder')->config('storage'),
                 'user' => [
-                    'id' => $app['user']->getId(),
-                    'name' => $app['user']->getName(),
-                    'email' => $app['user']->getEmail(),
-                    'username' => $app['user']->getUsername()
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'username' => $user->username
                 ],
                 'menu' => array_values($app['system']->getMenu()->getItems())
             ]);

@@ -37,7 +37,7 @@ module.exports = {
                 this.$set('menu', menu);
             } else {
 
-                this.load().then(function(){
+                this.load().then(function () {
                     vm.$set('menu', menu);
                 });
             }
@@ -165,7 +165,7 @@ module.exports = {
             return this.selected.indexOf(node.id.toString()) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
         },
 
-        toggleSelect: function(node) {
+        toggleSelect: function (node) {
 
             var index = this.selected.indexOf(node.id.toString());
 
@@ -200,7 +200,7 @@ module.exports = {
 
             return this.Nodes.query({menu: this.$get('menu.id')}, function (nodes) {
                 this.$set('nodes', nodes);
-                this.$set('tree', _(nodes).sortBy('priority').groupBy('parentId').value());
+                this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
             });
         },
 
@@ -224,13 +224,13 @@ module.exports = {
 
                             // hack for weird flickr bug
                             if (el.parent()[0] === nestable.element[0]) {
-                                setTimeout(function() {
+                                setTimeout(function () {
                                     el.remove();
                                 }, 50);
                             }
                         });
 
-                    }).error(function() {
+                    }).error(function () {
                         UIkit.notify(this.$trans('Reorder failed.'), 'danger');
                     });
                 }
@@ -253,8 +253,8 @@ module.exports = {
             return _.reject(menus, 'id', 'trash');
         },
 
-        divided: function(menus) {
-            return _.reject(menus, 'fixed', true).concat({divider:true}, _.filter(menus, 'fixed', true))
+        divided: function (menus) {
+            return _.reject(menus, 'fixed', true).concat({divider: true}, _.filter(menus, 'fixed', true))
         }
 
     },
@@ -272,7 +272,7 @@ module.exports = {
                     return this.node.url === '/';
                 },
 
-                type: function() {
+                type: function () {
                     return this.getType(this.node);
                 }
 

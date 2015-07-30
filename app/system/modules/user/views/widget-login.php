@@ -1,6 +1,6 @@
 <?php if ($user->isAuthenticated()): ?>
 
-<?= __('Hi %username%', ['%username%' => $user->getUsername()]) ?><br>
+<?= __('Hi %username%', ['%username%' => $user->username]) ?><br>
 <a href="<?= $view->url('@user/logout', ['redirect' => $redirect]) ?>"><?= __('Logout') ?></a>
 
 <?php else: ?>

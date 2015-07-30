@@ -13,7 +13,7 @@ trait WidgetModelTrait
      * Gets active widgets.
      *
      * @param  string|null $position
-     * @return WidgetInterface[]
+     * @return Widget[]
      */
     public static function findActive($position = null)
     {
@@ -21,7 +21,7 @@ trait WidgetModelTrait
 
         if ($widgets === null) {
 
-            $node    = App::node()->getId();
+            $node    = App::node()->id;
             $widgets = self::where(['status' => 1])->get();
 
             foreach (App::theme()->getPositions() as $pos) {
@@ -30,8 +30,8 @@ trait WidgetModelTrait
                     if (!isset($widgets[$id])
                         or !$widget = $widgets[$id]
                         or !$widget->hasAccess(App::user())
-                        or ($nodes = $widget->getNodes() and !in_array($node, $nodes))
-                        or !$type = App::widget()->getType($widget->getType())
+                        or ($nodes = $widget->nodes and !in_array($node, $nodes))
+                        or !$type = App::widget()->getType($widget->type)
                         or !$result = $type->render($widget)
                     ) {
                         continue;

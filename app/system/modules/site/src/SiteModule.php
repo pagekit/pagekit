@@ -20,7 +20,7 @@ class SiteModule extends Module
                 return $node;
             }
 
-            return new Node;
+            return Node::create();
         };
 
         $app['menu'] = function () {

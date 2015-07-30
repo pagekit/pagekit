@@ -35,47 +35,43 @@ trait UserModelTrait
     /**
      * {@inheritdoc}
      */
-    public static function updateLogin(UserInterface $user)
+    public static function updateLogin(User $user)
     {
-        self::where(['id' => $user->getId()])->update(['login' => date('Y-m-d H:i:s')]);
+        self::where(['id' => $user->id])->update(['login' => date('Y-m-d H:i:s')]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function updateAccess(UserInterface $user)
+    public static function updateAccess(User $user)
     {
-        self::where(['id' => $user->getId()])->update(['access' => date('Y-m-d H:i:s')]);
+        self::where(['id' => $user->id])->update(['access' => date('Y-m-d H:i:s')]);
     }
 
     /**
      * Finds user's roles.
      *
-     * @param  UserInterface $user
-     * @return RoleInterface[]
+     * @param  User $user
+     * @return Role[]
      */
-    public static function findRoles(UserInterface $user)
+    public static function findRoles(User $user)
     {
         static $cached = [];
 
-        $roles = $user->getRoles();
-
-        if ($ids = array_diff($roles, array_keys($cached))) {
-            $cached += Role::where('id IN ('.implode(',', $user->getRoles()).')')->get();
+        if ($ids = array_diff($user->roles, array_keys($cached))) {
+            $cached += Role::where('id IN ('.implode(',', $user->roles).')')->get();
         }
 
-        return array_intersect_key($cached, array_flip($roles));
+        return array_intersect_key($cached, array_flip($user->roles));
     }
 
     /**
      * @Saved
      */
-    public static function saved($event, UserInterface $user)
+    public static function saved($event, User $user)
     {
         if (!$user->hasRole(Role::ROLE_AUTHENTICATED)) {
-            $roles = $user->getRoles();
-            $roles[] = Role::ROLE_AUTHENTICATED;
-            $user->setRoles($roles);
+            $user->roles[] = Role::ROLE_AUTHENTICATED;
         }
     }
 }

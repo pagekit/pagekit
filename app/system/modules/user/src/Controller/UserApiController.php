@@ -94,20 +94,19 @@ class UserApiController
                     App::abort(400, __('Password required.'));
                 }
 
-                $user = User::create();
-                $user->setRegistered(new \DateTime);
+                $user = User::create(['registered' => new \DateTime]);
             }
 
-            $user->setName(@$data['name']);
-            $user->setUsername(@$data['username']);
-            $user->setEmail(@$data['email']);
+            $user->name = @$data['name'];
+            $user->username = @$data['username'];
+            $user->email = @$data['email'];
 
-            $self = App::user()->getId() == $user->getId();
+            $self = App::user()->id == $user->id;
             if ($self && @$data['status'] == User::STATUS_BLOCKED) {
                 App::abort(400, __('Unable to block yourself.'));
             }
 
-            if (@$data['email'] != $user->getEmail()) {
+            if (@$data['email'] != $user->email) {
                 $user->set('verified', false);
             }
 
@@ -117,7 +116,7 @@ class UserApiController
                     throw new Exception(__('Invalid Password.'));
                 }
 
-                $user->setPassword(App::get('auth.password')->hash($password));
+                $user->password = App::get('auth.password')->hash($password);
             }
 
             $key    = array_search(Role::ROLE_ADMINISTRATOR, @$data['roles'] ?: []);
@@ -146,7 +145,7 @@ class UserApiController
      */
     public function deleteAction($id)
     {
-        if (App::user()->getId() == $id) {
+        if (App::user()->id == $id) {
             App::abort(400, __('Unable to delete yourself.'));
         }
 

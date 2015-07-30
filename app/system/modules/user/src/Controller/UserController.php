@@ -45,8 +45,7 @@ class UserController
     {
         if (!$id) {
 
-            $user = User::create();
-            $user->setRoles([Role::ROLE_AUTHENTICATED]);
+            $user = User::create(['roles' => [Role::ROLE_AUTHENTICATED]]);
 
         } else if (!$user = User::find($id)) {
             App::abort(404, 'User not found.');
@@ -63,7 +62,7 @@ class UserController
                 'roles' => array_values($this->getRoles($user)),
                 'config' => [
                     'emailVerification' => App::module('system/user')->config('require_verification'),
-                    'currentUser' => App::user()->getId()
+                    'currentUser' => App::user()->id
                 ]
             ]
         ];
@@ -132,7 +131,7 @@ class UserController
     protected function getRoles(User $user = null)
     {
         $roles = [];
-        $self  = $user && $user->getId() === App::user()->getId();
+        $self  = $user && $user->id === App::user()->id;
         foreach (Role::where(['id <> ?'], [Role::ROLE_ANONYMOUS])->orderBy('priority')->get() as $role) {
 
             $r = $role->jsonSerialize();

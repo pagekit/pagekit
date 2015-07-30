@@ -5,85 +5,42 @@ namespace Pagekit\User\Model;
 /**
  * @Entity(tableClass="@system_role")
  */
-class Role implements RoleInterface, \JsonSerializable
+class Role implements \JsonSerializable
 {
     use RoleModelTrait;
 
+    /**
+     * The identifier of the anonymous role.
+     *
+     * @var int
+     */
+    const ROLE_ANONYMOUS = 1;
+
+    /**
+     * The identifier of the authenticated role.
+     *
+     * @var int
+     */
+    const ROLE_AUTHENTICATED = 2;
+
+    /**
+     * The identifier of the administrator role.
+     *
+     * @var int
+     */
+    const ROLE_ADMINISTRATOR = 3;
+
     /** @Column(type="integer") @Id */
-    protected $id;
+    public $id;
 
     /** @Column(type="string") */
-    protected $name;
+    public $name;
 
     /** @Column(type="integer") */
-    protected $priority = 0;
+    public $priority = 0;
 
     /** @Column(type="simple_array") */
-    protected $permissions = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
-    {
-        return $this->priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPriority($priority)
-    {
-        $this->priority = $priority;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPermissions($permissions)
-    {
-        return $this->permissions = $permissions;
-    }
+    public $permissions = [];
 
     /**
      * {@inheritdoc}

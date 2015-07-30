@@ -11,26 +11,26 @@ class PageListener implements EventSubscriberInterface
 {
     public function onNodeSave($event, $node)
     {
-        if ('page' !== $node->getType() or null === $data = App::request()->get('page')) {
+        if ('page' !== $node->type or null === $data = App::request()->get('page')) {
             return;
         }
 
         $page = $this->getPage($node);
         $page->save($data);
 
-        $node->set('defaults', ['id' => $page->getId()]);
-        $node->setLink('@page/'.$page->getId());
+        $node->set('defaults', ['id' => $page->id]);
+        $node->link = '@page/'.$page->id;
     }
 
     public function onNodeDeleted($event, $node)
     {
-        if ('page' !== $node->getType()) {
+        if ('page' !== $node->type) {
             return;
         }
 
         $page = $this->getPage($node);
 
-        if ($page->getId()) {
+        if ($page->id) {
             $page->delete();
         }
     }

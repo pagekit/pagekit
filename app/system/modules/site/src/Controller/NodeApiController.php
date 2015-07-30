@@ -66,7 +66,7 @@ class NodeApiController
     {
         if ($node = Node::find($id)) {
 
-            if ($type = App::module('system/site')->getType($node->getType()) and isset($type['protected']) and $type['protected']) {
+            if ($type = App::module('system/site')->getType($node->type) and isset($type['protected']) and $type['protected']) {
                 App::abort(400, __('Invalid type.'));
             }
 
@@ -111,9 +111,8 @@ class NodeApiController
         foreach ($nodes as $data) {
             if ($node = Node::find($data['id'])) {
 
-                $node->setParentId($data['parent_id']);
-                $node->setPriority($data['order']);
-                $node->setMenu($menu);
+                $data['priority']  = $data['order'];
+                $node->menu = $menu;
 
                 $node->save();
             }
@@ -128,7 +127,7 @@ class NodeApiController
      */
     public function frontpageAction($id)
     {
-        if (!$node = Node::find($id) or !$type = App::module('system/site')->getType($node->getType())) {
+        if (!$node = Node::find($id) or !$type = App::module('system/site')->getType($node->type())) {
             App::abort(404, __('Node not found.'));
         }
 

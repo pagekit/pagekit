@@ -23,7 +23,7 @@ class PostApiController
         extract($filter, EXTR_SKIP);
 
         if(!App::user()->hasAccess('blog: manage all posts')) {
-            $author = App::user()->getId();
+            $author = App::user()->id;
         }
 
         if (is_numeric($status)) {
@@ -85,13 +85,13 @@ class PostApiController
         }
 
         // user without universal access can only edit their own posts
-        if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
+        if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->id) {
             return ['error' => __('Access denied.')];
         }
 
         // user without universal access is not allowed to assign posts to other users
         if(!App::user()->hasAccess('blog: manage all posts')) {
-            $data['user_id'] = App::user()->getId();
+            $data['user_id'] = App::user()->id;
         }
 
         $data['date'] = App::intl()->date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
@@ -110,7 +110,7 @@ class PostApiController
     {
         if ($post = Post::find($id)) {
 
-            if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
+            if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->id) {
                 return ['error' => __('Access denied.')];
             }
 
@@ -128,16 +128,15 @@ class PostApiController
         $count = 0;
         foreach ($ids as $id) {
             if ($post = Post::find((int) $id)) {
-                if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
+                if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->id) {
                     continue;
                 }
 
                 $post = clone $post;
-                $post->setId(null);
-                $post->setStatus(Post::STATUS_DRAFT);
-                $post->setSlug($post->getSlug());
-                $post->setTitle($post->getTitle().' - '.__('Copy'));
-                $post->setCommentCount(0);
+                $post->id = null;
+                $post->status = Post::STATUS_DRAFT;
+                $post->title = $post->title.' - '.__('Copy');
+                $post->comment_count = 0;
                 $post->save();
                 $count++;
             }

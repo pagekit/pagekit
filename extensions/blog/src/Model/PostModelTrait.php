@@ -37,17 +37,17 @@ trait PostModelTrait
      */
     public static function saving($event, Post $post)
     {
-        $post->setModified(new \DateTime());
+        $post->modified = new \DateTime();
 
         $i  = 2;
-        $id = $post->getId();
+        $id = $post->id;
 
-        while (self::where('slug = ?', [$post->getSlug()])->where(function ($query) use ($id) {
+        while (self::where('slug = ?', [$post->slug])->where(function ($query) use ($id) {
             if ($id) {
                 $query->where('id <> ?', [$id]);
             }
         })->first()) {
-            $post->setSlug(preg_replace('/-\d+$/', '', $post->getSlug()).'-'.$i++);
+            $post->slug = preg_replace('/-\d+$/', '', $post->slug).'-'.$i++;
         }
     }
 
@@ -56,6 +56,6 @@ trait PostModelTrait
      */
     public static function deleting($event, Post $post)
     {
-        self::getConnection()->delete('@blog_comment', ['post_id' => $post->getId()]);
+        self::getConnection()->delete('@blog_comment', ['post_id' => $post->id]);
     }
 }

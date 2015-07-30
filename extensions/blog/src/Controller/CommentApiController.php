@@ -43,7 +43,7 @@ class CommentApiController
 
             if ($this->user->isAuthenticated()) {
                 $query->orWhere(function ($query) {
-                    $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, App::user()->getId()]);
+                    $query->where(['status = ?', 'user_id = ?'], [Comment::STATUS_PENDING, App::user()->id]);
                 });
             }
 
@@ -85,7 +85,7 @@ class CommentApiController
 
             $comment->content = App::content()->applyPlugins($comment->content, ['comment' => true]);
             $posts[$p->id] = $p;
-            $comment->setPost(null);
+            $comment->post = null;
         }
 
         $comments = array_values($comments);
@@ -114,14 +114,14 @@ class CommentApiController
             $comment = Comment::create();
 
             if ($this->user->isAuthenticated()) {
-                $data['author'] = $this->user->getName();
-                $data['email']  = $this->user->getEmail();
-                $data['url']    = $this->user->getUrl();
+                $data['author'] = $this->user->name;
+                $data['email']  = $this->user->email;
+                $data['url']    = $this->user->url;
             } elseif ($this->blog->config('comments.require_name_and_email') && (!@$data['author'] || !@$data['email'])) {
                 App::abort(400, __('Please provide valid name and email.'));
             }
 
-            $comment->user_id = (int) $this->user->getId();
+            $comment->user_id = (int) $this->user->id;
             $comment->ip = App::request()->getClientIp();
             $comment->created = new \DateTime;
 
@@ -138,7 +138,7 @@ class CommentApiController
         // check minimum idle time in between user comments
         if (!$this->user->hasAccess('blog: skip comment min idle')
             and $minidle = $this->blog->config('comments.minidle')
-            and $comment = Comment::where($this->user->isAuthenticated() ? ['user_id' => $this->user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
+            and $comment = Comment::where($this->user->isAuthenticated() ? ['user_id' => $this->user->id] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
         ) {
 
             $diff = $comment->created->diff(new \DateTime("- {$minidle} sec"));
@@ -156,7 +156,7 @@ class CommentApiController
             App::abort(404, __('Post not found.'));
         }
 
-        $approved_once = (boolean) Comment::where(['user_id' => $this->user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
+        $approved_once = (boolean) Comment::where(['user_id' => $this->user->id, 'status' => Comment::STATUS_APPROVED])->first();
         $comment->status = $this->user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $this->user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING;
 
         // check the max links rule

@@ -34,7 +34,7 @@ trait NodeModelTrait
      *
      * @param  string $menu
      * @param  array  $parameters
-     * @return NodeInterface|null
+     * @return Node|null
      */
     public static function getTree($menu, $parameters = [])
     {
@@ -48,38 +48,38 @@ trait NodeModelTrait
         $startLevel = (int) $parameters['start_level'] ?: 1;
         $maxDepth   = $startLevel + ($parameters['depth'] ?: PHP_INT_MAX);
 
-        $nodes      = self::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
-        $nodes[0]   = new static();
-        $nodes[0]->setParentId(null);
+        $nodes               = self::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
+        $nodes[0]            = new static();
+        $nodes[0]->parent_id = null;
 
         $node = App::node();
-        $path = $node->getPath();
-        
-        if (!isset($nodes[$node->getId()])) {
-            foreach($nodes as $node) {
+        $path = $node->path;
+
+        if (!isset($nodes[$node->id])) {
+            foreach ($nodes as $node) {
                 if ($node->getUrl('base') === $path) {
-                    $path = $node->getPath();
+                    $path = $node->path;
                     break;
                 }
             }
         }
 
-        $segments   = explode('/', $path);
-        $rootPath   = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
+        $segments = explode('/', $path);
+        $rootPath = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
 
         foreach ($nodes as $node) {
 
-            $depth  = substr_count($node->getPath(), '/');
-            $parent = isset($nodes[$node->getParentId()]) ? $nodes[$node->getParentId()] : null;
+            $depth  = substr_count($node->path, '/');
+            $parent = isset($nodes[$node->parent_id]) ? $nodes[$node->parent_id] : null;
 
-            $node->set('active', !$node->getPath() || 0 === strpos($path, $node->getPath()));
+            $node->set('active', !$node->path || 0 === strpos($path, $node->path));
 
             if ($depth >= $maxDepth
                 || !$node->hasAccess($user)
                 || $node->get('menu_hide')
                 || !($parameters['mode'] == 'all'
                     || $node->get('active')
-                    || $rootPath && 0 === strpos($node->getPath(), $rootPath)
+                    || $rootPath && 0 === strpos($node->path, $rootPath)
                     || $depth == $startLevel)
             ) {
                 continue;
@@ -105,62 +105,60 @@ trait NodeModelTrait
     /**
      * @Saving
      */
-    public static function saving($event, NodeInterface $node)
+    public static function saving($event, Node $node)
     {
         $db = self::getConnection();
 
         $i  = 2;
-        $id = $node->getId();
+        $id = $node->id;
 
-        if (!$node->getSlug()) {
-            $node->setSlug($node->getTitle());
+        if (!$node->slug) {
+            $node->slug = $node->title;
         }
 
-        while (self::where(['slug = ?', 'parent_id= ?'], [$node->getSlug(), $node->getParentId()])->where(function ($query) use ($id) {
+        while (self::where(['slug = ?', 'parent_id= ?'], [$node->slug, $node->parent_id])->where(function ($query) use ($id) {
             if ($id) $query->where('id <> ?', [$id]);
         })->first()) {
-            $node->setSlug(preg_replace('/-\d+$/', '', $node->getSlug()).'-'.$i++);
+            $node->slug = preg_replace('/-\d+$/', '', $node->slug).'-'.$i++;
         }
 
         // Update own path
-        $path = '/'.$node->getSlug();
-        if ($node->getParentId() && $parent = self::find($node->getParentId()) and $parent->getMenu() === $node->getMenu()) {
-            $path = $parent->getPath().$path;
+        $path = '/'.$node->slug;
+        if ($node->parent_id && $parent = self::find($node->parent_id) and $parent->menu === $node->menu) {
+            $path = $parent->path.$path;
         } else {
             // set Parent to 0, if old parent is not found
-            $node->setParentId(0);
+            $node->parent_id = 0;
         }
-        $node->setPath($path);
+        $node->path = $path;
 
         if ($id) {
             // Update children's paths
             foreach (self::where(['parent_id' => $id])->get() as $child) {
-                if (0 !== strpos($child->getPath(), $node->getPath().'/') || $child->getMenu() !== $node->getMenu()) {
-                    $child->setMenu($node->getMenu());
+                if (0 !== strpos($child->path, $node->path.'/') || $child->menu !== $node->menu) {
+                    $child->menu = $node->menu;
                     $child->save();
                 }
             }
         } else {
             // Set priority
-            $node->setPriority(
-                1 + $db->createQueryBuilder()
+            $node->priority = 1 + $db->createQueryBuilder()
                     ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
                     ->from('@system_node')
-                    ->where(['parent_id' => $node->getParentId()])
+                    ->where(['parent_id' => $node->parent_id])
                     ->execute()
-                    ->fetchColumn()
-            );
+                    ->fetchColumn();
         }
     }
 
     /**
      * @Deleting
      */
-    public static function deleting($event, NodeInterface $node)
+    public static function deleting($event, Node $node)
     {
         // Update children's parents
-        foreach (self::where('parent_id = ?', [$node->getId()])->get() as $child) {
-            $child->setParentId($node->getParentId());
+        foreach (self::where('parent_id = ?', [$node->id])->get() as $child) {
+            $child->parent_id = $node->parent_id;
             $child->save();
         }
     }

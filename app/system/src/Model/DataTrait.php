@@ -6,25 +6,8 @@ use Pagekit\Util\Arr;
 
 trait DataTrait
 {
-    /**
-     * Gets data.
-     *
-     * @return array
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * Sets data.
-     *
-     * @param array $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
+    /** @Column(type="json_array") */
+    protected $data;
 
     /**
      * Gets a data value.

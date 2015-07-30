@@ -3,6 +3,7 @@
 namespace Pagekit\User\Model;
 
 use Pagekit\Application\Exception;
+use Pagekit\Auth\UserInterface;
 use Pagekit\System\Model\DataTrait;
 
 /**
@@ -12,44 +13,55 @@ class User implements UserInterface, \JsonSerializable
 {
     use DataTrait, UserModelTrait;
 
+    /**
+     * The blocked status.
+     *
+     * @var int
+     */
+    const STATUS_BLOCKED = 0;
+
+    /**
+     * The active status.
+     *
+     * @var int
+     */
+    const STATUS_ACTIVE = 1;
+
     /** @Column(type="integer") @Id */
-    protected $id;
+    public $id;
 
     /** @Column */
-    protected $username = '';
+    public $username = '';
 
     /** @Column */
-    protected $password = '';
+    public $password = '';
 
     /** @Column */
-    protected $email = '';
+    public $email = '';
 
     /** @Column */
-    protected $url = '';
+    public $url = '';
 
     /** @Column(type="datetime") */
-    protected $registered;
+    public $registered;
 
     /** @Column(type="integer") */
-    protected $status = User::STATUS_ACTIVE;
+    public $status = User::STATUS_ACTIVE;
 
     /** @Column */
-    protected $name;
+    public $name;
 
     /** @Column(type="datetime") */
-    protected $access;
+    public $access;
 
     /** @Column(type="datetime") */
-    protected $login;
+    public $login;
 
     /** @Column */
-    protected $activation;
-
-    /** @Column(type="json_array") */
-    protected $data;
+    public $activation;
 
     /** @Column(type="simple_array") */
-    protected $roles = [];
+    public $roles = [];
 
     /**
      * @var array
@@ -65,34 +77,6 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
-     * Sets the user's id.
-     *
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * Sets the user's password.
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getUsername()
@@ -101,48 +85,11 @@ class User implements UserInterface, \JsonSerializable
     }
 
     /**
-     * Sets the user's username
-     *
-     * @param string $username
+     * {@inheritdoc}
      */
-    public function setUsername($username)
+    public function getPassword()
     {
-        $this->username = $username;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
+        return $this->password;
     }
 
     public function getStatusText()
@@ -160,61 +107,6 @@ class User implements UserInterface, \JsonSerializable
         ];
     }
 
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getRegistered()
-    {
-        return $this->registered;
-    }
-
-    public function setRegistered(\DateTime $registered)
-    {
-        $this->registered = $registered;
-    }
-
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    public function setLogin(\DateTime $login)
-    {
-        $this->login = $login;
-    }
-
-    public function getAccess()
-    {
-        return $this->access;
-    }
-
-    public function setAccess(\DateTime $access)
-    {
-        $this->access = $access;
-    }
-
-    public function getActivation()
-    {
-        return $this->activation;
-    }
-
-    public function setActivation($activation)
-    {
-        $this->activation = $activation;
-    }
-
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    public function setRoles($roles)
-    {
-        $this->roles = $roles;
-    }
-
     public function hasRole($role)
     {
         return in_array($role, $this->roles);
@@ -227,7 +119,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function isAnonymous()
     {
-        return $this->hasRole(RoleInterface::ROLE_ANONYMOUS);
+        return $this->hasRole(Role::ROLE_ANONYMOUS);
     }
 
     /**
@@ -237,7 +129,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function isAuthenticated()
     {
-        return $this->hasRole(RoleInterface::ROLE_AUTHENTICATED);
+        return $this->hasRole(Role::ROLE_AUTHENTICATED);
     }
 
     /**
@@ -247,7 +139,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function isAdministrator()
     {
-        return $this->hasRole(RoleInterface::ROLE_ADMINISTRATOR);
+        return $this->hasRole(Role::ROLE_ADMINISTRATOR);
     }
 
     /**
@@ -257,7 +149,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function isActive()
     {
-        return $this->getStatus() == self::STATUS_ACTIVE;
+        return $this->status == self::STATUS_ACTIVE;
     }
 
     /**
@@ -267,7 +159,7 @@ class User implements UserInterface, \JsonSerializable
      */
     public function isBlocked()
     {
-        return $this->getStatus() == self::STATUS_BLOCKED;
+        return $this->status == self::STATUS_BLOCKED;
     }
 
     /**
@@ -282,7 +174,7 @@ class User implements UserInterface, \JsonSerializable
 
             $this->permissions = [];
             foreach (self::findRoles($this) as $role) {
-                $this->permissions = array_merge($this->permissions, $role->getPermissions());
+                $this->permissions = array_merge($this->permissions, $role->permissions);
             }
 
         }

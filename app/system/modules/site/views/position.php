@@ -2,7 +2,7 @@
 <div class="<?= $widget->get('html_class') ?>">
 
     <?php if (!$widget->get('title_hide')) : ?>
-    <h3><?= $widget->getTitle() ?></h3>
+    <h3><?= $widget->title ?></h3>
     <?php endif ?>
 
     <?= $widget->get('result') ?>

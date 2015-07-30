@@ -30,7 +30,7 @@ class ThemeListener implements EventSubscriberInterface
      */
     public function onWidgetInit($event, $widget)
     {
-        $config  = $this->theme->get("data.widgets.".$widget->getId(), []);
+        $config  = $this->theme->get("data.widgets.".$widget->id, []);
         $default = $this->theme->config("widget", []);
 
         $widget->theme = array_replace($default, $config);
@@ -49,7 +49,7 @@ class ThemeListener implements EventSubscriberInterface
             return;
         }
 
-        $this->theme->options['data']['widgets'][$widget->getId()] = $data['theme'];
+        $this->theme->options['data']['widgets'][$widget->id] = $data['theme'];
         $this->theme->save();
     }
 

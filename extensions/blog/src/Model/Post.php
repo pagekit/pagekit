@@ -60,9 +60,6 @@ class Post implements \JsonSerializable
     /** @Column(type="integer") */
     public $comment_count = 0;
 
-    /** @Column(type="json_array") */
-    public $data;
-
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Model\User", keyFrom="user_id")
      */
@@ -101,7 +98,7 @@ class Post implements \JsonSerializable
         $blog      = App::module('blog');
         $autoclose = $blog->config('comments.autoclose') ? $blog->config('comments.autoclose_days') : 0;
 
-        return $this->getCommentStatus() && (!$autoclose or $this->getDate() >= new \DateTime("-{$autoclose} day"));
+        return $this->comment_status && (!$autoclose or $this->date >= new \DateTime("-{$autoclose} day"));
     }
 
     public function setCommentable($commentable)
@@ -131,7 +128,7 @@ class Post implements \JsonSerializable
         ];
 
         if ($this->user) {
-            $data['author'] = $this->user->getUsername();
+            $data['author'] = $this->user->username;
         }
 
         if ($this->comments) {

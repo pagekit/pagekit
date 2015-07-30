@@ -2,6 +2,8 @@
 
 namespace Pagekit\Site\Event;
 
+use Pagekit\Event\Event;
+use Pagekit\Site\Model\Node;
 use Pagekit\System\Theme;
 use Pagekit\Event\EventSubscriberInterface;
 
@@ -25,12 +27,12 @@ class ThemeListener implements EventSubscriberInterface
     /**
      * Sets the node theme data.
      *
-     * @param \Pagekit\Event\Event $event
-     * @param \Pagekit\Site\Model\NodeInterface $node
+     * @param Event $event
+     * @param Node  $node
      */
     public function onNodeInit($event, $node)
     {
-        $config  = $this->theme->get("data.nodes.".$node->getId(), []);
+        $config  = $this->theme->get("data.nodes.".$node->id, []);
         $default = $this->theme->config("node", []);
 
         $node->theme = array_replace($default, $config);
@@ -39,8 +41,8 @@ class ThemeListener implements EventSubscriberInterface
     /**
      * Saves the node theme data.
      *
-     * @param \Pagekit\Event\Event $event
-     * @param \Pagekit\Site\Model\NodeInterface $node
+     * @param Event $event
+     * @param Node  $node
      * @param array $data
      */
     public function onNodeSaved($event, $node, $data)
@@ -49,7 +51,7 @@ class ThemeListener implements EventSubscriberInterface
             return;
         }
 
-        $this->theme->options['data']['nodes'][$node->getId()] = $data['theme'];
+        $this->theme->options['data']['nodes'][$node->id] = $data['theme'];
         $this->theme->save();
     }
 

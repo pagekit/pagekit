@@ -34,7 +34,7 @@ class RegistrationController
         return [
             '$view' => [
                 'title' => __('User Registration'),
-                'name'  => 'system/user/registration.php'
+                'name' => 'system/user/registration.php'
             ]
         ];
     }
@@ -59,29 +59,30 @@ class RegistrationController
                 throw new Exception(__('Invalid Password.'));
             }
 
-            $user = User::create();
-            $user->setRegistered(new \DateTime);
-            $user->setName(@$data['name']);
-            $user->setUsername(@$data['username']);
-            $user->setEmail(@$data['email']);
-            $user->setPassword(App::get('auth.password')->hash($password));
-            $user->setStatus(User::STATUS_BLOCKED);
+            $user = User::create([
+                'registered' => new \DateTime,
+                'name' => @$data['name'],
+                'username' => @$data['username'],
+                'email' => @$data['email'],
+                'password' => App::get('auth.password')->hash($password),
+                'status' => User::STATUS_BLOCKED
+            ]);
 
             $token = App::get('auth.random')->generateString(32);
             $admin = $this->module->config('registration') == 'approval';
 
             if ($verify = $this->module->config('require_verification')) {
 
-                $user->setActivation($token);
+                $user->activation = $token;
 
             } elseif ($admin) {
 
-                $user->setActivation($token);
+                $user->activation = $token;
                 $user->set('verified', true);
 
             } else {
 
-                $user->setStatus(User::STATUS_ACTIVE);
+                $user->status = User::STATUS_ACTIVE;
 
             }
 
@@ -126,7 +127,7 @@ class RegistrationController
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
 
-            $user->setActivation(App::get('auth.random')->generateString(32));
+            $user->activation = App::get('auth.random')->generateString(32);
             $this->sendApproveMail($user);
 
             App::message()->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
@@ -134,8 +135,8 @@ class RegistrationController
         } else {
 
             $user->set('verified', true);
-            $user->setStatus(User::STATUS_ACTIVE);
-            $user->setActivation('');
+            $user->status = User::STATUS_ACTIVE;
+            $user->activation = '';
             $this->sendWelcomeEmail($user);
 
             if ($admin) {
@@ -155,12 +156,13 @@ class RegistrationController
         try {
 
             $mail = App::mailer()->create();
-            $mail->setTo($user->getEmail())
-                 ->setSubject(__('Welcome to %site%!', ['%site%' => App::module('system/site')->config('title')]))
-                 ->setBody(App::view('system/user:mails/welcome.php', compact('user', 'mail')), 'text/html')
-                 ->send();
+            $mail->setTo($user->email)
+                ->setSubject(__('Welcome to %site%!', ['%site%' => App::module('system/site')->config('title')]))
+                ->setBody(App::view('system/user:mails/welcome.php', compact('user', 'mail')), 'text/html')
+                ->send();
 
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 
     protected function sendVerificationMail($user)
@@ -168,10 +170,10 @@ class RegistrationController
         try {
 
             $mail = App::mailer()->create();
-            $mail->setTo($user->getEmail())
-                 ->setSubject(__('Activate your %site% account.', ['%site%' => App::module('system/site')->config('title')]))
-                 ->setBody(App::view('system/user:mails/verification.php', compact('user', 'mail')), 'text/html')
-                 ->send();
+            $mail->setTo($user->email)
+                ->setSubject(__('Activate your %site% account.', ['%site%' => App::module('system/site')->config('title')]))
+                ->setBody(App::view('system/user:mails/verification.php', compact('user', 'mail')), 'text/html')
+                ->send();
 
         } catch (\Exception $e) {
             throw new Exception(__('Unable to send verification link.'));
@@ -184,10 +186,11 @@ class RegistrationController
 
             $mail = App::mailer()->create();
             $mail->setTo(App::module('mail')->config('from_address'))
-                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::module('system/site')->config('title')]))
-                 ->setBody(App::view('system/user:mails/approve.php', compact('user', 'mail')), 'text/html')
-                 ->send();
+                ->setSubject(__('Approve an account at %site%.', ['%site%' => App::module('system/site')->config('title')]))
+                ->setBody(App::view('system/user:mails/approve.php', compact('user', 'mail')), 'text/html')
+                ->send();
 
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 }

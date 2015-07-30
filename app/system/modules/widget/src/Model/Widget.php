@@ -9,7 +9,7 @@ use Pagekit\User\Model\AccessTrait;
 /**
  * @Entity(tableClass="@system_widget")
  */
-class Widget implements WidgetInterface
+class Widget
 {
     use AccessTrait, DataTrait, WidgetModelTrait;
 
@@ -17,70 +17,17 @@ class Widget implements WidgetInterface
     public $position = '';
 
     /** @Column(type="integer") @Id */
-    protected $id;
+    public $id;
 
     /** @Column */
-    protected $title = '';
+    public $title = '';
 
     /** @Column(type="string") */
-    protected $type;
+    public $type;
 
     /** @Column(type="integer") */
-    protected $status = 1;
+    public $status = 1;
 
     /** @Column(name="nodes", type="simple_array") */
-    protected $nodes = [];
-
-    /** @Column(type="json_array") */
-    protected $data = [];
-
-    public function getId()
-    {
-        return (int) $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function setType($type)
-    {
-        $this->type = $type;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getNodes()
-    {
-        return (array) $this->nodes;
-    }
-
-    public function setNodes($nodes)
-    {
-        $this->nodes = $nodes;
-    }
+    public $nodes = [];
 }

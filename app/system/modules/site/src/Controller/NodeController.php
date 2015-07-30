@@ -43,21 +43,20 @@ class NodeController
         if (is_numeric($id)) {
             $node = Node::find($id);
         } else {
-            $node = Node::create();
-            $node->setType($id);
+            $node = Node::create(['type' => $id]);
 
             if ($menu && !App::menu($menu)) {
                 throw new NotFoundException(__('Menu not found.'));
             }
 
-            $node->setMenu($menu);
+            $node->menu = $menu;
         }
 
         if (!$node) {
             throw new NotFoundException(__('Node not found.'));
         }
 
-        if (!$type = $site->getType($node->getType())) {
+        if (!$type = $site->getType($node->type)) {
             throw new NotFoundException(__('Type not found.'));
         }
 
@@ -70,7 +69,6 @@ class NodeController
                 'node' => $node,
                 'type' => $type,
                 'roles' => array_values(Role::findAll())
-
             ]
         ];
     }

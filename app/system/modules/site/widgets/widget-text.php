@@ -9,7 +9,7 @@ return [
     'type' => 'widget',
 
     'render' => function ($widget) use ($app) {
-        return $app['content']->applyPlugins($widget->get('content'), ['widget' => $widget, 'markdown' => $widget->get('markdown')]);
+        return $app['view']->render('system/site/widget-text.php', compact('widget'));
     },
 
     'events' => [

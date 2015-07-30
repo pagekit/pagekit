@@ -23,8 +23,8 @@ class ProfileController
             ],
             '$data' => [
                 'user' => [
-                    'name' => $user->getName(),
-                    'email' => $user->getEmail()
+                    'name' => $user->name,
+                    'email' => $user->email
                 ]
             ]
         ];
@@ -43,7 +43,7 @@ class ProfileController
 
         try {
 
-            $user = User::find($user->getId());
+            $user = User::find($user->id);
 
             if ($password = @$data['password_new']) {
 
@@ -55,15 +55,15 @@ class ProfileController
                     throw new Exception(__('Invalid Password.'));
                 }
 
-                $user->setPassword(App::get('auth.password')->hash($password));
+                $user->password = App::get('auth.password')->hash($password);
             }
 
-            if (@$data['email'] != $user->getEmail()) {
+            if (@$data['email'] != $user->email) {
                 $user->set('verified', false);
             }
 
-            $user->setName(@$data['name']);
-            $user->setEmail(@$data['email']);
+            $user->name = @$data['name'];
+            $user->email = @$data['email'];
 
             $user->validate();
             $user->save();

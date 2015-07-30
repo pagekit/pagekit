@@ -17,11 +17,11 @@ class PageController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        $page->setContent(App::content()->applyPlugins($page->getContent(), ['page' => $page, 'markdown' => $page->get('markdown')]));
+        $page->content = App::content()->applyPlugins($page->content, ['page' => $page, 'markdown' => $page->get('markdown')]);
 
         return [
             '$view' => [
-                'title' => __($page->getTitle()),
+                'title' => __($page->title),
                 'name'  => 'system/site:views/page.php'
             ],
             'page' => $page,
