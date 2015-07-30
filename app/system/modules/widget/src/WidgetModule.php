@@ -10,6 +10,9 @@ class WidgetModule extends Module
 {
     protected $types = [];
 
+    /**
+     * {@inheritdoc}
+     */
     public function main(App $app)
     {
         $app['widget'] = $this;

@@ -3,6 +3,7 @@
 use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
+use Pagekit\Site\Model\Node;
 
 return [
 
@@ -126,11 +127,21 @@ return [
     'events' => [
 
         'boot' => function ($event, $app) {
+
             $app->subscribe(
                 new MaintenanceListener(),
                 new NodesListener(),
                 new PageListener()
             );
+
+            Node::setProperty('theme', function () use ($app) {
+
+                $config  = $app['theme']->get("data.nodes.".$this->id, []);
+                $default = $app['theme']->get("node", []);
+
+                return array_replace_recursive($default, $config);
+            }, true);
+
         },
 
         'site' => function () use ($app) {
@@ -169,6 +180,11 @@ return [
             $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
             $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
             $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
+        },
+
+        'model.node.saved' => function ($event, $node) use ($app) {
+            $app['theme']->options['data']['nodes'][$node->id] = $node->theme;
+            $app['theme']->save();
         }
 
     ]

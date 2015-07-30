@@ -1,11 +1,5 @@
 <?php
 
-use Pagekit\Site\Model\Node;
-use Pagekit\Widget\Model\Widget;
-
-/**
- * Configuration
- */
 return [
 
     'name' => 'one',
@@ -13,7 +7,7 @@ return [
     'type' => 'theme',
 
     /**
-     * Define resources
+     * Resources
      */
     'resources' => [
 
@@ -23,7 +17,7 @@ return [
     ],
 
     /**
-     * Define menu positions
+     * Menu positions
      */
     'menus' => [
 
@@ -33,7 +27,7 @@ return [
     ],
 
     /**
-     * Define widget positions
+     * Widget positions
      */
     'positions' => [
 
@@ -46,67 +40,45 @@ return [
 
     ],
 
+    /**
+     * Node defaults
+     */
+    'node' => [
+
+        'alignment' => ''
+
+    ],
+
+    /**
+     * Widget defaults
+     */
+    'widget' => [
+
+        'panel' => '',
+        'title_size' => 'uk-panel-title',
+        'alignment' => ''
+
+    ],
+
+    /**
+     * Settings url
+     */
     'settings' => '@site/settings#site-theme',
 
     /**
-     * Define settings
+     * Configuration defaults
      */
     'config' => [
 
         'sidebar-first' => false,
-        'hero-image' => '',
-
-        'node' => [
-
-            'alignment' => ''
-
-        ],
-
-        'widget' => [
-
-            'panel' => '',
-            'title_size' => 'uk-panel-title',
-            'alignment' => ''
-
-        ]
+        'hero-image' => ''
 
     ],
 
+    /**
+     * Events
+     */
     'events' => [
-
-        'boot' => function ($event, $app) {
-
-            $self = $this;
-
-            Node::setProperty('theme', function () use ($self) {
-
-                $config  = $self->get("data.nodes.".$this->id, []);
-                $default = $self->config("node", []);
-
-                return array_replace($default, $config);
-
-            }, function ($value) use ($self) {
-
-                $self->options['data']['nodes'][$this->id] = $value;
-                $self->save();
-
-            });
-
-            Widget::setProperty('theme', function () use ($self) {
-
-                $config  = $self->get("data.widgets.".$this->id, []);
-                $default = $self->config("widget", []);
-
-                return array_replace($default, $config);
-
-            }, function ($value) use ($self) {
-
-                $self->options['data']['widgets'][$this->id] = $value;
-                $self->save();
-
-            });
-
-        },
 
         'view.system/site/admin/settings' => function ($event, $view) {
             $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');

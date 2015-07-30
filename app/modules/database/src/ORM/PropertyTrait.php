@@ -16,7 +16,7 @@ trait PropertyTrait
      */
     public function __get($name)
     {
-        if (isset(static::$properties[$name]['get'])) {
+        if (isset(static::$properties[$name])) {
 
             $get = static::$properties[$name]['get'];
 
@@ -27,6 +27,7 @@ trait PropertyTrait
             return call_user_func($get);
 
         } else {
+
             trigger_error(sprintf('Undefined property: %s::$%s', __CLASS__, $name), E_USER_NOTICE);
         }
     }
@@ -39,9 +40,9 @@ trait PropertyTrait
      */
     public function __set($name, $value)
     {
-        if (isset(static::$properties[$name]['set'])) {
+        $set = isset(static::$properties[$name]) ? static::$properties[$name]['set'] : true;
 
-            $set = static::$properties[$name]['set'];
+        if (is_callable($set)) {
 
             if ($set instanceof \Closure) {
                 $set = $set->bindTo($this, $this);
@@ -49,7 +50,8 @@ trait PropertyTrait
 
             call_user_func($set, $value);
 
-        } else {
+        } elseif ($set === true) {
+
             $this->$name = $value;
         }
     }
@@ -65,9 +67,22 @@ trait PropertyTrait
     }
 
     /**
+     * Sets a object property.
+     *
+     * @param string $name
+     * @param callable $get
+     * @param callable|bool $set
+     */
+    public static function setProperty($name, $get, $set = null)
+    {
+        static::$properties[$name] = compact('get', 'set');
+    }
+
+    /**
      * Gets all object properties.
      *
-     * @param mixed $object
+     * @param  mixed $object
+     * @return array
      */
     public static function getProperties($object)
     {
@@ -78,17 +93,5 @@ trait PropertyTrait
         }
 
         return $properties;
-    }
-
-    /**
-     * Sets a object property.
-     *
-     * @param string   $name
-     * @param callable $get
-     * @param callable $set
-     */
-    public static function setProperty($name, callable $get, callable $set = null)
-    {
-        static::$properties[$name] = compact('get', 'set');
     }
 }

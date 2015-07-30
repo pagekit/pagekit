@@ -68,21 +68,35 @@ return [
 
     'events' => [
 
+        'boot' => function ($event, $app) {
+
+            Widget::setProperty('position', function () use ($app) {
+                return $app['theme']->findPosition($this->id);
+            }, true);
+
+            Widget::setProperty('theme', function () use ($app) {
+
+                $config  = $app['theme']->get("data.widgets.".$this->id, []);
+                $default = $app['theme']->get("widget", []);
+
+                return array_replace_recursive($default, $config);
+            }, true);
+        },
+
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
         },
 
-        'model.widget.init' => function ($event, $widget) use ($app) {
-            $widget->position = $app['theme']->findPosition($widget->id);
-        },
-
         'model.widget.saved' => function ($event, $widget) use ($app) {
             $app['theme']->assignPosition($widget->position, $widget->id);
+            $app['theme']->options['data']['widgets'][$widget->id] = $widget->theme;
+            $app['theme']->save();
         },
 
         'model.role.deleted' => function ($event, $role) {
             Widget::removeRole($role);
         }
+
     ]
 
 ];
