@@ -5,9 +5,7 @@
         <div class="uk-form-row">
             <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text">
-                <ul class="uk-list uk-margin-top-remove">
-                    <li>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</li>
-                </ul>
+                <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
                 <ul class="uk-list uk-margin-top-remove" v-repeat="menu: menus" v-show="menu.getNodes().length">
                     <li class="pk-list-header">{{ menu.label }}</li>
                     <node v-repeat="node: menu.getNodes()"></node>
