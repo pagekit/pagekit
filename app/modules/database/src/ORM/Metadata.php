@@ -62,11 +62,6 @@ class Metadata
     protected $reflClass;
 
     /**
-     * @var \ReflectionProperty[]
-     */
-    protected $reflFields;
-
-    /**
      * @var object
      */
     protected $prototype;
@@ -206,15 +201,14 @@ class Metadata
             $name = $this->fieldNames[$name];
         }
 
-        if (!isset($this->reflFields[$name])) {
+        if (!property_exists($entity, $name) && !isset($entity->$name)) {
             return null;
         }
 
-        $value = $this->reflFields[$name]->getValue($entity);
+        $value = $entity->$name;
 
         if ($convert) {
-            $platform = $this->manager->getConnection()->getDatabasePlatform();
-            $value = Type::getType($this->fields[$name]['type'])->convertToDatabaseValue($value, $platform);
+            $value = Type::getType($this->fields[$name]['type'])->convertToDatabaseValue($value, $this->manager->getConnection()->getDatabasePlatform());
         }
 
         return $value;
@@ -235,20 +229,23 @@ class Metadata
             $name = $this->fieldNames[$name];
         }
 
-        if ($convert) {
-            $platform = $this->manager->getConnection()->getDatabasePlatform();
-            $value = Type::getType($this->fields[$name]['type'])->convertToPHPValue($value, $platform);
+        if (!property_exists($entity, $name) && !isset($entity->$name)) {
+            return;
         }
 
-        $this->reflFields[$name]->setValue($entity, $value);
+        if ($convert) {
+            $value = Type::getType($this->fields[$name]['type'])->convertToPHPValue($value, $this->manager->getConnection()->getDatabasePlatform());
+        }
+
+        $entity->$name = $value;
     }
 
     /**
      * Gets all field values. The column parameter determines if the array keys are column names.
      *
-     * @param  mixed  $entity
-     * @param  bool   $column
-     * @param  bool   $convert
+     * @param  mixed $entity
+     * @param  bool  $column
+     * @param  bool  $convert
      * @return array
      */
     public function getValues($entity, $column = false, $convert = false)
@@ -256,7 +253,7 @@ class Metadata
         $data = [];
 
         foreach ($this->fields as $name => $field) {
-            $key = $column ? $field['column'] : $name;
+            $key        = $column ? $field['column'] : $name;
             $data[$key] = $this->getValue($entity, $name, false, $convert);
         }
 
@@ -266,20 +263,16 @@ class Metadata
     /**
      * Sets multiple field values. The column parameter determines if the array keys are column names.
      *
-     * @param  mixed  $entity
-     * @param  array  $values
-     * @param  bool   $column
-     * @param  bool   $convert
+     * @param  mixed $entity
+     * @param  array $values
+     * @param  bool  $column
+     * @param  bool  $convert
      * @return array
      */
     public function setValues($entity, array $values, $column = false, $convert = false)
     {
-        $fields = $column ? $this->fieldNames : $this->fields;
-
         foreach ($values as $name => $value) {
-            if (isset($fields[$name])) {
-                $this->setValue($entity, $name, $value, $column, $convert);
-            }
+            $this->setValue($entity, $name, $value, $column, $convert);
         }
     }
 
@@ -325,13 +318,13 @@ class Metadata
     public function getConfig()
     {
         return [
-            'class'              => $this->class,
-            'eventPrefix'        => $this->eventPrefix,
-            'events'             => $this->events,
-            'fields'             => $this->fields,
+            'class' => $this->class,
+            'eventPrefix' => $this->eventPrefix,
+            'events' => $this->events,
+            'fields' => $this->fields,
             'isMappedSuperclass' => $this->isMappedSuperclass,
-            'relations'          => $this->relations,
-            'table'              => $this->table
+            'relations' => $this->relations,
+            'table' => $this->table
         ];
     }
 
@@ -345,16 +338,12 @@ class Metadata
         if (isset($config['fields'])) {
             foreach ($config['fields'] as $name => $field) {
                 $this->validateField($config['fields'][$name]);
-                $this->reflFields[$name] = new \ReflectionProperty($this->class, $name);
-                $this->reflFields[$name]->setAccessible(true);
             }
         }
 
         if (isset($config['relations'])) {
             foreach ($config['relations'] as $name => $relation) {
                 $this->validateRelation($config['relations'][$name]);
-                $this->reflFields[$name] = new \ReflectionProperty($this->class, $name);
-                $this->reflFields[$name]->setAccessible(true);
             }
         }
 
@@ -416,7 +405,7 @@ class Metadata
             $namespace = $this->getReflectionClass()->getNamespaceName();
 
             if (strlen($namespace) > 0 && strpos($relation['targetEntity'], '\\') === false) {
-                $relation['targetEntity'] = $namespace . '\\' . $relation['targetEntity'];
+                $relation['targetEntity'] = $namespace.'\\'.$relation['targetEntity'];
             }
 
             $relation['targetEntity'] = ltrim($relation['targetEntity'], '\\');
