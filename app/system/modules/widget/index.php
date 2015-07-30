@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\Widget\Event\ThemeListener;
 use Pagekit\Widget\Model\Widget;
 
 return [
@@ -68,12 +67,6 @@ return [
     ],
 
     'events' => [
-
-        'boot' => function ($event, $app) {
-            if ($app['theme']) {
-                $app->subscribe(new ThemeListener($app['theme']));
-            }
-        },
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');

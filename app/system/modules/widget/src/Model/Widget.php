@@ -2,7 +2,6 @@
 
 namespace Pagekit\Widget\Model;
 
-use Pagekit\Application as App;
 use Pagekit\System\Model\DataTrait;
 use Pagekit\User\Model\AccessTrait;
 
@@ -12,9 +11,6 @@ use Pagekit\User\Model\AccessTrait;
 class Widget
 {
     use AccessTrait, DataTrait, WidgetModelTrait;
-
-    public $theme = [];
-    public $position = '';
 
     /** @Column(type="integer") @Id */
     public $id;

@@ -1,5 +1,7 @@
 <?php
 
+use Pagekit\Widget\Model\Widget;
+
 /**
  * Configuration
  */
@@ -64,6 +66,26 @@ return [
     ],
 
     'events' => [
+
+        'boot' => function ($event, $app) {
+
+            $self = $this;
+
+            Widget::property('theme', function () use ($self) {
+
+                $config  = $self->get("data.widgets.".$this->id, []);
+                $default = $self->config("widget", []);
+
+                return array_replace($default, $config);
+
+            }, function ($value) use ($self) {
+
+                $self->options['data']['widgets'][$this->id] = $value;
+                $self->save();
+
+            });
+
+        },
 
         'view.system/site/admin/settings' => function ($event, $view) {
             $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');
