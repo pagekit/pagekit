@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="uk-height-1-1">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,20 +10,16 @@
         <?php $view->style('theme', 'system/theme:css/theme.css') ?>
         <?php $view->script('uikit') ?>
     </head>
-    <body class="uk-height-1-1">
+    <body>
 
-        <div class="tm-height-4-5 uk-vertical-align uk-text-center">
-            <div class="uk-vertical-align-middle">
+        <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
+            <div class="tm-container">
 
-                <div class="tm-container">
+                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large-black.svg') ?>" width="120" height="120" alt="Pagekit">
 
-                    <img class="uk-margin-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large.svg') ?>" width="120" height="120" alt="Pagekit">
-
-                    <div class="uk-panel uk-panel-box">
-                        <h1><?= __('Maintenance') ?></h1>
-                        <p><?= $message ?></p>
-                    </div>
-
+                <div class="uk-panel uk-panel-box">
+                    <h1><?= __('Maintenance') ?></h1>
+                    <p><?= $message ?></p>
                 </div>
 
             </div>
