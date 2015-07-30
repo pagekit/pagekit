@@ -77,7 +77,7 @@ return [
 
             $self = $this;
 
-            Widget::property('theme', function () use ($self) {
+            Widget::setProperty('theme', function () use ($self) {
 
                 $config  = $self->get("data.widgets.".$this->id, []);
                 $default = $self->config("widget", []);

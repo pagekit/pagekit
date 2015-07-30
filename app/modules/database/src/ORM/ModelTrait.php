@@ -126,7 +126,7 @@ trait ModelTrait
     {
         $metadata = static::getMetadata();
 
-        foreach (get_object_vars($this) as $name => $value) {
+        foreach (static::getProperties($this) as $name => $value) {
 
             switch ($metadata->getField($name, 'type')) {
                 case 'json_array':

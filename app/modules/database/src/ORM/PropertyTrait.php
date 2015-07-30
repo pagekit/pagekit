@@ -10,7 +10,7 @@ trait PropertyTrait
     protected static $properties = [];
 
     /**
-     * Gets a dynamic property.
+     * Gets a object property.
      *
      * @param string $name
      */
@@ -32,7 +32,7 @@ trait PropertyTrait
     }
 
     /**
-     * Sets a dynamic property.
+     * Sets a object property.
      *
      * @param string $name
      * @param mixed  $value
@@ -55,7 +55,7 @@ trait PropertyTrait
     }
 
     /**
-     * Checks for a dynamic property.
+     * Checks for a object property.
      *
      * @param string $name
      */
@@ -65,13 +65,29 @@ trait PropertyTrait
     }
 
     /**
-     * Sets a dynamic property.
+     * Gets all object properties.
+     *
+     * @param mixed $object
+     */
+    public static function getProperties($object)
+    {
+        $properties = get_object_vars($object);
+
+        foreach (static::$properties as $name => $value) {
+            $properties[$name] = $object->$name;
+        }
+
+        return $properties;
+    }
+
+    /**
+     * Sets a object property.
      *
      * @param string   $name
      * @param callable $get
      * @param callable $set
      */
-    public static function property($name, callable $get, callable $set = null)
+    public static function setProperty($name, callable $get, callable $set = null)
     {
         static::$properties[$name] = compact('get', 'set');
     }

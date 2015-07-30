@@ -8,7 +8,7 @@ use Pagekit\User\Model\AccessTrait;
 /**
  * @Entity(tableClass="@system_widget")
  */
-class Widget
+class Widget implements \JsonSerializable
 {
     use AccessTrait, DataTrait, WidgetModelTrait;
 
