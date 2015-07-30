@@ -4,16 +4,18 @@ namespace Pagekit\Updater;
 
 use Composer\Console\Application as ComposerApplication;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Application
 {
     const packagesFile = '/packages.json';
 
     /**
-     * @param $config
-     * @param $output
+     *
+     * @param array $config
+     * @param OutputInterface $output
      */
-    public function __construct($config, $output)
+    public function __construct($config, OutputInterface $output)
     {
         $this->output = $output;
         $this->pagekitConfig = $config;
@@ -32,7 +34,7 @@ class Application
     }
 
     /**
-     *  $arguments
+     * @param array $arguments
      */
     public function run($arguments)
     {
@@ -54,8 +56,8 @@ class Application
     /**
      * Parses version constraints from package names.
      *
-     * @param $arguments
-     * @return mixed
+     * @param array $arguments
+     * @return array
      */
     protected function parsePackages($arguments)
     {
@@ -136,7 +138,7 @@ class Application
     protected function handleUpload($package)
     {
         if (!($path = realpath($package['name']))) {
-            throw new \Exception('Can not find package');
+            throw new \Exception(sprintf('Can not find package "%s"', $package['name']));
         }
 
         if (!($packageConfig = file_get_contents($path . '/composer.json'))) {

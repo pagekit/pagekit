@@ -13,7 +13,7 @@ if (PHP_SAPI === 'cli') {
     $output = new ConsoleOutput();
 
     // parse CLI input
-    $opts = getopt('p:v:r::', ['packages:', 'version:', 'remove::']);
+    $opts = getopt('p:r::', ['packages:', 'remove::']);
 
     if (isset($opts['p']) || isset($opts['packages'])) {
         $packages = explode(' ', isset($opts['p']) ? $opts['p'] : $opts['package']);
@@ -38,5 +38,9 @@ if (PHP_SAPI === 'cli') {
 
 $config = require(__DIR__ . '/../config.php');
 
-$updater = new Application($config, $output);
-$updater->run(compact('packages', 'remove'));
+try {
+    $updater = new Application($config, $output);
+    $updater->run(compact('packages', 'remove'));
+} catch (Exception $e) {
+    $output->writeln($e->getMessage());
+}

@@ -13,8 +13,9 @@
 !/vendor/assets/marked
 !/vendor/assets/vue-validator
 /config.php
-*composer.phar
+/**/composer.phar
 /composer.lock
+/packages.json
 /pagekit*.zip
 node_modules
 .DS_Store
