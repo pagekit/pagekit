@@ -3,9 +3,9 @@
 namespace Pagekit\System\Controller;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Application as App;
 use Pagekit\Filesystem\Archive\Zip;
-use Pagekit\System\Package\PackageInstaller;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -13,14 +13,6 @@ use Pagekit\System\Package\PackageInstaller;
 class PackageController
 {
     protected $installer;
-
-    public function __construct()
-    {
-        $client = new Client;
-        $client->setDefaultOption('query/api_key', App::module('system/package')->config('api.key'));
-
-        $this->installer = new PackageInstaller($client);
-    }
 
     public function themesAction()
     {
@@ -65,7 +57,7 @@ class PackageController
                 $package->set('enabled', true);
                 $package->set('settings', $settings);
                 $package->set('config', $module->config);
-                $package->set('permissions', (bool) $module->get('permissions'));
+                $package->set('permissions', (bool)$module->get('permissions'));
             }
         }
 
@@ -138,9 +130,9 @@ class PackageController
     }
 
     /**
-     * @Request({"type"}, csrf=true)
+     * @Request(csrf=true)
      */
-    public function uploadAction($type = null)
+    public function uploadAction()
     {
         $temp = App::get('path.temp');
         $file = App::request()->files->get('file');
@@ -151,16 +143,12 @@ class PackageController
 
         $package = $this->loadPackage($upload = $file->getPathname());
 
-        if ($type != $package->getType()) {
-            App::abort(400, __('Invalid package type.'));
-        }
-
-        Zip::extract($upload, "{$temp}/".($path = sha1($upload)));
+        Zip::extract($upload, "{$temp}/" . ($path = sha1($upload)));
 
         $extra = $package->get('extra');
 
         if (isset($extra['image'])) {
-            $extra['image'] = App::url()->getStatic("{$temp}/$path/".$extra['image']);
+            $extra['image'] = App::url()->getStatic("{$temp}/$path/" . $extra['image']);
         } else {
             $extra['image'] = App::url('app/system/assets/images/placeholder-icon.svg');
         }
@@ -179,32 +167,22 @@ class PackageController
      */
     public function installAction($package = null, $path = '')
     {
-        $temp = App::get('path.temp');
-
         try {
+            $package = App::package()->load($package);
+            $name = $package->getName();
 
-            if ($package = App::package()->load($package)) {
-                $path = sha1(json_encode($package));
-                $this->installer->download($package, "{$temp}/{$path}");
-            }
-
-            if (!$path) {
-                throw new \Exception(__('Path not found.'));
-            }
-
-            $package = $this->loadPackage($path = "{$temp}/{$path}");
-            $name    = $package->getName();
-
-            if ($enabled = (bool) App::module($package->get('module'))) {
+            if ($enabled = (bool)App::module($package->get('module'))) {
                 $this->disableAction($name);
             }
 
-            if ($package->get('type') == 'pagekit-extension') {
-                $this->installer->install($package, App::get('path.extensions'));
-            }
+            $client = new Client;
+            $res = $client->get(App::url('app/updater', [
+                'p' => sprintf('%s:%s', $name, $package->get('version')['version'])
+            ], true));
+            $res = json_decode($res->getBody());
 
-            if ($package->get('type') == 'pagekit-theme') {
-                $this->installer->install($package, App::get('path.themes'));
+            if ($res->status !== 'success') {
+                throw new \Exception(__($res->message));
             }
 
             App::module('system/cache')->clearCache();
@@ -213,12 +191,11 @@ class PackageController
                 $this->enableAction($name);
             }
 
+        } catch (BadResponseException $e) {
+            $data = json_decode($e->getResponse()->getBody(true), true);
+            $error = sprintf('Error: %s', $data['error']);
         } catch (\Exception $e) {
             $error = $e->getMessage();
-        }
-
-        if (strpos($path, $temp) === 0 && file_exists($path)) {
-            App::file()->delete($path);
         }
 
         if (isset($error)) {
@@ -233,26 +210,44 @@ class PackageController
      */
     public function uninstallAction($name)
     {
-        if (!$package = App::package($name)) {
-            App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
+        try {
+
+            if (!$package = App::package($name)) {
+                throw new \Exception(__('Unable to find "%name%".', ['%name%' => $name]));
+            }
+
+            if (!App::module($package->get('module'))) {
+                App::module()->load($package->get('module'));
+            }
+
+            if (!$module = App::module($package->get('module'))) {
+                throw new \Exception(__('Unable to uninstall "%name%".', ['%name%' => $package->get('title')]));
+            }
+
+            $this->disableAction($name);
+
+            App::trigger('uninstall', [$module]);
+            App::trigger("uninstall.{$module->name}", [$module]);
+
+            $client = new Client;
+            $res = $client->get(App::url('app/updater', ['p' => $name, 'r' => true], true));
+            $res = json_decode($res->getBody());
+
+            if ($res->status !== 'success') {
+                throw new \Exception(__($res->message));
+            }
+
+            App::module('system/cache')->clearCache();
+        } catch (BadResponseException $e) {
+            $data = json_decode($e->getResponse()->getBody(true), true);
+            $error = sprintf('Error: %s', $data['error']);
+        } catch (\Exception $e) {
+            $error = $e->getMessage();
         }
 
-        if (!App::module($package->get('module'))) {
-            App::module()->load($package->get('module'));
+        if (isset($error)) {
+            App::abort(400, $error);
         }
-
-        if (!$module = App::module($package->get('module'))) {
-            App::abort(400, __('Unable to uninstall "%name%".', ['%name%' => $package->get('title')]));
-        }
-
-        $this->disableAction($name);
-
-        App::trigger('uninstall', [$module]);
-        App::trigger("uninstall.{$module->name}", [$module]);
-
-        $this->installer->uninstall($package);
-
-        App::module('system/cache')->clearCache();
 
         return ['message' => 'success'];
     }
@@ -263,14 +258,14 @@ class PackageController
 
             if (is_dir($file)) {
 
-                $json = realpath("$file/theme.json") ?: realpath("$file/extension.json");
+                $json = realpath("$file/composer.json");
 
             } elseif (is_file($file)) {
 
                 $zip = new \ZipArchive;
 
                 if ($zip->open($file) === true) {
-                    $json = $zip->getFromName('theme.json') ?: $zip->getFromName('extension.json');
+                    $json = $zip->getFromName('composer.json');
                     $zip->close();
                 }
             }
@@ -304,7 +299,7 @@ class PackageController
             $message = __('Unable to activate "%name%".<br>A fatal error occured.', ['%name%' => $name]);
 
             if (App::debug()) {
-                $message .= '<br><br>'.$exception->getMessage();
+                $message .= '<br><br>' . $exception->getMessage();
             }
 
             App::response()->json($message, 500)->send();

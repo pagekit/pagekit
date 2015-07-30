@@ -1,15 +1,15 @@
 <?php
 
-
 require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
 require 'src/Application.php';
 
 use Pagekit\Updater\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\Console\Output\BufferedOutput;
+
+$error = false;
 
 if (PHP_SAPI === 'cli') {
-
     $output = new ConsoleOutput();
 
     // parse CLI input
@@ -21,10 +21,8 @@ if (PHP_SAPI === 'cli') {
     if (isset($opts['r']) || isset($opts['remove'])) {
         $remove = isset($opts['r']) ?: isset($opts['remove']);
     }
-
 } else {
-
-    $output = new StreamOutput(fopen('php://output', 'w'));
+    $output = new BufferedOutput();
 
     // parse request parameters
     if (isset($_GET['packages'])) {
@@ -34,6 +32,12 @@ if (PHP_SAPI === 'cli') {
         $remove = isset($_GET['remove']);
     }
 
+    register_shutdown_function(function () use ($output, &$error) {
+        echo json_encode([
+            'status' => $error ? 'failure' : 'success',
+            'message' => $output->fetch()
+        ]);
+    });
 }
 
 $config = require(__DIR__ . '/../config.php');
@@ -42,5 +46,6 @@ try {
     $updater = new Application($config, $output);
     $updater->run(compact('packages', 'remove'));
 } catch (Exception $e) {
+    $error = true;
     $output->writeln($e->getMessage());
 }
