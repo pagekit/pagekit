@@ -34,7 +34,9 @@
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-                    <h2 class="uk-margin-remove">{{ position ? position.label : 'All' | trans }}</h2>
+                    <h2 class="uk-margin-remove" v-show="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
+                    <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
+
 
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
@@ -77,17 +79,18 @@
             <div class="uk-overflow-container">
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length, pk-table-fake-border: emptyafterfilter">
+                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: (!pos.widgets.length || emptyafterfilter)">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                         <div class="pk-table-width-100">
-                            <div class="uk-form-select pk-filter" data-uk-form-select>
-                                <span>{{ 'Pages' | trans }}</span>
+                            <div class="uk-form-select pk-filter">
+                                <span v-show="!config.filter.node">{{ 'Pages' | trans }}</span>
+                                <span v-show="config.filter.node">{{ getNodeTitle(config.filter.node) }}</span>
                                 <select v-model="config.filter.node" options="nodes"></select>
                             </div>
                         </div>
-                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
-                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     </div>
 
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length">{{ 'No widgets found.' | trans }}</h3>
@@ -101,15 +104,15 @@
                                     <a href="{{ $url('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
                                     <span v-if="!type">{{ widget.title }}</span>
                                 </div>
-                                <div class="pk-table-width-100">
-                                    {{ getSingleNodeTitle(widget) | trans }}
-                                </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
                                         <a v-class="pk-icon-circle-danger: !widget.status, pk-icon-circle-success: widget.status" v-on="click: toggleStatus(widget)"></a>
                                     </td>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.label || type.name }}</div>
+                                <div class="pk-table-width-100">
+                                    {{ getSingleNodeTitle(widget) | trans }}
+                                </div>
                             </div>
 
                         </li>
