@@ -24,7 +24,8 @@ class PageController
                 'title' => __($page->getTitle()),
                 'name'  => 'system/site:views/page.php'
             ],
-            'page' => $page
+            'page' => $page,
+            'node' => App::node()
         ];
     }
 }
