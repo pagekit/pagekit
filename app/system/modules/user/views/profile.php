@@ -32,7 +32,7 @@
         <div class="uk-form-controls">
             <div class="uk-form-password">
                 <input id="form-password-old" class="uk-form-width-large" type="password" value="" v-model="user.password_old">
-                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
+                <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
             </div>
         </div>
     </div>
@@ -42,13 +42,13 @@
         <div class="uk-form-controls">
             <div class="uk-form-password">
                 <input id="form-password-new" class="uk-form-width-large" type="password" value="" v-model="user.password_new">
-                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
+                <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
             </div>
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <p class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
-    </div>
+    </p>
 
 </form>

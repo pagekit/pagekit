@@ -35,14 +35,14 @@
         <div class="uk-form-controls">
             <div class="uk-form-password">
                 <input id="form-password" class="uk-form-width-large" type="password" name="password" v-model="user.password" v-valid="required">
-                <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
+                <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
                 <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
             </div>
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <p class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit"><?= __('Submit') ?></button>
-    </div>
+    </p>
 
 </form>
