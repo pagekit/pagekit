@@ -12,6 +12,7 @@ module.exports = {
 
         UIkit.init();
         this.load();
+
     },
 
     computed: {
@@ -164,6 +165,11 @@ module.exports = {
         getSingleNodeTitle: function(widget) {
 
             return !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'selected');
+        },
+
+        getNodeTitle: function(id) {
+
+            return this.indexedNodes[id] ? this.indexedNodes[id][0].title : '';
         }
 
     },
