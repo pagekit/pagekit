@@ -55,6 +55,12 @@ return [
         'sidebar-first' => false,
         'hero-image' => '',
 
+        'node' => [
+
+            'alignment' => ''
+
+        ],
+
         'widget' => [
 
             'panel' => '',
