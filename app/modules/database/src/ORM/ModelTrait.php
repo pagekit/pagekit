@@ -116,13 +116,13 @@ trait ModelTrait
     }
 
     /**
-     * Gets array for JSON serialize.
+     * Gets model data as array.
      *
      * @param  array $data
      * @param  array $ignore
      * @return array
      */
-    public function toJson(array $data = [], array $ignore = [])
+    public function toArray(array $data = [], array $ignore = [])
     {
         $metadata = static::getMetadata();
 
@@ -148,6 +148,6 @@ trait ModelTrait
      */
     public function jsonSerialize()
     {
-        return $this->toJson();
+        return $this->toArray();
     }
 }

@@ -117,6 +117,6 @@ class Role implements \JsonSerializable
             'isAdministrator' => $this->isAdministrator()
         ];
 
-        return $this->toJson($data);
+        return $this->toArray($data);
     }
 }

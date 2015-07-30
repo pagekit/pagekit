@@ -261,6 +261,6 @@ class User implements UserInterface, \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return $this->toJson([], ['password', 'activation']);
+        return $this->toArray([], ['password', 'activation']);
     }
 }

@@ -137,6 +137,6 @@ class Post implements \JsonSerializable
             }));
         }
 
-        return $this->toJson($data);
+        return $this->toArray($data);
     }
 }
