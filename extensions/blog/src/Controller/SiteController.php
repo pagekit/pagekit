@@ -46,7 +46,7 @@ class SiteController
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
 
         foreach ($posts = $query->get() as $post) {
-            $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]));
+            $post->content = App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]);
         }
 
         return [
@@ -80,17 +80,18 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        $post->setContent(App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown')]));
+        $post->content = App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown')]);
+
         $user = App::user();
 
         return [
             '$view' => [
-                'title' => __($post->getTitle()),
+                'title' => __($post->title),
                 'name' => 'blog/post.php'
             ],
             '$comments' => [
                 'config' => [
-                    'post' => $post->getId(),
+                    'post' => $post->id,
                     'enabled' => $post->isCommentable(),
                     'requireinfo' => $this->blog->config('comments.require_name_and_email'),
                     'max_depth' => $this->blog->config('comments.max_depth')
@@ -133,12 +134,12 @@ class SiteController
         foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->blog->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
             $feed->addItem(
                 $feed->createItem([
-                    'title' => $post->getTitle(),
-                    'link' => App::url('@blog/id', ['id' => $post->getId()], true),
-                    'description' => App::content()->applyPlugins($post->getContent(), ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
-                    'date' => $post->getDate(),
-                    'author' => [$post->getUser()->getName(), $post->getUser()->getEmail()],
-                    'id' => App::url('@blog/id', ['id' => $post->getId()], true)
+                    'title' => $post->title,
+                    'link' => App::url('@blog/id', ['id' => $post->id], true),
+                    'description' => App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
+                    'date' => $post->date,
+                    'author' => [$post->user->getName(), $post->user->getEmail()],
+                    'id' => App::url('@blog/id', ['id' => $post->id], true)
                 ])
             );
         }

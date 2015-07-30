@@ -2,7 +2,7 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\Comment;
 
 class MarkSpamEvent extends CommentEvent
 {
@@ -14,8 +14,8 @@ class MarkSpamEvent extends CommentEvent
     /**
      * Constructor.
      *
-     * @param CommentInterface $comment
-     * @param mixed            $previousStatus
+     * @param Comment $comment
+     * @param mixed   $previousStatus
      */
     public function __construct($comment, $previousStatus)
     {

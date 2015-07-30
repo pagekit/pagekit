@@ -2,18 +2,15 @@
 
 namespace Pagekit\Comment\SpamDetection;
 
-use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\Comment;
 
-/**
- * Spam detection interface.
- */
 interface SpamDetectionInterface
 {
     /**
      * Takes the comment instance and should return a boolean value depending on whether the Spam service thinks the comment is spam.
      *
-     * @param  CommentInterface $comment
+     * @param  \Pagekit\Comment\Model\Comment $comment
      * @return boolean
      */
-    public function isSpam(CommentInterface $comment);
+    public function isSpam(Comment $comment);
 }

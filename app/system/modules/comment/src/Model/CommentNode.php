@@ -7,20 +7,20 @@ use Pagekit\Tree\Node;
 class CommentNode extends Node
 {
     /**
-     * @var CommentInterface
+     * @var Comment
      */
     protected $comment;
 
     /**
-     * @param CommentInterface $item
+     * @param Comment $item
      */
-    public function setComment(CommentInterface $item)
+    public function setComment(Comment $item)
     {
         $this->comment = $item;
     }
 
     /**
-     * @return CommentInterface
+     * @return Comment
      */
     public function getComment()
     {

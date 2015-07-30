@@ -28,146 +28,56 @@ class Post implements \JsonSerializable
     const STATUS_UNPUBLISHED = 3;
 
     /** @Column(type="integer") @Id */
-    protected $id;
+    public $id;
 
     /** @Column(type="string") */
-    protected $title;
+    public $title;
 
     /** @Column(type="string") */
-    protected $slug;
+    public $slug;
 
     /** @Column(type="integer") */
-    protected $user_id;
+    public $user_id;
 
     /** @Column(type="datetime") */
-    protected $date;
+    public $date;
 
     /** @Column(type="text") */
-    protected $content = '';
+    public $content = '';
 
     /** @Column(type="text") */
-    protected $excerpt = '';
+    public $excerpt = '';
 
     /** @Column(type="smallint") */
-    protected $status;
+    public $status;
 
     /** @Column(type="datetime") */
-    protected $modified;
+    public $modified;
 
     /** @Column(type="boolean") */
-    protected $comment_status;
+    public $comment_status;
 
     /** @Column(type="integer") */
-    protected $comment_count = 0;
+    public $comment_count = 0;
 
     /** @Column(type="json_array") */
-    protected $data;
+    public $data;
 
     /**
      * @BelongsTo(targetEntity="Pagekit\User\Model\User", keyFrom="user_id")
      */
-    protected $user;
+    public $user;
 
     /**
      * @HasMany(targetEntity="Comment", keyFrom="id", keyTo="post_id")
      * @OrderBy({"created" = "DESC"})
      */
-    protected $comments;
+    public $comments;
 
     /**
      * @var bool
      */
-    protected $commentable;
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
-
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-    }
-
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTime $date)
-    {
-        $this->date = $date;
-    }
-
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    public function getExcerpt()
-    {
-        return $this->excerpt;
-    }
-
-    public function setExcerpt($excerpt)
-    {
-        $this->excerpt = $excerpt;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getModified()
-    {
-        return $this->modified;
-    }
-
-    public function setModified(\DateTime $modified)
-    {
-        $this->modified = $modified;
-    }
+    public $commentable;
 
     public static function getStatuses()
     {
@@ -184,17 +94,6 @@ class Post implements \JsonSerializable
         $statuses = self::getStatuses();
 
         return isset($statuses[$this->status]) ? $statuses[$this->status] : __('Unknown');
-    }
-
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    public function setUser($user)
-    {
-        $this->user    = $user;
-        $this->user_id = $user->getId();
     }
 
     public function isCommentable()
@@ -237,7 +136,7 @@ class Post implements \JsonSerializable
 
         if ($this->comments) {
             $data['comments_pending'] = count(array_filter($this->comments, function ($comment) {
-                return $comment->getStatus() == Comment::STATUS_PENDING;
+                return $comment->status == Comment::STATUS_PENDING;
             }));
         }
 

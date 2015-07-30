@@ -2,20 +2,19 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Model\CommentInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class CommentEvent extends Event
 {
     /**
-     * @var CommentInterface
+     * @var \Pagekit\Comment\Model\Comment
      */
     protected $comment;
 
     /**
      * Constructor.
      *
-     * @param CommentInterface $comment
+     * @param \Pagekit\Comment\Model\Comment $comment
      */
     public function __construct($comment)
     {
@@ -23,7 +22,7 @@ class CommentEvent extends Event
     }
 
     /**
-     * @return CommentInterface
+     * @return \Pagekit\Comment\Model\Comment
      */
     public function getComment()
     {

@@ -2,24 +2,21 @@
 
 namespace Pagekit\Comment\SpamDetection;
 
-use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\Comment;
 
-/**
- * Spam marker interface.
- */
 interface SpamMarkerInterface
 {
     /**
      * Submits a comment as ham
      *
-     * @param CommentInterface $comment
+     * @param \Pagekit\Comment\Model\Comment $comment
      */
-    public function markHam(CommentInterface $comment);
+    public function markHam(Comment $comment);
 
     /**
      * Submits a comment as spam
      *
-     * @param CommentInterface $comment
+     * @param \Pagekit\Comment\Model\Comment $comment
      */
-    public function markSpam(CommentInterface $comment);
+    public function markSpam(Comment $comment);
 }

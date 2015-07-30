@@ -5,34 +5,38 @@ namespace Pagekit\Comment\Model;
 /**
  * @MappedSuperclass
  */
-abstract class Comment implements CommentInterface
+abstract class Comment
 {
     use CommentModelTrait;
 
+    const STATUS_PENDING = 0;
+    const STATUS_APPROVED = 1;
+    const STATUS_SPAM = 2;
+
     /** @Column(type="integer") @Id */
-    protected $id;
+    public $id;
 
     /** @Column(type="text") */
-    protected $content;
+    public $content;
 
     /** @Column(type="string") */
-    protected $author;
+    public $author;
 
     /** @Column(type="datetime") */
-    protected $created;
+    public $created;
 
     /** @Column(type="smallint") */
-    protected $status = 0;
+    public $status = 0;
 
     /** @Column(type="integer") */
-    protected $parent_id;
+    public $parent_id;
 
     /**
      * Should be mapped by the end developer.
      *
-     * @var CommentInterface
+     * @var \Pagekit\Comment\Model\Comment
      */
-    protected $parent;
+    public $parent;
 
     /**
      * Constructor.
@@ -45,119 +49,14 @@ abstract class Comment implements CommentInterface
     /**
      * {@inheritDoc}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setParent(CommentInterface $parent)
+    public function setParent(Comment $parent)
     {
         $this->parent = $parent;
-        $this->setParentId($parent->getId());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param string $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Sets the creation date
-     * @param \DateTime $created
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getStatus()
-    {
-        return (int) $this->status;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setStatus($status)
-    {
-        $this->status = (int) $status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getParentId()
-    {
-        return $this->parent_id;
-    }
-
-    /**
-     * @param mixed $parentId
-     */
-    public function setParentId($parentId)
-    {
-        $this->parent_id = $parentId;
+        $this->parent_id = $parent->getId();
     }
 
     public function __toString()
     {
-        return 'Comment #'.$this->getId();
+        return 'Comment #'.$this->id;
     }
 }

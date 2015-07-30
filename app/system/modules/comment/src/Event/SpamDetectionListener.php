@@ -2,7 +2,7 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\Comment;
 use Pagekit\Comment\SpamDetection\SpamDetectionInterface;
 use Pagekit\Event\EventSubscriberInterface;
 use Psr\Log\LoggerInterface;
@@ -46,7 +46,7 @@ class SpamDetectionListener implements EventSubscriberInterface
             $this->logger->info('Comment is marked as spam from detector.');
         }
 
-        $comment->setStatus(CommentInterface::STATUS_SPAM);
+        $comment->setStatus(Comment::STATUS_SPAM);
 
         $event->stopPropagation();
     }

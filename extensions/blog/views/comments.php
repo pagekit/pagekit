@@ -1,6 +1,4 @@
-<?php
-$view->script('comments', 'blog:app/bundle/comments.js', 'vue')
-?>
+<?php $view->script('comments', 'blog:app/bundle/comments.js', 'vue') ?>
 
 <div id="comments" class="uk-margin" v-if="config.enabled || comments.length">
 
@@ -102,7 +100,6 @@ $view->script('comments', 'blog:app/bundle/comments.js', 'vue')
         </form>
 
         <p v-if="user.isAuthenticated && !user.canComment">{{ 'You are not allowed to post comments.' | trans }}</p>
-
         <p v-if="!user.isAuthenticated && !user.canComment">{{ 'Please login to leave a comment.' | trans }}</p>
 
     </div>

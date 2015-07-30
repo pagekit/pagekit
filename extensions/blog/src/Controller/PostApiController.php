@@ -19,6 +19,7 @@ class PostApiController
     {
         $query  = Post::query();
         $filter = array_merge(array_fill_keys(['status', 'search', 'author', 'order', 'limit'], ''), $filter);
+
         extract($filter, EXTR_SKIP);
 
         if(!App::user()->hasAccess('blog: manage all posts')) {
@@ -84,7 +85,7 @@ class PostApiController
         }
 
         // user without universal access can only edit their own posts
-        if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+        if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
             return ['error' => __('Access denied.')];
         }
 
@@ -109,7 +110,7 @@ class PostApiController
     {
         if ($post = Post::find($id)) {
 
-            if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+            if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
                 return ['error' => __('Access denied.')];
             }
 
@@ -127,7 +128,7 @@ class PostApiController
         $count = 0;
         foreach ($ids as $id) {
             if ($post = Post::find((int) $id)) {
-                if(!App::user()->hasAccess('blog: manage all posts') && $post->getUserId() !== App::user()->getId()) {
+                if(!App::user()->hasAccess('blog: manage all posts') && $post->user_id !== App::user()->getId()) {
                     continue;
                 }
 

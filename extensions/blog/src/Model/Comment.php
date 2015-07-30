@@ -10,80 +10,25 @@ use Pagekit\Comment\Model\Comment as BaseComment;
 class Comment extends BaseComment implements \JsonSerializable
 {
     /** @Column(type="integer") */
-    protected $post_id;
+    public $post_id;
 
     /** @Column(type="string") */
-    protected $user_id;
+    public $user_id;
 
     /** @Column(type="string") */
-    protected $email;
+    public $email;
 
     /** @Column(type="string") */
-    protected $url = '';
+    public $url = '';
 
     /** @Column(type="string") */
-    protected $ip;
+    public $ip;
 
     /** @BelongsTo(targetEntity="Post", keyFrom="post_id") */
-    protected $post;
+    public $post;
 
     /** @BelongsTo(targetEntity="Pagekit\User\Model\User", keyFrom="user_id") */
-    protected $user;
-
-    public function getPostId()
-    {
-        return $this->post_id;
-    }
-
-    public function setPostId($postId)
-    {
-        $this->post_id = $postId;
-    }
-
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId($userId)
-    {
-        $this->user_id = $userId;
-    }
-
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-    }
-
-    public function getPost()
-    {
-        return $this->post;
-    }
+    public $user;
 
     public function setPost($post)
     {
@@ -92,16 +37,6 @@ class Comment extends BaseComment implements \JsonSerializable
         if ($post) {
             $this->post_id = $post->getId();
         }
-    }
-
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    public function setUser($user)
-    {
-        $this->user = $user;
     }
 
     public function getStatusText()

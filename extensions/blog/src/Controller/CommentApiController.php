@@ -28,6 +28,7 @@ class CommentApiController
     {
         $query  = Comment::query();
         $filter = array_merge(array_fill_keys(['status', 'search'], ''), $filter);
+
         extract($filter, EXTR_SKIP);
 
         if ($post) {
@@ -73,15 +74,17 @@ class CommentApiController
         }])->orderBy('created', 'DESC')->get();
 
         $posts = [];
+
         foreach ($comments as $i => $comment) {
 
-            $p = $comment->getPost();
+            $p = $comment->post;
+
             if ($post && (!$p || !$p->hasAccess($this->user) || !($p->isPublished() || $this->user->hasAccess('blog: manage comments')))) {
                 App::abort(403, __('Post not found.'));
             }
 
-            $comment->setContent(App::content()->applyPlugins($comment->getContent(), ['comment' => true]));
-            $posts[$p->getId()] = $p;
+            $comment->content = App::content()->applyPlugins($comment->content, ['comment' => true]);
+            $posts[$p->id] = $p;
             $comment->setPost(null);
         }
 
@@ -118,9 +121,9 @@ class CommentApiController
                 App::abort(400, __('Please provide valid name and email.'));
             }
 
-            $comment->setUserId((int) $this->user->getId());
-            $comment->setIp(App::request()->getClientIp());
-            $comment->setCreated(new \DateTime);
+            $comment->user_id = (int) $this->user->getId();
+            $comment->ip = App::request()->getClientIp();
+            $comment->created = new \DateTime;
 
         } else {
 
@@ -138,7 +141,7 @@ class CommentApiController
             and $comment = Comment::where($this->user->isAuthenticated() ? ['user_id' => $this->user->getId()] : ['ip' => App::request()->getClientIp()])->orderBy('created', 'DESC')->first()
         ) {
 
-            $diff = $comment->getCreated()->diff(new \DateTime("- {$minidle} sec"));
+            $diff = $comment->created->diff(new \DateTime("- {$minidle} sec"));
 
             if ($diff->invert) {
                 App::abort(403, __('Please wait another %seconds% seconds before commenting again.', ['%seconds%' => $diff->s + $diff->i * 60 + $diff->h * 3600]));
@@ -154,11 +157,11 @@ class CommentApiController
         }
 
         $approved_once = (boolean) Comment::where(['user_id' => $this->user->getId(), 'status' => Comment::STATUS_APPROVED])->first();
-        $comment->setStatus($this->user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $this->user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING);
+        $comment->status = $this->user->hasAccess('blog: skip comment approval') ? Comment::STATUS_APPROVED : $this->user->hasAccess('blog: comment approval required once') && $approved_once ? Comment::STATUS_APPROVED : Comment::STATUS_PENDING;
 
         // check the max links rule
-        if ($comment->getStatus() == Comment::STATUS_APPROVED && $this->blog->config('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
-            $comment->setStatus(Comment::STATUS_PENDING);
+        if ($comment->status == Comment::STATUS_APPROVED && $this->blog->config('comments.maxlinks') <= preg_match_all('/<a [^>]*href/i', @$data['content'])) {
+            $comment->status = Comment::STATUS_PENDING;
         }
 
         // check for spam

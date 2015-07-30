@@ -2,7 +2,7 @@
 
 namespace Pagekit\Comment\Event;
 
-use Pagekit\Comment\Model\CommentInterface;
+use Pagekit\Comment\Model\Comment;
 use Pagekit\Comment\SpamDetection\SpamMarkerInterface;
 use Pagekit\Event\EventSubscriberInterface;
 
@@ -34,9 +34,9 @@ class SpamMarkerListener implements EventSubscriberInterface
             return;
         }
 
-        if ($comment->getStatus() == CommentInterface::STATUS_SPAM) {
+        if ($comment->getStatus() == Comment::STATUS_SPAM) {
             $this->marker->markSpam($comment);
-        } elseif ($event->getPreviousStatus() == CommentInterface::STATUS_SPAM) {
+        } elseif ($event->getPreviousStatus() == Comment::STATUS_SPAM) {
             $this->marker->markHam($comment);
         }
     }
