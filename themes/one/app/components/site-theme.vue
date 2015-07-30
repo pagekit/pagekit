@@ -36,7 +36,7 @@
 
         section: {
             label: 'Theme',
-            icon: 'pk-icon-large-code',
+            icon: 'pk-icon-large-brush',
             priority: 30
         },
 
