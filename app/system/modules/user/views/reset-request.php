@@ -11,9 +11,9 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <p class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit"><?= __('Submit') ?></button>
-    </div>
+    </p>
 
     <?php $view->token()->get() ?>
 

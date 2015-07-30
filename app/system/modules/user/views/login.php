@@ -16,9 +16,9 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
+    <p class="uk-form-row">
         <button class="uk-button uk-button-primary" type="submit"><?= __('Login') ?></button>
-    </div>
+    </p>
 
     <ul class="uk-list">
         <li><label><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label></li>
