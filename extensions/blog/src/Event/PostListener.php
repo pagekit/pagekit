@@ -10,7 +10,7 @@ class PostListener implements EventSubscriberInterface
 {
     public function onCommentChange($event, Comment $comment)
     {
-        Post::updateCommentInfo($comment->getPostId());
+        Post::updateCommentInfo($comment->post_id);
     }
 
     public function onRoleDelete($event, $role)
