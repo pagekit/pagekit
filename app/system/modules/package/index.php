@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Module\Factory\ModuleFactory;
-use Pagekit\Module\Loader\ConfigLoader;
 use Pagekit\System\Package\PackageManager;
 
 return [

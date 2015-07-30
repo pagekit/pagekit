@@ -3,9 +3,9 @@
 namespace Pagekit\Site\Event;
 
 use Pagekit\Event\Event;
+use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\Site\Model\Node;
 use Pagekit\System\Theme;
-use Pagekit\Event\EventSubscriberInterface;
 
 class ThemeListener implements EventSubscriberInterface
 {

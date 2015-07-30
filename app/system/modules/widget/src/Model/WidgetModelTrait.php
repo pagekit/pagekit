@@ -15,38 +15,42 @@ trait WidgetModelTrait
      * @param  string|null $position
      * @return Widget[]
      */
-    public static function findActive($position = null)
+    public static function findActive($position)
     {
-        static $widgets;
+        static $widgets, $positions, $node, $active;
 
-        if ($widgets === null) {
-
-            $node    = App::node()->id;
+        if (null === $widgets) {
             $widgets = self::where(['status' => 1])->get();
+            $positions = App::theme()->getPositions();
+            $node = App::node()->id;
+            $active = [];
+        }
 
-            foreach (App::theme()->getPositions() as $pos) {
-                foreach ($pos['assigned'] as $id) {
+        if (!isset($positions[$position])) {
+            return [];
+        }
 
-                    if (!isset($widgets[$id])
-                        or !$widget = $widgets[$id]
-                        or !$widget->hasAccess(App::user())
-                        or ($nodes = $widget->nodes and !in_array($node, $nodes))
-                        or !$type = App::widget()->getType($widget->type)
-                        or !$result = $type->render($widget)
-                    ) {
-                        continue;
-                    }
+        if (!isset($active[$position])) {
 
-                    $widget->set('result', $result);
-                    $widgets[$pos['name']][] = $widget;
+            $active[$position] = [];
+
+            foreach ($positions[$position]['assigned'] as $id) {
+
+                if (!isset($widgets[$id])
+                    or !$widget = $widgets[$id]
+                    or !$widget->hasAccess(App::user())
+                    or ($nodes = $widget->nodes and !in_array($node, $nodes))
+                    or !$type = App::widget()->getType($widget->type)
+                    or !$result = $type->render($widget)
+                ) {
+                    continue;
                 }
+
+                $widget->set('result', $result);
+                $active[$position][] = $widget;
             }
         }
 
-        if ($position === null) {
-            return $widgets;
-        }
-
-        return isset($widgets[$position]) ? $widgets[$position] : [];
+        return $active[$position];
     }
 }
