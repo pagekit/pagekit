@@ -7,7 +7,7 @@
     <div class="uk-form-row">
         <label for="form-username" class="uk-form-label"><?= __('Email') ?></label>
         <div class="uk-form-controls">
-            <input id="form-username" type="text" name="email" value="" required autofocus>
+            <input id="form-username" class="uk-form-width-medium" type="text" name="email" value="" required autofocus>
         </div>
     </div>
 

@@ -26,6 +26,7 @@
                         <div class="uk-form-row">
                             <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
                         </div>
+
                         <div class="uk-form-row">
                             <div class="uk-form-password uk-width-1-1">
                                 <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
