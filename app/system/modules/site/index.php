@@ -3,7 +3,6 @@
 use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
-use Pagekit\Site\Event\ThemeListener;
 
 return [
 
@@ -132,12 +131,6 @@ return [
                 new NodesListener(),
                 new PageListener()
             );
-
-            if ($app['theme']) {
-                $app->subscribe(
-                    new ThemeListener($app['theme'])
-                );
-            }
         },
 
         'site' => function () use ($app) {

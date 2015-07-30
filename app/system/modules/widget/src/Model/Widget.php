@@ -24,6 +24,6 @@ class Widget implements \JsonSerializable
     /** @Column(type="integer") */
     public $status = 1;
 
-    /** @Column(name="nodes", type="simple_array") */
+    /** @Column(type="simple_array") */
     public $nodes = [];
 }

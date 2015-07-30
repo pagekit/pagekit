@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Site\Model\Node;
 use Pagekit\Widget\Model\Widget;
 
 /**
@@ -76,6 +77,20 @@ return [
         'boot' => function ($event, $app) {
 
             $self = $this;
+
+            Node::setProperty('theme', function () use ($self) {
+
+                $config  = $self->get("data.nodes.".$this->id, []);
+                $default = $self->config("node", []);
+
+                return array_replace($default, $config);
+
+            }, function ($value) use ($self) {
+
+                $self->options['data']['nodes'][$this->id] = $value;
+                $self->save();
+
+            });
 
             Widget::setProperty('theme', function () use ($self) {
 
