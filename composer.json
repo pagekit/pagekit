@@ -47,7 +47,7 @@
         },
         {
           "type": "composer",
-          "url": "https://pagekit.com"
+          "url": "http://pagekit.com"
         }
     ],
     "autoload": {
