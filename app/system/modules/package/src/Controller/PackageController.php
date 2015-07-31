@@ -134,51 +134,43 @@ class PackageController
      */
     public function uploadAction()
     {
-        $temp = App::get('path.temp');
         $file = App::request()->files->get('file');
 
         if ($file === null || !$file->isValid()) {
             App::abort(400, __('No file uploaded.'));
         }
 
-        $package = $this->loadPackage($upload = $file->getPathname());
+        $package = $this->loadPackage($file->getPathname());
+        $filename = str_replace('/', '-', $package->getName()) . ($package->get('version') ?: '') . '.zip';
 
-        Zip::extract($upload, "{$temp}/" . ($path = sha1($upload)));
+        $file->move(App::get('path.packages'), $filename);
 
-        $extra = $package->get('extra');
-
-        if (isset($extra['image'])) {
-            $extra['image'] = App::url()->getStatic("{$temp}/$path/" . $extra['image']);
-        } else {
-            $extra['image'] = App::url('app/system/assets/images/placeholder-icon.svg');
-        }
-
-        $package->set('extra', $extra);
-        $package->set('shasum', sha1_file($upload));
-
-        return [
-            'package' => $package,
-            'install' => $path
-        ];
+        return compact('package');
     }
 
     /**
-     * @Request({"package": "array", "path": "alnum"}, csrf=true)
+     * @Request({"package": "array"}, csrf=true)
      */
-    public function installAction($package = null, $path = '')
+    public function installAction($package = null)
     {
         try {
             $package = App::package()->load($package);
-            $name = $package->getName();
 
             if ($enabled = (bool)App::module($package->get('module'))) {
-                $this->disableAction($name);
+                $this->disableAction($package->getName());
+            }
+
+            if (is_array($package->get('version')) && isset($package->get('version')['version'])) {
+                $version = $package->get('version')['version'];
+            } elseif ($package->get('version')) {
+                $version = $package->get('version');
+            } else {
+                $version = '*';
             }
 
             $client = new Client;
             $res = $client->get(App::url('app/updater', [
-                'p' => sprintf('%s:%s', $name, $package->get('version')['version'])
-            ], true));
+                'packages' => sprintf('%s:%s', $package->getName(), $version)], true));
             $res = json_decode($res->getBody());
 
             if ($res->status !== 'success') {
@@ -188,7 +180,7 @@ class PackageController
             App::module('system/cache')->clearCache();
 
             if ($enabled) {
-                $this->enableAction($name);
+                $this->enableAction($package->getName());
             }
 
         } catch (BadResponseException $e) {
@@ -202,7 +194,7 @@ class PackageController
             App::abort(400, $error);
         }
 
-        return ['message' => 'success', 'package' => App::package($name)];
+        return ['message' => 'success', 'package' => App::package($package->getName())];
     }
 
     /**
@@ -230,7 +222,7 @@ class PackageController
             App::trigger("uninstall.{$module->name}", [$module]);
 
             $client = new Client;
-            $res = $client->get(App::url('app/updater', ['p' => $name, 'r' => true], true));
+            $res = $client->get(App::url('app/updater', ['packages' => $name, 'remove' => true], true));
             $res = json_decode($res->getBody());
 
             if ($res->status !== 'success') {
@@ -256,22 +248,31 @@ class PackageController
     {
         try {
 
-            if (is_dir($file)) {
-
-                $json = realpath("$file/composer.json");
-
-            } elseif (is_file($file)) {
+            if (is_file($file)) {
 
                 $zip = new \ZipArchive;
 
                 if ($zip->open($file) === true) {
                     $json = $zip->getFromName('composer.json');
+
+                    if ($json) {
+                        $package = App::package()->load($json);
+                        $extra = $package->get('extra');
+
+                        if (isset($extra['image'])) {
+                            unset($extra['image']);
+                            $package->set('extra', $extra);
+                        }
+
+                        $package->set('shasum', sha1_file($file));
+                    }
+
                     $zip->close();
                 }
             }
 
-            if (isset($json) && $json) {
-                return App::package()->load($json);
+            if (isset($package)) {
+                return $package;
             }
 
             App::abort(400);

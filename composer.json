@@ -42,8 +42,12 @@
     },
     "repositories": [
         {
-            "type": "composer",
-            "url": "pagekit.com"
+          "type": "artifact",
+          "url": "tmp/packages/"
+        },
+        {
+          "type": "composer",
+          "url": "https://pagekit.com"
         }
     ],
     "autoload": {

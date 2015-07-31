@@ -78,16 +78,10 @@ class Updater
      */
     protected function addRequirements($packages)
     {
-        if (!isset($this->packages['require'])) {
-            $this->packages['require'] = [];
-        }
-
         $update = [];
         foreach ($packages as $package) {
             if (preg_match('/^[\w\d\-_]+\/[\w\d\-_]+\z/', $package['name'])) {
                 $update[] = $this->handleRepository($package);
-            } else {
-                $update[] = $this->handleUpload($package);
             }
         }
 
@@ -103,8 +97,7 @@ class Updater
     protected function removeRequirements($packages)
     {
         foreach ($packages as $package) {
-            unset($this->packages['require'][$package['name']]);
-            unset($this->packages['packages'][$package['name']]);
+            unset($this->packages[$package['name']]);
         }
 
         $this->writePackagesFile();
@@ -121,38 +114,9 @@ class Updater
      */
     protected function handleRepository($package)
     {
-        $this->packages['require'][$package['name']] = $package['version'];
+        $this->packages[$package['name']] = $package['version'];
 
         return $package['name'];
-    }
-
-    /**
-     * Handles packages from local filesystem.
-     *
-     * @param $package
-     * @return array
-     * @throws \Exception
-     */
-    protected function handleUpload($package)
-    {
-        if (!($path = realpath($package['name']))) {
-            throw new \Exception(sprintf('Can not find package "%s"', $package['name']));
-        }
-
-        if (!($packageConfig = file_get_contents($path . '/composer.json'))) {
-            throw new \Exception('No composer.json found in package');
-        }
-
-        if (!isset($this->packages['packages'])) {
-            $this->packages['packages'] = [];
-        }
-
-        $packagesConfig = json_decode($packageConfig, true);
-        $name = $packagesConfig['name'];
-        $this->packages['packages'][$name] = $packagesConfig;
-        $this->packages['require'][$name] = $packagesConfig['version'];
-
-        return $name;
     }
 
     /**

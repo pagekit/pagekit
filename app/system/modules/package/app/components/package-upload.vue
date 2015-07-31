@@ -93,7 +93,7 @@
 
                 this.modal.hide();
 
-                this.$http.post('admin/system/package/install', {path: this.upload.install}, function () {
+                this.$http.post('admin/system/package/install', {package: this.upload.package}, function () {
 
                     UIkit.notify(this.$trans('"%title%" installed.', {title: this.package.title}));
 
