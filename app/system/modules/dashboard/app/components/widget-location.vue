@@ -219,7 +219,7 @@
 
                 }
 
-                timezoneKey = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
+                var timezoneKey = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
 
                 if (this.$session[timezoneKey]) {
 

@@ -61,12 +61,10 @@ class Application
      */
     protected function parsePackages($arguments)
     {
-        if (isset($arguments)) {
-            $packages = [];
-            foreach ($arguments as $argument) {
-                $argument = explode(':', $argument);
-                $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) ? $argument[1] : '*'];
-            }
+        $packages = [];
+        foreach ((array) $arguments as $argument) {
+            $argument = explode(':', $argument);
+            $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) ? $argument[1] : '*'];
         }
 
         return $packages;
@@ -173,12 +171,14 @@ class Application
     protected function composerUpdate($packages = false)
     {
         $params = ['update', '--prefer-dist'];
+        $params['--working-dir'] = $this->pagekitConfig['values']['path'];
         if ($packages) {
             $params['packages'] = $packages;
         }
 
-        chdir($this->pagekitConfig['values']['path']);
-        (new ComposerApplication())->run(new ArrayInput($params), $this->output);
+        $composer = new ComposerApplication();
+        $composer->setAutoExit(false);
+        $composer->run(new ArrayInput($params), $this->output);
     }
 
     /**
