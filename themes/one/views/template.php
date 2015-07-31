@@ -1,3 +1,46 @@
+<?php
+
+    $navbar = "tm-navbar";
+
+    $sticky = [
+        "media: 767",
+        "showup: true",
+        "animation: 'uk-animation-slide-top'"
+    ];
+
+    $hero = 'tm-block-height';
+
+    $logo = $site->config('logo');
+
+    // Sticky overlay navbar if hero position exists
+    if ($theme->config('navbar-transparent') && $view->position()->exists('hero') && $theme->config('hero-image')) {
+
+        $navbar  .= ' tm-navbar-overlay tm-navbar-transparent';
+        $sticky[] = "top: '.uk-sticky-placeholder + *'";
+        $hero     = 'uk-height-viewport';
+
+        if ($theme->config('hero-contrast')) {
+
+            $navbar  .= ' tm-navbar-contrast';
+            $sticky[] = "clsinactive: 'tm-navbar-transparent tm-navbar-contrast'";
+
+            if ($theme->config('logo-contrast')) {
+                $logo = $theme->config('logo-contrast');
+            }
+
+        } else {
+            $sticky[] = "clsinactive: 'tm-navbar-transparent'";
+        }
+
+    }
+
+    if ($theme->config('hero-contrast') && $theme->config('hero-image')) {
+        $hero .= ' uk-contrast';
+    }
+
+    $sticky = 'data-uk-sticky="{'.implode(',', array_filter($sticky)).'}"';
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,12 +54,12 @@
     <body>
 
         <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
-        <div class="tm-navbar" data-uk-sticky="{showup: true, animation: 'uk-animation-slide-top'}">
+        <div class="<?= $navbar ?>" <?= $sticky ?>>
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
 
-                    <?php if ($logo = $site->config('logo')) : ?>
+                    <?php if ($logo) : ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
                         <img src="<?= $this->escape($logo) ?>" alt="">
                     </a>
@@ -32,9 +75,9 @@
                     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                     <?php endif ?>
 
-                    <?php if ($logo): ?>
+                    <?php if ($site->config('logo')): ?>
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($logo) ?>" alt="">
+                        <img src="<?= $this->escape($site->config('logo')) ?>" alt="">
                     </a>
                     <?php endif ?>
 
@@ -45,7 +88,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-block uk-contrast uk-cover-background tm-block-height uk-flex uk-flex-middle" style="background-image: url('<?= $theme->config('hero-image'); ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $hero ?>" style="background-image: url('<?= $theme->config('hero-image'); ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>

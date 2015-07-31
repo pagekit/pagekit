@@ -12,17 +12,10 @@
     <div class="uk-form uk-form-horizontal">
 
         <div class="uk-form-row">
-            <span class="uk-form-label">Sidebar</span>
-            <div class="uk-form-controls uk-form-controls-text">
-                <label><input type="checkbox" v-model="config['sidebar-first']"> Show the sidebar before the content.</label>
-            </div>
-        </div>
-
-        <div class="uk-form-row">
-            <label for="form-hero-image" class="uk-form-label">Hero Image</label>
+            <label class="uk-form-label">{{ 'Logo Inverted' | trans }}</label>
             <div class="uk-form-controls">
-                <input-image source="{{@ config['hero-image'] }}"></input-image>
-                <p class="uk-form-help-block">{{ 'Choose a background image for the hero position.' | trans }}</p>
+                <input-image source="{{@ config['logo-contrast'] }}"></input-image>
+                <p class="uk-form-help-block">{{ 'Select a second logo which looks great on darker hero images.' | trans }}</p>
             </div>
         </div>
 

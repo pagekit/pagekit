@@ -45,7 +45,11 @@ return [
      */
     'node' => [
 
-        'alignment' => ''
+        'alignment' => '',
+        'sidebar-first' => false,
+        'hero-image' => '',
+        'hero-contrast' => '',
+        'navbar-transparent' => '',
 
     ],
 
@@ -70,8 +74,7 @@ return [
      */
     'config' => [
 
-        'sidebar-first' => false,
-        'hero-image' => ''
+        'logo-contrast' => '',
 
     ],
 
