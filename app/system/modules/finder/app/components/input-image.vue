@@ -38,10 +38,13 @@
 
     module.exports = {
 
-        props: ['source', 'class'],
+        props: ['class', 'source'],
 
         data: function () {
-            return _.merge({}, $pagekit);
+            return _.merge({
+                'class': '',
+                'source': ''
+            }, $pagekit);
         },
 
         methods: {
