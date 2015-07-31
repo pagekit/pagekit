@@ -37,7 +37,6 @@
                     <h2 class="uk-margin-remove" v-show="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
                     <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
 
-
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
                             <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
@@ -77,9 +76,27 @@
             </div>
 
             <div class="uk-overflow-container">
+
+                <div class="pk-table-fake pk-table-fake-header pk-table-fake-border" v-show="!position && emptyafterfilter()">
+                    <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
+                    <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                    <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                    <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
+                    <div class="pk-table-width-100">
+                        <div class="uk-form-select pk-filter">
+                            <span v-show="!config.filter.node">{{ 'Pages' | trans }}</span>
+                            <span v-show="config.filter.node">{{ getNodeTitle(config.filter.node) }}</span>
+                            <select v-model="config.filter.node" options="nodes"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="!position && emptyafterfilter()">{{ 'No widgets found.' | trans }}</h3>
+
+
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: (!pos.widgets.length || emptyafterfilter)">
+                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !pos.widgets.length" v-show="!emptyafterfilter(pos.widgets)">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
@@ -93,9 +110,9 @@
                         </div>
                     </div>
 
-                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length">{{ 'No widgets found.' | trans }}</h3>
+                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" inline-template>
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" inline-template>
                         <li v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
@@ -119,8 +136,6 @@
                     </ul>
 
                 </div>
-
-                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="empty || emptyafterfilter">{{ 'No widgets found.' | trans }}</h3>
 
             </div>
 

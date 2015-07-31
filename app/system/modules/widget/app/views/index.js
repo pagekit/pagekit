@@ -32,15 +32,6 @@ module.exports = {
             return !this.position && !this.get('assigned').length;
         },
 
-        emptyafterfilter: function() {
-
-            var vm = this;
-
-            return !this.widgets.filter(function(widget){
-                return vm.infilter(widget);
-            }).length;
-        },
-
         nodes: function () {
 
             var options = [{text: this.$trans('Pages'), value: ''}],
@@ -162,6 +153,17 @@ module.exports = {
             return true;
         },
 
+        emptyafterfilter: function(widgets) {
+
+            widgets = widgets || this.widgets;
+
+            var vm = this;
+
+            return !widgets.filter(function(widget){
+                return vm.infilter(widget);
+            }).length;
+        },
+
         getSingleNodeTitle: function(widget) {
 
             return !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'selected');
@@ -179,7 +181,7 @@ module.exports = {
         show: function (position) {
 
             if (!this.position) {
-                return position.name != '_unassigned' ? position.widgets.length : 0;
+                return (position.name != '_unassigned' ? position.widgets.length : 0);
             }
 
             return this.active(position);
