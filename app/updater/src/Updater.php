@@ -4,9 +4,9 @@ namespace Pagekit\Updater;
 
 use Composer\Console\Application as ComposerApplication;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 
-class Application
+class Updater
 {
     const packagesFile = '/packages.json';
 
@@ -15,7 +15,7 @@ class Application
      * @param array $config
      * @param OutputInterface $output
      */
-    public function __construct($config, OutputInterface $output)
+    public function __construct($config, ConsoleOutputInterface $output)
     {
         $this->output = $output;
         $this->pagekitConfig = $config;
@@ -62,7 +62,7 @@ class Application
     protected function parsePackages($arguments)
     {
         $packages = [];
-        foreach ((array) $arguments as $argument) {
+        foreach ((array)$arguments as $argument) {
             $argument = explode(':', $argument);
             $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) ? $argument[1] : '*'];
         }

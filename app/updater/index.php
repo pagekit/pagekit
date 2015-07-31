@@ -1,13 +1,13 @@
 <?php
 
 require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
-require 'src/Application.php';
+require 'src/Updater.php';
+require 'src/Output.php';
 
-use Pagekit\Updater\Application;
+use Pagekit\Updater\Updater;
+use Pagekit\Updater\Output;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\BufferedOutput;
-
-$error = false;
 
 if (PHP_SAPI === 'cli') {
     $output = new ConsoleOutput();
@@ -22,7 +22,7 @@ if (PHP_SAPI === 'cli') {
         $remove = isset($opts['r']) ?: isset($opts['remove']);
     }
 } else {
-    $output = new BufferedOutput();
+    $output = new Output();
 
     // parse request parameters
     if (isset($_GET['packages'])) {
@@ -32,10 +32,10 @@ if (PHP_SAPI === 'cli') {
         $remove = isset($_GET['remove']);
     }
 
-    register_shutdown_function(function () use ($output, &$error) {
+    register_shutdown_function(function () use ($output) {
         echo json_encode([
-            'status' => $error ? 'failure' : 'success',
-            'message' => $output->fetch()
+            'status' => ($error = $output->getErrorOutput()->fetch()) ? 'failure' : 'success',
+            'message' => $error ?: $output->fetch()
         ]);
     });
 }
@@ -43,9 +43,8 @@ if (PHP_SAPI === 'cli') {
 $config = require(__DIR__ . '/../config.php');
 
 try {
-    $updater = new Application($config, $output);
+    $updater = new Updater($config, $output);
     $updater->run(compact('packages', 'remove'));
 } catch (Exception $e) {
-    $error = true;
-    $output->writeln($e->getMessage());
+    $output->getErrorOutput()->writeln($e->getMessage());
 }
