@@ -118,7 +118,9 @@
 
                     <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
                         <?= $view->render('messages') ?>
+                        <?= $theme->config('alignment') ? '<div class="uk-text-center">' : '' ?>
                         <?= $view->render('content') ?>
+                        <?= $theme->config('alignment') ? '</div>' : '' ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
