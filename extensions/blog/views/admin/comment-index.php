@@ -80,8 +80,8 @@
                         <li><a class="pk-icon-reply pk-icon-hover" title="{{ 'Reply' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: reply"></a></li>
                     </ul>
 
-                    <a class="uk-link-muted" v-if="post.isAccessible" v-attr="href: post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
-                    <span v-if="!post.isAccessible">{{ comment.created | relativeDate }}</span>
+                    <a class="uk-link-muted" v-if="post.accessible" v-attr="href: post.url+'#comment-'+comment.id">{{ comment.created | relativeDate }}</a>
+                    <span v-if="!post.accessible">{{ comment.created | relativeDate }}</span>
                 </div>
             </div>
 

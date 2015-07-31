@@ -45,6 +45,12 @@ class Node implements NodeInterface, \JsonSerializable
     /** @Column(type="string") */
     public $menu = '';
 
+    /**
+     * Gets the node URL.
+     *
+     * @param  mixed  $referenceType
+     * @return string
+     */
     public function getUrl($referenceType = false)
     {
         return App::url($this->link, [], $referenceType);

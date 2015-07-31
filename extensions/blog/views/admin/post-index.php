@@ -64,9 +64,9 @@
                         <a title="{{ getStatusText(post) }}" v-class="
                                 pk-icon-circle: post.status == 0,
                                 pk-icon-circle-warning: post.status == 1,
-                                pk-icon-circle-success: post.status == 2 && post.isPublished,
+                                pk-icon-circle-success: post.status == 2 && post.published,
                                 pk-icon-circle-danger: post.status == 3,
-                                pk-icon-schedule: post.status == 2 && !post.isPublished
+                                pk-icon-schedule: post.status == 2 && !post.published
                             " v-on="click: toggleStatus(post)"></a>
                     </td>
                     <td>
@@ -79,8 +79,8 @@
                         {{ post.date | date 'medium' }}
                     </td>
                     <td class="pk-table-text-break">
-                        <a target="_blank" v-if="post.isAccessible && post.url" v-attr="href: this.$url(post.url.substr(1))">{{ post.url }}</a>
-                        <span v-if="!post.isAccessible && post.url">{{ post.url }}</span>
+                        <a target="_blank" v-if="post.accessible && post.url" v-attr="href: this.$url(post.url.substr(1))">{{ post.url }}</a>
+                        <span v-if="!post.accessible && post.url">{{ post.url }}</span>
                         <span v-if="!post.url">{{ 'Disabled' | true}}</span>
                     </td>
                 </tr>

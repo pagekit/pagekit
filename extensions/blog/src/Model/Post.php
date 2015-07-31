@@ -70,6 +70,13 @@ class Post implements \JsonSerializable
      */
     public $comments;
 
+    /** @var array */
+    protected static $properties = [
+        'author' => 'getAuthor',
+        'published' => 'isPublished',
+        'accessible' => 'isAccessible'
+    ];
+
     public static function getStatuses()
     {
         return [
@@ -95,6 +102,11 @@ class Post implements \JsonSerializable
         return $this->comment_status && (!$autoclose or $this->date >= new \DateTime("-{$autoclose} day"));
     }
 
+    public function getAuthor()
+    {
+        return $this->user ? $this->user->username : null;
+    }
+
     public function isPublished()
     {
         return $this->status === self::STATUS_PUBLISHED && $this->date < new \DateTime;
@@ -111,14 +123,8 @@ class Post implements \JsonSerializable
     public function jsonSerialize()
     {
         $data = [
-            'url' => App::url('@blog/id', ['id' => $this->id ?: 0], 'base'),
-            'isPublished' => $this->isPublished(),
-            'isAccessible' => $this->isAccessible()
+            'url' => App::url('@blog/id', ['id' => $this->id ?: 0], 'base')
         ];
-
-        if ($this->user) {
-            $data['author'] = $this->user->username;
-        }
 
         if ($this->comments) {
             $data['comments_pending'] = count(array_filter($this->comments, function ($comment) {
