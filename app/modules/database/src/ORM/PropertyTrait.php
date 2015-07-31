@@ -7,7 +7,7 @@ trait PropertyTrait
     /**
      * @var array
      */
-    protected static $properties = [];
+    protected static $_properties = [];
 
     /**
      * Gets a object property.
@@ -16,11 +16,13 @@ trait PropertyTrait
      */
     public function __get($name)
     {
-        if (isset(static::$properties[$name])) {
+        if ($descriptor = static::getPropertyDescriptor($name)) {
 
-            $get = static::$properties[$name]['get'];
+            $get = $descriptor['get'];
 
-            if ($get instanceof \Closure) {
+            if (is_string($get)) {
+                $get = [$this, $get];
+            } elseif ($get instanceof \Closure) {
                 $get = $get->bindTo($this, $this);
             }
 
@@ -40,17 +42,23 @@ trait PropertyTrait
      */
     public function __set($name, $value)
     {
-        $set = isset(static::$properties[$name]) ? static::$properties[$name]['set'] : true;
+        if ($descriptor = static::getPropertyDescriptor($name)) {
 
-        if (is_callable($set)) {
+            $set = $descriptor['set'];
 
-            if ($set instanceof \Closure) {
+            if (is_string($set)) {
+                $set = [$this, $set];
+            } elseif ($set instanceof \Closure) {
                 $set = $set->bindTo($this, $this);
             }
 
-            call_user_func($set, $value);
+            if (is_callable($set)) {
+                call_user_func($set, $value);
+            } elseif ($set === true) {
+                $this->$name = $value;
+            }
 
-        } elseif ($set === true) {
+        } else {
 
             $this->$name = $value;
         }
@@ -63,19 +71,7 @@ trait PropertyTrait
      */
     public function __isset($name)
     {
-        return isset(static::$properties[$name]);
-    }
-
-    /**
-     * Sets a object property.
-     *
-     * @param string $name
-     * @param callable $get
-     * @param callable|bool $set
-     */
-    public static function setProperty($name, $get, $set = null)
-    {
-        static::$properties[$name] = compact('get', 'set');
+        return isset(static::$_properties[$name]);
     }
 
     /**
@@ -88,10 +84,58 @@ trait PropertyTrait
     {
         $properties = get_object_vars($object);
 
-        foreach (static::$properties as $name => $value) {
+        foreach (array_diff_key(static::$_properties, $properties) as $name => $value) {
             $properties[$name] = $object->$name;
         }
 
+        if (isset(static::$properties)) {
+            foreach (array_diff_key(static::$properties, $properties) as $name => $value) {
+                $properties[$name] = $object->$name;
+            }
+        }
+
         return $properties;
+    }
+
+    /**
+     * Defines a object property.
+     *
+     * @param  string $name
+     * @param  string|callable|array $get
+     * @param  string|callable|bool $set
+     * @return array
+     */
+    public static function defineProperty($name, $get, $set = null)
+    {
+        $descriptor = is_array($get) ? $get : compact('get', 'set');
+
+        if (isset($descriptor[0])) {
+            $descriptor['get'] = $descriptor[0];
+        }
+
+        if (isset($descriptor[1])) {
+            $descriptor['set'] = $descriptor[1];
+        }
+
+        unset($descriptor[0], $descriptor[1]);
+
+        return static::$_properties[$name] = $descriptor;
+    }
+
+    /**
+     * Gets a object property descriptor.
+     *
+     * @param  string $name
+     * @return array
+     */
+    protected static function getPropertyDescriptor($name)
+    {
+        if (isset(static::$_properties[$name])) {
+            return static::$_properties[$name];
+        }
+
+        if (isset(static::$properties[$name])) {
+            return static::defineProperty($name, static::$properties[$name]);
+        }
     }
 }

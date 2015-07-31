@@ -70,11 +70,11 @@ return [
 
         'boot' => function ($event, $app) {
 
-            Widget::setProperty('position', function () use ($app) {
+            Widget::defineProperty('position', function () use ($app) {
                 return $app['theme']->findPosition($this->id);
             }, true);
 
-            Widget::setProperty('theme', function () use ($app) {
+            Widget::defineProperty('theme', function () use ($app) {
 
                 $config  = $app['theme']->get("data.widgets.".$this->id, []);
                 $default = $app['theme']->get("widget", []);

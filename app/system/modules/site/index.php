@@ -135,7 +135,7 @@ return [
                 new PageListener()
             );
 
-            Node::setProperty('theme', function () use ($app) {
+            Node::defineProperty('theme', function () use ($app) {
 
                 $config  = $app['theme']->get("data.nodes.".$this->id, []);
                 $default = $app['theme']->get("node", []);
