@@ -27,7 +27,7 @@
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !selectButton" v-on="click: select()">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !hasSelection()" v-on="click: select()">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>
@@ -44,15 +44,6 @@
             return _.merge({}, $pagekit);
         },
 
-        computed: {
-
-            selectButton: function() {
-                var selected = this.$.finder.getSelected();
-                return selected.length === 1 && this.$.finder.isImage(selected[0])
-            }
-
-        },
-
         methods: {
 
             pick: function() {
@@ -62,11 +53,17 @@
             select: function() {
                 this.source = this.$.finder.getSelected()[0];
                 this.$dispatch('image-selected', this.source);
+                this.$.finder.removeSelection();
                 this.$.modal.close();
             },
 
             remove: function() {
                 this.source = ''
+            },
+
+            hasSelection: function() {
+                var selected = this.$.finder.getSelected();
+                return selected.length === 1 && this.$.finder.isImage(selected[0])
             }
 
         }
