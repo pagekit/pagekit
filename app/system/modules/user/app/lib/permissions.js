@@ -11,6 +11,7 @@ module.exports = {
         this.Roles = this.$resource('api/user/role/:id');
 
         this.debounced = [];
+
         this.saveCb = Vue.util.debounce(function(role) {
             vm.$resource('api/user/role/:id').save({ id: 'bulk' }, { roles: vm.debounced }, function () {
                 UIkit.notify(this.$trans('Permissions saved'));
@@ -24,7 +25,7 @@ module.exports = {
 
         authenticated: function () {
             return this.roles.filter(function (role) {
-                return role.isAuthenticated;
+                return role.authenticated;
             })[0];
         }
 
@@ -42,7 +43,7 @@ module.exports = {
         },
 
         addPermission: function (role, permission) {
-            return !role.isAdministrator ? role.permissions.push(permission) : null;
+            return !role.administrator ? role.permissions.push(permission) : null;
         },
 
         hasPermission: function (role, permission) {
@@ -50,11 +51,11 @@ module.exports = {
         },
 
         isInherited: function (role, permission) {
-            return !role.isLocked && this.hasPermission(this.authenticated, permission);
+            return !role.locked && this.hasPermission(this.authenticated, permission);
         },
 
         showFakeCheckbox: function (role, permission) {
-            return role.isAdministrator || (this.isInherited(role, permission) && !this.hasPermission(role, permission));
+            return role.administrator || (this.isInherited(role, permission) && !this.hasPermission(role, permission));
         }
 
     }

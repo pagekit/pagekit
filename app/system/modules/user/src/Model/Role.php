@@ -42,6 +42,14 @@ class Role implements \JsonSerializable
     /** @Column(type="simple_array") */
     public $permissions = [];
 
+    /** @var array */
+    protected static $properties = [
+        'locked' => 'isLocked',
+        'anonymous' => 'isAnonymous',
+        'authenticated' => 'isAuthenticated',
+        'administrator' => 'isAdministrator'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -103,20 +111,5 @@ class Role implements \JsonSerializable
      */
     public function __toString() {
         return (string) $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function jsonSerialize()
-    {
-        $data = [
-            'isLocked' => $this->isLocked(),
-            'isAnonymous' => $this->isAnonymous(),
-            'isAuthenticated' => $this->isAuthenticated(),
-            'isAdministrator' => $this->isAdministrator()
-        ];
-
-        return $this->toArray($data);
     }
 }
