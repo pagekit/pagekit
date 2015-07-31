@@ -3,14 +3,14 @@
 namespace Pagekit\Site\Model;
 
 use Pagekit\Database\ORM\ModelTrait;
-use Pagekit\System\Model\DataTrait;
+use Pagekit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@system_page")
  */
 class Page implements \JsonSerializable
 {
-    use DataTrait, ModelTrait;
+    use DataModelTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     public $id;

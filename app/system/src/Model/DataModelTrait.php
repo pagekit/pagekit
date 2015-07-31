@@ -4,7 +4,7 @@ namespace Pagekit\System\Model;
 
 use Pagekit\Util\Arr;
 
-trait DataTrait
+trait DataModelTrait
 {
     /** @Column(type="json_array") */
     public $data;

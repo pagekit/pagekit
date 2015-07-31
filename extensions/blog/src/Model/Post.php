@@ -3,8 +3,8 @@
 namespace Pagekit\Blog\Model;
 
 use Pagekit\Application as App;
-use Pagekit\System\Model\DataTrait;
-use Pagekit\User\Model\AccessTrait;
+use Pagekit\System\Model\DataModelTrait;
+use Pagekit\User\Model\AccessModelTrait;
 use Pagekit\User\Model\User;
 
 /**
@@ -12,7 +12,7 @@ use Pagekit\User\Model\User;
  */
 class Post implements \JsonSerializable
 {
-    use AccessTrait, DataTrait, PostModelTrait;
+    use AccessModelTrait, DataModelTrait, PostModelTrait;
 
     /* Post draft status. */
     const STATUS_DRAFT = 0;
@@ -70,11 +70,6 @@ class Post implements \JsonSerializable
      */
     public $comments;
 
-    /**
-     * @var bool
-     */
-    public $commentable;
-
     public static function getStatuses()
     {
         return [
@@ -98,11 +93,6 @@ class Post implements \JsonSerializable
         $autoclose = $blog->config('comments.autoclose') ? $blog->config('comments.autoclose_days') : 0;
 
         return $this->comment_status && (!$autoclose or $this->date >= new \DateTime("-{$autoclose} day"));
-    }
-
-    public function setCommentable($commentable)
-    {
-        $this->commentable = $commentable;
     }
 
     public function isPublished()

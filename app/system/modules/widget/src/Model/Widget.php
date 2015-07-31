@@ -2,15 +2,15 @@
 
 namespace Pagekit\Widget\Model;
 
-use Pagekit\System\Model\DataTrait;
-use Pagekit\User\Model\AccessTrait;
+use Pagekit\System\Model\DataModelTrait;
+use Pagekit\User\Model\AccessModelTrait;
 
 /**
  * @Entity(tableClass="@system_widget")
  */
 class Widget implements \JsonSerializable
 {
-    use AccessTrait, DataTrait, WidgetModelTrait;
+    use AccessModelTrait, DataModelTrait, WidgetModelTrait;
 
     /** @Column(type="integer") @Id */
     public $id;

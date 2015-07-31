@@ -4,14 +4,14 @@ namespace Pagekit\User\Model;
 
 use Pagekit\Application\Exception;
 use Pagekit\Auth\UserInterface;
-use Pagekit\System\Model\DataTrait;
+use Pagekit\System\Model\DataModelTrait;
 
 /**
  * @Entity(tableClass="@system_user")
  */
 class User implements UserInterface, \JsonSerializable
 {
-    use DataTrait, UserModelTrait;
+    use DataModelTrait, UserModelTrait;
 
     /**
      * The blocked status.
@@ -240,14 +240,14 @@ class User implements UserInterface, \JsonSerializable
         }
 
         if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
-            $query->orWhere(['username = :username', 'email = :username'], ['username' => $this->username]);
+            $query->orWhere(['LOWER(username) = :username', 'LOWER(email) = :username'], ['username' => strtolower($this->username)]);
         })->first()
         ) {
             throw new Exception(__('Username not available.'));
         }
 
         if (self::where(['id <> :id'], ['id' => $this->id ?: 0])->where(function ($query) {
-            $query->orWhere(['username = :email', 'email = :email'], ['email' => $this->email]);
+            $query->orWhere(['LOWER(username) = :email', 'LOWER(email) = :email'], ['email' => strtolower($this->email)]);
         })->first()
         ) {
             throw new Exception(__('Email not available.'));

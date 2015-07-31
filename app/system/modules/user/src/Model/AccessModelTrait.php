@@ -4,7 +4,7 @@ namespace Pagekit\User\Model;
 
 use Pagekit\Application as App;
 
-trait AccessTrait
+trait AccessModelTrait
 {
     /** @Column(type="simple_array") */
     public $roles = [];

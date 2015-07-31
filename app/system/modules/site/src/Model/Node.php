@@ -3,17 +3,17 @@
 namespace Pagekit\Site\Model;
 
 use Pagekit\Application as App;
-use Pagekit\System\Model\DataTrait;
+use Pagekit\System\Model\DataModelTrait;
 use Pagekit\System\Model\NodeInterface;
 use Pagekit\System\Model\NodeTrait;
-use Pagekit\User\Model\AccessTrait;
+use Pagekit\User\Model\AccessModelTrait;
 
 /**
  * @Entity(tableClass="@system_node")
  */
 class Node implements NodeInterface, \JsonSerializable
 {
-    use AccessTrait, DataTrait, NodeModelTrait, NodeTrait;
+    use AccessModelTrait, DataModelTrait, NodeModelTrait, NodeTrait;
 
     /** @Column(type="integer") @Id */
     public $id;
