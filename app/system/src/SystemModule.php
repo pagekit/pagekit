@@ -37,7 +37,11 @@ class SystemModule extends Module
 
         $app['theme'] = $app->module($theme);
 
-        $app->extend('migrator', function($migrator) {
+        $app->extend('view', function ($view) use ($app) {
+            return $view->addGlobal('theme', $app['theme']);
+        });
+
+        $app->extend('migrator', function ($migrator) {
             return $migrator->setLoader(new FilesystemLoader());
         });
     }
@@ -68,7 +72,7 @@ class SystemModule extends Module
     /**
      * Loads language files.
      *
-     * @param string     $locale
+     * @param string              $locale
      * @param TranslatorInterface $translator
      */
     public function loadLocale($locale, TranslatorInterface $translator = null)

@@ -37,7 +37,6 @@ class SiteModule extends Module
         $app->extend('view', function ($view) {
             return $view->addGlobal('site', $this);
         });
-
     }
 
     /**

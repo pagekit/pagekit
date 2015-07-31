@@ -4,6 +4,7 @@ use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
 use Pagekit\Site\Model\Node;
+use Pagekit\Util\Arr;
 
 return [
 
@@ -154,6 +155,7 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
+            $app['theme']->config = Arr::merge($app['theme']->config, $app['node']->theme);
         },
 
         'view.meta' => function ($event, $meta) use ($app) {
