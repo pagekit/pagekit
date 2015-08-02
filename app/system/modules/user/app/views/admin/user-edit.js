@@ -1,6 +1,6 @@
 module.exports = {
 
-    data: window.$data,
+    data: _.merge({password: ''}, window.$data),
 
     ready: function() {
         UIkit.tab(this.$$.tab, {connect: this.$$.content});
