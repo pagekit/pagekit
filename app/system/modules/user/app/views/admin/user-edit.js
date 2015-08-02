@@ -3,6 +3,7 @@ module.exports = {
     data: window.$data,
 
     ready: function() {
+        UIkit.tab(this.$$.tab, {connect: this.$$.content});
 
         this.user.roles = this.user.roles.map(function(role) {
             return String(role);
@@ -23,6 +24,24 @@ module.exports = {
 
         isNew: function () {
             return !this.user.access && this.user.status;
+        },
+
+        sections: function () {
+
+            var sections = [];
+
+            _.forIn(this.$options.components, function (component, name) {
+
+                var options = component.options || {}, section = options.section;
+
+                if (section) {
+                    section.name = name;
+                    sections.push(section);
+                }
+
+            });
+
+            return sections;
         }
 
     },
@@ -47,7 +66,9 @@ module.exports = {
             });
         }
 
-    }
+    },
+
+    mixins: [window.Users]
 
 };
 
