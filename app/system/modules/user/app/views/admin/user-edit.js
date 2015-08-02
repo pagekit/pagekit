@@ -4,6 +4,7 @@ module.exports = {
 
     ready: function() {
         UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        UIkit.init(this.$el);
 
         this.user.roles = this.user.roles.map(function(role) {
             return String(role);
