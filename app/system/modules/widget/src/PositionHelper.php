@@ -32,7 +32,7 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) Widget::findActive($name);
+        return (bool) $this->positions->findActive($name);
     }
 
     /**
@@ -50,7 +50,7 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = Widget::findActive($name);
+        $parameters['widgets'] = $this->positions->findActive($name);
 
         return $this->view->render($view ?: 'system/site/position.php', $parameters);
     }

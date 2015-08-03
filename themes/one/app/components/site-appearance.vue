@@ -19,7 +19,7 @@
         <div class="uk-form-row">
             <label for="form-class" class="uk-form-label">{{ 'HTML Class' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-class" class="uk-form-width-large" type="text" v-model="node.data.html_class">
+                <input id="form-class" class="uk-form-width-large" type="text" v-model="node.data.view.html_class">
             </div>
         </div>
 

@@ -2,6 +2,7 @@
 
 namespace Pagekit\Widget\Model;
 
+use Pagekit\Database\ORM\ModelTrait;
 use Pagekit\System\Model\DataModelTrait;
 use Pagekit\User\Model\AccessModelTrait;
 
@@ -10,7 +11,7 @@ use Pagekit\User\Model\AccessModelTrait;
  */
 class Widget implements \JsonSerializable
 {
-    use AccessModelTrait, DataModelTrait, WidgetModelTrait;
+    use AccessModelTrait, DataModelTrait, ModelTrait;
 
     /** @Column(type="integer") @Id */
     public $id;

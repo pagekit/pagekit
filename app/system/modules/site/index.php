@@ -155,7 +155,11 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
-            $app['theme']->config = Arr::merge($app['theme']->config, $app['node']->theme);
+
+            $app->view()->config()
+                ->add($app['theme']->config)
+                ->add($app['node']->theme)
+                ->add($app['node']->get('view', []));
         },
 
         'view.meta' => function ($event, $meta) use ($app) {

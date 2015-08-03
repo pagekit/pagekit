@@ -13,19 +13,19 @@
     $logo = $site->config('logo');
 
     // Sticky overlay navbar if hero position exists
-    if ($theme->config('navbar-transparent') && $view->position()->exists('hero') && $theme->config('hero-image')) {
+    if ($view->config('navbar-transparent') && $view->position()->exists('hero') && $view->config('hero-image')) {
 
         $navbar  .= ' tm-navbar-overlay tm-navbar-transparent';
         $sticky[] = "top: '.uk-sticky-placeholder + *'";
         $hero     = 'uk-height-viewport';
 
-        if ($theme->config('hero-contrast')) {
+        if ($view->config('hero-contrast')) {
 
             $navbar  .= ' tm-navbar-contrast';
             $sticky[] = "clsinactive: 'tm-navbar-transparent tm-navbar-contrast'";
 
-            if ($theme->config('logo-contrast')) {
-                $logo = $theme->config('logo-contrast');
+            if ($view->config('logo-contrast')) {
+                $logo = $view->config('logo-contrast');
             }
 
         } else {
@@ -34,7 +34,7 @@
 
     }
 
-    if ($theme->config('hero-contrast') && $theme->config('hero-image')) {
+    if ($view->config('hero-contrast') && $view->config('hero-image')) {
         $hero .= ' uk-contrast';
     }
 
@@ -42,7 +42,7 @@
 
 ?>
 <!DOCTYPE html>
-<html>
+<html class="<?= $view->config('html_class') ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,7 +88,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $hero ?>" style="background-image: url('<?= $theme->config('hero-image'); ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $hero ?>" style="background-image: url('<?= $view->config('hero-image'); ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -118,13 +118,13 @@
 
                     <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
                         <?= $view->render('messages') ?>
-                        <?= $theme->config('alignment') ? '<div class="uk-text-center">' : '' ?>
+                        <?= $view->config('alignment') ? '<div class="uk-text-center">' : '' ?>
                         <?= $view->render('content') ?>
-                        <?= $theme->config('alignment') ? '</div>' : '' ?>
+                        <?= $view->config('alignment') ? '</div>' : '' ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
-                    <aside class="uk-width-medium-1-4 <?= $theme->config('sidebar-first') ? 'uk-flex-order-first-medium' : ''; ?>">
+                    <aside class="uk-width-medium-1-4 <?= $view->config('sidebar-first') ? 'uk-flex-order-first-medium' : ''; ?>">
                         <?= $view->position('sidebar', 'position-panel.php') ?>
                     </aside>
                     <?php endif ?>

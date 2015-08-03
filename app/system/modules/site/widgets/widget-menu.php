@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Site\Model\Node;
+use Pagekit\Application as App;
 
 return [
 
@@ -16,7 +16,7 @@ return [
             return '';
         }
 
-        $root = Node::getTree($menu, [
+        $root = App::menu()->getTree($menu, [
             'start_level' => (int) $widget->get('start_level', 1),
             'depth' => $widget->get('depth'),
             'mode' => $widget->get('mode')

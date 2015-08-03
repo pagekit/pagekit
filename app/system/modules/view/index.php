@@ -2,6 +2,7 @@
 
 use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
+use Pagekit\View\Helper\ConfigHelper;
 
 return [
 
@@ -11,6 +12,7 @@ return [
 
         $app->extend('view', function ($view) use ($app) {
 
+            $view->addHelper(new ConfigHelper());
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
 
@@ -20,7 +22,6 @@ return [
         $app->extend('assets', function ($assets) use ($app) {
 
             $assets->register('file', 'Pagekit\View\Asset\FileLocatorAsset');
-            $assets->register('template', 'Pagekit\View\Asset\TemplateAsset');
 
             return $assets;
         });
