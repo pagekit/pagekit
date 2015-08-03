@@ -41,6 +41,20 @@ class ConfigHelper extends Helper
     }
 
     /**
+     * Sets a value.
+     *
+     * @param  string $key
+     * @param  mixed  $value
+     * @return self
+     */
+    public function set($key, $value)
+    {
+        $this->config->set($key, $value);
+
+        return $this;
+    }
+
+    /**
      * Gets a value by key.
      *
      * @param  string $key

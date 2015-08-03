@@ -83,7 +83,7 @@ return [
      */
     'events' => [
 
-        'view.system/site/admin/settings' => function ($event, $view) {
+        'view.system/site/admin/settings' => function ($event, $view) use ($app) {
             $view->script('site-theme', 'theme:app/bundle/site-theme.js', 'site-settings');
             $view->data('$theme', $this);
         },
@@ -94,6 +94,48 @@ return [
 
         'view.system/widget/edit' => function ($event, $view) {
             $view->script('widget-appearance', 'theme:app/bundle/widget-appearance.js', 'widget-edit');
+        },
+
+        'view.layout' => function ($event, $view) {
+
+            $classes = [];
+
+            $classes['navbar'] = "tm-navbar";
+
+            $sticky = [
+                "media: 767",
+                "showup: true",
+                "animation: 'uk-animation-slide-top'"
+            ];
+
+            $classes['hero'] = 'tm-block-height';
+
+            // Sticky overlay navbar if hero position exists
+            if ($view->config('navbar-transparent') && $view->position()->exists('hero') && $view->config('hero-image')) {
+
+                $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
+                $sticky[]        = "top: '.uk-sticky-placeholder + *'";
+                $classes['hero'] = 'uk-height-viewport';
+
+                if ($view->config('hero-contrast')) {
+
+                    $classes['navbar'] .= ' tm-navbar-contrast';
+                    $sticky[] = "clsinactive: 'tm-navbar-transparent tm-navbar-contrast'";
+
+                } else {
+                    $sticky[] = "clsinactive: 'tm-navbar-transparent'";
+                }
+
+            }
+
+            if ($view->config('hero-contrast') && $view->config('hero-image')) {
+                $classes['hero'] .= ' uk-contrast';
+            }
+
+            $classes['sticky'] = 'data-uk-sticky="{'.implode(',', array_filter($sticky)).'}"';
+
+            $view->config()->add(['classes' => $classes]);
+
         }
 
     ]

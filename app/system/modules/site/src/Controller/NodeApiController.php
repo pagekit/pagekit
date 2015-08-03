@@ -114,7 +114,7 @@ class NodeApiController
 
                 $node->priority  = $data['order'];
                 $node->menu      = $menu;
-                $node->parent_id = $data['parent_id'] ?  $data['parent_id'] : 0;
+                $node->parent_id = $data['parent_id'] ?: 0;
 
                 $node->save();
             }

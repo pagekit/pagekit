@@ -40,7 +40,7 @@ class SiteModule extends Module
                 $view->addHelper(new MenuHelper($app['menu']));
             }
 
-            return $view->addGlobal('site', $this);
+            return $view;
         });
     }
 

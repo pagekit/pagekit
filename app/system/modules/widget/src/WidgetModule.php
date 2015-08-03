@@ -47,7 +47,7 @@ class WidgetModule extends Module
                 $view->addHelper(new PositionHelper($app['position']));
             }
 
-            return $view->addGlobal('site', $this);
+            return $view;
         });
     }
 

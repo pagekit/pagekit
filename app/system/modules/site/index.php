@@ -121,7 +121,11 @@ return [
             'footer' => ''
         ],
 
-        'logo' => ''
+        'view' => [
+
+            'logo' => ''
+
+        ]
 
     ],
 
@@ -138,14 +142,14 @@ return [
             Node::defineProperty('theme', function () use ($app) {
 
                 $config  = $app['theme']->config('_nodes.'.$this->id, []);
-                $default = $app['theme']->get("node", []);
+                $default = $app['theme']->get('node', []);
 
                 return array_replace_recursive($default, $config);
             }, true);
 
         },
 
-        'site' => function () use ($app) {
+        'site' => function ($event, $app) {
 
             $app->on('view.head', function ($event, $view) use ($app) {
                 $event->addResult($this->config('code.header'));
@@ -155,11 +159,14 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
+            $app->on('view.layout', function ($event, $view) use ($app) {
+                $view->config()
+                    ->add($this->config('view'))
+                    ->add($app['theme']->config)
+                    ->add($app['node']->get('view', []))
+                    ->add($app['node']->theme);
+            }, 50);
 
-            $app->view()->config()
-                ->add($app['theme']->config)
-                ->add($app['node']->theme)
-                ->add($app['node']->get('view', []));
         },
 
         'view.meta' => function ($event, $meta) use ($app) {

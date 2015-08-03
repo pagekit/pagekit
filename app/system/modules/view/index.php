@@ -40,7 +40,7 @@ return [
             $app->subscribe(new ResponseListener());
         },
 
-        'site' => function($event) use ($app) {
+        'site' => function($event, $app) {
             $app->subscribe(new CanonicalListener());
         },
 

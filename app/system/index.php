@@ -127,7 +127,7 @@ return [
                     return;
                 }
 
-                $app->trigger($app->isAdmin() ? 'admin' : 'site', [$request]);
+                $app->trigger($app->isAdmin() ? 'admin' : 'site', [$app]);
 
             }]
 

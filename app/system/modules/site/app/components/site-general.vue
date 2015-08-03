@@ -38,7 +38,7 @@
         <div class="uk-form-row">
             <label for="form-appicon" class="uk-form-label">{{ 'Logo' | trans }}</label>
             <div class="uk-form-controls">
-                <input-image class="uk-form-width-large" source="{{@ config.logo }}"></input-image>
+                <input-image class="uk-form-width-large" source="{{@ config.view.logo }}"></input-image>
             </div>
         </div>
 
