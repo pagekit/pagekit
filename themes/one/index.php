@@ -100,30 +100,36 @@ return [
 
             $classes = [];
 
-            $classes['navbar'] = "tm-navbar";
+            $classes['navbar'] = 'tm-navbar';
 
             $sticky = [
-                "media: 767",
-                "showup: true",
-                "animation: 'uk-animation-slide-top'"
+                'media' => 767,
+                'showup' => true,
+                'animation' => 'uk-animation-slide-top'
             ];
 
             $classes['hero'] = 'tm-block-height';
 
+            $view->config()->set('logo-nav', $view->config('logo'));
+
             // Sticky overlay navbar if hero position exists
             if ($view->config('navbar-transparent') && $view->position()->exists('hero') && $view->config('hero-image')) {
 
+                $sticky['top'] = '.uk-sticky-placeholder + *';
                 $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
-                $sticky[]        = "top: '.uk-sticky-placeholder + *'";
                 $classes['hero'] = 'uk-height-viewport';
 
                 if ($view->config('hero-contrast')) {
 
+                    $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
                     $classes['navbar'] .= ' tm-navbar-contrast';
-                    $sticky[] = "clsinactive: 'tm-navbar-transparent tm-navbar-contrast'";
+
+                    if ($view->config('logo-contrast')) {
+                        $view->config()->set('logo-nav', $view->config('logo-contrast'));
+                    }
 
                 } else {
-                    $sticky[] = "clsinactive: 'tm-navbar-transparent'";
+                    $sticky['clsinactive'] = 'tm-navbar-transparent';
                 }
 
             }
@@ -132,7 +138,7 @@ return [
                 $classes['hero'] .= ' uk-contrast';
             }
 
-            $classes['sticky'] = 'data-uk-sticky="{'.implode(',', array_filter($sticky)).'}"';
+            $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
 
             $view->config()->add(['classes' => $classes]);
 
