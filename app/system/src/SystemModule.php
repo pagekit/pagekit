@@ -38,7 +38,11 @@ class SystemModule extends Module
         $app['theme'] = $app->module($theme);
 
         $app->extend('view', function ($view) use ($app) {
-            return $view->addGlobal('theme', $app['theme']);
+            if ($app['theme']) {
+                $view->addGlobal('theme', $app['theme']);
+            }
+
+            return $view;
         });
 
         $app->extend('migrator', function ($migrator) {

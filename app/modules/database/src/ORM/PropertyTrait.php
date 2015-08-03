@@ -10,9 +10,10 @@ trait PropertyTrait
     protected static $_properties = [];
 
     /**
-     * Gets a object property.
+     * Gets an object property.
      *
-     * @param string $name
+     * @param  string $name
+     * @return mixed
      */
     public function __get($name)
     {
@@ -35,7 +36,7 @@ trait PropertyTrait
     }
 
     /**
-     * Sets a object property.
+     * Sets an object property.
      *
      * @param string $name
      * @param mixed  $value
@@ -65,9 +66,10 @@ trait PropertyTrait
     }
 
     /**
-     * Checks for a object property.
+     * Checks for an object property.
      *
-     * @param string $name
+     * @param  string $name
+     * @return bool
      */
     public function __isset($name)
     {
@@ -98,11 +100,11 @@ trait PropertyTrait
     }
 
     /**
-     * Defines a object property.
+     * Defines an object property.
      *
-     * @param  string $name
+     * @param  string                $name
      * @param  string|callable|array $get
-     * @param  string|callable|bool $set
+     * @param  string|callable|bool  $set
      * @return array
      */
     public static function defineProperty($name, $get, $set = null)
@@ -123,7 +125,7 @@ trait PropertyTrait
     }
 
     /**
-     * Gets a object property descriptor.
+     * Gets an object property descriptor.
      *
      * @param  string $name
      * @return array
@@ -134,7 +136,7 @@ trait PropertyTrait
             return static::$_properties[$name];
         }
 
-        if (isset(static::$properties) && isset(static::$properties[$name])) {
+        if (isset(static::$properties, static::$properties[$name])) {
             return static::defineProperty($name, static::$properties[$name]);
         }
     }

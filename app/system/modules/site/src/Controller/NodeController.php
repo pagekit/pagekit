@@ -25,7 +25,9 @@ class NodeController
                 'name'  => 'system/site/admin/index.php'
             ],
             '$data' => [
-                'theme' => App::theme(),
+                'config' => [
+                    'menus' => App::menu()->getPositions()
+                ],
                 'types' => array_values($site->getTypes())
             ]
         ];

@@ -44,7 +44,7 @@ class MenuApiController
 
     /**
      * @Route("/{id}", methods="POST", defaults={"id" = ""})
-     * @Request({"id", "menu"}, csrf=true)
+     * @Request({"id", "menu":"array"}, csrf=true)
      */
     public function saveAction($id, $menu)
     {
@@ -67,10 +67,9 @@ class MenuApiController
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
 
-        $theme = App::theme();
-        $theme->assignMenu($menu['assigned'], $id);
+        App::menu()->assign($id, $menu['positions']);
 
-        return ['message' => 'success', 'theme' => $theme];
+        return ['message' => 'success', 'menu' => $menu];
     }
 
     /**

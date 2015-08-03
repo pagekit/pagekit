@@ -21,7 +21,7 @@ trait WidgetModelTrait
 
         if (null === $widgets) {
             $widgets = self::where(['status' => 1])->get();
-            $positions = App::theme()->getPositions();
+            $positions = App::position()->all();
             $node = App::node()->id;
             $active = [];
         }

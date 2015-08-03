@@ -1,12 +1,19 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Pagekit\Site;
 
-use Pagekit\Application as App;
 use Pagekit\Site\Model\Node;
+use Pagekit\View\Helper\Helper;
 
 class MenuHelper extends Helper
 {
+    protected $menus;
+
+    public function __construct(MenuManager $menus)
+    {
+        $this->menus = $menus;
+    }
+
     /**
      * Set shortcut.
      *
@@ -25,7 +32,7 @@ class MenuHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) $this->getMenu($name);
+        return (bool) $this->menus->find($name);
     }
 
     /**
@@ -43,7 +50,7 @@ class MenuHelper extends Helper
             $view = false;
         }
 
-        if (!$menu = $this->getMenu($name)) {
+        if (!$menu = $this->menus->find($name)) {
             return '';
         }
 
@@ -58,16 +65,5 @@ class MenuHelper extends Helper
     public function getName()
     {
         return 'menu';
-    }
-
-    protected function getMenu($name)
-    {
-        static $menus;
-
-        if (null === $menus) {
-            $menus = App::theme()->getMenus();
-        }
-
-        return isset($menus[$name]) && $menus[$name]['assigned'] ? $menus[$name]['assigned'] : null;
     }
 }

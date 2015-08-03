@@ -23,18 +23,23 @@ class SiteModule extends Module
             return Node::create();
         };
 
-        $app['menu'] = function () {
+        $app['menu'] = function ($app) {
 
-            $menus = new MenuManager();
+            $menus = new MenuManager($app->config($app['theme']->name), $this->config('menus'));
 
-            foreach ($this->config('menus') as $menu) {
-                $menus->register($menu['id'], $menu['label']);
+            foreach ($app['theme']->get('menus', []) as $name => $label) {
+                $menus->register($name, $label);
             }
 
             return $menus;
         };
 
-        $app->extend('view', function ($view) {
+        $app->extend('view', function ($view) use ($app) {
+
+            if ($app['theme']) {
+                $view->addHelper(new MenuHelper($app['menu']));
+            }
+
             return $view->addGlobal('site', $this);
         });
     }

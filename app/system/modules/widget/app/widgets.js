@@ -50,7 +50,7 @@ window.Widgets = module.exports = {
     components: {
 
         appearance: require('./components/widget-appearance.vue'),
-        assignment: require('./components/widget-assignment.vue')
+        visibility: require('./components/widget-visibility.vue')
 
     }
 

@@ -28,6 +28,27 @@ class WidgetModule extends Module
 
             return $module;
         });
+
+        $app['position'] = function ($app) {
+
+            $positions = new PositionManager($app->config($app['theme']->name));
+
+            foreach ($app['theme']->get('positions', []) as $name => $label) {
+                $positions->register($name, $label);
+            }
+
+            return $positions;
+
+        };
+
+        $app->extend('view', function ($view) use ($app) {
+
+            if ($app['theme']) {
+                $view->addHelper(new PositionHelper($app['position']));
+            }
+
+            return $view->addGlobal('site', $this);
+        });
     }
 
     /**
@@ -48,8 +69,6 @@ class WidgetModule extends Module
     }
 
     /**
-     * Registers a type.
-     *
      * @param string        $name
      * @param TypeInterface $type
      */

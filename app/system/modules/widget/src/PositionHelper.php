@@ -1,11 +1,19 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Pagekit\Widget;
 
+use Pagekit\View\Helper\Helper;
 use Pagekit\Widget\Model\Widget;
 
 class PositionHelper extends Helper
 {
+    protected $positions;
+
+    public function __construct(PositionManager $positions)
+    {
+        $this->positions = $positions;
+    }
+
     /**
      * Set shortcut.
      *

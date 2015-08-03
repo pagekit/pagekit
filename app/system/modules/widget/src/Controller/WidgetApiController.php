@@ -36,10 +36,9 @@ class WidgetApiController
      */
     public function assignAction($position, $ids)
     {
-        $theme = App::theme();
-        $theme->assignPosition($position, $ids);
+        App::position()->assign($position, $ids);
 
-        return ['message' => 'success', 'theme' => $theme];
+        return ['message' => 'success', 'positions' => array_values(App::position()->all())];
     }
 
     /**
@@ -55,13 +54,9 @@ class WidgetApiController
             throw new NotFoundException('Widget not found.');
         }
 
-        if (isset($data['position'])) {
-            $widget->position = $data['position'];
-        }
-
         $widget->save($data);
 
-        return ['message' => __('Widget saved.'), 'widget' => Widget::find($widget->id)];
+        return ['message' => 'success', 'widget' => $widget];
     }
 
     /**
