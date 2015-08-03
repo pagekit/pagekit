@@ -7,7 +7,7 @@
 // Variables
 // ========================================================================
 
-@search-height:                                 @global-height;
+@search-height:                                 28px !important;
 @search-padding:                                35px !important;
 @search-border:                                 transparent !important;
 @search-border-width:                           0;
@@ -38,7 +38,8 @@
 .hook-search() { z-index: 1; }
 
 .hook-search-icon() {
-    height: @global-height;
+    width: @search-height;
+    height: 28px;
     background: url("@{global-image-path}/search.svg") 0 0 no-repeat;
     z-index: -1;
 }
