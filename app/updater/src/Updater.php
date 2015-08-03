@@ -4,7 +4,7 @@ namespace Pagekit\Updater;
 
 use Composer\Console\Application as ComposerApplication;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\ConsoleOutputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class Updater
 {
@@ -15,7 +15,7 @@ class Updater
      * @param array $config
      * @param OutputInterface $output
      */
-    public function __construct($config, ConsoleOutputInterface $output)
+    public function __construct($config, OutputInterface $output)
     {
         $this->output = $output;
         $this->pagekitConfig = $config;
@@ -85,8 +85,9 @@ class Updater
             }
         }
 
-        $this->writePackagesFile();
-        $this->composerUpdate($update);
+        if ($this->composerUpdate($update)) {
+            $this->writePackagesFile();
+        }
     }
 
     /**
@@ -134,6 +135,10 @@ class Updater
      */
     protected function composerUpdate($packages = false)
     {
+        global $pagekit_packages;
+
+        $pagekit_packages = $this->packages;
+
         $params = ['update', '--prefer-dist'];
         $params['--working-dir'] = $this->pagekitConfig['values']['path'];
         if ($packages) {
@@ -143,6 +148,8 @@ class Updater
         $composer = new ComposerApplication();
         $composer->setAutoExit(false);
         $composer->run(new ArrayInput($params), $this->output);
+
+        return empty($this->output->getError());
     }
 
     /**

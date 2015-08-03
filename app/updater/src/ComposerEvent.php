@@ -10,14 +10,20 @@ class ComposerEvent
 
     public static function extend($event)
     {
+        global $pagekit_packages;
+
+        if (isset($pagekit_packages) && $pagekit_packages) {
+            $packages = $pagekit_packages;
+        } else if (file_exists(self::CONFIG_FILE)) {
+            $packages = json_decode(file_get_contents(self::CONFIG_FILE), true);
+        } else {
+            return;
+        }
+
         $arrayLoader = new ArrayLoader();
         $composer = $event->getComposer();
-        $packages = file_exists(self::CONFIG_FILE) ? json_decode(file_get_contents(self::CONFIG_FILE), true) : [];
-
-        if ($packages) {
-            $links = $arrayLoader->parseLinks('pagekit/packages', '1.0.0', 'requires', $packages);
-            $requires = $composer->getPackage()->getRequires();
-            $composer->getPackage()->setRequires(array_merge($requires, $links));
-        }
+        $links = $arrayLoader->parseLinks('pagekit/packages', '1.0.0', 'requires', $packages);
+        $requires = $composer->getPackage()->getRequires();
+        $composer->getPackage()->setRequires(array_merge($requires, $links));
     }
 }
