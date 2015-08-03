@@ -113,9 +113,8 @@ class NodeApiController
             if ($node = Node::find($data['id'])) {
 
                 $node->priority  = $data['order'];
-                $node->menu = $menu;
-
-                $node->parent_id = $data['parent_id'] ?  $data['parent_id']:0;
+                $node->menu      = $menu;
+                $node->parent_id = $data['parent_id'] ?  $data['parent_id'] : 0;
 
                 $node->save();
             }
