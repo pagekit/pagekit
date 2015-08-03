@@ -53,5 +53,5 @@ try {
     $updater = new Updater($config, $output);
     $updater->run(compact('packages', 'remove'));
 } catch (Exception $e) {
-    $output->getErrorOutput()->writeln($e->getMessage());
+    $output->writeln($e->getMessage());
 }
