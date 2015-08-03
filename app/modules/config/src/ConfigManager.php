@@ -135,8 +135,8 @@ class ConfigManager implements \IteratorAggregate
             $this->cache = $this->connection->executeQuery("SELECT name, value FROM {$this->table}")->fetchAll(\PDO::FETCH_COLUMN | \PDO::FETCH_UNIQUE);
         }
 
-        if (isset($this->cache[$name])) {
-            return $this->configs[$name] = new Config(json_decode($this->cache[$name], true));
+        if (isset($this->cache[$name]) && $values = @json_decode($this->cache[$name], true)) {
+            return $this->configs[$name] = new Config($values);
         }
     }
 }
