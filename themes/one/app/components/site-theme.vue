@@ -14,7 +14,7 @@
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Logo Inverted' | trans }}</label>
             <div class="uk-form-controls">
-                <input-image source="{{@ config['logo-contrast'] }}"></input-image>
+                <input-image class="uk-form-width-large" source="{{@ config['logo-contrast'] }}"></input-image>
                 <p class="uk-form-help-block">{{ 'Select a second logo which looks great on darker hero images.' | trans }}</p>
             </div>
         </div>
