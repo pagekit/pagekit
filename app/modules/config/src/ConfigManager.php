@@ -93,7 +93,7 @@ class ConfigManager implements \IteratorAggregate
 
         if ($config->dirty()) {
 
-            $data = ['name' => $name, 'value' => json_encode($config)];
+            $data = ['name' => $name, 'value' => json_encode($config, JSON_UNESCAPED_UNICODE)];
 
             if ($this->connection->getDatabasePlatform() instanceof MySqlPlatform) {
                 $this->connection->executeQuery("INSERT INTO {$this->table} (name, value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE value = :value", $data);
