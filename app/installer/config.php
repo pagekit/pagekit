@@ -14,12 +14,6 @@ return [
 
     ],
 
-    'config' => [
-
-        'cache' => ''
-
-    ],
-
     'session' => [
 
         'storage' => 'array'
