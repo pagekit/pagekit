@@ -125,7 +125,7 @@ class Updater
      */
     protected function writePackagesFile()
     {
-        file_put_contents($this->packagesFile, json_encode($this->packages, JSON_PRETTY_PRINT));
+        file_put_contents($this->packagesFile, json_encode($this->packages, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT));
     }
 
     /**
