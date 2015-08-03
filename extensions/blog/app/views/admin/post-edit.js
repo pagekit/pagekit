@@ -9,10 +9,6 @@ var App = Vue.extend({
 
     created: function () {
         this.resource = this.$resource('api/blog/post/:id');
-
-        if (!this.post.id) {
-            this.post.user_id = $pagekit.user.id;
-        }
     },
 
     computed: {

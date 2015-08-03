@@ -53,7 +53,7 @@ class BlogController
                 $module = App::module('blog');
 
                 $post = Post::create([
-                    'user' => App::user(),
+                    'user_id' => App::user()->id,
                     'status' => Post::STATUS_DRAFT,
                     'date' => new \DateTime(),
                     'comment_status' => (bool) $module->config('posts.comments_enabled')
