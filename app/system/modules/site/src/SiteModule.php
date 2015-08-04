@@ -35,12 +35,7 @@ class SiteModule extends Module
         };
 
         $app->extend('view', function ($view) use ($app) {
-
-            if ($app['theme']) {
-                $view->addHelper(new MenuHelper($app['menu']));
-            }
-
-            return $view;
+            return $view->addHelper(new MenuHelper($app['menu']));
         });
     }
 

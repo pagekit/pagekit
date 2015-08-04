@@ -35,14 +35,22 @@ class SystemModule extends Module
             }
         }
 
-        $app['theme'] = $app->module($theme);
+        if (!$app['theme'] = $app->module($theme)) {
+            $app['theme'] = new Module([
+                'name' => 'default-theme',
+                'path' => '',
+                'config' => [],
+                'layout' => 'views:system/blank.php'
+            ]);
+        }
 
         $app->extend('view', function ($view) use ($app) {
-            if ($app['theme']) {
-                $view->addGlobal('theme', $app['theme']);
-            }
 
-            return $view;
+            $theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'];
+
+            $view->map('layout', $theme->get('layout', 'views:template.php'));
+
+            return $view->addGlobal('theme', $app['theme']);
         });
 
         $app->extend('migrator', function ($migrator) {

@@ -99,19 +99,22 @@ return [
         /**
         * Custom markup calculations based on theme settings
         */
-        'view.layout' => function ($event, $view) {
+        'view.layout' => function ($event, $view) use ($app) {
 
-            $classes = [];
+            if ($app->isAdmin()) {
+                return;
+            }
 
-            $classes['navbar'] = 'tm-navbar';
+            $classes = [
+                'navbar' => 'tm-navbar',
+                'hero' => 'tm-block-height'
+            ];
 
             $sticky = [
                 'media' => 767,
                 'showup' => true,
                 'animation' => 'uk-animation-slide-top'
             ];
-
-            $classes['hero'] = 'tm-block-height';
 
             $view->config()->set('logo-navbar', $view->config('logo'));
 

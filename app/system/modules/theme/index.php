@@ -6,6 +6,8 @@ return [
 
     'type' => 'theme',
 
+    'layout' => 'views:system/template.php',
+
     'events' => [
 
         'view.meta' => [function($event, $meta) use ($app) {

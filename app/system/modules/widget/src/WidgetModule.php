@@ -42,12 +42,7 @@ class WidgetModule extends Module
         };
 
         $app->extend('view', function ($view) use ($app) {
-
-            if ($app['theme']) {
-                $view->addHelper(new PositionHelper($app['position']));
-            }
-
-            return $view;
+            return $view->addHelper(new PositionHelper($app['position']));
         });
     }
 

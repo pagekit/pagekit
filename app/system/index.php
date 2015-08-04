@@ -160,19 +160,6 @@ return [
                 $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
             }
 
-        },
-
-        'view.layout' => function($event, $view) use ($app) {
-
-            if ($event->getTemplate() !== 'layout') {
-                return;
-            }
-
-            if ($theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'] ? : null) {
-                $event->setParameter('theme', $theme);
-                $event->setTemplate($theme->getLayout());
-            }
-
         }
 
     ]
