@@ -163,7 +163,7 @@ class UserApiController
     public function bulkSaveAction($users = [])
     {
         foreach ($users as $data) {
-            $this->saveAction($data, null, null, isset($data['id']) ? $data['id'] : 0);
+            $this->saveAction($data, null, isset($data['id']) ? $data['id'] : 0);
         }
 
         return ['message' => 'success'];
