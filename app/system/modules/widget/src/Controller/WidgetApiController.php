@@ -3,7 +3,6 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Widget\Model\Widget;
 
 /**
@@ -25,7 +24,7 @@ class WidgetApiController
     public function getAction($id)
     {
         if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
+            App::abort(404, 'Widget not found.');
         }
 
         return $widget;
@@ -51,7 +50,7 @@ class WidgetApiController
         if (!$id) {
             $widget = Widget::create();
         } else if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
+            App::abort(404, 'Widget not found.');
         }
 
         $widget->save($data);
@@ -66,7 +65,7 @@ class WidgetApiController
     public function deleteAction($id)
     {
         if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
+            App::abort(404, 'Widget not found.');
         }
 
         $widget->delete();

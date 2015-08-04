@@ -3,7 +3,6 @@
 namespace Pagekit\Site\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Site\Model\Node;
 use Pagekit\User\Model\Role;
 
@@ -48,18 +47,18 @@ class NodeController
             $node = Node::create(['type' => $id]);
 
             if ($menu && !App::menu($menu)) {
-                throw new NotFoundException(__('Menu not found.'));
+                App::abort(404, 'Menu not found.');
             }
 
             $node->menu = $menu;
         }
 
         if (!$node) {
-            throw new NotFoundException(__('Node not found.'));
+            App::abort(404, 'Node not found.');
         }
 
         if (!$type = $site->getType($node->type)) {
-            throw new NotFoundException(__('Type not found.'));
+            App::abort(404, 'Type not found.');
         }
 
         return [
