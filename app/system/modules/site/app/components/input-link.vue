@@ -34,7 +34,7 @@
 
     module.exports = {
 
-        props: ['url', 'link', 'name', 'class', 'id', 'required'],
+        props: ['link', 'name', 'class', 'id', 'required'],
 
         data: function () {
             return {url: false};
