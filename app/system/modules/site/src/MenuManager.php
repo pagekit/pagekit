@@ -58,7 +58,7 @@ class MenuManager implements \JsonSerializable
             return strcmp($a['label'], $b['label']);
         });
 
-        return $menus + [['id' => '', 'label' => 'Not Linked', 'fixed' => true]];
+        return $menus + ['' => ['id' => '', 'label' => 'Not Linked', 'fixed' => true]];
     }
 
     /**
