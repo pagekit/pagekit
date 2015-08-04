@@ -2,11 +2,11 @@
 
 namespace Pagekit\Updater;
 
-use Composer\Console\Application as ComposerApplication;
+use Composer\Console\Application as Composer;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Updater
+class Application
 {
     const packagesFile = '/packages.json';
 
@@ -145,7 +145,7 @@ class Updater
             $params['packages'] = $packages;
         }
 
-        $composer = new ComposerApplication();
+        $composer = new Composer();
         $composer->setAutoExit(false);
         $composer->run(new ArrayInput($params), $this->output);
 
