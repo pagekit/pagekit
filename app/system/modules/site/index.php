@@ -163,7 +163,6 @@ return [
                 $view->config()
                     ->add($this->config('view'))
                     ->add($app['theme']->config)
-                    ->add($app['node']->get('view', []))
                     ->add($app['node']->theme);
             }, 50);
 

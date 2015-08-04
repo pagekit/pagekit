@@ -45,6 +45,8 @@ return [
      */
     'node' => [
 
+        'title_hide' => false,
+        'html_class' => '',
         'alignment' => '',
         'sidebar-first' => false,
         'hero-image' => '',
@@ -58,6 +60,8 @@ return [
      */
     'widget' => [
 
+        'title_hide' => false,
+        'html_class' => '',
         'panel' => '',
         'title_size' => 'uk-panel-title',
         'alignment' => ''

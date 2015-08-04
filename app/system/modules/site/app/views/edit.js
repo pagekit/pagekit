@@ -71,8 +71,7 @@ window.Site = module.exports = {
 
     components: {
 
-        link: require('../components/link.vue'),
-        appearance: require('../components/site-appearance.vue')
+        link: require('../components/link.vue')
 
     }
 
