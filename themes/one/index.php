@@ -120,22 +120,22 @@ return [
                 'animation' => 'uk-animation-slide-top'
             ];
 
-            $view->config()->set('logo-navbar', $view->config('logo'));
+            $event['logo-navbar'] = $event['logo'];
 
             // Sticky overlay navbar if hero position exists
-            if ($view->config('navbar-transparent') && $view->position()->exists('hero') && $view->config('hero-image')) {
+            if ($event['navbar-transparent'] && $view->position()->exists('hero') && $event['hero-image']) {
 
                 $sticky['top'] = '.uk-sticky-placeholder + *';
                 $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
                 $classes['hero'] = 'uk-height-viewport';
 
-                if ($view->config('hero-contrast')) {
+                if ($event['hero-contrast']) {
 
                     $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
                     $classes['navbar'] .= ' tm-navbar-contrast';
 
-                    if ($view->config('logo-contrast')) {
-                        $view->config()->set('logo-navbar', $view->config('logo-contrast'));
+                    if (isset($event['logo-contrast'])) {
+                        $event['logo-navbar'] = $event['logo-contrast'];
                     }
 
                 } else {
@@ -144,13 +144,13 @@ return [
 
             }
 
-            if ($view->config('hero-contrast') && $view->config('hero-image')) {
+            if ($event['hero-contrast'] && $event['hero-image']) {
                 $classes['hero'] .= ' uk-contrast';
             }
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
 
-            $view->config()->add(['classes' => $classes]);
+            $event->addParameters(['classes' => $classes]);
 
         }
 

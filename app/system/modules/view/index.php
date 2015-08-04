@@ -2,7 +2,6 @@
 
 use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
-use Pagekit\View\Helper\ConfigHelper;
 
 return [
 
@@ -12,7 +11,6 @@ return [
 
         $app->extend('view', function ($view) use ($app) {
 
-            $view->addHelper(new ConfigHelper());
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
 

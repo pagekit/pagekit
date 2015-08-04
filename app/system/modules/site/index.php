@@ -158,11 +158,11 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
-            $app->on('view.layout', function ($event, $view) use ($app) {
-                $view->config()
-                    ->add($this->config('view'))
-                    ->add($app['theme']->config)
-                    ->add($app['node']->theme);
+            $app->on('view.layout', function ($event) use ($app) {
+                $event
+                    ->addParameters($this->config('view'))
+                    ->addParameters($app['theme']->config)
+                    ->addParameters($app['node']->theme);
             }, 50);
 
         },
