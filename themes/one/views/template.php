@@ -16,9 +16,9 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($view->config('logo-nav')) : ?>
+                    <?php if ($view->config('logo-navbar')) : ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($view->config('logo-nav')) ?>" alt="">
+                        <img src="<?= $this->escape($view->config('logo-navbar')) ?>" alt="">
                     </a>
                     <?php endif ?>
 

@@ -96,6 +96,9 @@ return [
             $view->script('widget-appearance', 'theme:app/bundle/widget-appearance.js', 'widget-edit');
         },
 
+        /**
+        * Custom markup calculations based on theme settings
+        */
         'view.layout' => function ($event, $view) {
 
             $classes = [];
@@ -110,7 +113,7 @@ return [
 
             $classes['hero'] = 'tm-block-height';
 
-            $view->config()->set('logo-nav', $view->config('logo'));
+            $view->config()->set('logo-navbar', $view->config('logo'));
 
             // Sticky overlay navbar if hero position exists
             if ($view->config('navbar-transparent') && $view->position()->exists('hero') && $view->config('hero-image')) {
@@ -125,7 +128,7 @@ return [
                     $classes['navbar'] .= ' tm-navbar-contrast';
 
                     if ($view->config('logo-contrast')) {
-                        $view->config()->set('logo-nav', $view->config('logo-contrast'));
+                        $view->config()->set('logo-navbar', $view->config('logo-contrast'));
                     }
 
                 } else {
