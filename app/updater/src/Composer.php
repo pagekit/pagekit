@@ -4,11 +4,11 @@ namespace Pagekit\Updater;
 
 use Composer\Package\Loader\ArrayLoader;
 
-class ComposerEvent
+class Composer
 {
     const CONFIG_FILE = 'packages.json';
 
-    public static function extend($event)
+    public static function packages($event)
     {
         global $packages;
 

@@ -131,18 +131,18 @@ class Application
     /**
      * Runs Composer Update command.
      *
-     * @param array|false $packages
+     * @param array|false $updates
      */
-    protected function composerUpdate($packages = false)
+    protected function composerUpdate($updates = false)
     {
-        global $pagekit_packages;
+        global $packages;
 
-        $pagekit_packages = $this->packages;
+        $packages = $this->packages;
 
         $params = ['update', '--prefer-dist'];
         $params['--working-dir'] = $this->pagekitConfig['values']['path'];
-        if ($packages) {
-            $params['packages'] = $packages;
+        if ($updates) {
+            $params['packages'] = $updates;
         }
 
         $composer = new Composer();
