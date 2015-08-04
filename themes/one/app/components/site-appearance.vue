@@ -39,7 +39,7 @@
                 <p class="uk-form-controls-condensed uk-margin-bottom">
                     <label><input type="checkbox" v-model="node.theme['navbar-transparent']"> {{ 'Make the navbar transparent and overlay the hero image.' | trans }}</label>
                 </p>
-                <input-image class="uk-form-width-large" source="{{@ node.theme['hero-image'] }}"></input-image>
+                <p class="uk-form-controls-condensed uk-form-width-large"><input-image source="{{@ node.theme['hero-image'] }}"></input-image></p>
                 <p class="uk-form-help-block">{{ 'Select a background image for the hero position.' | trans }}</p>
             </div>
         </div>
