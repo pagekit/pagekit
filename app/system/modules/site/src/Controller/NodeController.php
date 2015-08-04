@@ -8,14 +8,19 @@ use Pagekit\User\Model\Role;
 
 class NodeController
 {
+    protected $site;
+
+    public function __construct()
+    {
+        $this->site = App::module('system/site');
+    }
+
     /**
      * @Route("site/page", name="page")
      * @Access("site: manage site", admin=true)
      */
     public function indexAction()
     {
-        $site = App::module('system/site');
-
         Node::fixOrphanedNodes();
 
         return [
@@ -27,7 +32,7 @@ class NodeController
                 'config' => [
                     'menus' => App::menu()->getPositions()
                 ],
-                'types' => array_values($site->getTypes())
+                'types' => array_values($this->site->getTypes())
             ]
         ];
     }
@@ -39,10 +44,12 @@ class NodeController
      */
     public function editAction($id = '', $menu = '')
     {
-        $site = App::module('system/site');
-
         if (is_numeric($id)) {
-            $node = Node::find($id);
+
+            if (!$id or !$node = Node::find($id)) {
+                App::abort(404, 'Node not found.');
+            }
+
         } else {
             $node = Node::create(['type' => $id]);
 
@@ -53,11 +60,7 @@ class NodeController
             $node->menu = $menu;
         }
 
-        if (!$node) {
-            App::abort(404, 'Node not found.');
-        }
-
-        if (!$type = $site->getType($node->type)) {
+        if (!$type = $this->site->getType($node->type)) {
             App::abort(404, 'Type not found.');
         }
 
@@ -86,7 +89,7 @@ class NodeController
                 'name'  => 'system/site/admin/settings.php'
             ],
             '$data' => [
-                'config' => App::module('system/site')->config(['title', 'description', 'maintenance.', 'logo', 'icons.', 'code.'])
+                'config' => $this->site->config(['title', 'description', 'maintenance.', 'logo', 'icons.', 'code.'])
             ]
         ];
     }

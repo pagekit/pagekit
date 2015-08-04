@@ -46,7 +46,7 @@ trait ModelTrait
      * Creates a new instance of this model.
      *
      * @param  array $data
-     * @return Metadata
+     * @return static
      */
     public static function create($data = [])
     {
@@ -79,8 +79,7 @@ trait ModelTrait
      * Retrieve an entity by its identifier.
      *
      * @param  mixed $id
-     * @return mixed
-     * @throws \Exception
+     * @return static|null
      */
     public static function find($id)
     {
@@ -90,7 +89,7 @@ trait ModelTrait
     /**
      * Retrieve all entities.
      *
-     * @return mixed
+     * @return static[]|null
      */
     public static function findAll()
     {
