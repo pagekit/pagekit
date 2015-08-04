@@ -58,8 +58,8 @@
         }
     },
     "scripts": {
-        "pre-update-cmd": "Pagekit\\Updater\\ComposerEvent::extend",
-        "pre-install-cmd": "Pagekit\\Updater\\ComposerEvent::extend",
-        "pre-status-cmd": "Pagekit\\Updater\\ComposerEvent::extend"
+        "pre-update-cmd": "Pagekit\\Updater\\Composer::packages",
+        "pre-install-cmd": "Pagekit\\Updater\\Composer::packages",
+        "pre-status-cmd": "Pagekit\\Updater\\Composer::packages"
     }
 }

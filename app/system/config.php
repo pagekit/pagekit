@@ -8,12 +8,6 @@ return [
 
     ],
 
-    'config' => [
-
-        'cache' => "$path/tmp/cache"
-
-    ],
-
     'debug' => [
 
         'file' => "sqlite:$path/app/database/debug.db"

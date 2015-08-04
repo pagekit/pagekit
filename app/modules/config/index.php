@@ -39,9 +39,7 @@ return [
 
     'config' => [
 
-        'table'  => '@system_config',
-        'prefix' => 'config.',
-        'cache'  => ''
+        'table'  => '@system_config'
 
     ],
 

@@ -39,7 +39,7 @@
 
         props: ['widget', 'config']
 
-    }
+    };
 
     window.Widgets.components['widget-text'] = module.exports;
 

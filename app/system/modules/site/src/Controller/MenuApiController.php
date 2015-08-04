@@ -44,14 +44,14 @@ class MenuApiController
 
     /**
      * @Route("/{id}", methods="POST", defaults={"id" = ""})
-     * @Request({"id", "menu"}, csrf=true)
+     * @Request({"id", "menu":"array"}, csrf=true)
      */
     public function saveAction($id, $menu)
     {
         $oldId = trim($menu['id']);
         $label = trim($menu['label']);
 
-        if (!$id = $this->slugify($label)) {
+        if (!$id and !$id = $this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
         }
 
@@ -67,10 +67,9 @@ class MenuApiController
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
 
-        $theme = App::theme();
-        $theme->assignMenu($menu['assigned'], $id);
+        App::menu()->assign($id, $menu['positions']);
 
-        return ['message' => 'success', 'theme' => $theme];
+        return ['message' => 'success', 'menu' => $menu];
     }
 
     /**

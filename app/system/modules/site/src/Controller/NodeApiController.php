@@ -109,10 +109,12 @@ class NodeApiController
     public function updateOrderAction($menu, $nodes = [])
     {
         foreach ($nodes as $data) {
+
             if ($node = Node::find($data['id'])) {
 
-                $data['priority']  = $data['order'];
-                $node->menu = $menu;
+                $node->priority  = $data['order'];
+                $node->menu      = $menu;
+                $node->parent_id = $data['parent_id'] ?: 0;
 
                 $node->save();
             }

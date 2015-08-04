@@ -259,7 +259,7 @@
             },
 
             isImage: function (url) {
-                return url.match(/\.(?:gif|jpe?g|png|svg)$/i);
+                return url.match(/\.(?:gif|jpe?g|png|svg|ico)$/i);
             },
 
             isVideo: function (url) {

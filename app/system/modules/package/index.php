@@ -35,7 +35,7 @@ return [
             return $module;
         });
 
-        $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\System\Theme'));
+        $app['module']->addFactory('theme', new ModuleFactory($app));
         $app['module']->addFactory('extension', new ModuleFactory($app));
 
     },

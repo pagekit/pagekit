@@ -14,7 +14,7 @@ class %CLASSNAME% extends Theme
     {
         parent::boot($app);
 
-        $app->on('site', function() use ($app) {
+        $app->on('site', function($event, $app) {
 
             // your code here...
 

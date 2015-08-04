@@ -71,13 +71,13 @@ return [
         'boot' => function ($event, $app) {
 
             Widget::defineProperty('position', function () use ($app) {
-                return $app['theme']->findPosition($this->id);
+                return $app['position']->find($this->id);
             }, true);
 
             Widget::defineProperty('theme', function () use ($app) {
 
-                $config  = $app['theme']->get("data.widgets.".$this->id, []);
-                $default = $app['theme']->get("widget", []);
+                $config  = $app['theme']->config('_widgets.'.$this->id, []);
+                $default = $app['theme']->get('widget', []);
 
                 return array_replace_recursive($default, $config);
             }, true);
@@ -88,9 +88,8 @@ return [
         },
 
         'model.widget.saved' => function ($event, $widget) use ($app) {
-            $app['theme']->assignPosition($widget->position, $widget->id);
-            $app['theme']->options['data']['widgets'][$widget->id] = $widget->theme;
-            $app['theme']->save();
+            $app['position']->assign($widget->position, $widget->id);
+            $app->config($app['theme']->name)->set('_widgets.'.$widget->id, $widget->theme);
         },
 
         'model.role.deleted' => function ($event, $role) {

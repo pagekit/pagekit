@@ -114,4 +114,4 @@ exports.compare = function (v1, v2, operator) {
   default:
     return null;
   }
-}
+};

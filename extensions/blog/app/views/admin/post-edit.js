@@ -11,6 +11,15 @@ var App = Vue.extend({
         this.resource = this.$resource('api/blog/post/:id');
     },
 
+    ready: function() {
+
+        var meridian = this.$date(this.post.date, {time:'short'}).match(/(am|pm)/i);
+
+        $('.js-timepicker').each(function(){
+            UIkit.timepicker(this, {format: meridian ? '12h':'24h'});
+        });
+    },
+
     computed: {
 
         statuses: function() {

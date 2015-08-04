@@ -1,50 +1,64 @@
 <?php
 
-require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
-require 'src/Updater.php';
-require 'src/Output.php';
+use Pagekit\Updater\Application;
+use Pagekit\Updater\OutputFilter;
+use Pagekit\Updater\TokenVerifier;
 
-use Pagekit\Updater\Updater;
-use Pagekit\Updater\Output;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\BufferedOutput;
+require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
+require 'src/Application.php';
+require 'src/OutputFilter.php';
+require 'src/TokenVerifier.php';
+
+$config = require __DIR__ . '/../config.php';
 
 if (PHP_SAPI === 'cli') {
-    $output = new ConsoleOutput();
 
     // parse CLI input
-    $opts = getopt('p:r::', ['packages:', 'remove::']);
+    $options = getopt('p:r::', ['packages:', 'remove::']);
+    $output = new OutputFilter(fopen('php://stderr', 'w'));
 
-    if (isset($opts['p']) || isset($opts['packages'])) {
-        $packages = explode(' ', isset($opts['p']) ? $opts['p'] : $opts['package']);
-    }
-    if (isset($opts['r']) || isset($opts['remove'])) {
-        $remove = isset($opts['r']) ?: isset($opts['remove']);
-    }
 } else {
-    $output = new Output();
+
+    // verify access token
+    $verifier = new TokenVerifier(require $config['values']['config.file']);
+
+    if (!isset($_GET['token']) || !$verifier->verify($_GET['token'], array_diff_key(['token' => false], $_GET))) {
+        http_response_code(401);
+        die('No access permission.');
+    }
 
     // parse request parameters
-    if (isset($_GET['packages'])) {
-        $packages = explode(' ', $_GET['packages']);
-    }
-    if (isset($_GET['remove'])) {
-        $remove = isset($_GET['remove']);
-    }
+    $options = $_GET;
+    $output = new OutputFilter(fopen('php://output', 'w'));
+
+    ob_start();
 
     register_shutdown_function(function () use ($output) {
+
         echo json_encode([
-            'status' => ($error = $output->getErrorOutput()->fetch()) ? 'failure' : 'success',
-            'message' => $error ?: $output->fetch()
+            'status' => empty($output->getError()) ? 'success' : 'failure',
+            'message' => $output->getError() ?: ob_get_clean()
         ]);
+
     });
+
 }
 
-$config = require(__DIR__ . '/../config.php');
+if (isset($options['p']) || isset($options['packages'])) {
+    $packages = explode(' ', isset($options['p']) ? $options['p'] : $options['packages']);
+}
+
+if (isset($options['r']) || isset($options['remove'])) {
+    $remove = isset($options['r']) ?: isset($options['remove']);
+}
 
 try {
-    $updater = new Updater($config, $output);
-    $updater->run(compact('packages', 'remove'));
+
+    $app = new Application($config['values'], $output);
+    $app->run(compact('packages', 'remove'));
+
 } catch (Exception $e) {
-    $output->getErrorOutput()->writeln($e->getMessage());
+
+    $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
+
 }

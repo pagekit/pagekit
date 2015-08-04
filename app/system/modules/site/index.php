@@ -4,7 +4,6 @@ use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
 use Pagekit\Site\Model\Node;
-use Pagekit\Util\Arr;
 
 return [
 
@@ -121,7 +120,11 @@ return [
             'footer' => ''
         ],
 
-        'logo' => ''
+        'view' => [
+
+            'logo' => ''
+
+        ]
 
     ],
 
@@ -137,25 +140,31 @@ return [
 
             Node::defineProperty('theme', function () use ($app) {
 
-                $config  = $app['theme']->get("data.nodes.".$this->id, []);
-                $default = $app['theme']->get("node", []);
+                $config  = $app['theme']->config('_nodes.'.$this->id, []);
+                $default = $app['theme']->get('node', []);
 
                 return array_replace_recursive($default, $config);
             }, true);
 
         },
 
-        'site' => function () use ($app) {
+        'site' => function ($event, $app) {
 
-            $app->on('view.head', function ($event, $view) use ($app) {
+            $app->on('view.head', function ($event) use ($app) {
                 $event->addResult($this->config('code.header'));
             }, -10);
 
-            $app->on('view.footer', function ($event, $view) use ($app) {
+            $app->on('view.footer', function ($event) use ($app) {
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
-            $app['theme']->config = Arr::merge($app['theme']->config, $app['node']->theme);
+            $app->on('view.layout', function ($event) use ($app) {
+                $event
+                    ->addParameters($this->config('view'))
+                    ->addParameters($app['theme']->config)
+                    ->addParameters($app['node']->theme);
+            }, 50);
+
         },
 
         'view.meta' => function ($event, $meta) use ($app) {
@@ -185,8 +194,7 @@ return [
         },
 
         'model.node.saved' => function ($event, $node) use ($app) {
-            $app['theme']->options['data']['nodes'][$node->id] = $node->theme;
-            $app['theme']->save();
+            $app->config($app['theme']->name)->set('_nodes.'.$node->id, $node->theme);
         }
 
     ]

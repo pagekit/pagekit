@@ -60,8 +60,7 @@ module.exports = {
                 },
 
                 permalink: function () {
-
-                    return this.post.url + '#' + this.comment.id;
+                    return $pagekit.url + this.post.url + '#' + this.comment.id;
 
                 }
 
@@ -140,4 +139,3 @@ module.exports = {
 jQuery(function () {
     new Vue(module.exports).$mount('#comments');
 });
-

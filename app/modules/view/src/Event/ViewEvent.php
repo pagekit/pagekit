@@ -3,6 +3,7 @@
 namespace Pagekit\View\Event;
 
 use Pagekit\Event\Event;
+use Pagekit\Util\Arr;
 
 class ViewEvent extends Event
 {
@@ -62,6 +63,31 @@ class ViewEvent extends Event
     public function setParameter($key, $value)
     {
         $this->parameters[$key] = $value;
+    }
+
+    /**
+     * Adds parameter values.
+     *
+     * @param  mixed $values
+     * @param  bool  $replace
+     * @return self
+     */
+    public function addParameters(array $values, $replace = false)
+    {
+        $this->parameters = Arr::merge($this->parameters, $values, $replace);
+        return $this;
+    }
+
+    /**
+     * Gets parameter value.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    public function get($key, $default = false)
+    {
+        return Arr::get($this->parameters, $key, $default);
     }
 
     /**

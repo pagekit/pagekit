@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="uk-width-large-1-2">
-                                <div class="uk-form-icon uk-display-block" data-uk-timepicker="{format:'12h'}">
+                                <div class="uk-form-icon uk-display-block js-timepicker">
                                     <i class="pk-icon-time pk-icon-muted"></i>
                                     <input class="uk-width-1-1" type="text" v-model="time" lazy>
                                 </div>

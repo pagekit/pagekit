@@ -139,9 +139,9 @@ trait NodeTrait
         $node = isset($this->children[$hash]) ? $this->children[$hash] : null;
 
         if (!$node && $recursive) {
-            foreach(new \RecursiveIteratorIterator($this, \RecursiveIteratorIterator::SELF_FIRST) as $n) {
-                if ($n->hashCode() === $hash) {
-                    return $n;
+            foreach($this->getChildren() as $n) {
+                if ($child = $n->findChild($hash, $recursive)) {
+                    return $child;
                 }
             }
         }
@@ -182,7 +182,7 @@ trait NodeTrait
      */
     public function getIterator()
     {
-        return $this;
+        return new \ArrayIterator($this->children);
     }
 
     /**

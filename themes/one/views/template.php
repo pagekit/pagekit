@@ -1,48 +1,5 @@
-<?php
-
-    $navbar = "tm-navbar";
-
-    $sticky = [
-        "media: 767",
-        "showup: true",
-        "animation: 'uk-animation-slide-top'"
-    ];
-
-    $hero = 'tm-block-height';
-
-    $logo = $site->config('logo');
-
-    // Sticky overlay navbar if hero position exists
-    if ($theme->config('navbar-transparent') && $view->position()->exists('hero') && $theme->config('hero-image')) {
-
-        $navbar  .= ' tm-navbar-overlay tm-navbar-transparent';
-        $sticky[] = "top: '.uk-sticky-placeholder + *'";
-        $hero     = 'uk-height-viewport';
-
-        if ($theme->config('hero-contrast')) {
-
-            $navbar  .= ' tm-navbar-contrast';
-            $sticky[] = "clsinactive: 'tm-navbar-transparent tm-navbar-contrast'";
-
-            if ($theme->config('logo-contrast')) {
-                $logo = $theme->config('logo-contrast');
-            }
-
-        } else {
-            $sticky[] = "clsinactive: 'tm-navbar-transparent'";
-        }
-
-    }
-
-    if ($theme->config('hero-contrast') && $theme->config('hero-image')) {
-        $hero .= ' uk-contrast';
-    }
-
-    $sticky = 'data-uk-sticky="{'.implode(',', array_filter($sticky)).'}"';
-
-?>
 <!DOCTYPE html>
-<html>
+<html class="<?= $view->param('html_class') ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,14 +11,14 @@
     <body>
 
         <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
-        <div class="<?= $navbar ?>" <?= $sticky ?>>
+        <div class="<?= $view->param('classes.navbar') ?>" <?= $view->param('classes.sticky') ?>>
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
 
-                    <?php if ($logo) : ?>
+                    <?php if ($view->param('logo-navbar')) : ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($logo) ?>" alt="">
+                        <img src="<?= $this->escape($view->param('logo-navbar')) ?>" alt="">
                     </a>
                     <?php endif ?>
 
@@ -75,9 +32,9 @@
                     <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
                     <?php endif ?>
 
-                    <?php if ($site->config('logo')): ?>
+                    <?php if ($view->param('logo')): ?>
                     <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($site->config('logo')) ?>" alt="">
+                        <img src="<?= $this->escape($view->param('logo')) ?>" alt="">
                     </a>
                     <?php endif ?>
 
@@ -88,7 +45,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $hero ?>" style="background-image: url('<?= $theme->config('hero-image'); ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $view->param('classes.hero') ?>" style="background-image: url('<?= $view->param('hero-image'); ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -118,13 +75,13 @@
 
                     <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
                         <?= $view->render('messages') ?>
-                        <?= $theme->config('alignment') ? '<div class="uk-text-center">' : '' ?>
+                        <?= $view->param('alignment') ? '<div class="uk-text-center">' : '' ?>
                         <?= $view->render('content') ?>
-                        <?= $theme->config('alignment') ? '</div>' : '' ?>
+                        <?= $view->param('alignment') ? '</div>' : '' ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
-                    <aside class="uk-width-medium-1-4 <?= $theme->config('sidebar-first') ? 'uk-flex-order-first-medium' : ''; ?>">
+                    <aside class="uk-width-medium-1-4 <?= $view->param('sidebar-first') ? 'uk-flex-order-first-medium' : ''; ?>">
                         <?= $view->position('sidebar', 'position-panel.php') ?>
                     </aside>
                     <?php endif ?>
@@ -163,7 +120,7 @@
             <div class="uk-offcanvas-bar">
 
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
-                    <?= $view->menu('offcanvas', ['classes' => 'uk-nav-offcanvas']) ?>
+                    <?= $view->menu('offcanvas', ['class' => 'uk-nav-offcanvas']) ?>
                 <?php endif ?>
 
                 <?php if ($view->position()->exists('offcanvas')) : ?>

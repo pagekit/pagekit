@@ -1,11 +1,18 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Pagekit\Site;
 
-use Pagekit\Widget\Model\Widget;
+use Pagekit\View\Helper\Helper;
 
-class PositionHelper extends Helper
+class MenuHelper extends Helper
 {
+    protected $menus;
+
+    public function __construct(MenuManager $menus)
+    {
+        $this->menus = $menus;
+    }
+
     /**
      * Set shortcut.
      *
@@ -17,18 +24,18 @@ class PositionHelper extends Helper
     }
 
     /**
-     * Checks if the position exists.
+     * Checks if the menu exists.
      *
      * @param  string $name
      * @return bool
      */
     public function exists($name)
     {
-        return (bool) Widget::findActive($name);
+        return (bool) $this->menus->find($name);
     }
 
     /**
-     * Renders a position.
+     * Renders a menu.
      *
      * @param  string       $name
      * @param  array|string $view
@@ -42,9 +49,13 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = Widget::findActive($name);
+        if (!$menu = $this->menus->find($name)) {
+            return '';
+        }
 
-        return $this->view->render($view ?: 'system/site/position.php', $parameters);
+        $parameters['root'] = $this->menus->getTree($menu, $parameters);
+
+        return $this->view->render($view ?: 'system/site/menu.php', $parameters);
     }
 
     /**
@@ -52,6 +63,6 @@ class PositionHelper extends Helper
      */
     public function getName()
     {
-        return 'position';
+        return 'menu';
     }
 }

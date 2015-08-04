@@ -17,14 +17,14 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'system/widget/index.php'
+                'name' => 'system/widget/index.php'
             ],
             '$data' => [
-                'theme' => App::theme(),
                 'types' => App::widget()->getTypes(),
                 'config' => [
                     'menus' => App::menu(),
-                    'nodes' => array_values(Node::query()->get())
+                    'nodes' => array_values(Node::query()->get()),
+                    'positions' => array_values(App::position()->all())
                 ]
             ]
         ];
@@ -44,16 +44,16 @@ class WidgetController
         return [
             '$view' => [
                 'title' => __('Widgets'),
-                'name'  => 'system/widget/edit.php'
+                'name' => 'system/widget/edit.php'
             ],
             '$data' => [
                 'widget' => $widget,
-                'theme' => App::theme(),
                 'config' => [
                     'menus' => App::menu(),
                     'nodes' => array_values(Node::query()->get()),
                     'roles' => array_values(Role::findAll()),
-                    'types' => array_values(App::widget()->getTypes())
+                    'types' => array_values(App::widget()->getTypes()),
+                    'positions' => array_values(App::position()->all())
                 ]
             ]
         ];
