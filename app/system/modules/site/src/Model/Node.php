@@ -7,6 +7,7 @@ use Pagekit\System\Model\DataModelTrait;
 use Pagekit\System\Model\NodeInterface;
 use Pagekit\System\Model\NodeTrait;
 use Pagekit\User\Model\AccessModelTrait;
+use Pagekit\User\Model\User;
 
 /**
  * @Entity(tableClass="@system_node")
@@ -45,6 +46,11 @@ class Node implements NodeInterface, \JsonSerializable
     /** @Column(type="string") */
     public $menu = '';
 
+    /** @var array */
+    protected static $properties = [
+        'accessible' => 'isAccessible'
+    ];
+
     /**
      * Gets the node URL.
      *
@@ -54,6 +60,11 @@ class Node implements NodeInterface, \JsonSerializable
     public function getUrl($referenceType = false)
     {
         return App::url($this->link, [], $referenceType);
+    }
+
+    public function isAccessible(User $user = null)
+    {
+        return $this->status && $this->hasAccess($user ?: App::user());
     }
 
     /**

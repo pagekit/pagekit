@@ -142,8 +142,8 @@
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a title="{{ node.url }}" target="_blank" v-attr="href: $url(node.url.substr(1))" v-if="node.status && node.url">{{ node.url }}</a>
-                <span v-if="!node.status || !node.url">{{ node.path }}</span>
+                <a title="{{ node.url }}" target="_blank" v-attr="href: $url(node.url.substr(1))" v-if="node.accessible && node.url">{{ node.url }}</a>
+                <span v-if="!node.accessible || !node.url">{{ node.path }}</span>
             </div>
         </div>
 
