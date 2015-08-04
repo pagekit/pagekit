@@ -212,6 +212,11 @@ module.exports = {
 
                 var vm = this;
 
+                // disable sorting on unassigned position
+                if (this.$el.getAttribute('data-position') == '_unassigned') {
+                    return;
+                }
+
                 UIkit.sortable(this.$el, {group: 'position', removeWhitespace: false})
                     .element.off('change.uk.sortable')
                     .on('change.uk.sortable', function (e, sortable, element, action) {
