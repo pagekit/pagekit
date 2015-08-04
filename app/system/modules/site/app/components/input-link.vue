@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <p class="uk-text-muted uk-margin-small-top" v-show="url">{{ url }}</p>
+    <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
 
     <v-modal v-ref="modal">
 
