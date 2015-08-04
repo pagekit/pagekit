@@ -166,7 +166,7 @@ module.exports = {
 
         getSingleNodeTitle: function(widget) {
 
-            return !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'selected');
+            return !widget.nodes.length ? 'All': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'Selected');
         },
 
         getNodeTitle: function(id) {
