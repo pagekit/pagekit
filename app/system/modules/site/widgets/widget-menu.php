@@ -22,6 +22,10 @@ return [
             'mode' => $widget->get('mode')
         ]);
 
+        if (!$root) {
+            return '';
+        }
+
         return $app['view']->render('system/site/widget-menu.php', compact('widget', 'root'));
     },
 
