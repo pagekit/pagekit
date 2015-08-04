@@ -3,7 +3,6 @@
 namespace Pagekit\Widget;
 
 use Pagekit\View\Helper\Helper;
-use Pagekit\Widget\Model\Widget;
 
 class PositionHelper extends Helper
 {

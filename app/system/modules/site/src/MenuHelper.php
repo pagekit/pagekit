@@ -2,7 +2,6 @@
 
 namespace Pagekit\Site;
 
-use Pagekit\Site\Model\Node;
 use Pagekit\View\Helper\Helper;
 
 class MenuHelper extends Helper

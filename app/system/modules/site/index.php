@@ -4,7 +4,6 @@ use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
 use Pagekit\Site\Model\Node;
-use Pagekit\Util\Arr;
 
 return [
 
@@ -151,11 +150,11 @@ return [
 
         'site' => function ($event, $app) {
 
-            $app->on('view.head', function ($event, $view) use ($app) {
+            $app->on('view.head', function ($event) use ($app) {
                 $event->addResult($this->config('code.header'));
             }, -10);
 
-            $app->on('view.footer', function ($event, $view) use ($app) {
+            $app->on('view.footer', function ($event) use ($app) {
                 $event->addResult($this->config('code.footer'));
             }, -10);
 

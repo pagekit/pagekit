@@ -79,7 +79,7 @@ trait ModelTrait
      * Retrieve an entity by its identifier.
      *
      * @param  mixed $id
-     * @return static|null
+     * @return static
      */
     public static function find($id)
     {
@@ -89,7 +89,7 @@ trait ModelTrait
     /**
      * Retrieve all entities.
      *
-     * @return static[]|null
+     * @return static[]
      */
     public static function findAll()
     {

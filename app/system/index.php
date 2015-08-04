@@ -121,7 +121,7 @@ return [
 
             }, 50],
 
-            [function ($event, $request) use ($app) {
+            [function ($event) use ($app) {
 
                 if (!$event->isMasterRequest()) {
                     return;

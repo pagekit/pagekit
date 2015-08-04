@@ -51,7 +51,7 @@ trait NodeModelTrait
 
         // Update own path
         $path = '/'.$node->slug;
-        if ($node->parent_id && $parent = self::find($node->parent_id) and $parent->menu === $node->menu) {
+        if ($node->parent_id && $parent = Node::find($node->parent_id) and $parent->menu === $node->menu) {
             $path = $parent->path.$path;
         } else {
             // set Parent to 0, if old parent is not found
@@ -61,7 +61,7 @@ trait NodeModelTrait
 
         if ($id) {
             // Update children's paths
-            foreach (self::where(['parent_id' => $id])->get() as $child) {
+            foreach (Node::where(['parent_id' => $id])->get() as $child) {
                 if (0 !== strpos($child->path, $node->path.'/') || $child->menu !== $node->menu) {
                     $child->menu = $node->menu;
                     $child->save();
