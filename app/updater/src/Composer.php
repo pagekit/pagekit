@@ -6,14 +6,12 @@ use Composer\Package\Loader\ArrayLoader;
 
 class Composer
 {
-    const CONFIG_FILE = 'packages.json';
-
     public static function packages($event)
     {
         global $packages;
 
-        if (!$packages && file_exists(self::CONFIG_FILE)) {
-            $packages = json_decode(file_get_contents(self::CONFIG_FILE), true);
+        if (!$packages && file_exists(Application::CONFIG_FILE)) {
+            $packages = json_decode(file_get_contents(Application::CONFIG_FILE), true);
         }
 
         if ($packages) {

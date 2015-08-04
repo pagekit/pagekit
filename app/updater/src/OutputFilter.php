@@ -6,7 +6,6 @@ use Symfony\Component\Console\Output\StreamOutput;
 
 class OutputFilter extends StreamOutput
 {
-
     protected $errorLog = array();
 
     public function write($messages, $newline = false, $type = self::OUTPUT_NORMAL)

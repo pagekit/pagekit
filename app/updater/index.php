@@ -54,7 +54,7 @@ if (isset($options['r']) || isset($options['remove'])) {
 
 try {
 
-    $app = new Application($config, $output);
+    $app = new Application($config['values'], $output);
     $app->run(compact('packages', 'remove'));
 
 } catch (Exception $e) {
