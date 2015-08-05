@@ -46,8 +46,9 @@ return [
     'node' => [
 
         'title_hide' => false,
-        'html_class' => '',
+        'title_large' => false,
         'alignment' => '',
+        'html_class' => '',
         'sidebar-first' => false,
         'hero-image' => '',
         'hero-contrast' => '',
@@ -61,10 +62,10 @@ return [
     'widget' => [
 
         'title_hide' => false,
-        'html_class' => '',
-        'panel' => '',
         'title_size' => 'uk-panel-title',
-        'alignment' => ''
+        'alignment' => '',
+        'html_class' => '',
+        'panel' => ''
 
     ],
 
@@ -120,8 +121,6 @@ return [
                 'animation' => 'uk-animation-slide-top'
             ];
 
-            $event['logo-navbar'] = $event['logo'];
-
             // Sticky overlay navbar if hero position exists
             if ($event['navbar-transparent'] && $view->position()->exists('hero') && $event['hero-image']) {
 
@@ -133,10 +132,6 @@ return [
 
                     $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
                     $classes['navbar'] .= ' tm-navbar-contrast';
-
-                    if (isset($event['logo-contrast'])) {
-                        $event['logo-navbar'] = $event['logo-contrast'];
-                    }
 
                 } else {
                     $sticky['clsinactive'] = 'tm-navbar-transparent';

@@ -16,9 +16,15 @@
 
                 <nav class="uk-navbar">
 
-                    <?php if ($params['logo-navbar']) : ?>
+                    <?php if ($params['logo']) : ?>
                     <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($params['logo-navbar']) ?>" alt="">
+
+                        <img class="tm-logo" src="<?= $this->escape($params['logo']) ?>" alt="">
+
+                        <?php if ($params['logo-contrast']) : ?>
+                        <img class="tm-logo-contrast" src="<?= $this->escape($params['logo-contrast']) ?>" alt="">
+                        <?php endif ?>
+
                     </a>
                     <?php endif ?>
 
@@ -75,9 +81,7 @@
 
                     <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
                         <?= $view->render('messages') ?>
-                        <?= $params['alignment'] ? '<div class="uk-text-center">' : '' ?>
                         <?= $view->render('content') ?>
-                        <?= $params['alignment'] ? '</div>' : '' ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
