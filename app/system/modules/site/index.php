@@ -111,8 +111,8 @@ return [
         ],
 
         'icons' => [
-            'favicon' => '',
-            'appicon' => ''
+            'favicon' => 'system/theme:favicon.ico',
+            'appicon' => 'system/theme:apple_touch_icon.png'
         ],
 
         'code' => [
