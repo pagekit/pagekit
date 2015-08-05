@@ -2,7 +2,7 @@
 
 namespace Pagekit\Updater;
 
-use Composer\Console\Application as Composer;
+use Composer\Console\Application as ComposerApp;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -170,7 +170,7 @@ class Application
             $params['packages'] = $updates;
         }
 
-        $composer = new Composer();
+        $composer = new ComposerApp();
         $composer->setAutoExit(false);
         $composer->run(new ArrayInput($params), $this->output);
 
