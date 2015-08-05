@@ -55,7 +55,7 @@ return [
     			$subsets .= ',vietnamese';
     		}
 
-            $event->setParameter('subset', $subsets);
+            $event['subset'] = $subsets;
 
         }
 
