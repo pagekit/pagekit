@@ -143,7 +143,7 @@ class UrlProvider
             $url = $this->router->generate($name, $parameters, $referenceType);
 
             if ($referenceType === self::BASE_PATH) {
-                $url = substr($url, strlen($this->router->getRequest()->getBaseUrl()));
+				$url = preg_replace('#^' .$this->router->getRequest()->getBaseUrl() . '#', '', $url);
             }
 
             return $url;
