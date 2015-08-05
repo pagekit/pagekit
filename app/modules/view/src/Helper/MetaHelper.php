@@ -91,6 +91,8 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
 
                 if ($name == 'title') {
                     $output .= sprintf("        <title>%s</title>\n", $value);
+                } else if ($name == 'base') {
+                    $output .= sprintf("        <base href=\"%s\">\n", $value);
                 } else if ($name == 'canonical') {
                     $output .= sprintf("        <link rel=\"%s\" href=\"%s\">\n", $name, $value);
                 } elseif (preg_match('/^(og|twitter):/i', $name)) {
