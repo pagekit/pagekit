@@ -52,7 +52,7 @@ return [
         'sidebar-first' => false,
         'hero-image' => '',
         'hero-contrast' => '',
-        'navbar-transparent' => '',
+        'navbar-transparent' => ''
 
     ],
 
@@ -79,7 +79,7 @@ return [
      */
     'config' => [
 
-        'logo-contrast' => '',
+        'logo_contrast' => ''
 
     ],
 

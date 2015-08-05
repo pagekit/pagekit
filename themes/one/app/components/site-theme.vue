@@ -14,7 +14,7 @@
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Logo Contrast' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image source="{{@ config['logo-contrast'] }}"></input-image>
+                <input-image source="{{@ config.logo_contrast }}"></input-image>
                 <p class="uk-form-help-block">{{ 'Select an alternative logo which looks great on images.' | trans }}</p>
             </div>
         </div>
