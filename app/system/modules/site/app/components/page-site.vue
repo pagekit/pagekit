@@ -58,6 +58,14 @@
                     </div>
                 </div>
 
+                <div class="uk-form-row">
+                    <span class="uk-form-label">{{ 'Menu' | trans }}</span>
+
+                    <div class="uk-form-controls uk-form-controls-text">
+                        <label><input type="checkbox" value="center-content" v-model="node.data.menu_hide"> {{ 'Hide in menu' | trans }}</label>
+                    </div>
+                </div>
+
             </div>
 
         </div>
