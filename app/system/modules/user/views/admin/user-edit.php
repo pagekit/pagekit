@@ -18,7 +18,7 @@
     </div>
 
     <div class="uk-grid" data-uk-grid-margin>
-        <div class="uk-width-medium-3-4">
+        <div class="uk-width-medium-2-3 uk-width-large-3-4">
 
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
@@ -90,7 +90,7 @@
             </div>
 
         </div>
-        <div class="uk-width-medium-1-4">
+        <div class="uk-width-medium-1-3 uk-width-large-1-4">
 
             <div class="uk-panel uk-panel-box uk-text-center" v-show="user.name">
 
@@ -98,7 +98,7 @@
                     <img height="280" width="280" v-attr="alt: user.name" v-gravatar="user.email">
                 </div>
 
-                <h3 class="uk-panel-tile uk-margin-bottom-remove">{{ user.name }}
+                <h3 class="uk-panel-tile uk-margin-bottom-remove uk-text-break">{{ user.name }}
                     <i title="{{ (isNew ? 'New' : statuses[user.status]) | trans }}" v-class="
                         pk-icon-circle-primary: isNew,
                         pk-icon-circle-success: user.access && user.status,
@@ -107,7 +107,7 @@
                 </h3>
 
                 <div>
-                    <a href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" title="{{ 'Verified email address' | trans }}" v-show="config.emailVerification && user.data.verified"></i>
+                    <a class="uk-text-break" href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" title="{{ 'Verified email address' | trans }}" v-show="config.emailVerification && user.data.verified"></i>
                 </div>
 
             </div>
