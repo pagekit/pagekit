@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Updater;
+namespace Pagekit\Console\Updater;
 
 use Composer\Package\Loader\ArrayLoader;
 
@@ -10,8 +10,8 @@ class Composer
     {
         global $packages;
 
-        if (!$packages && file_exists(Application::CONFIG_FILE)) {
-            $packages = json_decode(file_get_contents(Application::CONFIG_FILE), true);
+        if (!$packages && file_exists(Updater::CONFIG_FILE)) {
+            $packages = json_decode(file_get_contents(Updater::CONFIG_FILE), true);
         }
 
         if ($packages) {

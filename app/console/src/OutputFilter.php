@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Updater;
+namespace Pagekit\Console;
 
 use Symfony\Component\Console\Output\StreamOutput;
 
@@ -10,9 +10,11 @@ class OutputFilter extends StreamOutput
 
     public function write($messages, $newline = false, $type = self::OUTPUT_NORMAL)
     {
-        $this->parseMessage($messages);
+        foreach ((array)$messages as $message) {
+            $this->parseMessage($message);
 
-        parent::write($messages, $newline, $type);
+            parent::write($message, $newline, $type);
+        }
     }
 
     public function getError()

@@ -1,10 +1,12 @@
 <?php
 
-namespace Pagekit\Console;
+namespace Pagekit\Console\Commands;
 
-use Pagekit\Application\Console\Command;
+use Pagekit\Console\Command;
+use Pagekit\Console\Updater\Updater;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UninstallCommand extends Command
@@ -25,6 +27,7 @@ class UninstallCommand extends Command
     protected function configure()
     {
         $this->addArgument('packages', InputArgument::IS_ARRAY, '[Package name]');
+        $this->addOption('remove', null, InputOption::VALUE_OPTIONAL, '');
     }
 
     /**
@@ -32,10 +35,10 @@ class UninstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $packages = $this->argument('packages');
-        $command = sprintf('php %s/app/updater/index.php -p "%s" -r', $this->container['path'],  implode(' ', $packages));
+        $input->setOption('remove', true);
 
-        system($command);
+        $updater = new Updater($this->config);
+        $updater->run($input, $output);
     }
 
 }

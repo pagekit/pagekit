@@ -1,12 +1,13 @@
 <?php
 
-namespace Pagekit\Updater;
+namespace Pagekit\Console\Updater;
 
 use Composer\Console\Application as ComposerApp;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Application
+class Updater
 {
     const CONFIG_FILE = 'packages.json';
 
@@ -26,19 +27,17 @@ class Application
     protected $file;
 
     /**
-     * @param array           $config
-     * @param OutputInterface $output
+     * @param $config
      */
-    public function __construct($config, OutputInterface $output)
+    public function __construct($config)
     {
-        $this->config   = $config;
-        $this->output   = $output;
-        $this->file     = $this->config['path'].'/'.self::CONFIG_FILE;
+        $this->config = $config;
+        $this->file = $config['path'] . '/' . self::CONFIG_FILE;
         $this->packages = $this->readPackages();
 
-        putenv('COMPOSER_HOME='.$config['path.temp']);
-        putenv('COMPOSER_CACHE_DIR='.$config['path.cache'].'/composer');
-        putenv('COMPOSER_VENDOR_DIR='.$config['path'].'/vendor');
+        putenv('COMPOSER_HOME=' . $config['path.temp']);
+        putenv('COMPOSER_CACHE_DIR=' . $config['path.cache'] . '/composer');
+        putenv('COMPOSER_VENDOR_DIR=' . $config['path'] . '/vendor');
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -48,18 +47,20 @@ class Application
     }
 
     /**
-     * @param array $arguments
+     * @param $input
+     * @param $output
      */
-    public function run($arguments)
+    public function run(InputInterface $input, OutputInterface $output)
     {
-        $packages = isset($arguments['packages']) ? $this->parsePackages($arguments['packages']) : [];
+        $this->output = $output;
+        $packages = $this->parsePackages($input->getArgument('packages'));
 
-        if ($packages && !isset($arguments['remove'])) {
+        if ($packages && !($input->hasOption('remove') && $input->getOption('remove'))) {
             $this->addRequirements($packages);
             return;
         }
 
-        if ($packages && isset($arguments['remove'])) {
+        if ($packages && ($input->hasOption('remove') && $input->getOption('remove'))) {
             $this->removeRequirements($packages);
             return;
         }
@@ -76,8 +77,8 @@ class Application
     protected function parsePackages($arguments)
     {
         $packages = [];
-        foreach ($arguments as $argument) {
-            $argument   = explode(':', $argument);
+        foreach ((array)$arguments as $argument) {
+            $argument = explode(':', $argument);
             $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) ? $argument[1] : '*'];
         }
 
@@ -164,7 +165,7 @@ class Application
 
         $packages = $this->packages;
 
-        $params                  = ['update', '--prefer-dist'];
+        $params = ['update', '--prefer-dist'];
         $params['--working-dir'] = $this->config['path'];
         if ($updates) {
             $params['packages'] = $updates;
@@ -187,8 +188,8 @@ class Application
      */
     protected function memoryInBytes($value)
     {
-        $unit  = strtolower(substr($value, -1, 1));
-        $value = (int) $value;
+        $unit = strtolower(substr($value, -1, 1));
+        $value = (int)$value;
 
         switch ($unit) {
             case 'g':

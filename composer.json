@@ -27,7 +27,6 @@
         "psr/log": "~1.0.0",
         "punic/punic": "~1.5.0",
         "swiftmailer/swiftmailer": "~5.4.1",
-        "symfony/console": "~2.7.1",
         "symfony/debug": "~2.7.1",
         "symfony/finder": "~2.7.1",
         "symfony/http-foundation": "~2.7.1",
@@ -54,12 +53,12 @@
         "psr-4": {
             "Pagekit\\": "app/modules/application/src",
             "Pagekit\\Config\\": "app/modules/config/src",
-            "Pagekit\\Updater\\": "app/updater/src"
+            "Pagekit\\Console\\": "app/console/src"
         }
     },
     "scripts": {
-        "pre-update-cmd": "Pagekit\\Updater\\Composer::packages",
-        "pre-install-cmd": "Pagekit\\Updater\\Composer::packages",
-        "pre-status-cmd": "Pagekit\\Updater\\Composer::packages"
+        "pre-update-cmd": "Pagekit\\Console\\Updater\\Composer::packages",
+        "pre-install-cmd": "Pagekit\\Console\\Updater\\Composer::packages",
+        "pre-status-cmd": "Pagekit\\Console\\Updater\\Composer::packages"
     }
 }

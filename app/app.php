@@ -32,9 +32,7 @@ $app['module']->addPath([
 $app['module']->addLoader(new AutoLoader($loader));
 $app['module']->addLoader(new ConfigLoader($config));
 
-if ($app->inConsole()) {
-    require __DIR__.'/console/app.php';
-} elseif (!$app['config.file']) {
+if (!$app['config.file']) {
     require __DIR__.'/installer/app.php';
 } else {
     require __DIR__.'/system/app.php';
