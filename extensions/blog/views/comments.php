@@ -1,8 +1,8 @@
 <?php $view->script('comments', 'blog:app/bundle/comments.js', 'vue') ?>
 
-<div id="comments" class="uk-margin" v-if="config.enabled || comments.length">
+<div id="comments" class="uk-margin-large" v-if="config.enabled || comments.length">
 
-    <h2 class="uk-h3" v-show="comments.length">{{ 'Comments (%count%)' | trans {count:count} }}</h2>
+    <h2 class="uk-h4" v-show="comments.length">{{ 'Comments (%count%)' | trans {count:count} }}</h2>
 
     <ul class="uk-comment-list" v-show="comments.length">
         <comments-item v-repeat="comment: tree[0]" depth="0"></comments-item>
@@ -22,7 +22,7 @@
 
             <header class="uk-comment-header">
 
-                <img class="uk-comment-avatar" width="50" height="50" alt="{{ comment.author }}" v-gravatar="comment.email">
+                <img class="uk-comment-avatar uk-border-rounded" width="40" height="40" alt="{{ comment.author }}" v-gravatar="comment.email">
 
                 <h3 class="uk-comment-title">{{ comment.author }}</h3>
 
@@ -39,7 +39,7 @@
 
                 <p>{{ comment.content }}</p>
 
-                <p v-if="showReplyButton"><a href="#" v-on="click: replyTo"><i class="uk-icon-reply"></i> {{ 'Reply' | trans }}</a></p>
+                <p v-if="showReplyButton"><a href="#" v-on="click: replyTo">{{ 'Reply' | trans }}</a></p>
 
             </div>
 
@@ -59,9 +59,9 @@
 
 <script id="comments-reply" type="text/template">
 
-    <div class="uk-margin">
+    <div class="uk-margin-large">
 
-        <h2 class="uk-h3">{{ 'Leave a comment' | trans }}</h2>
+        <h2 class="uk-h4">{{ 'Leave a comment' | trans }}</h2>
 
         <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
