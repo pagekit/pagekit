@@ -5,6 +5,7 @@ namespace Pagekit\View;
 use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\Event\EventInterface;
 use Pagekit\Event\PrefixEventDispatcher;
+use Pagekit\Util\ArrObject;
 use Pagekit\View\Event\ViewEvent;
 use Pagekit\View\Helper\HelperInterface;
 use Symfony\Component\Templating\DelegatingEngine;
@@ -187,7 +188,8 @@ class View
         }
 
         if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {
-            return $this->engine->render($event->getTemplate(), $event->getParameters());
+            $parameters = $event->getParameters();
+            return $this->engine->render($event->getTemplate(), array_replace(['params' => new ArrObject($parameters)], $parameters));
         }
 
         return $event->getResult();

@@ -3,7 +3,6 @@
 namespace Pagekit\Widget\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Kernel\Exception\NotFoundException;
 use Pagekit\Widget\Model\Widget;
 
 /**
@@ -25,7 +24,7 @@ class WidgetApiController
     public function getAction($id)
     {
         if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
+            App::abort(404, 'Widget not found.');
         }
 
         return $widget;
@@ -36,10 +35,9 @@ class WidgetApiController
      */
     public function assignAction($position, $ids)
     {
-        $theme = App::theme();
-        $theme->assignPosition($position, $ids);
+        App::position()->assign($position, $ids);
 
-        return ['message' => 'success', 'theme' => $theme];
+        return ['message' => 'success', 'positions' => array_values(App::position()->all())];
     }
 
     /**
@@ -52,16 +50,12 @@ class WidgetApiController
         if (!$id) {
             $widget = Widget::create();
         } else if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
-        }
-
-        if (isset($data['position'])) {
-            $widget->position = $data['position'];
+            App::abort(404, 'Widget not found.');
         }
 
         $widget->save($data);
 
-        return ['message' => __('Widget saved.'), 'widget' => Widget::find($widget->id)];
+        return ['message' => 'success', 'widget' => $widget];
     }
 
     /**
@@ -71,7 +65,7 @@ class WidgetApiController
     public function deleteAction($id)
     {
         if (!$widget = Widget::find($id)) {
-            throw new NotFoundException('Widget not found.');
+            App::abort(404, 'Widget not found.');
         }
 
         $widget->delete();

@@ -19,9 +19,9 @@
             </div>
 
             <div class="uk-form-row">
-                <label for="form-style" class="uk-form-label">{{ 'Start Level' | trans }}</label>
+                <label for="form-level" class="uk-form-label">{{ 'Start Level' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-style" class="uk-form-width-large" v-model="widget.data.start_level">
+                    <select id="form-level" class="uk-form-width-large" v-model="widget.data.start_level">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -37,9 +37,9 @@
             </div>
 
             <div class="uk-form-row">
-                <label for="form-style" class="uk-form-label">{{ 'Depth' | trans }}</label>
+                <label for="form-depth" class="uk-form-label">{{ 'Depth' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-style" class="uk-form-width-large" v-model="widget.data.depth">
+                    <select id="form-depth" class="uk-form-width-large" v-model="widget.data.depth">
                         <option value="">{{ 'No Limit' | trans }}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>

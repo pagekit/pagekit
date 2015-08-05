@@ -13,6 +13,9 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 
 class PhpEngine extends BasePhpEngine
 {
+    protected $template;
+    protected $parameters;
+
     /**
      * {@inheritdoc}
      */
@@ -26,36 +29,35 @@ class PhpEngine extends BasePhpEngine
 
     /**
      * {@inheritdoc}
-     * TODO: evalTemplate and evalParameters have private access
      */
     protected function evaluate(Storage $template, array $parameters = array())
     {
-        $this->evalTemplate = $template;
-        $this->evalParameters = $parameters;
+        $this->template = $template;
+        $this->parameters = $parameters;
         unset($template, $parameters);
 
-        if (isset($this->evalParameters['this'])) {
+        if (isset($this->parameters['this'])) {
             throw new \InvalidArgumentException('Invalid parameter (this)');
         }
 
-        if ($this->evalTemplate instanceof FileStorage) {
-            extract($this->evalParameters, EXTR_SKIP);
-            $this->evalParameters = null;
+        if ($this->template instanceof FileStorage) {
+            extract($this->parameters, EXTR_SKIP);
+            $this->parameters = null;
 
             ob_start();
-            require $this->evalTemplate;
+            require $this->template;
 
-            $this->evalTemplate = null;
+            $this->template = null;
 
             return ob_get_clean();
-        } elseif ($this->evalTemplate instanceof StringStorage) {
-            extract($this->evalParameters, EXTR_SKIP);
-            $this->evalParameters = null;
+        } elseif ($this->template instanceof StringStorage) {
+            extract($this->parameters, EXTR_SKIP);
+            $this->parameters = null;
 
             ob_start();
-            eval('; ?>'.$this->evalTemplate.'<?php ;');
+            eval('; ?>'.$this->template.'<?php ;');
 
-            $this->evalTemplate = null;
+            $this->template = null;
 
             return ob_get_clean();
         }

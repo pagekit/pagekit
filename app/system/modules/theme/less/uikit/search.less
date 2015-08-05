@@ -7,8 +7,10 @@
 // Variables
 // ========================================================================
 
-@search-height:                                 @global-height;
-@search-padding:                                35px !important;
+@search-width:                                  180px;
+@search-focus-width:                            @search-width;
+@search-height:                                 28px !important;
+@search-padding:                                28px !important;
 @search-border:                                 transparent !important;
 @search-border-width:                           0;
 @search-background:                             transparent !important;
@@ -38,7 +40,7 @@
 .hook-search() { z-index: 1; }
 
 .hook-search-icon() {
-    height: @global-height;
+    height: 28px;
     background: url("@{global-image-path}/search.svg") 0 0 no-repeat;
     z-index: -1;
 }
@@ -48,7 +50,7 @@
 // ========================================================================
 
 .hook-search-field() {
-    padding-left: (@search-padding + 10px) !important;
+    padding-left: (@search-padding + 12px) !important;
     font-size: 18px !important;
     line-height: 24px !important;
     font-weight: 300 !important;

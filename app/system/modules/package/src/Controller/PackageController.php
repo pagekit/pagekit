@@ -5,7 +5,7 @@ namespace Pagekit\System\Controller;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Application as App;
-use Pagekit\Filesystem\Archive\Zip;
+use Pagekit\Updater\TokenVerifier;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -141,7 +141,7 @@ class PackageController
         }
 
         $package = $this->loadPackage($file->getPathname());
-        $filename = str_replace('/', '-', $package->getName()) . ($package->get('version') ?: '') . '.zip';
+        $filename = str_replace('/', '-', $package->getName()) . ($package->get('version') ? '-' . $package->get('version') : '') . '.zip';
 
         $file->move(App::get('path.packages'), $filename);
 
@@ -169,12 +169,16 @@ class PackageController
             }
 
             $client = new Client;
-            $res = $client->get(App::url('app/updater', [
-                'packages' => sprintf('%s:%s', $package->getName(), $version)], true));
-            $res = json_decode($res->getBody());
+            $verifier = new TokenVerifier(require App::get('config.file'));
 
-            if ($res->status !== 'success') {
-                throw new \Exception(__($res->message));
+            $params = ['packages' => sprintf('%s:%s', $package->getName(), $version)];
+            $params['token'] = $verifier->hash($params);
+
+            $res = $client->get(App::url('app/updater', $params, true));
+            $res = json_decode($res->getBody(), true) ?: (string)$res->getBody();
+
+            if (!isset($res['status']) || $res['status'] !== 'success') {
+                throw new \Exception(__(isset($res['message']) ? $res['message'] : $res));
             }
 
             App::module('system/cache')->clearCache();
@@ -222,7 +226,12 @@ class PackageController
             App::trigger("uninstall.{$module->name}", [$module]);
 
             $client = new Client;
-            $res = $client->get(App::url('app/updater', ['packages' => $name, 'remove' => true], true));
+            $verifier = new TokenVerifier(require App::get('config.file'));
+
+            $params = ['packages' => $name, 'remove' => true];
+            $params['token'] = $verifier->hash($params);
+
+            $res = $client->get(App::url('app/updater', $params, true));
             $res = json_decode($res->getBody());
 
             if ($res->status !== 'success') {

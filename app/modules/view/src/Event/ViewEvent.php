@@ -47,24 +47,6 @@ class ViewEvent extends Event
     }
 
     /**
-     * @param  string $key
-     * @return mixed  $value
-     */
-    public function getParameter($key)
-    {
-        return isset($this->parameters[$key]) ? $this->parameters[$key] : null;
-    }
-
-    /**
-     * @param string $key
-     * @param mixed  $value
-     */
-    public function setParameter($key, $value)
-    {
-        $this->parameters[$key] = $value;
-    }
-
-    /**
      * @return string
      */
     public function getResult()

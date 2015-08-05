@@ -38,7 +38,7 @@
 
                 return _.extend(menu, {
 
-                    nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parentId').value(),
+                    nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parent_id').value(),
 
                     getNodes: function (node) {
                         return node ? this.nodes[node.id] : this.nodes[0];

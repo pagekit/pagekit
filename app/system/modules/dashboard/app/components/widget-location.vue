@@ -229,6 +229,8 @@
 
                     this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)}, function (data) {
 
+                        data.offset = data.rawOffset + data.dstOffset;
+
                         this.$session[timezoneKey] = JSON.stringify(data);
                         this.$set('timezone', data);
 
@@ -278,7 +280,7 @@
 
             updateClock: function () {
 
-                var offset = this.$get('timezone.offset'),
+                var offset = this.$get('timezone.offset') || 0,
                     date = new Date(),
                     time = offset ? new Date(date.getTime() + date.getTimezoneOffset() * 60000 + offset * 1000) : new Date();
 

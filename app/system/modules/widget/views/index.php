@@ -21,7 +21,7 @@
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li v-class="uk-active: active(pos)" v-repeat="pos: theme.positions" v-var="pos.widgets: pos.assigned | assigned">
+                    <li v-class="uk-active: active(pos)" v-repeat="pos: config.positions" v-var="pos.widgets: pos.assigned | assigned">
                         <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
@@ -46,7 +46,7 @@
                                 <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="theme.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                        <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -112,7 +112,7 @@
 
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" inline-template>
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" data-position="{{ pos.name }}" inline-template>
                         <li v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">

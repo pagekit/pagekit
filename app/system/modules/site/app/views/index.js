@@ -56,9 +56,7 @@ module.exports = {
                 };
             }
 
-            this.$set('edit', _.extend({
-                assigned: _.pluck(_.filter(this.theme.menus, 'assigned', menu.id), 'name')
-            }, menu));
+            this.$set('edit', _.merge({positions: []}, menu));
 
             this.$.modal.open();
         },
@@ -67,12 +65,17 @@ module.exports = {
 
             this.Menus.save({id: menu.id}, {menu: menu}, function (data) {
                 this.load();
-                this.$set('theme', data.theme);
             }).error(function (msg) {
                 UIkit.notify(msg, 'danger');
             });
 
             this.cancel();
+        },
+
+        getMenu: function(position) {
+            return _.find(this.menus, function(menu) {
+                return _.contains(menu.positions, position);
+            });
         },
 
         cancel: function () {

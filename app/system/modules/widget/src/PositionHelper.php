@@ -1,12 +1,18 @@
 <?php
 
-namespace Pagekit\View\Helper;
+namespace Pagekit\Widget;
 
-use Pagekit\Application as App;
-use Pagekit\Site\Model\Node;
+use Pagekit\View\Helper\Helper;
 
-class MenuHelper extends Helper
+class PositionHelper extends Helper
 {
+    protected $positions;
+
+    public function __construct(PositionManager $positions)
+    {
+        $this->positions = $positions;
+    }
+
     /**
      * Set shortcut.
      *
@@ -18,18 +24,18 @@ class MenuHelper extends Helper
     }
 
     /**
-     * Checks if the menu exists.
+     * Checks if the position exists.
      *
      * @param  string $name
      * @return bool
      */
     public function exists($name)
     {
-        return (bool) $this->getMenu($name);
+        return (bool) $this->positions->findActive($name);
     }
 
     /**
-     * Renders a menu.
+     * Renders a position.
      *
      * @param  string       $name
      * @param  array|string $view
@@ -43,13 +49,9 @@ class MenuHelper extends Helper
             $view = false;
         }
 
-        if (!$menu = $this->getMenu($name)) {
-            return '';
-        }
+        $parameters['widgets'] = $this->positions->findActive($name);
 
-        $parameters['root'] = Node::getTree($menu, $parameters);
-
-        return $this->view->render($view ?: 'system/site/menu.php', $parameters);
+        return $this->view->render($view ?: 'system/site/position.php', $parameters);
     }
 
     /**
@@ -57,17 +59,6 @@ class MenuHelper extends Helper
      */
     public function getName()
     {
-        return 'menu';
-    }
-
-    protected function getMenu($name)
-    {
-        static $menus;
-
-        if (null === $menus) {
-            $menus = App::theme()->getMenus();
-        }
-
-        return isset($menus[$name]) && $menus[$name]['assigned'] ? $menus[$name]['assigned'] : null;
+        return 'position';
     }
 }

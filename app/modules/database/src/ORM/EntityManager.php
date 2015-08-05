@@ -155,7 +155,7 @@ class EntityManager
 
             $this->connection->insert($metadata->getTable(), $metadata->getValues($entity, true, true));
 
-            $metadata->setValue($entity, $identifier, $this->connection->lastInsertId(), true);
+            $metadata->setValue($entity, $identifier, $this->connection->lastInsertId(), true, true);
 
             $this->trigger(Events::CREATED, $metadata, [$entity, $data]);
 

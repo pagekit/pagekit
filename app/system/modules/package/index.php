@@ -35,7 +35,7 @@ return [
             return $module;
         });
 
-        $app['module']->addFactory('theme', new ModuleFactory($app, 'Pagekit\System\Theme'));
+        $app['module']->addFactory('theme', new ModuleFactory($app));
         $app['module']->addFactory('extension', new ModuleFactory($app));
 
     },
@@ -43,7 +43,8 @@ return [
     'events' => [
 
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
-            $view->data('$settings', ['options' => [$this->name => $this->config]]);
+            $view->data('$settings', ['config' => [$this->name => $this->config(['api.key'])]]);
+            $view->data('$settings', ['options' => [$this->name => $this->config(['release_channel'])]]);
         }
 
     ],

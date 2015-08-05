@@ -35,7 +35,7 @@ class UninstallCommand extends Command
         $packages = $this->argument('packages');
         $command = sprintf('php %s/app/updater/index.php -p "%s" -r', $this->container['path'],  implode(' ', $packages));
 
-        exec($command);
+        system($command);
     }
 
 }

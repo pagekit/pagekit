@@ -38,7 +38,7 @@ class InstallCommand extends Command
             $this->container['path'],
             implode(' ', $packages));
 
-        exec($command);
+        system($command);
     }
 
 }

@@ -35,9 +35,21 @@ class SystemModule extends Module
             }
         }
 
-        $app['theme'] = $app->module($theme);
+        if (!$app['theme'] = $app->module($theme)) {
+            $app['theme'] = new Module([
+                'name' => 'default-theme',
+                'path' => '',
+                'config' => [],
+                'layout' => 'views:system/blank.php'
+            ]);
+        }
 
         $app->extend('view', function ($view) use ($app) {
+
+            $theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'];
+
+            $view->map('layout', $theme->get('layout', 'views:template.php'));
+
             return $view->addGlobal('theme', $app['theme']);
         });
 

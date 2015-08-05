@@ -12,7 +12,7 @@
     </head>
     <body>
 
-      <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
+        <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
             <div class="tm-container tm-container-small">
 
                 <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-text.svg') ?>" width="160" height="42" alt="Pagekit">

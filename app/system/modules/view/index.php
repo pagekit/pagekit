@@ -2,9 +2,6 @@
 
 use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
-use Pagekit\View\Helper\MenuHelper;
-use Pagekit\View\Helper\PositionHelper;
-use Pagekit\View\Helper\TemplateHelper;
 
 return [
 
@@ -16,9 +13,6 @@ return [
 
             $view->defer('head');
             $view->meta(['generator' => 'Pagekit '.$app['version']]);
-            $view->addHelper(new MenuHelper());
-            $view->addHelper(new PositionHelper());
-            $view->addHelper(new TemplateHelper($app['scripts']));
 
             return $view;
         });
@@ -26,7 +20,6 @@ return [
         $app->extend('assets', function ($assets) use ($app) {
 
             $assets->register('file', 'Pagekit\View\Asset\FileLocatorAsset');
-            $assets->register('template', 'Pagekit\View\Asset\TemplateAsset');
 
             return $assets;
         });
@@ -45,7 +38,7 @@ return [
             $app->subscribe(new ResponseListener());
         },
 
-        'site' => function($event) use ($app) {
+        'site' => function($event, $app) {
             $app->subscribe(new CanonicalListener());
         },
 

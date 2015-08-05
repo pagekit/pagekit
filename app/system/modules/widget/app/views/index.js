@@ -18,7 +18,7 @@ module.exports = {
     computed: {
 
         positions: function () {
-            return this.theme.positions.concat(this.unassigned);
+            return this.config.positions.concat(this.unassigned);
         },
 
         unassigned: function () {
@@ -65,13 +65,13 @@ module.exports = {
                 },
 
                 assigned: function (widget) {
-                    return this.theme.positions.some(function (position) {
+                    return this.config.positions.some(function (position) {
                         return position.assigned.indexOf(widget.id) !== -1;
                     });
                 },
 
                 unassigned: function (widget) {
-                    return !this.theme.positions.some(function (position) {
+                    return !this.config.positions.some(function (position) {
                         return position.assigned.indexOf(widget.id) !== -1;
                     });
                 }
@@ -96,7 +96,7 @@ module.exports = {
 
         assign: function (position, ids) {
             return this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
-                this.$set('theme', data.theme);
+                this.$set('config.positions', data.positions);
                 this.$set('selected', []);
             });
         },
@@ -166,7 +166,7 @@ module.exports = {
 
         getSingleNodeTitle: function(widget) {
 
-            return !widget.nodes.length ? 'all': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'selected');
+            return !widget.nodes.length ? 'All': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'Selected');
         },
 
         getNodeTitle: function(id) {
@@ -211,6 +211,11 @@ module.exports = {
             ready: function () {
 
                 var vm = this;
+
+                // disable sorting on unassigned position
+                if (this.$el.getAttribute('data-position') == '_unassigned') {
+                    return;
+                }
 
                 UIkit.sortable(this.$el, {group: 'position', removeWhitespace: false})
                     .element.off('change.uk.sortable')

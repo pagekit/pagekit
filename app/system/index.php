@@ -121,13 +121,13 @@ return [
 
             }, 50],
 
-            [function ($event, $request) use ($app) {
+            [function ($event) use ($app) {
 
                 if (!$event->isMasterRequest()) {
                     return;
                 }
 
-                $app->trigger($app->isAdmin() ? 'admin' : 'site', [$request]);
+                $app->trigger($app->isAdmin() ? 'admin' : 'site', [$app]);
 
             }]
 
@@ -158,19 +158,6 @@ return [
 
             if ($result) {
                 $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
-            }
-
-        },
-
-        'view.layout' => function($event, $view) use ($app) {
-
-            if ($event->getTemplate() !== 'layout') {
-                return;
-            }
-
-            if ($theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'] ? : null) {
-                $event->setParameter('theme', $theme);
-                $event->setTemplate($theme->getLayout());
             }
 
         }

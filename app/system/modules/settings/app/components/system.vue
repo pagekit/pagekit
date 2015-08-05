@@ -12,7 +12,7 @@
     <div class="uk-form-row">
         <label for="form-apikey" class="uk-form-label">{{ 'API Key' | trans }}</label>
         <div class="uk-form-controls">
-            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$root.options['system/package'].api.key"></textarea>
+            <textarea id="form-apikey" class="uk-form-width-large" placeholder="{{ 'Enter your API key' | trans }}" rows="6" v-model="$root.config['system/package'].api.key"></textarea>
         </div>
     </div>
 
