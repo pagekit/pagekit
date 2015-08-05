@@ -1,5 +1,5 @@
 <?php if ($root->getDepth() === 0) : ?>
-<ul class="uk-nav<?= ' '.implode(' ', (array) $view->param('class')) ?>">
+<ul class="uk-nav<?= ' '.implode(' ', (array) $params['class']) ?>">
 <?php endif ?>
 
     <?php foreach ($root->getChildren() as $node) : ?>

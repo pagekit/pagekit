@@ -2,6 +2,8 @@
 
 namespace Pagekit\Event;
 
+use Pagekit\Util\Arr;
+
 class Event implements EventInterface, \ArrayAccess
 {
     /**
@@ -77,6 +79,17 @@ class Event implements EventInterface, \ArrayAccess
     {
         $this->parameters = $parameters;
 
+        return $this;
+    }
+
+    /**
+     * @param  mixed $values
+     * @param  bool  $replace
+     * @return self
+     */
+    public function addParameters(array $values, $replace = false)
+    {
+        $this->parameters = Arr::merge($this->parameters, $values, $replace);
         return $this;
     }
 

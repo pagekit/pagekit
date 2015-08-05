@@ -9,7 +9,6 @@ use Pagekit\View\Helper\GravatarHelper;
 use Pagekit\View\Helper\MapHelper;
 use Pagekit\View\Helper\MarkdownHelper;
 use Pagekit\View\Helper\MetaHelper;
-use Pagekit\View\Helper\ParameterHelper;
 use Pagekit\View\Helper\ScriptHelper;
 use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
@@ -37,7 +36,6 @@ return [
                 new GravatarHelper(),
                 new MapHelper(),
                 new MetaHelper(),
-                new ParameterHelper(),
                 new ScriptHelper($app['scripts']),
                 new SectionHelper(),
                 new StyleHelper($app['styles']),
