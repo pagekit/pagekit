@@ -28,6 +28,10 @@ class MenuHelper extends Helper
      */
     public function __invoke($name, $view = null, array $parameters = [])
     {
+        if (!$name = $this->menus->find($name)) {
+            return '';
+        }
+
         return $this->render($name, $view, $parameters);
     }
 
@@ -57,7 +61,7 @@ class MenuHelper extends Helper
             $view = false;
         }
 
-        if (!$menu = $this->menus->find($name) or !$root = $this->getRoot($menu, $parameters)) {
+        if (!$root = $this->getRoot($name, $parameters)) {
             return '';
         }
 

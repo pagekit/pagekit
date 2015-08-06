@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Application as App;
-
 return [
 
     'name' => 'system/widget-menu',
@@ -11,10 +9,11 @@ return [
     'type' => 'widget',
 
     'render' => function ($widget) use ($app) {
-        return App::view()->menu($widget->get('menu'), 'system/site/widget-menu.php', [
+        return $app->view()->menu($widget->get('menu'), 'system/site/widget-menu.php', [
             'start_level' => (int) $widget->get('start_level', 1),
             'depth' => $widget->get('depth'),
-            'mode' => $widget->get('mode')
+            'mode' => $widget->get('mode'),
+            'widget' => $widget
         ]);
     },
 
