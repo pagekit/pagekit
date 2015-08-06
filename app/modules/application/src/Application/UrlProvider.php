@@ -6,6 +6,7 @@ use Pagekit\Filesystem\Filesystem;
 use Pagekit\Filesystem\Locator;
 use Pagekit\Routing\Generator\UrlGenerator;
 use Pagekit\Routing\Router;
+use Symfony\Component\Routing\Exception\MissingMandatoryParametersException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 class UrlProvider
@@ -37,8 +38,8 @@ class UrlProvider
      */
     public function __construct(Router $router, Filesystem $file, Locator $locator)
     {
-        $this->router  = $router;
-        $this->file    = $file;
+        $this->router = $router;
+        $this->file = $file;
         $this->locator = $locator;
     }
 
@@ -61,7 +62,7 @@ class UrlProvider
     public function base($referenceType = UrlGenerator::ABSOLUTE_PATH)
     {
         $request = $this->router->getRequest();
-        $url     = $request->getBasePath();
+        $url = $request->getBasePath();
 
         if ($referenceType === UrlGenerator::ABSOLUTE_URL) {
             $url = $request->getSchemeAndHttpHost().$url;
@@ -148,7 +149,9 @@ class UrlProvider
 
             return $url;
 
-        } catch (RouteNotFoundException $e) {}
+        } catch (RouteNotFoundException $e) {
+        } catch (MissingMandatoryParametersException $e) {
+        }
 
         return false;
     }
@@ -183,7 +186,7 @@ class UrlProvider
     {
         if ($query = substr(strstr($url, '?'), 1)) {
             parse_str($query, $params);
-            $url        = strstr($url, '?', true);
+            $url = strstr($url, '?', true);
             $parameters = array_replace($parameters, $params);
         }
 
