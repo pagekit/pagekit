@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <?php if ($params['logo'] || $view->menu()->exists('main')) : ?>
+        <?php if ($params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
         <div class="<?= $params['classes.navbar'] ?>" <?= $params['classes.sticky'] ?>>
             <div class="uk-container uk-container-center">
 
