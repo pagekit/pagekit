@@ -123,7 +123,7 @@ return [
             ];
 
             // Sticky overlay navbar if hero position exists
-            if ($event['navbar-transparent'] && $event['hero-image']) {
+            if ($event['navbar-transparent'] && $view->position()->exists('hero') && $event['hero-image']) {
 
                 $sticky['top'] = '.uk-sticky-placeholder + *';
                 $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
