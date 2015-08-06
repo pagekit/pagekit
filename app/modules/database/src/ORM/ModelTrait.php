@@ -124,8 +124,13 @@ trait ModelTrait
     public function toArray(array $data = [], array $ignore = [])
     {
         $metadata = static::getMetadata();
+        $mappings = $metadata->getRelationMappings();
 
         foreach (static::getProperties($this) as $name => $value) {
+
+            if (isset($mappings[$name])) {
+                continue;
+            }
 
             switch ($metadata->getField($name, 'type')) {
                 case 'json_array':
@@ -139,7 +144,7 @@ trait ModelTrait
             $data[$name] = $value;
         }
 
-        return array_diff_key($data, $metadata->getRelationMappings(), array_flip($ignore));
+        return array_diff_key($data, array_flip($ignore));
     }
 
     /**
