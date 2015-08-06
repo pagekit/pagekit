@@ -4,7 +4,6 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\Widget\Model\Widget;
 
 class PositionManager implements \JsonSerializable
 {
@@ -105,48 +104,6 @@ class PositionManager implements \JsonSerializable
 
         $this->positions[$position]['assigned'] = $positions[$position];
         $this->config->set('_positions', $positions);
-    }
-
-    /**
-     * Gets active widgets.
-     *
-     * @param  string|null $position
-     * @return Widget[]
-     */
-    public function findActive($position)
-    {
-        static $widgets, $positions = [];
-
-        if (null === $widgets) {
-            $widgets = Widget::where(['status' => 1])->get();
-        }
-
-        if (!isset($this->positions[$position])) {
-            return [];
-        }
-
-        if (!isset($positions[$position])) {
-
-            $positions[$position] = [];
-
-            foreach ($this->positions[$position]['assigned'] as $id) {
-
-                if (!isset($widgets[$id])
-                    or !$widget = $widgets[$id]
-                    or !$widget->hasAccess(App::user())
-                    or ($nodes = $widget->nodes and !in_array(App::node()->id, $nodes))
-                    or !$type = App::widget()->getType($widget->type)
-                    or !$result = $type->render($widget)
-                ) {
-                    continue;
-                }
-
-                $widget->set('result', $result);
-                $positions[$position][] = $widget;
-            }
-        }
-
-        return $positions[$position];
     }
 
     /**

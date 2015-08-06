@@ -11,22 +11,11 @@ return [
     'type' => 'widget',
 
     'render' => function ($widget) use ($app) {
-
-        if (!$menu = $widget->get('menu')) {
-            return '';
-        }
-
-        $root = App::menu()->getTree($menu, [
+        return App::view()->menu($widget->get('menu'), [
             'start_level' => (int) $widget->get('start_level', 1),
             'depth' => $widget->get('depth'),
             'mode' => $widget->get('mode')
         ]);
-
-        if (!$root) {
-            return '';
-        }
-
-        return $app['view']->render('system/site/widget-menu.php', compact('widget', 'root'));
     },
 
     'events' => [

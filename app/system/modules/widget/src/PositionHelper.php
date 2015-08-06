@@ -2,12 +2,20 @@
 
 namespace Pagekit\Widget;
 
+use Pagekit\Application as App;
 use Pagekit\View\Helper\Helper;
+use Pagekit\Widget\Model\Widget;
 
 class PositionHelper extends Helper
 {
+    /**
+     * @var PositionManager
+     */
     protected $positions;
 
+    /**
+     * @param PositionManager $positions
+     */
     public function __construct(PositionManager $positions)
     {
         $this->positions = $positions;
@@ -31,7 +39,7 @@ class PositionHelper extends Helper
      */
     public function exists($name)
     {
-        return (bool) $this->positions->findActive($name);
+        return (bool) $this->getWidgets($name);
     }
 
     /**
@@ -49,7 +57,7 @@ class PositionHelper extends Helper
             $view = false;
         }
 
-        $parameters['widgets'] = $this->positions->findActive($name);
+        $parameters['widgets'] = $this->getWidgets($name);
 
         return $this->view->render($view ?: 'system/site/position.php', $parameters);
     }
@@ -60,5 +68,45 @@ class PositionHelper extends Helper
     public function getName()
     {
         return 'position';
+    }
+
+    /**
+     * @param  string|null $position
+     * @return Widget[]
+     */
+    protected function getWidgets($position)
+    {
+        static $widgets, $positions = [];
+
+        if (null === $widgets) {
+            $widgets = Widget::where(['status' => 1])->get();
+        }
+
+        if (!$pos = $this->positions->get($position)) {
+            return [];
+        }
+
+        if (!isset($positions[$position])) {
+
+            $positions[$position] = [];
+
+            foreach ($pos['assigned'] as $id) {
+
+                if (!isset($widgets[$id])
+                    or !$widget = $widgets[$id]
+                    or !$widget->hasAccess(App::user())
+                    or ($nodes = $widget->nodes and !in_array(App::node()->id, $nodes))
+                    or !$type = App::widget()->getType($widget->type)
+                    or !$result = $type->render($widget)
+                ) {
+                    continue;
+                }
+
+                $widget->set('result', $result);
+                $positions[$position][] = $widget;
+            }
+        }
+
+        return $positions[$position];
     }
 }
