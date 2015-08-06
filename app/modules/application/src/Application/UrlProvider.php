@@ -169,7 +169,7 @@ class UrlProvider
         $url = $this->file->getUrl($this->locator->get($path) ?: $path, $referenceType === self::BASE_PATH ? false : $referenceType);
 
         if ($referenceType === self::BASE_PATH) {
-            $url = substr($url, strlen($this->router->getRequest()->getBaseUrl()));
+            $url = substr($url, strlen($this->router->getRequest()->getBasePath()));
         }
 
         return $this->parseQuery($url, $parameters);
