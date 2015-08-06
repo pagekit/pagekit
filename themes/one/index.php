@@ -103,8 +103,8 @@ return [
         },
 
         /**
-        * Custom markup calculations based on theme settings
-        */
+         * Custom markup calculations based on theme settings
+         */
         'view.layout' => function ($event, $view) use ($app) {
 
             if ($app->isAdmin()) {
@@ -146,8 +146,7 @@ return [
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
 
-            $event->addParameters(['classes' => $classes]);
-
+            $event['classes'] = $classes;
         },
 
         'view.system/site/widget-menu' => function ($event, $view) {
