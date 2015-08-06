@@ -10,7 +10,7 @@
     </head>
     <body>
 
-        <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
+        <?php if ($params['logo'] || $view->menu()->exists('main')) : ?>
         <div class="<?= $params['classes.navbar'] ?>" <?= $params['classes.sticky'] ?>>
             <div class="uk-container uk-container-center">
 
@@ -28,9 +28,10 @@
                     </a>
                     <?php endif ?>
 
-                    <?php if ($view->menu()->exists('main')) : ?>
+                    <?php if ($view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
                     <div class="uk-navbar-flip uk-hidden-small">
                         <?= $view->menu('main', 'menu-navbar.php') ?>
+                        <?= $view->position('navbar', 'position-blank.php') ?>
                     </div>
                     <?php endif ?>
 

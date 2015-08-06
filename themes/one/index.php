@@ -31,6 +31,7 @@ return [
      */
     'positions' => [
 
+        'navbar' => 'Navbar',
         'hero' => 'Hero',
         'top' => 'Top',
         'sidebar' => 'Sidebar',
@@ -146,6 +147,14 @@ return [
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
 
             $event->addParameters(['classes' => $classes]);
+
+        },
+
+        'view.system/site/widget-menu' => function ($event, $view) {
+
+            if ($event['widget']->position == 'navbar') {
+                $event->setTemplate(__DIR__.'/views/menu-navbar.php');
+            }
 
         }
 
