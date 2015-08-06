@@ -144,7 +144,7 @@ class UrlProvider
             $url = $this->router->generate($name, $parameters, $referenceType);
 
             if ($referenceType === self::BASE_PATH) {
-                $url = substr($url, strlen($this->router->getRequest()->getBaseUrl()));
+				$url = preg_replace('#^' .$this->router->getRequest()->getBaseUrl() . '#', '', $url);
             }
 
             return $url;
@@ -169,7 +169,7 @@ class UrlProvider
         $url = $this->file->getUrl($this->locator->get($path) ?: $path, $referenceType === self::BASE_PATH ? false : $referenceType);
 
         if ($referenceType === self::BASE_PATH) {
-            $url = substr($url, strlen($this->router->getRequest()->getBaseUrl()));
+            $url = preg_replace('#^' .$this->router->getRequest()->getBaseUrl() . '#', '', $url);
         }
 
         return $this->parseQuery($url, $parameters);
