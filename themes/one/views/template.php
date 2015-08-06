@@ -51,8 +51,10 @@
         </div>
         <?php endif ?>
 
-        <?php if ($view->position()->exists('hero')) : ?>
+        <?php if ($view->position()->exists('hero') || $params['hero-image']) : ?>
         <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" style="background-image: url('<?= $params['hero-image']; ?>');">
+
+            <?php if ($view->position()->exists('hero')) : ?>
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -60,6 +62,8 @@
                 </section>
 
             </div>
+            <?php endif; ?>
+
         </div>
         <?php endif; ?>
 
