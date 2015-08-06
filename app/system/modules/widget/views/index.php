@@ -118,8 +118,8 @@
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
-                                    <a href="{{ $url('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
-                                    <span v-if="!type">{{ widget.title }}</span>
+                                    <a href="{{ $url('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title | stripTags }}</a>
+                                    <span v-if="!type">{{ widget.title | stripTags }}</span>
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
