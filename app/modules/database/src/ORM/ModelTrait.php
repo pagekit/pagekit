@@ -128,7 +128,7 @@ trait ModelTrait
 
         foreach (static::getProperties($this) as $name => $value) {
 
-            if (isset($mappings[$name])) {
+            if (isset($data[$name]) || isset($mappings[$name])) {
                 continue;
             }
 
