@@ -2,7 +2,9 @@ module.exports = {
 
     ready: function () {
 
-        var $this = this, $el = $(this.$el).wrap('<div class="pk-editor"></div>');
+        var self = this, $el = $(this.$el), $parent = $el.parent();
+
+        $parent.addClass('pk-editor');
 
         this.$asset({
             css: [
@@ -27,12 +29,12 @@ module.exports = {
                 tabSize: 4
             }, this.options));
 
-            $el.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
-                $this.editor.refresh();
+            $parent.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
+                self.editor.refresh();
             });
 
             this.editor.on('change', function () {
-                $this.editor.save();
+                self.editor.save();
                 $el.trigger('input');
             });
 

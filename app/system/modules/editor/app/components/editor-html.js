@@ -3,6 +3,7 @@ module.exports = {
     ready: function () {
 
         this.$asset({
+
             css: [
                 'vendor/assets/codemirror/hint.css',
                 'vendor/assets/codemirror/codemirror.css'

@@ -1,6 +1,8 @@
 <template>
 
-    <textarea autocomplete="off" v-el="editor" v-model="value"></textarea>
+    <div>
+        <textarea autocomplete="off" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
+    </div>
 
 </template>
 
@@ -42,7 +44,14 @@
 
         components: {
 
-            'editor-textarea': {},
+            'editor-textarea': {
+
+                ready: function() {
+                    this.$emit('ready');
+                    this.$parent.$set('show', true);
+                }
+
+            },
             'editor-html': require('./editor-html'),
             'editor-code': require('./editor-code'),
             'plugin-link': require('./link'),
