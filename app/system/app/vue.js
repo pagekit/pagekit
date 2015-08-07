@@ -21,6 +21,8 @@ function install (Vue) {
     Vue.component('v-pagination', require('./components/pagination'));
 
     require('./components/input-date.vue');
+    require('./components/input-image.vue');
+    require('./components/input-video.vue');
 
     /**
      * Directives
