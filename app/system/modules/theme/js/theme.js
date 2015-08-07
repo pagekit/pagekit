@@ -7,7 +7,7 @@ jQuery(function ($) {
 
         data: _.extend({}, window.$pagekit),
 
-        ready: function () {
+        created: function () {
 
             var menu = _(this.menu).sortBy('priority').groupBy('parent').value();
             var item = _.find(menu.root, 'active');
