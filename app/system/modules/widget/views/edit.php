@@ -1,4 +1,4 @@
-<?php $view->style('codemirror'); $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
+<?php $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
 <form id="widget-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
 

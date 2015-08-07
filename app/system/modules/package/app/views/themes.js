@@ -21,7 +21,7 @@ window.Themes = module.exports = {
             if (pkg.extra && pkg.extra.image) {
                 return pkg.url + '/' + pkg.extra.image;
             } else {
-                return this.$url.static('app/system/assets/images/placeholder-800x600.svg');
+                return this.$url('app/system/assets/images/placeholder-800x600.svg');
             }
 
         },

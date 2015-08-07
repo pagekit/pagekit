@@ -1,4 +1,4 @@
-<?php $view->style('codemirror'); $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'editor', 'uikit']); ?>
+<?php $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'editor', 'uikit']); ?>
 
 <form id="site-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
 
@@ -11,7 +11,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-margin-small-right" v-attr="href: $url('admin/site/page')">{{ node.id ? 'Close' : 'Cancel' | trans }}</a>
+            <a class="uk-button uk-margin-small-right" v-attr="href: $url.route('admin/site/page')">{{ node.id ? 'Close' : 'Cancel' | trans }}</a>
             <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
         </div>

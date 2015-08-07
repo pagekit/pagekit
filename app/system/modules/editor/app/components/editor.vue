@@ -23,20 +23,22 @@
 
             }
 
-            var components = this.$options.components, type = 'editor-'+this.type;
+            var components = this.$options.components, type = 'editor-'+this.type, self = this;
             this.editor = this.$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea']);
-        },
 
-        ready: function() {
+            this.$on('ready', function() {
 
-            _.forIn(this.$options.components, function (component) {
+                _.forIn(this.$options.components, function (component) {
 
-                if (component.options && component.options.plugin) {
-                    this.editor.$addChild({ inherit: true }, component);
-                }
+                    if (component.options && component.options.plugin) {
+                        this.editor.$addChild({ inherit: true }, component);
+                    }
 
-            }, this);
+                }, this);
 
+                return false;
+
+            });
         },
 
         components: {

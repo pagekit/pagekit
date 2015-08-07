@@ -4,25 +4,40 @@ module.exports = {
 
         var $this = this, $el = $(this.$el).wrap('<div class="pk-editor"></div>');
 
-        this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
-            mode: "htmlmixed",
-            dragDrop: false,
-            autoCloseTags: true,
-            matchTags: true,
-            autoCloseBrackets: true,
-            matchBrackets: true,
-            indentUnit: 4,
-            indentWithTabs: false,
-            tabSize: 4
-        }, this.options));
+        this.$asset({
+            css: [
+                'vendor/assets/codemirror/hint.css',
+                'vendor/assets/codemirror/codemirror.css'
+            ],
+            js: [
+                'vendor/assets/codemirror/codemirror.js'
+            ]
 
-        $el.attr('data-uk-check-display', 'true').on('display.uk.check', function(e) {
-            $this.editor.refresh();
-        });
+        }, function () {
 
-        this.editor.on('change', function() {
-            $this.editor.save();
-            $el.trigger('input');
+            this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
+                mode: 'htmlmixed',
+                dragDrop: false,
+                autoCloseTags: true,
+                matchTags: true,
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                indentWithTabs: false,
+                tabSize: 4
+            }, this.options));
+
+            $el.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
+                $this.editor.refresh();
+            });
+
+            this.editor.on('change', function () {
+                $this.editor.save();
+                $el.trigger('input');
+            });
+
+            this.$dispatch('ready');
+
         });
     },
 
@@ -33,5 +48,6 @@ module.exports = {
                 this.editor.setValue(value);
             }
         }
+
     }
 };

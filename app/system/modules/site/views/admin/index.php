@@ -54,7 +54,7 @@
                         <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url('admin/site/page/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
+                                <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url.route('admin/site/page/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
             </div>
             <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
             <div class="pk-table-min-width-100">
-                <a v-attr="href: $url('admin/site/page/edit', { id: node.id })">{{ node.title }}</a>
+                <a v-attr="href: $url.route('admin/site/page/edit', { id: node.id })">{{ node.title }}</a>
                 <span class="uk-text-muted uk-text-small uk-margin-small-left" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
             </div>
             <div class="pk-table-width-minimum">
@@ -140,7 +140,7 @@
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a title="{{ node.url }}" target="_blank" v-attr="href: $url(node.url.substr(1))" v-if="node.accessible && node.url">{{ node.url }}</a>
+                <a title="{{ node.url }}" target="_blank" v-attr="href: $url.route(node.url.substr(1))" v-if="node.accessible && node.url">{{ node.url }}</a>
                 <span v-if="!node.accessible || !node.url">{{ node.path }}</span>
             </div>
         </div>

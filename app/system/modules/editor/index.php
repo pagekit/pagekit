@@ -25,7 +25,7 @@ return [
     'events' => [
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('editor', 'system/editor:app/bundle/editor.js', ['uikit-htmleditor', 'input-link', 'input-image', 'input-video']);
+            $scripts->register('editor', 'system/editor:app/bundle/editor.js', ['input-link', 'input-image', 'input-video']);
         }
 
     ]

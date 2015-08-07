@@ -40,7 +40,7 @@
 
             var type = this.type,
                 settings = {
-                    action: this.$url('admin/system/package/upload'),
+                    action: this.$url.route('admin/system/package/upload'),
                     type: 'json',
                     param: 'file',
                     before: function (options) {

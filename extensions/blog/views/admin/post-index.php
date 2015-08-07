@@ -26,7 +26,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
+            <a class="uk-button uk-button-primary" v-attr="href: $url.route('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
 
         </div>
     </div>
@@ -58,7 +58,7 @@
                 <tr class="check-item" v-repeat="post: posts" v-class="uk-active: active(post)">
                     <td><input type="checkbox" name="id" value="{{ post.id }}"></td>
                     <td>
-                        <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
+                        <a v-attr="href: $url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a title="{{ getStatusText(post) }}" v-class="
@@ -70,16 +70,16 @@
                             " v-on="click: toggleStatus(post)"></a>
                     </td>
                     <td>
-                        <a v-attr="href: $url('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
+                        <a v-attr="href: $url.route('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
+                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url.route('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
                     </td>
                     <td>
                         {{ post.date | date 'medium' }}
                     </td>
                     <td class="pk-table-text-break">
-                        <a target="_blank" v-if="post.accessible && post.url" v-attr="href: this.$url(post.url.substr(1))">{{ post.url }}</a>
+                        <a target="_blank" v-if="post.accessible && post.url" v-attr="href: this.$url.route(post.url.substr(1))">{{ post.url }}</a>
                         <span v-if="!post.accessible && post.url">{{ post.url }}</span>
                         <span v-if="!post.url">{{ 'Disabled' | true}}</span>
                     </td>

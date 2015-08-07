@@ -1,4 +1,4 @@
-<?php $view->style('codemirror'); $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'uikit-datepicker', 'uikit-timepicker', 'editor']) ?>
+<?php $view->script('post-edit', 'blog:app/bundle/post-edit.js', ['vue', 'editor']) ?>
 
 <form id="post" class="uk-form uk-form-stacked" name="form" v-on="valid: save" v-cloak>
 
@@ -11,7 +11,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-margin-small-right" v-attr="href: $url('admin/blog/post')">{{ post.id ? 'Close' : 'Cancel' | trans }}</a>
+            <a class="uk-button uk-margin-small-right" v-attr="href: $url.route('admin/blog/post')">{{ post.id ? 'Close' : 'Cancel' | trans }}</a>
             <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
 
         </div>
@@ -67,22 +67,10 @@
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Publish on' | trans }}</span>
                     <div class="uk-form-controls">
-                        <div class="uk-grid uk-grid-small" data-uk-grid-margin>
-                            <div class="uk-width-large-1-2">
-                                <div class="uk-form-icon uk-display-block">
-                                    <i class="pk-icon-calendar pk-icon-muted"></i>
-                                    <input class="uk-width-1-1" type="text" data-uk-datepicker="{format: 'YYYY-MM-DD', pos: 'bottom'}" v-model="date" lazy>
-                                </div>
-                            </div>
-                            <div class="uk-width-large-1-2">
-                                <div class="uk-form-icon uk-display-block js-timepicker">
-                                    <i class="pk-icon-time pk-icon-muted"></i>
-                                    <input class="uk-width-1-1" type="text" v-model="time" lazy>
-                                </div>
-                            </div>
-                        </div>
+                        <input-date datetime="{{@ post.date}}"></input-date>
                     </div>
                 </div>
+
                 <div class="uk-form-row">
                     <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
                     <div class="uk-form-controls uk-form-controls-text">

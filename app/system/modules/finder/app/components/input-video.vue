@@ -1,7 +1,7 @@
 <template>
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
+        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Video' | trans }}</p>
     </a>
 

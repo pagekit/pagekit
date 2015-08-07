@@ -92,7 +92,7 @@ var installer = {
 
                         // redirect to login after 3s
                         setTimeout(function(){
-                            location.href = Vue.url.static('admin');
+                            location.href = this.$url.route('admin');
                         }, 3000);
 
                     } else {

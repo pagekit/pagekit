@@ -38,8 +38,21 @@ return [
             $app->subscribe(new ResponseListener());
         },
 
-        'site' => function($event, $app) {
-            $app->subscribe(new CanonicalListener());
+        'view.meta' => function($event, $meta) use ($app) {
+
+            if ($app->isAdmin()) {
+                return;
+            }
+
+            $route = $app['url']->get(
+                $app['request']->attributes->get('_route'),
+                $app['request']->attributes->get('_route_params', [])
+            );
+
+            if ($route != $app['request']->getRequestUri()) {
+                $meta->add('canonical', $route);
+            }
+
         },
 
         'view.data' => function ($event, $data) use ($app) {

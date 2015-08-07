@@ -2,7 +2,7 @@
 
     <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!image.src">
 
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-image.svg')">
+        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
 
         <a class="uk-position-cover" v-on="click: config()"></a>

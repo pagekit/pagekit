@@ -20,21 +20,13 @@ class ResponseListener implements EventSubscriberInterface
      */
     public function onResponse($event, $request, $response)
     {
-        if (strpos($response->headers->get('Content-Type'), 'html') !== false) {
-            $content = preg_replace_callback(self::REGEX_URL, [$this, 'replaceUrlCallback'], $response->getContent());
-            $response->setContent($content);
+        if (strpos($response->headers->get('Content-Type'), 'html') === false) {
+            return;
         }
-    }
 
-    /**
-     * Replace internal/relative url callback.
-     *
-     * @param  array  $matches
-     * @return string
-     */
-    public function replaceUrlCallback($matches)
-    {
-        return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
+        $response->setContent(preg_replace_callback(self::REGEX_URL, function ($matches) {
+            return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
+        }, $response->getContent()));
     }
 
     /**

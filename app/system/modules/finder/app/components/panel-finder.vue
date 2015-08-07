@@ -307,7 +307,7 @@
                 var finder = this,
                     settings = {
 
-                        action: this.$url('system/finder/upload'),
+                        action: this.$url.route('system/finder/upload'),
 
                         before: function (options) {
                             $.extend(options.params, { path: finder.path, root: finder.getRoot(), _csrf: $pagekit.csrf });

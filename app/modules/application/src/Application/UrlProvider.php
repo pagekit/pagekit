@@ -157,7 +157,7 @@ class UrlProvider
     }
 
     /**
-     * Get the URL to a path resource.
+     * Gets the URL to a path resource.
      *
      * @param  string $path
      * @param  mixed  $parameters

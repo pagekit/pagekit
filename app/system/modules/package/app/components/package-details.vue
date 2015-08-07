@@ -68,7 +68,7 @@
                 var extra = pkg.extra || {};
 
                 if (!extra.image) {
-                    return this.$url.static('app/system/assets/images/placeholder-icon.svg');
+                    return this.$url('app/system/assets/images/placeholder-icon.svg');
                 } else if (!extra.image.match(/^(https?:)?\//)) {
                     return pkg.url + '/' + extra.image;
                 }

@@ -35,7 +35,7 @@ module.exports = {
             this.$resource('api/user/:id').save({id: this.user.id}, {user: this.user, password: this.password}, function (data) {
 
                 if (!this.user.id) {
-                    window.history.replaceState({}, '', this.$url('admin/user/edit', {id: data.user.id}))
+                    window.history.replaceState({}, '', this.$url.route('admin/user/edit', {id: data.user.id}))
                 }
 
                 this.$set('user', data.user);

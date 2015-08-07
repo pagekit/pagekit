@@ -21,7 +21,7 @@ window.Extensions = module.exports = {
             if (pkg.extra && pkg.extra.image) {
                 return pkg.url + '/' + pkg.extra.image;
             } else {
-                return this.$url.static('app/system/assets/images/placeholder-icon.svg');
+                return this.$url('app/system/assets/images/placeholder-icon.svg');
             }
 
         },
