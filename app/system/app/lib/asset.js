@@ -2,16 +2,12 @@ module.exports = function (Vue) {
 
     var _ = Vue.util;
     var Promise = require('promise');
-    var fn = function () {};
     var cache = {};
 
     /**
      * Asset provides a promise based assets manager.
      */
-    function Asset(assets, onSuccess, onError) {
-
-        onSuccess = onSuccess || fn;
-        onError = onError || fn;
+    function Asset(assets, success, error) {
 
         var self = this, promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
 
@@ -25,7 +21,9 @@ module.exports = function (Vue) {
 
             for (var i = 0; i < _assets.length; i++) {
 
-                if (!_assets[i]) continue;
+                if (!_assets[i]) {
+                    continue;
+                }
 
                 if (!cache[_assets[i]]) {
                     cache[_assets[i]] = Asset[type]($url(_assets[i]));
@@ -38,44 +36,42 @@ module.exports = function (Vue) {
 
         promise = Promise.all(promises);
 
-        _.extend(promise, {
+        promise.success = function (fn) {
 
-            success: function (onSuccess) {
+            promise.then(function (response) {
+                fn.call(self, response);
+            });
 
-                this.then(function (data) {
-                    onSuccess.apply(self, [data]);
-                }, function () {
-                });
+            return promise;
+        };
 
-                return this;
-            },
+        promise.error = function (fn) {
 
-            error: function (onError) {
+            promise.then(undefined, function (response) {
+                fn.call(self, response);
+            });
 
-                this.catch(function (err) {
-                    onError.apply(self, [err]);
-                });
+            return promise;
+        };
 
-                return this;
-            },
+        promise.always = function (fn) {
 
-            always: function (onAlways) {
+            var cb = function (response) {
+                fn.call(self, response);
+            };
 
-                var cb = function (data) {
-                    onAlways.apply(self, [data]);
-                };
+            promise.then(cb, cb);
 
-                this.then(cb, cb);
+            return promise;
+        };
 
-                return this;
-            }
-        });
+        if (success) {
+            promise.success(success);
+        }
 
-        promise.then(function () {
-            onSuccess.apply(self, []);
-        }).catch(function (e) {
-            onError.apply(self, [e]);
-        });
+        if (error) {
+            promise.error(error);
+        }
 
         return promise;
     }
