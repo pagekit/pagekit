@@ -26,7 +26,7 @@ module.exports = {
                     }
                 });
 
-            this.$dispatch('ready');
+            this.$emit('ready');
         });
 
     },
@@ -34,7 +34,7 @@ module.exports = {
     watch: {
 
         value: function (value) {
-            if (value != this.editor.editor.getValue()) {
+            if (this.editor && value != this.editor.editor.getValue()) {
                 this.editor.editor.setValue(value);
             }
         },

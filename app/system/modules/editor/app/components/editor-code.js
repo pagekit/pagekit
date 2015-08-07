@@ -36,7 +36,7 @@ module.exports = {
                 $el.trigger('input');
             });
 
-            this.$dispatch('ready');
+            this.$emit('ready');
 
         });
     },
@@ -44,7 +44,7 @@ module.exports = {
     watch: {
 
         value: function (value) {
-            if (value != this.editor.getValue()) {
+            if (this.editor && value != this.editor.getValue()) {
                 this.editor.setValue(value);
             }
         }
