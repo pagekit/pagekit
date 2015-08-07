@@ -82,20 +82,20 @@ module.exports = function (Vue) {
 
             return new Promise(function (resolve, reject) {
 
-                var img = document.createElement('img'),
-                    link = document.createElement('link');
+                var link = document.createElement('link');
 
-                link.type = 'text/css';
-                link.rel = 'stylesheet';
-                link.href = url;
-
-                document.getElementsByTagName('head')[0].appendChild(link);
-
-                img.onerror = function () {
+                link.onload = function () {
                     resolve(url);
                 };
+                link.onerror = function () {
+                    reject(url);
+                };
 
-                img.src = link.href;
+                link.href = url;
+                link.type = 'text/css';
+                link.rel = 'stylesheet';
+
+                document.getElementsByTagName('head')[0].appendChild(link);
             });
 
         },
@@ -106,7 +106,6 @@ module.exports = function (Vue) {
 
                 var script = document.createElement('script');
 
-                //script.async = true;
                 script.onload = function () {
                     resolve(url);
                 };
