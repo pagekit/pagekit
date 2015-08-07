@@ -4,6 +4,7 @@ use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
 use Pagekit\Debug\DataCollector\DatabaseDataCollector;
+use Pagekit\Debug\DataCollector\EventsDataCollector;
 use Pagekit\Debug\DataCollector\RoutesDataCollector;
 use Pagekit\Debug\DataCollector\SystemDataCollector;
 use Pagekit\Debug\DebugBar;
@@ -41,6 +42,10 @@ return [
             $app['debugbar']->addCollector(new MemoryCollector());
             $app['debugbar']->addCollector(new TimeDataCollector());
             $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
+
+            if (isset($app['events'])) {
+                $app['debugbar']->addCollector(new EventsDataCollector($app['events']));
+            }
 
             if (isset($app['auth'])) {
                 $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
