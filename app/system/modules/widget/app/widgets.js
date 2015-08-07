@@ -31,7 +31,7 @@ window.Widgets = module.exports = {
 
             this.resource.save({id: 'bulk'}, {widgets: widgets}, this.load).success(function(){
                 this.$set('selected', []);
-                UIkit.notify('Widget(s) copied.');
+                this.$notify('Widget(s) copied.');
             });
         },
 

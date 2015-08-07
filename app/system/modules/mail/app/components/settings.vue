@@ -114,9 +114,9 @@
             test: function (driver) {
 
                 this.$http.post('admin/system/mail/' + driver, { option: this.options }, function (data) {
-                    UIkit.notify(data.message, data.success ? '' : 'danger');
+                    this.$notify(data.message, data.success ? '' : 'danger');
                 }).error(function () {
-                    UIkit.notify('Ajax request to server failed.', 'danger');
+                    this.$notify('Ajax request to server failed.', 'danger');
                 });
 
             }

@@ -74,25 +74,25 @@ window.Themes = module.exports = {
 
         enable: function (pkg) {
             this.enablePackage(pkg).success(function () {
-                UIkit.notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
+                this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
             }).error(this.error);
         },
 
         uninstall: function (pkg) {
             this.uninstallPackage(pkg, this.packages).success(function () {
-                UIkit.notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
+                this.$notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
             }).error(this.error);
         },
 
         update: function (pkg) {
             this.installPackage(pkg, this.packages).success(function () {
-                UIkit.notify(this.$trans('"%title%" updated.', {title: pkg.title}));
+                this.$notify(this.$trans('"%title%" updated.', {title: pkg.title}));
                 this.load();
             }).error(this.error);
         },
 
         error: function (message) {
-            UIkit.notify(message, 'danger');
+            this.$notify(message, 'danger');
         }
 
     },

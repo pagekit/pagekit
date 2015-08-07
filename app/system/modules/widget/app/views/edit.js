@@ -62,9 +62,9 @@ module.exports = {
 
                 this.$set('widget', data.widget);
 
-                UIkit.notify(this.$trans('Widget saved.'));
+                this.$notify(this.$trans('Widget saved.'));
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         },
 

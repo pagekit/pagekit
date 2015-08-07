@@ -53,11 +53,11 @@ window.Site = module.exports = {
 
                 this.$set('node', data.node);
 
-                UIkit.notify(this.$trans('%type% saved.', {type: this.type.label}));
+                this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
 
             }, function (data) {
 
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

@@ -45,14 +45,14 @@ module.exports = {
                     var role = _.findIndex(this.roles, 'id', this.role.id);
                     this.roles.splice(role, 1, data.role);
 
-                    UIkit.notify(this.$trans('Role saved'));
+                    this.$notify(this.$trans('Role saved'));
                 } else {
                     this.roles.push(data.role);
-                    UIkit.notify(this.$trans('Role added'));
+                    this.$notify(this.$trans('Role added'));
                 }
 
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
 
             this.$.modal.close();
@@ -78,9 +78,9 @@ module.exports = {
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                // UIkit.notify(this.$trans('Roles reordered.'));
+                // this.$notify(this.$trans('Roles reordered.'));
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

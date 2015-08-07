@@ -40,10 +40,10 @@ module.exports = {
 
                 this.$set('user', data.user);
 
-                UIkit.notify(this.$trans('User saved.'));
+                this.$notify(this.$trans('User saved.'));
 
             }).error(function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

@@ -6,18 +6,16 @@ module.exports = {
 
     created: function () {
 
-        var vm = this;
-
         this.Roles = this.$resource('api/user/role/:id');
 
         this.debounced = [];
 
         this.saveCb = Vue.util.debounce(function(role) {
-            vm.$resource('api/user/role/:id').save({ id: 'bulk' }, { roles: vm.debounced }, function () {
-                UIkit.notify(this.$trans('Permissions saved'));
+            this.$resource('api/user/role/:id').save({ id: 'bulk' }, { roles: this.debounced }, function () {
+                this.$notify(this.$trans('Permissions saved'));
             });
-            vm.debounced = [];
-        }, 1000);
+            this.debounced = [];
+        }.bind(this), 1000);
 
     },
 

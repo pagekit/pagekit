@@ -60,9 +60,9 @@ module.exports = {
         save: function (comment) {
             return this.Comments.save({id: comment.id}, {comment: comment}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Comment saved.'));
+                this.$notify(this.$trans('Comment saved.'));
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         },
 
@@ -76,14 +76,14 @@ module.exports = {
 
             this.Comments.save({id: 'bulk'}, {comments: comments}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Comments saved.'));
+                this.$notify(this.$trans('Comments saved.'));
             });
         },
 
         remove: function () {
             this.Comments.delete({id: 'bulk'}, {ids: this.selected}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Comment(s) deleted.'));
+                this.$notify(this.$trans('Comment(s) deleted.'));
             });
         },
 

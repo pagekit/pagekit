@@ -40,9 +40,9 @@ window.Settings = module.exports = {
 
             this.$broadcast('save', this.$data);
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
-                UIkit.notify(this.$trans('Settings saved.'));
+                this.$notify(this.$trans('Settings saved.'));
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

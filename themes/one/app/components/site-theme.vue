@@ -45,9 +45,9 @@
                 var config = _.omit(this.config, ['positions', 'menus', 'widget']);
 
                 this.$http.post('admin/system/settings/config', {name: this.name, config: config}, function () {
-                    UIkit.notify(this.$trans('Settings saved.'), '');
+                    this.$notify(this.$trans('Settings saved.'), '');
                 }).error(function (data) {
-                    UIkit.notify(data, 'danger');
+                    this.$notify(data, 'danger');
                 });
 
             }

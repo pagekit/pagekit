@@ -128,7 +128,7 @@
                 this.$set('status', 'installing');
 
                 this.installPackage(pkg, this.installed).error(function (data) {
-                    UIkit.notify(data, 'danger');
+                    this.$notify(data, 'danger');
                 }).always(function (data) {
                     this.$set('status', '');
                 });

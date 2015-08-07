@@ -107,7 +107,7 @@ module.exports = {
             position = _.find(this.positions, 'name', position);
 
             this.assign(position.name, position.assigned.concat(ids)).success(function () {
-                UIkit.notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
+                this.$notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
             });
         },
 
@@ -122,7 +122,7 @@ module.exports = {
             this.resource.save({id: 'bulk'}, {widgets: widgets}, function () {
                 this.load();
                 this.$set('selected', []);
-                UIkit.notify('Widget(s) saved.');
+                this.$notify('Widget(s) saved.');
             });
         },
 
@@ -131,7 +131,7 @@ module.exports = {
             widget.status = widget.status ? 0 : 1;
 
             this.resource.save({id: widget.id}, {widget: widget}, function () {
-                UIkit.notify(this.$trans('Widget saved.'));
+                this.$notify(this.$trans('Widget saved.'));
             });
         },
 

@@ -65,6 +65,10 @@ function install (Vue) {
     Vue.url.current = Vue.url.parse(window.location.href);
 
     Vue.prototype.$session = window.sessionStorage || {};
+
+    window.addEventListener('load', function() {
+        Vue.prototype.$notify = window.UIkit && window.UIkit.notify || function() {};
+    });
 }
 
 if (window.Vue) {
@@ -73,3 +77,4 @@ if (window.Vue) {
 
 window.history.pushState = window.history.pushState || function() {};
 window.history.replaceState = window.history.replaceState || function() {};
+

@@ -36,10 +36,10 @@ var App = Vue.extend({
 
                 this.$set('post', data.post);
 
-                UIkit.notify(this.$trans('Post saved.'));
+                this.$notify(this.$trans('Post saved.'));
 
             }, function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

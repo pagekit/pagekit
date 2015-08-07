@@ -271,11 +271,11 @@
                 return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.getRoot()}, params), function (data) {
 
                     this.load();
-                    UIkit.notify(data.message, data.error ? 'danger' : '');
+                    this.$notify(data.message, data.error ? 'danger' : '');
 
                 }).error(function (data, status) {
 
-                    UIkit.notify(status == 500 ? this.$trans('Unknown error.') : data, 'danger');
+                    this.$notify(status == 500 ? this.$trans('Unknown error.') : data, 'danger');
                 });
             },
 
@@ -289,7 +289,7 @@
 
                 }).error(function() {
 
-                    UIkit.notify(this.$trans('Unable to access directory.'), 'danger')
+                    this.$notify(this.$trans('Unable to access directory.'), 'danger')
 
                 });
             }
@@ -328,7 +328,7 @@
 
                             finder.load();
 
-                            UIkit.notify(data.message, data.error ? 'danger' : '');
+                            finder.$notify(data.message, data.error ? 'danger' : '');
 
                             finder.$set('upload.progress', 100);
 

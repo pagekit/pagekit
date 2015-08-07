@@ -66,7 +66,7 @@ module.exports = {
             this.Menus.save({id: menu.id}, {menu: menu}, function (data) {
                 this.load();
             }).error(function (msg) {
-                UIkit.notify(msg, 'danger');
+                this.$notify(msg, 'danger');
             });
 
             this.cancel();
@@ -85,7 +85,7 @@ module.exports = {
         setFrontpage: function (node) {
             this.Nodes.save({id: 'frontpage'}, {id: node.id}, function () {
                 this.load();
-                UIkit.notify('Frontpage updated.');
+                this.$notify('Frontpage updated.');
             });
         },
 
@@ -99,7 +99,7 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                UIkit.notify('Page(s) saved.');
+                this.$notify('Page(s) saved.');
             });
         },
 
@@ -109,7 +109,7 @@ module.exports = {
 
             this.Nodes.save({id: node.id}, {node: node}, function () {
                 this.load();
-                UIkit.notify('Page saved.');
+                this.$notify('Page saved.');
             });
         },
 
@@ -123,7 +123,7 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({label: this.$trans('Trash')}), 'id', menu).label}));
+                this.$notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({label: this.$trans('Trash')}), 'id', menu).label}));
             });
         },
 
@@ -142,7 +142,7 @@ module.exports = {
             } else {
                 this.Nodes.delete({id: 'bulk'}, {ids: this.selected}, function () {
                     this.load();
-                    UIkit.notify('Page(s) deleted.');
+                    this.$notify('Page(s) deleted.');
                 });
             }
         },
@@ -223,7 +223,7 @@ module.exports = {
                     vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
 
                         // @TODO reload everything on reorder really needed?
-                        vm.load().success(function () {
+                        this.load().success(function () {
 
                             // hack for weird flickr bug
                             if (el.parent()[0] === nestable.element[0]) {
@@ -234,7 +234,7 @@ module.exports = {
                         });
 
                     }).error(function () {
-                        UIkit.notify(this.$trans('Reorder failed.'), 'danger');
+                        this.$notify(this.$trans('Reorder failed.'), 'danger');
                     });
                 }
             });

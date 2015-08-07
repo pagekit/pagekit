@@ -58,7 +58,7 @@ module.exports = {
         save: function (post) {
             this.resource.save({ id: post.id }, { post: post }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Post saved.'));
+                this.$notify(this.$trans('Post saved.'));
             });
         },
 
@@ -72,7 +72,7 @@ module.exports = {
 
             this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Posts saved.'));
+                this.$notify(this.$trans('Posts saved.'));
             });
         },
 
@@ -80,7 +80,7 @@ module.exports = {
 
             this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Posts deleted.'));
+                this.$notify(this.$trans('Posts deleted.'));
             });
         },
 
@@ -97,7 +97,7 @@ module.exports = {
 
             this.resource.save({ id: 'copy' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                this.$notify(data.message || data.error, data.error ? 'danger' : '');
             });
         },
 

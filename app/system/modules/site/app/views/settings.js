@@ -36,9 +36,9 @@ window.Site = module.exports = {
             e.preventDefault();
 
             this.$http.post('admin/system/settings/config', { name: 'system/site', config: this.config }, function() {
-                 UIkit.notify(this.$trans('Settings saved.'));
+                 this.$notify(this.$trans('Settings saved.'));
             }).error(function(data) {
-                 UIkit.notify(data, 'danger');
+                 this.$notify(data, 'danger');
             });
 
         }

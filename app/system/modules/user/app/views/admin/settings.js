@@ -4,14 +4,12 @@ module.exports = {
 
     methods: {
 
-        save: function(e) {
-
-            var vm = this;
+        save: function() {
 
             this.$http.post('admin/system/settings/config', { name: 'system/user', config: this.config }, function() {
-                 UIkit.notify(vm.$trans('Settings saved.'));
+                 this.$notify(this.$trans('Settings saved.'));
             }).error(function(data) {
-                 UIkit.notify(data, 'danger');
+                 this.$notify(data, 'danger');
             });
 
         }

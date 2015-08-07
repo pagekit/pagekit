@@ -77,7 +77,7 @@
                 }, 250);
 
                 if (data.error) {
-                    UIkit.notify(data.error, 'danger');
+                    this.$notify(data.error, 'danger');
                     return;
                 }
 
@@ -95,14 +95,14 @@
 
                 this.$http.post('admin/system/package/install', {package: this.upload.package}, function () {
 
-                    UIkit.notify(this.$trans('"%title%" installed.', {title: this.package.title}));
+                    this.$notify(this.$trans('"%title%" installed.', {title: this.package.title}));
 
                     setTimeout(function () {
                         location.reload();
                     }, 600);
 
                 }).error(function (msg) {
-                    UIkit.notify(msg, 'danger');
+                    this.$notify(msg, 'danger');
                 });
             }
 
