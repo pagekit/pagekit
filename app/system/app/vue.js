@@ -9,6 +9,7 @@ function install (Vue) {
     require('vue-resource');
     require('vue-validator');
     require('./lib/asset')(Vue);
+    require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
     require('./lib/filters')(Vue);
 
@@ -65,10 +66,6 @@ function install (Vue) {
     Vue.url.current = Vue.url.parse(window.location.href);
 
     Vue.prototype.$session = window.sessionStorage || {};
-
-    window.addEventListener('load', function() {
-        Vue.prototype.$notify = window.UIkit && window.UIkit.notify || function() {};
-    });
 }
 
 if (window.Vue) {
