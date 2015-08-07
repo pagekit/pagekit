@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <textarea autocomplete="off" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
+        <textarea autocomplete="off" v-style="height: height + 'px'" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
     </div>
 
 </template>
@@ -13,6 +13,8 @@
         props: ['type', 'value', 'options'],
 
         compiled: function() {
+
+            this.$add('height', this.options.height ? this.options.height : 500);
 
             if (this.$el.hasAttributes()) {
 

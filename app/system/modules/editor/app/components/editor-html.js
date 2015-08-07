@@ -2,6 +2,8 @@ module.exports = {
 
     ready: function () {
 
+        this.$parent.$set('height', this.$parent.height + 47);
+
         this.$asset({
 
             css: [
