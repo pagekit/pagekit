@@ -2,7 +2,15 @@
 
 namespace Pagekit\Console\Updater;
 
-use Composer\Console\Application as ComposerApp;
+
+use Composer\Factory;
+use Composer\Installer;
+use Composer\IO\ConsoleIO;
+use Composer\Json\JsonFile;
+use Composer\Package\Locker;
+use Composer\Repository\CompositeRepository;
+use Composer\Repository\InstalledFilesystemRepository;
+use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,6 +34,23 @@ class Updater
      */
     protected $file;
 
+
+    protected $packagesConfig = [
+        "repositories" => [
+            [
+                "type" => "artifact",
+                "url" => "tmp/packages/"
+            ],
+            [
+                "type" => "composer",
+                "url" => "http://pagekit.com"
+            ]
+        ],
+        "require" => [
+            "composer/installers" => "1.0.22"
+        ]
+    ];
+
     /**
      * @param $config
      */
@@ -37,7 +62,7 @@ class Updater
 
         putenv('COMPOSER_HOME=' . $config['path.temp']);
         putenv('COMPOSER_CACHE_DIR=' . $config['path.cache'] . '/composer');
-        putenv('COMPOSER_VENDOR_DIR=' . $config['path'] . '/vendor');
+        putenv('COMPOSER_VENDOR_DIR=' . $config['path'] . '/vendor/packages');
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -161,22 +186,34 @@ class Updater
      */
     protected function composerUpdate($updates = false)
     {
-        global $packages;
+        $packagesConfig = $this->packagesConfig;
+        $packagesConfig['require'] = array_merge($packagesConfig['require'], $this->packages);
 
-        $packages = $this->packages;
+        $io = new ConsoleIO(new ArrayInput([]), $this->output, new HelperSet());
+        $composer = Factory::create($io, $packagesConfig);
 
-        $params = ['update', '--prefer-dist'];
-        $params['--working-dir'] = $this->config['path'];
+        $lockFile = new JsonFile($this->config['path'] . '/packages.lock');
+        $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($packagesConfig)));
+        $composer->setLocker($locker);
+
+        $installed = new JsonFile($this->config['path'] . '/vendor/composer/installed.json');
+        $internal = new CompositeRepository([]);
+        $internal->addRepository(new InstalledFilesystemRepository($installed));
+
+        $installer = Installer::create($io, $composer);
+        $installer
+            ->setAdditionalInstalledRepository($internal)
+            ->setPreferDist(true)
+            ->setOptimizeAutoloader(true)
+            ->setUpdate(true);
+
         if ($updates) {
-            $params['packages'] = $updates;
+            $installer->setUpdateWhitelist($updates);
         }
 
-        $composer = new ComposerApp();
-        $composer->setAutoExit(false);
-        $composer->run(new ArrayInput($params), $this->output);
+        $installer->run();
 
         $error = $this->output->getError();
-
         return empty($error);
     }
 

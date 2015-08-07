@@ -12,7 +12,7 @@ class ParameterVerifier
      */
     public function __construct($config)
     {
-        $this->secretKey = json_encode($config);
+        $this->secretKey = sha1(json_encode(array_merge([__DIR__], $config)));
     }
 
     /**
@@ -27,24 +27,19 @@ class ParameterVerifier
             return false;
         }
 
-        return sha1($this->hash(array_diff_key(['token' => false], $params))) === sha1($params['token']);
+        return sha1($this->hash(array_diff_key($params, ['token' => false]))) === sha1($params['token']);
     }
 
     /**
      * Calculates HMAC-SHA1 message authentication code for parameter array.
      *
      * @param array $params
-     * @param $expires
      * @return string
      */
-    public function hash(array $params, $expires = null)
+    public function hash(array $params)
     {
-        if ($expires) {
-            $params['expires'] = $expires;
-        }
-
-        array_multisort($params);
-        $string = json_encode($params);
+        ksort($params);
+        $string = json_encode($params, JSON_NUMERIC_CHECK);
 
         return base64_encode(extension_loaded('hash') ?
             hash_hmac('sha1', $string, $this->secretKey, true) : pack('H*', sha1(

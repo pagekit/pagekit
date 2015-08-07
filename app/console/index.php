@@ -39,6 +39,8 @@ if (PHP_SAPI === 'cli') {
         $args = $_GET;
     }
 
+    unset($args['expires'], $args['token']);
+
     $input = new ArrayInput($args);
     $output = new OutputFilter(fopen('php://output', 'w'));
     $output->setFormatter(new HtmlOutputFormatter());
