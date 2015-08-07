@@ -37,7 +37,7 @@
         section: {
             label: 'Code',
             icon: 'pk-icon-large-code',
-            priority: 20
+            priority: 30
         },
 
         props: ['config']

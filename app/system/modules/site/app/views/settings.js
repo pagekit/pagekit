@@ -48,7 +48,8 @@ window.Site = module.exports = {
     components: {
 
         'site-code': require('../components/site-code.vue'),
-        'site-general': require('../components/site-general.vue')
+        'site-general': require('../components/site-general.vue'),
+        'site-maintenance': require('../components/site-maintenance.vue')
 
     }
 
