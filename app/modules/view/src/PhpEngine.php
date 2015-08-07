@@ -15,7 +15,7 @@ class PhpEngine extends BasePhpEngine
 {
     protected $result;
     protected $template;
-    protected $parameters = [];
+    protected $parameters;
 
     /**
      * {@inheritdoc}
@@ -33,21 +33,17 @@ class PhpEngine extends BasePhpEngine
      */
     protected function evaluate(Storage $template, array $parameters = [])
     {
-        if ($previous = end($this->parameters)) {
-            $parameters = array_replace($previous, $parameters);
-        }
-
         $this->result = false;
         $this->template = $template;
-        $this->parameters[] = $parameters;
+        $this->parameters = $parameters;
 
-        unset($template, $parameters, $previous);
+        unset($template, $parameters);
 
         if (isset($this->parameters['this'])) {
             throw new \InvalidArgumentException('Invalid parameter (this)');
         }
 
-        extract(end($this->parameters), EXTR_SKIP);
+        extract($this->parameters, EXTR_SKIP);
 
         if ($this->template instanceof FileStorage) {
             ob_start();
@@ -58,8 +54,6 @@ class PhpEngine extends BasePhpEngine
             eval('; ?>'.$this->template.'<?php ;');
             $this->result = ob_get_clean();
         }
-
-        array_pop($this->parameters);
 
         return $this->result;
     }

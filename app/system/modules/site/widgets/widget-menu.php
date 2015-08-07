@@ -9,7 +9,7 @@ return [
     'type' => 'widget',
 
     'render' => function ($widget) use ($app) {
-        return $app->view()->menu($widget->get('menu'), 'system/site/widget-menu.php', [
+        return $app->view()->menu()->render($widget->get('menu'), 'system/site/widget-menu.php', [
             'start_level' => (int) $widget->get('start_level', 1),
             'depth' => $widget->get('depth'),
             'mode' => $widget->get('mode'),
