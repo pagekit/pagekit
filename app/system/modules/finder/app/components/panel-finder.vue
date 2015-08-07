@@ -275,7 +275,7 @@
 
                 }).error(function (data, status) {
 
-                    this.$notify(status == 500 ? this.$trans('Unknown error.') : data, 'danger');
+                    this.$notify(status == 500 ? 'Unknown error.' : data, 'danger');
                 });
             },
 
@@ -289,7 +289,7 @@
 
                 }).error(function() {
 
-                    this.$notify(this.$trans('Unable to access directory.'), 'danger')
+                    this.$notify('Unable to access directory.', 'danger');
 
                 });
             }

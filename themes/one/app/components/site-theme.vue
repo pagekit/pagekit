@@ -45,7 +45,7 @@
                 var config = _.omit(this.config, ['positions', 'menus', 'widget']);
 
                 this.$http.post('admin/system/settings/config', {name: this.name, config: config}, function () {
-                    this.$notify(this.$trans('Settings saved.'), '');
+                    this.$notify('Settings saved.');
                 }).error(function (data) {
                     this.$notify(data, 'danger');
                 });

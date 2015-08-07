@@ -12,7 +12,7 @@ module.exports = {
 
         this.saveCb = Vue.util.debounce(function(role) {
             this.$resource('api/user/role/:id').save({ id: 'bulk' }, { roles: this.debounced }, function () {
-                this.$notify(this.$trans('Permissions saved'));
+                this.$notify('Permissions saved');
             });
             this.debounced = [];
         }.bind(this), 1000);

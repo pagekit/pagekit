@@ -62,7 +62,7 @@ module.exports = {
 
                 this.$set('widget', data.widget);
 
-                this.$notify(this.$trans('Widget saved.'));
+                this.$notify('Widget saved.');
             }, function (data) {
                 this.$notify(data, 'danger');
             });

@@ -40,7 +40,7 @@ module.exports = {
 
                 this.$set('user', data.user);
 
-                this.$notify(this.$trans('User saved.'));
+                this.$notify('User saved.');
 
             }).error(function (data) {
                 this.$notify(data, 'danger');

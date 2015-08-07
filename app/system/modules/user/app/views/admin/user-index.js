@@ -60,7 +60,7 @@ module.exports = {
         save: function (user) {
             this.resource.save({id: user.id}, {user: user}, function (data) {
                 this.load();
-                this.$notify(this.$trans('User saved.'));
+                this.$notify('User saved.');
             });
         },
 
@@ -74,14 +74,14 @@ module.exports = {
 
             this.resource.save({id: 'bulk'}, {users: users}, function (data) {
                 this.load();
-                this.$notify(this.$trans('Users saved.'));
+                this.$notify('Users saved.');
             });
         },
 
         remove: function () {
             this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
                 this.load();
-                this.$notify(this.$trans('Users deleted.'));
+                this.$notify('Users deleted.');
             });
         },
 

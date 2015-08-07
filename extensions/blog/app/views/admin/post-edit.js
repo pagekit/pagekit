@@ -36,7 +36,7 @@ var App = Vue.extend({
 
                 this.$set('post', data.post);
 
-                this.$notify(this.$trans('Post saved.'));
+                this.$notify('Post saved.');
 
             }, function (data) {
                 this.$notify(data, 'danger');

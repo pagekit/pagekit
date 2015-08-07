@@ -58,7 +58,7 @@ module.exports = {
         save: function (post) {
             this.resource.save({ id: post.id }, { post: post }, function (data) {
                 this.load();
-                this.$notify(this.$trans('Post saved.'));
+                this.$notify('Post saved.');
             });
         },
 
@@ -72,7 +72,7 @@ module.exports = {
 
             this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
                 this.load();
-                this.$notify(this.$trans('Posts saved.'));
+                this.$notify('Posts saved.');
             });
         },
 
@@ -80,7 +80,7 @@ module.exports = {
 
             this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                 this.load();
-                this.$notify(this.$trans('Posts deleted.'));
+                this.$notify('Posts deleted.');
             });
         },
 

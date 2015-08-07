@@ -40,7 +40,7 @@ window.Settings = module.exports = {
 
             this.$broadcast('save', this.$data);
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
-                this.$notify(this.$trans('Settings saved.'));
+                this.$notify('Settings saved.');
             }, function (data) {
                 this.$notify(data, 'danger');
             });

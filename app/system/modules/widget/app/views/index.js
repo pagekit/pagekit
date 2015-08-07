@@ -131,7 +131,7 @@ module.exports = {
             widget.status = widget.status ? 0 : 1;
 
             this.resource.save({id: widget.id}, {widget: widget}, function () {
-                this.$notify(this.$trans('Widget saved.'));
+                this.$notify('Widget saved.');
             });
         },
 
