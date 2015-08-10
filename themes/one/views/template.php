@@ -21,8 +21,8 @@
 
                         <img class="tm-logo" src="<?= $this->escape($params['logo']) ?>" alt="">
 
-                        <?php if ($params['logo-contrast']) : ?>
-                        <img class="tm-logo-contrast" src="<?= $this->escape($params['logo-contrast']) ?>" alt="">
+                        <?php if ($params['logo_contrast']) : ?>
+                        <img class="tm-logo-contrast" src="<?= $this->escape($params['logo_contrast']) ?>" alt="">
                         <?php endif ?>
 
                     </a>
@@ -52,7 +52,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" style="background-image: url('<?= $view->url($params['hero-image']); ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" style="background-image: url('<?= $view->url($params['hero_image']); ?>');">
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -86,7 +86,7 @@
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
-                    <aside class="uk-width-medium-1-4 <?= $params['sidebar-first'] ? 'uk-flex-order-first-medium' : ''; ?>">
+                    <aside class="uk-width-medium-1-4 <?= $params['sidebar_first'] ? 'uk-flex-order-first-medium' : ''; ?>">
                         <?= $view->position('sidebar', 'position-panel.php') ?>
                     </aside>
                     <?php endif ?>

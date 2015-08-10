@@ -50,10 +50,10 @@ return [
         'title_large' => false,
         'alignment' => '',
         'html_class' => '',
-        'sidebar-first' => false,
-        'hero-image' => '',
-        'hero-contrast' => '',
-        'navbar-transparent' => ''
+        'sidebar_first' => false,
+        'hero_image' => '',
+        'hero_contrast' => '',
+        'navbar_transparent' => ''
 
     ],
 
@@ -123,13 +123,13 @@ return [
             ];
 
             // Sticky overlay navbar if hero position exists
-            if ($event['navbar-transparent'] && $view->position()->exists('hero') && $event['hero-image']) {
+            if ($event['navbar_transparent'] && $view->position()->exists('hero') && $event['hero_image']) {
 
                 $sticky['top'] = '.uk-sticky-placeholder + *';
                 $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
                 $classes['hero'] = 'uk-height-viewport';
 
-                if ($event['hero-contrast']) {
+                if ($event['hero_contrast']) {
 
                     $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
                     $classes['navbar'] .= ' tm-navbar-contrast';
@@ -140,7 +140,7 @@ return [
 
             }
 
-            if ($event['hero-contrast'] && $event['hero-image']) {
+            if ($event['hero_contrast'] && $event['hero_image']) {
                 $classes['hero'] .= ' uk-contrast';
             }
 
