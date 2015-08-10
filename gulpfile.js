@@ -11,24 +11,14 @@ var merge      = require('merge-stream'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
     rename     = require('gulp-rename'),
-    eslint     = require('gulp-eslint'),
-    fs         = require('fs');
+    eslint     = require('gulp-eslint');
 
 // paths of the packages for the compile-task
 var pkgs = [
     { path: 'app/installer/', data: '../../composer.json' },
-    { path: 'app/system/modules/theme/', data: '../../../../composer.json' }
+    { path: 'app/system/modules/theme/', data: '../../../../composer.json' },
+    { path: 'themes/one/', data: 'composer.json' }
 ];
-
-// collect all themes to compile
-fs.readdirSync('themes').forEach(function(t){
-
-    try {
-        if (!fs.lstatSync('themes/'+t+'/less').isDirectory()) return;
-        pkgs.push({path: 'themes/'+t+'/', data: 'composer.json'});
-    } catch(e){}
-});
-
 
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
