@@ -23,10 +23,12 @@ trait NodeModelTrait
             ->where(['n.parent_id <> 0', 'c.id IS NULL'])
             ->execute('n.id')->fetchAll(\PDO::FETCH_COLUMN)
         ) {
-            self::query()
+            return self::query()
                 ->whereIn('id', $orphaned)
                 ->update(['parent_id' => 0]);
         }
+
+        return 0;
     }
 
     /**

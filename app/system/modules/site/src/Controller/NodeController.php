@@ -21,7 +21,9 @@ class NodeController
      */
     public function indexAction()
     {
-        Node::fixOrphanedNodes();
+        if ($test = Node::fixOrphanedNodes()) {
+            return App::redirect('@site/page');
+        }
 
         return [
             '$view' => [
