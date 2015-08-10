@@ -42,8 +42,8 @@ function install (Vue) {
      * Resource
      */
 
-    Vue.url.options.root = config.url.replace(/\/index.php$/i, '') || '/';
-    Vue.http.options.root = config.url || '/';
+    Vue.url.options.root = config.url.replace(/\/index.php$/i, '');
+    Vue.http.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
 
     Vue.http.headers.custom = {'X-XSRF-TOKEN': config.csrf};
