@@ -15,7 +15,7 @@
 
             <div class="uk-form-controls">
                 <select id="form-type" class="uk-form-width-large" v-model="behavior">
-                    <option value="">{{ 'Link' | trans }}</option>
+                    <option value="link">{{ 'Link' | trans }}</option>
                     <option value="alias">{{ 'URL Alias' | trans }}</option>
                     <option value="redirect">{{ 'Redirect' | trans }}</option>
                 </select>
@@ -61,7 +61,7 @@
                         return 'redirect';
                     }
 
-                    return '';
+                    return 'link';
                 },
 
                 set: function (type) {
