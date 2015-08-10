@@ -3,12 +3,10 @@ module.exports = {
     data: $.extend(true, {
         position: undefined,
         selected: [],
-        config: {filter:{search:'', node:''}}
+        config: {filter: {search: '', node: ''}}
     }, window.$data),
 
     ready: function () {
-
-        this.$set('indexedNodes', _($data.config.nodes).groupBy('id').value());
 
         UIkit.init();
         this.load();
@@ -35,19 +33,21 @@ module.exports = {
         nodes: function () {
 
             var options = [{text: this.$trans('Pages'), value: ''}],
-                nodes   = _($data.config.nodes).groupBy('menu').value(),
-                opts;
+                nodes = _(this.config.nodes).groupBy('menu').value();
 
-            Object.keys(nodes).forEach(function(menu){
+            _.forEach(this.config.menus, function(menu, name) {
 
-                opts = [];
+                var opts = nodes[name];
 
-                nodes[menu].forEach(function(node){
-                    opts.push({text:node.title, value:node.id});
-                });
+                if (!opts) {
+                    return;
+                }
 
-                options.push({label: menu, options:opts});
-            });
+                options.push({label: menu.label, options: _.map(opts, function(node) {
+                    return {text: node.title, value: node.id};
+                })});
+
+            }, this);
 
             return options;
         }
@@ -135,7 +135,7 @@ module.exports = {
             });
         },
 
-        infilter: function(widget) {
+        infilter: function (widget) {
 
             if (this.config.filter.search) {
                 return widget.title.toLowerCase().indexOf(this.config.filter.search.toLowerCase()) != -1;
@@ -145,7 +145,7 @@ module.exports = {
 
                 var selected = Number(this.config.filter.node), ret = false;
 
-                return widget.nodes.filter(function(node){
+                return widget.nodes.filter(function (node) {
                     return (Number(node) === selected)
                 }).length;
             }
@@ -153,25 +153,22 @@ module.exports = {
             return true;
         },
 
-        emptyafterfilter: function(widgets) {
+        emptyafterfilter: function (widgets) {
 
             widgets = widgets || this.widgets;
 
-            var vm = this;
-
-            return !widgets.filter(function(widget){
-                return vm.infilter(widget);
-            }).length;
+            return !widgets.filter(function (widget) {
+                return this.infilter(widget);
+            }, this).length;
         },
 
-        getSingleNodeTitle: function(widget) {
-
-            return !widget.nodes.length ? 'All': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'Selected');
+        getSingleNodeTitle: function (widget) {
+            return !widget.nodes.length ? 'All' : (widget.nodes.length === 1 ? this.getNodeTitle(widget.nodes[0]) : 'Selected');
         },
 
-        getNodeTitle: function(id) {
-
-            return this.indexedNodes[id] ? this.indexedNodes[id][0].title : '';
+        getNodeTitle: function (id) {
+            var node = _.find(this.config.nodes, 'id', id);
+            return node ? node.title : '';
         }
 
     },
