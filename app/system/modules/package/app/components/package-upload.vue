@@ -9,7 +9,9 @@
     <div class="uk-modal" v-el="modal">
         <div class="uk-modal-dialog">
 
-            <package-details api="{{ api }}" package="{{ package }}"></package-details>
+            <package-details v-if="!output" api="{{ api }}" package="{{ package }}"></package-details>
+
+            <div v-if="output" v-html="output"></div>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -32,7 +34,8 @@
                 api: {},
                 package: {},
                 upload: null,
-                progress: ''
+                progress: '',
+                output: ''
             };
         },
 
@@ -91,9 +94,15 @@
 
                 e.preventDefault();
 
-                this.modal.hide();
+                var vm = this;
 
-                this.$http.post('admin/system/package/install', {package: this.upload.package}, function () {
+                this.$http.post('admin/system/package/install', {package: this.upload.package}, null, {
+                    beforeSend: function (request) {
+                        request.onprogress = function () {
+                            vm.output = this.responseText;
+                        };
+                    }
+                }).success(function () {
 
                     this.$notify(this.$trans('"%title%" installed.', {title: this.package.title}));
 
