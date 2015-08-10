@@ -10,11 +10,17 @@ module.exports = {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return this.$http.jsonp(this.api.url + '/package/update', {api_key: this.api.key, packages: JSON.stringify(pkgs)}, success);
+            return this.$http.jsonp(this.api.url + '/package/update', {
+                api_key: this.api.key,
+                packages: JSON.stringify(pkgs)
+            }, success);
         },
 
         queryPackage: function (pkg, success) {
-            return this.$http.jsonp(this.api.url + '/package/:name', {api_key: this.api.key, name: _.isObject(pkg) ? pkg.name : pkg}, success);
+            return this.$http.jsonp(this.api.url + '/package/:name', {
+                api_key: this.api.key,
+                name: _.isObject(pkg) ? pkg.name : pkg
+            }, success);
         },
 
         enablePackage: function (pkg) {
@@ -35,7 +41,7 @@ module.exports = {
             });
         },
 
-        installPackage: function (pkg, packages) {
+        installPackage: function (pkg, packages, options) {
             return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
                 if (packages && data.package) {
 
@@ -48,15 +54,15 @@ module.exports = {
                     }
 
                 }
-            });
+            }, options);
         },
 
-        uninstallPackage: function (pkg, packages) {
+        uninstallPackage: function (pkg, packages, options) {
             return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }
-            });
+            }, options);
         }
 
     }

@@ -85,9 +85,22 @@ window.Extensions = module.exports = {
         },
 
         uninstall: function (pkg) {
-            this.uninstallPackage(pkg, this.packages).success(function () {
+            var output = this.$addChild(require('../components/output.vue'));
+
+            output.open();
+            this.uninstallPackage(pkg, this.packages, {
+                beforeSend: function (request) {
+                    request.onprogress = function () {
+                        output.setOutput(this.responseText);
+                    };
+                }
+            }).success(function () {
+                output.close();
                 this.$notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
-            }).error(this.error);
+            }).error(function (message) {
+                output.close();
+                this.error(message);
+            });
         },
 
         update: function (pkg) {

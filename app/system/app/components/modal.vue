@@ -25,7 +25,8 @@
             large: Boolean,
             lightbox: Boolean,
             closed: Function,
-            modifier: String
+            modifier: String,
+            options: Object
         },
 
         ready: function () {
@@ -34,7 +35,7 @@
 
             this.$appendTo('body');
 
-            this.modal = UIkit.modal(this.$el, {modal: false});
+            this.modal = UIkit.modal(this.$el, _.extend({modal: false}, this.options));
             this.modal.on('hide.uk.modal', function () {
 
                 vm.opened = false;

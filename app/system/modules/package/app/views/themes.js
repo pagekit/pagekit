@@ -79,9 +79,22 @@ window.Themes = module.exports = {
         },
 
         uninstall: function (pkg) {
-            this.uninstallPackage(pkg, this.packages).success(function () {
+            var output = this.$addChild(require('../components/output.vue'));
+
+            output.open();
+            this.uninstallPackage(pkg, this.packages, {
+                beforeSend: function (request) {
+                    request.onprogress = function () {
+                        output.setOutput(this.responseText);
+                    };
+                }
+            }).success(function () {
+                output.close();
                 this.$notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
-            }).error(this.error);
+            }).error(function (message) {
+                output.close();
+                this.error(message);
+            });
         },
 
         update: function (pkg) {
@@ -103,9 +116,9 @@ window.Themes = module.exports = {
             return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
         },
 
-        themeorder: function(packages) {
+        themeorder: function (packages) {
 
-            var index = packages.indexOf(_.find(packages, {enabled:true}));
+            var index = packages.indexOf(_.find(packages, {enabled: true}));
 
             if (index !== -1) {
                 packages.splice(0, 0, packages.splice(index, 1)[0]);
