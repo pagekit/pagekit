@@ -51,7 +51,7 @@
                 <select id="form-user-number" class="uk-width-1-1" v-model="widget.count" number>
                     <option value="6">6</option>
                     <option value="12">12</option>
-                    <option value="18">16</option>
+                    <option value="18">18</option>
                     <option value="24">24</option>
                 </select>
             </div>
@@ -61,9 +61,9 @@
 
     <div class="pk-text-large" v-if="widget.total">{{ userscount }}</div>
 
-    <h3 class="uk-panel-title" v-if="widget.show == 'registered' && widget.total">{{ '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' | transChoice users.length}}</h3>
+    <h3 class="uk-panel-title" v-if="widget.show == 'registered' && widget.total">{{ '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' | transChoice userscount}}</h3>
 
-    <h3 class="uk-panel-title" v-if="widget.show != 'registered' && widget.total">{{ '{0} Logged in Users|{1} Logged in User|]1,Inf[ Logged in Users' | transChoice users.length}}</h3>
+    <h3 class="uk-panel-title" v-if="widget.show != 'registered' && widget.total">{{ '{0} Logged in Users|{1} Logged in User|]1,Inf[ Logged in Users' | transChoice userscount}}</h3>
 
     <h3 class="uk-panel-title" v-if="widget.show == 'registered' && !widget.total">{{ 'Latest registered Users' | trans}}</h3>
 
