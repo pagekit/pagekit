@@ -4,22 +4,26 @@ namespace Pagekit\Site\Event;
 
 use Pagekit\Application as App;
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Site\Model\Node;
 use Pagekit\Site\Model\Page;
 
 class PageListener implements EventSubscriberInterface
 {
-    public function onNodeSave($event, $node)
+    public function onNodeSave($event, $request)
     {
-        if ('page' !== $node->type or null === $data = App::request()->get('page')) {
+        if (null === $node = $request->get('node')
+            or null === $data = $request->get('page')
+            or 'page' !== @$node['type']
+        ) {
             return;
         }
 
-        $page = $this->getPage($node);
+        $page = $this->getPage(@$node['id']);
         $page->save($data);
 
-        $node->set('defaults', ['id' => $page->id]);
-        $node->link = '@page/'.$page->id;
+        $node['data']['defaults'] = ['id' => $page->id];
+        $node['link'] = '@page/'.$page->id;
+
+        $request->request->set('node', $node);
     }
 
     public function onNodeDeleted($event, $node)
@@ -28,7 +32,7 @@ class PageListener implements EventSubscriberInterface
             return;
         }
 
-        $page = $this->getPage($node);
+        $page = $this->getPage($node->get('defaults.id', 0));
 
         if ($page->id) {
             $page->delete();
@@ -50,7 +54,8 @@ class PageListener implements EventSubscriberInterface
     public function subscribe()
     {
         return [
-            'model.node.saving' => 'onNodeSave',
+            'before@site/api/node/save' => 'onNodeSave',
+            'before@site/api/node/save_1' => 'onNodeSave',
             'model.node.deleted' => 'onNodeDeleted',
             'route.configure' => 'onRouteConfigure'
         ];
@@ -59,12 +64,12 @@ class PageListener implements EventSubscriberInterface
     /**
      * Find page entity by node.
      *
-     * @param  Node $node
+     * @param  int $id
      * @return Page
      */
-    protected function getPage(Node $node)
+    protected function getPage($id)
     {
-        if (!$id = $node->get('defaults.id', 0) or !$page = Page::find($id)) {
+        if (!$id or !$page = Page::find($id)) {
             $page = Page::create();
         }
 
