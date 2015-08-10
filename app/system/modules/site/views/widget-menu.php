@@ -8,7 +8,7 @@
 
         <?php if ($node->hasChildren()) : ?>
         <ul class="uk-nav-sub">
-            <?= $view->render('system/site/widget-menu.php', ['root' => $node]) ?>
+            <?= $this->render('system/site/widget-menu.php', ['root' => $node]) ?>
         </ul>
         <?php endif ?>
     </li>

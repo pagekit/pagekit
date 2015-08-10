@@ -152,7 +152,7 @@ return [
         'view.system/site/widget-menu' => function ($event, $view) {
 
             if ($event['widget']->position == 'navbar') {
-                $event->setTemplate(__DIR__.'/views/menu-navbar.php');
+                $event->setTemplate('views/menu-navbar.php');
             }
 
         }
