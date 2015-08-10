@@ -6,7 +6,6 @@ use Pagekit\Console\Command;
 use Pagekit\Console\Updater\Updater;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class InstallCommand extends Command
@@ -19,7 +18,7 @@ class InstallCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Installs a Pagekit package';
+    protected $description = 'Installs a Pagekit package.';
 
     /**
      * {@inheritdoc}

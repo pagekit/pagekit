@@ -2,7 +2,6 @@
 
 namespace Pagekit\Console\Updater;
 
-
 use Composer\Factory;
 use Composer\Installer;
 use Composer\IO\ConsoleIO;
@@ -34,20 +33,19 @@ class Updater
      */
     protected $file;
 
-
     protected $packagesConfig = [
-        "repositories" => [
+        'repositories' => [
             [
-                "type" => "artifact",
-                "url" => "tmp/packages/"
+                'type' => 'artifact',
+                'url' => 'tmp/packages/'
             ],
             [
-                "type" => "composer",
-                "url" => "http://pagekit.com"
+                'type' => 'composer',
+                'url' => 'http://pagekit.com'
             ]
         ],
-        "require" => [
-            "composer/installers" => "1.0.22"
+        'require' => [
+            'composer/installers' => '1.0.22'
         ]
     ];
 
@@ -202,8 +200,7 @@ class Updater
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
-        $installer = Installer::create($io, $composer);
-        $installer
+        $installer = Installer::create($io, $composer)
             ->setAdditionalInstalledRepository($internal)
             ->setPreferDist(true)
             ->setOptimizeAutoloader(true)

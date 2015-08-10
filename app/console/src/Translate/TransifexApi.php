@@ -9,7 +9,6 @@ use GuzzleHttp\Client;
 */
 class TransifexApi
 {
-
     protected $username;
     protected $password;
     protected $project;
