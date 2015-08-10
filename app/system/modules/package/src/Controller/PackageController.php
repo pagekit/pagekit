@@ -159,11 +159,11 @@ class PackageController
             $params = [
                 'command' => 'install',
                 'expires' => time() + 10,
-                'packages' => sprintf('%s:%s', $package->getName(), $package->getVersion())
+                'packages' => sprintf('%s:%s', $package->getName(), $package->get('version'))
             ];
             $params['token'] = $verifier->hash($params);
 
-            return App::redirect(App::url('app/console', $params, true));
+            return App::redirect(App::url('app/console/', $params, true));
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
@@ -196,7 +196,6 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $package = App::package()->load($package);
             $verifier = new ParameterVerifier(require App::get('config.file'));
 
             $params = [
@@ -206,7 +205,7 @@ class PackageController
             ];
             $params['token'] = $verifier->hash($params);
 
-            return App::redirect(App::url('app/console', $params, true));
+            return App::redirect(App::url('app/console/', $params, true));
 
         } catch (\Exception $e) {
             $error = $e->getMessage();

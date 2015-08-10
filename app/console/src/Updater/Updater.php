@@ -60,8 +60,10 @@ class Updater
         $this->file = $config['path'] . '/' . self::CONFIG_FILE;
         $this->packages = $this->readPackages();
 
-        putenv('COMPOSER_HOME=' . $config['path.temp']);
-        putenv('COMPOSER_CACHE_DIR=' . $config['path.cache'] . '/composer');
+        chdir($config['path']);
+
+        putenv('COMPOSER_HOME=' . $config['path']);
+        putenv('COMPOSER_CACHE_DIR=' . $config['path.temp'] . '/composer');
         putenv('COMPOSER_VENDOR_DIR=' . $config['path'] . '/vendor/packages');
 
         // set memory limit, if < 512M
