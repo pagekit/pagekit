@@ -43,6 +43,7 @@ trait NodeModelTrait
             $node->slug = $node->title;
         }
 
+        // Ensure unique slug
         while (self::where(['slug = ?', 'parent_id= ?'], [$node->slug, $node->parent_id])->where(function ($query) use ($id) {
             if ($id) $query->where('id <> ?', [$id]);
         })->first()) {
@@ -51,24 +52,25 @@ trait NodeModelTrait
 
         // Update own path
         $path = '/'.$node->slug;
-        if ($node->parent_id && $parent = Node::find($node->parent_id) and $parent->menu === $node->menu) {
+        if ($node->parent_id && $parent = Node::find($node->parent_id)) {
             $path = $parent->path.$path;
         } else {
             // set Parent to 0, if old parent is not found
             $node->parent_id = 0;
         }
+
+        // Update children's paths
+        if ($id && $path != $node->path) {
+            $db->executeUpdate(
+                'UPDATE '.self::getMetadata()->getTable()
+                .' SET path = REPLACE ('.$db->getDatabasePlatform()->getConcatExpression($db->quote('//'), 'path').", '//{$node->path}', '{$path}')"
+                .' WHERE path LIKE '.$db->quote($node->path.'%'));
+        }
+
         $node->path = $path;
 
-        if ($id) {
-            // Update children's paths
-            foreach (Node::where(['parent_id' => $id])->get() as $child) {
-                if (0 !== strpos($child->path, $node->path.'/') || $child->menu !== $node->menu) {
-                    $child->menu = $node->menu;
-                    $child->save();
-                }
-            }
-        } else {
-            // Set priority
+        // Set priority
+        if (!$id) {
             $node->priority = 1 + $db->createQueryBuilder()
                     ->select($db->getDatabasePlatform()->getMaxExpression('priority'))
                     ->from('@system_node')
