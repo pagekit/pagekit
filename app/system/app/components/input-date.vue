@@ -33,7 +33,9 @@
             date: {
 
                 get: function () {
-                    return this.$date(this.datetime, 'short');
+                    // @TODO: make i18n work
+                    // return this.$date(this.datetime, 'short');
+                    return UIkit.Utils.moment(this.datetime).format('YYYY-MM-DD');
                 },
 
                 set: function (date) {
