@@ -5,7 +5,6 @@ namespace Pagekit\Console\Commands;
 use Pagekit\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Finder\Finder;
 
 class ClearCacheCommand extends Command
 {
