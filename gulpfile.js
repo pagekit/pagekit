@@ -11,13 +11,13 @@ var merge      = require('merge-stream'),
     header     = require('gulp-header'),
     less       = require('gulp-less'),
     rename     = require('gulp-rename'),
-    eslint     = require('gulp-eslint');
+    eslint     = require('gulp-eslint'),
+    fs         = require('fs');
 
 // paths of the packages for the compile-task
 var pkgs = [
     { path: 'app/installer/', data: '../../composer.json' },
-    { path: 'app/system/modules/theme/', data: '../../../../composer.json' },
-    { path: 'themes/one/', data: 'composer.json' }
+    { path: 'app/system/modules/theme/', data: '../../../../composer.json' }
 ];
 
 // banner for the css files
@@ -29,6 +29,16 @@ gulp.task('default', ['compile']);
  * Compile all less files
  */
 gulp.task('compile', function () {
+
+    fs.readdirSync('themes').forEach(function(t){
+
+        try {
+
+            if (!fs.lstatSync('themes/'+t+'/less').isDirectory()) return;
+            pkgs.push({path: 'themes/'+t+'/', data: 'composer.json'});
+
+        } catch(e){}
+    });
 
     return merge.apply(null, pkgs.map(function (pkg) {
         return gulp.src(pkg.path + '**/less/*.less', {base: pkg.path})
