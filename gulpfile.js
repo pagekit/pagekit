@@ -20,6 +20,16 @@ var pkgs = [
     { path: 'app/system/modules/theme/', data: '../../../../composer.json' }
 ];
 
+// collect all themes to compile
+fs.readdirSync('themes').forEach(function(t){
+
+    try {
+        if (!fs.lstatSync('themes/'+t+'/less').isDirectory()) return;
+        pkgs.push({path: 'themes/'+t+'/', data: 'composer.json'});
+    } catch(e){}
+});
+
+
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
 
@@ -29,16 +39,6 @@ gulp.task('default', ['compile']);
  * Compile all less files
  */
 gulp.task('compile', function () {
-
-    fs.readdirSync('themes').forEach(function(t){
-
-        try {
-
-            if (!fs.lstatSync('themes/'+t+'/less').isDirectory()) return;
-            pkgs.push({path: 'themes/'+t+'/', data: 'composer.json'});
-
-        } catch(e){}
-    });
 
     return merge.apply(null, pkgs.map(function (pkg) {
         return gulp.src(pkg.path + '**/less/*.less', {base: pkg.path})
