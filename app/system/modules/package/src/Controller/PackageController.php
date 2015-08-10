@@ -2,10 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Application as App;
-use Pagekit\Updater\TokenVerifier;
+use Pagekit\Console\ParameterVerifier;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -151,54 +149,27 @@ class PackageController
     /**
      * @Request({"package": "array"}, csrf=true)
      */
-    public function installAction($package = null)
+    public function installAction($package = [])
     {
         try {
+
             $package = App::package()->load($package);
+            $verifier = new ParameterVerifier(require App::get('config.file'));
 
-            if ($enabled = (bool)App::module($package->get('module'))) {
-                $this->disableAction($package->getName());
-            }
-
-            if (is_array($package->get('version')) && isset($package->get('version')['version'])) {
-                $version = $package->get('version')['version'];
-            } elseif ($package->get('version')) {
-                $version = $package->get('version');
-            } else {
-                $version = '*';
-            }
-
-            $client = new Client;
-            $verifier = new TokenVerifier(require App::get('config.file'));
-
-            $params = ['packages' => sprintf('%s:%s', $package->getName(), $version)];
+            $params = [
+                'command' => 'install',
+                'expires' => time() + 10,
+                'packages' => sprintf('%s:%s', $package->getName(), $package->getVersion())
+            ];
             $params['token'] = $verifier->hash($params);
 
-            $res = $client->get(App::url('app/updater', $params, true));
-            $res = json_decode($res->getBody(), true) ?: (string)$res->getBody();
+            return App::redirect(App::url('app/console', $params, true));
 
-            if (!isset($res['status']) || $res['status'] !== 'success') {
-                throw new \Exception(__(isset($res['message']) ? $res['message'] : $res));
-            }
-
-            App::module('system/cache')->clearCache();
-
-            if ($enabled) {
-                $this->enableAction($package->getName());
-            }
-
-        } catch (BadResponseException $e) {
-            $data = json_decode($e->getResponse()->getBody(true), true);
-            $error = sprintf('Error: %s', $data['error']);
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
-        if (isset($error)) {
-            App::abort(400, $error);
-        }
-
-        return ['message' => 'success', 'package' => App::package($package->getName())];
+        App::abort(400, $error);
     }
 
     /**
@@ -225,32 +196,23 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $client = new Client;
-            $verifier = new TokenVerifier(require App::get('config.file'));
+            $package = App::package()->load($package);
+            $verifier = new ParameterVerifier(require App::get('config.file'));
 
-            $params = ['packages' => $name, 'remove' => true];
+            $params = [
+                'command' => 'uninstall',
+                'expires' => time() + 10,
+                'packages' => $package->getName()
+            ];
             $params['token'] = $verifier->hash($params);
 
-            $res = $client->get(App::url('app/updater', $params, true));
-            $res = json_decode($res->getBody());
+            return App::redirect(App::url('app/console', $params, true));
 
-            if ($res->status !== 'success') {
-                throw new \Exception(__($res->message));
-            }
-
-            App::module('system/cache')->clearCache();
-        } catch (BadResponseException $e) {
-            $data = json_decode($e->getResponse()->getBody(true), true);
-            $error = sprintf('Error: %s', $data['error']);
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
-        if (isset($error)) {
-            App::abort(400, $error);
-        }
-
-        return ['message' => 'success'];
+        App::abort(400, $error);
     }
 
     protected function loadPackage($file)
