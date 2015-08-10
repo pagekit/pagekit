@@ -109,22 +109,24 @@ class MenuHelper extends Helper
             }
         }
 
+        $path .= '/';
+
         $segments = explode('/', $path);
-        $rootPath = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)) : '';
+        $rootPath = count($segments) > $startLevel ? implode('/', array_slice($segments, 0, $startLevel + 1)).'/' : '';
 
         foreach ($nodes as $node) {
 
             $depth = substr_count($node->path, '/');
             $parent = isset($nodes[$node->parent_id]) ? $nodes[$node->parent_id] : null;
 
-            $node->set('active', !$node->path || 0 === strpos($path, $node->path));
+            $node->set('active', !$node->path || 0 === strpos($path, $node->path.'/'));
 
             if ($depth >= $maxDepth
                 || !$node->hasAccess($user)
                 || $node->get('menu_hide')
                 || !($parameters['mode'] == 'all'
                     || $node->get('active')
-                    || $rootPath && 0 === strpos($node->path, $rootPath)
+                    || $rootPath && 0 === strpos($node->path.'/', $rootPath)
                     || $depth == $startLevel)
             ) {
                 continue;
