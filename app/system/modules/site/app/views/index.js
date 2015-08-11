@@ -30,15 +30,11 @@ module.exports = {
         },
 
         selectMenu: function (menu, reload) {
-
-            var vm = this;
-
             if (reload === false) {
                 this.$set('menu', menu);
             } else {
-
-                this.load().then(function () {
-                    vm.$set('menu', menu);
+                this.load().success(function () {
+                    this.$set('menu', menu);
                 });
             }
         },
@@ -201,7 +197,7 @@ module.exports = {
 
             this.$set('selected', []);
 
-            return this.Nodes.query({menu: this.$get('menu.id')}, function (nodes) {
+            this.Nodes.query({menu: this.$get('menu.id')}, function (nodes) {
                 this.$set('nodes', nodes);
                 this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
             });
