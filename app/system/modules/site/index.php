@@ -170,13 +170,13 @@ return [
         'view.meta' => function ($event, $meta) use ($app) {
 
             $meta->add('link:favicon', [
-                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon3.png'),
+                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon.png'),
                 'rel' => 'shortcut icon',
                 'type' => 'image/x-icon'
             ]);
 
             $meta->add('link:appicon', [
-                'href' => $app['url']->getStatic($this->config('icons.appicon') ?: 'system/theme:apple_touch_icon3.png'),
+                'href' => $app['url']->getStatic($this->config('icons.appicon') ?: 'system/theme:apple_touch_icon.png'),
                 'rel' => 'apple-touch-icon-precomposed'
             ]);
 
