@@ -19,13 +19,13 @@
         <span class="uk-form-label">{{ 'Registration' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" v-model="config.registration" value="admin"> {{ 'Adminstrators only' | trans }}</label>
+                <label><input type="radio" v-model="config.registration" value="admin"> {{ 'Disabled' | trans }}</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" v-model="config.registration" value="guest"> {{ 'Guests' | trans }}</label>
+                <label><input type="radio" v-model="config.registration" value="guest"> {{ 'Enabled' | trans }}</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="radio" v-model="config.registration" value="approval"> {{ 'Guests, but administrator approval is required' | trans }}</label>
+                <label><input type="radio" v-model="config.registration" value="approval"> {{ 'Enabled, but approval is required.' | trans }}</label>
             </p>
         </div>
     </div>
