@@ -36,8 +36,8 @@
             <div class="uk-form-password">
                 <input id="form-password" class="uk-form-width-large" type="password" name="password" v-model="user.password" v-valid="required">
                 <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
-                <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
             </div>
+            <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
         </div>
     </div>
 
