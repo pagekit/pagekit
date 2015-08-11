@@ -108,7 +108,6 @@ class SystemModule extends Module
                 $domains[] = $domain;
 
                 $translator->addResource($format, $file, $locale, $domain);
-                $translator->addResource($format, $file, substr($locale, 0, 2), $domain);
             }
         }
     }
