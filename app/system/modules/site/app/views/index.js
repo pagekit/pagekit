@@ -59,7 +59,7 @@ module.exports = {
 
         saveMenu: function (menu) {
 
-            this.Menus.save({id: menu.id}, {menu: menu}, function (data) {
+            this.Menus.save({id: menu.id}, {menu: menu}, function () {
                 this.load();
             }).error(function (msg) {
                 this.$notify(msg, 'danger');
@@ -193,11 +193,11 @@ module.exports = {
 
     watch: {
 
-        menu: function () {
+        menu: function (menu) {
 
             this.$set('selected', []);
 
-            this.Nodes.query({menu: this.$get('menu.id')}, function (nodes) {
+            this.Nodes.query({menu: menu.id}, function (nodes) {
                 this.$set('nodes', nodes);
                 this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
             });
