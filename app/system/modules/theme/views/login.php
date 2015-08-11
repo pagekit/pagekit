@@ -28,9 +28,7 @@
                         </div>
 
                         <div class="uk-form-row">
-                            <div class="uk-form-password uk-width-1-1">
-                                <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
-                            </div>
+                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
                         </div>
 
                         <p class="uk-form-row tm-panel-marginless-bottom">
