@@ -38,17 +38,19 @@ return [
             $app->subscribe(new ResponseListener());
         },
 
-        'view.meta' => function($event, $meta) use ($app) {
+        'site' => function($event, $app) {
+            $app->on('view.meta', function($event, $meta) use ($app) {
 
-            $route = $app['url']->get(
-                $app['request']->attributes->get('_route'),
-                $app['request']->attributes->get('_route_params', [])
-            );
+                $route = $app['url']->get(
+                    $app['request']->attributes->get('_route'),
+                    $app['request']->attributes->get('_route_params', [])
+                );
 
-            if ($route != $app['request']->getRequestUri()) {
-                $meta->add('canonical', $route);
-            }
+                if ($route != $app['request']->getRequestUri()) {
+                    $meta->add('canonical', $route);
+                }
 
+            });
         },
 
         'view.data' => function ($event, $data) use ($app) {
