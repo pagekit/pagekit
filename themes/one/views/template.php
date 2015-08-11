@@ -17,7 +17,7 @@
                 <nav class="uk-navbar">
 
                     <?php if ($params['logo']) : ?>
-                    <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
+                    <a class="uk-navbar-brand" href="<?= $view->url()->get() ?>">
 
                         <img class="tm-logo" src="<?= $this->escape($params['logo']) ?>" alt="">
 
@@ -36,13 +36,9 @@
                     <?php endif ?>
 
                     <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
-                    <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-                    <?php endif ?>
-
-                    <?php if ($params['logo']): ?>
-                    <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($params['logo']) ?>" alt="">
-                    </a>
+                    <div class="uk-navbar-flip uk-visible-small">
+                        <a href="#offcanvas" class="uk-navbar-toggle" data-uk-offcanvas></a>
+                    </div>
                     <?php endif ?>
 
                 </nav>
@@ -122,7 +118,7 @@
 
         <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
-            <div class="uk-offcanvas-bar">
+            <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
 
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
                     <?= $view->menu('offcanvas', ['class' => 'uk-nav-offcanvas']) ?>

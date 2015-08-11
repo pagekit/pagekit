@@ -32,6 +32,8 @@
 @navbar-toggle-color:                           @global-color;
 @navbar-toggle-hover-color:                     @global-color;
 
+@navbar-toggle-icon:                            "";
+
 
 // Component
 // ========================================================================
@@ -43,7 +45,7 @@
 // ========================================================================
 
 .hook-navbar-nav() {
-	-webkit-transition: color 0.05s linear;
+    -webkit-transition: color 0.05s linear;
     transition: color 0.05s linear;
 }
 
@@ -68,10 +70,23 @@
 
 .hook-navbar-misc() {
 
-	/*
+    /*
      * `uk-navbar-brand`
      */
 
     .uk-navbar-brand {}
+
+    /*
+     * `uk-navbar-toggle`
+     */
+
+    .uk-navbar-toggle:after {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background: url("@{global-image-path}/navbar-toggle.svg") 0 0 no-repeat;
+        line-height: 20px;
+    }
+
 
 }
