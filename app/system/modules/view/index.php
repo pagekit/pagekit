@@ -54,7 +54,10 @@ return [
         },
 
         'view.data' => function ($event, $data) use ($app) {
-            $data->add('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+            $data->add('$pagekit', [
+                'url' => $app['router']->getContext()->getBaseUrl(),
+                'csrf' => $app['csrf']->generate()
+            ]);
         },
 
         'view.styles' => function ($event, $styles) {

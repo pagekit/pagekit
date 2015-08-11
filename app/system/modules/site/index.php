@@ -170,7 +170,7 @@ return [
         'view.meta' => function ($event, $meta) use ($app) {
 
             $meta->add('link:favicon', [
-                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon.png'),
+                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon.ico'),
                 'rel' => 'shortcut icon',
                 'type' => 'image/x-icon'
             ]);
