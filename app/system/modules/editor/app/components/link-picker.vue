@@ -47,7 +47,6 @@
             this.$.modal.open();
         },
 
-
         methods: {
 
             close: function() {

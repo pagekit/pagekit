@@ -1,13 +1,13 @@
 <?php
 
-require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
-require dirname(__DIR__) . '/autoload.php';
-
 use Pagekit\Console\Application as Console;
 use Pagekit\Console\OutputFilter;
 use Pagekit\Console\ParameterVerifier;
 use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Input\ArrayInput;
+
+require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
+require dirname(__DIR__) . '/autoload.php';
 
 if (version_compare($ver = PHP_VERSION, $req = '5.4.0', '<')) {
     exit(sprintf('You are running PHP %s, but Pagekit needs at least <strong>PHP %s</strong> to run.', $ver, $req));
