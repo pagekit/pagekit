@@ -2,7 +2,7 @@
 
 use Pagekit\Console\Application as Console;
 use Pagekit\Console\OutputFilter;
-use Pagekit\Console\ParameterVerifier;
+use Pagekit\Console\UriVerifier;
 use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Input\ArrayInput;
 
@@ -18,16 +18,19 @@ date_default_timezone_set('UTC');
 $config = require dirname(__DIR__) . '/config.php';
 
 if (PHP_SAPI === 'cli') {
+
     $input = null;
     $output = new OutputFilter(fopen('php://stdout', 'w'));
+
 } else {
+
     if (!$config['values']['config.file']) {
         exit('Pagekit needs to be installed before accessing the console over the web.');
     }
 
     // Check parameter integrity
-    $verifier = new ParameterVerifier(require $config['values']['config.file']);
-    if (!$verifier->verify($_GET)) {
+    $verifier = new UriVerifier(require $config['values']['config.file']);
+    if (!$verifier->verify($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'])) {
         http_response_code(401);
         exit('Invalid parameters.');
     }
@@ -53,6 +56,7 @@ if (PHP_SAPI === 'cli') {
     register_shutdown_function(function () use ($output) {
         // TODO: Send status
     });
+
 }
 
 $console = new Console($config['values'], 'Pagekit Console');

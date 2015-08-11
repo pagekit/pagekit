@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Console\ParameterVerifier;
+use Pagekit\Console\UriVerifier;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -154,16 +154,17 @@ class PackageController
         try {
 
             $package = App::package()->load($package);
-            $verifier = new ParameterVerifier(require App::get('config.file'));
 
             $params = [
                 'command' => 'install',
-                'expires' => time() + 10,
                 'packages' => sprintf('%s:%s', $package->getName(), $package->get('version'))
             ];
-            $params['token'] = $verifier->hash($params);
 
-            return App::redirect(App::url('app/console/', $params, true));
+            $verifier = new UriVerifier(require App::get('config.file'));
+
+            return App::redirect(
+                $verifier->sign(App::url('app/console/', $params, true), 10)
+            );
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
@@ -196,16 +197,15 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $verifier = new ParameterVerifier(require App::get('config.file'));
-
             $params = [
                 'command' => 'uninstall',
-                'expires' => time() + 10,
                 'packages' => $package->getName()
             ];
-            $params['token'] = $verifier->hash($params);
 
-            return App::redirect(App::url('app/console/', $params, true));
+            $verifier = new UriVerifier(require App::get('config.file'));
+            $uri = $verifier->sign(App::url('app/console/', $params, true), 10);
+
+            return App::redirect($uri);
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
