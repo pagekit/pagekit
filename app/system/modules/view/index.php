@@ -40,10 +40,6 @@ return [
 
         'view.meta' => function($event, $meta) use ($app) {
 
-            if ($app->isAdmin()) {
-                return;
-            }
-
             $route = $app['url']->get(
                 $app['request']->attributes->get('_route'),
                 $app['request']->attributes->get('_route_params', [])
