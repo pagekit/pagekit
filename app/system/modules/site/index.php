@@ -111,8 +111,8 @@ return [
         ],
 
         'icons' => [
-            'favicon' => 'app/system/modules/theme/favicon.ico',
-            'appicon' => 'app/system/modules/theme/apple_touch_icon.png'
+            'favicon' => false,
+            'appicon' => false
         ],
 
         'code' => [
@@ -169,20 +169,16 @@ return [
 
         'view.meta' => function ($event, $meta) use ($app) {
 
-            if ($icon = $this->config('icons.favicon')) {
-                $meta->add('link:favicon', [
-                    'href' => $app['url']->getStatic($icon),
-                    'rel' => 'shortcut icon',
-                    'type' => 'image/x-icon'
-                ]);
-            }
+            $meta->add('link:favicon', [
+                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon3.png'),
+                'rel' => 'shortcut icon',
+                'type' => 'image/x-icon'
+            ]);
 
-            if ($icon = $this->config('icons.appicon')) {
-                $meta->add('link:appicon', [
-                    'href' => $app['url']->getStatic($icon),
-                    'rel' => 'apple-touch-icon-precomposed'
-                ]);
-            }
+            $meta->add('link:appicon', [
+                'href' => $app['url']->getStatic($this->config('icons.appicon') ?: 'system/theme:apple_touch_icon3.png'),
+                'rel' => 'apple-touch-icon-precomposed'
+            ]);
 
         },
 
