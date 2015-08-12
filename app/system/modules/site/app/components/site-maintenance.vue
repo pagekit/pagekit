@@ -36,7 +36,7 @@
 
         section: {
             label: 'Maintenance',
-            icon: 'uk-icon-wrench',
+            icon: 'pk-icon-large-cone',
             priority: 30
         },
 
