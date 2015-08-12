@@ -76,8 +76,8 @@
                     vm.progress = '';
                 }, 250);
 
-                if (data.error) {
-                    this.$notify(data.error, 'danger');
+                if (!data.package) {
+                    this.$notify(data, 'danger');
                     return;
                 }
 

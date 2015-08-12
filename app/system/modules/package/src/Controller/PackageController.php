@@ -139,11 +139,18 @@ class PackageController
         }
 
         $package = $this->loadPackage($file->getPathname());
-        $filename = str_replace('/', '-', $package->getName()) . ($package->get('version') ? '-' . $package->get('version') : '') . '.zip';
+
+        if (!$package->getName() || !$package->get('title') || !$package->get('version')) {
+            App::abort(400, __('"composer.json" file not valid.'));
+        }
+
+        $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';
 
         $file->move(App::get('path.packages'), $filename);
 
-        return compact('package');
+        $status='successful';
+
+        return compact('status', 'package');
     }
 
     /**
