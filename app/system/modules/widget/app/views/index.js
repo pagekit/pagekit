@@ -143,11 +143,11 @@ module.exports = {
 
             if (this.config.filter.node && widget.nodes.length) {
 
-                var selected = Number(this.config.filter.node), ret = false;
+                var selected = Number(this.config.filter.node);
 
-                return widget.nodes.filter(function (node) {
+                return widget.nodes.some(function (node) {
                     return (Number(node) === selected)
-                }).length;
+                });
             }
 
             return true;
@@ -157,9 +157,9 @@ module.exports = {
 
             widgets = widgets || this.widgets;
 
-            return !widgets.filter(function (widget) {
+            return !widgets.some(function (widget) {
                 return this.infilter(widget);
-            }, this).length;
+            }, this);
         },
 
         getSingleNodeTitle: function (widget) {
@@ -167,7 +167,7 @@ module.exports = {
         },
 
         getNodeTitle: function (id) {
-            var node = _.find(this.config.nodes, 'id', id);
+            var node = _.find(this.config.nodes, 'id', Number(id));
             return node ? node.title : '';
         }
 
