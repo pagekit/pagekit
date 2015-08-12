@@ -107,7 +107,7 @@ class UserController
     }
 
     /**
-     * @Access("user: manage settings")
+     * @Access("system: manage settings")
      */
     public function settingsAction()
     {

@@ -54,10 +54,6 @@ return [
 
     'permissions' => [
 
-        'blog: manage settings' => [
-            'title' => 'Manage settings',
-            'description' => 'View and change settings'
-        ],
         'blog: manage own posts' => [
             'title' => 'Manage own posts',
             'description' => 'Create, edit, delete and publish posts of their own'
@@ -96,7 +92,7 @@ return [
             'icon' => 'extensions/blog/image.svg',
             'url' => '@blog/post',
             'active' => '@blog/post*',
-            'access' => 'blog: manage own posts || blog: manage all posts || blog: manage comments || blog: manage settings',
+            'access' => 'blog: manage own posts || blog: manage all posts || blog: manage comments || system: manage settings',
             'priority' => 110
         ],
         'blog: posts' => [
@@ -118,7 +114,7 @@ return [
             'parent' => 'blog',
             'url' => '@blog/settings',
             'active' => '@blog/settings*',
-            'access' => 'blog: manage settings'
+            'access' => 'system: manage settings'
         ]
 
     ],

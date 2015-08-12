@@ -64,10 +64,6 @@ return [
         ],
         'site: maintenance access' => [
             'title' => 'Use the site in maintenance mode'
-        ],
-        'site: manage settings' => [
-            'title' => 'Manage settings',
-            'description' => 'View and change settings'
         ]
 
     ],
@@ -78,7 +74,7 @@ return [
             'label' => 'Site',
             'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site/page',
-            'access' => 'site: manage site',
+            'access' => 'site: manage site || system: manage widgets || system: manage storage || system: manage settings',
             'active' => '@site*',
             'priority' => 105
         ],
@@ -86,12 +82,14 @@ return [
             'label' => 'Pages',
             'parent' => 'site',
             'url' => '@site/page',
+            'access' => 'site: manage site',
             'active' => '@site/page(/edit)?'
         ],
         'site: settings' => [
             'label' => 'Settings',
             'parent' => 'site',
             'url' => '@site/settings',
+            'access' => 'system: manage settings',
             'priority' => 20
         ]
 
