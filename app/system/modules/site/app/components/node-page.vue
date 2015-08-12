@@ -133,6 +133,6 @@
 
     };
 
-    window.Site.components['page'] = module.exports;
+    window.Site.components['node-page'] = module.exports;
 
 </script>

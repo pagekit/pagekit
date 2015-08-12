@@ -71,7 +71,7 @@ window.Site = module.exports = {
 
     components: {
 
-        link: require('../components/link.vue')
+        'node-link': require('../components/node-link.vue')
 
     }
 

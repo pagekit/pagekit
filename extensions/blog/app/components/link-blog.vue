@@ -47,6 +47,6 @@
 
     };
 
-    window.Links.components['blog'] = module.exports;
+    window.Links.components['link-blog'] = module.exports;
 
 </script>

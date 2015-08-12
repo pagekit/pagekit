@@ -22,6 +22,6 @@
 
     };
 
-    window.Site.components['blog'] = module.exports;
+    window.Site.components['node-blog'] = module.exports;
 
 </script>

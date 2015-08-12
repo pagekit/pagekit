@@ -56,6 +56,6 @@
 
     };
 
-    window.Links.components['page'] = module.exports;
+    window.Links.components['link-page'] = module.exports;
 
 </script>

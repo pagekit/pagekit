@@ -55,7 +55,7 @@
     module.exports = {
 
         section: {
-            label: 'Appearance',
+            label: 'Theme',
             priority: 90
         },
 
@@ -73,6 +73,6 @@
 
     };
 
-    window.Widgets.components['appearance'] = module.exports;
+    window.Widgets.components['widget-theme'] = module.exports;
 
 </script>

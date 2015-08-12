@@ -95,11 +95,11 @@ return [
         },
 
         'view.system/site/admin/edit' => function ($event, $view) {
-            $view->script('site-appearance', 'theme:app/bundle/site-appearance.js', 'site-edit');
+            $view->script('node-theme', 'theme:app/bundle/node-theme.js', 'site-edit');
         },
 
         'view.system/widget/edit' => function ($event, $view) {
-            $view->script('widget-appearance', 'theme:app/bundle/widget-appearance.js', 'widget-edit');
+            $view->script('widget-theme', 'theme:app/bundle/widget-theme.js', 'widget-edit');
         },
 
         /**

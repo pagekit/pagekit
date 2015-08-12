@@ -31,6 +31,6 @@
 
     };
 
-    window.Links.components['user'] = module.exports;
+    window.Links.components['link-user'] = module.exports;
 
 </script>
