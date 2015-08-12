@@ -35,10 +35,7 @@
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th class="pk-table-min-width-300" colspan="2">{{ 'Comment' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statusOptions"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statusOptions }}"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-class="pk-filter: config.post, uk-active: config.post">
                         <span v-if="!config.post">{{ 'Post' | trans }}</span>

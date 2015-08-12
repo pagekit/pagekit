@@ -42,7 +42,7 @@ module.exports = {
                 return {text: status, value: id};
             });
 
-            return [{text: this.$trans('Status'), value: ''}, {label: this.$trans('Filter by'), options: options}];
+            return [{label: this.$trans('Filter by'), options: options}];
         }
 
     },

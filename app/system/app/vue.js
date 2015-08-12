@@ -20,6 +20,7 @@ function install (Vue) {
     Vue.component('v-loader', require('./components/loader.vue'));
     Vue.component('v-modal', require('./components/modal.vue'));
     Vue.component('v-pagination', require('./components/pagination'));
+    Vue.component('input-filter', require('./components/input-filter.vue'));
 
     require('./components/input-date.vue');
     require('./components/input-image.vue');

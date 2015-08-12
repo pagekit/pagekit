@@ -38,16 +38,11 @@
                     <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
                     <th class="pk-table-min-width-200" v-order="title: config.filter.order">{{ 'Title' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statusOptions"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statusOptions }}"></input-filter>
                     </th>
                     <th class="pk-table-width-100">
-                        <div data-uk-form-select v-class="uk-form-select: canEditAll, pk-filter: canEditAll">
-                            <span>{{ 'Author' | trans }}</span>
-                            <select v-model="config.filter.author" options="authors" v-if="canEditAll"></select>
-                        </div>
+                        <span v-if="!canEditAll">{{ 'Author' | trans }}</span>
+                        <input-filter title="{{ 'Author' | trans }}" value="{{@ config.filter.author}}" options="{{ authors }}" v-if="canEditAll"></input-filter>
                     </th>
                     <th class="pk-table-width-100 uk-text-center" v-order="comment_count: config.filter.order">{{ 'Comments' | trans }}</th>
                     <th class="pk-table-width-100" v-order="date: config.filter.order">{{ 'Date' | trans }}</th>

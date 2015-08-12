@@ -39,19 +39,13 @@
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statuses"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statuses }}"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-order="email: config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Roles' | trans }}</span>
-                            <select v-model="config.filter.role" options="roles"></select>
-                        </div>
+                        <input-filter title="{{ 'Roles' | trans }}" value="{{@ config.filter.role}}" options="{{ roles }}"></input-filter>
                     </th>
                 </tr>
             </thead>

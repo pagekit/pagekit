@@ -83,11 +83,7 @@
                     <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                     <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                     <div class="pk-table-width-100">
-                        <div class="uk-form-select pk-filter">
-                            <span v-show="!config.filter.node">{{ 'Pages' | trans }}</span>
-                            <span v-show="config.filter.node">{{ getNodeTitle(config.filter.node) }}</span>
-                            <select v-model="config.filter.node" options="nodes"></select>
-                        </div>
+                        <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}"></input-filter>
                     </div>
                 </div>
 
@@ -102,11 +98,7 @@
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                         <div class="pk-table-width-100">
-                            <div class="uk-form-select pk-filter">
-                                <span v-show="!config.filter.node">{{ 'Pages' | trans }}</span>
-                                <span v-show="config.filter.node">{{ getNodeTitle(config.filter.node) }}</span>
-                                <select v-model="config.filter.node" options="nodes"></select>
-                            </div>
+                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}"></input-filter>
                         </div>
                     </div>
 

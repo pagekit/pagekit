@@ -36,7 +36,7 @@ module.exports = {
                 return { text: status, value: id };
             });
 
-            return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{ label: this.$trans('Filter by'), options: options }];
         },
 
         authors: function() {
@@ -45,7 +45,7 @@ module.exports = {
                 return { text: author.name, value: author.user_id };
             });
 
-            return [{ text: this.$trans('Author'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{ label: this.$trans('Filter by'), options: options }];
         }
     },
 

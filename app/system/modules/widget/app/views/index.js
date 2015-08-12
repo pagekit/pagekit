@@ -32,7 +32,7 @@ module.exports = {
 
         nodes: function () {
 
-            var options = [{text: this.$trans('Pages'), value: ''}],
+            var options = [],
                 nodes = _(this.config.nodes).groupBy('menu').value();
 
             _.forEach(this.config.menus, function(menu, name) {
