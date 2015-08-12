@@ -25,7 +25,7 @@
 
     module.exports = {
 
-        props: ['api', 'type'],
+        props: ['api', 'type', 'packages'],
 
         data: function () {
             return {
@@ -88,33 +88,23 @@
             },
 
             install: function (e) {
-
                 e.preventDefault();
-                var output = this.$addChild(require('./output.vue'));
 
                 this.modal.hide();
-                output.open();
 
-                this.$http.post('admin/system/package/install', {package: this.upload.package}, null, {
-                    beforeSend: function (request) {
-                        request.onprogress = function () {
-                            output.setOutput(this.responseText);
-                        };
-                    }
-                }).success(function () {
-                    output.close();
-                    this.$notify(this.$trans('"%title%" installed.', {title: this.package.title}));
-
-                    setTimeout(function () {
-                        location.reload();
-                    }, 600);
-
-                }).error(function (msg) {
-                    this.$notify(msg, 'danger');
-                });
+                this.installPackage(this.upload.package, this.packages,
+                    function () {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 300);
+                    });
             }
 
-        }
+        },
+
+        mixins: [
+            require('../lib/package')
+        ]
 
     };
 

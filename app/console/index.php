@@ -54,7 +54,7 @@ if (PHP_SAPI === 'cli') {
     ob_end_flush();
 
     register_shutdown_function(function () use ($output) {
-        // TODO: Send status
+        echo sprintf('status=%s', $output->getError() ? 'error' : 'success');
     });
 
 }

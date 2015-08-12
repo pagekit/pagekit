@@ -1,3 +1,5 @@
+var Output = require('../components/output.vue');
+
 module.exports = {
 
     methods: {
@@ -20,49 +22,93 @@ module.exports = {
             return this.$http.jsonp(this.api.url + '/package/:name', {
                 api_key: this.api.key,
                 name: _.isObject(pkg) ? pkg.name : pkg
-            }, success).error(function () {});
+            }, success).error(function () {
+            });
         },
 
-        enablePackage: function (pkg) {
+        enablePackage: function (pkg, reload) {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.$set('enabled', true);
-                    document.location.reload();
+                    if (reload !== false) {
+                        document.location.reload();
+                    }
                 }
             });
         },
 
-        disablePackage: function (pkg) {
+        disablePackage: function (pkg, reload) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
+
                 if (!data.error) {
                     pkg.$set('enabled', false);
-                    document.location.reload();
+                    if (reload !== false) {
+                        document.location.reload();
+                    }
                 }
             });
         },
 
-        installPackage: function (pkg, packages, options) {
-            return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
-                if (packages && data.package) {
+        installPackage: function (pkg, packages, onClose) {
+            var output = this.$addChild(Output);
+            var options = {
+                xhr: {
+                    onprogress: function () {
+                        output.setOutput(this.responseText);
+                    }
+                }
+            };
 
-                    var index = _.findIndex(packages, 'name', data.package.name);
+            output.init(this.$trans('Installing "%title%"', {title: this.package.title}));
+            if (onClose) {
+                output.onClose(onClose);
+            }
+
+            return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
+                if (data.package) {
+                    pkg = data.package;
+                }
+
+                if (packages) {
+
+                    var index = _.findIndex(packages, 'name', pkg.name);
 
                     if (-1 !== index) {
-                        packages.splice(index, 1, data.package);
+                        packages.splice(index, 1, pkg);
                     } else {
-                        packages.push(data.package);
+                        packages.push(pkg);
                     }
 
                 }
-            }, options);
+            }, options).error(function (msg) {
+
+                console.log(msg);
+                output.close();
+
+                this.$notify(msg, 'danger');
+            });
         },
 
-        uninstallPackage: function (pkg, packages, options) {
+        uninstallPackage: function (pkg, packages) {
+            var output = this.$addChild(Output);
+            var options = {
+                xhr: {
+                    onprogress: function () {
+                        output.setOutput(this.responseText);
+                    }
+                }
+            };
+
+            output.init(this.$trans('Uninstalling "%title%"', {title: pkg.title}));
+
             return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }
-            }, options);
+            }, options).error(function (message) {
+                output.close();
+                this.$notify(message, 'danger');
+            });
         }
 
     }

@@ -85,28 +85,24 @@ window.Extensions = module.exports = {
         },
 
         uninstall: function (pkg) {
-            var output = this.$addChild(require('../components/output.vue'));
-
-            output.open();
-            this.uninstallPackage(pkg, this.packages, {
-                beforeSend: function (request) {
-                    request.onprogress = function () {
-                        output.setOutput(this.responseText);
-                    };
-                }
-            }).success(function () {
-                output.close();
-                this.$notify(this.$trans('"%title%" uninstalled.', {title: pkg.title}));
-            }).error(function (message) {
-                output.close();
-                this.error(message);
-            });
+            this.uninstallPackage(pkg, this.packages);
         },
 
         update: function (pkg) {
-            this.installPackage(pkg, this.packages).success(function () {
-                this.$notify(this.$trans('"%title%" updated.', {title: pkg.title}));
-                this.load();
+            this.disablePackage(pkg, false).success(function () {
+
+                var vm = this;
+                this.installPackage(pkg, this.packages,
+                    function (output) {
+                        if (output.status !== 'success') {
+                            return;
+                        }
+
+                        vm.enablePackage(pkg).success(function () {
+                            vm.$notify(vm.$trans('"%title%" enabled.', {title: pkg.title}));
+                        }).error(vm.error);
+                    });
+
             }).error(this.error);
         },
 
@@ -123,7 +119,9 @@ window.Extensions = module.exports = {
         },
 
         folder: function (pkg) {
-            return pkg.url.match(/[^\/]+$/gi);
+            if (pkg.url) {
+                return pkg.url.match(/[^\/]+$/gi);
+            }
         }
 
     },

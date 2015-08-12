@@ -203,9 +203,10 @@ class PackageController
             ];
 
             $verifier = new UriVerifier(require App::get('config.file'));
-            $uri = $verifier->sign(App::url('app/console/', $params, true), 10);
 
-            return App::redirect($uri);
+            return App::redirect(
+                $verifier->sign(App::url('app/console/', $params, true), 10)
+            );
 
         } catch (\Exception $e) {
             $error = $e->getMessage();

@@ -2,7 +2,13 @@
 
     <div>
         <v-modal v-ref="output" options="{{ options }}" large>
-            <div v-html="output"></div>
+            <h1>{{ title }}</h1>
+
+            <pre v-html="output"></pre>
+
+            <a class="uk-button uk-button-success" v-show="status == 'success'" v-on="click: close">{{ 'Ok' | trans }}</a>
+            <a class="uk-button uk-button-error" v-show="status == 'error'" v-on="click: close">{{ 'Failed' | trans }}</a>
+
         </v-modal>
     </div>
 
@@ -11,9 +17,13 @@
 <script>
 
     module.exports = {
+
         data: function () {
             return {
+                title: '',
                 output: '',
+                status: 'waiting',
+                cb: null,
                 options: {
                     bgclose: false,
                     keyboard: false
@@ -26,8 +36,26 @@
         },
 
         methods: {
+            init: function (title) {
+                this.title = title;
+
+                this.open();
+            },
+
+            onClose: function (cb) {
+                this.cb = cb;
+            },
+
             setOutput: function (output) {
-                this.output = output;
+                var lines = output.split("\n");
+                var match = lines[lines.length - 1].match(/^status=(success|error)$/);
+
+                if (match) {
+                    this.status = match[1];
+                } else {
+                    this.output = output;
+                }
+
             },
 
             open: function () {
@@ -35,6 +63,10 @@
             },
 
             close: function () {
+                if (this.cb) {
+                    this.cb(this);
+                }
+
                 this.$.output.close();
                 this.$destroy();
             }
