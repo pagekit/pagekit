@@ -148,9 +148,7 @@ class PackageController
 
         $file->move(App::get('path.packages'), $filename);
 
-        $status='successful';
-
-        return compact('status', 'package');
+        return compact('package');
     }
 
     /**
