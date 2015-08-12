@@ -102,7 +102,7 @@
 
                     source: function (release) {
 
-                        vm.$http.get(api + '/find', {q: encodeURI(this.input.val()), type: 'like'}, function (data) {
+                        vm.$http.get(api + '/find', {q: this.input.val(), type: 'like'}, function (data) {
 
                             list = data.list || [];
                             release(list);
