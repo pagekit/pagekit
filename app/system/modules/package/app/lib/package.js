@@ -20,7 +20,7 @@ module.exports = {
             return this.$http.jsonp(this.api.url + '/package/:name', {
                 api_key: this.api.key,
                 name: _.isObject(pkg) ? pkg.name : pkg
-            }, success);
+            }, success).error(function () {});
         },
 
         enablePackage: function (pkg) {
