@@ -98,7 +98,7 @@
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                         <div class="pk-table-width-100">
-                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}"></input-filter>
+                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}" number></input-filter>
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@
                                 </div>
                                 <div class="pk-table-width-150">{{ type.label || type.name }}</div>
                                 <div class="pk-table-width-100">
-                                    {{ getSingleNodeTitle(widget) | trans }}
+                                    {{ getPageFilter(widget) }}
                                 </div>
                             </div>
 

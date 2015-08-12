@@ -35,7 +35,7 @@ module.exports = {
             var options = [],
                 nodes = _(this.config.nodes).groupBy('menu').value();
 
-            _.forEach(this.config.menus, function(menu, name) {
+            _.forEach(this.config.menus, function (menu, name) {
 
                 var opts = nodes[name];
 
@@ -43,9 +43,11 @@ module.exports = {
                     return;
                 }
 
-                options.push({label: menu.label, options: _.map(opts, function(node) {
-                    return {text: node.title, value: node.id};
-                })});
+                options.push({
+                    label: menu.label, options: _.map(opts, function (node) {
+                        return {text: node.title, value: node.id};
+                    })
+                });
 
             }, this);
 
@@ -110,6 +112,31 @@ module.exports = {
             });
         },
 
+        copy: function () {
+
+            var widgets = _.merge([], this.widgets.filter(function (widget) {
+                return -1 !== this.selected.indexOf(widget.id);
+            }, this));
+
+            widgets.forEach(function (widget) {
+                delete widget.id;
+            });
+
+            this.resource.save({id: 'bulk'}, {widgets: widgets}, function (data) {
+                this.load();
+                this.$set('config.positions', data.positions);
+                this.$set('selected', []);
+                this.$notify('Widget(s) copied.');
+            });
+        },
+
+        remove: function () {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function() {
+                this.load();
+                this.$set('selected', []);
+            });
+        },
+
         status: function () {
 
             var widgets = this.get('selected');
@@ -130,6 +157,7 @@ module.exports = {
             widget.status = widget.status ? 0 : 1;
 
             this.resource.save({id: widget.id}, {widget: widget}, function () {
+                this.load();
                 this.$notify('Widget saved.');
             });
         },
