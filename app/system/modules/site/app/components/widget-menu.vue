@@ -14,7 +14,9 @@
             <div class="uk-form-row">
                 <label for="form-menu" class="uk-form-label">{{ 'Menu' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu" options="menuOptions"></select>
+                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu" options="menuOptions">
+                        <option value="">{{ '- Menu -' | trans }}</option>
+                    </select>
                 </div>
             </div>
 
@@ -100,9 +102,9 @@
         computed: {
 
             menuOptions: function () {
-                return [{text: this.$trans('- Menu -'), value: ''}].concat(_.map(this.menus, function (menu) {
+                return _.map(this.menus, function (menu) {
                     return {text: menu.label, value: menu.id};
-                }));
+                });
             }
 
         }

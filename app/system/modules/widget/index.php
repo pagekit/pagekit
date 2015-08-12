@@ -87,6 +87,12 @@ return [
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
         },
 
+        'model.widget.init' => function ($event, $widget) {
+            if ($type = $this->getType($widget->type)) {
+                $widget->data = array_replace_recursive($type->get('defaults', []), $widget->data ?: []);
+            }
+        },
+
         'model.widget.saved' => function ($event, $widget) use ($app) {
             $app['position']->assign($widget->position, $widget->id);
             $app->config($app['theme']->name)->set('_widgets.'.$widget->id, $widget->theme);
