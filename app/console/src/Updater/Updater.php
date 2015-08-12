@@ -104,7 +104,7 @@ class Updater
         $packages = [];
         foreach ((array)$arguments as $argument) {
             $argument = explode(':', $argument);
-            $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) ? $argument[1] : '*'];
+            $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) && $argument[1] ? $argument[1] : '*'];
         }
 
         return $packages;

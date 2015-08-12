@@ -16,7 +16,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary">{{ 'Upload' | trans }}</a>
+            <package-upload api="{{ api }}" packages="{{ packages }}" type="theme"></package-upload>
 
         </div>
     </div>

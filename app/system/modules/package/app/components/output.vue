@@ -6,6 +6,8 @@
 
             <pre v-html="output"></pre>
 
+            <v-loader v-show="status == 'loading'"></v-loader>
+
             <a class="uk-button uk-button-success" v-show="status == 'success'" v-on="click: close">{{ 'Ok' | trans }}</a>
             <a class="uk-button uk-button-error" v-show="status == 'error'" v-on="click: close">{{ 'Failed' | trans }}</a>
 
@@ -22,7 +24,7 @@
             return {
                 title: '',
                 output: '',
-                status: 'waiting',
+                status: 'loading',
                 cb: null,
                 options: {
                     bgclose: false,
@@ -52,6 +54,8 @@
 
                 if (match) {
                     this.status = match[1];
+                    delete lines[lines.length - 1];
+                    this.output = lines.join("\n");
                 } else {
                     this.output = output;
                 }

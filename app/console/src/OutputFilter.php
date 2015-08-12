@@ -24,7 +24,7 @@ class OutputFilter extends StreamOutput
 
     protected function parseMessage($message)
     {
-        if (preg_match('/(?<=<error>).+(?=<\/error>)/', $message, $matches)) {
+        if (preg_match('/((?<=<error>).+(?=<\/error>))|(\[.+Exception\])/', $message, $matches)) {
             $this->errorLog[] = $matches[0];
         }
     }
