@@ -85,7 +85,7 @@
                 </div>
             </div>
 
-            <div>{{ comment.content }}</div>
+            <div>{{{ comment.content }}}</div>
 
             <div class="uk-margin-top" v-if="replyComment.parent_id === comment.id">
                 <form name="replyform" class="uk-form" v-on="valid: submit">
