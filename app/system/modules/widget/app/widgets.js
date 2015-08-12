@@ -2,8 +2,7 @@ window.Widgets = module.exports = {
 
     data: function () {
         return {
-            widgets: [],
-            configs: {}
+            widgets: []
         };
     },
 
