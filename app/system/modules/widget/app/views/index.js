@@ -169,6 +169,10 @@ module.exports = {
         getNodeTitle: function (id) {
             var node = _.find(this.config.nodes, 'id', Number(id));
             return node ? node.title : '';
+        },
+
+        isSelected: function (widgetId) {
+            return this.selected.indexOf(widgetId.toString()) !== -1;
         }
 
     },
