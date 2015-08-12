@@ -5,7 +5,7 @@
             <h2 class="uk-margin-remove">{{ 'Theme' | trans }}</h2>
         </div>
         <div data-uk-margin>
-            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
         </div>
     </div>
 
@@ -37,16 +37,13 @@
             return window.$theme;
         },
 
-        methods: {
+        events: {
 
-            save: function(e) {
-                e.preventDefault();
+            save: function() {
 
                 var config = _.omit(this.config, ['positions', 'menus', 'widget']);
 
-                this.$http.post('admin/system/settings/config', {name: this.name, config: config}, function () {
-                    this.$notify('Settings saved.');
-                }).error(function (data) {
+                this.$http.post('admin/system/settings/config', {name: this.name, config: config}).error(function (data) {
                     this.$notify(data, 'danger');
                 });
 

@@ -35,6 +35,8 @@ window.Site = module.exports = {
         save: function(e) {
             e.preventDefault();
 
+            this.$broadcast('save', this.config);
+
             this.$http.post('admin/system/settings/config', { name: 'system/site', config: this.config }, function() {
                  this.$notify('Settings saved.');
             }).error(function(data) {
