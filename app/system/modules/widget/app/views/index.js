@@ -103,7 +103,6 @@ module.exports = {
 
         move: function (position, ids) {
 
-            ids = _.map(ids, _.parseInt);
             position = _.find(this.positions, 'name', position);
 
             this.assign(position.name, position.assigned.concat(ids)).success(function () {
@@ -142,12 +141,9 @@ module.exports = {
             }
 
             if (this.config.filter.node && widget.nodes.length) {
-
-                var selected = Number(this.config.filter.node);
-
                 return widget.nodes.some(function (node) {
-                    return (Number(node) === selected)
-                });
+                    return node === this.config.filter.node;
+                }, this);
             }
 
             return true;
@@ -162,13 +158,16 @@ module.exports = {
             }, this);
         },
 
-        getSingleNodeTitle: function (widget) {
-            return !widget.nodes.length ? 'All' : (widget.nodes.length === 1 ? this.getNodeTitle(widget.nodes[0]) : 'Selected');
-        },
+        getPageFilter: function (widget) {
 
-        getNodeTitle: function (id) {
-            var node = _.find(this.config.nodes, 'id', Number(id));
-            return node ? node.title : '';
+            if (!widget.nodes.length) {
+                return this.$trans('All');
+            } else if (widget.nodes.length > 1) {
+                return this.$trans('Selected');
+            } else {
+                return (_.find(this.config.nodes, 'id', widget.nodes[0]) || {}).title;
+            }
+
         },
 
         isSelected: function (widgetId) {

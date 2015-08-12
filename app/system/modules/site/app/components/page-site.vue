@@ -53,7 +53,7 @@
 
                     <div class="uk-form-controls uk-form-controls-text">
                         <p v-repeat="role: roles" class="uk-form-controls-condensed">
-                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="node.roles"> {{ role.name }}</label>
+                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="node.roles" number> {{ role.name }}</label>
                         </p>
                     </div>
                 </div>

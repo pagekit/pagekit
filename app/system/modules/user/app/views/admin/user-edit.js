@@ -9,16 +9,6 @@ module.exports = {
         });
     },
 
-    watch: {
-
-        'user.status': function (status) {
-            if (typeof status === 'string') {
-                this.user.status = parseInt(status);
-            }
-        }
-
-    },
-
     computed: {
 
         isNew: function () {

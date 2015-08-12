@@ -8,6 +8,7 @@ module.exports = {
 
         this.$el = this.vm.$el;
         this.checked = false;
+        this.number = this.el.getAttribute('number') !== null;
 
         $(this.el).on('change.check-all', function () {
             $(selector, self.$el).prop('checked', $(this).prop('checked'));
@@ -28,7 +29,7 @@ module.exports = {
         this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
 
             $(selector, this.$el).prop('checked', function () {
-                return selected.indexOf($(this).val()) !== -1;
+                return selected.indexOf(self.toNumber($(this).val())) !== -1;
             });
 
             self.selected();
@@ -61,11 +62,11 @@ module.exports = {
 
     selected: function (update) {
 
-        var keypath = this.arg, selected = [], values = [], value;
+        var self = this, keypath = this.arg, selected = [], values = [], value;
 
         $(this.expression, this.$el).each(function () {
 
-            value = $(this).val();
+            value = self.toNumber($(this).val());
             values.push(value);
 
             if ($(this).prop('checked')) {
@@ -90,6 +91,10 @@ module.exports = {
             this.checked = undefined;
         }
 
+    },
+
+    toNumber: function (value) {
+        return this.number ? Number(value) : value;
     }
 
 };
