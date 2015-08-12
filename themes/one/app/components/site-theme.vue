@@ -30,7 +30,7 @@
         section: {
             label: 'Theme',
             icon: 'pk-icon-large-brush',
-            priority: 40
+            priority: 15
         },
 
         data: function () {

@@ -32,7 +32,7 @@
         section: {
             label: 'Maintenance',
             icon: 'uk-icon-wrench',
-            priority: 20
+            priority: 30
         },
 
         props: ['config']
