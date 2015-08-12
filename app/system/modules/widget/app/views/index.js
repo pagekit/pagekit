@@ -170,8 +170,8 @@ module.exports = {
 
         },
 
-        isSelected: function (widgetId) {
-            return this.selected.indexOf(widgetId.toString()) !== -1;
+        isSelected: function (id) {
+            return this.selected.indexOf(id) !== -1;
         }
 
     },
