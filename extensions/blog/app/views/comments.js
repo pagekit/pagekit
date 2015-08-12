@@ -60,7 +60,7 @@ module.exports = {
                 },
 
                 permalink: function () {
-                    return $pagekit.url + this.post.url + '#' + this.comment.id;
+                    return $pagekit.url + this.post.url + '#comment-' + this.comment.id;
 
                 }
 
