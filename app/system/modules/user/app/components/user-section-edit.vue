@@ -1,14 +1,7 @@
 <template>
 
     <div class="uk-form-row">
-        <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
-        <div class="uk-form-controls">
-            <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-valid="required">
-            <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid">{{ 'Username cannot be blank.' | trans }}</p>
-        </div>
-    </div>
 
-    <div class="uk-form-row">
         <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
         <div class="uk-form-controls">
             <input id="form-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-valid="required">
@@ -41,7 +34,7 @@
         <span class="uk-form-label">{{ 'Status' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed" v-repeat="statuses">
-                <label><input type="radio" v-model="user.status" value="{{ $key }}" v-attr="disabled: config.currentUser == user.id"> {{ $value }}</label>
+                <label><input type="radio" v-model="user.status" value="{{ $key }}" v-attr="disabled: config.currentUser == user.id" number> {{ $value }}</label>
             </p>
         </div>
     </div>
@@ -50,7 +43,7 @@
         <span class="uk-form-label">{{ 'Roles' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed" v-repeat="role: roles">
-                <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" v-attr="disabled: role.disabled"> {{ role.name }}</label>
+                <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" v-attr="disabled: role.disabled" number> {{ role.name }}</label>
             </p>
         </div>
     </div>
