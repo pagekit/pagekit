@@ -10,8 +10,6 @@ return [
 
     'type' => 'extension',
 
-    'main' => 'Pagekit\\Blog\\BlogExtension',
-
     'autoload' => [
 
         'Pagekit\\Blog\\' => 'src'
