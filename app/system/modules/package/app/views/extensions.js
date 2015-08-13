@@ -89,21 +89,8 @@ window.Extensions = module.exports = {
         },
 
         update: function (pkg) {
-            this.disablePackage(pkg, false).success(function () {
-
-                var vm = this;
-                this.installPackage(pkg, this.packages,
-                    function (output) {
-                        if (output.status !== 'success') {
-                            return;
-                        }
-
-                        vm.enablePackage(pkg).success(function () {
-                            vm.$notify(vm.$trans('"%title%" enabled.', {title: pkg.title}));
-                        }).error(vm.error);
-                    });
-
-            }).error(this.error);
+            this.updates.$delete(pkg.name);
+            this.updatePackage(pkg, this.packages);
         },
 
         error: function (message) {

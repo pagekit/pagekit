@@ -51,20 +51,15 @@ module.exports = {
 
         installPackage: function (pkg, packages, onClose) {
             var output = this.$addChild(Output);
-            var options = {
-                xhr: {
-                    onprogress: function () {
-                        output.setOutput(this.responseText);
-                    }
-                }
-            };
-
-            output.init(this.$trans('Installing "%title%"', {title: this.package.title}));
             if (onClose) {
                 output.onClose(onClose);
             }
 
-            return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
+            return this.$http.post('admin/system/package/install', {package: pkg}, null, {
+                beforeSend: function (request) {
+                    output.init(request, this.$trans('Installing "%title%"', {title: this.package.title}));
+                }
+            }).success(function (data) {
                 if (data.package) {
                     pkg = data.package;
                 }
@@ -80,35 +75,49 @@ module.exports = {
                     }
 
                 }
-            }, options).error(function (msg) {
-
-                console.log(msg);
+            }).error(function (msg) {
                 output.close();
-
                 this.$notify(msg, 'danger');
             });
         },
 
         uninstallPackage: function (pkg, packages) {
             var output = this.$addChild(Output);
-            var options = {
-                xhr: {
-                    onprogress: function () {
-                        output.setOutput(this.responseText);
-                    }
+
+            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {
+                beforeSend: function (request) {
+                    output.init(request, this.$trans('Uninstalling "%title%"', {title: pkg.title}));
                 }
-            };
-
-            output.init(this.$trans('Uninstalling "%title%"', {title: pkg.title}));
-
-            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
+            }).success(function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }
-            }, options).error(function (message) {
+            }).error(function (message) {
                 output.close();
                 this.$notify(message, 'danger');
             });
+        },
+
+        updatePackage: function (pkg, packages) {
+            this.disablePackage(pkg, false).always(function (data, status) {
+                var enable = status == 200;
+
+                var vm = this;
+                this.installPackage(pkg, packages,
+                    function (output) {
+                        if (output.status !== 'success') {
+                            return;
+                        }
+
+                        if (enable) {
+                            vm.enablePackage(pkg).success(function () {
+                                vm.$notify(vm.$trans('"%title%" enabled.', {title: pkg.title}));
+                            }).error(function (message) {
+                                vm.$notify(message, 'danger');
+                            });
+                        }
+                    });
+            }).error(function () {});
         }
 
     }

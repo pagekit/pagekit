@@ -38,8 +38,13 @@
         },
 
         methods: {
-            init: function (title) {
+            init: function (request, title) {
+                var vm = this;
                 this.title = title;
+
+                request.onprogress = function () {
+                    vm.setOutput(this.responseText);
+                };
 
                 this.open();
             },
