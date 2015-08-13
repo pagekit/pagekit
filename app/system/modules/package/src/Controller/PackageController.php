@@ -128,9 +128,9 @@ class PackageController
     }
 
     /**
-     * @Request(csrf=true)
+     * @Request({"type": "string"}, csrf=true)
      */
-    public function uploadAction()
+    public function uploadAction($type)
     {
         $file = App::request()->files->get('file');
 
@@ -142,6 +142,10 @@ class PackageController
 
         if (!$package->getName() || !$package->get('title') || !$package->get('version')) {
             App::abort(400, __('"composer.json" file not valid.'));
+        }
+
+        if ($package->get('type') !== 'pagekit-' . $type) {
+            App::abort(400, __('No Pagekit %type%', ['%type%' => $type]));
         }
 
         $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';
