@@ -51,28 +51,6 @@ module.exports = {
             this.$.details.open();
         },
 
-        queryUpdates: function (packages, success) {
-
-            var pkgs = {};
-
-            _.each(packages, function (pkg) {
-                pkgs[pkg.name] = pkg.version;
-            });
-
-            return this.$http.jsonp(this.api.url + '/package/update', {
-                api_key: this.api.key,
-                packages: JSON.stringify(pkgs)
-            }, success);
-        },
-
-        queryPackage: function (pkg, success) {
-            return this.$http.jsonp(this.api.url + '/package/:name', {
-                api_key: this.api.key,
-                name: _.isObject(pkg) ? pkg.name : pkg
-            }, success).error(function () {
-            });
-        },
-
         settings: function (pkg) {
 
             if (!pkg.settings) {
