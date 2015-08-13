@@ -68,8 +68,8 @@ module.exports = {
             this.cancel();
         },
 
-        getMenu: function(position) {
-            return _.find(this.menus, function(menu) {
+        getMenu: function (position) {
+            return _.find(this.menus, function (menu) {
                 return _.contains(menu.positions, position);
             });
         },
@@ -119,7 +119,7 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                this.$notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({label: this.$trans('Trash')}), 'id', menu).label}));
+                this.$notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({id: 'trash', label: this.$trans('Trash')}), 'id', menu).label}));
             });
         },
 
@@ -161,15 +161,15 @@ module.exports = {
                 }, this);
             }
 
-            return this.selected.indexOf(node.id.toString()) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
+            return this.selected.indexOf(node.id) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
         },
 
         toggleSelect: function (node) {
 
-            var index = this.selected.indexOf(node.id.toString());
+            var index = this.selected.indexOf(node.id);
 
             if (index == -1) {
-                this.selected.push(node.id.toString());
+                this.selected.push(node.id);
             } else {
                 this.selected.splice(index, 1);
             }
