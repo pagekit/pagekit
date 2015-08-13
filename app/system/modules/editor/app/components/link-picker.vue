@@ -18,7 +18,7 @@
                 <div class="uk-form-row">
                     <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-link id="form-link-url" class="uk-width-1-1" url="{{@ link.link}}"></input-link>
+                        <input-link id="form-link-url" class="uk-width-1-1" link="{{@ link.link}}"></input-link>
                     </div>
                 </div>
 
@@ -46,7 +46,6 @@
         ready: function () {
             this.$.modal.open();
         },
-
 
         methods: {
 

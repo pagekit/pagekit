@@ -34,6 +34,11 @@ class View
     protected $helpers = [];
 
     /**
+     * @var array[]
+     */
+    protected $parameters = [];
+
+    /**
      * Constructor.
      *
      * @param EventDispatcherInterface $events
@@ -178,7 +183,7 @@ class View
     public function render($name, array $parameters = [])
     {
         $event = new ViewEvent('render', $name);
-        $event->setParameters(array_replace($this->globals, $parameters));
+        $event->setParameters(array_replace($this->globals, end($this->parameters) ?: [], $parameters));
 
         $this->events->trigger($event, [$this]);
 
@@ -187,11 +192,15 @@ class View
             $this->events->trigger($event->setName($name), [$this]);
         }
 
-        if ($event->getResult() === null && $this->engine->supports($event->getTemplate())) {
-            $parameters = $event->getParameters();
-            return $this->engine->render($event->getTemplate(), array_replace(['params' => new ArrObject($parameters)], $parameters));
+        $result = $event->getResult();
+        $params = $this->parameters[] = $event->getParameters();
+
+        if ($result === null && $this->engine->supports($event->getTemplate())) {
+            $result = $this->engine->render($event->getTemplate(), array_replace(['params' => new ArrObject($params)], $params));
         }
 
-        return $event->getResult();
+        array_pop($this->parameters);
+
+        return $result;
     }
 }

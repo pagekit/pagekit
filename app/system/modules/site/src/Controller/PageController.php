@@ -22,7 +22,7 @@ class PageController
         return [
             '$view' => [
                 'title' => __($page->title),
-                'name'  => 'system/site:views/page.php'
+                'name'  => 'system/site/page.php'
             ],
             'page' => $page,
             'node' => App::node()

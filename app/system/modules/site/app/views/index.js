@@ -30,15 +30,11 @@ module.exports = {
         },
 
         selectMenu: function (menu, reload) {
-
-            var vm = this;
-
             if (reload === false) {
                 this.$set('menu', menu);
             } else {
-
-                this.load().then(function () {
-                    vm.$set('menu', menu);
+                this.load().success(function () {
+                    this.$set('menu', menu);
                 });
             }
         },
@@ -63,17 +59,17 @@ module.exports = {
 
         saveMenu: function (menu) {
 
-            this.Menus.save({id: menu.id}, {menu: menu}, function (data) {
+            this.Menus.save({id: menu.id}, {menu: menu}, function () {
                 this.load();
             }).error(function (msg) {
-                UIkit.notify(msg, 'danger');
+                this.$notify(msg, 'danger');
             });
 
             this.cancel();
         },
 
-        getMenu: function(position) {
-            return _.find(this.menus, function(menu) {
+        getMenu: function (position) {
+            return _.find(this.menus, function (menu) {
                 return _.contains(menu.positions, position);
             });
         },
@@ -85,7 +81,7 @@ module.exports = {
         setFrontpage: function (node) {
             this.Nodes.save({id: 'frontpage'}, {id: node.id}, function () {
                 this.load();
-                UIkit.notify('Frontpage updated.');
+                this.$notify('Frontpage updated.');
             });
         },
 
@@ -99,7 +95,7 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                UIkit.notify('Page(s) saved.');
+                this.$notify('Page(s) saved.');
             });
         },
 
@@ -109,7 +105,7 @@ module.exports = {
 
             this.Nodes.save({id: node.id}, {node: node}, function () {
                 this.load();
-                UIkit.notify('Page saved.');
+                this.$notify('Page saved.');
             });
         },
 
@@ -123,7 +119,7 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                UIkit.notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({label: this.$trans('Trash')}), 'id', menu).label}));
+                this.$notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({id: 'trash', label: this.$trans('Trash')}), 'id', menu).label}));
             });
         },
 
@@ -142,7 +138,7 @@ module.exports = {
             } else {
                 this.Nodes.delete({id: 'bulk'}, {ids: this.selected}, function () {
                     this.load();
-                    UIkit.notify('Page(s) deleted.');
+                    this.$notify('Page(s) deleted.');
                 });
             }
         },
@@ -165,15 +161,15 @@ module.exports = {
                 }, this);
             }
 
-            return this.selected.indexOf(node.id.toString()) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
+            return this.selected.indexOf(node.id) !== -1 && (!children || !this.tree[node.id] || this.isSelected(this.tree[node.id], true));
         },
 
         toggleSelect: function (node) {
 
-            var index = this.selected.indexOf(node.id.toString());
+            var index = this.selected.indexOf(node.id);
 
             if (index == -1) {
-                this.selected.push(node.id.toString());
+                this.selected.push(node.id);
             } else {
                 this.selected.splice(index, 1);
             }
@@ -197,11 +193,11 @@ module.exports = {
 
     watch: {
 
-        menu: function () {
+        menu: function (menu) {
 
             this.$set('selected', []);
 
-            return this.Nodes.query({menu: this.$get('menu.id')}, function (nodes) {
+            this.Nodes.query({menu: menu.id}, function (nodes) {
                 this.$set('nodes', nodes);
                 this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
             });
@@ -223,7 +219,7 @@ module.exports = {
                     vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
 
                         // @TODO reload everything on reorder really needed?
-                        vm.load().success(function () {
+                        this.load().success(function () {
 
                             // hack for weird flickr bug
                             if (el.parent()[0] === nestable.element[0]) {
@@ -234,7 +230,7 @@ module.exports = {
                         });
 
                     }).error(function () {
-                        UIkit.notify(this.$trans('Reorder failed.'), 'danger');
+                        this.$notify('Reorder failed.', 'danger');
                     });
                 }
             });

@@ -21,7 +21,9 @@ class NodeController
      */
     public function indexAction()
     {
-        Node::fixOrphanedNodes();
+        if ($test = Node::fixOrphanedNodes()) {
+            return App::redirect('@site/page');
+        }
 
         return [
             '$view' => [
@@ -79,7 +81,7 @@ class NodeController
 
     /**
      * @Route("site/settings")
-     * @Access("site: manage settings", admin=true)
+     * @Access("system: manage settings", admin=true)
      */
     public function settingsAction()
     {

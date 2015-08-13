@@ -3,12 +3,10 @@ module.exports = {
     data: $.extend(true, {
         position: undefined,
         selected: [],
-        config: {filter:{search:'', node:''}}
+        config: {filter: {search: '', node: ''}}
     }, window.$data),
 
     ready: function () {
-
-        this.$set('indexedNodes', _($data.config.nodes).groupBy('id').value());
 
         UIkit.init();
         this.load();
@@ -34,20 +32,24 @@ module.exports = {
 
         nodes: function () {
 
-            var options = [{text: this.$trans('Pages'), value: ''}],
-                nodes   = _($data.config.nodes).groupBy('menu').value(),
-                opts;
+            var options = [],
+                nodes = _(this.config.nodes).groupBy('menu').value();
 
-            Object.keys(nodes).forEach(function(menu){
+            _.forEach(this.config.menus, function (menu, name) {
 
-                opts = [];
+                var opts = nodes[name];
 
-                nodes[menu].forEach(function(node){
-                    opts.push({text:node.title, value:node.id});
+                if (!opts) {
+                    return;
+                }
+
+                options.push({
+                    label: menu.label, options: _.map(opts, function (node) {
+                        return {text: node.title, value: node.id};
+                    })
                 });
 
-                options.push({label: menu, options:opts});
-            });
+            }, this);
 
             return options;
         }
@@ -103,11 +105,35 @@ module.exports = {
 
         move: function (position, ids) {
 
-            ids = _.map(ids, _.parseInt);
             position = _.find(this.positions, 'name', position);
 
             this.assign(position.name, position.assigned.concat(ids)).success(function () {
-                UIkit.notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
+                this.$notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
+            });
+        },
+
+        copy: function () {
+
+            var widgets = _.merge([], this.widgets.filter(function (widget) {
+                return -1 !== this.selected.indexOf(widget.id);
+            }, this));
+
+            widgets.forEach(function (widget) {
+                delete widget.id;
+            });
+
+            this.resource.save({id: 'bulk'}, {widgets: widgets}, function (data) {
+                this.load();
+                this.$set('config.positions', data.positions);
+                this.$set('selected', []);
+                this.$notify('Widget(s) copied.');
+            });
+        },
+
+        remove: function () {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function() {
+                this.load();
+                this.$set('selected', []);
             });
         },
 
@@ -122,7 +148,7 @@ module.exports = {
             this.resource.save({id: 'bulk'}, {widgets: widgets}, function () {
                 this.load();
                 this.$set('selected', []);
-                UIkit.notify('Widget(s) saved.');
+                this.$notify('Widget(s) saved.');
             });
         },
 
@@ -131,47 +157,49 @@ module.exports = {
             widget.status = widget.status ? 0 : 1;
 
             this.resource.save({id: widget.id}, {widget: widget}, function () {
-                UIkit.notify(this.$trans('Widget saved.'));
+                this.load();
+                this.$notify('Widget saved.');
             });
         },
 
-        infilter: function(widget) {
+        infilter: function (widget) {
 
             if (this.config.filter.search) {
                 return widget.title.toLowerCase().indexOf(this.config.filter.search.toLowerCase()) != -1;
             }
 
             if (this.config.filter.node && widget.nodes.length) {
-
-                var selected = Number(this.config.filter.node), ret = false;
-
-                return widget.nodes.filter(function(node){
-                    return (Number(node) === selected)
-                }).length;
+                return widget.nodes.some(function (node) {
+                    return node === this.config.filter.node;
+                }, this);
             }
 
             return true;
         },
 
-        emptyafterfilter: function(widgets) {
+        emptyafterfilter: function (widgets) {
 
             widgets = widgets || this.widgets;
 
-            var vm = this;
-
-            return !widgets.filter(function(widget){
-                return vm.infilter(widget);
-            }).length;
+            return !widgets.some(function (widget) {
+                return this.infilter(widget);
+            }, this);
         },
 
-        getSingleNodeTitle: function(widget) {
+        getPageFilter: function (widget) {
 
-            return !widget.nodes.length ? 'All': ( widget.nodes.length == 1 ? this.indexedNodes[widget.nodes[0]][0].title:'Selected');
+            if (!widget.nodes.length) {
+                return this.$trans('All');
+            } else if (widget.nodes.length > 1) {
+                return this.$trans('Selected');
+            } else {
+                return (_.find(this.config.nodes, 'id', widget.nodes[0]) || {}).title;
+            }
+
         },
 
-        getNodeTitle: function(id) {
-
-            return this.indexedNodes[id] ? this.indexedNodes[id][0].title : '';
+        isSelected: function (id) {
+            return this.selected.indexOf(id) !== -1;
         }
 
     },

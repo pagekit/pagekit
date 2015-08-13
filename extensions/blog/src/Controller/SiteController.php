@@ -31,7 +31,7 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
-        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->where(function($query) {
+        $query = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->where(function ($query) {
             return $query->where('roles IS NULL')->whereInSet('roles', App::user()->roles, false, 'OR');
         })->related('user');
 
@@ -41,7 +41,7 @@ class SiteController
 
         $count = $query->count('id');
         $total = ceil($count / $limit);
-        $page  = max(1, min($total, $page));
+        $page = max(1, min($total, $page));
 
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
 
@@ -55,7 +55,7 @@ class SiteController
                 'name' => 'blog/posts.php',
                 'link:feed' => [
                     'rel' => 'alternate',
-                    'href' => App::url('@blog/feed', [], true),
+                    'href' => App::url('@blog/feed'),
                     'title' => App::module('system/site')->config('title'),
                     'type' => App::feed()->create($this->blog->config('feed.type'))->getMIMEType()
                 ]
@@ -65,6 +65,46 @@ class SiteController
             'total' => $total,
             'page' => $page
         ];
+    }
+
+    /**
+     * @Route("/feed")
+     * @Route("/feed/{type}")
+     */
+    public function feedAction($type = '')
+    {
+        if (!App::node()->hasAccess(App::user())) {
+            App::abort(403, __('Insufficient User Rights.'));
+        }
+
+        $site = App::module('system/site');
+        $feed = App::feed()->create($type ?: $this->blog->config('feed.type'), [
+            'title' => $site->config('title'),
+            'link' => App::url('@blog', [], true),
+            'description' => $site->config('description'),
+            'element' => ['language', App::module('system')->config('site.locale')],
+            'selfLink' => App::url('@blog/feed', [], true)
+        ]);
+
+        if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
+            $feed->setDate($last->modified);
+        }
+
+        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->blog->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
+            $url = App::url('@blog/id', ['id' => $post->id], true);
+            $feed->addItem(
+                $feed->createItem([
+                    'title' => $post->title,
+                    'link' => $url,
+                    'description' => App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
+                    'date' => $post->date,
+                    'author' => [$post->user->name, $post->user->email],
+                    'id' => $url
+                ])
+            );
+        }
+
+        return App::response($feed->generate(), 200, ['Content-Type' => $feed->getMIMEType()]);
     }
 
     /**
@@ -106,44 +146,5 @@ class SiteController
             'blog' => $this->blog,
             'post' => $post
         ];
-    }
-
-    /**
-     * @Route("/feed")
-     * @Route("/feed/{type}")
-     */
-    public function feedAction($type = '')
-    {
-        if (!App::node()->hasAccess(App::user())) {
-            App::abort(403, __('Insufficient User Rights.'));
-        }
-
-        $site = App::module('system/site');
-        $feed = App::feed()->create($type ?: $this->blog->config('feed.type'), [
-            'title' => $site->config('title'),
-            'link' => App::url('@blog', [], true),
-            'description' => $site->config('description'),
-            'element' => ['language', App::module('system/locale')->config('locale')],
-            'selfLink' => App::url('@blog/feed', [], true)
-        ]);
-
-        if ($last = Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->limit(1)->orderBy('modified', 'DESC')->first()) {
-            $feed->setDate($last->getModified());
-        }
-
-        foreach (Post::where(['status = ?', 'date < ?'], [Post::STATUS_PUBLISHED, new \DateTime])->related('user')->limit($this->blog->config('feed.limit'))->orderBy('date', 'DESC')->get() as $post) {
-            $feed->addItem(
-                $feed->createItem([
-                    'title' => $post->title,
-                    'link' => App::url('@blog/id', ['id' => $post->id], true),
-                    'description' => App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]),
-                    'date' => $post->date,
-                    'author' => [$post->user->name, $post->user->email],
-                    'id' => App::url('@blog/id', ['id' => $post->id], true)
-                ])
-            );
-        }
-
-        return App::response($feed->generate(), 200, ['Content-Type' => $feed->getMIMEType()]);
     }
 }

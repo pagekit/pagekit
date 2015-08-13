@@ -25,7 +25,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/user/edit')">{{ 'Add User' | trans }}</a>
+            <a class="uk-button uk-button-primary" v-attr="href: $url.route('admin/user/edit')">{{ 'Add User' | trans }}</a>
 
         </div>
     </div>
@@ -34,24 +34,18 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></th>
                     <th colspan="2" v-order="name: config.filter.order">
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statuses"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statuses }}"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-order="email: config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Roles' | trans }}</span>
-                            <select v-model="config.filter.role" options="roles"></select>
-                        </div>
+                        <input-filter title="{{ 'Roles' | trans }}" value="{{@ config.filter.role}}" options="{{ roles }}"></input-filter>
                     </th>
                 </tr>
             </thead>
@@ -62,7 +56,7 @@
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ user.name }}" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
-                        <a v-attr="href: $url('admin/user/edit', { id: user.id })">{{ user.username }}</a>
+                        <a v-attr="href: $url.route('admin/user/edit', { id: user.id })">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">

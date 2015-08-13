@@ -35,10 +35,12 @@ window.Site = module.exports = {
         save: function(e) {
             e.preventDefault();
 
+            this.$broadcast('save', this.config);
+
             this.$http.post('admin/system/settings/config', { name: 'system/site', config: this.config }, function() {
-                 UIkit.notify(this.$trans('Settings saved.'));
+                 this.$notify('Settings saved.');
             }).error(function(data) {
-                 UIkit.notify(data, 'danger');
+                 this.$notify(data, 'danger');
             });
 
         }
@@ -48,7 +50,8 @@ window.Site = module.exports = {
     components: {
 
         'site-code': require('../components/site-code.vue'),
-        'site-general': require('../components/site-general.vue')
+        'site-general': require('../components/site-general.vue'),
+        'site-maintenance': require('../components/site-maintenance.vue')
 
     }
 

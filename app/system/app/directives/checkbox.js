@@ -4,15 +4,17 @@ module.exports = {
 
     bind: function () {
 
-        var vm = this.vm, expression = this.expression, el = $(this.el);
+        var self = this, vm = this.vm, expression = this.expression, el = $(this.el);
+
+        this.number = this.el.getAttribute('number') !== null;
 
         el.on('change.checkbox', function () {
 
-            var model = vm.$get(expression), contains = model.indexOf(el.val());
+            var model = vm.$get(expression), contains = model.indexOf(self.toNumber(el.val()));
 
             if (el.prop('checked')) {
                 if (-1 === contains) {
-                    model.push(el.val());
+                    model.push(self.toNumber(el.val()));
                 }
             } else if (-1 !== contains) {
                 model.splice(contains, 1);
@@ -28,11 +30,15 @@ module.exports = {
             return;
         }
 
-        $(this.el).prop('checked', -1 !== value.indexOf(this.el.value));
+        $(this.el).prop('checked', -1 !== value.indexOf(this.toNumber(this.el.value)));
     },
 
     unbind: function () {
         $(this.el).off('.checkbox');
+    },
+
+    toNumber: function (value) {
+        return this.number ? Number(value) : value;
     }
 
 };

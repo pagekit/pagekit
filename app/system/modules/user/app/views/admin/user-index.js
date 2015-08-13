@@ -37,7 +37,7 @@ module.exports = {
                 return {text: status, value: id};
             }));
 
-            return [{text: this.$trans('Status'), value: ''}, {label: this.$trans('Filter by'), options: options}];
+            return [{label: this.$trans('Filter by'), options: options}];
         },
 
         roles: function () {
@@ -46,7 +46,7 @@ module.exports = {
                 return {text: role.name, value: role.id};
             });
 
-            return [{text: this.$trans('Role'), value: ''}, {label: this.$trans('Filter by'), options: options}];
+            return [{label: this.$trans('Filter by'), options: options}];
         }
 
     },
@@ -60,7 +60,7 @@ module.exports = {
         save: function (user) {
             this.resource.save({id: user.id}, {user: user}, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('User saved.'));
+                this.$notify('User saved.');
             });
         },
 
@@ -74,14 +74,14 @@ module.exports = {
 
             this.resource.save({id: 'bulk'}, {users: users}, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Users saved.'));
+                this.$notify('Users saved.');
             });
         },
 
         remove: function () {
             this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Users deleted.'));
+                this.$notify('Users deleted.');
             });
         },
 
@@ -96,7 +96,7 @@ module.exports = {
 
         showRoles: function (user) {
             return _.reduce(user.roles, function (roles, id) {
-                var role = _.find(this.$data.roles, 'id', parseInt(id));
+                var role = _.find(this.$data.roles, 'id', id);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }

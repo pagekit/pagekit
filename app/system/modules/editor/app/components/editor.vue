@@ -1,6 +1,8 @@
 <template>
 
-    <textarea autocomplete="off" v-el="editor" v-model="value"></textarea>
+    <div>
+        <textarea autocomplete="off" v-style="height: height + 'px'" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
+    </div>
 
 </template>
 
@@ -11,6 +13,8 @@
         props: ['type', 'value', 'options'],
 
         compiled: function() {
+
+            this.$add('height', this.options && this.options.height ? this.options.height : 500);
 
             if (this.$el.hasAttributes()) {
 
@@ -23,25 +27,33 @@
 
             }
 
-            var components = this.$options.components, type = 'editor-'+this.type;
-            this.editor = this.$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea']);
-        },
+            var components = this.$options.components, type = 'editor-'+this.type, self = this;
 
-        ready: function() {
+            this
+                .$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea'])
+                .$on('ready', function() {
 
-            _.forIn(this.$options.components, function (component) {
+                    _.forIn(self.$options.components, function (component) {
 
-                if (component.options && component.options.plugin) {
-                    this.editor.$addChild({ inherit: true }, component);
-                }
+                        if (component.options && component.options.plugin) {
+                            this.$addChild({ inherit: true }, component);
+                        }
 
-            }, this);
+                    }, this);
 
+                });
         },
 
         components: {
 
-            'editor-textarea': {},
+            'editor-textarea': {
+
+                ready: function() {
+                    this.$emit('ready');
+                    this.$parent.$set('show', true);
+                }
+
+            },
             'editor-html': require('./editor-html'),
             'editor-code': require('./editor-code'),
             'plugin-link': require('./link'),

@@ -87,11 +87,13 @@ class AccessListener implements EventSubscriberInterface
      */
     public function onLateRequest($event, $request)
     {
-        if ($access = $request->attributes->get('_access')) {
-            foreach ($access as $expression) {
-                if (!App::user()->hasAccess($expression)) {
-                    App::abort(403, __('Insufficient User Rights.'));
-                }
+        if (!$access = $request->attributes->get('_access')) {
+            return;
+        }
+
+        foreach ($access as $expression) {
+            if (!App::user()->hasAccess($expression)) {
+                App::abort(403, __('Insufficient User Rights.'));
             }
         }
     }
@@ -101,17 +103,18 @@ class AccessListener implements EventSubscriberInterface
      */
     public function onRequest($event, $request)
     {
-        if (!App::auth()->getUser() and $access = $request->attributes->get('_access') and in_array('system: access admin area', $access)) {
-
-            $params = [];
-
-            // redirect to default URL for POST requests and don't explicitly redirect the default URL
-            if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system') {
-                $params['redirect'] = App::url()->current(true);
-            }
-
-            $event->setResponse(App::response()->redirect('@system/login', $params));
+        if (App::auth()->getUser() or !in_array('system: access admin area', $request->attributes->get('_access', []))) {
+            return;
         }
+
+        $params = [];
+
+        // redirect to default URL for POST requests and don't explicitly redirect the default URL
+        if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system') {
+            $params['redirect'] = App::url()->current(true);
+        }
+
+        $event->setResponse(App::response()->redirect('@system/login', $params));
     }
 
     /**
@@ -123,8 +126,8 @@ class AccessListener implements EventSubscriberInterface
             'route.configure' => 'onConfigureRoute',
             'auth.authorize' => 'onAuthorize',
             'request' => [
-                ['onLateRequest', -512],
-                ['onRequest', -256]
+                ['onLateRequest', -100],
+                ['onRequest', -50]
             ]
         ];
     }

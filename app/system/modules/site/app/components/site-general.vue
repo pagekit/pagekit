@@ -26,16 +26,6 @@
         </div>
 
         <div class="uk-form-row">
-            <label for="form-offlinemessage" class="uk-form-label">{{ 'Offline Message' | trans }}</label>
-            <div class="uk-form-controls">
-                <textarea id="form-offlinemessage" class="uk-form-width-large" placeholder="{{ &quot;We'll be back soon.&quot; | trans }}" rows="5" v-model="config.maintenance.msg"></textarea>
-                <p class="uk-form-controls-condensed">
-                    <label><input type="checkbox" value="1" v-model="config.maintenance.enabled"> {{ 'Put the site offline and show the offline message.' | trans }}</label>
-                </p>
-            </div>
-        </div>
-
-        <div class="uk-form-row">
             <label for="form-appicon" class="uk-form-label">{{ 'Logo' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
                 <input-image source="{{@ config.view.logo }}"></input-image>

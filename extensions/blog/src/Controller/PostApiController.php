@@ -94,9 +94,6 @@ class PostApiController
             $data['user_id'] = App::user()->id;
         }
 
-        $data['date'] = App::intl()->date()->parse($data['date'])->setTimezone(new \DateTimeZone('UTC'));
-        $data['comment_status'] = isset($data['comment_status']) ? $data['comment_status'] : 0;
-
         $post->save($data);
 
         return ['message' => 'success', 'post' => $post];

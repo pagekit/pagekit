@@ -4,7 +4,6 @@ namespace Pagekit\Widget;
 
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\Widget\Model\Widget;
 
 class PositionManager implements \JsonSerializable
 {
@@ -34,7 +33,8 @@ class PositionManager implements \JsonSerializable
      */
     public function get($name)
     {
-        return isset($this->positions[$name]) ? $this->positions[$name] : null;
+        $positions = $this->all();
+        return isset($positions[$name]) ? $positions[$name] : null;
     }
 
     /**
@@ -44,6 +44,10 @@ class PositionManager implements \JsonSerializable
      */
     public function all()
     {
+        array_walk($this->positions, function(&$position, $name) {
+            $position['assigned'] = $this->config->get("_positions.$name", []);
+        });
+
         return $this->positions;
     }
 
@@ -55,11 +59,7 @@ class PositionManager implements \JsonSerializable
      */
     public function register($name, $label)
     {
-        $this->positions[$name] = [
-            'name' => $name,
-            'label' => $label,
-            'assigned' => $this->config->get("_positions.$name", [])
-        ];
+        $this->positions[$name] = compact('name', 'label');
     }
 
     /**
@@ -70,8 +70,8 @@ class PositionManager implements \JsonSerializable
      */
     public function find($id)
     {
-        foreach ($this->config->get('_positions', []) as $name => $assigned) {
-            if (in_array($id, $assigned)) {
+        foreach ($this->all() as $name => $position) {
+            if (in_array($id, $position['assigned'])) {
                 return $name;
             }
         }
@@ -103,50 +103,7 @@ class PositionManager implements \JsonSerializable
             $positions[$position][] = $id;
         }
 
-        $this->positions[$position]['assigned'] = $positions[$position];
         $this->config->set('_positions', $positions);
-    }
-
-    /**
-     * Gets active widgets.
-     *
-     * @param  string|null $position
-     * @return Widget[]
-     */
-    public function findActive($position)
-    {
-        static $widgets, $positions = [];
-
-        if (null === $widgets) {
-            $widgets = Widget::where(['status' => 1])->get();
-        }
-
-        if (!isset($this->positions[$position])) {
-            return [];
-        }
-
-        if (!isset($positions[$position])) {
-
-            $positions[$position] = [];
-
-            foreach ($this->positions[$position]['assigned'] as $id) {
-
-                if (!isset($widgets[$id])
-                    or !$widget = $widgets[$id]
-                    or !$widget->hasAccess(App::user())
-                    or ($nodes = $widget->nodes and !in_array(App::node()->id, $nodes))
-                    or !$type = App::widget()->getType($widget->type)
-                    or !$result = $type->render($widget)
-                ) {
-                    continue;
-                }
-
-                $widget->set('result', $result);
-                $positions[$position][] = $widget;
-            }
-        }
-
-        return $positions[$position];
     }
 
     /**

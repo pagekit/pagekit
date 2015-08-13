@@ -13,8 +13,7 @@ module.exports = {
     created: function () {
 
         this.resource = this.$resource('api/blog/post/:id');
-        this.config.filter = _.extend({ search: '', status: '' , author:'', order: 'date desc'}, this.config.filter);
-
+        this.config.filter = _.extend({ search: '', status: '' , author:'', order: 'date desc', limit:25}, this.config.filter);
     },
 
     watch: {
@@ -36,7 +35,7 @@ module.exports = {
                 return { text: status, value: id };
             });
 
-            return [{ text: this.$trans('Status'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{ label: this.$trans('Filter by'), options: options }];
         },
 
         authors: function() {
@@ -45,7 +44,7 @@ module.exports = {
                 return { text: author.name, value: author.user_id };
             });
 
-            return [{ text: this.$trans('Author'), value: '' }, { label: this.$trans('Filter by'), options: options }];
+            return [{ label: this.$trans('Filter by'), options: options }];
         }
     },
 
@@ -58,7 +57,7 @@ module.exports = {
         save: function (post) {
             this.resource.save({ id: post.id }, { post: post }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Post saved.'));
+                this.$notify('Post saved.');
             });
         },
 
@@ -72,7 +71,7 @@ module.exports = {
 
             this.resource.save({ id: 'bulk' }, { posts: posts }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Posts saved.'));
+                this.$notify('Posts saved.');
             });
         },
 
@@ -80,7 +79,7 @@ module.exports = {
 
             this.resource.delete({ id: 'bulk' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(this.$trans('Posts deleted.'));
+                this.$notify('Posts deleted.');
             });
         },
 
@@ -97,7 +96,7 @@ module.exports = {
 
             this.resource.save({ id: 'copy' }, { ids: this.selected }, function (data) {
                 this.load();
-                UIkit.notify(data.message || data.error, data.error ? 'danger' : '');
+                this.$notify(data.message || data.error, data.error ? 'danger' : '');
             });
         },
 

@@ -96,7 +96,7 @@
                 e.preventDefault();
 
                 this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
-                    UIkit.notify('Cache cleared.')
+                    this.$notify('Cache cleared.')
                 });
 
                 this.$.modal.close();

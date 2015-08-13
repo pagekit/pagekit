@@ -32,13 +32,10 @@
         <table class="uk-table uk-table-hover pk-table-large">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></th>
                     <th class="pk-table-min-width-300" colspan="2">{{ 'Comment' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statusOptions"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statusOptions }}"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-class="pk-filter: config.post, uk-active: config.post">
                         <span v-if="!config.post">{{ 'Post' | trans }}</span>
@@ -70,7 +67,7 @@
 
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
                 <div>
-                    <a v-attr="href: $url('admin/user/edit', { id: comment.user_id })" v-if="comment.user_id">{{ comment.author }}</a>
+                    <a v-attr="href: $url.route('admin/user/edit', { id: comment.user_id })" v-if="comment.user_id">{{ comment.author }}</a>
                     <span v-if="!comment.user_id">{{ comment.author }}</span>
                     <br><a class="uk-link-muted" href="mailto:{{ comment.email }}">{{ comment.email }}</a>
                 </div>
@@ -85,7 +82,7 @@
                 </div>
             </div>
 
-            <div>{{ comment.content }}</div>
+            <div>{{{ comment.content }}}</div>
 
             <div class="uk-margin-top" v-if="replyComment.parent_id === comment.id">
                 <form name="replyform" class="uk-form" v-on="valid: submit">
@@ -114,10 +111,10 @@
             </a>
         </td>
         <td class="pk-blog-comments-padding">
-            <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
+            <a v-attr="href: $url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
 
             <p>
-                <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice post.comments_pending post }}"><i class="pk-icon-comment" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
+                <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url.route('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments_pending% pending' | transChoice post.comments_pending post }}"><i class="pk-icon-comment" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
             </p>
         </td>
 

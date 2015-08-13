@@ -13,13 +13,14 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 
 class PhpEngine extends BasePhpEngine
 {
+    protected $result;
     protected $template;
     protected $parameters;
 
     /**
      * {@inheritdoc}
      */
-    public function __construct(TemplateNameParserInterface $parser = null, LoaderInterface $loader = null, array $helpers = array())
+    public function __construct(TemplateNameParserInterface $parser = null, LoaderInterface $loader = null, array $helpers = [])
     {
         $parser = $parser ?: new TemplateNameParser();
         $loader = $loader ?: new FilesystemLoader([]);
@@ -30,38 +31,30 @@ class PhpEngine extends BasePhpEngine
     /**
      * {@inheritdoc}
      */
-    protected function evaluate(Storage $template, array $parameters = array())
+    protected function evaluate(Storage $template, array $parameters = [])
     {
+        $this->result = false;
         $this->template = $template;
         $this->parameters = $parameters;
+
         unset($template, $parameters);
 
         if (isset($this->parameters['this'])) {
             throw new \InvalidArgumentException('Invalid parameter (this)');
         }
 
-        if ($this->template instanceof FileStorage) {
-            extract($this->parameters, EXTR_SKIP);
-            $this->parameters = null;
+        extract($this->parameters, EXTR_SKIP);
 
+        if ($this->template instanceof FileStorage) {
             ob_start();
             require $this->template;
-
-            $this->template = null;
-
-            return ob_get_clean();
+            $this->result = ob_get_clean();
         } elseif ($this->template instanceof StringStorage) {
-            extract($this->parameters, EXTR_SKIP);
-            $this->parameters = null;
-
             ob_start();
             eval('; ?>'.$this->template.'<?php ;');
-
-            $this->template = null;
-
-            return ob_get_clean();
+            $this->result = ob_get_clean();
         }
 
-        return false;
+        return $this->result;
     }
 }

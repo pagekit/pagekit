@@ -14,6 +14,7 @@ use Pagekit\View\Helper\SectionHelper;
 use Pagekit\View\Helper\StyleHelper;
 use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
+use Pagekit\View\Loader\FilesystemLoader;
 use Pagekit\View\PhpEngine;
 use Pagekit\View\View;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,7 +28,7 @@ return [
         $app['view'] = function ($app) {
 
             $view = new View(new PrefixEventDispatcher('view.', $app['events']));
-            $view->addEngine(new PhpEngine());
+            $view->addEngine(new PhpEngine(null, isset($app['locator']) ? new FilesystemLoader($app['locator']) : null));
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
             $view->addHelpers([
@@ -49,22 +50,6 @@ return [
             if (isset($app['markdown'])) {
                 $view->addHelper(new MarkdownHelper($app['markdown']));
             }
-
-            $view->on('render', function ($event) use ($app) {
-
-                $tmpl = $event->getTemplate();
-
-                if (!isset($app['locator'])) {
-                    return;
-                }
-
-                if (!strpos($tmpl, ':') and $template = $app['locator']->get("views:{$tmpl}")) {
-                    $event->setTemplate($template);
-                } elseif ($template = $app['locator']->get($tmpl)) {
-                    $event->setTemplate($template);
-                }
-
-            }, 10);
 
             return $view;
         };

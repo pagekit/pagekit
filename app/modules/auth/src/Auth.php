@@ -50,7 +50,7 @@ class Auth
      */
     public function __construct(EventDispatcherInterface $events, SessionInterface $session = null)
     {
-        $this->events  = $events;
+        $this->events = $events;
         $this->session = $session;
     }
 
@@ -175,7 +175,7 @@ class Auth
     /**
      * Authorize a user.
      *
-     * @param UserInterface $user
+     * @param  UserInterface $user
      * @throws Exception\AuthException
      */
     public function authorize(UserInterface $user)

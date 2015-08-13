@@ -8,9 +8,9 @@ module.exports = {
 
         save: function () {
             this.$http.post('admin/system/settings/config', { name: 'blog', config: this.config }, function () {
-                UIkit.notify(this.$trans('Settings saved.'), '');
+                this.$notify('Settings saved.');
             }).error(function (data) {
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 

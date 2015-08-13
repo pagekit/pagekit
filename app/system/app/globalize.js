@@ -1,10 +1,10 @@
-var config = window.$globalize || { translations: {} };
+var config = window.$globalize || {translations: {}};
 
 /**
  * Copyright (c) William DURAND <william.durand1@gmail.com> (https://github.com/willdurand/BazingaJsTranslationBundle)
  */
 
-var Translator = (function(document, undefined) {
+var Translator = (function (document, undefined) {
 
     "use strict";
 
@@ -422,7 +422,7 @@ var Translator = (function(document, undefined) {
          * @type {String}
          * @api public
          */
-        fallback: 'en',
+        fallback: null,
 
         /**
          * Placeholder prefix.
@@ -466,7 +466,7 @@ var Translator = (function(document, undefined) {
          * @return {Object}         Translator
          * @api public
          */
-        add: function(id, message, domain, locale) {
+        add: function (id, message, domain, locale) {
             var _locale = locale || this.locale || this.fallback,
                 _domain = domain || this.defaultDomain;
 
@@ -498,7 +498,7 @@ var Translator = (function(document, undefined) {
          * @return {String}               The translated string
          * @api public
          */
-        trans: function(id, parameters, domain, locale) {
+        trans: function (id, parameters, domain, locale) {
             var _message = get_message(
                 id,
                 domain,
@@ -521,7 +521,7 @@ var Translator = (function(document, undefined) {
          * @return {String}               The translated string
          * @api public
          */
-        transChoice: function(id, number, parameters, domain, locale) {
+        transChoice: function (id, number, parameters, domain, locale) {
             var _message = get_message(
                 id,
                 domain,
@@ -550,8 +550,8 @@ var Translator = (function(document, undefined) {
          * @return {Object}         Translator
          * @api public
          */
-        fromJSON: function(data) {
-            if(typeof data === 'string') {
+        fromJSON: function (data) {
+            if (typeof data === 'string') {
                 data = JSON.parse(data);
             }
 
@@ -583,14 +583,17 @@ var Translator = (function(document, undefined) {
         /**
          * @api public
          */
-        reset: function() {
+        reset: function () {
             _messages   = {};
             _domains    = [];
             this.locale = get_current_locale();
         }
     };
 
-})(document, undefined).fromJSON({ translations: config.translations });
+})(document, undefined).fromJSON({
+    locale: config.locale,
+    translations: config.translations
+});
 
 require('globalize/number');
 require('globalize/date');

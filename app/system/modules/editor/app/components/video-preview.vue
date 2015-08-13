@@ -2,7 +2,7 @@
 
     <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.src">
 
-        <img width="60" height="60" alt="{{ 'Placeholder Video' | trans }}" v-attr="src: $url.static('app/system/assets/images/placeholder-video.svg')">
+        <img width="60" height="60" alt="{{ 'Placeholder Video' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Video' | trans }}</p>
 
         <a class="uk-position-cover" v-on="click: config()"></a>

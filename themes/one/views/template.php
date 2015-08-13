@@ -10,32 +10,35 @@
     </head>
     <body>
 
-        <?php if ($view->position()->exists('logo') || $view->menu()->exists('main')) : ?>
+        <?php if ($params['logo'] || $view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
         <div class="<?= $params['classes.navbar'] ?>" <?= $params['classes.sticky'] ?>>
             <div class="uk-container uk-container-center">
 
                 <nav class="uk-navbar">
 
-                    <?php if ($params['logo-navbar']) : ?>
-                    <a class="uk-navbar-brand uk-hidden-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($params['logo-navbar']) ?>" alt="">
+                    <?php if ($params['logo']) : ?>
+                    <a class="uk-navbar-brand" href="<?= $view->url()->get() ?>">
+
+                        <img class="tm-logo" src="<?= $this->escape($params['logo']) ?>" alt="">
+
+                        <?php if ($params['logo_contrast']) : ?>
+                        <img class="tm-logo-contrast" src="<?= $this->escape($params['logo_contrast']) ?>" alt="">
+                        <?php endif ?>
+
                     </a>
                     <?php endif ?>
 
-                    <?php if ($view->menu()->exists('main')) : ?>
+                    <?php if ($view->menu()->exists('main') || $view->position()->exists('navbar')) : ?>
                     <div class="uk-navbar-flip uk-hidden-small">
                         <?= $view->menu('main', 'menu-navbar.php') ?>
+                        <?= $view->position('navbar', 'position-blank.php') ?>
                     </div>
                     <?php endif ?>
 
                     <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
-                    <a href="#offcanvas" class="uk-navbar-toggle uk-visible-small" data-uk-offcanvas></a>
-                    <?php endif ?>
-
-                    <?php if ($params['logo']): ?>
-                    <a class="uk-navbar-brand uk-navbar-center uk-visible-small" href="<?= $view->url()->get() ?>">
-                        <img src="<?= $this->escape($params['logo']) ?>" alt="">
-                    </a>
+                    <div class="uk-navbar-flip uk-visible-small">
+                        <a href="#offcanvas" class="uk-navbar-toggle" data-uk-offcanvas></a>
+                    </div>
                     <?php endif ?>
 
                 </nav>
@@ -45,7 +48,7 @@
         <?php endif ?>
 
         <?php if ($view->position()->exists('hero')) : ?>
-        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" style="background-image: url('<?= $params['hero-image']; ?>');">
+        <div id="tm-hero" class="tm-hero uk-block uk-cover-background uk-flex uk-flex-middle <?= $params['classes.hero'] ?>" <?= $params['hero_image'] ? "style=\"background-image: url('{$view->url($params['hero_image'])}');\"" : '' ?>>
             <div class="uk-container uk-container-center">
 
                 <section class="uk-grid uk-grid-match" data-uk-grid-margin>
@@ -75,13 +78,11 @@
 
                     <main class="<?= $view->position()->exists('sidebar') ? 'uk-width-medium-3-4' : 'uk-width-1-1'; ?>">
                         <?= $view->render('messages') ?>
-                        <?= $params['alignment'] ? '<div class="uk-text-center">' : '' ?>
                         <?= $view->render('content') ?>
-                        <?= $params['alignment'] ? '</div>' : '' ?>
                     </main>
 
                     <?php if ($view->position()->exists('sidebar')) : ?>
-                    <aside class="uk-width-medium-1-4 <?= $params['sidebar-first'] ? 'uk-flex-order-first-medium' : ''; ?>">
+                    <aside class="uk-width-medium-1-4 <?= $params['sidebar_first'] ? 'uk-flex-order-first-medium' : ''; ?>">
                         <?= $view->position('sidebar', 'position-panel.php') ?>
                     </aside>
                     <?php endif ?>
@@ -117,7 +118,7 @@
 
         <?php if ($view->position()->exists('offcanvas') || $view->menu()->exists('offcanvas')) : ?>
         <div id="offcanvas" class="uk-offcanvas">
-            <div class="uk-offcanvas-bar">
+            <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">
 
                 <?php if ($view->menu()->exists('offcanvas')) : ?>
                     <?= $view->menu('offcanvas', ['class' => 'uk-nav-offcanvas']) ?>

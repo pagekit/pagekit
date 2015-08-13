@@ -145,7 +145,7 @@ class EntityManager
         $metadata   = $this->getMetadata($entity);
         $identifier = $metadata->getIdentifier(true);
 
-        $metadata->setValues($entity, $data);
+        $metadata->setValues($entity, $data, false, true);
 
         $this->trigger(Events::SAVING, $metadata, [$entity, $data]);
 

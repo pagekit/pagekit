@@ -20,12 +20,12 @@ module.exports = [
         entry: {
             "edit": "./app/views/edit",
             "index": "./app/views/index",
-            "settings": "./app/views/settings",
             "input-link": "./app/components/input-link.vue",
+            "link-page": "./app/components/link-page.vue",
+            "node-page": "./app/components/node-page.vue",
+            "settings": "./app/views/settings",
             "widget-menu": "./app/components/widget-menu.vue",
-            "widget-text": "./app/components/widget-text.vue",
-            "page-site": "./app/components/page-site.vue",
-            "page-link": "./app/components/page-link.vue"
+            "widget-text": "./app/components/widget-text.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

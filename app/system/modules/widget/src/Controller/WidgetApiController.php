@@ -83,7 +83,7 @@ class WidgetApiController
             $this->saveAction($data, isset($data['id']) ? $data['id'] : 0);
         }
 
-        return ['message' => 'success'];
+        return ['message' => 'success', 'positions' => array_values(App::position()->all())];
     }
 
     /**

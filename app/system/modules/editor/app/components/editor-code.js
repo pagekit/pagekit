@@ -2,36 +2,54 @@ module.exports = {
 
     ready: function () {
 
-        var $this = this, $el = $(this.$el).wrap('<div class="pk-editor"></div>');
+        var self = this, $el = $(this.$el), $parent = $el.parent();
 
-        this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
-            mode: "htmlmixed",
-            dragDrop: false,
-            autoCloseTags: true,
-            matchTags: true,
-            autoCloseBrackets: true,
-            matchBrackets: true,
-            indentUnit: 4,
-            indentWithTabs: false,
-            tabSize: 4
-        }, this.options));
+        $parent.addClass('pk-editor');
 
-        $el.attr('data-uk-check-display', 'true').on('display.uk.check', function(e) {
-            $this.editor.refresh();
-        });
+        this.$asset({
+            css: [
+                'vendor/assets/codemirror/hint.css',
+                'vendor/assets/codemirror/codemirror.css'
+            ],
+            js: [
+                'vendor/assets/codemirror/codemirror.js'
+            ]
 
-        this.editor.on('change', function() {
-            $this.editor.save();
-            $el.trigger('input');
+        }, function () {
+
+            this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
+                mode: 'htmlmixed',
+                dragDrop: false,
+                autoCloseTags: true,
+                matchTags: true,
+                autoCloseBrackets: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                indentWithTabs: false,
+                tabSize: 4
+            }, this.options));
+
+            $parent.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
+                self.editor.refresh();
+            });
+
+            this.editor.on('change', function () {
+                self.editor.save();
+                $el.trigger('input');
+            });
+
+            this.$emit('ready');
+
         });
     },
 
     watch: {
 
         value: function (value) {
-            if (value != this.editor.getValue()) {
+            if (this.editor && value != this.editor.getValue()) {
                 this.editor.setValue(value);
             }
         }
+
     }
 };

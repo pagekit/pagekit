@@ -2,10 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 use Pagekit\Application as App;
-use Pagekit\Updater\TokenVerifier;
+use Pagekit\Console\UriVerifier;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -130,9 +128,9 @@ class PackageController
     }
 
     /**
-     * @Request(csrf=true)
+     * @Request({"type": "string"}, csrf=true)
      */
-    public function uploadAction()
+    public function uploadAction($type)
     {
         $file = App::request()->files->get('file');
 
@@ -141,7 +139,16 @@ class PackageController
         }
 
         $package = $this->loadPackage($file->getPathname());
-        $filename = str_replace('/', '-', $package->getName()) . ($package->get('version') ? '-' . $package->get('version') : '') . '.zip';
+
+        if (!$package->getName() || !$package->get('title') || !$package->get('version')) {
+            App::abort(400, __('"composer.json" file not valid.'));
+        }
+
+        if ($package->get('type') !== 'pagekit-' . $type) {
+            App::abort(400, __('No Pagekit %type%', ['%type%' => $type]));
+        }
+
+        $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';
 
         $file->move(App::get('path.packages'), $filename);
 
@@ -151,54 +158,28 @@ class PackageController
     /**
      * @Request({"package": "array"}, csrf=true)
      */
-    public function installAction($package = null)
+    public function installAction($package = [])
     {
         try {
+
             $package = App::package()->load($package);
 
-            if ($enabled = (bool)App::module($package->get('module'))) {
-                $this->disableAction($package->getName());
-            }
+            $params = [
+                'command' => 'install',
+                'packages' => sprintf('%s:%s', $package->getName(), $package->get('version'))
+            ];
 
-            if (is_array($package->get('version')) && isset($package->get('version')['version'])) {
-                $version = $package->get('version')['version'];
-            } elseif ($package->get('version')) {
-                $version = $package->get('version');
-            } else {
-                $version = '*';
-            }
+            $verifier = new UriVerifier(require App::get('config.file'));
 
-            $client = new Client;
-            $verifier = new TokenVerifier(require App::get('config.file'));
+            return App::redirect(
+                $verifier->sign(App::url('app/console/', $params, true), 10)
+            );
 
-            $params = ['packages' => sprintf('%s:%s', $package->getName(), $version)];
-            $params['token'] = $verifier->hash($params);
-
-            $res = $client->get(App::url('app/updater', $params, true));
-            $res = json_decode($res->getBody(), true) ?: (string)$res->getBody();
-
-            if (!isset($res['status']) || $res['status'] !== 'success') {
-                throw new \Exception(__(isset($res['message']) ? $res['message'] : $res));
-            }
-
-            App::module('system/cache')->clearCache();
-
-            if ($enabled) {
-                $this->enableAction($package->getName());
-            }
-
-        } catch (BadResponseException $e) {
-            $data = json_decode($e->getResponse()->getBody(true), true);
-            $error = sprintf('Error: %s', $data['error']);
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
-        if (isset($error)) {
-            App::abort(400, $error);
-        }
-
-        return ['message' => 'success', 'package' => App::package($package->getName())];
+        App::abort(400, $error);
     }
 
     /**
@@ -225,32 +206,22 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $client = new Client;
-            $verifier = new TokenVerifier(require App::get('config.file'));
+            $params = [
+                'command' => 'uninstall',
+                'packages' => $package->getName()
+            ];
 
-            $params = ['packages' => $name, 'remove' => true];
-            $params['token'] = $verifier->hash($params);
+            $verifier = new UriVerifier(require App::get('config.file'));
 
-            $res = $client->get(App::url('app/updater', $params, true));
-            $res = json_decode($res->getBody());
+            return App::redirect(
+                $verifier->sign(App::url('app/console/', $params, true), 10)
+            );
 
-            if ($res->status !== 'success') {
-                throw new \Exception(__($res->message));
-            }
-
-            App::module('system/cache')->clearCache();
-        } catch (BadResponseException $e) {
-            $data = json_decode($e->getResponse()->getBody(true), true);
-            $error = sprintf('Error: %s', $data['error']);
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
-        if (isset($error)) {
-            App::abort(400, $error);
-        }
-
-        return ['message' => 'success'];
+        App::abort(400, $error);
     }
 
     protected function loadPackage($file)

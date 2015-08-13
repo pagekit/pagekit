@@ -22,16 +22,10 @@ class UrlResolver implements ParamsResolverInterface
     protected $cacheEntries;
 
     /**
-     * @var string
-     */
-    protected $permalink;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->permalink    = App::module('blog')->getPermalink();
         $this->cacheEntries = App::cache()->fetch(self::CACHE_KEY) ?: [];
     }
 
@@ -89,7 +83,7 @@ class UrlResolver implements ParamsResolverInterface
 
         $meta = $this->cacheEntries[$id];
 
-        preg_match_all('#{([a-z]+)}#i', $this->permalink, $matches);
+        preg_match_all('#{([a-z]+)}#i', self::getPermalink(), $matches);
 
         if ($matches) {
             foreach($matches[1] as $attribute) {
@@ -108,6 +102,29 @@ class UrlResolver implements ParamsResolverInterface
         if ($this->cacheDirty) {
             App::cache()->save(self::CACHE_KEY, $this->cacheEntries);
         }
+    }
+
+    /**
+     * Gets the blog's permalink setting.
+     *
+     * @return string
+     */
+    public static function getPermalink()
+    {
+        static $permalink;
+
+        if (null === $permalink) {
+
+            $blog = App::module('blog');
+            $permalink = $blog->config('permalink.type');
+
+            if ($permalink == 'custom') {
+                $permalink = $blog->config('permalink.custom');
+            }
+
+        }
+
+        return $permalink;
     }
 
     protected function addCache($post)

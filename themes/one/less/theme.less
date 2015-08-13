@@ -1,11 +1,13 @@
 @import "uikit/uikit.less";
 
 @icon-font-path: "../../../../../vendor/assets/uikit/fonts";
-@global-image-path: '../../images';
+@global-image-path: '../../less/uikit/images';
 
 /* ========================================================================
    Theme
  ========================================================================== */
+
+[v-cloak] { display: none; }
 
 /*
  * Force vertical scrollbar
@@ -41,6 +43,9 @@ html { overflow-y: scroll; }
 .tm-navbar-transparent .uk-navbar { background: none; }
 
 // Contrast color
+
+.tm-logo-contrast { display: none; }
+
 .tm-navbar-contrast {
 
     .uk-navbar { color: @contrast-color; }
@@ -71,6 +76,12 @@ html { overflow-y: scroll; }
 
     .uk-navbar-toggle:hover,
     .uk-navbar-toggle:focus { color: @contrast-color; }
+
+    .uk-navbar-toggle:after { background: url("../less/uikit/images/navbar-toggle-contrast.svg") 0 0 no-repeat; }
+
+    // Logo
+    .tm-logo { display: none; }
+    .tm-logo-contrast { display: inline-block; }
 
 }
 

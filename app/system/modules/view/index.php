@@ -39,11 +39,25 @@ return [
         },
 
         'site' => function($event, $app) {
-            $app->subscribe(new CanonicalListener());
+            $app->on('view.meta', function($event, $meta) use ($app) {
+
+                $route = $app['url']->get(
+                    $app['request']->attributes->get('_route'),
+                    $app['request']->attributes->get('_route_params', [])
+                );
+
+                if ($route != $app['request']->getRequestUri()) {
+                    $meta->add('canonical', $route);
+                }
+
+            });
         },
 
         'view.data' => function ($event, $data) use ($app) {
-            $data->add('$pagekit', ['url' => $app['router']->getContext()->getBaseUrl(), 'csrf' => $app['csrf']->generate()]);
+            $data->add('$pagekit', [
+                'url' => $app['router']->getContext()->getBaseUrl(),
+                'csrf' => $app['csrf']->generate()
+            ]);
         },
 
         'view.styles' => function ($event, $styles) {

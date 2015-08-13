@@ -1,7 +1,5 @@
 <?php
 
-use Pagekit\Application as App;
-
 return [
 
     'name' => 'system/widget-menu',
@@ -10,23 +8,19 @@ return [
 
     'type' => 'widget',
 
+    'defaults' => [
+        'start_level' => 1,
+        'depth' => 0,
+        'mode' => 'all'
+    ],
+
     'render' => function ($widget) use ($app) {
-
-        if (!$menu = $widget->get('menu')) {
-            return '';
-        }
-
-        $root = App::menu()->getTree($menu, [
-            'start_level' => (int) $widget->get('start_level', 1),
+        return $app->view()->menu()->render($widget->get('menu'), 'system/site/widget-menu.php', [
+            'start_level' => (int) $widget->get('start_level'),
             'depth' => $widget->get('depth'),
-            'mode' => $widget->get('mode')
+            'mode' => $widget->get('mode'),
+            'widget' => $widget
         ]);
-
-        if (!$root) {
-            return '';
-        }
-
-        return $app['view']->render('system/site/widget-menu.php', compact('widget', 'root'));
     },
 
     'events' => [

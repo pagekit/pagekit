@@ -36,7 +36,7 @@
 
     props: ['data'],
 
-    ready: function () {
+    created: function () {
         this.$data = this.data;
         this.$parent.add(this);
     }

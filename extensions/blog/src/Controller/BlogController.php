@@ -130,7 +130,7 @@ class BlogController
     }
 
     /**
-     * @Access("blog: manage settings")
+     * @Access("system: manage settings")
      */
     public function settingsAction()
     {

@@ -31,6 +31,7 @@ return [
      */
     'positions' => [
 
+        'navbar' => 'Navbar',
         'hero' => 'Hero',
         'top' => 'Top',
         'sidebar' => 'Sidebar',
@@ -46,12 +47,13 @@ return [
     'node' => [
 
         'title_hide' => false,
-        'html_class' => '',
+        'title_large' => false,
         'alignment' => '',
-        'sidebar-first' => false,
-        'hero-image' => '',
-        'hero-contrast' => '',
-        'navbar-transparent' => '',
+        'html_class' => '',
+        'sidebar_first' => false,
+        'hero_image' => '',
+        'hero_contrast' => '',
+        'navbar_transparent' => ''
 
     ],
 
@@ -61,10 +63,10 @@ return [
     'widget' => [
 
         'title_hide' => false,
-        'html_class' => '',
-        'panel' => '',
         'title_size' => 'uk-panel-title',
-        'alignment' => ''
+        'alignment' => '',
+        'html_class' => '',
+        'panel' => ''
 
     ],
 
@@ -78,7 +80,7 @@ return [
      */
     'config' => [
 
-        'logo-contrast' => '',
+        'logo_contrast' => ''
 
     ],
 
@@ -93,16 +95,16 @@ return [
         },
 
         'view.system/site/admin/edit' => function ($event, $view) {
-            $view->script('site-appearance', 'theme:app/bundle/site-appearance.js', 'site-edit');
+            $view->script('node-theme', 'theme:app/bundle/node-theme.js', 'site-edit');
         },
 
         'view.system/widget/edit' => function ($event, $view) {
-            $view->script('widget-appearance', 'theme:app/bundle/widget-appearance.js', 'widget-edit');
+            $view->script('widget-theme', 'theme:app/bundle/widget-theme.js', 'widget-edit');
         },
 
         /**
-        * Custom markup calculations based on theme settings
-        */
+         * Custom markup calculations based on theme settings
+         */
         'view.layout' => function ($event, $view) use ($app) {
 
             if ($app->isAdmin()) {
@@ -120,23 +122,17 @@ return [
                 'animation' => 'uk-animation-slide-top'
             ];
 
-            $event['logo-navbar'] = $event['logo'];
-
             // Sticky overlay navbar if hero position exists
-            if ($event['navbar-transparent'] && $view->position()->exists('hero') && $event['hero-image']) {
+            if ($event['navbar_transparent'] && $view->position()->exists('hero') && $event['hero_image']) {
 
                 $sticky['top'] = '.uk-sticky-placeholder + *';
                 $classes['navbar'] .= ' tm-navbar-overlay tm-navbar-transparent';
                 $classes['hero'] = 'uk-height-viewport';
 
-                if ($event['hero-contrast']) {
+                if ($event['hero_contrast']) {
 
                     $sticky['clsinactive'] = 'tm-navbar-transparent tm-navbar-contrast';
                     $classes['navbar'] .= ' tm-navbar-contrast';
-
-                    if (isset($event['logo-contrast'])) {
-                        $event['logo-navbar'] = $event['logo-contrast'];
-                    }
 
                 } else {
                     $sticky['clsinactive'] = 'tm-navbar-transparent';
@@ -144,13 +140,20 @@ return [
 
             }
 
-            if ($event['hero-contrast'] && $event['hero-image']) {
+            if ($event['hero_contrast'] && $event['hero_image']) {
                 $classes['hero'] .= ' uk-contrast';
             }
 
             $classes['sticky'] = 'data-uk-sticky=\''.json_encode($sticky).'\'';
 
-            $event->addParameters(['classes' => $classes]);
+            $event['classes'] = $classes;
+        },
+
+        'view.system/site/widget-menu' => function ($event, $view) {
+
+            if ($event['widget']->position == 'navbar') {
+                $event->setTemplate('menu-navbar.php');
+            }
 
         }
 

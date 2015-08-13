@@ -64,10 +64,6 @@ return [
         ],
         'site: maintenance access' => [
             'title' => 'Use the site in maintenance mode'
-        ],
-        'site: manage settings' => [
-            'title' => 'Manage settings',
-            'description' => 'View and change settings'
         ]
 
     ],
@@ -78,7 +74,7 @@ return [
             'label' => 'Site',
             'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site/page',
-            'access' => 'site: manage site',
+            'access' => 'site: manage site || system: manage widgets || system: manage storage || system: manage settings',
             'active' => '@site*',
             'priority' => 105
         ],
@@ -86,12 +82,14 @@ return [
             'label' => 'Pages',
             'parent' => 'site',
             'url' => '@site/page',
+            'access' => 'site: manage site',
             'active' => '@site/page(/edit)?'
         ],
         'site: settings' => [
             'label' => 'Settings',
             'parent' => 'site',
             'url' => '@site/settings',
+            'access' => 'system: manage settings',
             'priority' => 20
         ]
 
@@ -111,8 +109,8 @@ return [
         ],
 
         'icons' => [
-            'favicon' => '',
-            'appicon' => ''
+            'favicon' => false,
+            'appicon' => false
         ],
 
         'code' => [
@@ -169,20 +167,16 @@ return [
 
         'view.meta' => function ($event, $meta) use ($app) {
 
-            if ($icon = $this->config('icons.favicon')) {
-                $meta->add('link:favicon', [
-                    'href' => $app['url']->getStatic($icon),
-                    'rel' => 'shortcut icon',
-                    'type' => 'image/x-icon'
-                ]);
-            }
+            $meta->add('link:favicon', [
+                'href' => $app['url']->getStatic($this->config('icons.favicon') ?: 'system/theme:favicon.ico'),
+                'rel' => 'shortcut icon',
+                'type' => 'image/x-icon'
+            ]);
 
-            if ($icon = $this->config('icons.appicon')) {
-                $meta->add('link:appicon', [
-                    'href' => $app['url']->getStatic($icon),
-                    'rel' => 'apple-touch-icon-precomposed'
-                ]);
-            }
+            $meta->add('link:appicon', [
+                'href' => $app['url']->getStatic($this->config('icons.appicon') ?: 'system/theme:apple_touch_icon.png'),
+                'rel' => 'apple-touch-icon-precomposed'
+            ]);
 
         },
 

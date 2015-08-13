@@ -5,7 +5,7 @@
             <h2 class="uk-margin-remove">{{ 'Theme' | trans }}</h2>
         </div>
         <div data-uk-margin>
-            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="submit">{{ 'Save' | trans }}</button>
         </div>
     </div>
 
@@ -14,7 +14,7 @@
         <div class="uk-form-row">
             <label class="uk-form-label">{{ 'Logo Contrast' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image source="{{@ config['logo-contrast'] }}"></input-image>
+                <input-image source="{{@ config.logo_contrast }}"></input-image>
                 <p class="uk-form-help-block">{{ 'Select an alternative logo which looks great on images.' | trans }}</p>
             </div>
         </div>
@@ -30,24 +30,21 @@
         section: {
             label: 'Theme',
             icon: 'pk-icon-large-brush',
-            priority: 30
+            priority: 15
         },
 
         data: function () {
             return window.$theme;
         },
 
-        methods: {
+        events: {
 
-            save: function(e) {
-                e.preventDefault();
+            save: function() {
 
                 var config = _.omit(this.config, ['positions', 'menus', 'widget']);
 
-                this.$http.post('admin/system/settings/config', {name: this.name, config: config}, function () {
-                    UIkit.notify(this.$trans('Settings saved.'), '');
-                }).error(function (data) {
-                    UIkit.notify(data, 'danger');
+                this.$http.post('admin/system/settings/config', {name: this.name, config: config}).error(function (data) {
+                    this.$notify(data, 'danger');
                 });
 
             }

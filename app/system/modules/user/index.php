@@ -78,10 +78,6 @@ return [
             'title' => 'Manage user permissions',
             'trusted' => true
         ],
-        'user: manage settings' => [
-            'title' => 'Manage settings',
-            'trusted' => true
-        ],
         'system: access admin area' => [
             'title' => 'Access admin area',
             'trusted' => true
@@ -96,7 +92,7 @@ return [
             'icon' => 'system/user:assets/images/icon-users.svg',
             'url' => '@user',
             'active' => '@user(/*)?',
-            'access' => 'user: manage users || user: manage user permissions',
+            'access' => 'user: manage users || user: manage user permissions || system: manage settings',
             'priority' => 115
         ],
         'user: users' => [
@@ -122,7 +118,7 @@ return [
             'label' => 'Settings',
             'parent' => 'user',
             'url' => '@user/settings',
-            'access' => 'user: manage user settings'
+            'access' => 'system: manage settings'
         ]
 
     ],

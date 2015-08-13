@@ -1,4 +1,4 @@
-<?php $view->style('codemirror'); $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
+<?php $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
 <form id="widget-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
 
@@ -23,7 +23,7 @@
 
     <div class="uk-switcher uk-margin-large-top" v-el="content">
         <div v-repeat="section: sections | active | orderBy 'priority'">
-            <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}"></component>
+            <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}" form="{{@ form}}"></component>
         </div>
     </div>
 

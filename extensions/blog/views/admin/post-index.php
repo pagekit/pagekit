@@ -26,7 +26,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
+            <a class="uk-button uk-button-primary" v-attr="href: $url.route('admin/blog/post/edit')">{{ 'Add Post' | trans }}</a>
 
         </div>
     </div>
@@ -35,19 +35,14 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]"></th>
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></th>
                     <th class="pk-table-min-width-200" v-order="title: config.filter.order">{{ 'Title' | trans }}</th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <div class="uk-form-select pk-filter" data-uk-form-select>
-                            <span>{{ 'Status' | trans }}</span>
-                            <select v-model="config.filter.status" options="statusOptions"></select>
-                        </div>
+                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statusOptions }}"></input-filter>
                     </th>
                     <th class="pk-table-width-100">
-                        <div data-uk-form-select v-class="uk-form-select: canEditAll, pk-filter: canEditAll">
-                            <span>{{ 'Author' | trans }}</span>
-                            <select v-model="config.filter.author" options="authors" v-if="canEditAll"></select>
-                        </div>
+                        <span v-if="!canEditAll">{{ 'Author' | trans }}</span>
+                        <input-filter title="{{ 'Author' | trans }}" value="{{@ config.filter.author}}" options="{{ authors }}" v-if="canEditAll"></input-filter>
                     </th>
                     <th class="pk-table-width-100 uk-text-center" v-order="comment_count: config.filter.order">{{ 'Comments' | trans }}</th>
                     <th class="pk-table-width-100" v-order="date: config.filter.order">{{ 'Date' | trans }}</th>
@@ -58,7 +53,7 @@
                 <tr class="check-item" v-repeat="post: posts" v-class="uk-active: active(post)">
                     <td><input type="checkbox" name="id" value="{{ post.id }}"></td>
                     <td>
-                        <a v-attr="href: $url('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
+                        <a v-attr="href: $url.route('admin/blog/post/edit', { id: post.id })">{{ post.title }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a title="{{ getStatusText(post) }}" v-class="
@@ -70,16 +65,16 @@
                             " v-on="click: toggleStatus(post)"></a>
                     </td>
                     <td>
-                        <a v-attr="href: $url('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
+                        <a v-attr="href: $url.route('admin/user/edit', { id: post.user_id })">{{ post.author }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
+                        <a class="uk-text-nowrap" v-class="pk-link-icon: !post.comments_pending" v-attr="href: $url.route('admin/blog/comment', { post: post.id })" title="{{ '{0} No pending|{1} One pending|]1,Inf[ %comments% pending' | transChoice post.comments_pending {comments:post.comments_pending} }}"><i class="pk-icon-comment uk-margin-small-right" v-class="pk-icon-primary: post.comments_pending"></i> {{ post.comment_count }}</a>
                     </td>
                     <td>
                         {{ post.date | date 'medium' }}
                     </td>
                     <td class="pk-table-text-break">
-                        <a target="_blank" v-if="post.accessible && post.url" v-attr="href: this.$url(post.url.substr(1))">{{ post.url }}</a>
+                        <a target="_blank" v-if="post.accessible && post.url" v-attr="href: this.$url.route(post.url.substr(1))">{{ post.url }}</a>
                         <span v-if="!post.accessible && post.url">{{ post.url }}</span>
                         <span v-if="!post.url">{{ 'Disabled' | true}}</span>
                     </td>

@@ -14,14 +14,16 @@
             <div class="uk-form-row">
                 <label for="form-menu" class="uk-form-label">{{ 'Menu' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu" options="menuOptions"></select>
+                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu" options="menuOptions">
+                        <option value="">{{ '- Menu -' | trans }}</option>
+                    </select>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <label for="form-level" class="uk-form-label">{{ 'Start Level' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-level" class="uk-form-width-large" v-model="widget.data.start_level">
+                    <select id="form-level" class="uk-form-width-large" v-model="widget.data.start_level" number>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -39,7 +41,7 @@
             <div class="uk-form-row">
                 <label for="form-depth" class="uk-form-label">{{ 'Depth' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-depth" class="uk-form-width-large" v-model="widget.data.depth">
+                    <select id="form-depth" class="uk-form-width-large" v-model="widget.data.depth" number>
                         <option value="">{{ 'No Limit' | trans }}</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -100,9 +102,9 @@
         computed: {
 
             menuOptions: function () {
-                return [{text: this.$trans('- Menu -'), value: ''}].concat(_.map(this.menus, function (menu) {
+                return _.map(this.menus, function (menu) {
                     return {text: menu.label, value: menu.id};
-                }));
+                });
             }
 
         }

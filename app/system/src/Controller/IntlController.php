@@ -16,17 +16,18 @@ class IntlController
     {
         App::system()->loadLocale($locale);
 
-        $locale  = substr($locale, 0, 2);
+        $minLocale = substr($locale, 0, stripos($locale, '_'));
+
         $numbers = App::intl()->get('numbers', $locale);
         $dateFields = App::intl()->get('dateFields', $locale);
-        $plurals = json_decode(file_get_contents(App::path().'/app/modules/intl/data/plurals.json'), true);
+        $plurals = json_decode(file_get_contents(App::path() . '/app/modules/intl/data/plurals.json'), true);
 
         $messages = json_encode([
 
-            'locale' => $locale,
+            'locale' => $minLocale,
 
             'main' => [
-                $locale => [
+                $minLocale => [
                     'dates' => [
                         'calendars' => [
                             'gregorian' => App::intl()->get('calendar', $locale)
@@ -37,18 +38,18 @@ class IntlController
                         'defaultNumberingSystem' => 'latn',
                         'symbols-numberSystem-latn' => $numbers['symbols'],
                         'decimalFormats-numberSystem-latn' => [
-                          'standard' => '#,##0.###'
+                            'standard' => '#,##0.###'
                         ]
                     ])
                 ]
             ],
 
             'supplemental' => [
-                'likelySubtags' => [$locale => App::intl()->guessFullLocale($locale)],
-                'plurals-type-cardinal' => [$locale => $plurals['supplemental']['plurals-type-cardinal'][$locale]]
+                'likelySubtags' => [$minLocale => App::intl()->guessFullLocale($minLocale)],
+                'plurals-type-cardinal' => [$minLocale => $plurals['supplemental']['plurals-type-cardinal'][$minLocale]]
             ],
 
-            'translations' => [$locale => App::translator()->getCatalogue($locale)->all()]
+            'translations' => [$minLocale => App::translator()->getCatalogue($locale)->all()]
 
         ]);
 
@@ -56,8 +57,8 @@ class IntlController
 
         $json = $request->isXmlHttpRequest();
 
-        $response = ($json ? App::response()->json() : App::response('', 200, ['Content-Type' =>'application/javascript']));
-        $response->setETag(md5($json.$messages))->setPublic();
+        $response = ($json ? App::response()->json() : App::response('', 200, ['Content-Type' => 'application/javascript']));
+        $response->setETag(md5($json . $messages))->setPublic();
 
         if ($response->isNotModified($request)) {
             return $response;

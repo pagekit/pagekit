@@ -1,3 +1,5 @@
+var Output = require('../components/output.vue');
+
 module.exports = {
 
     methods: {
@@ -10,53 +12,111 @@ module.exports = {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return this.$http.jsonp(this.api.url + '/package/update', {api_key: this.api.key, packages: JSON.stringify(pkgs)}, success);
+            return this.$http.jsonp(this.api.url + '/package/update', {
+                api_key: this.api.key,
+                packages: JSON.stringify(pkgs)
+            }, success);
         },
 
         queryPackage: function (pkg, success) {
-            return this.$http.jsonp(this.api.url + '/package/:name', {api_key: this.api.key, name: _.isObject(pkg) ? pkg.name : pkg}, success);
+            return this.$http.jsonp(this.api.url + '/package/:name', {
+                api_key: this.api.key,
+                name: _.isObject(pkg) ? pkg.name : pkg
+            }, success).error(function () {});
         },
 
-        enablePackage: function (pkg) {
+        enablePackage: function (pkg, reload) {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.$set('enabled', true);
-                    document.location.reload();
+                    if (reload !== false) {
+                        document.location.reload();
+                    }
                 }
             });
         },
 
-        disablePackage: function (pkg) {
+        disablePackage: function (pkg, reload) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
+
                 if (!data.error) {
                     pkg.$set('enabled', false);
-                    document.location.reload();
+                    if (reload !== false) {
+                        document.location.reload();
+                    }
                 }
             });
         },
 
-        installPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/install', {package: pkg}, function (data) {
-                if (packages && data.package) {
+        installPackage: function (pkg, packages, onClose) {
+            var output = this.$addChild(Output);
+            if (onClose) {
+                output.onClose(onClose);
+            }
 
-                    var index = _.findIndex(packages, 'name', data.package.name);
+            return this.$http.post('admin/system/package/install', {package: pkg}, null, {
+                beforeSend: function (request) {
+                    output.init(request, this.$trans('Installing "%title%"', {title: this.package.title}));
+                }
+            }).success(function (data) {
+                if (data.package) {
+                    pkg = data.package;
+                }
+
+                if (packages) {
+
+                    var index = _.findIndex(packages, 'name', pkg.name);
 
                     if (-1 !== index) {
-                        packages.splice(index, 1, data.package);
+                        packages.splice(index, 1, pkg);
                     } else {
-                        packages.push(data.package);
+                        packages.push(pkg);
                     }
 
                 }
+            }).error(function (msg) {
+                output.close();
+                this.$notify(msg, 'danger');
             });
         },
 
         uninstallPackage: function (pkg, packages) {
-            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, function (data) {
+            var output = this.$addChild(Output);
+
+            return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {
+                beforeSend: function (request) {
+                    output.init(request, this.$trans('Uninstalling "%title%"', {title: pkg.title}));
+                }
+            }).success(function (data) {
                 if (packages && !data.error) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }
+            }).error(function (message) {
+                output.close();
+                this.$notify(message, 'danger');
             });
+        },
+
+        updatePackage: function (pkg, packages) {
+            this.disablePackage(pkg, false).always(function (data, status) {
+                var enable = status == 200;
+
+                var vm = this;
+                this.installPackage(pkg, packages,
+                    function (output) {
+                        if (output.status !== 'success') {
+                            return;
+                        }
+
+                        if (enable) {
+                            vm.enablePackage(pkg).success(function () {
+                                vm.$notify(vm.$trans('"%title%" enabled.', {title: pkg.title}));
+                            }).error(function (message) {
+                                vm.$notify(message, 'danger');
+                            });
+                        }
+                    });
+            }).error(function () {});
         }
 
     }

@@ -25,7 +25,7 @@
 
     module.exports = {
 
-        props: ['api', 'type'],
+        props: ['api', 'type', 'packages'],
 
         data: function () {
             return {
@@ -40,7 +40,7 @@
 
             var type = this.type,
                 settings = {
-                    action: this.$url('admin/system/package/upload'),
+                    action: this.$url.route('admin/system/package/upload'),
                     type: 'json',
                     param: 'file',
                     before: function (options) {
@@ -76,8 +76,8 @@
                     vm.progress = '';
                 }, 250);
 
-                if (data.error) {
-                    UIkit.notify(data.error, 'danger');
+                if (!data.package) {
+                    this.$notify(data, 'danger');
                     return;
                 }
 
@@ -88,25 +88,23 @@
             },
 
             install: function (e) {
-
                 e.preventDefault();
 
                 this.modal.hide();
 
-                this.$http.post('admin/system/package/install', {package: this.upload.package}, function () {
-
-                    UIkit.notify(this.$trans('"%title%" installed.', {title: this.package.title}));
-
-                    setTimeout(function () {
-                        location.reload();
-                    }, 600);
-
-                }).error(function (msg) {
-                    UIkit.notify(msg, 'danger');
-                });
+                this.installPackage(this.upload.package, this.packages,
+                    function () {
+                        setTimeout(function () {
+                            location.reload();
+                        }, 300);
+                    });
             }
 
-        }
+        },
+
+        mixins: [
+            require('../lib/package')
+        ]
 
     };
 

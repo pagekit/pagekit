@@ -48,16 +48,16 @@ window.Site = module.exports = {
             this.Nodes.save({id: this.node.id}, data, function (data) {
 
                 if (!this.node.id) {
-                    window.history.replaceState({}, '', this.$url('admin/site/page/edit', {id: data.node.id}));
+                    window.history.replaceState({}, '', this.$url.route('admin/site/page/edit', {id: data.node.id}));
                 }
 
                 this.$set('node', data.node);
 
-                UIkit.notify(this.$trans('%type% saved.', {type: this.type.label}));
+                this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
 
             }, function (data) {
 
-                UIkit.notify(data, 'danger');
+                this.$notify(data, 'danger');
             });
         }
 
@@ -71,7 +71,7 @@ window.Site = module.exports = {
 
     components: {
 
-        link: require('../components/link.vue')
+        'node-link': require('../components/node-link.vue')
 
     }
 

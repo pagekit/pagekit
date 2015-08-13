@@ -12,7 +12,7 @@ module.exports = [
             "user-index": "./app/views/admin/user-index",
             "widget-login": "./app/components/widget-login.vue",
             "widget-user": "./app/components/widget-user.vue",
-            "link": "./app/components/link.vue"
+            "link-user": "./app/components/link-user.vue"
         },
         output: {
             filename: "./app/bundle/[name].js"

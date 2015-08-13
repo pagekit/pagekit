@@ -8,14 +8,12 @@ use Pagekit\Event\EventSubscriberInterface;
 
 class RouteListener implements EventSubscriberInterface
 {
-    protected $permalink;
-
     /**
      * Adds cache breaker to router.
      */
     public function onAppRequest()
     {
-        App::router()->setOption('blog.permalink', $this->permalink = App::module('blog')->getPermalink());
+        App::router()->setOption('blog.permalink', UrlResolver::getPermalink());
     }
 
     /**
@@ -23,8 +21,8 @@ class RouteListener implements EventSubscriberInterface
      */
     public function onConfigureRoute($event, $route)
     {
-        if ($route->getName() == '@blog/id' && $this->permalink) {
-            App::routes()->alias(dirname($route->getPath()).'/'.ltrim($this->permalink, '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
+        if ($route->getName() == '@blog/id' && UrlResolver::getPermalink()) {
+            App::routes()->alias(dirname($route->getPath()).'/'.ltrim(UrlResolver::getPermalink(), '/'), '@blog/id', ['_resolver' => 'Pagekit\Blog\UrlResolver']);
         }
     }
 

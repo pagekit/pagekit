@@ -70,7 +70,7 @@ module.exports = {
                     this.$set('message', this.$trans('Installed successfully.'));
 
                     setTimeout(function() {
-                        window.location = vm.$url('admin');
+                        window.location = vm.$url.route('admin');
                     }, 1000);
                 }
 

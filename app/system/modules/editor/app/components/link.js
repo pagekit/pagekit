@@ -65,9 +65,10 @@ module.exports = {
                 .$mount()
                 .$appendTo('body')
                 .$on('select', function (link) {
+
                     link.replace(this.$interpolate(
                         (link.tag || editor.getCursorMode()) == 'html' ?
-                            '<a href="{{ link.link }}">{{ link.txt }}</a>'
+                            (link.outerHTML ? link.outerHTML : '<a href="{{ link.link }}">{{ link.txt }}</a>')
                             : '[{{ link.txt }}]({{ link.link }})'
                         )
                     );
@@ -80,9 +81,11 @@ module.exports = {
 
                 var anchor = $(data.matches[0]);
 
-                data.link    = anchor.attr('href');
-                data.txt     = anchor.html();
-                data.class   = anchor.attr('class') || '';
+                data.link      = anchor.attr('href');
+                data.txt       = anchor.html();
+                data.class     = anchor.attr('class') || '';
+
+                data.outerHTML = anchor.attr('href', '{{ link.link }}').text('{{ link.txt }}')[0].outerHTML;
 
             } else {
 

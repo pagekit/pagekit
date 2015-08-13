@@ -233,7 +233,7 @@ class Metadata
             return;
         }
 
-        if ($convert) {
+        if ($convert && isset($this->fields[$name])) {
             $value = Type::getType($this->fields[$name]['type'])->convertToPHPValue($value, $this->manager->getConnection()->getDatabasePlatform());
         }
 

@@ -21,7 +21,7 @@ module.exports = {
                 var replacement = data.matches[0];
 
                 if (!data.matches[1].match(/^(\/|http:|https:|ftp:)/i)) {
-                    replacement = replacement.replace(data.matches[1], Vue.url.static(data.matches[1], true));
+                    replacement = replacement.replace(data.matches[1], Vue.url(data.matches[1], true));
                 }
 
                 return replacement;

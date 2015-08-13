@@ -37,7 +37,7 @@
 
             <div class="uk-comment-body">
 
-                <p>{{ comment.content }}</p>
+                <p>{{{ comment.content }}}</p>
 
                 <p v-if="showReplyButton"><a href="#" v-on="click: replyTo">{{ 'Reply' | trans }}</a></p>
 

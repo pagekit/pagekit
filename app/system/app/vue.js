@@ -8,6 +8,8 @@ function install (Vue) {
 
     require('vue-resource');
     require('vue-validator');
+    require('./lib/asset')(Vue);
+    require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
     require('./lib/filters')(Vue);
 
@@ -18,6 +20,11 @@ function install (Vue) {
     Vue.component('v-loader', require('./components/loader.vue'));
     Vue.component('v-modal', require('./components/modal.vue'));
     Vue.component('v-pagination', require('./components/pagination'));
+    Vue.component('input-filter', require('./components/input-filter.vue'));
+
+    require('./components/input-date.vue');
+    require('./components/input-image.vue');
+    require('./components/input-video.vue');
 
     /**
      * Directives
@@ -36,12 +43,13 @@ function install (Vue) {
      * Resource
      */
 
-    Vue.url.options.root = config.url || '/';
+    Vue.url.options.root = config.url.replace(/\/index.php$/i, '');
+    Vue.http.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
 
     Vue.http.headers.custom = {'X-XSRF-TOKEN': config.csrf};
 
-    Vue.url.static = function (url, params) {
+    Vue.url.route = function (url, params) {
 
         var options = url;
 
@@ -50,7 +58,7 @@ function install (Vue) {
         }
 
         Vue.util.extend(options, {
-            root: Vue.url.options.root.replace(/\/index.php$/i, '')
+            root: Vue.http.options.root
         });
 
         return this(options);
@@ -67,3 +75,4 @@ if (window.Vue) {
 
 window.history.pushState = window.history.pushState || function() {};
 window.history.replaceState = window.history.replaceState || function() {};
+
