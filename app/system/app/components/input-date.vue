@@ -43,13 +43,13 @@
             },
 
             clockFormat: function () {
-                return this.timeFormat.match(/\ba\b/) ? '12h' : '24h';
+                return this.timeFormat.match(/a/) ? '12h' : '24h';
             },
 
             date: {
 
                 get: function () {
-                     return UIkit.Utils.moment(this.datetime).format(this.dateFormat);
+                    return UIkit.Utils.moment(this.datetime).format(this.dateFormat);
                 },
 
                 set: function (date) {
