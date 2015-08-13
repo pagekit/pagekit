@@ -13,7 +13,7 @@ var installer = {
 
     ready: function () {
 
-        this.resource = this.$resource('installer/:action', {}, { post: { method: 'POST' } });
+        this.resource = this.$resource('installer/:action', {}, {post: {method: 'POST'}});
 
     },
 
@@ -46,10 +46,10 @@ var installer = {
                 return false;
             }
 
-            this.resource.post({ action: 'check' }, { config: this.config }, function (data) {
+            this.resource.post({action: 'check'}, {config: this.config}, function (data) {
 
                 if (!Vue.util.isPlainObject(data)) {
-                    data = { message: 'Whoops, something went wrong' };
+                    data = {message: 'Whoops, something went wrong'};
                 }
 
                 if (data.status == 'no-tables') {
@@ -79,21 +79,21 @@ var installer = {
 
             this.$set('status', 'install');
 
-            this.resource.post({ action: 'install' }, { config: this.config, option: this.option, user: this.user }, function (data) {
+            this.resource.post({action: 'install'}, {config: this.config, option: this.option, user: this.user}, function (data) {
 
-                setTimeout(function(){
+                setTimeout(function () {
 
                     if (!Vue.util.isPlainObject(data)) {
-                        data = { message: 'Whoops, something went wrong' };
+                        data = {message: 'Whoops, something went wrong'};
                     }
 
                     if (data.status == 'success') {
                         this.$set('status', 'finished');
 
                         // redirect to login after 3s
-                        setTimeout(function(){
+                        setTimeout(function () {
                             location.href = this.$url.route('admin');
-                        }, 3000);
+                        }.bind(this), 3000);
 
                     } else {
                         this.$set('status', 'failed');
