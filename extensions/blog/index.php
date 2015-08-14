@@ -170,8 +170,8 @@ return [
         },
 
         'view.scripts' => function ($event, $scripts) {
-            $scripts->register('blog-site', 'blog:app/bundle/site.js', '~site-edit');
-            $scripts->register('blog-link', 'blog:app/bundle/link.js', '~panel-link');
+            $scripts->register('node-blog', 'blog:app/bundle/node-blog.js', '~site-edit');
+            $scripts->register('link-blog', 'blog:app/bundle/link-blog.js', '~panel-link');
         },
 
         'enable.blog' => function () use ($app) {
