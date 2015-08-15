@@ -6,6 +6,7 @@ function install (Vue) {
      * Libraries
      */
 
+    require('vue-intl');
     require('vue-resource');
     require('vue-validator');
     require('./lib/asset')(Vue);
@@ -46,7 +47,6 @@ function install (Vue) {
     Vue.url.options.root = config.url.replace(/\/index.php$/i, '');
     Vue.http.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
-
     Vue.http.headers.custom = {'X-XSRF-TOKEN': config.csrf};
 
     Vue.url.route = function (url, params) {
@@ -75,4 +75,3 @@ if (window.Vue) {
 
 window.history.pushState = window.history.pushState || function() {};
 window.history.replaceState = window.history.replaceState || function() {};
-

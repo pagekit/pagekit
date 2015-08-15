@@ -1,27 +1,7 @@
 module.exports = function (Vue) {
 
-    var formats = ['full', 'long', 'medium', 'short'];
-
-    Vue.prototype.$date = function (date, format) {
-
-        var options = format;
-
-        if (typeof date == 'string') {
-            date = new Date(date);
-        }
-
-        if (typeof options == 'string') {
-            if (formats.indexOf(format) != -1) {
-                options = {date: format};
-            } else {
-                options = {skeleton: format};
-            }
-        }
-
-        return Globalize.formatDate(date, options);
-    };
-
     Vue.prototype.$relativeDate = function (value, reference) {
+
         var SECOND = 1000,
             MINUTE = 60 * SECOND,
             HOUR = 60 * MINUTE,
@@ -63,7 +43,7 @@ module.exports = function (Vue) {
             }
         }
 
-        return this.$date((new Date(value)).toISOString(), 'medium');
+        return this.$date(value);
     };
 
     Vue.prototype.$trans = Globalize.trans;

@@ -12,6 +12,7 @@ module.exports = [
         resolve: {
             alias: {
                 "md5$": assets + "/js-md5/js/md5.min.js",
+                "vue-intl$": assets + "/vue-intl/src/index.js",
                 "vue-resource$": assets + "/vue-resource/src/index.js",
                 "vue-validator$": assets + "/vue-validator/src/index.js",
                 "promise$": assets + "/vue-resource/src/lib/promise.js"
@@ -19,8 +20,9 @@ module.exports = [
         },
         module: {
             loaders: [
-                { test: /\.html$/, loader: "html" },
-                { test: /\.vue$/, loader: "vue" }
+                { test: /\.vue$/, loader: "vue" },
+                { test: /\.json$/, loader: "json" },
+                { test: /\.html$/, loader: "html" }
             ]
         }
     },

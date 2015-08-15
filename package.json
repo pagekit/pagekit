@@ -16,6 +16,6 @@
     "lodash": "^3.7.0",
     "merge-stream": "^0.1.7",
     "vue-loader": "^2.1.1",
-    "webpack": "^1.10.5"
+    "webpack": "^1.11.0"
   }
 }

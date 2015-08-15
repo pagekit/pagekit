@@ -78,14 +78,14 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Last login' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p>{{ $trans('%date%', { date: user.login ? $date(user.login, 'medium') : $trans('Never') }) }}</p>
+                    <p>{{ $trans('%date%', { date: user.login ? $date(user.login) : $trans('Never') }) }}</p>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Registered since' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    {{ $trans('%date%', { date: $date(user.registered, 'medium') }) }}
+                    {{ $trans('%date%', { date: $date(user.registered) }) }}
                 </div>
             </div>
 
