@@ -183,8 +183,8 @@ return [
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
             $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
-            $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
-            $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
+            $scripts->register('link-page', 'system/site:app/bundle/link-page.js', '~panel-link');
+            $scripts->register('node-page', 'system/site:app/bundle/node-page.js', ['~site-edit', 'editor']);
         },
 
         'model.node.saved' => function ($event, $node) use ($app) {

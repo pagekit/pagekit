@@ -150,7 +150,7 @@ return [
             if ($app['user']->hasAccess('user: manage users')) {
                 $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
             }
-            $scripts->register('user-link', 'system/user:app/bundle/link.js', '~panel-link');
+            $scripts->register('link-user', 'system/user:app/bundle/link-user.js', '~panel-link');
         }
 
     ]
