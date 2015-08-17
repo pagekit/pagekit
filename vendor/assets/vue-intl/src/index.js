@@ -9,10 +9,13 @@ function install(Vue) {
 
     require('./plural')(_);
 
+    if (!v.$locale) {
+        v.$locale = require('../dist/locales/en.json');
+    }
+
     v.$date = require('./date')(_);
     v.$number = require('./number')(_);
     v.$currency = require('./currency')(_);
-    v.$locale = require('../dist/locales/en.json');
 
     Vue.filter('date', v.$date);
     Vue.filter('number', v.$number);
