@@ -17,8 +17,8 @@ class IntlController
 
         $messages = [];
 
-        $file = "vendor/assets/vue-intl/dist/locales/{$locale}.json";
-        if (App::file()->exists($file)) {
+        $l = strtolower(str_replace('_', '-', $locale));
+        if (App::file()->exists($file = "vendor/assets/vue-intl/dist/locales/{$l}.json")) {
             $messages = json_decode(file_get_contents(App::file()->getPath($file)), true);
         }
 
