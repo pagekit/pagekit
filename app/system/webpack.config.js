@@ -25,27 +25,6 @@ module.exports = [
                 { test: /\.html$/, loader: "html" }
             ]
         }
-    },
-
-    {
-        entry: {
-            "globalize": "./app/globalize"
-        },
-        output: {
-            filename: "./app/bundle/[name].js",
-            library: "Globalize"
-        },
-        resolve: {
-            alias: {
-                "cldr$": assets + "/cldrjs/dist/cldr.js",
-                "cldr/event$": assets + "/cldrjs/dist/cldr/event.js",
-                "cldr/supplemental$": assets + "/cldrjs/dist/cldr/supplemental.js",
-                "globalize$": assets + "/globalize/dist/globalize.js",
-                "globalize/number$": assets + "/globalize/dist/globalize/number.js",
-                "globalize/date$": assets + "/globalize/dist/globalize/date.js",
-                "globalize/relative-time$": assets + "/globalize/dist/globalize/relative-time.js"
-            }
-        }
     }
 
 ];

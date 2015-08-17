@@ -31,7 +31,7 @@
         computed: {
 
             dateFormat: function () {
-                return window.$globalize.main[window.$globalize.locale].dates.calendars.gregorian.dateFormats.short
+                return window.$locale.formats.DATETIME_FORMATS.shortDate
                     .replace(/\bd\b/i, 'DD')
                     .replace(/\bm\b/i, 'MM')
                     .replace(/\by\b/i, 'YYYY')
@@ -39,7 +39,7 @@
             },
 
             timeFormat: function () {
-                return window.$globalize.main[window.$globalize.locale].dates.calendars.gregorian.timeFormats.short.replace(/\bh\b/i, 'hh');
+                return window.$locale.formats.DATETIME_FORMATS.shortTime.replace(/\bh\b/i, 'hh');
             },
 
             clockFormat: function () {

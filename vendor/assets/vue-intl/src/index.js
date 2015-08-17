@@ -16,6 +16,7 @@ function install(Vue) {
     v.$date = require('./date')(_);
     v.$number = require('./number')(_);
     v.$currency = require('./currency')(_);
+    v.$relativeDate = require('./relative')(_);
 
     Vue.filter('date', v.$date);
     Vue.filter('number', v.$number);

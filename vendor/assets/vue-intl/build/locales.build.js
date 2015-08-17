@@ -5,6 +5,7 @@ var path = require('path');
 var plural = path.join(__dirname, '../src/plural.js');
 var output = path.join(__dirname, '../dist/locales/');
 var source = path.join(__dirname, '../node_modules/angular-i18n/');
+var relative = path.join(__dirname, '../node_modules/twitter_cldr/full/');
 
 global.angular = {
 
@@ -21,8 +22,8 @@ global.angular = {
     value: function (name, value) {
 
         var id = value.id.match(/^\w+/i)[0],
-            fn = value.pluralCat.toString();
-            key = md5(fn);
+            fn = value.pluralCat.toString(),
+            key = md5(fn), file, data;
 
         if (this.locales.indexOf(id) === -1) {
 
@@ -37,8 +38,19 @@ global.angular = {
 
         delete value.pluralCat;
 
-        var file = output + value.id + '.json';
-        var data = JSON.stringify(value);
+        [value.id, id, 'en'].forEach(function(locale) {
+            var path = relative+locale+'.js';
+            if (!file && fs.existsSync(path)) {
+                file = path;
+            }
+        });
+
+        if (file) {
+            value.TIMESPAN_FORMATS = (new (require(file)).TimespanFormatter).patterns;
+        }
+
+        file = output + value.id + '.json';
+        data = JSON.stringify(value);
 
         fs.writeFileSync(file, data);
     }

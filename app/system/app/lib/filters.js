@@ -12,12 +12,9 @@ module.exports = function (Vue) {
         return this.$transChoice(id, number, parameters, domain, locale);
     });
 
-    Vue.filter('relativeDate', function (value, reference) {
-        try {
-            return this.$relativeDate(value, reference);
-        } catch (e) {
-            return 'NaN';
-        }
+    Vue.filter('relativeDate', function (value, options) {
+        var date = value instanceof Date ? value : new Date(value);
+        return this.$relativeDate((date - new Date()) / 1000, options);
     });
 
     Vue.filter('trim', {

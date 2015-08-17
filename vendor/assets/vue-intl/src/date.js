@@ -8,6 +8,36 @@ module.exports = function (_) {
     var NUMBER_STRING = /^\-?\d+$/;
     var R_ISO8601_STR = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\d)(?:\.(\d+))?)?)?(Z|([+-])(\d\d):?(\d\d))?)?$/;
     var DATE_FORMATS_SPLIT = /((?:[^yMdHhmsaZEwG']+)|(?:'(?:[^']|'')*')|(?:E+|y+|M+|d+|H+|h+|m+|s+|a|Z|G+|w+))(.*)/;
+    var DATE_FORMATS = {
+        yyyy: dateGetter('FullYear', 4),
+        yy: dateGetter('FullYear', 2, 0, true),
+        y: dateGetter('FullYear', 1),
+        MMMM: dateStrGetter('Month'),
+        MMM: dateStrGetter('Month', true),
+        MM: dateGetter('Month', 2, 1),
+        M: dateGetter('Month', 1, 1),
+        dd: dateGetter('Date', 2),
+        d: dateGetter('Date', 1),
+        HH: dateGetter('Hours', 2),
+        H: dateGetter('Hours', 1),
+        hh: dateGetter('Hours', 2, -12),
+        h: dateGetter('Hours', 1, -12),
+        mm: dateGetter('Minutes', 2),
+        m: dateGetter('Minutes', 1),
+        ss: dateGetter('Seconds', 2),
+        s: dateGetter('Seconds', 1),
+        sss: dateGetter('Milliseconds', 3),
+        EEEE: dateStrGetter('Day'),
+        EEE: dateStrGetter('Day', true),
+        a: ampmGetter,
+        Z: timeZoneGetter,
+        ww: weekGetter(2),
+        w: weekGetter(1),
+        G: eraGetter,
+        GG: eraGetter,
+        GGG: eraGetter,
+        GGGG: longEraGetter
+    };
 
     function padNumber(num, digits, trim) {
         var neg = '';
@@ -132,37 +162,6 @@ module.exports = function (_) {
         var timezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
         return addDateMinutes(date, reverse * (timezoneOffset - date.getTimezoneOffset()));
     }
-
-    var DATE_FORMATS = {
-        yyyy: dateGetter('FullYear', 4),
-        yy: dateGetter('FullYear', 2, 0, true),
-        y: dateGetter('FullYear', 1),
-        MMMM: dateStrGetter('Month'),
-        MMM: dateStrGetter('Month', true),
-        MM: dateGetter('Month', 2, 1),
-        M: dateGetter('Month', 1, 1),
-        dd: dateGetter('Date', 2),
-        d: dateGetter('Date', 1),
-        HH: dateGetter('Hours', 2),
-        H: dateGetter('Hours', 1),
-        hh: dateGetter('Hours', 2, -12),
-        h: dateGetter('Hours', 1, -12),
-        mm: dateGetter('Minutes', 2),
-        m: dateGetter('Minutes', 1),
-        ss: dateGetter('Seconds', 2),
-        s: dateGetter('Seconds', 1),
-        sss: dateGetter('Milliseconds', 3),
-        EEEE: dateStrGetter('Day'),
-        EEE: dateStrGetter('Day', true),
-        a: ampmGetter,
-        Z: timeZoneGetter,
-        ww: weekGetter(2),
-        w: weekGetter(1),
-        G: eraGetter,
-        GG: eraGetter,
-        GGG: eraGetter,
-        GGGG: longEraGetter
-    };
 
     return function (date, format, timezone) {
 

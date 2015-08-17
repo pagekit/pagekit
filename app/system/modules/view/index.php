@@ -84,10 +84,9 @@ return [
             $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $scripts->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
             $scripts->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
-            $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'globalize']);
+            $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'vendor/assets/vue/dist/'.($app->debug() ? 'vue.js' : 'vue.min.js'));
-            $scripts->register('globalize', 'app/system/app/bundle/globalize.js', 'globalize-data');
-            $scripts->register('globalize-data', $app->url('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
+            $scripts->register('locale', $app->url('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
         }
 
     ]
