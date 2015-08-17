@@ -116,6 +116,23 @@ module.exports = function (_) {
         return string;
     }
 
+    function timezoneToOffset(timezone, fallback) {
+        var requestedTimezoneOffset = Date.parse('Jan 01, 1970 00:00:00 ' + timezone) / 60000;
+        return isNaN(requestedTimezoneOffset) ? fallback : requestedTimezoneOffset;
+    }
+
+    function addDateMinutes(date, minutes) {
+        date = new Date(date.getTime());
+        date.setMinutes(date.getMinutes() + minutes);
+        return date;
+    }
+
+    function convertTimezoneToLocal(date, timezone, reverse) {
+        reverse = reverse ? -1 : 1;
+        var timezoneOffset = timezoneToOffset(timezone, date.getTimezoneOffset());
+        return addDateMinutes(date, reverse * (timezoneOffset - date.getTimezoneOffset()));
+    }
+
     var DATE_FORMATS = {
         yyyy: dateGetter('FullYear', 4),
         yy: dateGetter('FullYear', 2, 0, true),
