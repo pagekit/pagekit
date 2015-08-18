@@ -177,7 +177,7 @@ class SelfupdateCommand extends Command
     protected function copy($updateDir)
     {
         unlink("$updateDir/.htaccess");
-        $this->moveRecursive($updateDir, $this->config['path'] . '/test');
+        $this->moveRecursive($updateDir, $this->config['path']);
     }
 
     /**

@@ -2,10 +2,8 @@
 
 namespace Pagekit\System\Controller;
 
-use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\System\Package\Package;
-use Pagekit\System\Package\PackageInstaller;
+use Pagekit\Console\UriVerifier;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -17,7 +15,7 @@ class UpdateController
         return [
             '$view' => [
                 'title' => __('Update'),
-                'name'  => 'system/package:views/update.php'
+                'name' => 'system/package:views/update.php'
             ],
             '$data' => [
                 'api' => App::module('system/package')->config('api'),
@@ -30,63 +28,27 @@ class UpdateController
     /**
      * @Request({"update": "array"})
      */
-    public function downloadAction($update = null)
+    public function runAction($update = null)
     {
         try {
 
-            if ($update) {
-                App::session()->set('system.update', $update);
-            } else {
-                App::abort(400, __('Unable to find update.'));
-            }
+            $params = [
+                'command' => 'self-update',
+                '--url' => $update['url'],
+                '--shasum' => $update['shasum']
+            ];
 
-            App::session()->set('system.updateDir', $path = App::get('path.temp').'/'.sha1(uniqid()));
+            $verifier = new UriVerifier(require App::get('config.file'));
 
-            $client = new Client;
-            $installer = new PackageInstaller($client);
-
-            $package = new Package([]);
-            $package->set('dist', $update);
-
-            $installer->download($package, $path);
-
-            return ['message' => 'success'];
+            return App::redirect(
+                $verifier->sign(App::url('app/console/', $params, true), 10)
+            );
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
         }
 
-        return compact('error');
+        App::abort(400, $error);
     }
 
-    public function copyAction()
-    {
-        if (!$update = App::session()->get('system.update') or !$updateDir = App::session()->get('system.updateDir')) {
-            App::abort(400, __('You may not call this step directly.'));
-        }
-
-        // TODO: create maintenance file
-        // TODO: cleanup old files
-
-        App::file()->delete("$updateDir/.htaccess");
-        App::file()->copyDir($updateDir, App::path());
-        App::file()->delete($updateDir);
-        App::module('system/cache')->clearCache();
-        App::session()->remove('system.updateDir');
-
-        return ['message' => 'success'];
-    }
-
-    public function databaseAction()
-    {
-        if (!$update = App::session()->get('system.update')) {
-            App::abort(400, __('You may not call this step directly.'));
-        }
-
-        App::system()->enable();
-        App::module('system/cache')->clearCache();
-        App::session()->remove('system.update');
-
-        return ['message' => 'success'];
-    }
 }

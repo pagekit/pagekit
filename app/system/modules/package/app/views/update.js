@@ -1,27 +1,21 @@
+var Output = require('../components/output.vue');
+
 module.exports = {
 
-    data: function() {
+    data: function () {
         return _.extend({
-            view: 'index',
             update: false,
-            progress: 0,
-            errors: [],
-            steps: [
-                { action: 'download', msg: 'Downloading...', progress: 33 },
-                { action: 'copy', msg: 'Copying files...', progress: 66 },
-                { action: 'database', msg: 'Updating database...', progress: 100 }
-            ]
+            errors: []
         }, window.$data);
     },
 
-    created: function() {
-        this.resource = this.$resource('admin/system/update/:action');
+    created: function () {
         this.getVersions();
     },
 
     computed: {
 
-        hasUpdate: function() {
+        hasUpdate: function () {
             return this.update && this.update.version != this.version;
         }
 
@@ -29,13 +23,13 @@ module.exports = {
 
     methods: {
 
-        getVersions: function() {
+        getVersions: function () {
 
-            this.$http.jsonp(this.api.url + '/update', function(data) {
+            this.$http.jsonp(this.api.url + '/update', function (data) {
 
                 this.$set('update', data[this.channel == 'nightly' ? 'nightly' : 'latest']);
 
-            }).error(function() {
+            }).error(function () {
 
                 this.errors.push(self.$trans('Cannot connect to the server. Please try again later.'), 'error');
 
@@ -43,41 +37,23 @@ module.exports = {
 
         },
 
-        install: function() {
-            this.$set('view', 'installation');
-            this.step({ update: this.update });
-        },
+        install: function () {
 
-        step: function(data) {
+            var output = this.$addChild(Output);
+            var vm = this;
+            output.onClose(function () {
+                setTimeout(function () {
+                    window.location = vm.$url.route('admin');
+                }, 300);
+            });
 
-            var vm = this, step = this.steps.shift();
-
-            if (!step) return;
-
-            this.$set('message', this.$trans(step.msg));
-
-            this.resource.get(_.extend({ action: step.action }, data), function(data) {
-
-                if (data.error) {
-                    this.errors.push(data.error || this.$trans('Whoops, something went wrong.'));
-                    return;
+            return this.$http.post('admin/system/update/run', {update: this.update}, null, {
+                beforeSend: function (request) {
+                    output.init(request, this.$trans('Updating to Pagekit %version%', {version: this.update.version}));
                 }
-
-                this.$set('progress', step.progress);
-
-                if (!this.steps.length) {
-
-                    this.$set('message', this.$trans('Installed successfully.'));
-
-                    setTimeout(function() {
-                        window.location = vm.$url.route('admin');
-                    }, 1000);
-                }
-
-                this.step();
-
-            }).error(function() {
-                this.errors.push(this.$trans('Whoops, something went wrong.'));
+            }).error(function (msg) {
+                output.close();
+                this.$notify(msg, 'danger');
             });
         }
 
