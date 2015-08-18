@@ -36,7 +36,6 @@ return [
 
     'autoload' => [
 
-        'Pagekit\\System\\' => '../system/src',
         'Pagekit\\Installer\\' => 'src'
 
     ],
