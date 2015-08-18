@@ -16,12 +16,6 @@ return [
             return $migrator;
         };
 
-    },
-
-    'autoload' => [
-
-        'Pagekit\\Migration\\' => 'src'
-
-    ]
+    }
 
 ];

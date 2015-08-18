@@ -38,12 +38,6 @@ return [
 
     ],
 
-    'autoload' => [
-
-        'Pagekit\\System\\' => 'src'
-
-    ],
-
     'routes' => [
 
         '/' => [
@@ -97,7 +91,7 @@ return [
                     return;
                 }
 
-                $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app['isAdmin'] = $admin = (bool)preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
 
             }, 50],
 
