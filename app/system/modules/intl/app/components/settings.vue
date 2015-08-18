@@ -12,14 +12,14 @@
     <div class="uk-form-row">
         <label for="form-sitelocale" class="uk-form-label">{{ 'Site Locale' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-sitelocale" class="uk-form-width-large" v-model="option.site.locale" options="locales | toOptions"></select>
+            <select id="form-sitelocale" class="uk-form-width-large" v-model="option.locale.site" options="locales | toOptions"></select>
         </div>
     </div>
 
     <div class="uk-form-row">
         <label for="form-adminlocale" class="uk-form-label">{{ 'Admin Locale' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-adminlocale" class="uk-form-width-large" v-model="option.admin.locale" options="locales | toOptions"></select>
+            <select id="form-adminlocale" class="uk-form-width-large" v-model="option.locale.admin" options="locales | toOptions"></select>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
         computed: {
 
             option: function() {
-                return this.$root.$get('options.system');
+                return this.$root.$get('options')['system/intl'];
             }
 
         }
