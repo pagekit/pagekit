@@ -1,7 +1,7 @@
 <?php $view->script('posts', 'blog:app/bundle/posts.js', 'vue') ?>
 
 <?php foreach ($posts as $post) : ?>
-<article class="uk-article" v-cloak>
+<article class="uk-article">
 
     <?php if ($image = $post->get('image')): ?>
     <img src="<?=$image?>">
@@ -10,7 +10,7 @@
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= $post->title ?></a></h1>
 
     <p class="uk-article-meta">
-        <?= __('Written by %name% on %date%', ['%name%' => $post->user->name, '%date%' => '<time datetime="'.$post->date->format(\DateTime::ISO8601).'">{{ "'.$post->date->format(\DateTime::ISO8601).'" | date "longDate" }}</time>' ]) ?>
+        <?= __('Written by %name% on %date%', ['%name%' => $post->user->name, '%date%' => '<time datetime="'.$post->date->format(\DateTime::ISO8601).'" v-cloak>{{ "'.$post->date->format(\DateTime::ISO8601).'" | date "longDate" }}</time>' ]) ?>
     </p>
 
     <div class="uk-margin"><?= $post->excerpt ?: $post->content ?></div>

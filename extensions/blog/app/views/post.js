@@ -1,5 +1,5 @@
 jQuery(function ($) {
-    $('article').each(function() {
+    $('time').each(function() {
         new Vue({}).$mount(this);
     });
 });
