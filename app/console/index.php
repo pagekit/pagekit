@@ -59,7 +59,7 @@ if (PHP_SAPI === 'cli') {
 
 }
 
-$console = new Console($config['values'], 'Pagekit Console');
+$console = new Console($config, 'Pagekit Console');
 
 // Register commands
 $namespace = 'Pagekit\\Console\\Commands\\';
