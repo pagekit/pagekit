@@ -122,7 +122,7 @@ class ExtensionTranslateCommand extends Command
         }
 
         // php matches ...->trans('foo')
-        preg_match_all('/(->trans\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?\))/', $content, $matches);
+        preg_match_all('/((?:->trans|__)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?\))/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[6][$i] ?: 'messages';
 
@@ -130,19 +130,13 @@ class ExtensionTranslateCommand extends Command
         }
 
         // php matches ...->transChoice('foo')
-        preg_match_all('/(->transChoice\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?.+\))/', $content, $matches);
+        preg_match_all('/((?:->transChoice|_c)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?.+\))/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[6][$i] ?: 'messages';
 
             $pairs[] = [$domain, $string];
         }
 
-        // TODO:
-        // __('something')
-        // __('something', 'domain')
-        // _c('something', $number, $args)
-        // _c('something', $number, $args, 'domain')
-        // ...?
 
         // sort all pairs according to domain
         $messages = [];
@@ -187,7 +181,6 @@ class ExtensionTranslateCommand extends Command
     protected function getPath($path)
     {
 
-        // TODO: better handling for core modules
         if ($path == 'system') {
             // system module
             $root = $this->config['path'].'/app';
