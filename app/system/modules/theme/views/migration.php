@@ -15,7 +15,7 @@
         <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
             <div class="tm-container">
 
-                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large-black.svg') ?>" width="120" height="120" alt="Pagekit">
+                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large-black.svg') ?>" alt="Pagekit">
 
                 <form class="uk-panel uk-panel-box" action="<?= $view->url('@system/migration/migrate') ?>">
                     <h1><?= __('Update Pagekit') ?></h1>

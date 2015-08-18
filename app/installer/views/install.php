@@ -16,7 +16,7 @@
                 <div class="uk-text-center" v-el="start" v-show="step == 'start'">
 
                     <a class="uk-panel" v-on="click: gotoStep('database')">
-                        <img src="app/system/assets/images/pagekit-logo-large.svg" width="120" height="120" alt="Pagekit">
+                        <img src="app/system/assets/images/pagekit-logo-large.svg" alt="Pagekit">
                         <p>
                             <svg class="tm-arrow" width="40px" height="40px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                                 <line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="2" y1="18" x2="36" y2="18"/>
