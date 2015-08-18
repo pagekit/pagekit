@@ -56,7 +56,7 @@ class Application extends BaseApplication
     /**
      * Returns dynamically booted Pagekit application.
      *
-     *  @return App
+     * @return App
      */
     public function getPagekit()
     {
@@ -74,8 +74,6 @@ class Application extends BaseApplication
             $app['module']->addLoader(new AutoLoader($loader));
             $app['module']->addLoader(new ConfigLoader($this->config));
             $app['module']->addLoader(new ConfigLoader(require $app['config.file']));
-
-            $app['module']->load('system');
 
             $app['module']->addPath(__DIR__ . '/../console.php');
             $app['module']->load('console');
