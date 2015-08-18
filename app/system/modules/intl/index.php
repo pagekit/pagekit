@@ -29,7 +29,7 @@ return [
 
         'locale' => [
 
-            'admin' => 'de_DE',
+            'admin' => 'en_US',
             'site' => 'en_US'
 
         ]
