@@ -42,9 +42,7 @@ module.exports = {
             var output = this.$addChild(Output);
             var vm = this;
             output.onClose(function () {
-                setTimeout(function () {
-                    window.location = vm.$url.route('admin');
-                }, 300);
+                window.location = vm.$url.route('admin');
             });
 
             return this.$http.post('admin/system/update/run', {update: this.update}, null, {
