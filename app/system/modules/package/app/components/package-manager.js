@@ -112,13 +112,8 @@ module.exports = {
 
         empty: function (packages) {
             return Vue.filter('filterBy')(packages, this.search, 'title').length === 0;
-        },
-
-        folder: function (pkg) {
-            if (pkg.url) {
-                return pkg.url.match(/[^\/]+$/gi);
-            }
         }
+
     },
 
     mixins: [
