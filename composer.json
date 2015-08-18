@@ -24,7 +24,6 @@
         "monolog/monolog": "~1.13",
         "nikic/php-parser": "~1.2.2",
         "psr/log": "~1.0.0",
-        "punic/punic": "~1.5.0",
         "swiftmailer/swiftmailer": "~5.4.1",
         "symfony/debug": "~2.7.1",
         "symfony/finder": "~2.7.1",

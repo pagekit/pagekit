@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Intl\Controller;
 
 use Pagekit\Application as App;
 
@@ -13,15 +13,10 @@ class IntlController
      */
     public function indexAction($locale = null)
     {
-        App::system()->loadLocale($locale);
+        $intl = App::module('system/intl');
+        $intl->loadLocale($locale);
 
-        $messages = [];
-
-        $l = strtolower(str_replace('_', '-', $locale));
-        if (App::file()->exists($file = "vendor/assets/vue-intl/dist/locales/{$l}.json")) {
-            $messages = json_decode(file_get_contents(App::file()->getPath($file)), true);
-        }
-
+        $messages = $intl->getFormats($locale) ?: [];
         $messages['translations'] = [$locale => App::translator()->getCatalogue($locale)->all()];
         $messages = json_encode($messages);
 

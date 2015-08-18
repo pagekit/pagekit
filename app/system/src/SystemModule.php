@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class SystemModule extends Module
 {
@@ -79,36 +78,5 @@ class SystemModule extends Module
         }
 
         return $menu;
-    }
-
-    /**
-     * Loads language files.
-     *
-     * @param string              $locale
-     * @param TranslatorInterface $translator
-     */
-    public function loadLocale($locale, TranslatorInterface $translator = null)
-    {
-        $translator = $translator ?: App::translator();
-
-        foreach (App::module() as $module) {
-
-            $domains = [];
-            $files   = glob($module->get('path')."/languages/{$locale}/*") ?: [];
-
-            foreach ($files as $file) {
-
-                $format = substr(strrchr($file, '.'), 1);
-                $domain = basename($file, '.'.$format);
-
-                if (in_array($domain, $domains)) {
-                    continue;
-                }
-
-                $domains[] = $domain;
-
-                $translator->addResource($format, $file, $locale, $domain);
-            }
-        }
     }
 }

@@ -39,6 +39,16 @@ class FilterManager
     }
 
     /**
+     * Get shortcut.
+     *
+     * @see get()
+     */
+    public function __invoke($name, array $options = [])
+    {
+        return $this->get($name, $options);
+    }
+
+    /**
      * Gets a filter by name.
      *
      * @param  string $name

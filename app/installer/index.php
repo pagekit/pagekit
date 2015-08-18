@@ -29,6 +29,7 @@ return [
         'application',
         'migration',
         'system/cache',
+        'system/intl',
         'system/view'
 
     ],
@@ -48,6 +49,8 @@ return [
         ]
 
     ],
+
+    'languages' => '/../system/languages',
 
     'config' => [
 

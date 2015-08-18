@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="<?= $params['html_class'] ?>">
+<html class="<?= $params['html_class'] ?>" lang="<?= $intl->getLocaleTag() ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

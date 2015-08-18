@@ -6,6 +6,7 @@
 /themes/*
 !/themes/one
 /themes/one/css/*
+**/languages/**/*.json
 /vendor/*
 !/vendor/assets
 /vendor/assets/*

@@ -23,13 +23,6 @@
         </div>
     </div>
 
-    <div class="uk-form-row">
-        <label for="form-timezone" class="uk-form-label">{{ 'Time Zone' | trans }}</label>
-        <div class="uk-form-controls">
-            <select id="form-timezone" class="uk-form-width-large" v-model="option.timezone" options="timezones | toOptions"></select>
-        </div>
-    </div>
-
 </template>
 
 <script>
@@ -45,7 +38,7 @@
         props: ['config', 'options'],
 
         data: function() {
-            return window.$system;
+            return window.$intl;
         },
 
         computed: {
@@ -57,5 +50,7 @@
         }
 
     };
+
+    window.Settings.components['system/intl'] = module.exports;
 
 </script>

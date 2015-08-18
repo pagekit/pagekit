@@ -86,7 +86,7 @@ return [
             $scripts->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'vendor/assets/vue/dist/'.($app->debug() ? 'vue.js' : 'vue.min.js'));
-            $scripts->register('locale', $app->url('@system/intl', ['locale' => $app['intl']->getDefaultLocale()]));
+            $scripts->register('locale', $app->url('@system/intl', ['locale' => $app->module('system/intl')->getLocale()]));
         }
 
     ]

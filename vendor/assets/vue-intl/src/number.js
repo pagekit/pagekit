@@ -106,8 +106,7 @@ module.exports = function (_) {
         var formats = this.$locale.NUMBER_FORMATS;
 
         // if null or undefined pass it through
-        return (number == null) ? number : _.formatNumber(number, formats.PATTERNS[0], formats.GROUP_SEP, formats.DECIMAL_SEP,
-            fractionSize);
+        return (number == null) ? number : _.formatNumber(number, formats.PATTERNS[0], formats.GROUP_SEP, formats.DECIMAL_SEP, fractionSize);
     };
 
 };

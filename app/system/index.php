@@ -24,6 +24,7 @@ return [
         'system/editor',
         'system/finder',
         'system/info',
+        'system/intl',
         'system/mail',
         'system/package',
         'system/settings',
@@ -49,10 +50,6 @@ return [
             'name' => '@system',
             'controller' => 'Pagekit\\System\\Controller\\AdminController'
         ],
-        '/system/intl' => [
-            'name' => '@system/intl',
-            'controller' => 'Pagekit\\System\\Controller\\IntlController'
-        ],
         '/system/migration' => [
             'name' => '@system/migration',
             'controller' => 'Pagekit\\System\\Controller\\MigrationController'
@@ -71,15 +68,8 @@ return [
         'key' => '',
 
         'site' => [
-            'locale' => 'en_US',
             'theme' => null
         ],
-
-        'admin' => [
-            'locale' => 'en_US'
-        ],
-
-        'timezone' => 'UTC',
 
         'extensions' => []
 
@@ -108,16 +98,6 @@ return [
                 }
 
                 $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
-
-                $app->extend('translator', function ($translator) use ($app, $admin) {
-
-                    $locale = $this->config($admin ? 'admin.locale' : 'site.locale');
-                    $app['intl']->setDefaultLocale($locale);
-                    $translator->setLocale($locale);
-                    $this->loadLocale($locale, $translator);
-
-                    return $translator;
-                });
 
             }, 50],
 
