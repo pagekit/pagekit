@@ -1,4 +1,6 @@
-<article class="uk-article">
+<?php $view->script('post', 'blog:app/bundle/post.js', ['vue', 'comments']) ?>
+
+<article class="uk-article" v-cloak>
 
     <?php if ($image = $post->get('image')): ?>
     <img src="<?= $image ?>">

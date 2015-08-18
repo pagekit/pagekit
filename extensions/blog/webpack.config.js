@@ -7,6 +7,8 @@ module.exports = [
             "post-index": "./app/views/admin/post-index",
             "settings": "./app/views/admin/settings",
             "comments": "./app/views/comments",
+            "post": "./app/views/post",
+            "posts": "./app/views/posts",
             "node-blog": "./app/components/node-blog.vue",
             "link-blog": "./app/components/link-blog.vue"
         },
