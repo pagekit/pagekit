@@ -35,7 +35,7 @@ class ExtensionTranslateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $extension = $this->argument('extension') ?: 'system';
-        $files     = $this->getFiles($path = $this->getPath($extension));
+        $files     = $this->getFiles($path = $this->getPath($extension), $extension);
         $languages = "$path/languages";
 
         $this->line("Extracting strings for extension '$extension'");
@@ -137,6 +137,13 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
+        // TODO:
+        // __('something')
+        // __('something', 'domain')
+        // _c('something', $number, $args)
+        // _c('something', $number, $args, 'domain')
+        // ...?
+
         // sort all pairs according to domain
         $messages = [];
         foreach ($pairs as $pair) {
@@ -159,9 +166,16 @@ class ExtensionTranslateCommand extends Command
      * @param  string $path
      * @return array
      */
-    protected function getFiles($path)
+    protected function getFiles($path, $extension)
     {
-        return Finder::create()->files()->in($path)->name('*.{php}');
+        $files = Finder::create()->files()->in($path);
+
+        if ($extension == "system") {
+            // add installer files
+            $files->in($this->config['path'].'/app/installer');
+        }
+
+        return $files->name('*.{php}');
     }
 
     /**
