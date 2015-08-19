@@ -21,7 +21,7 @@ class PageController
 
         return [
             '$view' => [
-                'title' => __($page->title),
+                'title' => $page->title,
                 'name'  => 'system/site/page.php'
             ],
             'page' => $page,

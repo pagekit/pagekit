@@ -157,7 +157,7 @@ class FinderController
             foreach ($files as $file) {
 
                 if (!$file->isValid()) {
-                    return $this->error(__(sprintf('Uploaded file invalid. (%s)', $file->getErrorMessage())));
+                    return $this->error(sprintf(__('Uploaded file invalid. (%s)'), $file->getErrorMessage()));
                 }
 
                 $file->move($path, $file->getClientOriginalName());
