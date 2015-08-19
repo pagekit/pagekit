@@ -35,11 +35,8 @@
 
                         <form class="uk-form" name="formLanguage" v-on="submit: stepLanguage">
 
-                            <div class="uk-form-row uk-flex uk-flex-center">
-                                <div class="uk-form-controls">
-                                    <select id="form-lang" size="10" v-model="locale" options="locales | toOptions" multiple></select>
-                                </div>
-                            </div>
+                            <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions" multiple></select>
+
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
