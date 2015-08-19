@@ -105,7 +105,7 @@ class ExtensionTranslateCommand extends Command
         // collect pairs of [$domain, string] from all matches
         $pairs = [];
 
-        // vue matches {{ 'foo' | trans }}
+        // vue matches {{ 'foo' | trans [args] }}
         preg_match_all('/({{\s*(\'|")((?:(?!\2).)+)\2\s*\|\s*trans\s+([^\s]+\s+((\'|")((?:(?!\6).)+)\6))?.*}})/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[7][$i] ?: 'messages';
@@ -113,7 +113,7 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
-        // vue matches {{ 'foo' | transChoice }}
+        // vue matches {{ 'foo' | transChoice [args] }}
         preg_match_all('/({{\s*(\'|")((?:(?!\2).)+)\2\s*\|\s*transChoice\s+([^\s]+\s+[^\s]+\s+((\'|")((?:(?!\6).)+)\6))?.*}})/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[7][$i] ?: 'messages';
@@ -121,7 +121,7 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
-        // php matches ...->trans('foo')
+        // php matches ...->trans('foo'[, args])
         preg_match_all('/((?:->trans|__)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?\))/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[6][$i] ?: 'messages';
@@ -129,7 +129,7 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
-        // php matches ...->transChoice('foo')
+        // php matches ...->transChoice('foo'[, args])
         preg_match_all('/((?:->transChoice|_c)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?.+\))/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = $matches[6][$i] ?: 'messages';
@@ -137,8 +137,7 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
-
-        // sort all pairs according to domain
+        // group strings by message domain
         $messages = [];
         foreach ($pairs as $pair) {
             list($domain, $string) = $pair;
@@ -151,7 +150,6 @@ class ExtensionTranslateCommand extends Command
         }
 
         return $messages;
-
     }
 
     /**
@@ -180,7 +178,6 @@ class ExtensionTranslateCommand extends Command
      */
     protected function getPath($path)
     {
-
         if ($path == 'system') {
             // system module
             $root = $this->config['path'].'/app';
@@ -250,5 +247,4 @@ msgstr ""
 
 EOD;
     }
-
 }
