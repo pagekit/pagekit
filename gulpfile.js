@@ -25,9 +25,13 @@ var pkgs = [
 // banner for the css files
 var banner = "/*! <%= data.title %> <%= data.version %> | (c) 2014 Pagekit | MIT License */\n";
 
-var cldr = path.join(__dirname, 'node_modules/cldr-localenames-modern/main/');
-var formats = path.join(__dirname, 'vendor/assets/vue-intl/dist/locales/');
-var languages = path.join(__dirname, 'app/system/languages/');
+var cldr = {
+    cldr: path.join(__dirname, 'node_modules/cldr-core/supplemental/'),
+    intl: path.join(__dirname, 'app/system/modules/intl/data/'),
+    locales: path.join(__dirname, 'node_modules/cldr-localenames-modern/main/'),
+    formats: path.join(__dirname, 'vendor/assets/vue-intl/dist/locales/'),
+    languages: path.join(__dirname, 'app/system/languages/')
+};
 
 gulp.task('default', ['compile']);
 
@@ -75,9 +79,17 @@ gulp.task('lint', function () {
 
 gulp.task('cldr', function () {
 
-    fs.readdirSync(languages)
+    // territoryContainment
+    var data = {}, json = JSON.parse(fs.readFileSync(cldr.cldr + 'territoryContainment.json', 'utf8')).supplemental.territoryContainment;
+    Object.keys(json).forEach(function (key) {
+        if (isNaN(key)) return;
+        data[key] = json[key]._contains;
+    });
+    fs.writeFileSync(cldr.intl + 'territoryContainment.json', JSON.stringify(data));
+
+    fs.readdirSync(cldr.languages)
         .filter(function (file) {
-            return fs.statSync(path.join(languages, file)).isDirectory();
+            return fs.statSync(path.join(cldr.languages, file)).isDirectory();
         })
         .forEach(function (src) {
 
@@ -87,10 +99,10 @@ gulp.task('cldr', function () {
 
                 found = false;
                 [id, shortId, 'en'].forEach(function (locale) {
-                    var file = cldr + locale + '/' + name + '.json';
+                    var file = cldr.locales + locale + '/' + name + '.json';
                     if (!found && fs.existsSync(file)) {
                         found = true;
-                        fs.writeFileSync(languages + src + '/' + name + '.json', JSON.stringify(JSON.parse(fs.readFileSync(file, 'utf8')).main[locale].localeDisplayNames[name]));
+                        fs.writeFileSync(cldr.languages + src + '/' + name + '.json', JSON.stringify(JSON.parse(fs.readFileSync(file, 'utf8')).main[locale].localeDisplayNames[name]));
                     }
                 });
 
@@ -98,10 +110,10 @@ gulp.task('cldr', function () {
 
             found = false;
             [id.toLowerCase(), shortId, 'en'].forEach(function (locale) {
-                var file = formats + locale + '.json';
+                var file = cldr.formats + locale + '.json';
                 if (!found && fs.existsSync(file)) {
                     found = true;
-                    fs.writeFileSync(languages + src + '/formats.json', fs.readFileSync(file, 'utf8'));
+                    fs.writeFileSync(cldr.languages + src + '/formats.json', fs.readFileSync(file, 'utf8'));
                 }
             });
 

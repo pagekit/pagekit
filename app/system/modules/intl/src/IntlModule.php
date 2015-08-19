@@ -123,6 +123,39 @@ class IntlModule extends Module
     }
 
     /**
+     * Gets the continents list.
+     *
+     * @param  string $locale
+     * @return array
+     */
+    public function getContinents($locale = null)
+    {
+        return $this->getTerritoryContainment(1, $locale);
+    }
+
+    /**
+     * Gets the subcontinents list.
+     *
+     * @param  string $locale
+     * @return array
+     */
+    public function getSubContinents($locale = null)
+    {
+        return $this->getTerritoryContainment(2, $locale);
+    }
+
+    /**
+     * Gets the countries list.
+     *
+     * @param  string $locale
+     * @return array
+     */
+    public function getCountries($locale = null)
+    {
+        return $this->getTerritoryContainment(3, $locale);
+    }
+
+    /**
      * Gets the locales formats data.
      *
      * @param  string $locale
@@ -165,19 +198,76 @@ class IntlModule extends Module
         }
     }
 
+    protected function getTerritoryContainment($level = 1, $locale = null)
+    {
+        static $tree;
+
+        if (null === $tree) {
+            $tree = [];
+            $data = $this->getGeneric('territoryContainment');
+
+            $build = function($code, &$tree) use (&$build, $data) {
+
+                $tree[$code] = [];
+
+                if (isset($data[$code])) {
+                    foreach ($data[$code] as $node) {
+                        $build($node, $tree[$code]);
+                    }
+                }
+
+            };
+
+            $build('001', $tree);
+        }
+
+        $getLevel = function ($node, $depth = 1) use (&$getLevel, $level) {
+            if ($level === $depth) {
+                return $node;
+            }
+
+            $result = [];
+            foreach ($node as $child) {
+                $result += $getLevel($child, $depth + 1);
+            }
+            return $result;
+        };
+
+        return array_intersect_key($this->getTerritories($locale), $getLevel($tree['001']));
+    }
+
     /**
      * @param  string      $name
      * @param  string|null $locale
-     * @return mixed|null
+     * @return array|null
      */
     protected function getData($name, $locale = null)
     {
         $locale = $locale ?: $this->getLocale();
+        return $this->parse("app/system/languages/{$locale}/{$name}.json");
+    }
 
-        if (App::file()->exists($file = "app/system/languages/{$locale}/{$name}.json")) {
-            return json_decode(file_get_contents(App::file()->getPath($file)), true);
+    /**
+     * @param  string $name
+     * @return array|null
+     */
+    protected function getGeneric($name)
+    {
+        return $this->parse("system/intl:data/{$name}.json");
+    }
+
+    /**
+     * @param  string $file
+     * @return array|null
+     */
+    protected function parse($file)
+    {
+        static $data = [];
+
+        if (!isset($data[$file])) {
+            $data[$file] = ($file = App::locator()->get($file)) ? json_decode(file_get_contents($file), true) : null;
         }
 
-        return null;
+        return $data[$file];
     }
 }
