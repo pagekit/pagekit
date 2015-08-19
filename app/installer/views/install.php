@@ -35,7 +35,7 @@
 
                         <form class="uk-form" name="formLanguage" v-on="submit: stepLanguage">
 
-                            <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions" multiple></select>
+                            <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions"></select>
 
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
