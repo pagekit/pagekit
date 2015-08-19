@@ -103,7 +103,7 @@ return [
                 $app['isAdmin'] = $admin = (bool)preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
                 $app->module('system/intl')->setLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
-            }, 50],
+            }, 150],
 
             [function ($event) use ($app) {
 
