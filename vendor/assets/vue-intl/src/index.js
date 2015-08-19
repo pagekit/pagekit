@@ -21,6 +21,7 @@ function install(Vue) {
     Vue.filter('date', v.$date);
     Vue.filter('number', v.$number);
     Vue.filter('currency', v.$currency);
+    Vue.filter('relativeDate', v.$relativeDate);
 }
 
 if (window.Vue) {

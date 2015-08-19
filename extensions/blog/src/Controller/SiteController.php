@@ -46,6 +46,7 @@ class SiteController
         $query->offset(($page - 1) * $limit)->limit($limit)->orderBy('date', 'DESC');
 
         foreach ($posts = $query->get() as $post) {
+            $post->excerpt = App::content()->applyPlugins($post->excerpt, ['post' => $post, 'markdown' => $post->get('markdown')]);
             $post->content = App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown'), 'readmore' => true]);
         }
 
@@ -120,6 +121,7 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
+        $post->excerpt = App::content()->applyPlugins($post->excerpt, ['post' => $post, 'markdown' => $post->get('markdown')]);
         $post->content = App::content()->applyPlugins($post->content, ['post' => $post, 'markdown' => $post->get('markdown')]);
 
         $user = App::user();

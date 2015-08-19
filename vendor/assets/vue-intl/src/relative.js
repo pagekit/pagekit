@@ -52,8 +52,8 @@ module.exports = function (_) {
         return Math.round(seconds / time_in_seconds[unit]);
     }
 
-    return function (seconds, fmt_options) {
-        var key, number, obj, options, patterns = this.$locale.TIMESPAN_FORMATS;
+    function format(seconds, fmt_options, patterns) {
+        var key, number, obj, options;
         if (fmt_options == null) {
             fmt_options = {};
         }
@@ -71,6 +71,11 @@ module.exports = function (_) {
         number = calculate_time(Math.abs(seconds), options["unit"]);
         options["rule"] = _.pluralCat('de', number);
         return patterns[options["direction"]][options["unit"]][options["type"]][options["rule"]].replace(/\{[0-9]\}/, number.toString());
-    };
+    }
+
+    return function (date, options) {
+        date = date instanceof Date ? date : new Date(date);
+        return format((date - new Date()) / 1000, options, this.$locale.TIMESPAN_FORMATS);
+    }
 
 };
