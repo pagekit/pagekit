@@ -38,10 +38,20 @@ class PhpNodeVisitor extends NodeVisitor implements BaseVisitor
     public function enterNode(Node $node)
     {
         if ($node instanceof Node\Expr\FuncCall
+            && isset($node->name) && isset($node->name->parts)
             && ($node->name->parts[0] == '__' || $node->name->parts[0] == '_c')
-            && isset($node->args[0]) && is_string($string = $node->args[0]->value->value)
+            && isset($node->args[0]) && isset($node->args[0]->value->value)
+            && is_string($string = $node->args[0]->value->value)
         ) {
             $key                               = $node->name->parts[0] == '__' ? 2 : 3;
+            $domain                            = isset($node->args[$key]) && is_string($node->args[$key]->value->value) ? $node->args[$key]->value->value : 'messages';
+            $this->results[$domain][$string][] = ['file' => $this->file, 'line' => $node->getLine()];
+        } elseif ($node instanceof Node\Expr\MethodCall
+            && isset($node->name)
+            && ($node->name == 'trans' || $node->name == 'transChoice')
+            && isset($node->args[0]) && isset($node->args[0]->value->value)
+            && is_string($string = $node->args[0]->value->value)) {
+            $key                               = $node->name == 'trans' ? 2 : 3;
             $domain                            = isset($node->args[$key]) && is_string($node->args[$key]->value->value) ? $node->args[$key]->value->value : 'messages';
             $this->results[$domain][$string][] = ['file' => $this->file, 'line' => $node->getLine()];
         }

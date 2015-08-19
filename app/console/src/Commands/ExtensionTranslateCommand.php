@@ -3,6 +3,7 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Console\Command;
+use Pagekit\Console\NodeVisitor\PhpNodeVisitor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,6 +22,8 @@ class ExtensionTranslateCommand extends Command
      */
     protected $description = 'Generates extension\'s translation .pot/.po/.php files';
 
+    protected $visitor;
+
     /**
      * {@inheritdoc}
      */
@@ -37,6 +40,9 @@ class ExtensionTranslateCommand extends Command
         $extension = $this->argument('extension') ?: 'system';
         $files     = $this->getFiles($path = $this->getPath($extension), $extension);
         $languages = "$path/languages";
+
+        $app = $this->getApplication()->getPagekit();
+        $this->visitor = new PhpNodeVisitor($app['view']->getEngine());
 
         $this->line("Extracting strings for extension '$extension'");
 
@@ -57,7 +63,13 @@ class ExtensionTranslateCommand extends Command
             $strings = $this->extractStrings($file);
             foreach ($strings as $domain => $messages) {
                 if(array_key_exists($domain, $result)) {
-                    $result[$domain] = array_merge($result[$domain], $messages);
+
+                    // custom merge (array_merge would create duplicates from numeric keys)
+                    foreach ($messages as $key => $value) {
+                        $result[$domain][$key] = $key;
+                    }
+                    // $result[$domain] = array_merge($result[$domain], $messages);
+
                 } else {
                     $result[$domain] = $messages;
                 }
@@ -121,20 +133,14 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
-        // php matches ...->trans('foo'[, args])
-        preg_match_all('/((?:->trans|__)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?\))/', $content, $matches);
-        foreach ($matches[3] as $i => $string) {
-            $domain = $matches[6][$i] ?: 'messages';
+        // php matches ...->trans('foo'[, args]) or __('foo'[, args])
+        // php matches ...->transChoice('foo'[, args]) or _c('foo'[, args])
+        $this->visitor->traverse([$file]);
 
-            $pairs[] = [$domain, $string];
-        }
-
-        // php matches ...->transChoice('foo'[, args])
-        preg_match_all('/((?:->transChoice|_c)\((\'|")\s*((?:(?!\2).)+)\2\s*(?:,\s*[^,]+\s*,\s*[^,]+\s*,\s*((\'|")\s*((?:(?!\5).)+)\5).*)?.+\))/', $content, $matches);
-        foreach ($matches[3] as $i => $string) {
-            $domain = $matches[6][$i] ?: 'messages';
-
-            $pairs[] = [$domain, $string];
+        foreach ($this->visitor->results as $domain => $strings) {
+            foreach ($strings as $string => $attr) {
+                $pairs[] = [$domain, $string];
+            }
         }
 
         // group strings by message domain
