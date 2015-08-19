@@ -10,6 +10,8 @@ use GuzzleHttp\Exception\TransferException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 
 class SelfupdateCommand extends Command
@@ -46,7 +48,19 @@ class SelfupdateCommand extends Command
         if (!$this->option('url')) {
             $output->write('Requesting Version...');
             $versions = $this->getVersions();
-            $output->writeln('Latest Version: ' . $versions['latest']['version']);
+            $output->writeln('<info>done.</info>');
+
+            $output->writeln('');
+            $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
+            $output->writeln('');
+
+            $helper = $this->getHelper('question');
+            $question = new ConfirmationQuestion('Update to Version ' . $versions['latest']['version'] . '? [y/n]', false);
+
+            if (!$helper->ask($input, $output, $question)) {
+                return;
+            }
+            $output->writeln('');
 
             $url = $versions['latest']['url'];
             $shasum = $versions['latest']['shasum'];
@@ -55,25 +69,120 @@ class SelfupdateCommand extends Command
             $shasum = $this->option('shasum');
         }
 
-        $updateDir = $this->config['path.temp'] . '/' . sha1(uniqid());
+        $tmpFile = $this->config['path.temp'] . '/' . sha1(uniqid());
 
         $output->write('Downloading...');
-        $this->download($url, $shasum, $updateDir);
-        $output->writeln('done.');
+        $this->download($url, $shasum, $tmpFile);
+        $output->writeln('<info>done.</info>');
 
-        $output->writeln('Entering maintenance mode');
+        $output->write('Entering maintenance mode...');
         $this->setMaintenanceMode(true);
+        $output->writeln('<info>done.</info>');
 
-        $output->writeln('Copying files');
-        $this->copy($updateDir);
+        $output->write('Extracting files...');
+        $target = $this->config['path'] . '/test';
+        $this->extract($tmpFile, $target);
+        $output->writeln('<info>done.</info>');
 
-        $output->writeln('Migrating database');
+        $output->write('Migrating database...');
         $this->database();
+        $output->writeln('<info>done.</info>');
 
         //TODO: Clear cache
 
+        $output->write('Deactivating maintenance mode...');
         $this->setMaintenanceMode(false);
-        $output->writeln('Deactivating maintenance mode');
+        $output->writeln('<info>done.</info>');
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getVersions()
+    {
+        try {
+            $res = $this->client->get(self::API . '/update');
+        } catch (\Exception $e) {
+            if ($e instanceof TransferException) {
+                throw new \RuntimeException(__('Could not obtain latest Version.'));
+            }
+            throw $e;
+        }
+
+        return json_decode($res->getBody(), true);
+    }
+
+    /**
+     * @param $url
+     * @param $shasum
+     * @param $file
+     * @throws \Exception
+     */
+    public function download($url, $shasum, $file)
+    {
+        try {
+            if (!$url) {
+                throw new \RuntimeException(__('Package url is missing.'));
+            }
+
+            $data = $this->client->get($url)->getBody();
+
+            if (sha1($data) !== $shasum) {
+                throw new \RuntimeException(__('Package checksum verification failed.'));
+            }
+
+            if (!file_put_contents($file, $data)) {
+                throw new \RuntimeException(__('Path is not writable.'));
+            }
+
+        } catch (\Exception $e) {
+            unlink($file);
+
+            if ($e instanceof TransferException) {
+                if ($e instanceof BadResponseException) {
+                    throw new \RuntimeException(__('Invalid API key.'));
+                }
+                throw new \RuntimeException(__('Package download failed.'));
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * @param $file
+     * @param $path
+     */
+    protected function extract($file, $path)
+    {
+        $zip = new \ZipArchive;
+        if ($zip->open($file) === true) {
+
+            $zip->deleteName(".htaccess");
+
+            $zip->extractTo($path);
+            $zip->close();
+        } else {
+            throw new \RuntimeException(__('Package extraction failed.'));
+        }
+
+        unlink($file);
+    }
+
+
+    /**
+     * Migrating the database.
+     */
+    protected function database()
+    {
+        $pagekit = $this->getApplication()->getPagekit();
+        $pagekit->extend('migrator', function ($migrator) {
+            return $migrator->setLoader(new FilesystemLoader());
+        });
+
+        $currentVersion = $pagekit->config('system')->get('version');
+        if ($version = $pagekit['migrator']->create('app/system/migrations', $currentVersion)->run()) {
+            $pagekit->config('system')->set('version', $version);
+        }
     }
 
 
@@ -105,119 +214,6 @@ class SelfupdateCommand extends Command
         }
 
         file_put_contents($this->config['config.file'], '<?php return ' . var_export($config, true) . ';');
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getVersions()
-    {
-        try {
-            $res = $this->client->get(self::API . '/update');
-        } catch (\Exception $e) {
-            if ($e instanceof TransferException) {
-                throw new \RuntimeException(__('Could not obtain latest Version.'));
-            }
-            throw $e;
-        }
-
-        return json_decode($res->getBody(), true);
-    }
-
-    /**
-     * @param $url
-     * @param $shasum
-     * @param $updateDir
-     * @throws \Exception
-     */
-    public function download($url, $shasum, $updateDir)
-    {
-        $file = $updateDir . '/' . uniqid();
-        try {
-            if (!$url) {
-                throw new \RuntimeException(__('Package url is missing.'));
-            }
-
-            $data = $this->client->get($url)->getBody();
-
-            if (sha1($data) !== $shasum) {
-                throw new \RuntimeException(__('Package checksum verification failed.'));
-            }
-
-            if (!mkdir($updateDir) || !file_put_contents($file, $data)) {
-                throw new \RuntimeException(__('Path is not writable.'));
-            }
-
-            $zip = new \ZipArchive;
-            if ($res = $zip->open($file)) {
-                $zip->extractTo($updateDir);
-                $zip->close();
-            } else {
-                throw new \RuntimeException(__('Package extraction failed.'));
-            }
-
-            unlink($file);
-
-        } catch (\Exception $e) {
-            unlink($file);
-
-            if ($e instanceof TransferException) {
-                if ($e instanceof BadResponseException) {
-                    throw new \RuntimeException(__('Invalid API key.'));
-                }
-                throw new \RuntimeException(__('Package download failed.'));
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * @param $updateDir
-     */
-    protected function copy($updateDir)
-    {
-        unlink("$updateDir/.htaccess");
-        $this->moveRecursive($updateDir, $this->config['path']);
-    }
-
-    /**
-     *
-     */
-    protected function database()
-    {
-        $pagekit = $this->getApplication()->getPagekit();
-        $pagekit->extend('migrator', function ($migrator) {
-            return $migrator->setLoader(new FilesystemLoader());
-        });
-
-        $currentVersion = $pagekit->config('system')->get('version');
-        if ($version = $pagekit['migrator']->create('app/system/migrations', $currentVersion)->run()) {
-            $pagekit['config']($this->name)->set('version', $version);
-        }
-    }
-
-    /**
-     * @param $dir
-     * @param $path
-     */
-    protected function moveRecursive($dir, $path)
-    {
-        foreach (array_diff(scandir($dir), array('..', '.')) as $file) {
-            $oldName = $dir . '/' . $file;
-            $newName = $path . '/' . $file;
-
-            if (is_dir($oldName)) {
-                if (!is_dir($newName)) {
-                    mkdir($newName);
-                }
-                chmod($newName, 0755);
-                $this->moveRecursive($oldName, $newName);
-                rmdir($oldName);
-            } else {
-                rename($oldName, $newName);
-                chmod($newName, 0755);
-            }
-        }
     }
 
 }
