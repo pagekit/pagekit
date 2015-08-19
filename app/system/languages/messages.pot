@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit 0.8.8 (system, messages)\n"
-"POT-Creation-Date: 2015-02-09 13:42+0000\n"
+"Project-Id-Version: Pagekit UNKNOWN (system, messages)\n"
+"POT-Creation-Date: 2015-08-19 14:25+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,3781 +9,906 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: app/modules/cache/views/admin/settings.razr:1
-#: app/modules/cache/views/admin/settings.razr:4
-#: app/modules/cache/src/CacheModule.php:81
-msgid "Cache"
-msgstr ""
-
-#: app/modules/cache/views/admin/settings.razr:14
-#: app/modules/system/views/admin/settings/settings.razr:84
-msgid "Developer"
-msgstr ""
-
-#: app/modules/cache/views/admin/settings.razr:18
-msgid "Disable cache"
-msgstr ""
-
-#: app/modules/console/skeleton/extension/views/admin/settings.razr:7
-#: app/modules/console/skeleton/theme/views/admin/settings.razr:7
-#: app/modules/dashboard/views/admin/edit.razr:5
-#: app/modules/user/views/admin/edit.razr:7
-#: app/modules/widget/views/admin/edit.razr:7
-#: app/modules/system/views/admin/settings/settings.razr:7
-#: app/modules/site/views/tmpl/site.edit.php:7
-msgid "Close"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/edit.razr:4
-#: app/modules/user/views/admin/edit.razr:6
-#: app/modules/user/views/admin/role.razr:90
-#: app/modules/user/views/profile.razr:46
-#: app/modules/widget/views/admin/edit.razr:6
-#: app/modules/system/views/admin/settings/settings.razr:6
-#: app/modules/site/views/tmpl/site.edit.php:6
-#: app/modules/site/views/tmpl/site.list.php:75
-msgid "Save"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/edit.razr:5
-#: app/modules/user/views/admin/edit.razr:7
-#: app/modules/user/views/admin/role.razr:91
-#: app/modules/widget/views/admin/edit.razr:7
-#: app/modules/system/views/admin/settings/index.razr:125
-#: app/modules/system/views/tmpl/image.modal.razr:25
-#: app/modules/system/views/tmpl/image.modal.razr:33
-#: app/modules/system/views/tmpl/link.modal.razr:13
-#: app/modules/system/views/tmpl/linkpicker.modal.razr:7
-#: app/modules/system/views/tmpl/package.upload.razr:36
-#: app/modules/system/views/tmpl/video.modal.razr:24
-#: app/modules/system/views/tmpl/video.modal.razr:32
-#: app/modules/site/views/tmpl/site.edit.php:7
-#: app/modules/site/views/tmpl/site.list.php:76
-msgid "Cancel"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/settings.razr:8
-#: app/modules/widget/views/admin/index.razr:9
-#: app/modules/dashboard/src/Controller/DashboardController.php:87
-#: app/modules/widget/src/Controller/WidgetsController.php:60
-msgid "Add Widget"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/settings.razr:18
-#: app/modules/user/views/admin/index.razr:9
-#: app/modules/user/views/admin/role.razr:17
-#: app/modules/widget/views/admin/index.razr:19
-#: app/modules/system/views/admin/extensions/table.razr:43
-#: app/modules/system/views/admin/themes/table.razr:27
-#: app/modules/system/views/tmpl/finder.main.razr:11
-#: app/modules/system/views/tmpl/image.replace.razr:15
-#: app/modules/system/views/tmpl/video.replace.razr:15
-#: app/modules/site/views/tmpl/site.list.php:13
-msgid "Delete"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/settings.razr:24
-msgid "Widget"
-msgstr ""
-
-#: app/modules/dashboard/views/admin/settings.razr:25
-#: app/modules/widget/views/admin/index.razr:68
-#: app/modules/system/views/admin/link/link.types.razr:8
-msgid "Type"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:2
-#: app/modules/widget/views/admin/edit.razr:25
-#: app/modules/widget/views/admin/index.razr:65
-#: app/modules/system/views/admin/settings/settings.razr:31
-#: app/modules/system/views/tmpl/link.modal.razr:5
-#: app/modules/site/views/tmpl/site.edit.php:15
-msgid "Title"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:9
-#: app/modules/system/views/admin/link/link.types.razr:2
-#: app/modules/system/views/tmpl/image.modal.razr:12
-#: app/modules/system/views/tmpl/video.modal.razr:15
-msgid "URL"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:16
-msgid "Number of Posts"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:27
-msgid "Post Content"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:30
-msgid "Don't show"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:33
-msgid "Show on all posts"
-msgstr ""
-
-#: app/modules/dashboard/views/feed/edit.razr:36
-msgid "Only show on first post."
-msgstr ""
-
-#: app/modules/dashboard/views/feed/tmpl/error.razr:1
-msgid "Unable to retrieve feed data."
-msgstr ""
-
-#: app/modules/dashboard/views/weather/edit.razr:4
-msgid "Location"
-msgstr ""
-
-#: app/modules/dashboard/views/weather/edit.razr:10
-msgid "Enter the name of the city you want to get weather information for."
-msgstr ""
-
-#: app/modules/dashboard/views/weather/edit.razr:15
-msgid "Unit"
-msgstr ""
-
-#: app/modules/dashboard/views/weather/edit.razr:18
-msgid "Metric"
-msgstr ""
-
-#: app/modules/dashboard/views/weather/edit.razr:21
-msgid "Imperial"
-msgstr ""
-
-#: app/modules/dashboard/views/weather/index.razr:12
-#: app/modules/dashboard/src/WeatherWidget.php:24
-msgid "Weather"
-msgstr ""
-
-#: app/modules/dashboard/views/weather/index.razr:13
-msgid "Unable to retrieve weather data."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:5
-msgid "Pagekit Installer"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:26
-msgid "Begin"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:36
-msgid "Connect database"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:38
-msgid "Enter your database connection details."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:43
-#: app/modules/system/views/admin/settings/info.razr:81
-msgid "Driver"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:54
-msgid "Hostname"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:57
-msgid "Host cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:62
-#: app/modules/user/views/admin/settings.razr:1
-#: app/modules/user/views/admin/table.razr:6
-#: app/modules/user/module.php:58
-msgid "User"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:65
-msgid "User cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:70
-#: app/modules/installer/views/install.razr:131
-#: app/modules/theme/templates/login.razr:31
-#: app/modules/user/views/admin/edit.razr:57
-#: app/modules/user/views/login.razr:13
-#: app/modules/user/views/registration.razr:29
-msgid "Password"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:74
-#: app/modules/installer/views/install.razr:74
-#: app/modules/installer/views/install.razr:135
-#: app/modules/installer/views/install.razr:135
-#: app/modules/mail/views/admin/settings.razr:50
-#: app/modules/user/views/admin/edit.razr:68
-#: app/modules/user/views/admin/edit.razr:68
-#: app/modules/user/views/profile.razr:30
-#: app/modules/user/views/profile.razr:30
-#: app/modules/user/views/profile.razr:40
-#: app/modules/user/views/profile.razr:40
-#: app/modules/user/views/registration.razr:33
-#: app/modules/user/views/registration.razr:33
-#: app/modules/user/views/reset/confirm.razr:12
-#: app/modules/user/views/reset/confirm.razr:12
-msgid "Show"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:74
-#: app/modules/installer/views/install.razr:135
-#: app/modules/user/views/admin/edit.razr:68
-#: app/modules/user/views/profile.razr:30
-#: app/modules/user/views/profile.razr:40
-#: app/modules/user/views/registration.razr:33
-#: app/modules/user/views/reset/confirm.razr:12
-msgid "Hide"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:80
-msgid "Database Name"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:83
-msgid "Database name cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:88
-#: app/modules/installer/views/install.razr:97
-msgid "Table Prefix"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:105
-#: app/modules/installer/views/install.razr:150
-#: app/modules/installer/views/install.razr:183
-msgid "Next"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:116
-msgid "Create your account"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:118
-msgid "You will be the site administrator."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:123
-#: app/modules/theme/templates/login.razr:27
-#: app/modules/user/views/admin/edit.razr:36
-#: app/modules/user/views/login.razr:6
-#: app/modules/user/views/registration.razr:8
-msgid "Username"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:126
-msgid "Username cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:137
-msgid "Password cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:142
-#: app/modules/mail/views/admin/settings.razr:3
-#: app/modules/theme/templates/login.razr:50
-#: app/modules/user/views/admin/edit.razr:50
-#: app/modules/user/views/admin/table.razr:8
-#: app/modules/user/views/profile.razr:15
-#: app/modules/user/views/registration.razr:22
-#: app/modules/user/views/reset/request.razr:8
-msgid "Email"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:145
-msgid "Field must be a valid email address."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:161
-msgid "Setup your site"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:163
-msgid "Enter your website details."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:168
-#: app/modules/user/views/admin/edit.razr:43
-#: app/modules/user/views/profile.razr:8
-#: app/modules/user/views/registration.razr:15
-#: app/modules/system/views/admin/extensions/table.razr:4
-#: app/modules/system/views/tmpl/package.updates.razr:5
-msgid "Name"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:171
-msgid "Site name cannot be blank."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:176
-#: app/modules/system/views/admin/settings/settings.razr:37
-msgid "Description"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:195
-msgid "Installing Pagekit..."
-msgstr ""
-
-#: app/modules/installer/views/install.razr:203
-msgid "Installation failed!"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:212
-msgid "Retry"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:218
-msgid "Finished!"
-msgstr ""
-
-#: app/modules/installer/views/install.razr:225
-msgid "Login now"
-msgstr ""
-
-#: app/modules/locale/views/admin/settings.razr:1
-#: app/modules/locale/module.php:129
-msgid "Localization"
-msgstr ""
-
-#: app/modules/locale/views/admin/settings.razr:3
-msgid "Site Locale"
-msgstr ""
-
-#: app/modules/locale/views/admin/settings.razr:13
-msgid "Admin Locale"
-msgstr ""
-
-#: app/modules/locale/views/admin/settings.razr:23
-msgid "Time Zone"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:5
-msgid "From Email"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:11
-msgid "From Name"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:17
-msgid "Mailer"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:20
-msgid "PHP Mailer"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:20
-msgid "SMTP Mailer"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:28
-msgid "SMTP Port"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:34
-msgid "SMTP Host"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:40
-msgid "SMTP User"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:46
-msgid "SMTP Password"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:55
-msgid "SMTP Encryption"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:58
-msgid "None"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:59
-msgid "SSL"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:59
-msgid "TLS"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:64
-msgid "Please enable the PHP Open SSL extension."
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:71
-msgid "Check Connection"
-msgstr ""
-
-#: app/modules/mail/views/admin/settings.razr:72
-msgid "Send Test Email"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:2
-#: app/modules/widget/views/admin/edit.razr:40
-#: app/modules/menu/src/Widget/MenuWidget.php:24
-msgid "Menu"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:12
-msgid "Start Level"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:22
-msgid "Depth"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:25
-msgid "No Limit"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:33
-msgid "Sub Items"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:36
-msgid "Show all"
-msgstr ""
-
-#: app/modules/menu/views/widgets/menu/edit.razr:39
-msgid "Show only for active item"
-msgstr ""
-
-#: app/modules/oauth/views/admin/settings.razr:3
-#: app/modules/oauth/module.php:21
-msgid "OAuth"
-msgstr ""
-
-#: app/modules/oauth/views/admin/settings.razr:10
-msgid "Redirect URL: %url%"
-msgstr ""
-
-#: app/modules/oauth/views/tmpl/settings.razr:5
-msgid "<a href=\"%url%\">Google API Console</a>"
-msgstr ""
-
-#: app/modules/oauth/views/tmpl/settings.razr:6
-msgid "<a href=\"%url%\">Amazon</a>"
-msgstr ""
-
-#: app/modules/oauth/views/tmpl/settings.razr:9
-msgid "Client ID"
-msgstr ""
-
-#: app/modules/oauth/views/tmpl/settings.razr:15
-msgid "Client Secret"
-msgstr ""
-
-#: app/modules/theme/templates/error.razr:4
-msgid "Error"
-msgstr ""
-
-#: app/modules/theme/templates/login.razr:35
-#: app/modules/user/views/login/login.razr:10
-#: app/modules/user/views/login.razr:3
-#: app/modules/user/src/Controller/AuthController.php:29
-#: app/modules/user/src/Widget/LoginWidget.php:26
-#: app/modules/system/src/Controller/AdminController.php:33
-msgid "Login"
-msgstr ""
-
-#: app/modules/theme/templates/login.razr:38
-#: app/modules/user/views/login/login.razr:14
-#: app/modules/user/views/login.razr:24
-msgid "Remember Me"
-msgstr ""
-
-#: app/modules/theme/templates/login.razr:39
-#: app/modules/user/views/login/login.razr:15
-msgid "Forgot Password?"
-msgstr ""
-
-#: app/modules/theme/templates/login.razr:53
-msgid "Reset Password"
-msgstr ""
-
-#: app/modules/theme/templates/maintenance.razr:23
-#: app/modules/system/views/admin/settings/settings.razr:43
-msgid "Maintenance"
-msgstr ""
-
-#: app/modules/theme/templates/migration.razr:23
-#: app/modules/system/src/Controller/MigrationController.php:18
-msgid "Update Pagekit"
-msgstr ""
-
-#: app/modules/theme/templates/migration.razr:24
-msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
-msgstr ""
-
-#: app/modules/theme/templates/migration.razr:26
-#: app/modules/system/views/admin/settings/index.razr:54
-#: app/modules/system/views/admin/settings/index.razr:55
-#: app/modules/system/views/admin/settings/update.razr:11
-#: app/modules/system/views/tmpl/image.modal.razr:24
-#: app/modules/system/views/tmpl/link.modal.razr:12
-#: app/modules/system/views/tmpl/linkpicker.modal.razr:6
-#: app/modules/system/views/tmpl/marketplace.details.razr:9
-#: app/modules/system/views/tmpl/package.updates.razr:25
-#: app/modules/system/views/tmpl/video.modal.razr:23
-#: app/modules/system/src/Controller/UpdateController.php:25
-msgid "Update"
-msgstr ""
-
-#: app/modules/theme/templates/template.razr:23
-#: app/modules/theme/templates/template.razr:40
-msgid "Pagekit"
-msgstr ""
-
-#: app/modules/theme/templates/template.razr:66
-#: app/modules/theme/templates/template.razr:134
-msgid "Visit Site"
-msgstr ""
-
-#: app/modules/theme/templates/template.razr:67
-#: app/modules/theme/templates/template.razr:135
-#: app/modules/widget/views/admin/edit.razr:14
-#: app/modules/system/views/admin/extensions/table.razr:23
-#: app/modules/system/views/admin/settings/index.razr:11
-#: app/modules/system/views/admin/settings/index.razr:12
-#: app/modules/system/views/admin/themes/table.razr:21
-#: app/modules/system/views/tmpl/image.replace.razr:14
-#: app/modules/system/views/tmpl/video.replace.razr:14
-#: app/modules/system/languages/messages.php:24
-#: app/modules/system/src/Controller/SettingsController.php:44
-#: app/modules/system/src/Controller/SystemController.php:31
-msgid "Settings"
-msgstr ""
-
-#: app/modules/theme/templates/template.razr:68
-#: app/modules/theme/templates/template.razr:136
-#: app/modules/user/views/login/logout.razr:2
-msgid "Logout"
-msgstr ""
-
-#: app/modules/theme/templates/template.razr:115
-#: app/modules/system/views/admin/settings/index.razr:20
-#: app/modules/system/views/admin/settings/index.razr:21
-#: app/modules/system/views/admin/settings/index.razr:79
-#: app/modules/system/views/admin/settings/info.razr:61
-#: app/modules/system/src/Controller/ExtensionsController.php:37
-msgid "Extensions"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:19
-#: app/modules/user/views/admin/edit.razr:111
-#: app/modules/user/views/admin/index.razr:27
-#: app/modules/user/views/admin/table.razr:25
-msgid "New"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:24
-msgid "Verified email address"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:25
-msgid "Last login: %date%"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:25
-#: app/modules/user/src/Controller/UserController.php:261
-msgid "Never"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:26
-msgid "Registered since: %date%"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:61
-#: app/modules/user/views/profile.razr:22
-msgid "Change password"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:75
-#: app/modules/user/views/admin/table.razr:7
-#: app/modules/widget/views/admin/edit.razr:73
-#: app/modules/widget/views/admin/index.razr:66
-#: app/modules/system/views/admin/extensions/table.razr:6
-#: app/modules/system/views/admin/settings/info.razr:104
-msgid "Status"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:87
-#: app/modules/user/views/admin/table.razr:9
-#: app/modules/system/languages/messages.php:29
-#: app/modules/user/src/Controller/RoleController.php:34
-msgid "Roles"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:117
-msgid "Last login: {{login}}"
-msgstr ""
-
-#: app/modules/user/views/admin/edit.razr:118
-msgid "Registered since: {{registered}}"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:8
-#: app/modules/user/src/Controller/UserController.php:99
-msgid "Add User"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:12
-#: app/modules/widget/views/admin/index.razr:22
-msgid "More"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:15
-msgid "Activate"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:16
-msgid "Block"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:26
-#: app/modules/widget/views/admin/index.razr:37
-msgid "- Status -"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:34
-msgid "- Role -"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:41
-msgid "- Permission -"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:51
-#: app/modules/widget/views/admin/index.razr:56
-#: app/modules/system/views/admin/extensions/index.razr:61
-#: app/modules/system/views/admin/themes/index.razr:61
-#: app/modules/system/views/tmpl/finder.main.razr:17
-msgid "Search"
-msgstr ""
-
-#: app/modules/user/views/admin/index.razr:56
-msgid "No user found."
-msgstr ""
-
-#: app/modules/user/views/admin/permission.razr:11
-#: app/modules/user/views/admin/role.razr:43
-msgid "Permission"
-msgstr ""
-
-#: app/modules/user/views/admin/role.razr:16
-msgid "Edit"
-msgstr ""
-
-#: app/modules/user/views/admin/role.razr:17
-#: app/modules/system/views/tmpl/finder.main.razr:1
-msgid "Are you sure?"
-msgstr ""
-
-#: app/modules/user/views/admin/role.razr:28
-msgid "Add Role"
-msgstr ""
-
-#: app/modules/user/views/admin/role.razr:87
-msgid "Enter Role Name"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:3
-#: app/modules/user/views/registration.razr:5
-msgid "Registration"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:6
-msgid "Adminstrators only"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:9
-msgid "Guests"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:12
-msgid "Guests, but administrator approval is required"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:17
-msgid "Verification"
-msgstr ""
-
-#: app/modules/user/views/admin/settings.razr:20
-msgid "Require e-mail verification when a guest creates an account."
-msgstr ""
-
-#: app/modules/user/views/admin/table.razr:31
-msgid "Verified Email Address"
-msgstr ""
-
-#: app/modules/user/views/dashboard/edit.razr:2
-msgid "User Type"
-msgstr ""
-
-#: app/modules/user/views/dashboard/edit.razr:4
-#: app/modules/user/src/Dashboard/UserWidget.php:37
-msgid "Logged in"
-msgstr ""
-
-#: app/modules/user/views/dashboard/edit.razr:4
-#: app/modules/user/src/Dashboard/UserWidget.php:37
-msgid "Last registered"
-msgstr ""
-
-#: app/modules/user/views/dashboard/edit.razr:12
-msgid "Number of Users"
-msgstr ""
-
-#: app/modules/user/views/dashboard/index.razr:4
-msgid "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
-msgstr ""
-
-#: app/modules/user/views/dashboard/index.razr:6
-msgid "{0} No users logged in|{1} %users% user logged in|]1,Inf[ %users% users logged in"
-msgstr ""
-
-#: app/modules/user/views/login/edit.razr:4
-msgid "Login Redirect"
-msgstr ""
-
-#: app/modules/user/views/login/edit.razr:10
-msgid "Logout Redirect"
-msgstr ""
-
-#: app/modules/user/views/login/login.razr:4
-msgid "username"
-msgstr ""
-
-#: app/modules/user/views/login/login.razr:7
-msgid "password"
-msgstr ""
-
-#: app/modules/user/views/login/login.razr:17
-msgid "Sign up"
-msgstr ""
-
-#: app/modules/user/views/login/logout.razr:1
-msgid "Hi"
-msgstr ""
-
-#: app/modules/user/views/login.razr:13
-msgid "(Forgot Password?)"
-msgstr ""
-
-#: app/modules/user/views/login.razr:20
-#: app/modules/user/views/registration.razr:39
-#: app/modules/user/views/reset/confirm.razr:18
-#: app/modules/user/views/reset/request.razr:15
-msgid "Submit"
-msgstr ""
-
-#: app/modules/user/views/mails/approve.razr:91
-msgid "Hello!"
-msgstr ""
-
-#: app/modules/user/views/mails/approve.razr:93
-msgid "A new user signed up for %site% with the username %username%. Please click the button below to approve the account."
-msgstr ""
-
-#: app/modules/user/views/mails/approve.razr:98
-msgid "Appove Account"
-msgstr ""
-
-#: app/modules/user/views/mails/welcome.razr:91
-#: app/modules/user/src/Controller/RegistrationController.php:200
-msgid "Welcome to %site%!"
-msgstr ""
-
-#: app/modules/user/views/mails/welcome.razr:93
-msgid "We're really happy to have you, %name%! Just login with the username %username%."
-msgstr ""
-
-#: app/modules/user/views/mails/welcome.razr:96
-msgid "Login Now"
-msgstr ""
-
-#: app/modules/user/views/profile.razr:5
-#: app/modules/user/src/Controller/ProfileController.php:25
-msgid "Your Profile"
-msgstr ""
-
-#: app/modules/user/views/profile.razr:26
-msgid "Current Password"
-msgstr ""
-
-#: app/modules/user/views/profile.razr:36
-msgid "New Password"
-msgstr ""
-
-#: app/modules/user/views/reset/confirm.razr:5
-msgid "Password confirmation"
-msgstr ""
-
-#: app/modules/user/views/reset/confirm.razr:8
-msgid "Enter your new password below."
-msgstr ""
-
-#: app/modules/user/views/reset/request.razr:3
-msgid "Forgot password"
-msgstr ""
-
-#: app/modules/user/views/reset/request.razr:5
-msgid "Please enter your email address. You will receive a link to create a new password via email."
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:15
-msgid "Assignment"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:49
-msgid "Pattern"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:52
-msgid "Enter one page path per line. The \"*\" character is a wildcard. Exclude pages by prepending an exclamation mark to the path. Example paths: \"blog\" for the blog page, \"blog/*\" for blog entries or \"!blog\" if you want to exclude the blog."
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:76
-#: app/modules/widget/views/admin/index.razr:38
-#: app/modules/system/views/admin/extensions/table.razr:37
-#: app/modules/widget/src/Entity/Widget.php:99
-msgid "Enabled"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:77
-#: app/modules/widget/views/admin/index.razr:39
-#: app/modules/system/views/admin/extensions/table.razr:39
-#: app/modules/widget/src/Entity/Widget.php:98
-msgid "Disabled"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:82
-#: app/modules/widget/views/admin/index.razr:67
-msgid "Position"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:92
-#: app/modules/site/views/tmpl/site.edit.php:30
-msgid "Restrict Access"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:103
-msgid "Options"
-msgstr ""
-
-#: app/modules/widget/views/admin/edit.razr:105
-msgid "Show Title"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:25
-#: app/modules/system/views/admin/themes/table.razr:26
-msgid "Enable"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:26
-msgid "Disable"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:28
-#: app/modules/widget/src/Controller/WidgetsController.php:151
-msgid "Copy"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:43
-msgid "- Position -"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:50
-msgid "- Type -"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:109
-msgid "- Assign -"
-msgstr ""
-
-#: app/modules/widget/views/admin/index.razr:117
-msgid "Extension not loaded"
-msgstr ""
-
-#: app/modules/widget/views/widgets/text/edit.razr:5
-msgid "Enable Markdown"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:12
-#: app/modules/system/views/admin/themes/index.razr:12
-#: app/modules/system/views/tmpl/marketplace.details.razr:5
-msgid "Installed"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:13
-#: app/modules/system/views/admin/themes/index.razr:13
-msgid "Updates"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:14
-#: app/modules/system/views/admin/themes/index.razr:14
-#: app/modules/system/views/tmpl/marketplace.details.razr:8
-#: app/modules/system/views/tmpl/package.upload.razr:35
-msgid "Install"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:15
-#: app/modules/system/views/admin/themes/index.razr:15
-#: app/modules/system/src/Controller/MarketplaceController.php:27
-msgid "Marketplace"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:16
-#: app/modules/system/views/admin/themes/index.razr:16
-msgid "All"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:34
-#: app/modules/system/views/admin/themes/index.razr:34
-msgid "An error occurred in retrieving update information. Please try again later."
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:38
-msgid "No extension updates found."
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:44
-#: app/modules/system/views/admin/themes/index.razr:44
-msgid "Install an extension"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:47
-#: app/modules/system/views/admin/themes/index.razr:47
-#: app/modules/system/views/tmpl/finder.table.razr:44
-#: app/modules/system/views/tmpl/finder.thumbnail.razr:38
-msgid "Droparea"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:48
-#: app/modules/system/views/admin/themes/index.razr:48
-msgid "Drop files here or <a class=\"uk-form-file\">select one<input class=\"js-upload-select\" type=\"file\" name=\"file\"></a>"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:67
-msgid "No extensions found."
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/index.razr:68
-#: app/modules/system/views/admin/themes/index.razr:68
-msgid "Cannot connect to the marketplace. Please try again later."
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/table.razr:5
-#: app/modules/system/views/admin/settings/info.razr:49
-#: app/modules/system/views/admin/settings/info.razr:85
-#: app/modules/system/views/tmpl/package.upload.razr:17
-msgid "Version"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/table.razr:20
-#: app/modules/system/views/admin/themes/table.razr:16
-#: app/modules/system/views/tmpl/marketplace.table.razr:14
-msgid "Details"
-msgstr ""
-
-#: app/modules/system/views/admin/extensions/table.razr:25
-#: app/modules/system/views/admin/settings/info.razr:5
-#: app/modules/system/languages/messages.php:28
-#: app/modules/user/src/Controller/PermissionController.php:21
-msgid "Permissions"
-msgstr ""
-
-#: app/modules/system/views/admin/link/link.types.razr:11
-msgid "- Select Type -"
-msgstr ""
-
-#: app/modules/system/views/admin/link/system.razr:2
-msgid "View"
-msgstr ""
-
-#: app/modules/system/views/admin/link/system.razr:5
-msgid "- Select View -"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:4
-#: app/modules/system/views/admin/settings/info.razr:2
-#: app/modules/system/views/admin/settings/settings.razr:16
-#: app/modules/system/views/admin/settings/settings.razr:60
-#: app/modules/system/src/Link/System.php:22
-msgid "System"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:29
-#: app/modules/system/views/admin/settings/index.razr:30
-#: app/modules/system/src/Controller/ThemesController.php:52
-msgid "Themes"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:37
-#: app/modules/system/views/admin/settings/index.razr:38
-#: app/modules/dashboard/src/Controller/DashboardController.php:48
-msgid "Dashboard"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:45
-#: app/modules/system/views/admin/settings/index.razr:46
-#: app/modules/system/views/admin/settings/settings.razr:78
-#: app/modules/system/src/Controller/SystemController.php:65
-msgid "Storage"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:62
-#: app/modules/system/views/admin/settings/index.razr:63
-msgid "Info"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:69
-#: app/modules/system/views/admin/settings/index.razr:70
-msgid "Clear Cache"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:98
-msgid "Select caches to clear:"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:105
-msgid "System Cache"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:112
-msgid "Rendered Templates"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:119
-msgid "Temporary Files"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/index.razr:124
-msgid "Clear"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:3
-msgid "PHP"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:4
-msgid "Database"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:15
-#: app/modules/system/views/admin/settings/info.razr:43
-#: app/modules/system/views/admin/settings/info.razr:75
-msgid "Setting"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:16
-#: app/modules/system/views/admin/settings/info.razr:44
-#: app/modules/system/views/admin/settings/info.razr:76
-msgid "Value"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:21
-msgid "Pagekit Version"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:25
-msgid "Web Server"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:29
-msgid "User Agent"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:53
-msgid "Handler"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:57
-msgid "Built On"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:89
-msgid "Client"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:103
-msgid "Path"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:111
-msgid "Writable"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/info.razr:111
-msgid "Unwritable"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:15
-#: app/modules/system/views/admin/settings/settings.razr:29
-msgid "Site"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:46
-msgid "Put the site offline and show the offline message."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:51
-msgid "Offline Message"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:53
-#: app/modules/system/src/Event/MaintenanceListener.php:22
-msgid "We'll be back soon."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:62
-msgid "API Key"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:64
-msgid "Enter your API key"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:68
-msgid "Release Channel"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:71
-msgid "Stable"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:71
-msgid "Nightly"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:88
-msgid "Enable debug mode"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:92
-msgid "Enable debug toolbar"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/settings.razr:95
-msgid "Please enable the SQLite database extension."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:7
-msgid "There is an update available."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:8
-msgid "Please update Pagekit to version %version%!"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:12
-#: app/modules/system/views/admin/settings/update.razr:34
-msgid "Download %version%"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:19
-msgid "Downloading ..."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:29
-msgid "You have the latest version of Pagekit."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:30
-msgid "You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually."
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:33
-msgid "Re-install"
-msgstr ""
-
-#: app/modules/system/views/admin/settings/update.razr:39
-msgid "Cannot connect to the server. Please try again later."
-msgstr ""
-
-#: app/modules/system/views/admin/themes/index.razr:38
-msgid "No theme updates found."
-msgstr ""
-
-#: app/modules/system/views/admin/themes/index.razr:67
-msgid "No themes found."
-msgstr ""
-
-#: app/modules/system/views/admin/themes/table.razr:11
-#: app/modules/user/src/Entity/User.php:101
-msgid "Active"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:1
-msgid "New Name"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:1
-msgid "Folder Name"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:5
-msgid "Upload"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:9
-msgid "Add Folder"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:12
-msgid "Rename"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.main.razr:28
-msgid "Home"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.table.razr:7
-msgid "Size"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.table.razr:8
-msgid "Modified"
-msgstr ""
-
-#: app/modules/system/views/tmpl/finder.table.razr:44
-#: app/modules/system/views/tmpl/finder.thumbnail.razr:38
-msgid "Drop files here."
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.modal.razr:4
-msgid "Add Image"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.modal.razr:8
-msgid "Select image"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.modal.razr:18
-msgid "Alt"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.modal.razr:29
-msgid "Select Image"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.modal.razr:32
-#: app/modules/system/views/tmpl/video.modal.razr:31
-msgid "Select"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.replace.razr:6
-msgid "Placeholder Image"
-msgstr ""
-
-#: app/modules/system/views/tmpl/image.replace.razr:12
-msgid "Image"
-msgstr ""
-
-#: app/modules/system/views/tmpl/link.modal.razr:3
-msgid "Add Link"
-msgstr ""
-
-#: app/modules/system/views/tmpl/link.replace.razr:1
-#: app/modules/system/views/tmpl/linkpicker.replace.razr:1
-msgid "Select Link"
-msgstr ""
-
-#: app/modules/system/views/tmpl/linkpicker.modal.razr:3
-msgid "Link"
-msgstr ""
-
-#: app/modules/system/views/tmpl/package.updates.razr:18
-msgid "Changelog"
-msgstr ""
-
-#: app/modules/system/views/tmpl/package.upload.razr:4
-msgid "The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated."
-msgstr ""
-
-#: app/modules/system/views/tmpl/package.upload.razr:8
-msgid "There is an update available for the uploaded package. Please consider installing it instead."
-msgstr ""
-
-#: app/modules/system/views/tmpl/package.upload.razr:28
-msgid "Path:"
-msgstr ""
-
-#: app/modules/system/views/tmpl/package.upload.razr:29
-msgid "Type:"
-msgstr ""
-
-#: app/modules/system/views/tmpl/video.modal.razr:5
-msgid "Add Video"
-msgstr ""
-
-#: app/modules/system/views/tmpl/video.modal.razr:16
-msgid "Select video"
-msgstr ""
-
-#: app/modules/system/views/tmpl/video.modal.razr:28
-msgid "Select Video"
-msgstr ""
-
-#: app/modules/system/views/tmpl/video.replace.razr:6
-msgid "Placeholder Video"
-msgstr ""
-
-#: app/modules/system/views/tmpl/video.replace.razr:12
-msgid "Video"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:4
-msgid "0"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:5
 msgid "1"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:6
 msgid "2"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:7
 msgid "3"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:8
 msgid "4"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:9
 msgid "5"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:10
 msgid "6"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:11
 msgid "7"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:12
 msgid "8"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:13
 msgid "9"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:14
 msgid "10"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:15
-msgid "11"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:16
-msgid "12"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:17
-msgid "13"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:18
-msgid "14"
-msgstr ""
-
-#: app/modules/system/languages/messages.php:19
 msgid "15"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:20
-msgid "16"
+msgid "20"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:21
-msgid "17"
+msgid "25"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:25
-#: app/modules/widget/src/Controller/WidgetsController.php:48
+msgid "30"
+msgstr ""
+
+msgid "33"
+msgstr ""
+
+msgid "40"
+msgstr ""
+
+msgid "50"
+msgstr ""
+
+msgid "100"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
 msgid "Widgets"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:26
 msgid "Menus"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:27
-#: app/modules/user/src/Controller/UserController.php:86
-#: app/modules/user/src/Dashboard/UserWidget.php:25
 msgid "Users"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:30
+msgid "Permissions"
+msgstr ""
+
+msgid "Roles"
+msgstr ""
+
 msgid "Access"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:33
 msgid "Manage media files"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:34
 msgid "Manage menus"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:35
 msgid "Manage widgets"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:36
 msgid "Manage themes"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:37
 msgid "Manage extensions"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:38
 msgid "Apply system updates"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:39
 msgid "Access admin area"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:40
 msgid "Access system settings"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:41
 msgid "Manage user permissions"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:42
 msgid "Manage users"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:43
 msgid "Use the site in maintenance mode"
 msgstr ""
 
-#: app/modules/system/languages/messages.php:44
 msgid "Warning: Give to trusted roles only; this permission has security implications."
 msgstr ""
 
-#: app/modules/dashboard/src/Controller/DashboardController.php:69
-msgid "Dashboard Settings"
+msgid "Dashboard"
 msgstr ""
 
-#: app/modules/dashboard/src/Controller/DashboardController.php:81
-#: app/modules/dashboard/src/Controller/DashboardController.php:111
-msgid "Invalid widget type."
+msgid "Widget deleted."
 msgstr ""
 
-#: app/modules/dashboard/src/Controller/DashboardController.php:107
-msgid "Invalid widget id."
-msgstr ""
-
-#: app/modules/dashboard/src/Controller/DashboardController.php:116
-#: app/modules/widget/src/Controller/WidgetsController.php:75
-msgid "Edit Widget"
-msgstr ""
-
-#: app/modules/dashboard/src/Controller/DashboardController.php:141
-#: app/modules/widget/src/Controller/WidgetsController.php:110
-msgid "Widget created."
-msgstr ""
-
-#: app/modules/dashboard/src/Controller/DashboardController.php:141
-#: app/modules/widget/src/Controller/WidgetsController.php:110
-msgid "Widget saved."
-msgstr ""
-
-#: app/modules/dashboard/src/Controller/DashboardController.php:162
-msgid "{0} No widgets deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-
-#: app/modules/dashboard/src/Controller/DashboardController.php:185
 msgid "Widgets reordered."
 msgstr ""
 
-#: app/modules/dashboard/src/FeedWidget.php:24
-msgid "Feed"
-msgstr ""
-
-#: app/modules/dashboard/src/FeedWidget.php:33
-msgid "Feed Widget"
-msgstr ""
-
-#: app/modules/dashboard/src/FeedWidget.php:36
-msgid "No title given."
-msgstr ""
-
-#: app/modules/dashboard/src/WeatherWidget.php:33
-msgid "Weather Widget"
-msgstr ""
-
-#: app/modules/dashboard/src/WeatherWidget.php:36
-msgid "No location chosen."
-msgstr ""
-
-#: app/modules/editor/src/Templating/EditorHelper.php:34
-msgid "Editor not found."
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:67
-msgid "Existing Pagekit installation detected. Choose different table prefix?"
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:84
-msgid "Database connection failed!"
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:87
-msgid "Database access denied!"
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:107
-msgid "No database connection."
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:157
-msgid "Can't write config."
-msgstr ""
-
-#: app/modules/installer/src/Controller/InstallerController.php:170
-msgid "Database error: %error%"
-msgstr ""
-
-#: app/modules/locale/module.php:45
-#: app/modules/locale/module.php:88
-msgid "DATE_FULL"
-msgstr ""
-
-#: app/modules/locale/module.php:46
-#: app/modules/locale/module.php:87
-msgid "DATE_LONG"
-msgstr ""
-
-#: app/modules/locale/module.php:47
-#: app/modules/locale/module.php:86
-msgid "DATE_MEDIUM"
-msgstr ""
-
-#: app/modules/locale/module.php:48
-#: app/modules/locale/module.php:85
-msgid "DATE_SHORT"
-msgstr ""
-
-#: app/modules/locale/module.php:49
-msgid "DATE_INTERVAL"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Mon"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Tue"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Wed"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Thu"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Fri"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Sat"
-msgstr ""
-
-#: app/modules/locale/module.php:89
-msgid "Sun"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Monday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Tuesday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Wednesday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Thursday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Friday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Saturday"
-msgstr ""
-
-#: app/modules/locale/module.php:90
-msgid "Sunday"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Jan"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Feb"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Mar"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Apr"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-#: app/modules/locale/module.php:92
-msgid "May"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Jun"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Jul"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Aug"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Sep"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Oct"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Nov"
-msgstr ""
-
-#: app/modules/locale/module.php:91
-msgid "Dec"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "January"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "February"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "March"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "April"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "June"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "July"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "August"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "September"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "October"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "November"
-msgstr ""
-
-#: app/modules/locale/module.php:92
-msgid "December"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:20
-msgid "Ascension Island"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:21
-msgid "Andorra"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:22
-msgid "United Arab Emirates"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:23
-msgid "Afghanistan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:24
-msgid "Antigua and Barbuda"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:25
-msgid "Anguilla"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:26
-msgid "Albania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:27
-msgid "Armenia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:28
-msgid "Netherlands Antilles"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:29
-msgid "Angola"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:30
-msgid "Antarctica"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:31
-msgid "Argentina"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:32
-msgid "American Samoa"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:33
-msgid "Austria"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:34
-msgid "Australia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:35
-msgid "Aruba"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:36
-msgid "Åland Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:37
-msgid "Azerbaijan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:38
-msgid "Bosnia and Herzegovina"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:39
-msgid "Barbados"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:40
-msgid "Bangladesh"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:41
-msgid "Belgium"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:42
-msgid "Burkina Faso"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:43
-msgid "Bulgaria"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:44
-msgid "Bahrain"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:45
-msgid "Burundi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:46
-msgid "Benin"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:47
-msgid "Saint Barthélemy"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:48
-msgid "Bermuda"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:49
-msgid "Brunei"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:50
-msgid "Bolivia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:51
-msgid "Caribbean Netherlands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:52
-msgid "Brazil"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:53
-msgid "Bahamas"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:54
-msgid "Bhutan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:55
-msgid "Bouvet Island"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:56
-msgid "Botswana"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:57
-msgid "Belarus"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:58
-msgid "Belize"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:59
-msgid "Canada"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:60
-msgid "Cocos [Keeling] Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:61
-msgid "Congo - Kinshasa"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:62
-msgid "Central African Republic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:63
-msgid "Congo - Brazzaville"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:64
-msgid "Switzerland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:65
-msgid "Côte d’Ivoire"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:66
-msgid "Cook Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:67
-msgid "Chile"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:68
-msgid "Cameroon"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:69
-msgid "China"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:70
-msgid "Colombia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:71
-msgid "Clipperton Island"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:72
-msgid "Costa Rica"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:73
-msgid "Cuba"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:74
-msgid "Cape Verde"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:75
-msgid "Curaçao"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:76
-msgid "Christmas Island"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:77
-msgid "Cyprus"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:78
-msgid "Czech Republic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:79
-msgid "Germany"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:80
-msgid "Diego Garcia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:81
-msgid "Djibouti"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:82
-msgid "Denmark"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:83
-msgid "Dominica"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:84
-msgid "Dominican Republic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:85
-msgid "Algeria"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:86
-msgid "Ceuta and Melilla"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:87
-msgid "Ecuador"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:88
-msgid "Estonia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:89
-msgid "Egypt"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:90
-msgid "Western Sahara"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:91
-msgid "Eritrea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:92
-msgid "Spain"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:93
-msgid "Ethiopia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:94
-msgid "Finland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:95
-msgid "Fiji"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:96
-msgid "Falkland Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:97
-msgid "Micronesia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:98
-msgid "Faroe Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:99
-msgid "France"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:100
-msgid "Gabon"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:101
-msgid "United Kingdom"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:102
-msgid "Grenada"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:103
-msgid "Georgia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:104
-msgid "French Guiana"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:105
-msgid "Guernsey"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:106
-msgid "Ghana"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:107
-msgid "Gibraltar"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:108
-msgid "Greenland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:109
-msgid "Gambia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:110
-msgid "Guinea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:111
-msgid "Guadeloupe"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:112
-msgid "Equatorial Guinea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:113
-msgid "Greece"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:114
-msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:115
-msgid "Guatemala"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:116
-msgid "Guam"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:117
-msgid "Guinea-Bissau"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:118
-msgid "Guyana"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:119
-msgid "Hong Kong SAR China"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:120
-msgid "Heard Island and McDonald Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:121
-msgid "Honduras"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:122
-msgid "Croatia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:123
-msgid "Haiti"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:124
-msgid "Hungary"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:125
-msgid "Canary Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:126
-msgid "Indonesia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:127
-msgid "Ireland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:128
-msgid "Israel"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:129
-msgid "Isle of Man"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:130
-msgid "India"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:131
-msgid "British Indian Ocean Territory"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:132
-msgid "Iraq"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:133
-msgid "Iran"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:134
-msgid "Iceland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:135
-msgid "Italy"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:136
-msgid "Jersey"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:137
-msgid "Jamaica"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:138
-msgid "Jordan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:139
-msgid "Japan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:140
-msgid "Kenya"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:141
-msgid "Kyrgyzstan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:142
-msgid "Cambodia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:143
-msgid "Kiribati"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:144
-msgid "Comoros"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:145
-msgid "Saint Kitts and Nevis"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:146
-msgid "North Korea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:147
-msgid "South Korea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:148
-msgid "Kuwait"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:149
-msgid "Cayman Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:150
-msgid "Kazakhstan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:151
-msgid "Laos"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:152
-msgid "Lebanon"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:153
-msgid "Saint Lucia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:154
-msgid "Liechtenstein"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:155
-msgid "Sri Lanka"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:156
-msgid "Liberia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:157
-msgid "Lesotho"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:158
-msgid "Lithuania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:159
-msgid "Luxembourg"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:160
-msgid "Latvia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:161
-msgid "Libya"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:162
-msgid "Morocco"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:163
-msgid "Monaco"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:164
-msgid "Moldova"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:165
-msgid "Montenegro"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:166
-msgid "Saint Martin"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:167
-msgid "Madagascar"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:168
-msgid "Marshall Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:169
-msgid "Macedonia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:170
-msgid "Mali"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:171
-msgid "Myanmar [Burma]"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:172
-msgid "Mongolia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:173
-msgid "Macau SAR China"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:174
-msgid "Northern Mariana Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:175
-msgid "Martinique"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:176
-msgid "Mauritania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:177
-msgid "Montserrat"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:178
-msgid "Malta"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:179
-msgid "Mauritius"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:180
-msgid "Maldives"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:181
-msgid "Malawi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:182
-msgid "Mexico"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:183
-msgid "Malaysia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:184
-msgid "Mozambique"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:185
-msgid "Namibia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:186
-msgid "New Caledonia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:187
-msgid "Niger"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:188
-msgid "Norfolk Island"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:189
-msgid "Nigeria"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:190
-msgid "Nicaragua"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:191
-msgid "Netherlands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:192
-msgid "Norway"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:193
-msgid "Nepal"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:194
-msgid "Nauru"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:195
-msgid "Niue"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:196
-msgid "New Zealand"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:197
-msgid "Oman"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:198
-msgid "Panama"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:199
-msgid "Peru"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:200
-msgid "French Polynesia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:201
-msgid "Papua New Guinea"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:202
-msgid "Philippines"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:203
-msgid "Pakistan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:204
-msgid "Poland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:205
-msgid "Saint Pierre and Miquelon"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:206
-msgid "Pitcairn Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:207
-msgid "Puerto Rico"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:208
-msgid "Palestinian Territories"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:209
-msgid "Portugal"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:210
-msgid "Palau"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:211
-msgid "Paraguay"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:212
-msgid "Qatar"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:213
-msgid "Outlying Oceania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:214
-msgid "Réunion"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:215
-msgid "Romania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:216
-msgid "Serbia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:217
-msgid "Russia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:218
-msgid "Rwanda"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:219
-msgid "Saudi Arabia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:220
-msgid "Solomon Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:221
-msgid "Seychelles"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:222
-msgid "Sudan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:223
-msgid "Sweden"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:224
-msgid "Singapore"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:225
-msgid "Saint Helena"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:226
-msgid "Slovenia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:227
-msgid "Svalbard and Jan Mayen"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:228
-msgid "Slovakia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:229
-msgid "Sierra Leone"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:230
-msgid "San Marino"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:231
-msgid "Senegal"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:232
-msgid "Somalia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:233
-msgid "Suriname"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:234
-msgid "South Sudan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:235
-msgid "São Tomé and Príncipe"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:236
-msgid "El Salvador"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:237
-msgid "Sint Maarten"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:238
-msgid "Syria"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:239
-msgid "Swaziland"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:240
-msgid "Tristan da Cunha"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:241
-msgid "Turks and Caicos Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:242
-msgid "Chad"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:243
-msgid "French Southern Territories"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:244
-msgid "Togo"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:245
-msgid "Thailand"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:246
-msgid "Tajikistan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:247
-msgid "Tokelau"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:248
-msgid "Timor-Leste"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:249
-msgid "Turkmenistan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:250
-msgid "Tunisia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:251
-msgid "Tonga"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:252
-msgid "Turkey"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:253
-msgid "Trinidad and Tobago"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:254
-msgid "Tuvalu"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:255
-msgid "Taiwan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:256
-msgid "Tanzania"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:257
-msgid "Ukraine"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:258
-msgid "Uganda"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:259
-msgid "U.S. Outlying Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:260
-msgid "United States"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:261
-msgid "Uruguay"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:262
-msgid "Uzbekistan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:263
-msgid "Vatican City"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:264
-msgid "Saint Vincent and the Grenadines"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:265
-msgid "Venezuela"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:266
-msgid "British Virgin Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:267
-msgid "U.S. Virgin Islands"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:268
-msgid "Vietnam"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:269
-msgid "Vanuatu"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:270
-msgid "Wallis and Futuna"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:271
-msgid "Samoa"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:272
-msgid "Kosovo"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:273
-msgid "Yemen"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:274
-msgid "Mayotte"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:275
-msgid "South Africa"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:276
-msgid "Zambia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/CountryHelper.php:277
-msgid "Zimbabwe"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:20
-msgid "Afrikaans"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:21
-msgid "Amharic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:22
-msgid "Arabic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:23
-msgid "Asturian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:24
-msgid "Azerbaijani"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:25
-msgid "Belarusian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:26
-msgid "Bulgarian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:27
-msgid "Bengali"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:28
-msgid "Tibetan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:29
-msgid "Bosnian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:30
-msgid "Catalan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:31
-msgid "Czech"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:32
-msgid "Welsh"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:33
-msgid "Danish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:34
-msgid "German"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:35
-msgid "Dzongkha"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:36
-msgid "Greek"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:37
-msgid "English"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:38
-msgid "Esperanto"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:39
-msgid "Spanish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:40
-msgid "Estonian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:41
-msgid "Basque"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:42
-msgid "Persian, Farsi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:43
-msgid "Finnish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:44
-msgid "Filipino"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:45
-msgid "Faeroese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:46
-msgid "French"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:47
-msgid "Frisian, Western"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:48
-msgid "Irish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:49
-msgid "Scots Gaelic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:50
-msgid "Galician"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:51
-msgid "Swiss German"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:52
-msgid "Gujarati"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:53
-msgid "Hebrew"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:54
-msgid "Hindi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:55
-msgid "Croatian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:56
-msgid "Haitian Creole"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:57
-msgid "Hungarian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:58
-msgid "Armenian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:59
-msgid "Indonesian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:60
-msgid "Icelandic"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:61
-msgid "Italian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:62
-msgid "Japanese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:63
-msgid "Javanese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:64
-msgid "Georgian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:65
-msgid "Kazakh"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:66
-msgid "Khmer"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:67
-msgid "Kannada"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:68
-msgid "Korean"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:69
-msgid "Kurdish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:70
-msgid "Kyrgyz"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:71
-msgid "Lao"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:72
-msgid "Lithuanian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:73
-msgid "Latvian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:74
-msgid "Malagasy"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:75
-msgid "Macedonian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:76
-msgid "Malayalam"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:77
-msgid "Mongolian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:78
-msgid "Marathi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:79
-msgid "Bahasa Malaysia"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:80
-msgid "Burmese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:81
-msgid "Norwegian Bokmål"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:82
-msgid "Nepali"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:83
-msgid "Dutch"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:84
-msgid "Norwegian Nynorsk"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:85
-msgid "Occitan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:86
-msgid "Punjabi"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:87
-msgid "Polish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:88
-msgid "Portuguese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:89
-msgid "Portuguese, Brazil"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:90
-msgid "Portuguese, Portugal"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:91
-msgid "Romanian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:92
-msgid "Russian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:93
-msgid "Scots"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:94
-msgid "Northern Sami"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:95
-msgid "Sinhala"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:96
-msgid "Slovak"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:97
-msgid "Slovenian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:98
-msgid "Albanian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:99
-msgid "Serbian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:100
-msgid "Swedish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:101
-msgid "Swahili"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:102
-msgid "Tamil"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:103
-msgid "Tamil, Sri Lanka"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:104
-msgid "Telugu"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:105
-msgid "Thai"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:106
-msgid "Turkish"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:107
-msgid "Tuvan"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:108
-msgid "Uyghur"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:109
-msgid "Ukrainian"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:110
-msgid "Urdu"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:111
-msgid "Vietnamese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:112
-msgid "Lolspeak"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:113
-msgid "Chinese"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:114
-msgid "Chinese, Simplified"
-msgstr ""
-
-#: app/modules/locale/src/Helper/LanguageHelper.php:115
-msgid "Chinese, Traditional"
-msgstr ""
-
-#: app/modules/mail/module.php:84
-msgid "Mail"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:33
-msgid "Connection established!"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:37
-msgid "Connection not established! (%s)"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:65
-msgid "Test email!"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:65
-msgid "Testemail"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:66
-msgid "Mail successfully sent!"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:66
-msgid "Mail delivery failed!"
-msgstr ""
-
-#: app/modules/mail/src/Controller/TestController.php:70
-msgid "Mail delivery failed! (%s)"
-msgstr ""
-
-#: app/modules/menu/src/Widget/MenuWidget.php:32
-msgid "Menu Widget"
-msgstr ""
-
-#: app/modules/site/src/Controller/NodeController.php:72
-msgid "Success"
-msgstr ""
-
-#: app/modules/site/src/Controller/SiteController.php:41
-msgid "Nodes"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.alias.php:3
-#: app/modules/system/src/Controller/LinkController.php:55
-msgid "Url"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.edit.php:22
-msgid "Slug"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.list.php:5
-msgid "Add"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.list.php:14
-msgid "Make Frontpage"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.list.php:60
-msgid "Create Menu"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.list.php:69
-msgid "Enter Menu Name"
-msgstr ""
-
-#: app/modules/site/views/tmpl/site.list.php:72
-msgid "Enter Menu Slug"
-msgstr ""
-
-#: app/modules/user/src/Controller/AuthController.php:25
-#: app/modules/user/src/Controller/RegistrationController.php:22
-msgid "You are already logged in."
-msgstr ""
-
-#: app/modules/user/src/Controller/AuthController.php:49
-#: app/modules/user/src/Controller/RegistrationController.php:50
-#: app/modules/user/src/Controller/ResetPasswordController.php:40
-#: app/modules/user/src/Controller/ResetPasswordController.php:105
-msgid "Invalid token. Please try again."
-msgstr ""
-
-#: app/modules/user/src/Controller/AuthController.php:57
-msgid "Invalid username or password."
-msgstr ""
-
-#: app/modules/user/src/Controller/PermissionController.php:35
-msgid "Permissions saved!"
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:47
-msgid "Name is invalid."
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:51
-#: app/modules/user/src/Controller/RegistrationController.php:71
-#: app/modules/user/src/Controller/UserController.php:151
-msgid "Email is invalid."
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:55
-#: app/modules/user/src/Controller/RegistrationController.php:79
-#: app/modules/user/src/Controller/UserController.php:163
-msgid "Email not available."
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:61
-msgid "Invalid Password."
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:65
-msgid "New Password is invalid."
-msgstr ""
-
-#: app/modules/user/src/Controller/ProfileController.php:84
-msgid "Profile updated."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:27
-msgid "Public user registration is disabled."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:31
-#: app/modules/system/src/Link/System.php:53
-msgid "User Registration"
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:59
-msgid "Name required."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:63
-#: app/modules/user/src/Controller/UserController.php:130
-msgid "Password required."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:67
-#: app/modules/user/src/Controller/UserController.php:147
-msgid "Username is invalid."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:75
-#: app/modules/user/src/Controller/UserController.php:157
-msgid "Username not available."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:83
-msgid "Signup failed"
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:118
-msgid "Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:123
-msgid "Your user account has been created and is pending approval by the site administrator."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:128
-msgid "Your user account has been created."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:164
-#: app/modules/user/src/Controller/ResetPasswordController.php:91
-msgid "Invalid key."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:173
-msgid "Your email has been verified. Once an administrator approves your account, you will be notified by email."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:183
-msgid "The user's account has been activated and the user has been notified about it."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:185
-msgid "Your account has been activated."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:213
-msgid "Activate your %site% account."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:218
-msgid "Unable to send verification link."
-msgstr ""
-
-#: app/modules/user/src/Controller/RegistrationController.php:228
-msgid "Approve an account at %site%."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:24
-msgid "Reset"
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:44
-msgid "Enter a email address."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:48
-msgid "Invalid email address."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:52
-#: app/modules/user/src/Controller/ResetPasswordController.php:96
-msgid "Your account has not been activated or is blocked."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:63
-msgid "Reset password for %site%."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:68
-msgid "Unable to send confirmation link."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:73
-msgid "Check your email for the confirmation link."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:111
-msgid "Enter password."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:115
-msgid "Invalid password."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:122
-msgid "Your password has been reset."
-msgstr ""
-
-#: app/modules/user/src/Controller/ResetPasswordController.php:130
-msgid "Reset Confirm"
-msgstr ""
-
-#: app/modules/user/src/Controller/RoleController.php:55
-msgid "Roles saved!"
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:111
-msgid "Edit User"
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:126
-msgid "User not found."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:140
-#: app/modules/user/src/Controller/UserController.php:222
-msgid "Unable to block yourself."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:188
-msgid "User saved."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:188
-msgid "User created."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:203
-msgid "Unable to delete yourself."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:212
-msgid "{1} User deleted.|]1,Inf[ Users deleted."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:237
-msgid "{1} User blocked.|]1,Inf[ Users blocked."
-msgstr ""
-
-#: app/modules/user/src/Controller/UserController.php:239
-msgid "{1} User activated.|]1,Inf[ Users activated."
-msgstr ""
-
-#: app/modules/user/src/Dashboard/UserWidget.php:34
-msgid "Displays a list of users."
-msgstr ""
-
-#: app/modules/user/src/Entity/User.php:95
-#: app/modules/widget/src/Entity/Widget.php:92
-msgid "Unknown"
-msgstr ""
-
-#: app/modules/user/src/Entity/User.php:102
-msgid "Blocked"
-msgstr ""
-
-#: app/modules/user/src/Event/AccessListener.php:84
-msgid "You do not have access to the administration area of this site."
-msgstr ""
-
-#: app/modules/user/src/Event/AccessListener.php:98
-msgid "Insufficient User Rights."
-msgstr ""
-
-#: app/modules/user/src/Event/AuthorizationListener.php:44
-msgid "Your account is blocked."
-msgstr ""
-
-#: app/modules/user/src/Event/AuthorizationListener.php:44
-msgid "Your account has not been activated."
-msgstr ""
-
-#: app/modules/user/src/Event/LoginAttemptListener.php:31
-msgid "Slow down a bit."
-msgstr ""
-
-#: app/modules/user/src/Widget/LoginWidget.php:34
-msgid "Displays a user login form."
-msgstr ""
-
-#: app/modules/widget/src/Controller/WidgetsController.php:39
-msgid "Unassigned Widgets"
-msgstr ""
-
-#: app/modules/widget/src/Controller/WidgetsController.php:72
-#: app/modules/widget/src/Controller/WidgetsController.php:95
-msgid "Invalid widget id"
-msgstr ""
-
-#: app/modules/widget/src/Controller/WidgetsController.php:131
-msgid "{0} No widget deleted.|{1} Widget deleted.|]1,Inf[ Widgets deleted."
-msgstr ""
-
-#: app/modules/widget/src/Controller/WidgetsController.php:205
-msgid "Widgets updated."
-msgstr ""
-
-#: app/modules/widget/src/TextWidget.php:24
-msgid "Text"
-msgstr ""
-
-#: app/modules/widget/src/TextWidget.php:32
-msgid "Text Widget"
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:55
-msgid "Unable to activate extension.<br>The extension triggered a fatal error."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:67
-msgid "Unable to enable extension \"%name%\"."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:78
-msgid "Extension enabled."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:95
-msgid "Extension \"%name%\" has not been loaded."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:102
-msgid "Extension disabled."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:123
-msgid "Unable to uninstall extension \"%name%\"."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:133
-msgid "Extension uninstalled."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:149
-#: app/modules/system/src/Controller/ExtensionsController.php:172
-msgid "Invalid extension."
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:155
-msgid "%extension% Settings"
-msgstr ""
-
-#: app/modules/system/src/Controller/ExtensionsController.php:178
-#: app/modules/system/src/Controller/SettingsController.php:71
-#: app/modules/system/src/Controller/ThemesController.php:154
-msgid "Settings saved."
-msgstr ""
-
-#: app/modules/system/src/Controller/FinderController.php:17
-#: app/modules/system/src/Controller/FinderController.php:64
-#: app/modules/system/src/Controller/FinderController.php:98
-#: app/modules/system/src/Controller/FinderController.php:126
-#: app/modules/system/src/Controller/FinderController.php:154
 msgid "Invalid path."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:21
-#: app/modules/system/src/Controller/FinderController.php:72
-#: app/modules/system/src/Controller/FinderController.php:102
-#: app/modules/system/src/Controller/FinderController.php:130
-#: app/modules/system/src/Controller/FinderController.php:158
 msgid "Permission denied."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:60
-#: app/modules/system/src/Controller/FinderController.php:94
 msgid "Invalid file name."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:68
 msgid "Folder already exists."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:79
 msgid "Directory created."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:83
 msgid "Unable to create directory."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:109
-msgid "Renamed."
-msgstr ""
-
-#: app/modules/system/src/Controller/FinderController.php:113
 msgid "Unable to rename."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:139
+msgid "Renamed."
+msgstr ""
+
 msgid "Unable to remove."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:143
 msgid "Removed selected."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:164
 msgid "No files uploaded."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:176
+msgid "Uploaded file invalid. (%s)"
+msgstr ""
+
 msgid "Upload complete."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:180
 msgid "Unable to upload."
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:202
 msgid "n/a"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d Bytes"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d  KB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d  MB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d  GB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d TB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d PB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d EB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d ZB"
 msgstr ""
 
-#: app/modules/system/src/Controller/FinderController.php:205
 msgid "%d YB"
 msgstr ""
 
-#: app/modules/system/src/Controller/MigrationController.php:28
-msgid "Your Pagekit database has been updated successfully."
+msgid "Storage"
 msgstr ""
 
-#: app/modules/system/src/Controller/MigrationController.php:30
-msgid "Your Pagekit database is already up-to-date!"
+msgid "Info"
 msgstr ""
 
-#: app/modules/system/src/Controller/PackageController.php:34
+msgid "System"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Setting"
+msgstr ""
+
+msgid "Value"
+msgstr ""
+
+msgid "Pagekit Version"
+msgstr ""
+
+msgid "Web Server"
+msgstr ""
+
+msgid "User Agent"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Handler"
+msgstr ""
+
+msgid "Built On"
+msgstr ""
+
+msgid "Extensions"
+msgstr ""
+
+msgid "Driver"
+msgstr ""
+
+msgid "Client"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Writable"
+msgstr ""
+
+msgid "Unwritable"
+msgstr ""
+
+msgid "Connection established!"
+msgstr ""
+
+msgid "Connection not established! (%s)"
+msgstr ""
+
+msgid "Test email!"
+msgstr ""
+
+msgid "Testemail"
+msgstr ""
+
+msgid "Mail successfully sent!"
+msgstr ""
+
+msgid "Mail delivery failed!"
+msgstr ""
+
+msgid "Mail delivery failed! (%s)"
+msgstr ""
+
+msgid "Marketplace"
+msgstr ""
+
+msgid "Themes"
+msgstr ""
+
+msgid "Unable to find \"%name%\"."
+msgstr ""
+
+msgid "Unable to enable \"%name%\"."
+msgstr ""
+
+msgid "\"%name%\" has not been loaded."
+msgstr ""
+
 msgid "No file uploaded."
 msgstr ""
 
-#: app/modules/system/src/Controller/PackageController.php:40
-msgid "Invalid package type."
+msgid "\"composer.json\" file not valid."
 msgstr ""
 
-#: app/modules/system/src/Controller/PackageController.php:96
-msgid "Path not found."
+msgid "No Pagekit %type%"
 msgstr ""
 
-#: app/modules/system/src/Controller/PackageController.php:109
-msgid "Package \"%name%\" installed."
+msgid "Unable to uninstall \"%name%\"."
 msgstr ""
 
-#: app/modules/system/src/Controller/PackageController.php:112
-#: app/modules/system/src/Controller/UpdateController.php:53
-msgid "Package extraction failed."
-msgstr ""
-
-#: app/modules/system/src/Controller/PackageController.php:114
-#: app/modules/system/src/Controller/UpdateController.php:55
-msgid "Package checksum verification failed."
-msgstr ""
-
-#: app/modules/system/src/Controller/PackageController.php:116
-#: app/modules/system/src/Controller/UpdateController.php:57
-msgid "Invalid API key."
-msgstr ""
-
-#: app/modules/system/src/Controller/PackageController.php:118
-#: app/modules/system/src/Controller/UpdateController.php:59
-msgid "Package download failed."
-msgstr ""
-
-#: app/modules/system/src/Controller/PackageController.php:120
-#: app/modules/system/src/Controller/UpdateController.php:61
-msgid "Path is not writable."
-msgstr ""
-
-#: app/modules/system/src/Controller/PackageController.php:192
 msgid "Can't load json file from package."
 msgstr ""
 
-#: app/modules/system/src/Controller/SystemController.php:51
-msgid "Order saved."
+msgid "Unable to activate \"%name%\".<br>A fatal error occured."
 msgstr ""
 
-#: app/modules/system/src/Controller/SystemController.php:74
-msgid "System Information"
+msgid "Update"
 msgstr ""
 
-#: app/modules/system/src/Controller/SystemController.php:114
-msgid "Cache cleared!"
+msgid "Name"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:71
-msgid "Unable to activate theme.<br>The theme triggered a fatal error."
+msgid "Folder"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:77
-msgid "Unable to enable theme \"%name%\"."
+msgid "Enabled"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:86
-msgid "Theme enabled."
+msgid "Disabled"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:103
-msgid "Unable to uninstall theme \"%name%\"."
+msgid "View Details"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:109
-msgid "Theme uninstalled."
+msgid "View Permissions"
 msgstr ""
 
-#: app/modules/system/src/Controller/ThemesController.php:125
-#: app/modules/system/src/Controller/ThemesController.php:148
-msgid "Invalid theme."
+msgid "Delete"
 msgstr ""
 
-#: app/modules/system/src/Controller/UpdateController.php:39
-msgid "Unable to find update."
+msgid "No extension found."
 msgstr ""
 
-#: app/modules/system/src/Controller/UpdateController.php:50
-msgid "Copying files..."
+msgid "Enable"
 msgstr ""
 
-#: app/modules/system/src/Controller/UpdateController.php:77
-#: app/modules/system/src/Controller/UpdateController.php:107
-msgid "You may not call this step directly."
+msgid "No theme found."
 msgstr ""
 
-#: app/modules/system/src/Controller/UpdateController.php:89
-msgid "Updating database..."
+msgid "There is an update available."
 msgstr ""
 
-#: app/modules/system/src/Controller/UpdateController.php:114
-msgid "Installed successfully."
+msgid "Please update Pagekit to version %version%!"
 msgstr ""
 
-#: app/modules/system/src/Event/FrontpageListener.php:20
+msgid "You have the latest version of Pagekit."
+msgstr ""
+
+msgid "You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually."
+msgstr ""
+
+msgid "Re-install"
+msgstr ""
+
+msgid "Download %version%"
+msgstr ""
+
+msgid "Invalid id."
+msgstr ""
+
+msgid "Duplicate Menu Id."
+msgstr ""
+
+msgid "Node not found."
+msgstr ""
+
+msgid "Invalid slug."
+msgstr ""
+
+msgid "Invalid type."
+msgstr ""
+
+msgid "Invalid node type."
+msgstr ""
+
+msgid "Pages"
+msgstr ""
+
+msgid "Page not found."
+msgstr ""
+
+msgid "Insufficient User Rights."
+msgstr ""
+
+msgid "We'll be back soon."
+msgstr ""
+
 msgid "No Frontpage assigned."
 msgstr ""
 
-#: app/modules/system/src/Event/WidgetListener.php:30
-msgid "Theme"
+msgid "Edit %type%"
 msgstr ""
 
-#: app/modules/system/src/Exception/ExceptionController.php:29
-msgid "Invalid CSRF token."
+msgid "Add %type%"
 msgstr ""
 
-#: app/modules/system/src/Exception/ExceptionController.php:32
-msgid "Sorry, the page you are looking for could not be found."
+msgid "Save"
 msgstr ""
 
-#: app/modules/system/src/Exception/ExceptionController.php:38
-msgid "Whoops, looks like something went wrong."
+msgid "Edit"
 msgstr ""
 
-#: app/modules/system/src/Link/System.php:50
+msgid "Add Menu"
+msgstr ""
+
+msgid "Publish"
+msgstr ""
+
+msgid "Unpublish"
+msgstr ""
+
+msgid "Move"
+msgstr ""
+
+msgid "Add Page"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "URL"
+msgstr ""
+
+msgid "No pages found."
+msgstr ""
+
+msgid "Invalid name."
+msgstr ""
+
+msgid "Menu Positions"
+msgstr ""
+
+msgid "(Currently set to: %menu%)"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Hidden"
+msgstr ""
+
+msgid "Set as frontpage"
+msgstr ""
+
 msgid "Frontpage"
 msgstr ""
 
-#: app/modules/system/src/Link/System.php:51
-msgid "User Login"
+msgid "_subset"
 msgstr ""
 
-#: app/modules/system/src/Link/System.php:52
-msgid "User Logout"
+msgid "Error"
 msgstr ""
 
-#: app/modules/system/src/Link/System.php:54
-msgid "User Profile"
+msgid "Username"
 msgstr ""
 
-#: app/modules/system/src/Link/System.php:55
-msgid "User Password Reset"
+msgid "Password"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Remember Me"
+msgstr ""
+
+msgid "Forgot Password?"
+msgstr ""
+
+msgid "Request Password"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Reset Password"
+msgstr ""
+
+msgid "Maintenance"
+msgstr ""
+
+msgid "Update Pagekit"
+msgstr ""
+
+msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
+msgstr ""
+
+msgid "Visit Site"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
+msgid "Hello!"
+msgstr ""
+
+msgid "A new user signed up for %site% with the username %username%. Please click the button below to approve the account."
+msgstr ""
+
+msgid "Approve Account"
+msgstr ""
+
+msgid "Hi %name%!"
+msgstr ""
+
+msgid "We got a request to reset your %site% password for %username%. If you ignore this message, your password won't be changed."
+msgstr ""
+
+msgid "Thank you for signing up for %site%. Just one more step! Please click the button below to activate your account."
+msgstr ""
+
+msgid "Activate Account"
+msgstr ""
+
+msgid "Welcome to %site%!"
+msgstr ""
+
+msgid "We're really happy to have you, %name%! Just login with the username %username%."
+msgstr ""
+
+msgid "Login Now"
+msgstr ""
+
+msgid "You are already logged in."
+msgstr ""
+
+msgid "Invalid token. Please try again."
+msgstr ""
+
+msgid "Invalid username or password."
+msgstr ""
+
+msgid "Your Profile"
+msgstr ""
+
+msgid "Invalid Password."
+msgstr ""
+
+msgid "Public user registration is disabled."
+msgstr ""
+
+msgid "User Registration"
+msgstr ""
+
+msgid "Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you."
+msgstr ""
+
+msgid "Your user account has been created and is pending approval by the site administrator."
+msgstr ""
+
+msgid "Your user account has been created."
+msgstr ""
+
+msgid "Invalid key."
+msgstr ""
+
+msgid "Your email has been verified. Once an administrator approves your account, you will be notified by email."
+msgstr ""
+
+msgid "The user's account has been activated and the user has been notified about it."
+msgstr ""
+
+msgid "Your account has been activated."
+msgstr ""
+
+msgid "Activate your %site% account."
+msgstr ""
+
+msgid "Unable to send verification link."
+msgstr ""
+
+msgid "Approve an account at %site%."
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Enter a email address."
+msgstr ""
+
+msgid "Invalid email address."
+msgstr ""
+
+msgid "Your account has not been activated or is blocked."
+msgstr ""
+
+msgid "Reset password for %site%."
+msgstr ""
+
+msgid "Unable to send confirmation link."
+msgstr ""
+
+msgid "Check your email for the confirmation link."
+msgstr ""
+
+msgid "Enter password."
+msgstr ""
+
+msgid "Invalid password."
+msgstr ""
+
+msgid "Your password has been reset."
+msgstr ""
+
+msgid "Reset Confirm"
+msgstr ""
+
+msgid "Role not found."
+msgstr ""
+
+msgid "User not found."
+msgstr ""
+
+msgid "Password required."
+msgstr ""
+
+msgid "Unable to block yourself."
+msgstr ""
+
+msgid "Unable to delete yourself."
+msgstr ""
+
+msgid "Edit User"
+msgstr ""
+
+msgid "Add User"
+msgstr ""
+
+msgid "User Settings"
+msgstr ""
+
+msgid "You do not have access to the administration area of this site."
+msgstr ""
+
+msgid "Your account is blocked."
+msgstr ""
+
+msgid "Your account has not been activated."
+msgstr ""
+
+msgid "Slow down a bit."
+msgstr ""
+
+msgid "Unknown"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Blocked"
+msgstr ""
+
+msgid "Name required."
+msgstr ""
+
+msgid "Username is invalid."
+msgstr ""
+
+msgid "Email is invalid."
+msgstr ""
+
+msgid "Username not available."
+msgstr ""
+
+msgid "Email not available."
+msgstr ""
+
+msgid "This permission has security implications. Give it trusted roles only."
+msgstr ""
+
+msgid "Add Role"
+msgstr ""
+
+msgid "Name cannot be blank."
+msgstr ""
+
+msgid "Registration"
+msgstr ""
+
+msgid "Enabled, but approval is required."
+msgstr ""
+
+msgid "Verification"
+msgstr ""
+
+msgid "Require e-mail verification when a guest creates an account."
+msgstr ""
+
+msgid "Username cannot be blank."
+msgstr ""
+
+msgid "Field must be a valid email address."
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Last login"
+msgstr ""
+
+msgid "Registered since"
+msgstr ""
+
+msgid "Verified email address"
+msgstr ""
+
+msgid "Activate"
+msgstr ""
+
+msgid "Block"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Verified Email Address"
+msgstr ""
+
+msgid "No user found."
+msgstr ""
+
+msgid "{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users"
+msgstr ""
+
+msgid "{1} %count% User selected|]1,Inf[ %count% Users selected"
+msgstr ""
+
+msgid "No account yet?"
+msgstr ""
+
+msgid "Sign up now"
+msgstr ""
+
+msgid "Invalid Email."
+msgstr ""
+
+msgid "Current Password"
+msgstr ""
+
+msgid "New Password"
+msgstr ""
+
+msgid "Email address is invalid."
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Password cannot be blank."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Password Confirmation"
+msgstr ""
+
+msgid "Forgot Password"
+msgstr ""
+
+msgid "Please enter your email address. You will receive a link to create a new password via email."
+msgstr ""
+
+msgid "Hi %username%"
+msgstr ""
+
+msgid "username"
+msgstr ""
+
+msgid "password"
+msgstr ""
+
+msgid "Sign up"
+msgstr ""
+
+msgid "Edit Widget"
+msgstr ""
+
+msgid "Add Widget"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Unassigned"
+msgstr ""
+
+msgid "Positions"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "No widgets found."
+msgstr ""
+
+msgid "{1} %count% Widget selected|]1,Inf[ %count% Widgets selected"
+msgstr ""
+
+msgid "Missing order data."
+msgstr ""
+
+msgid "Order saved."
+msgstr ""
+
+msgid "Whoops, looks like something went wrong."
+msgstr ""
+
+msgid "Your Pagekit database has been updated successfully."
+msgstr ""
+
+msgid "Your Pagekit database is already up-to-date!"
+msgstr ""
+
+msgid "Pagekit Installer"
+msgstr ""
+
+msgid "Existing Pagekit installation detected. Choose different table prefix?"
+msgstr ""
+
+msgid "Database connection failed!"
+msgstr ""
+
+msgid "Database access denied!"
+msgstr ""
+
+msgid "No database connection."
+msgstr ""
+
+msgid "Can't write config."
+msgstr ""
+
+msgid "Database error: %error%"
+msgstr ""
+
+msgid "Choose language"
+msgstr ""
+
+msgid "Select your site language."
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Connect database"
+msgstr ""
+
+msgid "Enter your database connection details."
+msgstr ""
+
+msgid "Hostname"
+msgstr ""
+
+msgid "Host cannot be blank."
+msgstr ""
+
+msgid "User cannot be blank."
+msgstr ""
+
+msgid "Database Name"
+msgstr ""
+
+msgid "Database name cannot be blank."
+msgstr ""
+
+msgid "Table Prefix"
+msgstr ""
+
+msgid "Create your account"
+msgstr ""
+
+msgid "You will be the site administrator."
+msgstr ""
+
+msgid "Setup your site"
+msgstr ""
+
+msgid "Enter your website details."
+msgstr ""
+
+msgid "Site name cannot be blank."
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Installation failed!"
+msgstr ""
+
+msgid "Retry"
 msgstr ""
 
