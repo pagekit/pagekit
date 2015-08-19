@@ -590,12 +590,26 @@ var Translator = (function (document, undefined) {
         }
     };
 
-})(document, undefined).fromJSON(config);
+})(document, undefined);
 
 module.exports = function (Vue) {
 
     Vue.prototype.$trans = Translator.trans.bind(Translator);
     Vue.prototype.$transChoice = Translator.transChoice.bind(Translator);
-    Vue.prototype.$locale = config;
 
+    Object.defineProperty(Vue, '$locale', {
+
+        get: function () {
+            return config;
+        },
+
+        set: function (locale) {
+            config = locale;
+            Translator.fromJSON(locale);
+            Translator.locale = locale.locale;
+        }
+
+    });
+
+    Vue.$locale = config;
 };

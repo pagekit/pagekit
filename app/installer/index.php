@@ -14,7 +14,7 @@ return [
 
         $app->on('request', function ($event) use ($app) {
             if ($locale = $app['request']->getPreferredLanguage()) {
-                $app['translator']->setLocale($locale);
+                $app->module('system/intl')->setLocale($locale);
             }
         });
 

@@ -17,6 +17,7 @@ class IntlController
         $intl->loadLocale($locale);
 
         $messages = $intl->getFormats($locale) ?: [];
+        $messages['locale'] = $locale;
         $messages['translations'] = [$locale => App::translator()->getCatalogue($locale)->all()];
         $messages = json_encode($messages);
 

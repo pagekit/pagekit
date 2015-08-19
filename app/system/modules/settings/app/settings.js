@@ -50,6 +50,7 @@ window.Settings = module.exports = {
 
     components: {
 
+        locale: require('./components/locale.vue'),
         system: require('./components/system.vue')
 
     }

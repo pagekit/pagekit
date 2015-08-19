@@ -62,7 +62,16 @@ return [
         'key' => '',
 
         'site' => [
-            'theme' => null
+
+            'theme' => null,
+            'locale' => 'en_US'
+
+        ],
+
+        'admin' => [
+
+            'locale' => 'en_US'
+
         ],
 
         'extensions' => []
@@ -92,6 +101,7 @@ return [
                 }
 
                 $app['isAdmin'] = $admin = (bool)preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app->module('system/intl')->setLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
             }, 50],
 

@@ -46,11 +46,17 @@ class IntlModule extends Module
      */
     public function getLocale()
     {
-        if (!App::has('isAdmin')) {
-            return App::request()->getPreferredLanguage($this->getAvailableLanguages());
-        }
+        return $this->config('locale');
+    }
 
-        return $this->config(App::isAdmin() ? 'locale.admin' : 'locale.site', 'en_US');
+    /**
+     * Sets the current locale id.
+     *
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->config['locale'] = $locale;
     }
 
     /**
@@ -70,11 +76,28 @@ class IntlModule extends Module
      */
     public function getAvailableLanguages()
     {
-        $languages = [];
-        foreach (Finder::create()->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2}(_[A-Z]{2})?$/') as $dir) {
-            $languages[] = $dir->getFileName();
+        $languages = $this->getLanguages();
+        $territories = $this->getTerritories();
+
+        $available = [];
+        foreach (Finder::create()->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2,3}(_[A-Z]{2})?$/') as $dir) {
+
+            $id = $dir->getFilename();
+            list($lang, $country) = explode('_', $id);
+
+            if (isset($languages[$lang])) {
+                $available[$id] = $languages[$lang];
+
+                if (isset($territories[$country])) {
+                    $available[$id] .= ' - '.$territories[$country];
+                }
+
+            }
         }
-        return $languages;
+
+        asort($available);
+
+        return $available;
     }
 
     /**

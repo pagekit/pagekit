@@ -57,6 +57,7 @@ return [
         'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
 
             $view->data('$system', [
+                'locales' => $app->module('system/intl')->getAvailableLanguages(),
                 'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
             ]);
 

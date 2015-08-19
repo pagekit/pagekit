@@ -31,10 +31,16 @@ class InstallerController
 
     public function indexAction()
     {
+        $intl = App::module('system/intl');
+
         return [
             '$view' => [
                 'title' => __('Pagekit Installer'),
-                'name' => 'app/installer/views/install.php'
+                'name' => 'app/installer/views/install.php',
+            ],
+            '$installer' => [
+                'locale' => $intl->getLocale(),
+                'locales' => $intl->getAvailableLanguages()
             ]
         ];
     }
@@ -44,7 +50,7 @@ class InstallerController
      */
     public function checkAction($config = [])
     {
-        $status  = 'no-connection';
+        $status = 'no-connection';
         $message = '';
 
         try {
@@ -62,7 +68,7 @@ class InstallerController
                 App::db()->connect();
 
                 if (App::db()->getUtility()->tableExists('@system_config')) {
-                    $status  = 'tables-exist';
+                    $status = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
                     $status = 'no-tables';
@@ -95,9 +101,9 @@ class InstallerController
      */
     public function installAction($config = [], $option = [], $user = [])
     {
-        $status  = $this->checkAction($config, false);
+        $status = $this->checkAction($config, false);
         $message = $status['message'];
-        $status  = $status['status'];
+        $status = $status['status'];
 
         try {
 
@@ -162,7 +168,7 @@ class InstallerController
 
         } catch (DBALException $e) {
 
-            $status  = 'db-sql-failed';
+            $status = 'db-sql-failed';
             $message = __('Database error: %error%', ['%error%' => $e->getMessage()]);
 
         } catch (\Exception $e) {
