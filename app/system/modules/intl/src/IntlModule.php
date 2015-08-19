@@ -83,12 +83,12 @@ class IntlModule extends Module
         foreach (Finder::create()->directories()->depth(0)->in('app/system/languages')->name('/^[a-z]{2,3}(_[A-Z]{2})?$/') as $dir) {
 
             $id = $dir->getFilename();
-            list($lang, $country) = explode('_', $id);
+            @list($lang, $country) = explode('_', $id);
 
             if (isset($languages[$lang])) {
                 $available[$id] = $languages[$lang];
 
-                if (isset($territories[$country])) {
+                if (isset($country, $territories[$country])) {
                     $available[$id] .= ' - '.$territories[$country];
                 }
 
