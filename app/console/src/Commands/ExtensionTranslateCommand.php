@@ -43,7 +43,7 @@ class ExtensionTranslateCommand extends Command
         chdir($this->config['path']);
 
         if (!is_dir($languages)) {
-            mkdir($languages, 0777, true);
+            mkdir($languages, 0755, true);
         }
 
         $result = [];
