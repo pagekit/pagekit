@@ -597,7 +597,7 @@ module.exports = function (Vue) {
     Vue.prototype.$trans = Translator.trans.bind(Translator);
     Vue.prototype.$transChoice = Translator.transChoice.bind(Translator);
 
-    Object.defineProperty(Vue, '$locale', {
+    Object.defineProperty(Vue.prototype, '$locale', {
 
         get: function () {
             return config;
@@ -611,5 +611,5 @@ module.exports = function (Vue) {
 
     });
 
-    Vue.$locale = config;
+    Vue.prototype.$locale = config;
 };

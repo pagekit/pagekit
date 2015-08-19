@@ -49,7 +49,7 @@ var installer = {
                 this.$set('option.system.admin.locale', this.locale);
                 this.$set('option.system.site.locale', this.locale);
 
-                Vue.$locale = window.$locale;
+                Vue.prototype.$locale = window.$locale;
                 this.gotoStep('database');
 
             });
