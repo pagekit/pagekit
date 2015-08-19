@@ -1,15 +1,21 @@
 module.exports = function (Vue) {
 
-    var Notify = function () {
+    Vue.prototype.$notify = function () {
 
-        if (arguments[0]) {
-            arguments[0] = this.$trans(arguments[0]);
+        var args = arguments,
+            msgs = window.jQuery('.pk-system-messages'),
+            UIkit = window.UIkit || {};
+
+        if (args[0]) {
+            args[0] = this.$trans(args[0]);
         }
 
-        UIkit.notify.apply(this, arguments);
+        if (UIkit.notify) {
+            UIkit.notify.apply(this, args);
+        } else if (msgs) {
+            msgs.empty().append('<div class="uk-alert uk-alert-' + (args[1] || 'info') + '"><p>' + args[0] + '</p></div>');
+        }
+
     };
 
-    Vue.prototype.$notify = Notify;
-
-    return Notify;
 };

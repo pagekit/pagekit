@@ -140,10 +140,7 @@ return [
                 }
             }
 
-            if ($result) {
-                $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
-            }
-
+            $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
         }
 
     ]
