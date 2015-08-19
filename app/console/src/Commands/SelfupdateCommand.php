@@ -80,8 +80,7 @@ class SelfupdateCommand extends Command
         $output->writeln('<info>done.</info>');
 
         $output->write('Extracting files...');
-        $target = $this->config['path'] . '/test';
-        $this->extract($tmpFile, $target);
+        $this->extract($tmpFile, $this->config['path']);
         $output->writeln('<info>done.</info>');
 
         $output->write('Migrating database...');
