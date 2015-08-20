@@ -61,7 +61,7 @@ class Application extends BaseApplication
     public function getPagekit()
     {
         if (!$this->pagekit) {
-            $this->pagekit = require __DIR__ . '/../autoload.php';
+            $this->pagekit = require __DIR__ . '/../app.php';
         }
 
         return $this->pagekit;
