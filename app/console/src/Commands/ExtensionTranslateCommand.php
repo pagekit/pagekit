@@ -41,7 +41,7 @@ class ExtensionTranslateCommand extends Command
         $files     = $this->getFiles($path = $this->getPath($extension), $extension);
         $languages = "$path/languages";
 
-        $app = $this->getApplication()->getPagekit();
+        $app = $this->getPagekit();
         $this->visitor = new PhpNodeVisitor($app['view']->getEngine());
 
         $this->line("Extracting strings for extension '$extension'");

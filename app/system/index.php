@@ -86,10 +86,6 @@ return [
                 $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
             }
 
-            if ($app->inConsole()) {
-                $app['isAdmin'] = false;
-            }
-
         },
 
         'request' => [
@@ -125,6 +121,14 @@ return [
             }
 
         }, 8],
+
+        'updated' => function ($event) use ($app) {
+
+            if ($app['migrator']->create('system:migrations', $this->config('version'))->get()) {
+                $event->setResponse($app['response']->redirect('@system/migration'));
+            }
+
+        },
 
         'view.messages' => function ($event) use ($app) {
 

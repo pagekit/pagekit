@@ -18,13 +18,6 @@ class Application extends BaseApplication
     protected $config;
 
     /**
-     * The Pagekit application.
-     *
-     * @var App
-     */
-    protected $pagekit;
-
-    /**
      * Constructor.
      *
      * @param array $config
@@ -53,17 +46,4 @@ class Application extends BaseApplication
         return parent::add($command);
     }
 
-    /**
-     * Returns dynamically booted Pagekit application.
-     *
-     * @return App
-     */
-    public function getPagekit()
-    {
-        if (!$this->pagekit) {
-            $this->pagekit = require __DIR__ . '/../app.php';
-        }
-
-        return $this->pagekit;
-    }
 }

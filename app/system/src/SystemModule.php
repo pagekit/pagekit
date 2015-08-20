@@ -15,6 +15,7 @@ class SystemModule extends Module
     public function main(App $app)
     {
         $app['system'] = $this;
+        $app['isAdmin'] = false;
 
         $app->factory('finder', function () {
             return Finder::create();

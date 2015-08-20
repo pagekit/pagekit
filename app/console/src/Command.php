@@ -37,6 +37,13 @@ class Command extends BaseCommand
     protected $output;
 
     /**
+     * The Pagekit application.
+     *
+     * @var App
+     */
+    protected $pagekit;
+
+    /**
      * The Pagekit config.
      *
      * @var array
@@ -51,6 +58,20 @@ class Command extends BaseCommand
         parent::__construct($this->name);
 
         $this->setDescription($this->description);
+    }
+
+    /**
+     * Returns dynamically booted Pagekit application.
+     *
+     * @return App
+     */
+    public function getPagekit()
+    {
+        if (!$this->pagekit) {
+            $this->pagekit = require __DIR__ . '/../app.php';
+        }
+
+        return $this->pagekit;
     }
 
     /**
@@ -130,7 +151,7 @@ class Command extends BaseCommand
      * Prompt the user for input but hide the answer from the console.
      *
      * @param  string $question
-     * @param  bool   $fallback
+     * @param  bool $fallback
      * @return string
      */
     public function secret($question, $fallback = true)

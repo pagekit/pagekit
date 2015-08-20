@@ -10,8 +10,6 @@ use GuzzleHttp\Exception\TransferException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 
 class SelfupdateCommand extends Command
@@ -49,7 +47,6 @@ class SelfupdateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->client = new Client;
-        $tmpFile = tmpnam($this->config['path.temp'], 'update_');
 
         try {
             if (!$this->option('url')) {
@@ -61,12 +58,10 @@ class SelfupdateCommand extends Command
                 $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
                 $output->writeln('');
 
-                $helper = $this->getHelper('question');
-                $question = new ConfirmationQuestion('Update to Version ' . $versions['latest']['version'] . '? [y/n]', false);
-
-                if (!$helper->ask($input, $output, $question)) {
+                if (!$this->ask('Update to Version ' . $versions['latest']['version'] . '? [y/n]', false)) {
                     return;
                 }
+
                 $output->writeln('');
 
                 $url = $versions['latest']['url'];
@@ -76,6 +71,7 @@ class SelfupdateCommand extends Command
                 $shasum = $this->option('shasum');
             }
 
+            $tmpFile = tempnam($this->config['path.temp'], 'update_');
 
             $output->write('Downloading...');
             $this->download($url, $shasum, $tmpFile);
@@ -91,7 +87,9 @@ class SelfupdateCommand extends Command
 
             $output->write('Removing old files...');
             $this->cleanup($tmpFile, $this->config['path']);
+
             unlink($tmpFile);
+
             $output->writeln('<info>done.</info>');
 
             $output->write('Migrating database...');
@@ -183,7 +181,7 @@ class SelfupdateCommand extends Command
      */
     protected function database()
     {
-        $pagekit = $this->getApplication()->getPagekit();
+        $pagekit = $this->getPagekit();
         $pagekit->extend('migrator', function ($migrator) {
             return $migrator->setLoader(new FilesystemLoader());
         });

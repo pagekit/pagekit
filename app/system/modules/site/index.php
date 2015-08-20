@@ -138,7 +138,7 @@ return [
 
             Node::defineProperty('theme', function () use ($app) {
 
-                $config  = $app['theme']->config('_nodes.'.$this->id, []);
+                $config = $app['theme']->config('_nodes.' . $this->id, []);
                 $default = $app['theme']->get('node', []);
 
                 return array_replace_recursive($default, $config);
@@ -188,7 +188,7 @@ return [
         },
 
         'model.node.saved' => function ($event, $node) use ($app) {
-            $app->config($app['theme']->name)->set('_nodes.'.$node->id, $node->theme);
+            $app->config($app['theme']->name)->set('_nodes.' . $node->id, $node->theme);
         }
 
     ]
