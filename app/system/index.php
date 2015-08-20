@@ -124,8 +124,9 @@ return [
 
         'updated' => function ($event) use ($app) {
 
-            if ($app['migrator']->create('system:migrations', $this->config('version'))->get()) {
-                $event->setResponse($app['response']->redirect('@system/migration'));
+            $currentVersion = $app->config('system')->get('version');
+            if ($version = $app['migrator']->create('app/system/migrations', $currentVersion)->run()) {
+                $app->config('system')->set('version', $version);
             }
 
         },

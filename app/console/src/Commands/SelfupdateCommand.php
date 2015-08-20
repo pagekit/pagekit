@@ -92,8 +92,8 @@ class SelfupdateCommand extends Command
 
             $output->writeln('<info>done.</info>');
 
-            $output->write('Migrating database...');
-            $this->database();
+            $output->write('Migrating Pagekit...');
+            $this->migrate();
             $output->writeln('<info>done.</info>');
 
             $output->write('Deactivating maintenance mode...');
@@ -177,19 +177,12 @@ class SelfupdateCommand extends Command
     }
 
     /**
-     * Migrating the database.
+     * Migrating Pagekit after update.
      */
-    protected function database()
+    protected function migrate()
     {
-        $pagekit = $this->getPagekit();
-        $pagekit->extend('migrator', function ($migrator) {
-            return $migrator->setLoader(new FilesystemLoader());
-        });
-
-        $currentVersion = $pagekit->config('system')->get('version');
-        if ($version = $pagekit['migrator']->create('app/system/migrations', $currentVersion)->run()) {
-            $pagekit->config('system')->set('version', $version);
-        }
+        $app = $this->getPagekit();
+        $app->trigger('updated');
     }
 
     /**
