@@ -114,7 +114,7 @@ module.exports = {
         },
 
         getSelected: function() {
-            return this.posts.filter(function(post) { return this.selected.indexOf(post.id.toString()) !== -1; }, this);
+            return this.posts.filter(function(post) { return this.selected.indexOf(post.id) !== -1; }, this);
         },
 
         getStatusText: function(post) {
