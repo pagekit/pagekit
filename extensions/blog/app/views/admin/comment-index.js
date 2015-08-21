@@ -50,7 +50,7 @@ module.exports = {
     methods: {
 
         active: function (comment) {
-            return this.selected.indexOf(comment.id.toString()) != -1;
+            return this.selected.indexOf(comment.id) != -1;
         },
 
         submit: function () {
@@ -106,7 +106,7 @@ module.exports = {
         getSelected: function () {
             var vm = this;
             return this.comments.filter(function (comment) {
-                return vm.selected.indexOf(comment.id.toString()) !== -1;
+                return vm.selected.indexOf(comment.id) !== -1;
             });
         },
 

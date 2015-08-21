@@ -51,7 +51,7 @@ module.exports = {
     methods: {
 
         active: function (post) {
-            return this.selected.indexOf(post.id.toString()) != -1;
+            return this.selected.indexOf(post.id) != -1;
         },
 
         save: function (post) {
