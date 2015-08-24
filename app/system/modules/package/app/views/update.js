@@ -1,4 +1,5 @@
 var Output = require('../components/output.vue');
+var Version = require('../lib/version');
 
 module.exports = {
 
@@ -16,7 +17,7 @@ module.exports = {
     computed: {
 
         hasUpdate: function () {
-            return this.update && this.update.version != this.version;
+            return this.update && Version.compare(this.update.version, this.version, '>');
         }
 
     },

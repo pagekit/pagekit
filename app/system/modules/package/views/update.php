@@ -13,13 +13,12 @@
 
         <div v-show="!hasUpdate">
             <h2>{{ 'You have the latest version of Pagekit.' | trans }}</h2>
-            <p>{{ 'You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can do so automatically or download the package and re-install manually.' | trans update }}</p>
+            <p>{{ 'You have the latest version of Pagekit. You do not need to update. However, if you want to re-install version %version%, you can download the package and re-install manually.' | trans update }}</p>
         </div>
 
         <p>
-            <a class="uk-button uk-button-primary" v-on="click: install()">
-                <span v-show="hasUpdate">{{ 'Update' | trans }}</span>
-                <span v-show="!hasUpdate">{{ 'Re-install' | trans }}</span>
+            <a class="uk-button uk-button-primary" v-on="click: install()" v-show="hasUpdate">
+                <span>{{ 'Update' | trans }}</span>
             </a>
             <a class="uk-button uk-button-success" v-attr="href: update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
