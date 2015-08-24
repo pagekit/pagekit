@@ -26,14 +26,12 @@ module.exports = {
 
         getVersions: function () {
 
-            this.$http.jsonp(this.api.url + '/update', function (data) {
+            this.$http.get(this.api.url + '/update', function (data) {
 
                 this.$set('update', data[this.channel == 'nightly' ? 'nightly' : 'latest']);
 
             }).error(function () {
-
-                this.errors.push(self.$trans('Cannot connect to the server. Please try again later.'), 'error');
-
+                this.errors.push(this.$trans('Cannot connect to the server. Please try again later.'));
             });
 
         },
@@ -48,7 +46,9 @@ module.exports = {
 
             return this.$http.post('admin/system/update/run', {update: this.update}, null, {
                 beforeSend: function (request) {
+
                     output.init(request, this.$trans('Updating to Pagekit %version%', {version: this.update.version}));
+
                 }
             }).error(function (msg) {
                 output.close();
