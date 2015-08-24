@@ -1,6 +1,6 @@
 {
     "name": "pagekit/pagekit",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "type": "project",
     "description": "The Pagekit CMS",
     "keywords": ["cms", "pagekit"],
