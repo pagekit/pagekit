@@ -3,7 +3,6 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Console\Command;
-use Pagekit\System\Migration\FilesystemLoader;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\TransferException;
@@ -77,16 +76,27 @@ class SelfupdateCommand extends Command
             $this->download($url, $shasum, $tmpFile);
             $output->writeln('<info>done.</info>');
 
+            $fileList = $this->getFileList($tmpFile);
+            unset($fileList[array_search('.htaccess', $fileList)]);
+
+            if ($this->isWritable($fileList, $this->config['path']) !== true) {
+                throw new \RuntimeException(array_reduce($fileList, function ($carry, $file) {
+                    return $carry . sprintf("'%s' not writable\n", $file);
+                }));
+            }
+
             $output->write('Entering maintenance mode...');
             $this->setMaintenanceMode(true);
             $output->writeln('<info>done.</info>');
 
             $output->write('Extracting files...');
-            $this->extract($tmpFile, $this->config['path']);
+            $this->extract($tmpFile, $fileList, $this->config['path']);
             $output->writeln('<info>done.</info>');
 
             $output->write('Removing old files...');
-            $this->cleanup($tmpFile, $this->config['path']);
+            foreach ($this->cleanup($fileList, $this->config['path']) as $file) {
+                $this->writeln(sprintf('<warning>\'%s\’ could not be removed</warning>', $file));
+            }
 
             unlink($tmpFile);
 
@@ -158,18 +168,69 @@ class SelfupdateCommand extends Command
         }
     }
 
+
     /**
-     * @param $tmpFile
+     * @param $file
+     * @return array
+     */
+    protected function getFileList($file)
+    {
+        $list = [];
+
+        $zip = new \ZipArchive;
+        if ($zip->open($file) === true) {
+
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $list[] = $zip->getNameIndex($i);
+            }
+            $zip->close();
+
+            return $list;
+        } else {
+            throw new \RuntimeException('Can not build file list.');
+        }
+    }
+
+    /**
+     * @param $fileList
+     * @param $path
+     * @return bool|array
+     */
+    protected function isWritable($fileList, $path)
+    {
+        $notWritable = [];
+
+        if (!file_exists($path)) {
+            throw new \RuntimeException(sprintf('"%s" not writable', $path));
+        }
+
+        foreach ($fileList as $file) {
+            $file = $path . '/' . $file;
+
+            while (!file_exists($file)) {
+                $file = dirname($file);
+            }
+
+            if (!is_writable($file)) {
+                $notWritable[] = $file;
+            }
+        }
+
+        return $notWritable ?: true;
+    }
+
+
+    /**
+     * @param $file
+     * @param $fileList
      * @param $path
      */
-    protected function extract($tmpFile, $path)
+    protected function extract($file, $fileList, $path)
     {
         $zip = new \ZipArchive;
-        if ($zip->open($tmpFile) === true) {
+        if ($zip->open($file) === true) {
 
-            $zip->deleteName(".htaccess");
-
-            $zip->extractTo($path);
+            $zip->extractTo($path, $fileList);
             $zip->close();
         } else {
             throw new \RuntimeException('Package extraction failed.');
@@ -186,44 +247,48 @@ class SelfupdateCommand extends Command
     }
 
     /**
-     * @param $tmpFile
-     * @param $base
+     * @param $fileList
+     * @param $path
+     * @return array
      */
-    protected function cleanup($tmpFile, $base)
+    protected function cleanup($fileList, $path)
     {
-        $zip = new \ZipArchive;
-        if ($zip->open($tmpFile) === true) {
+        $errorList = [];
 
-            foreach ($this->cleanFolder as $folder) {
-                $this->doCleanup($zip, $base, $folder);
-            }
-
-            $zip->close();
-        } else {
-            throw new \RuntimeException('Package extraction failed.');
+        foreach ($this->cleanFolder as $dir) {
+            array_merge($errorList, $this->doCleanup($fileList, $dir, $path));
         }
+
+        return $errorList;
     }
 
     /**
-     * @param $zip
-     * @param $base
+     * @param $fileList
+     * @param $dir
      * @param $path
+     * @return array
      */
-    protected function doCleanup($zip, $base, $path)
+    protected function doCleanup($fileList, $dir, $path)
     {
-        foreach (array_diff(scandir($this->config['path'] . '/' . $path), array('..', '.')) as $file) {
-            $file = ($path ? $path . '/' : '') . $file;
-            if (is_dir($base . '/' . $file)) {
+        $errorList = [];
+
+        foreach (array_diff(@scandir($path . '/' . $dir) ?: [], ['..', '.']) as $file) {
+            $file = ($dir ? $dir . '/' : '') . $file;
+            $realPath = $path . '/' . $file;
+
+            if (is_dir($realPath)) {
                 if (in_array($file, $this->ignoreFolder)) {
                     continue;
                 }
 
-                $this->doCleanup($zip, $base, $file);
-                @rmdir($base . '/' . $file);
-            } else if (!$zip->statName($file)) {
-                unlink($base . '/' . $file);
+                array_merge($errorList, $this->doCleanup($fileList, $file, $path));
+                @rmdir($realPath);
+            } else if (!in_array($file, $fileList) && !unlink($realPath)) {
+                $errorList[] = $file;
             }
         }
+
+        return $errorList;
     }
 
     /**
