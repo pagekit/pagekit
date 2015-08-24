@@ -2,13 +2,6 @@ module.exports = {
 
     data: window.$data,
 
-    ready: function() {
-
-        this.user.roles = this.user.roles.map(function(role) {
-            return String(role);
-        });
-    },
-
     computed: {
 
         isNew: function () {
