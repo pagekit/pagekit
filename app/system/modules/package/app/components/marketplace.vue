@@ -39,7 +39,7 @@
                         <h1 class="uk-h2 uk-margin-remove">{{ pkg.title }}</h1>
                         <ul class="uk-subnav uk-subnav-line uk-margin-top-remove">
                             <li class="uk-text-muted">{{ pkg.author.name }}</li>
-                            <li class="uk-text-muted" v-show="pkg.version">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
+                            <li class="uk-text-muted">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
                         </ul>
                     </div>
                 </div>
@@ -136,10 +136,7 @@
                     this.modal = UIkit.modal(this.$$.modal);
                 }
 
-                this.$http.jsonp(this.api.url + '/package/' + pkg.name, function (data) {
-                    this.$set('pkg', data);
-                });
-
+                this.$set('pkg', pkg);
                 this.modal.show();
             },
 
