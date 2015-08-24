@@ -51,9 +51,11 @@ class MenuApiController
         $oldId = trim($menu['id']);
         $label = trim($menu['label']);
 
-        if (!$id and !$id = $this->slugify($label)) {
+        if (!$id || !$this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
         }
+
+        $id = $this->slugify($label);
 
         if ($id != $oldId) {
 
