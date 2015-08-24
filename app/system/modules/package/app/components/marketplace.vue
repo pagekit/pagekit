@@ -8,7 +8,7 @@
 
                     <div class="uk-panel-teaser uk-position-relative">
                         <div class="uk-overlay uk-display-block">
-                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{pkg.extra.teaser}});"></div>
+                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{ pkg.extra.teaser }});"></div>
                             <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
                             <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                         </div>
@@ -25,7 +25,7 @@
         <v-pagination page="{{@ page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
         <div class="uk-modal" v-el="modal">
-            <div class="uk-modal-dialog uk-modal-dialog-large pk-modal-dialog-iframe">
+            <div class="uk-modal-dialog uk-modal-dialog-large">
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
@@ -34,7 +34,26 @@
                     </button>
                 </div>
 
-                <iframe class="uk-width-1-1 uk-height-1-1" v-attr="src: iframe"></iframe>
+                <div class="uk-grid">
+                    <div class="uk-width-1-1">
+                        <h1 class="uk-h2 uk-margin-remove">{{ pkg.title }}</h1>
+                        <ul class="uk-subnav uk-subnav-line uk-margin-top-remove">
+                            <li class="uk-text-muted">{{ pkg.author.name }}</li>
+                            <li class="uk-text-muted" v-show="pkg.version">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr class="uk-grid-divider">
+
+                <div class="uk-grid uk-overflow-container pk-marketplace-overflow-container">
+                    <div class="uk-width-medium-1-2">
+                        <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: pkg.extra.teaser">
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <div>{{ pkg.description }}</div>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -117,8 +136,9 @@
                     this.modal = UIkit.modal(this.$$.modal);
                 }
 
-                this.$set('iframe', this.api.url.replace(/\/api$/, '') + '/marketplace/frame/' + pkg.name);
-                this.$set('pkg', pkg);
+                this.$http.jsonp(this.api.url + '/package/' + pkg.name, function (data) {
+                    this.$set('pkg', data);
+                });
 
                 this.modal.show();
             },
