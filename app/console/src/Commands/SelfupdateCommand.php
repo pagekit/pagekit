@@ -282,7 +282,10 @@ class SelfupdateCommand extends Command
                 }
 
                 array_merge($errorList, $this->doCleanup($fileList, $file, $path));
-                @rmdir($realPath);
+
+                if (!in_array($file, $fileList)) {
+                    @rmdir($realPath);
+                }
             } else if (!in_array($file, $fileList) && !unlink($realPath)) {
                 $errorList[] = $file;
             }
