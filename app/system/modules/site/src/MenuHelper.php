@@ -81,7 +81,7 @@ class MenuHelper extends Helper
      * @param  array  $parameters
      * @return Node|null
      */
-    protected function getRoot($menu, $parameters = [])
+    public function getRoot($menu, $parameters = [])
     {
         $parameters = array_replace([
             'start_level' => 1,
