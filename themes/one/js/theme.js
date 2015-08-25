@@ -11,7 +11,7 @@
 
                 meta = main.css('min-height','')[0].getBoundingClientRect();
 
-                if (meta.height < window.innerHeight) {
+                if ((meta.top + meta.height) < window.innerHeight) {
                     main.css('min-height', (window.innerHeight - meta.top - footer[0].getBoundingClientRect().height)+'px');
                 }
 
