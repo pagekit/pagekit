@@ -56,7 +56,7 @@ module.exports = {
 
             return this.$http.post('admin/system/package/install', {package: pkg}, null, {
                 beforeSend: function (request) {
-                    output.init(request, this.$trans('Installing "%title%"', {title: this.package.title}));
+                    output.init(request, this.$trans('Installing "%title%"', {title: pkg.title}));
                 }
             }).success(function (data) {
                 if (data.package) {
