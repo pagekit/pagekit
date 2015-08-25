@@ -51,11 +51,9 @@ class MenuApiController
         $oldId = trim($menu['id']);
         $label = trim($menu['label']);
 
-        if (!$id || !$this->slugify($label)) {
+        if (!$id = $this->slugify($label)) {
             App::abort(400, __('Invalid id.'));
         }
-
-        $id = $this->slugify($label);
 
         if ($id != $oldId) {
 
@@ -64,10 +62,11 @@ class MenuApiController
             }
 
             $this->config->remove('menus.'.$oldId);
-            $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
 
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
+
+        $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
 
         App::menu()->assign($id, $menu['positions']);
 
