@@ -3,16 +3,18 @@
     $(function(){
 
         // fit footer
-        (function(footer, main, meta, fn){
+        (function(main, meta, fn){
 
-            if (!footer.length || !main.length) return;
+            if (!main.length) return;
 
             fn = function() {
 
-                meta = main.css('min-height','')[0].getBoundingClientRect();
+                main.css('min-height','');
 
-                if ((meta.top + meta.height) < window.innerHeight) {
-                    main.css('min-height', (window.innerHeight - meta.top - footer[0].getBoundingClientRect().height)+'px');
+                meta = document.body.getBoundingClientRect();
+
+                if (meta.height < window.innerHeight) {
+                    main.css('min-height', (main.outerHeight() + (window.innerHeight - meta.height))+'px');
                 }
 
                 return fn;
@@ -20,7 +22,7 @@
 
             UIkit.$win.on('load resize', fn());
 
-        })($('#tm-footer'), $('#tm-main'));
+        })($('#tm-main'));
 
     });
 
