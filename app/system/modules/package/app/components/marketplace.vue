@@ -80,7 +80,7 @@
             return {
                 api: {},
                 search: '',
-                type: 'extension',
+                type: 'pagekit-extension',
                 pkg: null,
                 packages: null,
                 updates: null,
@@ -121,7 +121,7 @@
 
                 var url = this.api.url + '/package/search';
 
-                this.$http.jsonp(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
+                this.$http.get(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
                     this.$set('packages', data.packages);
                     this.$set('pages', data.pages);
                 }).error(function () {
