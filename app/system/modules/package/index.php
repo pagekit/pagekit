@@ -40,15 +40,6 @@ return [
 
     },
 
-    'events' => [
-
-        'view.system:modules/settings/views/settings' => function ($event, $view) use ($app) {
-            $view->data('$settings', ['config' => [$this->name => $this->config(['api.key'])]]);
-            $view->data('$settings', ['options' => [$this->name => $this->config(['release_channel'])]]);
-        }
-
-    ],
-
     'routes' => [
 
         '/system/package' => [
@@ -133,11 +124,6 @@ return [
     ],
 
     'config' => [
-
-        'api' => [
-            'key' => '',
-            'url' => 'http://pagekit.com/api'
-        ],
 
         'release_channel' => 'stable'
 

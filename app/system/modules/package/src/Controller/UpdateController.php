@@ -18,7 +18,7 @@ class UpdateController
                 'name' => 'system/package:views/update.php'
             ],
             '$data' => [
-                'api' => App::module('system/package')->config('api'),
+                'api' => App::system()->config('api'),
                 'channel' => App::module('system/package')->config('release_channel'),
                 'version' => App::version()
             ]

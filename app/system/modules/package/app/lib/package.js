@@ -6,21 +6,19 @@ module.exports = {
 
         queryUpdates: function (packages, success) {
 
-            var pkgs = {};
+            var pkgs = {}, options = {emulateJSON: true};
 
             _.each(packages, function (pkg) {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return this.$http.get(this.api.url + '/package/update', {
-                api_key: this.api.key,
+            return this.$http.post(this.api + '/package/update', {
                 packages: JSON.stringify(pkgs)
-            }, success);
+            }, success, options);
         },
 
         queryPackage: function (pkg, success) {
-            return this.$http.get(this.api.url + '/package/:name', {
-                api_key: this.api.key,
+            return this.$http.get(this.api + '/package/:name', {
                 name: _.isObject(pkg) ? pkg.name : pkg
             }, success).error(function () {});
         },
