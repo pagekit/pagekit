@@ -129,17 +129,6 @@ class InstallerController
                 'roles' => [2, 3]
             ], ['string', 'string', 'string', 'string', 'string', 'datetime', 'simple_array']);
 
-            if ($sampleData = App::module('installer')->config('sampleData')) {
-
-                $sql = file_get_contents($sampleData);
-
-                foreach (explode(';', $sql) as $query) {
-                    if ($query = trim($query)) {
-                        App::db()->executeUpdate($query);
-                    }
-                }
-            }
-
             if (!$this->config) {
 
                 $configuration = new Config();
@@ -160,6 +149,10 @@ class InstallerController
 
             foreach ($option as $name => $values) {
                 App::config()->set($name, $values);
+            }
+
+            if (file_exists(__DIR__.'/../install.php')) {
+                require_once __DIR__.'/../install.php';
             }
 
             App::module('system/cache')->clearCache();
