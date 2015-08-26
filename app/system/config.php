@@ -10,7 +10,7 @@ return [
 
     'debug' => [
 
-        'file' => "sqlite:$path/app/database/debug.db"
+        'file' => "sqlite:$path/tmp/temp/debug.db"
 
     ],
 
