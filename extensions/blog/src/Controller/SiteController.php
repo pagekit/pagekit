@@ -78,12 +78,16 @@ class SiteController
             App::abort(403, __('Insufficient User Rights.'));
         }
 
+        // fetch locale and convert to ISO-639 (en_US -> en-us)
+        $locale = App::module('system')->config('site.locale');
+        $locale = str_replace('_', '-', strtolower($locale));
+
         $site = App::module('system/site');
         $feed = App::feed()->create($type ?: $this->blog->config('feed.type'), [
             'title' => $site->config('title'),
             'link' => App::url('@blog', [], true),
             'description' => $site->config('description'),
-            'element' => ['language', App::module('system')->config('site.locale')],
+            'element' => ['language', $locale],
             'selfLink' => App::url('@blog/feed', [], true)
         ]);
 
