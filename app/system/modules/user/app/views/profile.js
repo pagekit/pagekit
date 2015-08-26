@@ -7,13 +7,10 @@ module.exports = {
         save: function (e) {
             e.preventDefault();
 
-            this.$set('message', '');
-            this.$set('error', '');
-
             this.$http.post('user/profile/save', {user: this.user}, function () {
-                this.message = this.$trans('Profile Updated');
+                this.$notify('Profile Updated', 'success');
             }).error(function (error) {
-                this.error = error;
+                this.$notify(error, 'danger');
             });
         }
 
