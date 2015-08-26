@@ -97,10 +97,11 @@ class PositionHelper extends Helper
                     or !$widget->hasAccess(App::user())
                     or ($nodes = $widget->nodes and !in_array(App::node()->id, $nodes))
                     or !$type = App::widget()->getType($widget->type)
-                    or !$result = $type->render($widget)
                 ) {
                     continue;
                 }
+
+                $result = $type->render($widget);
 
                 $widget->set('result', $result);
                 $positions[$position][] = $widget;
