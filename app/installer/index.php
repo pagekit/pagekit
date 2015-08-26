@@ -13,9 +13,14 @@ return [
         }
 
         $app->on('request', function ($event) use ($app) {
-            if ($locale = $app['request']->getPreferredLanguage()) {
-                $app->module('system/intl')->setLocale($locale);
+
+            $available = $app->module('system/intl')->getAvailableLanguages();
+            $preferred = $app['request']->getPreferredLanguage();
+
+            if (isset($available[$preferred])) {
+                $app->module('system/intl')->setLocale($preferred);
             }
+
         });
 
         $app->error(function (NotFoundException $e) use ($app) {
