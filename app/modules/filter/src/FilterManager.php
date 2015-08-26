@@ -18,6 +18,7 @@ class FilterManager
         'integer'        => 'Pagekit\Filter\Int',
         'json'           => 'Pagekit\Filter\Json',
         'pregreplace'    => 'Pagekit\Filter\PregReplace',
+        'slug'           => 'Pagekit\Filter\Slug',
         'string'         => 'Pagekit\Filter\String',
         'stripnewlines'  => 'Pagekit\Filter\StripNewlines'
     ];
