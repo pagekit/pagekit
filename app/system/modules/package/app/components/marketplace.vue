@@ -78,7 +78,7 @@
 
         data: function () {
             return {
-                api: {},
+                api: '',
                 search: '',
                 type: 'pagekit-extension',
                 pkg: null,
@@ -119,12 +119,12 @@
 
             query: function (page) {
 
-                var url = this.api.url + '/package/search';
+                var url = this.api + '/package/search', options = {emulateJSON: true};
 
-                this.$http.get(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
+                this.$http.post(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
                     this.$set('packages', data.packages);
                     this.$set('pages', data.pages);
-                }).error(function () {
+                }, options).error(function () {
                     this.$set('packages', null);
                     this.$set('status', 'error');
                 });

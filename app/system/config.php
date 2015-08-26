@@ -39,7 +39,7 @@ return [
                 'driverOptions' => [
                     'userDefinedFunctions' => [
                         'REGEXP' => [
-                            'callback' => function($pattern, $subject) {
+                            'callback' => function ($pattern, $subject) {
                                 return preg_match("/$pattern/", $subject);
                             },
                             'numArgs' => 2

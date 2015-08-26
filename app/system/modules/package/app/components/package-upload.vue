@@ -29,7 +29,7 @@
 
         data: function () {
             return {
-                api: {},
+                api: '',
                 package: {},
                 upload: null,
                 progress: ''

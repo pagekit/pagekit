@@ -59,7 +59,7 @@ return [
 
     'config' => [
 
-        'key' => '',
+        'api' => 'http://pagekit.com/api',
 
         'site' => [
 

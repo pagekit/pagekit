@@ -26,10 +26,8 @@ module.exports = {
 
         getVersions: function () {
 
-            this.$http.get(this.api.url + '/update', function (data) {
-
+            this.$http.get(this.api + '/update', function (data) {
                 this.$set('update', data[this.channel == 'nightly' ? 'nightly' : 'latest']);
-
             }).error(function () {
                 this.errors.push(this.$trans('Cannot connect to the server. Please try again later.'));
             });

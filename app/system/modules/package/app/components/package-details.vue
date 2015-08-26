@@ -55,7 +55,7 @@
 
         data: function () {
             return {
-                api: {},
+                api: '',
                 package: {},
                 messages: {}
             };
