@@ -31,6 +31,15 @@
 <?php endforeach ?>
 
 
+<?php
+
+    $range     = 3;
+    $total     = intval($total);
+    $page      = intval($page);
+    $pageIndex = $page - 1;
+?>
+
+
 <?php if ($total > 1) : ?>
 <ul class="uk-pagination">
 
@@ -39,6 +48,20 @@
         <a href="<?= $view->url('@blog/page', ['page' => $page - 1]) ?>"><?= __('Newer posts') ?></a>
     </li>
     <?php endif ?>
+
+    <?php for($i=1;$i<=$total;$i++): ?>
+        <?php if ($i <= ($pageIndex+$range) && $i >= ($pageIndex-$range)): ?>
+
+            <?php if ($i == $page): ?>
+            <li class="uk-active"><span><?=$i?></span></li>
+            <?php else: ?>
+            <li>
+                <a href="<?= $view->url('@blog/page', ['page' => $i]) ?>"><?=$i?></a>
+            <li>
+            <?php endif; ?>
+
+        <?php endif; ?>
+    <?php endfor; ?>
 
     <?php if ($page < $total) : ?>
     <li class="uk-pagination-next">
