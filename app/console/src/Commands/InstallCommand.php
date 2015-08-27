@@ -3,7 +3,7 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Console\Command;
-use Pagekit\Console\Updater\Updater;
+use Pagekit\Console\Installer\Installer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -33,8 +33,15 @@ class InstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $updater = new Updater($this->config);
-        $updater->run($input, $output);
+        $packages = [];
+
+        foreach ((array) $this->argument('packages') as $argument) {
+            $argument = explode(':', $argument);
+            $packages[$argument[0]] = isset($argument[1]) && $argument[1] ? $argument[1] : '*';
+        }
+
+        $installer = new Installer($this->config, $output);
+        $installer->install($packages);
     }
 
 }

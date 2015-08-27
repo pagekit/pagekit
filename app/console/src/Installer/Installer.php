@@ -1,9 +1,9 @@
 <?php
 
-namespace Pagekit\Console\Updater;
+namespace Pagekit\Console\Installer;
 
 use Composer\Factory;
-use Composer\Installer;
+use Composer\Installer as ComposerInstaller;
 use Composer\IO\ConsoleIO;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
@@ -11,10 +11,9 @@ use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
 use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Updater
+class Installer
 {
     const CONFIG_FILE = 'packages.json';
 
@@ -51,10 +50,13 @@ class Updater
 
     /**
      * @param $config
+     * @param null $output
      */
-    public function __construct($config)
+    public function __construct($config, $output = null)
     {
         $this->config = $config;
+        $this->output = $output;
+
         $this->file = $config['path'] . '/' . self::CONFIG_FILE;
         $this->packages = $this->readPackages();
 
@@ -72,42 +74,26 @@ class Updater
     }
 
     /**
-     * @param $input
-     * @param $output
+     * @param array $install
      */
-    public function run(InputInterface $input, OutputInterface $output)
+    public function install(array $install)
     {
-        $this->output = $output;
-        $packages = $this->parsePackages($input->getArgument('packages'));
+        $this->packages = array_merge($this->packages, $install);
 
-        if ($packages && !($input->hasOption('remove') && $input->getOption('remove'))) {
-            $this->addRequirements($packages);
-            return;
+        if ($this->composerUpdate(array_keys($install))) {
+            $this->writePackages();
         }
-
-        if ($packages && ($input->hasOption('remove') && $input->getOption('remove'))) {
-            $this->removeRequirements($packages);
-            return;
-        }
-
-        $this->composerUpdate();
     }
 
     /**
-     * Parses version constraints from package names.
-     *
-     * @param  array $arguments
-     * @return array
+     * @param array $uninstall
      */
-    protected function parsePackages($arguments)
+    public function uninstall(array $uninstall)
     {
-        $packages = [];
-        foreach ((array)$arguments as $argument) {
-            $argument = explode(':', $argument);
-            $packages[] = ['name' => $argument[0], 'version' => isset($argument[1]) && $argument[1] ? $argument[1] : '*'];
-        }
+        $this->packages = array_diff_key($this->packages, array_flip($uninstall));
 
-        return $packages;
+        $this->writePackages();
+        $this->composerUpdate($uninstall);
     }
 
     /**
@@ -126,56 +112,6 @@ class Updater
     protected function writePackages()
     {
         file_put_contents($this->file, json_encode($this->packages, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT));
-    }
-
-    /**
-     * Installs new packages.
-     *
-     * @param  $packages
-     * @throws \Exception
-     */
-    protected function addRequirements($packages)
-    {
-        $update = [];
-        foreach ($packages as $package) {
-            if (preg_match('/^[\w\d\-_]+\/[\w\d\-_]+\z/', $package['name'])) {
-                $update[] = $this->handleRepository($package);
-            }
-        }
-
-        if ($this->composerUpdate($update)) {
-            $this->writePackages();
-        }
-    }
-
-    /**
-     * Uninstalls packages.
-     *
-     * @param $packages
-     */
-    protected function removeRequirements($packages)
-    {
-        foreach ($packages as $package) {
-            unset($this->packages[$package['name']]);
-        }
-
-        $this->writePackages();
-        $this->composerUpdate(array_map(function ($package) {
-            return $package['name'];
-        }, $packages));
-    }
-
-    /**
-     * Handles packages from remote repository.
-     *
-     * @param $package
-     * @return array
-     */
-    protected function handleRepository($package)
-    {
-        $this->packages[$package['name']] = $package['version'];
-
-        return $package['name'];
     }
 
     /**
@@ -200,7 +136,7 @@ class Updater
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
-        $installer = Installer::create($io, $composer)
+        $installer = ComposerInstaller::create($io, $composer)
             ->setAdditionalInstalledRepository($internal)
             ->setPreferDist(true)
             ->setOptimizeAutoloader(true)
