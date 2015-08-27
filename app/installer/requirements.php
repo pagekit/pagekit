@@ -357,7 +357,7 @@ class PagekitRequirements extends RequirementCollection
     /**
      * Constructor that initializes the requirements.
      */
-    public function __construct($app)
+    public function __construct($path)
     {
         /* mandatory requirements follow */
 
@@ -443,7 +443,6 @@ class PagekitRequirements extends RequirementCollection
             );
         }
 
-        $path = $app['path'];
         $writable_directories = ["$path/tmp", "$path/tmp/cache", "$path/tmp/logs", "$path/tmp/sessions"];
 
         if (!file_exists("$path/config.php")) {
@@ -519,4 +518,4 @@ class PagekitRequirements extends RequirementCollection
     }
 }
 
-return new PagekitRequirements($app);
+return new PagekitRequirements($path);

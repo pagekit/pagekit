@@ -1,7 +1,40 @@
 <?php
 
+if (version_compare($ver = PHP_VERSION, $req = '5.4.0', '<')) {
+    exit(sprintf('You are running PHP %s, but Pagekit needs at least <strong>PHP %s</strong> to run.', $ver, $req));
+}
+
+if (PHP_SAPI == 'cli-server' && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))) {
+    return false;
+}
+
 if (!isset($_SERVER['HTTP_MOD_REWRITE'])) {
     $_SERVER['HTTP_MOD_REWRITE'] = 'Off';
 }
 
-require_once __DIR__.'/app/app.php';
+date_default_timezone_set('UTC');
+
+$env = 'system';
+$path = __DIR__;
+$config = array(
+    'path'            => $path,
+    'path.extensions' => $path.'/extensions',
+    'path.storage'    => $path.'/storage',
+    'path.themes'     => $path.'/themes',
+    'path.packages'   => $path.'/tmp/packages',
+    'path.temp'       => $path.'/tmp/temp',
+    'path.cache'      => $path.'/tmp/cache',
+    'path.logs'       => $path.'/tmp/logs',
+    'path.vendor'     => $path.'/vendor',
+    'config.file'     => realpath($path.'/config.php')
+);
+
+if (!$config['config.file']) {
+    $env = 'installer';
+}
+
+if (PHP_SAPI == 'cli') {
+    $env = 'console';
+}
+
+require_once "$path/app/$env/app.php";
