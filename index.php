@@ -29,12 +29,12 @@ $config = array(
     'config.file'     => realpath($path.'/config.php')
 );
 
-if (!$config['config.file']) {
-    $env = 'installer';
-}
-
 if (PHP_SAPI == 'cli') {
     $env = 'console';
+}
+
+if (!$config['config.file']) {
+    $env = 'installer';
 }
 
 require_once "$path/app/$env/app.php";
