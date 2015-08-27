@@ -3,8 +3,6 @@
 namespace Pagekit\Console;
 
 use Pagekit\Application as App;
-use Pagekit\Module\Loader\AutoLoader;
-use Pagekit\Module\Loader\ConfigLoader;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 
@@ -40,10 +38,9 @@ class Application extends BaseApplication
     public function add(BaseCommand $command)
     {
         if ($command instanceof Command) {
-            $command->setConfig($this->config['values']);
+            $command->setConfig($this->config);
         }
 
         return parent::add($command);
     }
-
 }

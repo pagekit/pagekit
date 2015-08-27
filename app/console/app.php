@@ -1,24 +1,59 @@
 <?php
 
-use Pagekit\Application as App;
-use Pagekit\Module\Loader\AutoLoader;
-use Pagekit\Module\Loader\ConfigLoader;
+use Pagekit\Console\Application as Console;
+use Pagekit\Console\Output\FilterOutput;
+use Pagekit\Console\Output\WebOutput;
+use Pagekit\Console\UriVerifier;
+use Symfony\Component\Console\Input\ArrayInput;
 
-$loader = require __DIR__ . '/../autoload.php';
-$config = require __DIR__ . '/../config.php';
+require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
 
-$app = new App($config['values']);
-$app['autoloader'] = $loader;
+$loader = require $path . '/autoload.php';
 
-$app['module']->addPath([
-    __DIR__ . '/../modules/*/index.php',
-    __DIR__ . '/../system/index.php',
-]);
+if (PHP_SAPI === 'cli') {
 
-$app['module']->addLoader(new AutoLoader($loader));
-$app['module']->addLoader(new ConfigLoader($config));
-$app['module']->addLoader(new ConfigLoader(require $app['config.file']));
+    $input = null;
+    $output = new FilterOutput(fopen('php://stdout', 'w'));
 
-$app['module']->load('system');
+} else {
 
-return $app;
+    if (!$config['config.file']) {
+        exit('Pagekit needs to be installed before accessing the console over the web.');
+    }
+
+    // Check parameter integrity
+    $verifier = new UriVerifier(require $config['config.file']);
+    if (!$verifier->verify($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'])) {
+        http_response_code(401);
+        exit('Invalid parameters.');
+    }
+
+    if (isset($_GET['command'])) {
+        $command = $_GET['command'];
+        $args = array_merge(compact('command'), $_GET);
+    } else {
+        $args = $_GET;
+    }
+
+    unset($args['expires'], $args['token']);
+
+    $input = new ArrayInput($args);
+    $output = new WebOutput(fopen('php://output', 'w'));
+}
+
+$console = new Console($config, 'Pagekit Console');
+
+// Register commands
+$namespace = 'Pagekit\\Console\\Commands\\';
+foreach (glob(__DIR__ . '/src/Commands/*Command.php') as $file) {
+    $class = $namespace . basename($file, '.php');
+    $console->add(new $class);
+}
+
+try {
+    $console->run($input, $output);
+} catch (Exception $e) {
+    $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
+}
+
+

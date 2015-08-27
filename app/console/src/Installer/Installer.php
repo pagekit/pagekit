@@ -75,25 +75,30 @@ class Installer
 
     /**
      * @param array $install
+     * @return bool
      */
     public function install(array $install)
     {
         $this->packages = array_merge($this->packages, $install);
 
-        if ($this->composerUpdate(array_keys($install))) {
+        if ($return = $this->composerUpdate(array_keys($install))) {
             $this->writePackages();
         }
+
+        return $return;
     }
 
     /**
      * @param array $uninstall
+     * @return bool
      */
     public function uninstall(array $uninstall)
     {
         $this->packages = array_diff_key($this->packages, array_flip($uninstall));
 
         $this->writePackages();
-        $this->composerUpdate($uninstall);
+
+        return $this->composerUpdate($uninstall);
     }
 
     /**

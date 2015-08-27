@@ -68,7 +68,7 @@ class Command extends BaseCommand
     public function getPagekit()
     {
         if (!$this->pagekit) {
-            $this->pagekit = require __DIR__ . '/../app.php';
+            $this->pagekit = require __DIR__ . '/../system.php';
         }
 
         return $this->pagekit;

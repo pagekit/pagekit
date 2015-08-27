@@ -1,10 +1,10 @@
 <?php
 
-namespace Pagekit\Console;
+namespace Pagekit\Console\Output;
 
 use Symfony\Component\Console\Output\StreamOutput;
 
-class OutputFilter extends StreamOutput
+class FilterOutput extends StreamOutput
 {
     protected $errorLog = array();
 
