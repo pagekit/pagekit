@@ -4,7 +4,7 @@
 <article class="uk-article">
 
     <?php if ($image = $post->get('image')): ?>
-    <img src="<?=$image?>">
+    <a class="uk-display-block" href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><img src="<?=$image?>"></a>
     <?php endif ?>
 
     <h1 class="uk-article-title"><a href="<?= $view->url('@blog/id', ['id' => $post->id]) ?>"><?= $post->title ?></a></h1>
