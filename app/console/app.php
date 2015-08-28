@@ -6,8 +6,6 @@ use Pagekit\Console\Output\WebOutput;
 use Pagekit\Console\UriVerifier;
 use Symfony\Component\Console\Input\ArrayInput;
 
-require 'phar://' . __DIR__ . '/composer.phar/src/bootstrap.php';
-
 $loader = require $path . '/autoload.php';
 
 if (PHP_SAPI === 'cli') {
