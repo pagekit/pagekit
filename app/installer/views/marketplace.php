@@ -1,4 +1,4 @@
-<?php $view->script('marketplace', 'system/package:app/bundle/marketplace.js', 'vue') ?>
+<?php $view->script('marketplace', 'installer:app/bundle/marketplace.js', 'vue') ?>
 
 <div id="marketplace">
 

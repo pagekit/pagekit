@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
 
@@ -14,7 +14,7 @@ class MarketplaceController
         return [
             '$view' => [
                 'title' => __('Marketplace'),
-                'name'  => 'system/package:views/marketplace.php'
+                'name'  => 'installer:views/marketplace.php'
             ],
             '$data' => [
                 'title' => 'Themes',
@@ -30,7 +30,7 @@ class MarketplaceController
         return [
             '$view' => [
                 'title' => __('Marketplace'),
-                'name'  => 'system/package:views/marketplace.php'
+                'name'  => 'installer:views/marketplace.php'
             ],
             '$data' => [
                 'title' => 'Extensions',

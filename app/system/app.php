@@ -10,6 +10,7 @@ $app = new App($config);
 $app['autoloader'] = $loader;
 
 $app['module']->addPath([
+    $path.'/app/installer/index.php',
     $path.'/app/modules/*/index.php',
     $path.'/extensions/*/index.php',
     $path.'/themes/*/index.php',

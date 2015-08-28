@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Installer;
+namespace Pagekit\Installer\Controller;
 
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;

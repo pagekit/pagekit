@@ -1,4 +1,4 @@
-<?php $view->script('extensions', 'system/package:app/bundle/extensions.js', ['vue', 'uikit-upload']) ?>
+<?php $view->script('extensions', 'installer:app/bundle/extensions.js', ['vue', 'uikit-upload']) ?>
 
 <div id="extensions">
 

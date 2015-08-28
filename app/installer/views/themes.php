@@ -1,4 +1,4 @@
-<?php $view->script('themes', 'system/package:app/bundle/themes.js', ['vue', 'uikit-upload', 'editor']) ?>
+<?php $view->script('themes', 'installer:app/bundle/themes.js', ['vue', 'uikit-upload', 'editor']) ?>
 
 <div id="themes">
 

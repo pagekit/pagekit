@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Console\UriVerifier;
@@ -15,12 +15,12 @@ class UpdateController
         return [
             '$view' => [
                 'title' => __('Update'),
-                'name' => 'system/package:views/update.php'
+                'name' => 'installer:views/update.php'
             ],
             '$data' => [
                 'api' => App::system()->config('api'),
-                'channel' => App::module('system/package')->config('release_channel'),
-                'version' => App::version()
+                'version' => App::version(),
+                'channel' => 'stable'
             ]
         ];
     }

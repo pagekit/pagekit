@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\System\Controller;
+namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Console\UriVerifier;
@@ -32,7 +32,7 @@ class PackageController
         return [
             '$view' => [
                 'title' => __('Themes'),
-                'name' => 'system:modules/package/views/themes.php'
+                'name' => 'installer:views/themes.php'
             ],
             '$data' => [
                 'api' => App::system()->config('api'),
@@ -62,7 +62,7 @@ class PackageController
         return [
             '$view' => [
                 'title' => __('Extensions'),
-                'name' => 'system:modules/package/views/extensions.php'
+                'name' => 'installer:views/extensions.php'
             ],
             '$data' => [
                 'api' => App::system()->config('api'),
