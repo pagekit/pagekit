@@ -3,19 +3,19 @@
 namespace Pagekit\Filter;
 
 /**
- * This filter keeps only digits of the value.
+ * This filter keeps only alphabetic characters of the value.
  */
-class Digits extends AbstractFilter
+class AlphaFilter extends AbstractFilter
 {
     /**
      * Returns the filtered value.
      *
      * @param  mixed  $value
-     * 
+     *
      * @return string
      */
     public function filter($value)
     {
-        return str_replace(['-', '+'], '', filter_var((string) $value, FILTER_SANITIZE_NUMBER_INT));
+        return preg_replace('/[^[:alpha:]]/u', '', (string) $value);
     }
 }

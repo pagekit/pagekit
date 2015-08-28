@@ -5,13 +5,13 @@ namespace Pagekit\Filter;
 /**
  * This filter adds a rel="nofollow" to all HTML anchor elements.
  */
-class AddRelNofollow extends AbstractFilter
+class AddRelNofollowFilter extends AbstractFilter
 {
     /**
      * Returns the filtered value.
      *
      * @param  mixed  $value
-     * 
+     *
      * @return string
      */
     public function filter($value)

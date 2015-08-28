@@ -7,7 +7,7 @@ namespace Pagekit\Filter;
  *
  * @link http://php.net/manual/en/function.preg-replace.php
  */
-class PregReplace extends AbstractFilter
+class PregReplaceFilter extends AbstractFilter
 {
     /**
      * Constructor.

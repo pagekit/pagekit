@@ -2,13 +2,13 @@
 
 namespace Pagekit\Filter\Tests;
 
-use Pagekit\Filter\Json;
+use Pagekit\Filter\JsonFilter;
 
 class JsonTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $filter = new Json;
+        $filter = new JsonFilter;
 
         $values = [
             '"23"'              => "23",

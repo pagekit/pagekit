@@ -3,18 +3,18 @@
 namespace Pagekit\Filter;
 
 /**
- * This filter converts the value to boolean.
+ * This filter converts the value to string.
  */
-class Boolean extends AbstractFilter
+class StringFilter extends AbstractFilter
 {
     /**
      * Returns the filtered value.
      *
      * @param  mixed $value
-     * @return bool
+     * @return string
      */
     public function filter($value)
     {
-        return (bool) @strval($value);
+        return (string) $value;
     }
 }

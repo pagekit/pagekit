@@ -2,13 +2,13 @@
 
 namespace Pagekit\Filter\Tests;
 
-use Pagekit\Filter\Boolean;
+use Pagekit\Filter\BooleanFilter;
 
 class BooleanTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $filter = new Boolean;
+        $filter = new BooleanFilter;
 
         $values = [
             0   => false,

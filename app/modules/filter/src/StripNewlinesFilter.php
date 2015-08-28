@@ -5,7 +5,7 @@ namespace Pagekit\Filter;
 /**
  * This filter strips the newline control characters of the value.
  */
-class StripNewlines extends AbstractFilter
+class StripNewlinesFilter extends AbstractFilter
 {
     /**
      * Returns the filtered value.

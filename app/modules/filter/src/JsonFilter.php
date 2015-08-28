@@ -5,7 +5,7 @@ namespace Pagekit\Filter;
 /**
  * This filter decodes a JSON string to a array.
  */
-class Json extends AbstractFilter
+class JsonFilter extends AbstractFilter
 {
     /**
      * Returns the filtered value.

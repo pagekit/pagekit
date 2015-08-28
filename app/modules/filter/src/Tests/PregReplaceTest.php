@@ -2,7 +2,7 @@
 
 namespace Pagekit\Filter\Tests;
 
-use Pagekit\Filter\PregReplace;
+use Pagekit\Filter\PregReplaceFilter;
 
 class PregReplaceTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +13,7 @@ class PregReplaceTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->filter = new PregReplace;
+        $this->filter = new PregReplaceFilter;
     }
 
     /**

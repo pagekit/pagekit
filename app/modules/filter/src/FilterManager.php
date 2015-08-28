@@ -8,18 +8,18 @@ class FilterManager
      * @var array
      */
     protected $defaults = [
-        'addrelnofollow' => 'Pagekit\Filter\AddRelNofollow',
-        'alnum'          => 'Pagekit\Filter\Alnum',
-        'alpha'          => 'Pagekit\Filter\Alpha',
-        'bool'           => 'Pagekit\Filter\Boolean',
-        'boolean'        => 'Pagekit\Filter\Boolean',
-        'digits'         => 'Pagekit\Filter\Digits',
-        'int'            => 'Pagekit\Filter\Int',
-        'integer'        => 'Pagekit\Filter\Int',
-        'json'           => 'Pagekit\Filter\Json',
-        'pregreplace'    => 'Pagekit\Filter\PregReplace',
-        'string'         => 'Pagekit\Filter\String',
-        'stripnewlines'  => 'Pagekit\Filter\StripNewlines'
+        'addrelnofollow' => 'Pagekit\Filter\AddRelNofollowFilter',
+        'alnum'          => 'Pagekit\Filter\AlnumFilter',
+        'alpha'          => 'Pagekit\Filter\AlphaFilter',
+        'bool'           => 'Pagekit\Filter\BooleanFilter',
+        'boolean'        => 'Pagekit\Filter\BooleanFilter',
+        'digits'         => 'Pagekit\Filter\DigitsFilter',
+        'int'            => 'Pagekit\Filter\IntFilter',
+        'integer'        => 'Pagekit\Filter\IntFilter',
+        'json'           => 'Pagekit\Filter\JsonFilter',
+        'pregreplace'    => 'Pagekit\Filter\PregReplaceFilter',
+        'string'         => 'Pagekit\Filter\StringFilter',
+        'stripnewlines'  => 'Pagekit\Filter\StripNewlinesFilter'
     ];
 
     /**
