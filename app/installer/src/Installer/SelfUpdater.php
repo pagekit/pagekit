@@ -25,7 +25,7 @@ class SelfUpdater
     public function update($file)
     {
         try {
-            $path = $this->config['path'] . '/test';
+            $path = $this->config['path'];
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
