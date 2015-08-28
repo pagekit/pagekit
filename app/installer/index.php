@@ -70,12 +70,6 @@ return [
 
     ],
 
-    'autoload' => [
-
-        'Pagekit\\Installer\\' => 'src'
-
-    ],
-
     'routes' => [
 
         '/system/package' => [

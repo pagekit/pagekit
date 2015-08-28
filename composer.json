@@ -41,6 +41,7 @@
     "autoload": {
         "psr-4": {
             "Pagekit\\": "app/modules/application/src",
+            "Pagekit\\Installer\\": "app/installer/src",
             "Pagekit\\System\\": "app/system/src",
             "Pagekit\\Config\\": "app/modules/config/src",
             "Pagekit\\Console\\": "app/console/src",
