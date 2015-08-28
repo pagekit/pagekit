@@ -22,6 +22,10 @@ Options -Indexes
         SetEnv HTTP_MOD_REWRITE On
     </IfModule>
 
+    <IfModule mod_headers.c>
+        RequestHeader set MOD_REWRITE "On"
+    </IfModule>
+
 </IfModule>
 
 # Redirect admin URL, if rewrite is not enabled
