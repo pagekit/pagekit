@@ -5,6 +5,8 @@ namespace Pagekit\Installer\Controller;
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
 use Pagekit\Installer\Installer\Verifier;
+use Pagekit\Installer\Installer\SelfUpdater;
+use Pagekit\Installer\Installer\WebOutput;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -62,5 +64,18 @@ class UpdateController
         }
 
         App::abort(500, $error);
+    }
+
+    public static function updateAction($config, $file, $token)
+    {
+        $verifier = new Verifier(require $config['config.file']);
+        if (!$verifier->verify($file, $token)) {
+            http_response_code(401);
+            exit('No access.');
+        }
+
+        $updater = new SelfUpdater($config, new WebOutput(fopen('php://output', 'w')));
+        $updater->update($file);
+
     }
 }

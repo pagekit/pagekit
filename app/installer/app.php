@@ -1,9 +1,7 @@
 <?php
 
 use Pagekit\Application as App;
-use Pagekit\Installer\Installer\SelfUpdater;
-use Pagekit\Installer\Installer\Verifier;
-use Pagekit\Installer\Installer\WebOutput;
+use Pagekit\Installer\Controller\UpdateController;
 use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
 
@@ -22,15 +20,7 @@ if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
         exit ('Invalid parameters.');
     }
 
-    $verifier = new Verifier(require $config['config.file']);
-    if (!$verifier->verify($_GET['file'], $_SERVER['HTTP_X_SECURITY_TOKEN'])) {
-        http_response_code(401);
-        exit('No access.');
-    }
-
-    $updater = new SelfUpdater($config, new WebOutput(fopen('php://output', 'w')));
-    $updater->update($_GET['file']);
-
+    UpdateController::updateAction($config, $file, $token);
     exit;
 }
 

@@ -51,10 +51,9 @@ module.exports = {
                 })
                 .success(function (data) {
 
-                    this.$http.get('', {file: data.file}, null, {
+                    this.$http.get('', {file: data.file, token: data.token}, null, {
                         headers: {
-                            'X_UPDATE_MODE': true,
-                            'X_SECURITY_TOKEN': data.token
+                            'X_UPDATE_MODE': true
                         },
                         beforeSend: function (request) {
                             output.init(request, this.$trans('Updating to Pagekit %version%', {version: this.update.version}));
