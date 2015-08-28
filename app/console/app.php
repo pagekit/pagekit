@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Application as App;
+use Pagekit\Application\Console\Application as Console;
 use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
 
@@ -20,9 +21,6 @@ $app['module']->addPath([
 $app['module']->addLoader(new AutoLoader($app['autoloader']));
 $app['module']->addLoader(new ConfigLoader(require $path.'/app/system/config.php'));
 $app['module']->addLoader(new ConfigLoader(require $app['config.file']));
-
-
-use Pagekit\Application\Console\Application as Console;
 
 $app['module']->load('system');
 $app['module']->load('console');
