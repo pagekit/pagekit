@@ -35,6 +35,12 @@ return [
 
         if ($this->config['enabled']) {
 
+            $app['routes']->add([
+                'path' => '/installer',
+                'name' => '@installer',
+                'controller' => 'Pagekit\Installer\Controller\InstallerController'
+            ]);
+
             $app->on('request', function ($event) use ($app) {
 
                 $available = $app->module('system/intl')->getAvailableLanguages();
@@ -72,10 +78,6 @@ return [
 
     'routes' => [
 
-        '/installer' => [
-            'name' => '@installer',
-            'controller' => 'Pagekit\Installer\Controller\InstallerController'
-        ],
         '/system/package' => [
             'name' => '@system/package',
             'controller' => 'Pagekit\Installer\Controller\PackageController'
