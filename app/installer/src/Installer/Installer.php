@@ -1,6 +1,9 @@
 <?php
 
-namespace Pagekit\Console\Installer;
+namespace Pagekit\Installer\Installer;
+
+use Pagekit\Application as App;
+use Pagekit\Console\Output\WebOutput;
 
 use Composer\Factory;
 use Composer\Installer as ComposerInstaller;
@@ -52,19 +55,18 @@ class Installer
      * @param $config
      * @param null $output
      */
-    public function __construct($config, $output = null)
+    public function __construct($output = null)
     {
-        $this->config = $config;
-        $this->output = $output;
+        $this->output = $output ?: new WebOutput(fopen('php://output', 'w'));
 
-        $this->file = $config['path'] . '/' . self::CONFIG_FILE;
+        $this->file = App::path() . '/' . self::CONFIG_FILE;
         $this->packages = $this->readPackages();
 
-        chdir($config['path']);
+        chdir(App::path());
 
-        putenv('COMPOSER_HOME=' . $config['path']);
-        putenv('COMPOSER_CACHE_DIR=' . $config['path.temp'] . '/composer');
-        putenv('COMPOSER_VENDOR_DIR=' . $config['path'] . '/vendor/packages');
+        putenv('COMPOSER_HOME=' . App::path());
+        putenv('COMPOSER_CACHE_DIR=' . App::get('path.temp') . '/composer');
+        putenv('COMPOSER_VENDOR_DIR=' . App::path() . '/vendor/packages');
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -133,11 +135,11 @@ class Installer
         $io = new ConsoleIO(new ArrayInput([]), $this->output, new HelperSet());
         $composer = Factory::create($io, $packagesConfig);
 
-        $lockFile = new JsonFile($this->config['path'] . '/packages.lock');
+        $lockFile = new JsonFile(App::path() . '/packages.lock');
         $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($packagesConfig)));
         $composer->setLocker($locker);
 
-        $installed = new JsonFile($this->config['path'] . '/vendor/composer/installed.json');
+        $installed = new JsonFile(App::path() . '/vendor/composer/installed.json');
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 

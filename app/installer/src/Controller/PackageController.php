@@ -3,7 +3,7 @@
 namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Console\UriVerifier;
+use Pagekit\Installer\Installer\Installer;
 
 /**
  * @Access("system: manage packages", admin=true)
@@ -164,16 +164,10 @@ class PackageController
 
             $package = App::package()->load($package);
 
-            $params = [
-                'command' => 'install',
-                'packages' => sprintf('%s:%s', $package->getName(), $package->get('version'))
-            ];
+            $installer = new Installer();
+            $installer->install([$package->getName() => $package->get('version')]);
 
-            $verifier = new UriVerifier(require App::get('config.file'));
-
-            return App::redirect(
-                $verifier->sign(App::url('app/console/', $params, true), 10)
-            );
+            return App::response('');
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
@@ -206,16 +200,10 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $params = [
-                'command' => 'uninstall',
-                'packages' => $package->getName()
-            ];
+            $installer = new Installer();
+            $installer->uninstall([$package->getName()]);
 
-            $verifier = new UriVerifier(require App::get('config.file'));
-
-            return App::redirect(
-                $verifier->sign(App::url('app/console/', $params, true), 10)
-            );
+            return App::response('');
 
         } catch (\Exception $e) {
             $error = $e->getMessage();
