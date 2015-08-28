@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Console\Output;
+namespace Pagekit\Installer\Installer;
 
 use Symfony\Component\Console\Output\StreamOutput;
 

@@ -3,7 +3,6 @@
 namespace Pagekit\Installer\Installer;
 
 use Pagekit\Application as App;
-use Pagekit\Console\Output\WebOutput;
 
 use Composer\Factory;
 use Composer\Installer as ComposerInstaller;
