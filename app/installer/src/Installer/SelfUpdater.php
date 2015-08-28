@@ -1,31 +1,34 @@
 <?php
 
-namespace Pagekit\Console\Commands;
+namespace Pagekit\Installer\Installer;
 
 use Symfony\Component\Console\Output\OutputInterface;
 
 class SelfUpdater
 {
 
-    const API = 'http://pagekit.com/api';
-
     protected $cleanFolder = ['app', 'vendor'];
 
     protected $ignoreFolder = ['vendor/packages'];
 
-    protected $output;
+    protected $config, $output;
 
-    public function __construct(OutputInterface $output)
+    public function __construct($config, OutputInterface $output)
     {
+        $this->config = $config;
         $this->output = $output;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function execute($file)
+    public function update($fileName)
     {
         try {
+
+            $fileName = str_replace('/', '', $fileName);
+            $file = $this->config['path.temp'] . '/' . $fileName;
+            $path = $this->config['path'];
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
@@ -34,7 +37,7 @@ class SelfUpdater
             $this->output->write('Preparing update...');
             $fileList = $this->getFileList($file);
             unset($fileList[array_search('.htaccess', $fileList)]);
-            if ($this->isWritable($fileList, $this->config['path']) !== true) {
+            if ($this->isWritable($fileList, $path) !== true) {
                 throw new \RuntimeException(array_reduce($fileList, function ($carry, $file) {
                     return $carry . sprintf("'%s' not writable\n", $file);
                 }));
@@ -46,11 +49,11 @@ class SelfUpdater
             $this->output->writeln('<info>done.</info>');
 
             $this->output->write('Extracting files...');
-            $this->extract($file, $fileList, $this->config['path']);
+            $this->extract($file, $fileList, $path);
             $this->output->writeln('<info>done.</info>');
 
             $this->output->write('Removing old files...');
-            foreach ($this->cleanup($fileList, $this->config['path']) as $file) {
+            foreach ($this->cleanup($fileList, $path) as $file) {
                 $this->writeln(sprintf('<warning>\'%s\’ could not be removed</warning>', $file));
             }
 
@@ -67,8 +70,9 @@ class SelfUpdater
             $this->output->writeln('<info>done.</info>');
 
         } catch (\Exception $e) {
-            unlink($file);
-            throw $e;
+            @unlink($file);
+
+            $this->output->writeln(sprintf("\n<error>%s</error>", $e->getMessage()));
         }
 
     }
@@ -146,8 +150,8 @@ class SelfUpdater
      */
     protected function migrate()
     {
-        $app = $this->container;
-        $app->trigger('updated');
+        // TODO: Implement this.
+//        $app->trigger('updated');
     }
 
     /**
@@ -205,7 +209,7 @@ class SelfUpdater
      */
     protected function setUpdateMode($active)
     {
-       // TODO: Implement this.
+        // TODO: Implement this.
     }
 
 }

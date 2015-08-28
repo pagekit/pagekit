@@ -2,8 +2,9 @@
 
 namespace Pagekit\Installer\Controller;
 
+use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Console\UriVerifier;
+use Pagekit\Installer\Installer\Verifier;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -26,29 +27,40 @@ class UpdateController
     }
 
     /**
-     * @Request({"update": "array"})
+     * @Request({"url": "string", "shasum": "string"})
      */
-    public function runAction($update = null)
+    public function downloadAction($url, $shasum)
     {
         try {
 
-            $params = [
-                'command' => 'self-update',
-                '--url' => $update['url'],
-                '--shasum' => $update['shasum']
-            ];
+            $file = tempnam(App::get('path.temp'), 'update_');
+            $client = new Client;
 
-            $verifier = new UriVerifier(require App::get('config.file'));
+            $data = $client->get($url)->getBody();
 
-            return App::redirect(
-                $verifier->sign(App::url('app/console/', $params, true), 10)
-            );
+            if (sha1($data) !== $shasum) {
+                throw new \RuntimeException('Package checksum verification failed.');
+            }
+
+            if (!file_put_contents($file, $data)) {
+                throw new \RuntimeException('Path is not writable.');
+            }
+
+            $verifier = new Verifier(require App::get('config.file'));
+
+            $file = basename($file);
+            $token = $verifier->hash($file);
+
+            return compact('file', 'token');
 
         } catch (\Exception $e) {
-            $error = $e->getMessage();
+            if ($e instanceof TransferException) {
+                $error = 'Package download failed.';
+            } else {
+                $error = $e->getMessage();
+            }
         }
 
-        App::abort(400, $error);
+        App::abort(500, $error);
     }
-
 }

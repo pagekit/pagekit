@@ -38,20 +38,33 @@ module.exports = {
 
             var output = this.$addChild(Output);
             var vm = this;
+
             output.onClose(function () {
-                window.location = vm.$url.route('admin');
-            });
-
-            return this.$http.post('admin/system/update/run', {update: this.update}, null, {
-                beforeSend: function (request) {
-
-                    output.init(request, this.$trans('Updating to Pagekit %version%', {version: this.update.version}));
-
+                if (this.status == 'success') {
+                    window.location = vm.$url.route('admin');
                 }
-            }).error(function (msg) {
-                output.close();
-                this.$notify(msg, 'danger');
             });
+
+            this.$http.post('admin/system/update/download', {url: this.update.url, shasum: this.update.shasum})
+                .error(function (msg) {
+                    this.$notify(msg, 'danger');
+                })
+                .success(function (data) {
+
+                    this.$http.get('', {file: data.file}, null, {
+                        headers: {
+                            'X_UPDATE_MODE': true,
+                            'X_SECURITY_TOKEN': data.token
+                        },
+                        beforeSend: function (request) {
+                            output.init(request, this.$trans('Updating to Pagekit %version%', {version: this.update.version}));
+                        }
+                    }).error(function (msg) {
+                        output.close();
+                        this.$notify(msg, 'danger');
+                    });
+
+                });
         }
 
     }
