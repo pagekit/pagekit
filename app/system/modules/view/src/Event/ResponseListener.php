@@ -20,13 +20,13 @@ class ResponseListener implements EventSubscriberInterface
      */
     public function onResponse($event, $request, $response)
     {
-        if (strpos($response->headers->get('Content-Type'), 'html') === false) {
+        if (!is_string($content = $response->getContent()) || strpos($response->headers->get('Content-Type'), 'html') === false) {
             return;
         }
 
         $response->setContent(preg_replace_callback(self::REGEX_URL, function ($matches) {
             return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
-        }, $response->getContent()));
+        }, $content));
     }
 
     /**
