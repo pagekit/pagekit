@@ -25,7 +25,7 @@ class SelfUpdater
     public function update($file)
     {
         try {
-            $path = $this->config['path'];
+            $path = $this->config['path'] . '/test';
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
@@ -55,11 +55,6 @@ class SelfUpdater
             }
 
             unlink($file);
-
-            $this->output->writeln('<info>done.</info>');
-
-            $this->output->write('Migrating Pagekit...');
-            $this->migrate();
             $this->output->writeln('<info>done.</info>');
 
             $this->output->write('Deactivating update mode...');
@@ -140,15 +135,6 @@ class SelfUpdater
         } else {
             throw new \RuntimeException('Package extraction failed.');
         }
-    }
-
-    /**
-     * Migrating Pagekit after update.
-     */
-    protected function migrate()
-    {
-        // TODO: Implement this.
-//        $app->trigger('updated');
     }
 
     /**

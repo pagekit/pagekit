@@ -15,12 +15,12 @@ if ($failed = $requirements->getFailedRequirements()) {
 $loader = require $path . '/autoload.php';
 
 if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
-    if (!isset($_GET['file'], $_SERVER['HTTP_X_SECURITY_TOKEN'])) {
+    if (!isset($_GET['file'], $_GET['token'])) {
         http_response_code(400);
         exit ('Invalid parameters.');
     }
 
-    UpdateController::updateAction($config, $file, $token);
+    UpdateController::updateAction($config, $_GET['file'], $_GET['token']);
     exit;
 }
 

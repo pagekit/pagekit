@@ -4,7 +4,7 @@
 
     <p class="uk-alert uk-alert-warning" v-repeat="errors">{{ $value }}</p>
 
-    <div v-show="update">
+    <div v-show="update && view == 'index'">
 
         <div v-show="hasUpdate">
             <h2>{{ 'There is an update available.' | trans }}</h2>
@@ -22,6 +22,24 @@
             </a>
             <a class="uk-button uk-button-success" v-attr="href: update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
+
+    </div>
+
+    <div v-show="view == 'installation'">
+
+        <p>{{ message | trans }}</p>
+
+        <div class="uk-progress uk-progress-striped" v-class="
+            uk-progress-danger:  errors.length,
+            uk-progress-success: progress == 100,
+            uk-active:           progress != 100 && !errors.length
+        ">
+            <div class="uk-progress-bar" v-style="width: progress + '%'">{{ progress }}%</div>
+        </div>
+
+        <pre v-html="output" v-show="output"></pre>
+
+        <a class="uk-button uk-button-success" v-attr="href: $url.route('admin')" v-show="progress == 100">{{ 'Ok' | trans }}</a>
 
     </div>
 
