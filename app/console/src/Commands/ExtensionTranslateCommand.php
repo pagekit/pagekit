@@ -2,7 +2,7 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Console\Command;
+use Pagekit\Application\Console\Command;
 use Pagekit\Console\NodeVisitor\PhpNodeVisitor;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -41,7 +41,7 @@ class ExtensionTranslateCommand extends Command
         $files     = $this->getFiles($path = $this->getPath($extension), $extension);
         $languages = "$path/languages";
 
-        $app = $this->getPagekit();
+        $app = $this->container;
         $this->visitor = new PhpNodeVisitor($app['view']->getEngine());
 
         $this->line("Extracting strings for extension '$extension'");

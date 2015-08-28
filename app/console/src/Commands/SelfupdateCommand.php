@@ -2,7 +2,7 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Console\Command;
+use Pagekit\Application\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\TransferException;
@@ -242,7 +242,7 @@ class SelfupdateCommand extends Command
      */
     protected function migrate()
     {
-        $app = $this->getPagekit();
+        $app = $this->container;
         $app->trigger('updated');
     }
 

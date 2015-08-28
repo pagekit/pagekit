@@ -2,7 +2,7 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Console\Command;
+use Pagekit\Application\Console\Command;
 use Pagekit\Console\Translate\TransifexApi;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

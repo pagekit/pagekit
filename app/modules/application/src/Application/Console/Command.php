@@ -1,7 +1,7 @@
 <?php
+namespace Pagekit\Application\Console;
 
-namespace Pagekit\Console;
-
+use Pagekit\Container;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,18 +37,11 @@ class Command extends BaseCommand
     protected $output;
 
     /**
-     * The Pagekit application.
+     * The Container instance.
      *
-     * @var App
+     * @var Container
      */
-    protected $pagekit;
-
-    /**
-     * The Pagekit config.
-     *
-     * @var array
-     */
-    protected $config;
+    protected $container;
 
     /**
      * Create a new console command instance.
@@ -56,22 +49,17 @@ class Command extends BaseCommand
     public function __construct()
     {
         parent::__construct($this->name);
-
         $this->setDescription($this->description);
     }
 
     /**
-     * Returns dynamically booted Pagekit application.
+     * Set the Pagekit application instance.
      *
-     * @return App
+     * @param Container $container
      */
-    public function getPagekit()
+    public function setContainer(Container $container)
     {
-        if (!$this->pagekit) {
-            $this->pagekit = require __DIR__ . '/../system.php';
-        }
-
-        return $this->pagekit;
+        $this->container = $container;
     }
 
     /**

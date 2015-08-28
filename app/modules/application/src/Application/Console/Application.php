@@ -1,32 +1,35 @@
 <?php
 
-namespace Pagekit\Console;
+namespace Pagekit\Application\Console;
 
-use Pagekit\Application as App;
+use Pagekit\Application as Container;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 
 class Application extends BaseApplication
 {
     /**
-     * The Pagekit config.
+     * The Pagekit application instance.
      *
-     * @var array
+     * @var Container
      */
-    protected $config;
+    protected $container;
 
     /**
      * Constructor.
      *
-     * @param array $config
-     * @param string $name
-     * @param string $version
+     * @param Container $container
+     * @param string    $name
      */
-    public function __construct(array $config, $name = 'UNKNOWN', $version = 'UNKNOWN')
+    public function __construct(Container $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
         parent::__construct($name, $version);
 
-        $this->config = $config;
+        $this->container = $container;
+
+        if (isset($container['events'])) {
+            $container['events']->trigger('console.init', [$this]);
+        }
     }
 
     /**
@@ -38,7 +41,7 @@ class Application extends BaseApplication
     public function add(BaseCommand $command)
     {
         if ($command instanceof Command) {
-            $command->setConfig($this->config);
+            $command->setContainer($this->container);
         }
 
         return parent::add($command);
