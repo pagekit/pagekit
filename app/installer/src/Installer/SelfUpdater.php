@@ -22,12 +22,9 @@ class SelfUpdater
     /**
      * {@inheritdoc}
      */
-    public function update($fileName)
+    public function update($file)
     {
         try {
-
-            $fileName = str_replace('/', '', $fileName);
-            $file = $this->config['path.temp'] . '/' . $fileName;
             $path = $this->config['path'];
 
             if (!file_exists($file)) {

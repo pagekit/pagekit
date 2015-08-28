@@ -51,7 +51,7 @@ class UpdateController
             $verifier = new Verifier(require App::get('config.file'));
 
             $file = basename($file);
-            $token = $verifier->hash($file);
+            $token = $verifier->hash($shasum);
 
             return compact('file', 'token');
 
@@ -68,8 +68,11 @@ class UpdateController
 
     public static function updateAction($config, $file, $token)
     {
+        $file = str_replace('/', '', $file);
+        $file = $config['path.temp'] . '/' . $file;
+
         $verifier = new Verifier(require $config['config.file']);
-        if (!$verifier->verify($file, $token)) {
+        if (!$verifier->verify(sha1_file($file), $token)) {
             http_response_code(401);
             exit('No access.');
         }
