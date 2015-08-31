@@ -56,7 +56,7 @@ class SelfupdateCommand extends Command
                 $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
                 $output->writeln('');
 
-                if (!$this->ask('Update to Version ' . $versions['latest']['version'] . '? [y/n]')) {
+                if (!$this->confirm('Update to Version ' . $versions['latest']['version'] . '? [y/n]')) {
                     return;
                 }
 
