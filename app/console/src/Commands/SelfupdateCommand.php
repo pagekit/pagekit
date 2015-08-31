@@ -56,7 +56,7 @@ class SelfupdateCommand extends Command
                 $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
                 $output->writeln('');
 
-                if (!$this->ask('Update to Version ' . $versions['latest']['version'] . '? [y/n]', false)) {
+                if (!$this->ask('Update to Version ' . $versions['latest']['version'] . '? [y/n]')) {
                     return;
                 }
 
@@ -75,7 +75,7 @@ class SelfupdateCommand extends Command
             $this->download($url, $shasum, $tmpFile);
             $output->writeln('<info>done.</info>');
 
-            $updater = new Updater($output);
+            $updater = new Updater($this->container->path(), $output);
             $updater->update($tmpFile);
 
             $output->write('Migrating...');

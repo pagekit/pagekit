@@ -2,21 +2,36 @@
 
 namespace Pagekit\Installer;
 
-use Pagekit\Application as App;
 use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 
 class Updater
 {
+    /**
+     * @var array
+     */
     protected $cleanFolder = ['app', 'vendor'];
 
-    protected $ignoreFolder = ['vendor/packages'];
+    /**
+     * @var string
+     */
+    protected $path;
 
+    /**
+     * @var string
+     */
     protected $output;
 
-    public function __construct(OutputInterface $output = null)
+    /**
+     * Constructor.
+     *
+     * @param string $path
+     * @param mixed  $output
+     */
+    public function __construct($path, OutputInterface $output = null)
     {
+        $this->path = $path;
         $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
 
         if (PHP_SAPI != 'cli') {
@@ -28,13 +43,16 @@ class Updater
         }
     }
 
+
     /**
-     * {@inheritdoc}
+     * Runs Pagekit self update.
+     *
+     * @param $file
      */
     public function update($file)
     {
         try {
-            $path = App::path();
+            $path = $this->path;
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
@@ -79,6 +97,8 @@ class Updater
     }
 
     /**
+     * Generates file list for given archive.
+     *
      * @param $file
      * @return array
      */
@@ -101,6 +121,8 @@ class Updater
     }
 
     /**
+     * Checks if directory is writable.
+     *
      * @param $fileList
      * @param $path
      * @return bool|array
@@ -130,6 +152,8 @@ class Updater
 
 
     /**
+     * Extracts an archive.
+     *
      * @param $file
      * @param $fileList
      * @param $path
@@ -147,6 +171,8 @@ class Updater
     }
 
     /**
+     * Scans directory for old files.
+     *
      * @param $fileList
      * @param $path
      * @return array
@@ -177,10 +203,6 @@ class Updater
             $realPath = $path . '/' . $file;
 
             if (is_dir($realPath)) {
-                if (in_array($file, $this->ignoreFolder)) {
-                    continue;
-                }
-
                 array_merge($errorList, $this->doCleanup($fileList, $file, $path));
 
                 if (!in_array($file, $fileList)) {

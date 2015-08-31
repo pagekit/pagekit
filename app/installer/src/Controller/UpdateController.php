@@ -81,7 +81,7 @@ class UpdateController
                 }
 
                 $updater = new Updater();
-                $updater->update($file);
+                $updater->update(App::path(), $file);
 
             } catch (\Exception $e) {
 
