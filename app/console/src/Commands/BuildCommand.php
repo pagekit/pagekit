@@ -41,14 +41,13 @@ class BuildCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $info   = $this->container->info()->get();
+        $path   = $this->container->path();
         $filter = '/'.implode('|', $this->excludes).'/i';
 
-        $zip    = new \ZipArchive;
-        $root   = __DIR__.'/../../../../';
-        $path   = $root;
-        $vers   = $info['version'];
+        $zip  = new \ZipArchive;
+        $vers = $info['version'];
 
-        $finder = Finder::create()->files()->in($root)->ignoreVCS(true)->filter(function ($file) use($filter) {
+        $finder = Finder::create()->files()->in($path)->ignoreVCS(true)->filter(function ($file) use($filter) {
             return !preg_match($filter, $file->getRelativePathname());
         });
 
@@ -62,6 +61,9 @@ class BuildCommand extends Command
             $zip->addFile($file->getPathname(), $file->getRelativePathname());
         }
 
+        $zip->addFile("{$path}/.bowerrc", '.bowerrc');
+        $zip->addFile("{$path}/.htaccess", '.htaccess');
+
         $zip->addEmptyDir('tmp/');
         $zip->addEmptyDir('tmp/cache');
         $zip->addEmptyDir('tmp/temp');
@@ -70,6 +72,7 @@ class BuildCommand extends Command
         $zip->addEmptyDir('tmp/packages');
         $zip->addEmptyDir('app/database');
         $zip->addEmptyDir('storage');
+
         $zip->close();
 
         $name = basename($zipFile);
