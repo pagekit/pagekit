@@ -13,20 +13,6 @@ if ($failed = $requirements->getFailedRequirements()) {
     exit;
 }
 
-if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
-
-    $config = array_replace(require $config['config.file'], $config);
-
-    if (PHP_SAPI != 'cli') {
-        $request = array_replace(['file' => '', 'token' => ''], $_GET);
-    } else {
-        $request = ['file' => isset($argv[1]) ? $argv[1] : ''];
-    }
-
-    UpdateController::updateAction($config, $request);
-    exit;
-}
-
 $app = new App($config);
 $app['autoloader'] = $loader;
 

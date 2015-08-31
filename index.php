@@ -31,7 +31,7 @@ if (PHP_SAPI == 'cli') {
     $env = 'console';
 }
 
-if (!$config['config.file'] || isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
+if (!$config['config.file']) {
     $env = 'installer';
 }
 

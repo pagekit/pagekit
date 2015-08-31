@@ -63,29 +63,36 @@ class UpdateController
         App::abort(500, $error);
     }
 
-    public static function updateAction($config, $request)
+    /**
+     * @Request({"file": "string", "token": "string"}, csrf=true)
+     */
+    public function updateAction($file, $token)
     {
-        try {
+        return App::response()->stream(function () use ($file, $token) {
 
-            $file = preg_replace('/[^a-z0-9_\-\.]/i', '', $request['file']);
-            $file = $config['path.temp'] . '/' . $file;
+            try {
 
-            if (!file_exists($file) || !is_file($file)) {
-                throw new \RuntimeException('File does not exist.');
+                $file = preg_replace('/[^a-z0-9_\-\.]/i', '', $file);
+                $file = App::get('path.temp') . '/' . $file;
+
+                if (!file_exists($file) || !is_file($file)) {
+                    throw new \RuntimeException('File does not exist.');
+                }
+
+                if (isset($request['token']) && !self::verify(sha1_file($file), $token)) {
+                    throw new \RuntimeException('File token verification failed.');
+                }
+
+                $updater = new Updater();
+                $updater->update($file);
+
+            } catch (\Exception $e) {
+
+                http_response_code(400);
+                echo $e->getMessage();
             }
 
-            if (isset($request['token']) && !self::verify(sha1_file($file), $request['token'])) {
-                throw new \RuntimeException('File token verification failed.');
-            }
-
-            $updater = new Updater($config);
-            $updater->update($file);
-
-        } catch (\Exception $e) {
-
-            http_response_code(400);
-            echo $e->getMessage();
-        }
+        });
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Pagekit\Installer;
 
+use Pagekit\Application as App;
 use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
@@ -12,11 +13,10 @@ class Updater
 
     protected $ignoreFolder = ['vendor/packages'];
 
-    protected $config, $output;
+    protected $output;
 
-    public function __construct($config, OutputInterface $output = null)
+    public function __construct(OutputInterface $output = null)
     {
-        $this->config = $config;
         $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
 
         if (PHP_SAPI != 'cli') {
@@ -34,7 +34,7 @@ class Updater
     public function update($file)
     {
         try {
-            $path = $this->config['path'];
+            $path = App::path();
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
@@ -195,7 +195,7 @@ class Updater
     }
 
     /**
-     * Toggles maintenance mode without booting Pagekit application.
+     * Toggles update mode without booting Pagekit application.
      *
      * @param $active
      */

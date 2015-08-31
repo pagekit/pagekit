@@ -55,8 +55,7 @@ module.exports = {
             var vm = this;
 
             this.$set('progress', 66);
-            this.$http.get('', {file: data.file, token: data.token}, null, {
-                headers: {'X_UPDATE_MODE': true},
+            this.$http.get('admin/system/update/update', {file: data.file, token: data.token}, null, {
                 xhr: {
                     onprogress: function () {
                         vm.setOutput(this.responseText);
