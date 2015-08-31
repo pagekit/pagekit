@@ -158,25 +158,23 @@ class PackageController
      */
     public function installAction($package = [])
     {
-        try {
+        return App::response()->stream(function () use ($package) {
 
-            $package = App::package()->load($package);
+            try {
 
-            return App::response()->stream(function () use ($package) {
+                $package = App::package()->load($package);
 
                 $installer = new Installer(App::path());
                 $installer->install([$package->getName() => $package->get('version')]);
 
                 echo 'status=success';
 
-            });
+            } catch (\Exception $e) {
 
-        } catch (\Exception $e) {
+                printf("%s\nstatus=error", $e->getMessage());
+            }
 
-            $error = $e->getMessage();
-        }
-
-        App::abort(400, $error);
+        });
     }
 
     /**
@@ -185,6 +183,7 @@ class PackageController
     public function uninstallAction($name)
     {
         return App::response()->stream(function () use ($name) {
+
             try {
 
                 if (!$package = App::package($name)) {
@@ -211,10 +210,9 @@ class PackageController
 
             } catch (\Exception $e) {
 
-                echo $e->getMessage();
-                echo 'status=error';
-
+                printf("%s\nstatus=error", $e->getMessage());
             }
+
         });
     }
 
