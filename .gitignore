@@ -1,12 +1,8 @@
+**/languages/**/*.json
 **/app/bundle/**/*.js
 /app/installer/assets/css/*
 /app/system/modules/theme/css/*
-/extensions/*
-!/extensions/blog
-/themes/*
-!/themes/one
-/themes/one/css/*
-**/languages/**/*.json
+/packages/*
 /vendor/*
 !/vendor/assets
 /vendor/assets/*
