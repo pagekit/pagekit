@@ -24,12 +24,15 @@ class BuildCommand extends Command
     * @var string[]
     */
    protected $excludes = [
-       '^(app\/database|tmp\/cache|tmp\/logs|tmp\/sessions|tmp\/temp|storage|config\.php|pagekit.+\.zip)',
-       '^extensions\/.+\/languages\/.+\.(po|pot)',
-       '^themes\/(?!(one)\/).*',
-       'node_modules',
-       '^vendor\/(.*)\/(build|bin|doc|docs|examples|grammar|test|tests|test_old|phpunit|notes|run)\/',
-       '(run|makefile|composer\.lock)$',
+       '^(app\/database|packages|storage|tmp|config\.php|pagekit.+\.zip)',
+       '^vendor\/assets\/.+?\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
+       '^vendor\/assets\/(jquery|vue)\/(src|perf)',
+       '^vendor\/lusitanian\/oauth\/examples',
+       '^vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources',
+       '^vendor\/nickic\/php-parser\/(grammar|test_old)',
+       '^vendor\/(phpdocumentor|phpspec|phpunit|sebastian|symfony\/yaml)',
+       '^vendor\/.+?\/.+?\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
+       'node_modules'
    ];
 
     /**
@@ -67,7 +70,6 @@ class BuildCommand extends Command
         $zip->addEmptyDir('tmp/packages');
         $zip->addEmptyDir('app/database');
         $zip->addEmptyDir('storage');
-
         $zip->close();
 
         $name = basename($zipFile);
