@@ -13,7 +13,7 @@ if ($failed = $requirements->getFailedRequirements()) {
     exit;
 }
 
-if (true || isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
+if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
 
     $config = array_replace(require $config['config.file'], $config);
     $request = array_replace(['file' => '', 'token' => ''], $_GET);

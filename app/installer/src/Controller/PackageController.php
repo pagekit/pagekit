@@ -184,40 +184,38 @@ class PackageController
      */
     public function uninstallAction($name)
     {
-        try {
+        return App::response()->stream(function () use ($name) {
+            try {
 
-            if (!$package = App::package($name)) {
-                throw new \Exception(__('Unable to find "%name%".', ['%name%' => $name]));
-            }
+                if (!$package = App::package($name)) {
+                    throw new \Exception(__('Unable to find "%name%".', ['%name%' => $name]));
+                }
 
-            if (!App::module($package->get('module'))) {
-                App::module()->load($package->get('module'));
-            }
+                if (!App::module($package->get('module'))) {
+                    App::module()->load($package->get('module'));
+                }
 
-            if (!$module = App::module($package->get('module'))) {
-                throw new \Exception(__('Unable to uninstall "%name%".', ['%name%' => $package->get('title')]));
-            }
+                if (!$module = App::module($package->get('module'))) {
+                    throw new \Exception(__('Unable to uninstall "%name%".', ['%name%' => $package->get('title')]));
+                }
 
-            $this->disableAction($name);
+                $this->disableAction($name);
 
-            App::trigger('uninstall', [$module]);
-            App::trigger("uninstall.{$module->name}", [$module]);
-
-            return App::response()->stream(function () use ($package) {
+                App::trigger('uninstall', [$module]);
+                App::trigger("uninstall.{$module->name}", [$module]);
 
                 $installer = new Installer(App::path());
                 $installer->uninstall([$package->getName()]);
 
                 echo 'status=success';
 
-            });
+            } catch (\Exception $e) {
 
-        } catch (\Exception $e) {
+                echo $e->getMessage();
+                echo 'status=error';
 
-            $error = $e->getMessage();
-        }
-
-        App::abort(400, $error);
+            }
+        });
     }
 
     protected function loadPackage($file)
