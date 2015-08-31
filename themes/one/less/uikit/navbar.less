@@ -15,7 +15,7 @@
 @navbar-nav-height:                             80px;
 @navbar-nav-line-height:                        @navbar-nav-height;
 @navbar-nav-color:                              @global-muted-color;
-@navbar-nav-font-size:                          @global-font-size;
+@navbar-nav-font-size:                          14px;
 @navbar-nav-font-family:                        "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @navbar-nav-hover-background:                   transparent;
 @navbar-nav-hover-color:                        @global-dark-color;
@@ -45,6 +45,7 @@
 // ========================================================================
 
 .hook-navbar-nav() {
+    text-transform: uppercase;
     -webkit-transition: color 0.05s linear;
     transition: color 0.05s linear;
 }

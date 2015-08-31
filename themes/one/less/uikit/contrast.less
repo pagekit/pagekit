@@ -3,6 +3,23 @@
 //
 // ========================================================================
 
+@contrast-color:                                 @global-contrast-color;
+@contrast-inverted-color:                        #333;
+
+@contrast-button-color:                          @contrast-color;
+@contrast-button-background:                     rgba(0,0,0,0);
+@contrast-button-hover-color:                    @global-dark-color;
+@contrast-button-hover-background:               @contrast-color;
+@contrast-button-active-background:              @global-dark-color;
+@contrast-button-active-color:                   @contrast-color;
+
+//
+// New
+//
+
+@contrast-button-border:                         @contrast-color;
+@contrast-button-hover-border:                   fade(@contrast-color, 70%);
+
 
 // Base
 // ========================================================================
@@ -50,13 +67,21 @@
 // Button
 // ========================================================================
 
-.hook-contrast-button() {}
-.hook-contrast-button-hover() {}
+.hook-contrast-button() {
+
+    -webkit-transition: all 0.05s linear;
+    transition: all 0.05s linear;
+
+    &:not(.uk-button-primary) { border-color: @contrast-button-border; }
+
+}
+
+.hook-contrast-button-hover() { border-color: @contrast-button-hover-border; }
 .hook-contrast-button-active() {}
 .hook-contrast-button-primary() {}
+
 .hook-contrast-button-primary-hover() {}
 .hook-contrast-button-primary-active() {}
-
 
 // Icon
 // ========================================================================
