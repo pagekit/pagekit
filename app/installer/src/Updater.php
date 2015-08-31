@@ -60,7 +60,7 @@ class Updater
 
             $this->output->write('Removing old files...');
             foreach ($this->cleanup($fileList, $path) as $file) {
-                $this->writeln(sprintf('<warning>\'%s\’ could not be removed</warning>', $file));
+                $this->writeln(sprintf('<error>\'%s\’ could not be removed</error>', $file));
             }
 
             unlink($file);

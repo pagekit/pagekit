@@ -27,13 +27,15 @@ class UpdateController
     }
 
     /**
-     * @Request({"url": "string", "shasum": "string"})
+     * @Request({"url": "string", "shasum": "string"}, csrf=true)
      */
     public function downloadAction($url, $shasum)
     {
         try {
 
             $file = tempnam(App::get('path.temp'), 'update_');
+            App::session()->set('system.update', $file);
+
             $client = new Client;
 
             $data = $client->get($url)->getBody();
@@ -46,10 +48,7 @@ class UpdateController
                 throw new \RuntimeException('Path is not writable.');
             }
 
-            return [
-                'file' => basename($file),
-                'token' => $this->hash($shasum, App::system()->config('key'))
-            ];
+            return [];
 
         } catch (\Exception $e) {
 
@@ -58,29 +57,27 @@ class UpdateController
             } else {
                 $error = $e->getMessage();
             }
-        }
 
-        App::abort(500, $error);
+            App::abort(500, $error);
+        }
     }
 
     /**
-     * @Request({"file": "string", "token": "string"}, csrf=true)
+     * @Request(csrf=true)
      */
-    public function updateAction($file, $token)
+    public function updateAction()
     {
-        return App::response()->stream(function () use ($file, $token) {
+        if (!$file = App::session()->get('system.update')) {
+            App::abort(400, __('You may not call this step directly.'));
+        }
+        App::session()->remove('system.update');
+
+        return App::response()->stream(function () use ($file) {
 
             try {
 
-                $file = preg_replace('/[^a-z0-9_\-\.]/i', '', $file);
-                $file = App::get('path.temp') . '/' . $file;
-
                 if (!file_exists($file) || !is_file($file)) {
                     throw new \RuntimeException('File does not exist.');
-                }
-
-                if (!$this->verify(sha1_file($file), $token)) {
-                    throw new \RuntimeException('File token verification failed.');
                 }
 
                 $updater = new Updater();
@@ -93,33 +90,5 @@ class UpdateController
             }
 
         });
-    }
-
-    /**
-     * Calculates HMAC-SHA1 for given data.
-     *
-     * @param  string $data
-     * @param  string $key
-     * @return string
-     */
-    public function hash($data, $key)
-    {
-        return base64_encode(extension_loaded('hash') ?
-            hash_hmac('sha1', $data, $key, true) : pack('H*', sha1(
-                (str_pad($key, 64, chr(0x00)) ^ (str_repeat(chr(0x5c), 64))) .
-                pack('H*', sha1((str_pad($key, 64, chr(0x00)) ^
-                        (str_repeat(chr(0x36), 64))) . $data)))));
-    }
-
-    /**
-     * Verifies integrity of a given data.
-     *
-     * @param  string $data
-     * @param  string $token
-     * @return bool
-     */
-    public function verify($data, $token)
-    {
-        return sha1($this::hash($data)) === sha1($token);
     }
 }

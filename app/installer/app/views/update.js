@@ -51,18 +51,17 @@ module.exports = {
                 .error(this.error);
         },
 
-        doInstall: function (data) {
+        doInstall: function () {
             var vm = this;
 
             this.$set('progress', 66);
-            this.$http.get('admin/system/update/update', {file: data.file, token: data.token}, null, {
+            this.$http.get('admin/system/update/update', this.doMigration, {
                 xhr: {
                     onprogress: function () {
                         vm.setOutput(this.responseText);
                     }
                 }
-            }).success(this.doMigration)
-                .error(this.error);
+            }).error(this.error);
         },
 
         doMigration: function () {
