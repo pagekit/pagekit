@@ -83,6 +83,7 @@ return [
             $scripts->register('uikit-sortable', 'vendor/assets/uikit/js/components/sortable.min.js', 'uikit');
             $scripts->register('uikit-sticky', 'vendor/assets/uikit/js/components/sticky.min.js', 'uikit');
             $scripts->register('uikit-upload', 'vendor/assets/uikit/js/components/upload.min.js', 'uikit');
+            $scripts->register('uikit-lightbox', 'vendor/assets/uikit/js/components/lightbox.min.js', 'uikit');
             $scripts->register('uikit-timepicker', 'vendor/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'vendor/assets/vue/dist/'.($app->debug() ? 'vue.js' : 'vue.min.js'));
