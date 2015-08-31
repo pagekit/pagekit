@@ -21,17 +21,17 @@ class BuildCommand extends Command
     protected $description = 'Builds a .zip release file.';
 
     /**
-    * @var string[]
-    */
-   protected $excludes = [
+     * @var string[]
+     */
+    protected $excludes = [
        '^(app\/database|packages|storage|tmp|config\.php|pagekit.+\.zip)',
-       '^vendor\/assets\/.+?\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
+       '^vendor\/assets\/[^\/]+\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
        '^vendor\/assets\/(jquery|vue)\/(src|perf)',
        '^vendor\/lusitanian\/oauth\/examples',
        '^vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources',
        '^vendor\/nickic\/php-parser\/(grammar|test_old)',
        '^vendor\/(phpdocumentor|phpspec|phpunit|sebastian|symfony\/yaml)',
-       '^vendor\/.+?\/.+?\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
+       '^vendor\/[^\/]+\/[^\/]+\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
        'node_modules'
    ];
 
