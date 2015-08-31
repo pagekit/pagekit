@@ -23,16 +23,12 @@ if (file_exists($config['path.packages'] . '/autoload.php')) {
     if (file_exists($config['path.packages'] . '/composer/autoload_files.php')) {
         $includeFiles = require $config['path.packages'] . '/composer/autoload_files.php';
         foreach ($includeFiles as $file) {
-            composerRequire($file);
+            require $file;
         }
     }
 }
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
+$path = $config['path'];
 
 return $loader;
-
-function composerRequire($file)
-{
-    require $file;
-}

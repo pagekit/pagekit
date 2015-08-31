@@ -5,7 +5,6 @@ use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
 
 $loader = require $path.'/autoload.php';
-$path = $config['path'];
 
 $app = new App($config);
 $app['autoloader'] = $loader;
