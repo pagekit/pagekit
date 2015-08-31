@@ -74,7 +74,7 @@ class UpdateController
                 throw new \RuntimeException('File does not exist.');
             }
 
-            if (!self::verify(sha1_file($file), $request['token'])) {
+            if (isset($request['token']) && !self::verify(sha1_file($file), $request['token'])) {
                 throw new \RuntimeException('File token verification failed.');
             }
 

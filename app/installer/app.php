@@ -16,7 +16,12 @@ if ($failed = $requirements->getFailedRequirements()) {
 if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
 
     $config = array_replace(require $config['config.file'], $config);
-    $request = array_replace(['file' => '', 'token' => ''], $_GET);
+
+    if (PHP_SAPI != 'cli') {
+        $request = array_replace(['file' => '', 'token' => ''], $_GET);
+    } else {
+        $request = ['file' => isset($argv[1]) ? $argv[1] : ''];
+    }
 
     UpdateController::updateAction($config, $request);
     exit;
