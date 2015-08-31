@@ -45,7 +45,7 @@ class Installer
     protected $config = [
         'repositories' => [
             ['type' => 'artifact', 'url' => 'tmp/packages/'],
-            ['type' => 'composer', 'url' => 'http://pagekit.com/api']
+            ['type' => 'composer', 'url' => 'http://pagekit.com']
         ],
     ];
 
