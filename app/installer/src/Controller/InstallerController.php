@@ -7,7 +7,9 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\ConnectionException;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
+use Pagekit\Installer\Installer;
 use Pagekit\Util\Arr;
+use Symfony\Component\Console\Output\NullOutput;
 
 class InstallerController
 {
@@ -20,6 +22,11 @@ class InstallerController
      * @var string
      */
     protected $configFile = 'config.php';
+
+    /**
+     * @var array
+     */
+    protected $packages = [];
 
     /**
      * Constructor.
@@ -149,6 +156,11 @@ class InstallerController
 
             foreach ($option as $name => $values) {
                 App::config()->set($name, $values);
+            }
+
+            if ($this->packages) {
+                $installer = new Installer(App::path(), new NullOutput());
+                $installer->install($this->packages);
             }
 
             if (file_exists(__DIR__.'/../install.php')) {

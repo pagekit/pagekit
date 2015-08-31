@@ -5,22 +5,20 @@ use Pagekit\Installer\Controller\UpdateController;
 use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
 
-$requirements = require __DIR__ . '/requirements.php';
+$loader = require $path.'/autoload.php';
+$requirements = require __DIR__.'/requirements.php';
 
 if ($failed = $requirements->getFailedRequirements()) {
-    require __DIR__ . '/views/requirements.php';
+    require __DIR__.'/views/requirements.php';
     exit;
 }
 
-$loader = require $path . '/autoload.php';
+if (true || isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
 
-if (isset($_SERVER['HTTP_X_UPDATE_MODE'])) {
-    if (!isset($_GET['file'], $_GET['token'])) {
-        http_response_code(400);
-        exit ('Invalid parameters.');
-    }
+    $config = array_replace(require $config['config.file'], $config);
+    $request = array_replace(['file' => '', 'token' => ''], $_GET);
 
-    UpdateController::updateAction($config, $_GET['file'], $_GET['token']);
+    UpdateController::updateAction($config, $request);
     exit;
 }
 

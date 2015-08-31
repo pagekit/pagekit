@@ -1,22 +1,31 @@
 <?php
 
-namespace Pagekit\Installer\Installer;
+namespace Pagekit\Installer;
 
+use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\StreamOutput;
 
-class SelfUpdater
+class Updater
 {
-
     protected $cleanFolder = ['app', 'vendor'];
 
     protected $ignoreFolder = ['vendor/packages'];
 
     protected $config, $output;
 
-    public function __construct($config, OutputInterface $output)
+    public function __construct($config, OutputInterface $output = null)
     {
         $this->config = $config;
-        $this->output = $output;
+        $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
+
+        if (PHP_SAPI != 'cli') {
+
+            ob_implicit_flush(true);
+            ob_end_flush();
+
+            $this->output->setFormatter(new HtmlOutputFormatter());
+        }
     }
 
     /**

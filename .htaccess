@@ -1,5 +1,5 @@
 # Restricted access to files
-<FilesMatch "\.(cache|db|log|po|pot|sql)$">
+<FilesMatch "\.(cache|db)$">
     Order allow,deny
 </FilesMatch>
 

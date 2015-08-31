@@ -1,37 +1,43 @@
 <?php
 
-namespace Pagekit\Installer\Installer;
+namespace Pagekit\Installer;
 
-use Pagekit\Application as App;
 use Composer\Factory;
 use Composer\Installer as ComposerInstaller;
-use Composer\IO\ConsoleIO;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
-use Symfony\Component\Console\Helper\HelperSet;
-use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\StreamOutput;
 
 class Installer
 {
-    const CONFIG_FILE = 'packages.json';
-
     /**
-     * @var array
+     * @var string
      */
-    protected $config;
-
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
+    protected $path;
 
     /**
      * @var string
      */
     protected $file;
+
+    /**
+     * @var ConsoleIO
+     */
+    protected $io;
+
+    /**
+     * @var InputInterface
+     */
+    protected $input;
+
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
 
     protected $packagesConfig = [
         'repositories' => [
@@ -39,32 +45,33 @@ class Installer
                 'type' => 'artifact',
                 'url' => 'tmp/packages/'
             ],
-            [
-                'type' => 'composer',
-                'url' => 'http://pagekit.com'
-            ]
+            // [
+            //     'type' => 'composer',
+            //     'url' => 'http://pagekit.com/api'
+            // ]
         ],
         'require' => [
-            'composer/installers' => '1.0.22'
         ]
     ];
 
     /**
-     * @param $config
-     * @param null $output
+     * Constructor.
+     *
+     * @param string $path
+     * @param mixed  $output
      */
-    public function __construct($output = null)
+    public function __construct($path, $output = null)
     {
-        $this->output = $output ?: new WebOutput(fopen('php://output', 'w'));
-
-        $this->file = App::path() . '/' . self::CONFIG_FILE;
+        $this->path = $path;
+        $this->file = "{$path}/packages.json";
+        $this->output = $output;
         $this->packages = $this->readPackages();
 
-        chdir(App::path());
+        chdir($path);
 
-        putenv('COMPOSER_HOME=' . App::path());
-        putenv('COMPOSER_CACHE_DIR=' . App::get('path.temp') . '/composer');
-        putenv('COMPOSER_VENDOR_DIR=' . App::path() . '/vendor/packages');
+        putenv("COMPOSER_HOME={$path}");
+        putenv("COMPOSER_CACHE_DIR={$path}/tmp/temp/composer");
+        putenv("COMPOSER_VENDOR_DIR={$path}/vendor/packages");
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -77,7 +84,7 @@ class Installer
      * @param array $install
      * @return bool
      */
-    public function install(array $install)
+    public function install(array $install = [])
     {
         $this->packages = array_merge($this->packages, $install);
 
@@ -130,14 +137,14 @@ class Installer
         $packagesConfig = $this->packagesConfig;
         $packagesConfig['require'] = array_merge($packagesConfig['require'], $this->packages);
 
-        $io = new ConsoleIO(new ArrayInput([]), $this->output, new HelperSet());
+        $io = new InstallerIO($this->input, $this->output);
         $composer = Factory::create($io, $packagesConfig);
 
-        $lockFile = new JsonFile(App::path() . '/packages.lock');
+        $lockFile = new JsonFile($this->path.'/packages.lock');
         $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($packagesConfig)));
         $composer->setLocker($locker);
 
-        $installed = new JsonFile(App::path() . '/vendor/composer/installed.json');
+        $installed = new JsonFile($this->path.'/vendor/composer/installed.json');
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
@@ -152,9 +159,6 @@ class Installer
         }
 
         $installer->run();
-
-        $error = $this->output->getError();
-        return empty($error);
     }
 
     /**

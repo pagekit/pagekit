@@ -3,15 +3,13 @@
 namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Installer\Installer\Installer;
+use Pagekit\Installer\Installer;
 
 /**
  * @Access("system: manage packages", admin=true)
  */
 class PackageController
 {
-    protected $installer;
-
     public function themesAction()
     {
         $packages = App::package()->all('pagekit-theme');
@@ -164,12 +162,17 @@ class PackageController
 
             $package = App::package()->load($package);
 
-            $installer = new Installer();
-            $installer->install([$package->getName() => $package->get('version')]);
+            return App::response()->stream(function () use ($package) {
 
-            return App::response('');
+                $installer = new Installer(App::path());
+                $installer->install([$package->getName() => $package->get('version')]);
+
+                echo 'status=success';
+
+            });
 
         } catch (\Exception $e) {
+
             $error = $e->getMessage();
         }
 
@@ -200,12 +203,17 @@ class PackageController
             App::trigger('uninstall', [$module]);
             App::trigger("uninstall.{$module->name}", [$module]);
 
-            $installer = new Installer();
-            $installer->uninstall([$package->getName()]);
+            return App::response()->stream(function () use ($package) {
 
-            return App::response('');
+                $installer = new Installer(App::path());
+                $installer->uninstall([$package->getName()]);
+
+                echo 'status=success';
+
+            });
 
         } catch (\Exception $e) {
+
             $error = $e->getMessage();
         }
 

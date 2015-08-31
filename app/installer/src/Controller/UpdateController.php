@@ -4,9 +4,7 @@ namespace Pagekit\Installer\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Installer\Installer\Verifier;
-use Pagekit\Installer\Installer\SelfUpdater;
-use Pagekit\Installer\Installer\WebOutput;
+use Pagekit\Installer\Updater;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -48,14 +46,13 @@ class UpdateController
                 throw new \RuntimeException('Path is not writable.');
             }
 
-            $verifier = new Verifier(require App::get('config.file'));
-
-            $file = basename($file);
-            $token = $verifier->hash($shasum);
-
-            return compact('file', 'token');
+            return [
+                'file' => basename($file),
+                'token' => self::hash($shasum, App::system()->config('key'))
+            ];
 
         } catch (\Exception $e) {
+
             if ($e instanceof TransferException) {
                 $error = 'Package download failed.';
             } else {
@@ -66,19 +63,56 @@ class UpdateController
         App::abort(500, $error);
     }
 
-    public static function updateAction($config, $file, $token)
+    public static function updateAction($config, $request)
     {
-        $file = str_replace('/', '', $file);
-        $file = $config['path.temp'] . '/' . $file;
+        try {
 
-        $verifier = new Verifier(require $config['config.file']);
-        if (!$verifier->verify(sha1_file($file), $token)) {
-            http_response_code(401);
-            exit('No access.');
+            $file = preg_replace('/[^a-z0-9_\-\.]/i', '', $request['file']);
+            $file = $config['path.temp'] . '/' . $file;
+
+            if (!file_exists($file) || !is_file($file)) {
+                throw new \RuntimeException('File does not exist.');
+            }
+
+            if (!self::verify(sha1_file($file), $request['token'])) {
+                throw new \RuntimeException('File token verification failed.');
+            }
+
+            $updater = new Updater($config);
+            $updater->update($file);
+
+        } catch (\Exception $e) {
+
+            http_response_code(400);
+            echo $e->getMessage();
         }
+    }
 
-        $updater = new SelfUpdater($config, new WebOutput(fopen('php://output', 'w')));
-        $updater->update($file);
+    /**
+     * Calculates HMAC-SHA1 for given data.
+     *
+     * @param  string $data
+     * @param  string $key
+     * @return string
+     */
+    public static function hash($data, $key)
+    {
+        return base64_encode(extension_loaded('hash') ?
+            hash_hmac('sha1', $data, $key, true) : pack('H*', sha1(
+                (str_pad($key, 64, chr(0x00)) ^ (str_repeat(chr(0x5c), 64))) .
+                pack('H*', sha1((str_pad($key, 64, chr(0x00)) ^
+                        (str_repeat(chr(0x36), 64))) . $data)))));
+    }
 
+    /**
+     * Verifies integrity of a given data.
+     *
+     * @param  string $data
+     * @param  string $token
+     * @return bool
+     */
+    public static function verify($data, $token)
+    {
+        return sha1(self::hash($data)) === sha1($token);
     }
 }
