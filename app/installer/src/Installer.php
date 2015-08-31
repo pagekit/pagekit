@@ -39,19 +39,14 @@ class Installer
      */
     protected $output;
 
-    protected $packagesConfig = [
+    /**
+     * @var string
+     */
+    protected $config = [
         'repositories' => [
-            [
-                'type' => 'artifact',
-                'url' => 'tmp/packages/'
-            ],
-             [
-                 'type' => 'composer',
-                 'url' => 'http://pagekit.com/api'
-             ]
+            ['type' => 'artifact', 'url' => 'tmp/packages/'],
+            ['type' => 'composer', 'url' => 'http://pagekit.com/api']
         ],
-        'require' => [
-        ]
     ];
 
     /**
@@ -71,7 +66,7 @@ class Installer
 
         putenv("COMPOSER_HOME={$path}");
         putenv("COMPOSER_CACHE_DIR={$path}/tmp/temp/composer");
-        putenv("COMPOSER_VENDOR_DIR={$path}/vendor/packages");
+        putenv("COMPOSER_VENDOR_DIR={$path}/packages");
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -134,14 +129,14 @@ class Installer
      */
     protected function composerUpdate($updates = false)
     {
-        $packagesConfig = $this->packagesConfig;
-        $packagesConfig['require'] = array_merge($packagesConfig['require'], $this->packages);
+        $config = $this->config;
+        $config['require'] = $this->packages;
 
         $io = new InstallerIO($this->input, $this->output);
-        $composer = Factory::create($io, $packagesConfig);
+        $composer = Factory::create($io, $config);
 
-        $lockFile = new JsonFile($this->path.'/packages.lock');
-        $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($packagesConfig)));
+        $lockFile = new JsonFile(preg_replace('/\.json$/i', '.lock', $this->file));
+        $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($config)));
         $composer->setLocker($locker);
 
         $installed = new JsonFile($this->path.'/vendor/composer/installed.json');

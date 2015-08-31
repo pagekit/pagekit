@@ -11,9 +11,7 @@ return [
     'main' => function ($app) {
 
         $app['package'] = function ($app) {
-            return (new PackageManager())
-                ->addPath($app['path.extensions'].'/*/composer.json')
-                ->addPath($app['path.themes'].'/*/composer.json');
+            return (new PackageManager())->addPath($app['path'].'/packages/*/*/composer.json');
         };
 
         $app['module']->addLoader(function ($name, $module) use ($app) {

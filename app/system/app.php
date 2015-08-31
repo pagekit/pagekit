@@ -12,8 +12,7 @@ $app['autoloader'] = $loader;
 $app['module']->addPath([
     $path.'/app/installer/index.php',
     $path.'/app/modules/*/index.php',
-    $path.'/extensions/*/index.php',
-    $path.'/themes/*/index.php',
+    $path.'/packages/*/*/index.php',
     __DIR__.'/index.php'
 ]);
 

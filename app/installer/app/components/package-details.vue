@@ -30,7 +30,7 @@
             <p>{{ package.description }}</p>
 
             <ul class="uk-list">
-                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package | folder }}</li>
+                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
                 <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
                 <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
                 <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
@@ -74,10 +74,6 @@
                 }
 
                 return extra.image;
-            },
-
-            folder: function (pkg) {
-                return pkg.url && pkg.url.match(/[^\/]+$/gi);
             }
 
         },
