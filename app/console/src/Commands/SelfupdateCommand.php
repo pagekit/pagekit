@@ -6,6 +6,7 @@ use Pagekit\Application\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\TransferException;
+use Pagekit\Installer\Updater;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -74,9 +75,8 @@ class SelfupdateCommand extends Command
             $this->download($url, $shasum, $tmpFile);
             $output->writeln('<info>done.</info>');
 
-            putenv('HTTP_X_UPDATE_MODE=true');
-
-            system($this->container->path() . '/pagekit ' . basename($tmpFile));
+            $updater = new Updater($output);
+            $updater->update($tmpFile);
 
         } catch (\Exception $e) {
             unlink($tmpFile);
