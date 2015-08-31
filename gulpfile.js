@@ -40,6 +40,10 @@ gulp.task('default', ['compile']);
  */
 gulp.task('compile', function () {
 
+    pkgs = pkgs.filter(function (pkg) {
+        return fs.existsSync(pkg.path);
+    });
+
     return merge.apply(null, pkgs.map(function (pkg) {
         return gulp.src(pkg.path + '**/less/*.less', {base: pkg.path})
             .pipe(less({compress: true, relativeUrls: true}))
