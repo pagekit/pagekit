@@ -56,12 +56,8 @@ module.exports = {
                 beforeSend: function (request) {
                     output.init(request, this.$trans('Installing "%title%"', {title: pkg.title}));
                 }
-            }).success(function (data) {
-                if (data.package) {
-                    pkg = data.package;
-                }
-
-                if (packages) {
+            }).success(function () {
+                if (output.status === 'success' && packages) {
 
                     var index = _.findIndex(packages, 'name', pkg.name);
 
@@ -85,8 +81,8 @@ module.exports = {
                 beforeSend: function (request) {
                     output.init(request, this.$trans('Uninstalling "%title%"', {title: pkg.title}));
                 }
-            }).success(function (data) {
-                if (packages && !data.error) {
+            }).success(function () {
+                if (output.status === 'success' && packages) {
                     packages.splice(packages.indexOf(pkg), 1);
                 }
             }).error(function (message) {
