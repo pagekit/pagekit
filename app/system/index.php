@@ -116,20 +116,10 @@ return [
         'auth.login' => [function ($event) use ($app) {
 
             if ($event->getUser()->hasAccess('system: software updates') && $app['migrator']->create('system:migrations', $this->config('version'))->get()) {
-                $event->setResponse($app['response']->redirect('@system/migration'));
-
+                $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
             }
 
         }, 8],
-
-        'updated' => function ($event) use ($app) {
-
-            $currentVersion = $app->config('system')->get('version');
-            if ($version = $app['migrator']->create('app/system/migrations', $currentVersion)->run()) {
-                $app->config('system')->set('version', $version);
-            }
-
-        },
 
         'view.messages' => function ($event) use ($app) {
 
