@@ -44,7 +44,7 @@ var installer = {
         stepLanguage: function (e) {
             e.preventDefault();
 
-            this.$asset({js: [this.$url('system/intl/:locale', {locale: this.locale})]}, function () {
+            this.$asset({js: [this.$url.route('system/intl/:locale', {locale: this.locale})]}, function () {
 
                 this.$set('option.system.admin.locale', this.locale);
                 this.$set('option.system.site.locale', this.locale);
