@@ -92,16 +92,8 @@ module.exports = {
 
             methods: {
 
-                cancel: function (e) {
-                    e.preventDefault();
-                    this.$set('reply', 0);
-                    this.$set('author', '');
-                    this.$set('email', '');
-                    this.$set('content', '');
-                    this.$set('replyForm', {});
-                },
-
                 save: function (e) {
+
                     e.preventDefault();
 
                     var comment = {
@@ -111,20 +103,32 @@ module.exports = {
                     };
 
                     if (!this.user.isAuthenticated) {
-                        comment['author'] = this.author;
-                        comment['email'] = this.email;
+                        comment.author = this.author;
+                        comment.email  = this.email;
                     }
 
                     this.$set('error', false);
 
                     this.$resource('api/blog/comment/:id').save({id: 0}, {comment: comment}, function (data) {
-                        this.cancel(e);
+
+                        this.$set('reply', 0);
+                        this.$set('author', '');
+                        this.$set('email', '');
+                        this.$set('content', '');
+                        this.$set('replyForm', {});
+
+                        if (document.replyForm) {
+                            document.replyForm.reset();
+                        }
+
                         this.load().success(function () {
                             window.location.hash = 'comment-' + data.comment.id;
                         });
+
                     }, function () {
+
                         // TODO better error messages
-                        this.$set('error', this.$trans('Unable to comment. Please try again later.'))
+                        this.$set('error', this.$trans('Unable to comment. Please try again later.'));
                     });
                 }
 
