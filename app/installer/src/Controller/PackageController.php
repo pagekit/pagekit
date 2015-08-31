@@ -148,7 +148,7 @@ class PackageController
 
         $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';
 
-        $file->move(App::get('path.packages'), $filename);
+        $file->move(App::get('path').'/tmp/packages', $filename);
 
         return compact('package');
     }
