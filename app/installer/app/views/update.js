@@ -6,7 +6,8 @@ module.exports = {
     data: function () {
         return _.extend({
             view: 'index',
-            status: null,
+            status: 'success',
+            finished: false,
             update: false,
             output: '',
             progress: 0,
@@ -56,10 +57,10 @@ module.exports = {
             this.$set('progress', 66);
             this.$http.get('', {file: data.file, token: data.token}, null, {
                 headers: {'X_UPDATE_MODE': true},
-                beforeSend: function (request) {
-                    request.onprogress = function () {
+                xhr: {
+                    onprogress: function () {
                         vm.setOutput(this.responseText);
-                    };
+                    }
                 }
             }).success(this.doMigration)
                 .error(this.error);
@@ -68,7 +69,12 @@ module.exports = {
         doMigration: function () {
             this.$set('progress', 100);
             if (this.status === 'success') {
-                // TODO: Implement this.
+                this.$http.get('admin/system/migration/migrate', function (data) {
+                    this.output += "\n\n" + data.message;
+                    this.finished = true;
+                }).error(this.error);
+            } else {
+                this.error();
             }
         },
 
@@ -88,6 +94,9 @@ module.exports = {
 
         error: function (error) {
             this.errors.push(error || this.$trans('Whoops, something went wrong.'));
+
+            this.status = 'error';
+            this.finished = true;
         }
 
     }

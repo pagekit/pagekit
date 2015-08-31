@@ -39,7 +39,7 @@
 
         <pre v-html="output" v-show="output"></pre>
 
-        <a class="uk-button uk-button-success" v-attr="href: $url.route('admin')" v-show="progress == 100">{{ 'Ok' | trans }}</a>
+        <a class="uk-button uk-button-{{ status }}" v-attr="href: $url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
 
     </div>
 
