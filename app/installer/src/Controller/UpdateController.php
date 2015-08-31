@@ -48,7 +48,7 @@ class UpdateController
 
             return [
                 'file' => basename($file),
-                'token' => self::hash($shasum, App::system()->config('key'))
+                'token' => $this->hash($shasum, App::system()->config('key'))
             ];
 
         } catch (\Exception $e) {
@@ -79,7 +79,7 @@ class UpdateController
                     throw new \RuntimeException('File does not exist.');
                 }
 
-                if (isset($request['token']) && !self::verify(sha1_file($file), $token)) {
+                if (!$this->verify(sha1_file($file), $token)) {
                     throw new \RuntimeException('File token verification failed.');
                 }
 
@@ -102,7 +102,7 @@ class UpdateController
      * @param  string $key
      * @return string
      */
-    public static function hash($data, $key)
+    public function hash($data, $key)
     {
         return base64_encode(extension_loaded('hash') ?
             hash_hmac('sha1', $data, $key, true) : pack('H*', sha1(
@@ -118,8 +118,8 @@ class UpdateController
      * @param  string $token
      * @return bool
      */
-    public static function verify($data, $token)
+    public function verify($data, $token)
     {
-        return sha1(self::hash($data)) === sha1($token);
+        return sha1($this::hash($data)) === sha1($token);
     }
 }
