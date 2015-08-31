@@ -26,7 +26,10 @@ class InstallerController
     /**
      * @var array
      */
-    protected $packages = [];
+    protected $packages = [
+        'pagekit/blog' => '0.9.*',
+        'pagekit/theme-one' => '0.9.*'
+    ];
 
     /**
      * Constructor.
