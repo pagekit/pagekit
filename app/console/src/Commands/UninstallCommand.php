@@ -3,10 +3,9 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Application\Console\Command;
-use Pagekit\Installer\Installer\Installer;
+use Pagekit\Installer\Installer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UninstallCommand extends Command
@@ -34,7 +33,7 @@ class UninstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $updater = new Installer($this->config, $output);
+        $updater = new Installer($this->container->path(), $output);
         $updater->uninstall((array) $this->argument('packages'));
     }
 
