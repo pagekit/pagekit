@@ -30,29 +30,40 @@ class AuthDataCollector implements DataCollectorInterface
     {
         if (null === $this->auth) {
             return [
-                'enabled'       => false,
+                'enabled' => false,
                 'authenticated' => false,
-                'user_class'    => null,
-                'user'          => '',
-                'roles'         => [],
-            ];
-        } elseif (null === $user = $this->auth->getUser()) {
-            return [
-                'enabled'       => true,
-                'authenticated' => false,
-                'user_class'    => null,
-                'user'          => '',
-                'roles'         => [],
-            ];
-        } else {
-            return [
-                'enabled'       => true,
-                'authenticated' => $user->isAuthenticated(),
-                'user_class'    => get_class($user),
-                'user'          => $user->getUsername(),
-                'roles'         => array_map(function ($role) { return $role->name; }, User::findRoles($user)), // TODO interface does not match
+                'user_class' => null,
+                'user' => '',
+                'roles' => [],
             ];
         }
+
+        try {
+            $user = $this->auth->getUser();
+        } catch (\Exception $e) {
+            $user = null;
+        }
+
+        if (null === $user) {
+            return [
+                'enabled' => true,
+                'authenticated' => false,
+                'user_class' => null,
+                'user' => '',
+                'roles' => [],
+            ];
+        }
+
+        return [
+            'enabled' => true,
+            'authenticated' => $user->isAuthenticated(),
+            'user_class' => get_class($user),
+            'user' => $user->getUsername(),
+            'roles' => array_map(function ($role) {
+                return $role->name;
+            }, User::findRoles($user)), // TODO interface does not match
+        ];
+
     }
 
     /**
