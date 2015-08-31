@@ -78,6 +78,9 @@ class SelfupdateCommand extends Command
             $updater = new Updater($output);
             $updater->update($tmpFile);
 
+            $output->write('Migrating...');
+            system(sprintf('php %s migrate', $_SERVER['PHP_SELF']));
+
         } catch (\Exception $e) {
             unlink($tmpFile);
             throw $e;
