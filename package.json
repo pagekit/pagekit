@@ -1,7 +1,7 @@
 {
   "name": "pagekit",
   "scripts": {
-    "install": "bower install && webpack && gulp cldr"
+    "install": "bower install && webpack && gulp && gulp cldr"
   },
   "devDependencies": {
     "cldr-localenames-modern": "^27.0.3",
