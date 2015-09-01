@@ -3,6 +3,7 @@
 namespace Pagekit\Installer\Controller;
 
 use Pagekit\Application as App;
+use Pagekit\Filesystem\Filesystem;
 use Pagekit\Installer\Installer;
 
 /**
@@ -212,8 +213,27 @@ class PackageController
                 App::trigger('uninstall', [$module]);
                 App::trigger("uninstall.{$module->name}", [$module]);
 
-                $installer = new Installer();
-                $installer->uninstall([$package->getName()]);
+                $installed = App::get('path.packages') . '/composer/installed.json';
+                $installed = file_exists($installed) ? json_decode(file_get_contents($installed), true) : [];
+
+                $installed = array_map(function ($pkg) {
+                    return $pkg['name'];
+                }, $installed);
+
+                if (array_search($name, $installed)) {
+                    $installer = new Installer();
+                    $installer->uninstall([$package->getName()]);
+                } else {
+                    if (!$path = $package->get('path')) {
+                        throw new \RuntimeException(__('Package path is missing.'));
+                    }
+                    echo __("Removing package folder. \n");
+
+                    $file = new Filesystem;
+                    $file->delete($path);
+
+                    @rmdir(dirname($path));
+                }
 
                 echo 'status=success';
 
