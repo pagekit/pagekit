@@ -3,6 +3,8 @@ jQuery(function ($) {
     // main menu
     var menu = new Vue({
 
+        inherit: true,
+
         el: '#header',
 
         data: _.extend({}, window.$pagekit),
@@ -21,7 +23,7 @@ jQuery(function ($) {
             }
 
             // main menu order
-            $(this.$$.appnav).on('stop.uk.sortable', function () {
+            $('#js-appnav').on('stop.uk.sortable', function () {
 
                 var data = {};
 
