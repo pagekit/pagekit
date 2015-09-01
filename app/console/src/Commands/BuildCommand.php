@@ -42,10 +42,10 @@ class BuildCommand extends Command
     {
         $info   = $this->container->info()->get();
         $path   = $this->container->path();
+        $vers   = $info['version'];
         $filter = '/'.implode('|', $this->excludes).'/i';
 
-        $zip  = new \ZipArchive;
-        $vers = $info['version'];
+        system('webpack -p');
 
         $finder = Finder::create()->files()->in($path)->ignoreVCS(true)->filter(function ($file) use($filter) {
             return !preg_match($filter, $file->getRelativePathname());
