@@ -1,4 +1,4 @@
-<html lang="<?= str_replace('_', '-', $app['translator']->getLocaleTag()) ?>">
+<html lang="<?= str_replace('_', '-', $app['translator']->getLocale()) ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
