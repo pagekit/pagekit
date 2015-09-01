@@ -1,4 +1,3 @@
-var Output = require('../components/output.vue');
 var Version = require('../lib/version');
 
 module.exports = {

@@ -1,5 +1,3 @@
-var Output = require('./output.vue');
-
 module.exports = {
 
     data: function () {
