@@ -2,26 +2,26 @@
 
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
-$loader = require $config['path.vendor'] . '/autoload.php';
+$loader = require __DIR__ . '/vendor/autoload.php';
 
-if (file_exists($config['path.packages'] . '/autoload.php')) {
-    $map = require $config['path.packages'] . '/composer/autoload_namespaces.php';
-    foreach ($map as $namespace => $path) {
-        $loader->set($namespace, $path);
+if (file_exists(__DIR__ . '/packages/autoload.php')) {
+    $map = require __DIR__ . '/packages/composer/autoload_namespaces.php';
+    foreach ($map as $namespace => $p) {
+        $loader->set($namespace, $p);
     }
 
-    $map = require $config['path.packages'] . '/composer/autoload_psr4.php';
-    foreach ($map as $namespace => $path) {
-        $loader->setPsr4($namespace, $path);
+    $map = require __DIR__ . '/packages/composer/autoload_psr4.php';
+    foreach ($map as $namespace => $p) {
+        $loader->setPsr4($namespace, $p);
     }
 
-    $classMap = require $config['path.packages'] . '/composer/autoload_classmap.php';
+    $classMap = require __DIR__ . '/packages/composer/autoload_classmap.php';
     if ($classMap) {
         $loader->addClassMap($classMap);
     }
 
-    if (file_exists($config['path.packages'] . '/composer/autoload_files.php')) {
-        $includeFiles = require $config['path.packages'] . '/composer/autoload_files.php';
+    if (file_exists(__DIR__ . '/packages/composer/autoload_files.php')) {
+        $includeFiles = require __DIR__ . '/packages/composer/autoload_files.php';
         foreach ($includeFiles as $file) {
             require $file;
         }
@@ -29,6 +29,5 @@ if (file_exists($config['path.packages'] . '/autoload.php')) {
 }
 
 AnnotationRegistry::registerLoader([$loader, 'loadClass']);
-$path = $config['path'];
 
 return $loader;
