@@ -89,28 +89,6 @@ module.exports = {
                 output.close();
                 this.$notify(message, 'danger');
             });
-        },
-
-        updatePackage: function (pkg, packages) {
-            this.disablePackage(pkg, false).always(function (data, status) {
-                var enable = status == 200;
-
-                var vm = this;
-                this.installPackage(pkg, packages,
-                    function (output) {
-                        if (output.status !== 'success') {
-                            return;
-                        }
-
-                        if (enable) {
-                            vm.enablePackage(pkg).success(function () {
-                                vm.$notify(vm.$trans('"%title%" enabled.', {title: pkg.title}));
-                            }).error(function (message) {
-                                vm.$notify(message, 'danger');
-                            });
-                        }
-                    });
-            }).error(function () {});
         }
 
     }

@@ -148,7 +148,7 @@ class PackageController
 
         $filename = str_replace('/', '-', $package->getName()) . '-' . $package->get('version') . '.zip';
 
-        $file->move(App::get('path').'/tmp/packages', $filename);
+        $file->move(App::get('path') . '/tmp/packages', $filename);
 
         return compact('package');
     }
@@ -163,9 +163,18 @@ class PackageController
             try {
 
                 $package = App::package()->load($package);
+                $name = $package->getName();
 
-                $installer = new Installer(App::path());
+                if ($enabled = (bool)App::module($package->get('module'))) {
+                    $this->disableAction($name);
+                }
+
+                $installer = new Installer();
                 $installer->install([$package->getName() => $package->get('version')]);
+
+                if ($enabled) {
+                    $this->enableAction($name);
+                }
 
                 echo 'status=success';
 
@@ -203,7 +212,7 @@ class PackageController
                 App::trigger('uninstall', [$module]);
                 App::trigger("uninstall.{$module->name}", [$module]);
 
-                $installer = new Installer(App::path());
+                $installer = new Installer();
                 $installer->uninstall([$package->getName()]);
 
                 echo 'status=success';

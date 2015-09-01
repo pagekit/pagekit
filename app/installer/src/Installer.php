@@ -11,6 +11,7 @@ use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\StreamOutput;
 
 class Installer
 {
@@ -58,7 +59,7 @@ class Installer
     public function __construct($output = null)
     {
         $this->file = App::get('path.packages') . '/packages.php';
-        $this->output = $output;
+        $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
         $this->packages = $this->readPackages();
 
         chdir(App::path());

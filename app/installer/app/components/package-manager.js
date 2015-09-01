@@ -98,8 +98,17 @@ module.exports = {
         },
 
         update: function (pkg) {
-            this.updates.$delete(pkg.name);
-            this.updatePackage(pkg, this.packages);
+            var vm = this;
+
+            this.installPackage(pkg, this.packages, function (output) {
+                if (output.status === 'success') {
+                    vm.updates.$delete(pkg.name);
+                }
+
+                setTimeout(function () {
+                    location.reload();
+                }, 300);
+            });
         },
 
         error: function (message) {
