@@ -63,8 +63,7 @@ class Installer
 
         chdir(App::path());
 
-        putenv('COMPOSER_HOME=' . App::path());
-        putenv('COMPOSER_CACHE_DIR=' . App::get('path.temp') . '/composer');
+        putenv('COMPOSER_HOME=' . App::get('path.temp') . '/composer');
         putenv('COMPOSER_VENDOR_DIR=' . App::get('path.packages'));
 
         // set memory limit, if < 512M
