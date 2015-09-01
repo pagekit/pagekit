@@ -147,7 +147,7 @@ class InstallerController
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('system.key', App::get('auth.random')->generateString(64));
+                $configuration->set('system.secret', App::get('auth.random')->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 

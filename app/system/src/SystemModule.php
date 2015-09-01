@@ -21,7 +21,7 @@ class SystemModule extends Module
             return Finder::create();
         });
 
-        $app->module('auth')->config['rememberme.key'] = $this->config('key');
+        $app->module('auth')->config['rememberme.key'] = $this->config('secret');
 
         $app['db.em']; // -TODO- fix me
 
