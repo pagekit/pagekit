@@ -33,8 +33,8 @@ class UninstallCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $updater = new Installer($this->container->path(), $output);
-        $updater->uninstall((array) $this->argument('packages'));
+        $updater = new Installer($output);
+        $updater->uninstall((array)$this->argument('packages'));
     }
 
 }

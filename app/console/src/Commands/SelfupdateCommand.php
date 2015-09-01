@@ -75,7 +75,7 @@ class SelfupdateCommand extends Command
             $this->download($url, $shasum, $tmpFile);
             $output->writeln('<info>done.</info>');
 
-            $updater = new Updater($this->container->path(), $output);
+            $updater = new Updater($output);
             $updater->update($tmpFile);
 
             $output->write('Migrating...');

@@ -35,12 +35,12 @@ class InstallCommand extends Command
     {
         $packages = [];
 
-        foreach ((array) $this->argument('packages') as $argument) {
+        foreach ((array)$this->argument('packages') as $argument) {
             $argument = explode(':', $argument);
             $packages[$argument[0]] = isset($argument[1]) && $argument[1] ? $argument[1] : '*';
         }
 
-        $installer = new Installer($this->container->path(), $output);
+        $installer = new Installer($output);
         $installer->install($packages);
     }
 

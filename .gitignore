@@ -13,8 +13,6 @@
 /config.php
 /**/composer.phar
 /composer.lock
-/packages.json
-/packages.lock
 /pagekit*.zip
 node_modules
 .DS_Store

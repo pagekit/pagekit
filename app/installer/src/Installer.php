@@ -2,6 +2,7 @@
 
 namespace Pagekit\Installer;
 
+use Pagekit\Application as App;
 use Composer\Factory;
 use Composer\Installer as ComposerInstaller;
 use Composer\Json\JsonFile;
@@ -52,20 +53,19 @@ class Installer
      * Constructor.
      *
      * @param string $path
-     * @param mixed  $output
+     * @param mixed $output
      */
-    public function __construct($path, $output = null)
+    public function __construct($output = null)
     {
-        $this->path = $path;
-        $this->file = "{$path}/packages.json";
+        $this->file = App::get('path.packages') . '/packages.php';
         $this->output = $output;
         $this->packages = $this->readPackages();
 
-        chdir($path);
+        chdir(App::path());
 
-        putenv("COMPOSER_HOME={$path}");
-        putenv("COMPOSER_CACHE_DIR={$path}/tmp/temp/composer");
-        putenv("COMPOSER_VENDOR_DIR={$path}/packages");
+        putenv('COMPOSER_HOME=' . App::path());
+        putenv('COMPOSER_CACHE_DIR=' . App::get('path.temp') . '/composer');
+        putenv('COMPOSER_VENDOR_DIR=' . App::get('path.packages'));
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -81,12 +81,9 @@ class Installer
     public function install(array $install = [])
     {
         $this->packages = array_merge($this->packages, $install);
+        $this->composerUpdate(array_keys($install));
 
-        if ($return = $this->composerUpdate(array_keys($install))) {
-            $this->writePackages();
-        }
-
-        return $return;
+        $this->writePackages();
     }
 
     /**
@@ -109,7 +106,7 @@ class Installer
      */
     protected function readPackages()
     {
-        return file_exists($this->file) ? json_decode(file_get_contents($this->file), true) : [];
+        return file_exists($this->file) ? require $this->file : [];
     }
 
     /**
@@ -117,7 +114,7 @@ class Installer
      */
     protected function writePackages()
     {
-        file_put_contents($this->file, json_encode($this->packages, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT));
+        file_put_contents($this->file, '<?php return ' . var_export($this->packages, true) . ';');
     }
 
     /**
@@ -134,11 +131,11 @@ class Installer
         $io = new InstallerIO($this->input, $this->output);
         $composer = Factory::create($io, $config);
 
-        $lockFile = new JsonFile(preg_replace('/\.json$/i', '.lock', $this->file));
+        $lockFile = new JsonFile(preg_replace('/\.php$/i', '.lock', $this->file));
         $locker = new Locker($io, $lockFile, $composer->getRepositoryManager(), $composer->getInstallationManager(), md5(json_encode($config)));
         $composer->setLocker($locker);
 
-        $installed = new JsonFile($this->path.'/vendor/composer/installed.json');
+        $installed = new JsonFile(App::get('path.vendor') . '/composer/installed.json');
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
