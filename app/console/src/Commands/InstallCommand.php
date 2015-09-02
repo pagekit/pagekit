@@ -3,7 +3,7 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Application\Console\Command;
-use Pagekit\Installer\Installer;
+use Pagekit\Installer\Package\PackageManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -40,8 +40,7 @@ class InstallCommand extends Command
             $packages[$argument[0]] = isset($argument[1]) && $argument[1] ? $argument[1] : '*';
         }
 
-        $installer = new Installer($output);
+        $installer = new PackageManager($output);
         $installer->install($packages);
     }
-
 }

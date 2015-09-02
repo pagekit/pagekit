@@ -6,7 +6,7 @@ use Pagekit\Application\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\TransferException;
-use Pagekit\Installer\Updater;
+use Pagekit\Installer\SelfUpdater;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -75,7 +75,7 @@ class SelfupdateCommand extends Command
             $this->download($url, $shasum, $tmpFile);
             $output->writeln('<info>done.</info>');
 
-            $updater = new Updater($output);
+            $updater = new SelfUpdater($output);
             $updater->update($tmpFile);
 
             $output->write('Migrating...');
