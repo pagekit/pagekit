@@ -1,5 +1,5 @@
 # Restricted access to files
-<FilesMatch "\.(lock|cache|db)$">
+<FilesMatch "((\.(lock|cache|db))|installed.json)$">
     Order allow,deny
 </FilesMatch>
 
