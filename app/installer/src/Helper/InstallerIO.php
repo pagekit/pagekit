@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\Installer;
+namespace Pagekit\Installer\Helper;
 
 use Composer\IO\ConsoleIO;
 use Composer\Console\HtmlOutputFormatter;

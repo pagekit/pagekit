@@ -4,7 +4,7 @@ namespace Pagekit\Installer\Controller;
 
 use GuzzleHttp\Client;
 use Pagekit\Application as App;
-use Pagekit\Installer\Updater;
+use Pagekit\Installer\SelfUpdater;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -80,7 +80,7 @@ class UpdateController
                     throw new \RuntimeException('File does not exist.');
                 }
 
-                $updater = new Updater();
+                $updater = new SelfUpdater();
                 $updater->update($file);
 
             } catch (\Exception $e) {

@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Installer\Package\PackageManager;
+use Pagekit\Installer\Package\PackageFactory;
 use Pagekit\Module\Factory\ModuleFactory;
 use Pagekit\Kernel\Exception\NotFoundException;
 
@@ -11,7 +11,7 @@ return [
     'main' => function ($app) {
 
         $app['package'] = function ($app) {
-            return (new PackageManager())->addPath($app['path'].'/packages/*/*/composer.json');
+            return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
         };
 
         $app['module']->addLoader(function ($name, $module) use ($app) {

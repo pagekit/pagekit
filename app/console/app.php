@@ -11,11 +11,12 @@ $app = new App($config);
 $app['autoloader'] = $loader;
 
 $app['module']->addPath([
-    __DIR__.'/index.php',
     $path.'/app/system/index.php',
     $path.'/app/modules/*/index.php',
+    $path.'/app/installer/index.php',
     $path.'/extensions/*/index.php',
-    $path.'/themes/*/index.php'
+    $path.'/themes/*/index.php',
+    __DIR__.'/index.php'
 ]);
 
 $app['module']->addLoader(new AutoLoader($app['autoloader']));

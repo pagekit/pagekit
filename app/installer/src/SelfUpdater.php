@@ -7,7 +7,7 @@ use Composer\Console\HtmlOutputFormatter;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 
-class Updater
+class SelfUpdater
 {
     /**
      * @var array
@@ -27,7 +27,6 @@ class Updater
     /**
      * Constructor.
      *
-     * @param string $path
      * @param mixed  $output
      */
     public function __construct(OutputInterface $output = null)

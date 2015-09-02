@@ -7,7 +7,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\ConnectionException;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\Installer\Installer;
+use Pagekit\Installer\PackageManager;
 use Pagekit\Util\Arr;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -162,7 +162,7 @@ class InstallerController
             }
 
             if ($this->packages) {
-                $installer = new Installer(App::path(), new NullOutput());
+                $installer = new PackageManager(App::path(), new NullOutput());
                 $installer->install($this->packages);
             }
 

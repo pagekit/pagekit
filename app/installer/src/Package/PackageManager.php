@@ -3,186 +3,183 @@
 namespace Pagekit\Installer\Package;
 
 use Pagekit\Application as App;
+use Pagekit\Installer\Helper\Composer;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\StreamOutput;
 
-class PackageManager implements \ArrayAccess, \IteratorAggregate
+class PackageManager
 {
-    /**
-     * @var array
-     */
-    protected $paths = [];
 
     /**
-     * @var array
+     * @var OutputInterface
      */
-    protected $packages = [];
+    protected $output;
 
     /**
-     * Get shortcut.
+     * Constructor.
      *
-     * @see get()
+     * @param mixed $output
      */
-    public function __invoke($name)
+    public function __construct($output = null)
     {
-        return $this->get($name);
+        $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
     }
 
     /**
-     * Gets a package.
-     *
-     * @param  string $name
-     * @return mixed|null
-     */
-    public function get($name)
-    {
-        if (empty($this->packages)) {
-            $this->loadPackages();
-        }
-
-        return isset($this->packages[$name]) ? $this->packages[$name] : null;
-    }
-
-    /**
-     * Gets all packages.
-     *
-     * @param  string $type
-     * @return array
-     */
-    public function all($type = null)
-    {
-        if (empty($this->packages)) {
-            $this->loadPackages();
-        }
-
-        $filter = function ($package) use ($type) {
-            return $package->get('type') == $type;
-        };
-
-        if ($type !== null) {
-            $packages = array_filter($this->packages, $filter);
-        } else {
-            $packages = $this->packages;
-        }
-
-        return array_values($packages);
-    }
-
-    /**
-     * Loads a package from data.
-     *
-     * @param  string|array $data
-     * @return Package
-     */
-    public function load($data)
-    {
-        if (is_string($data) && strpos($data, '{') !== 0) {
-            $path = strtr(dirname($data), '\\', '/');
-            $data = @file_get_contents($data);
-        }
-
-        if (is_string($data)) {
-            $data = @json_decode($data, true);
-        }
-
-        if (is_array($data) && isset($data['name'])) {
-
-            if (!isset($data['module'])) {
-                $data['module'] = basename($data['name']);
-            }
-
-            if (isset($path)) {
-                $data['path'] = $path;
-                $data['url']  = App::url()->getStatic($path);
-            }
-
-            return new Package($data);
-        }
-    }
-
-    /**
-     * Adds a package path(s).
-     *
-     * @param  string|array $paths
-     * @return self
-     */
-    public function addPath($paths)
-    {
-        $this->paths = array_merge($this->paths, (array) $paths);
-
-        return $this;
-    }
-
-    /**
-     * Checks if a package exists.
-     *
-     * @param  string $name
+     * @param array $install
      * @return bool
      */
-    public function offsetExists($name)
+    public function install(array $install = [])
     {
-        return isset($this->packages[$name]);
+        Composer::setOutput($this->output);
+        Composer::install($install);
+
+        $packages = App::package()->all(null, true);
+        foreach ($install as $name => $version) {
+            if (isset($packages[$name]) && App::module($packages[$name]->get('module'))) {
+                $this->enable($packages[$name]);
+            }
+        }
     }
 
     /**
-     * Gets a package by name.
-     *
-     * @param  string $name
+     * @param $uninstall
      * @return bool
      */
-    public function offsetGet($name)
+    public function uninstall($uninstall)
     {
-        return $this->get($name);
+        foreach ((array) $uninstall as $name) {
+            if (!$package = App::package($name)) {
+                throw new \RuntimeException(__('Unable to find "%name%".', ['%name%' => $name]));
+            }
+
+            if (!$path = $package->get('path')) {
+                throw new \RuntimeException(__('Package path is missing.'));
+            }
+            $path = App::get('path.packages') . '/' . $path;
+
+            $this->trigger($package, 'uninstall');
+//            App::config('system')->pull('migration', $package->get('module'));
+
+            if (Composer::isInstalled($package->getName())) {
+                Composer::setOutput($this->output);
+                Composer::uninstall($package->getName());
+            } else {
+
+                $this->output->writeln(__("Removing package folder."));
+
+                $file = new Filesystem;
+                $file->delete($path);
+
+                @rmdir(dirname($path));
+            }
+        }
     }
 
     /**
-     * Sets a package.
+     * @param $package
+     */
+    public function enable($package)
+    {
+        $this->migrate($package);
+        $this->trigger($package, 'enable');
+
+        if ($package->getType() == 'pagekit-theme') {
+            App::config('system')->set('site.theme', $package->get('module'));
+        } elseif ($package->getType() == 'pagekit-extension') {
+            App::config('system')->push('extensions', $package->get('module'));
+        }
+    }
+
+    /**
+     * @param $package
+     */
+    protected function migrate($package)
+    {
+        $scripts = $this->loadScripts($package);
+
+        if (isset($scripts['migrations']) &&
+            is_array($migrationList = $scripts['migrations']) &&
+            $new = $this->getVersion($package)
+        ) {
+            $current = App::module('system')->config('migration.' . $package->get('module'));
+
+            if (!$current) {
+                $migrationList = array_intersect_key($migrationList, array_flip(['init']));
+            } else {
+                unset($migrationList['init']);
+                $migrationList = array_filter($migrationList, function () use (&$migrationList, $current) {
+                    return version_compare(key($migrationList), $current, '>');
+                });
+            }
+
+            uksort($migrationList, 'version_compare');
+            array_map(function ($migration) {
+                call_user_func($migration, App::getInstance());
+            }, $migrationList);
+
+            App::config('system')->set('migration.' . $package->get('module'), $new);
+        }
+    }
+
+    /**
+     * Tries to obtain package version from 'composer.json' or installation log.
      *
-     * @param string $name
-     * @param string $package
+     * @param $package
+     * @return bool
      */
-    public function offsetSet($name, $package)
+    protected function getVersion($package)
     {
-        $this->packages[$name] = $package;
-    }
+        if (!$path = $package->get('path')) {
+            throw new \RuntimeException(__('Package path is missing.'));
+        }
 
-    /**
-     * Unset a package.
-     *
-     * @param string $name
-     */
-    public function offsetUnset($name)
-    {
-        unset($this->packages[$name]);
-    }
+        if (!file_exists($file = $path . '/composer.json')) {
+            return false;
+        }
 
-    /**
-     * Implements the IteratorAggregate.
-     *
-     * @return \ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->packages);
-    }
+        $package = json_decode(file_get_contents($file), true);
+        if (isset($package['version'])) {
+            return $package['version'];
+        }
 
-    /**
-     * Load packages from paths.
-     */
-    protected function loadPackages()
-    {
-        $app = App::getInstance();
+        if (file_exists(App::get('path.packages') . '/composer/installed.json')) {
+            $installed = json_decode(file_get_contents($file), true);
 
-        foreach ($this->paths as $path) {
-
-            $paths = glob($path, GLOB_NOSORT) ?: [];
-
-            foreach ($paths as $p) {
-
-                if (!$package = $this->load($p)) {
-                    continue;
+            foreach ($installed as $package) {
+                if ($package['name'] === $package->getName()) {
+                    return $package['version'];
                 }
-
-                $this->packages[$package->getName()] = $package;
             }
         }
+
+        return false;
+    }
+
+    /**
+     * @param $package
+     * @param $script
+     * @return mixed
+     */
+    protected function trigger($package, $script)
+    {
+        $scripts = $this->loadScripts($package);
+
+        if (isset($scripts[$script]) && is_callable($func = $scripts[$script])) {
+            return call_user_func($func, App::getInstance());
+        }
+    }
+
+    /**
+     * @param $package
+     * @return array|mixed
+     */
+    protected function loadScripts($package)
+    {
+        if (!$path = $package->get('path')) {
+            throw new \RuntimeException(__('Package path is missing.'));
+        }
+
+        return file_exists($path = $path . '/scripts.php') ? require $path : [];
     }
 }
