@@ -4,7 +4,7 @@
         <div class="uk-panel uk-panel-box uk-text-center" v-on="click: toggleSelect">
             <div class="uk-panel-teaser uk-position-relative">
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-folder"></div>
-                <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-truncate">
                 <input type="checkbox" value="{{ name }}" v-checkbox="selected">
@@ -18,7 +18,7 @@
             <div class="uk-panel-teaser uk-position-relative">
                 <div class="pk-background-contain uk-position-cover" v-if="isImage(path)" v-lazy-background="$url(url)"></div>
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-if="!isImage(path)"></div>
-                <canvas class="uk-responsive-width uk-display-block" width="800" height="600"></canvas>
+                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
                 <input type="checkbox" value="{{ name }}" v-checkbox="selected">
