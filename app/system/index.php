@@ -74,7 +74,9 @@ return [
 
         ],
 
-        'extensions' => []
+        'extensions' => [],
+
+        'migration' => []
 
     ],
 
