@@ -93,10 +93,12 @@
                 this.modal.hide();
 
                 this.installPackage(this.upload.package, this.packages,
-                    function () {
-                        setTimeout(function () {
-                            location.reload();
-                        }, 300);
+                    function (output) {
+                        if (output.status === 'success') {
+                            setTimeout(function () {
+                                location.reload();
+                            }, 300);
+                        }
                     });
             }
 
