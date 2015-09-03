@@ -25,6 +25,8 @@ function install (Vue) {
 
     require('./components/input-date.vue');
     require('./components/input-image.vue');
+    
+    require('./components/input-image-meta.vue');
     require('./components/input-video.vue');
 
     /**
