@@ -27,7 +27,7 @@ class SystemModule extends Module
 
         $theme = $this->config('site.theme');
 
-        foreach (array_merge($this->config['extensions'], (array) $theme) as $module) {
+        foreach (array_merge($this->config['extensions'], (array)$theme) as $module) {
             try {
                 $app['module']->load($module);
             } catch (\RuntimeException $e) {
@@ -52,10 +52,6 @@ class SystemModule extends Module
 
             return $view->addGlobal('theme', $app['theme']);
         });
-
-        $app->extend('migrator', function ($migrator) {
-            return $migrator->setLoader(new FilesystemLoader());
-        });
     }
 
     /**
@@ -72,7 +68,7 @@ class SystemModule extends Module
             $menu = new SystemMenu();
 
             foreach (App::module() as $module) {
-                foreach ((array) $module->get('menu') as $id => $item) {
+                foreach ((array)$module->get('menu') as $id => $item) {
                     $menu->addItem($id, $item);
                 }
             }

@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Installer\Package\PackageManager;
 use Pagekit\Kernel\Event\ExceptionListener;
 
 return [
@@ -15,7 +16,6 @@ return [
         'application',
         'feed',
         'markdown',
-        'migration',
         'installer',
         'system/view',
         'system/cache',
@@ -76,7 +76,7 @@ return [
 
         'extensions' => [],
 
-        'migration' => []
+        'packages' => []
 
     ],
 
@@ -116,9 +116,8 @@ return [
         ],
 
         'auth.login' => [function ($event) use ($app) {
-
-            if ($event->getUser()->hasAccess('system: software updates') && $app['migrator']->create('system:migrations', $this->config('version'))->get()) {
-                $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
+            if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), App::version()) !== 0) {
+                $event->setResponse($app['response']->redirect('@system/migration'));
             }
 
         }, 8],

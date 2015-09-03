@@ -61,7 +61,6 @@ return [
     'require' => [
 
         'application',
-        'migration',
         'system/cache',
         'system/intl',
         'system/view'
