@@ -9,12 +9,6 @@
 /app/system/modules/theme/css/*
 /packages/*
 /vendor/*
-!/vendor/assets
-/vendor/assets/*
-!/vendor/assets/codemirror
-!/vendor/assets/marked
-!/vendor/assets/vue-intl
-!/vendor/assets/vue-validator
 /config.php
 /composer.lock
 /pagekit*.zip
