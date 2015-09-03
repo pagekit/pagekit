@@ -76,7 +76,11 @@
             this.$on('image-selected', function(path) {
 
                 if (path && !this.img.alt) {
-                    this.img.alt = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '');
+
+                    var alt   = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '').replace(/(_|-)/g, ' ').trim(),
+                        first = alt.charAt(0).toUpperCase();
+
+                    this.img.alt = first + alt.substr(1);
                 }
             });
         },
