@@ -2,7 +2,7 @@
 
 return [
 
-    'install' => function () use ($app) {
+    'install' => function ($app) {
 
         $db = $app['db'];
         $util = $app['db']->getUtility();
