@@ -71,7 +71,7 @@ class PackageManager
 
             $this->disable($package);
             $this->trigger('uninstall', $this->loadScripts($package));
-            App::config('system')->remove('packages.' . $package->get('module'));
+            App::config('system')->pull('packages', $package->get('module'));
 
             if (Composer::isInstalled($package->getName())) {
                 Composer::uninstall($package->getName(), $this->output);
@@ -88,27 +88,6 @@ class PackageManager
 
                 @rmdir(dirname($path));
             }
-        }
-    }
-
-    /**
-     * @param array|callable $scripts
-     */
-    public function execute($scripts)
-    {
-        array_map(function ($script) {
-            call_user_func($script, App::getInstance());
-        }, (array)$scripts);
-    }
-
-    /**
-     * @param $name
-     * @param $scripts
-     */
-    public function trigger($name, $scripts)
-    {
-        if (isset($scripts[$name]) && is_callable($func = $scripts[$name])) {
-            $this->execute($func);
         }
     }
 
@@ -196,6 +175,27 @@ class PackageManager
         }
 
         return '0.0.0';
+    }
+
+    /**
+     * @param array|callable $scripts
+     */
+    public function execute($scripts)
+    {
+        array_map(function ($script) {
+            call_user_func($script, App::getInstance());
+        }, (array)$scripts);
+    }
+
+    /**
+     * @param $name
+     * @param $scripts
+     */
+    public function trigger($name, $scripts)
+    {
+        if (isset($scripts[$name]) && is_callable($func = $scripts[$name])) {
+            $this->execute($func);
+        }
     }
 
     /**
