@@ -3,6 +3,7 @@
 namespace Pagekit\Console\Commands;
 
 use Pagekit\Application\Console\Command;
+use Pagekit\Installer\Package\PackageManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -24,13 +25,15 @@ class MigrationCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $config = $this->container->config('system');
+        $manager = new PackageManager();
 
-        if ($version = $this->container->migrator()->create('system:migrations', $config->get('version'))->run()) {
-            $config->set('version', $version);
-
-            $this->line(sprintf('<info>%s</info>', __('Your Pagekit database has been updated successfully.')));
-        } else {
-            $this->line(sprintf('<error>%s</error>', __('Your Pagekit database is already up-to-date!')));
+        $scripts = $manager->loadScripts(null, $this->container->path() . '/app/system/scripts.php');
+        if (isset($scripts['updates'])) {
+            $updates = $manager->filterUpdates($scripts['updates'], $config->get('version'));
+            $manager->execute($updates);
         }
+
+        $config->set('version', $this->container->version());
+        $this->line(sprintf('<info>%s</info>', __('Your Pagekit database has been updated successfully.')));
     }
 }
