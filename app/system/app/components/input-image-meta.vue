@@ -2,7 +2,7 @@
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!image.src" v-on="click: pick()">
         <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-image.svg')">
-        <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
+        <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
     </a>
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-if="image.src">
