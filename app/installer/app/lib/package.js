@@ -12,13 +12,13 @@ module.exports = {
                 pkgs[pkg.name] = pkg.version;
             });
 
-            return this.$http.post(this.api + '/package/update', {
+            return this.$http.post(this.api + '/api/package/update', {
                 packages: JSON.stringify(pkgs)
             }, success, options);
         },
 
         queryPackage: function (pkg, success) {
-            return this.$http.get(this.api + '/package/:name', {
+            return this.$http.get(this.api + '/api/package/:name', {
                 name: _.isObject(pkg) ? pkg.name : pkg
             }, success).error(function () {});
         },

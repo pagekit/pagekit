@@ -8,7 +8,7 @@
 
                     <div class="uk-panel-teaser">
                         <div class="uk-overlay uk-display-block">
-                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{ pkg.extra.teaser }});"></div>
+                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{ pkg.extra.image }});"></div>
                             <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
                             <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                         </div>
@@ -48,7 +48,7 @@
 
                 <div class="uk-grid uk-overflow-container pk-marketplace-overflow-container">
                     <div class="uk-width-medium-1-2">
-                        <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: pkg.extra.teaser">
+                        <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
                         <div>{{ pkg.description }}</div>
@@ -119,7 +119,7 @@
 
             query: function (page) {
 
-                var url = this.api + '/package/search', options = {emulateJSON: true};
+                var url = this.api + '/api/package/search', options = {emulateJSON: true};
 
                 this.$http.post(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
                     this.$set('packages', data.packages);
