@@ -36,9 +36,15 @@ body {
 
 .tm-header {
     position: relative;
-    margin-bottom: 65px;
+    margin-bottom: 40px;
     background: @navbar-background;
     color: @global-contrast-color;
+}
+
+@media (min-height: 700px) {
+
+    .tm-header { margin-bottom: 65px; }
+
 }
 
 
@@ -60,6 +66,12 @@ body {
 
 /* Tablet and bigger */
 @media (min-width: @breakpoint-medium) {
+
+    .tm-headerbar { height: 120px; }
+
+}
+
+@media (min-width: @breakpoint-medium) and (min-height: 700px) {
 
     .tm-headerbar { height: 165px; }
 
