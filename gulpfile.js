@@ -29,7 +29,7 @@ var cldr = {
     cldr: path.join(__dirname, 'node_modules/cldr-core/supplemental/'),
     intl: path.join(__dirname, 'app/system/modules/intl/data/'),
     locales: path.join(__dirname, 'node_modules/cldr-localenames-modern/main/'),
-    formats: path.join(__dirname, 'vendor/assets/vue-intl/dist/locales/'),
+    formats: path.join(__dirname, 'app/assets/vue-intl/dist/locales/'),
     languages: path.join(__dirname, 'app/system/languages/')
 };
 

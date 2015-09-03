@@ -1,4 +1,4 @@
-var assets = __dirname + "/../../vendor/assets";
+var assets = __dirname + "/../assets";
 
 module.exports = [
 
