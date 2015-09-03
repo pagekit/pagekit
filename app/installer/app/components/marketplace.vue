@@ -6,7 +6,7 @@
             <div v-repeat="pkg: packages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
-                    <div class="uk-panel-teaser uk-position-relative">
+                    <div class="uk-panel-teaser">
                         <div class="uk-overlay uk-display-block">
                             <div class="uk-cover-background uk-position-cover" style="background-image: url({{ pkg.extra.teaser }});"></div>
                             <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>

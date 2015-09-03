@@ -25,7 +25,7 @@
         <div v-repeat="pkg: packages | filterBy search in 'title' | themeorder">
             <div class="uk-panel uk-panel-box uk-visible-hover uk-overlay-hover">
 
-                <div class="uk-panel-teaser uk-position-relative">
+                <div class="uk-panel-teaser">
                     <div class="uk-overlay uk-display-block">
                         <div class="uk-cover-background uk-position-cover" style="background-image: url({{icon(pkg)}});"></div>
                         <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
