@@ -12,7 +12,7 @@ class SelfUpdater
     /**
      * @var array
      */
-    protected $cleanFolder = ['app', 'vendor'];
+    protected $cleanFolder = ['app'];
 
     /**
      * @var string
