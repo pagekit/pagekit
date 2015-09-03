@@ -14,8 +14,7 @@ $app['module']->addPath([
     $path.'/app/system/index.php',
     $path.'/app/modules/*/index.php',
     $path.'/app/installer/index.php',
-    $path.'/extensions/*/index.php',
-    $path.'/themes/*/index.php',
+    $path.'/packages/*/index.php',
     __DIR__.'/index.php'
 ]);
 
