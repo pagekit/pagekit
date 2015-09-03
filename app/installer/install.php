@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Application as App;
-use Pagekit\Installer\Package\PackageManager;
 
 /********************************************
  * Post install script. Insert sample data. *
