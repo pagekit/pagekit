@@ -74,10 +74,22 @@ class PackageController
      */
     public function enableAction($name)
     {
-        $package = App::package()->get($name);
+        $handler = $this->errorHandler($name);
+
+        if (!$package = App::package($name)) {
+            App::abort(400, __('Unable to find "%name%".', ['%name%' => $name]));
+        }
+
+        App::module()->load($package->get('module'));
+
+        if (!$module = App::module($package->get('module'))) {
+            App::abort(400, __('Unable to enable "%name%".', ['%name%' => $package->get('title')]));
+        }
 
         $manager = new PackageManager();
         $manager->enable($package);
+
+        App::exception()->setHandler($handler);
 
         return ['message' => 'success'];
     }
@@ -95,9 +107,8 @@ class PackageController
             App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $package->get('title')]));
         }
 
-        if ($package->getType() == 'pagekit-extension') {
-            App::config('system')->pull('extensions', $module->name);
-        }
+        $manager = new PackageManager();
+        $manager->disable($package);
 
         App::module('system/cache')->clearCache();
 
@@ -213,5 +224,30 @@ class PackageController
         } catch (\Exception $e) {
             App::abort(400, __('Can\'t load json file from package.'));
         }
+    }
+
+
+    /**
+     * @param  string $name
+     * @return callable|null
+     */
+    protected function errorHandler($name)
+    {
+        ini_set('display_errors', 0);
+
+        return App::exception()->setHandler(function ($exception) use ($name) {
+
+            while (ob_get_level()) {
+                ob_get_clean();
+            }
+
+            $message = __('Unable to activate "%name%".<br>A fatal error occured.', ['%name%' => $name]);
+
+            if (App::debug()) {
+                $message .= '<br><br>' . $exception->getMessage();
+            }
+
+            App::response()->json($message, 500)->send();
+        });
     }
 }

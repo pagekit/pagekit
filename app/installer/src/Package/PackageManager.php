@@ -31,8 +31,7 @@ class PackageManager
      */
     public function install(array $install = [])
     {
-        Composer::setOutput($this->output);
-        Composer::install($install);
+        Composer::install($install, $this->output);
 
         $packages = App::package()->all(null, true);
         foreach ($install as $name => $version) {
@@ -48,7 +47,7 @@ class PackageManager
      */
     public function uninstall($uninstall)
     {
-        foreach ((array) $uninstall as $name) {
+        foreach ((array)$uninstall as $name) {
             if (!$package = App::package($name)) {
                 throw new \RuntimeException(__('Unable to find "%name%".', ['%name%' => $name]));
             }
@@ -62,8 +61,7 @@ class PackageManager
 //            App::config('system')->pull('migration', $package->get('module'));
 
             if (Composer::isInstalled($package->getName())) {
-                Composer::setOutput($this->output);
-                Composer::uninstall($package->getName());
+                Composer::uninstall($package->getName(), $this->output);
             } else {
 
                 $this->output->writeln(__("Removing package folder."));
@@ -88,6 +86,16 @@ class PackageManager
             App::config('system')->set('site.theme', $package->get('module'));
         } elseif ($package->getType() == 'pagekit-extension') {
             App::config('system')->push('extensions', $package->get('module'));
+        }
+    }
+
+    /**
+     * @param $package
+     */
+    public function disable($package)
+    {
+        if ($package->getType() == 'pagekit-extension') {
+            App::config('system')->pull('extensions', $package->get('module'));
         }
     }
 

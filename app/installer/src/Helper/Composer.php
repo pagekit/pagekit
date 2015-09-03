@@ -51,10 +51,12 @@ class Composer
 
     /**
      * @param array $install [name => version, name => version, ...]
+     * @param OutputInterface $output
      * @return bool
      */
-    public static function install(array $install)
+    public static function install(array $install, OutputInterface $output = null)
     {
+        self::setOutput($output);
         self::addPackages($install);
 
         self::composerUpdate(array_keys($install));
@@ -64,9 +66,11 @@ class Composer
 
     /**
      * @param array|string $uninstall [name, name, ...]
+     * @param OutputInterface $output
      */
-    public static function uninstall($uninstall)
+    public static function uninstall($uninstall, OutputInterface $output = null)
     {
+        self::setOutput($output);
         $uninstall = (array)$uninstall;
 
         self::removePackages($uninstall);
