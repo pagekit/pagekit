@@ -94,7 +94,7 @@ class Composer
             return $pkg['name'];
         }, $installed);
 
-        return (bool)array_search($name, $installed);
+        return array_search($name, $installed) !== false;
     }
 
     /**

@@ -71,7 +71,7 @@ class PackageManager
 
             $this->disable($package);
             $this->trigger('uninstall', $this->loadScripts($package));
-//            App::config('system')->pull('migration', $package->get('module'));
+            App::config('system')->remove('packages.' . $package->get('module'));
 
             if (Composer::isInstalled($package->getName())) {
                 Composer::uninstall($package->getName(), $this->output);
