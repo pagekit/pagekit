@@ -116,7 +116,7 @@ return [
         ],
 
         'auth.login' => [function ($event) use ($app) {
-            if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), App::version()) !== 0) {
+            if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), $app->version()) !== 0) {
                 $event->setResponse($app['response']->redirect('@system/migration'));
             }
 
