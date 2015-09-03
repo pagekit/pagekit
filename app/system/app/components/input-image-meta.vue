@@ -70,7 +70,7 @@
 
         ready: function () {
 
-            this.image = this.image || {src: '', alt: ''};
+            this.image = this.image && typeof(this.image) == 'object' ? this.image : {src: '', alt: ''};
             this.$set('img', {src: this.image.src, alt: this.image.alt});
 
             this.$on('image-selected', function(path) {
