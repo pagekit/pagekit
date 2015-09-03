@@ -52,17 +52,17 @@ class PackageManager
                 throw new \RuntimeException(__('Unable to find "%name%".', ['%name%' => $name]));
             }
 
-            if (!$path = $package->get('path')) {
-                throw new \RuntimeException(__('Package path is missing.'));
-            }
-            $path = App::get('path.packages') . '/' . $path;
-
+            $this->disable($package);
             $this->trigger($package, 'uninstall');
 //            App::config('system')->pull('migration', $package->get('module'));
 
             if (Composer::isInstalled($package->getName())) {
                 Composer::uninstall($package->getName(), $this->output);
             } else {
+                if (!$path = $package->get('path')) {
+                    throw new \RuntimeException(__('Package path is missing.'));
+                }
+                $path = App::get('path.packages') . '/' . $path;
 
                 $this->output->writeln(__("Removing package folder."));
 
@@ -94,6 +94,8 @@ class PackageManager
      */
     public function disable($package)
     {
+        $this->trigger($package, 'disable');
+
         if ($package->getType() == 'pagekit-extension') {
             App::config('system')->pull('extensions', $package->get('module'));
         }
@@ -106,25 +108,23 @@ class PackageManager
     {
         $scripts = $this->loadScripts($package);
 
-        if (isset($scripts['migrations']) &&
-            is_array($migrationList = $scripts['migrations']) &&
-            $new = $this->getVersion($package)
-        ) {
+        if (isset($scripts['updates']) && is_array($updates = $scripts['updates']) && $new = $this->getVersion($package)) {
             $current = App::module('system')->config('migration.' . $package->get('module'));
 
-            if (!$current) {
-                $migrationList = array_intersect_key($migrationList, array_flip(['init']));
+            if (!$current && isset ($scripts['install'])) {
+                $updates = (array)$scripts['install'];
+            } elseif (!$current) {
+                $updates = [];
             } else {
-                unset($migrationList['init']);
-                $migrationList = array_filter($migrationList, function () use (&$migrationList, $current) {
-                    return version_compare(key($migrationList), $current, '>');
+                $updates = array_filter($updates, function () use (&$updates, $current) {
+                    return version_compare(key($updates), $current, '>');
                 });
             }
 
-            uksort($migrationList, 'version_compare');
-            array_map(function ($migration) {
-                call_user_func($migration, App::getInstance());
-            }, $migrationList);
+            uksort($updates, 'version_compare');
+            array_map(function ($update) {
+                call_user_func($update, App::getInstance());
+            }, $updates);
 
             App::config('system')->set('migration.' . $package->get('module'), $new);
         }
@@ -180,14 +180,18 @@ class PackageManager
 
     /**
      * @param $package
-     * @return array|mixed
+     * @return array
      */
     protected function loadScripts($package)
     {
+        if (!($extra = $package->get('extra')) || !isset($extra['scripts'])) {
+            return [];
+        }
+
         if (!$path = $package->get('path')) {
             throw new \RuntimeException(__('Package path is missing.'));
         }
 
-        return file_exists($path = $path . '/scripts.php') ? require $path : [];
+        return file_exists($path = $path . '/' . $extra['scripts']) ? require $path : [];
     }
 }
