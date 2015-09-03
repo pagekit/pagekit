@@ -47,5 +47,8 @@
             "Pagekit\\Console\\": "app/console/src",
             "Pagekit\\Migration\\": "app/modules/migration/src"
         }
+    },
+    "config": {
+        "vendor-dir": "app/vendor"
     }
 }

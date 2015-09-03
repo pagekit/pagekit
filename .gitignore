@@ -1,5 +1,6 @@
 **/languages/**/*.json
 **/app/bundle/**/*.js
+/app/vendor/*
 /app/assets/*
 !/app/assets/codemirror
 !/app/assets/marked
@@ -8,7 +9,6 @@
 /app/installer/assets/css/*
 /app/system/modules/theme/css/*
 /packages/*
-/vendor/*
 /config.php
 /composer.lock
 /pagekit*.zip
