@@ -2,13 +2,13 @@
 
 return [
 
-    'up' => function() use ($app) {
+    'install' => function () use ($app) {
 
         $db = $app['db'];
         $util = $app['db']->getUtility();
 
         if ($util->tableExists('@system_config') === false) {
-            $util->createTable('@system_config', function($table) {
+            $util->createTable('@system_config', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('value', 'text');
@@ -18,7 +18,7 @@ return [
         }
 
         if ($util->tableExists('@system_node') === false) {
-            $util->createTable('@system_node', function($table) {
+            $util->createTable('@system_node', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
@@ -36,7 +36,7 @@ return [
         }
 
         if ($util->tableExists('@system_page') === false) {
-            $util->createTable('@system_page', function($table) {
+            $util->createTable('@system_page', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('title', 'string', ['length' => 255]);
                 $table->addColumn('content', 'text');
@@ -46,7 +46,7 @@ return [
         }
 
         if ($util->tableExists('@system_role') === false) {
-            $util->createTable('@system_role', function($table) {
+            $util->createTable('@system_role', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
@@ -62,7 +62,7 @@ return [
         }
 
         if ($util->tableExists('@system_session') === false) {
-            $util->createTable('@system_session', function($table) {
+            $util->createTable('@system_session', function ($table) {
                 $table->addColumn('id', 'string', ['length' => 255]);
                 $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->addColumn('time', 'datetime');
@@ -71,7 +71,7 @@ return [
         }
 
         if ($util->tableExists('@system_user') === false) {
-            $util->createTable('@system_user', function($table) {
+            $util->createTable('@system_user', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('username', 'string', ['length' => 255, 'default' => '']);
@@ -92,7 +92,7 @@ return [
         }
 
         if ($util->tableExists('@system_widget') === false) {
-            $util->createTable('@system_widget', function($table) {
+            $util->createTable('@system_widget', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
                 $table->addColumn('title', 'string', ['length' => 255]);
                 $table->addColumn('type', 'string', ['length' => 255]);
@@ -104,9 +104,6 @@ return [
             });
         }
 
-        // TODO use data from package.json
-        // skip migrations and return latest version
-        return '2014-08-28_0.8.6';
     }
 
 ];
