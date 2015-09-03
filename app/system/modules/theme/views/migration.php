@@ -21,9 +21,6 @@
                     <h1><?= __('Update Pagekit') ?></h1>
                     <p><?= __('Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.') ?></p>
                     <p>
-                        <?php if ($redirect): ?>
-                            <input type="hidden" name="redirect" value="<?php echo $redirect ?>">
-                        <?php endif; ?>
                         <button class="uk-button uk-button-primary" type="submit" value=""><?= __('Update') ?></button>
                         <?php $view->token()->get() ?>
                     </p>
