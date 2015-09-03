@@ -128,6 +128,7 @@ class InstallerController
             $installer = new PackageManager(new NullOutput());
             $scripts = $installer->loadScripts(null, App::path() . '/app/system/scripts.php');
             $installer->trigger('install', $scripts);
+            App::config()->set('system.version', App::version());
 
             App::db()->insert('@system_user', [
                 'name' => $user['username'],

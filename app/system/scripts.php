@@ -103,8 +103,6 @@ return [
                 $table->setPrimaryKey(['id']);
             });
         }
-
-        $app->config('system')->set('version', $app->version());
     }
 
 ];
