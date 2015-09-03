@@ -104,6 +104,7 @@ return [
             });
         }
 
+        $app->config('system')->set('version', $app->version());
     }
 
 ];

@@ -3,6 +3,7 @@
 namespace Pagekit\Installer\Package;
 
 use Pagekit\Application as App;
+use Pagekit\Filesystem\Filesystem;
 use Pagekit\Installer\Helper\Composer;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
@@ -37,8 +38,24 @@ class PackageManager
         foreach ($install as $name => $version) {
             if (isset($packages[$name]) && App::module($packages[$name]->get('module'))) {
                 $this->enable($packages[$name]);
+            } elseif (isset($packages[$name])) {
+                $this->doInstall($packages[$name]);
             }
         }
+    }
+
+    /**
+     * @param $package
+     * @return string
+     */
+    public function doInstall($package)
+    {
+        $this->trigger('install', $this->loadScripts($package));
+        $version = $this->getVersion($package);
+
+        App::config('system')->set('packages.' . $package->get('module'), $version);
+
+        return $version;
     }
 
     /**
@@ -53,7 +70,7 @@ class PackageManager
             }
 
             $this->disable($package);
-            $this->trigger($package, 'uninstall');
+            $this->trigger('uninstall', $this->loadScripts($package));
 //            App::config('system')->pull('migration', $package->get('module'));
 
             if (Composer::isInstalled($package->getName())) {
@@ -75,12 +92,43 @@ class PackageManager
     }
 
     /**
+     * @param array|callable $scripts
+     */
+    public function execute($scripts)
+    {
+        array_map(function ($script) {
+            call_user_func($script, App::getInstance());
+        }, (array)$scripts);
+    }
+
+    /**
+     * @param $name
+     * @param $scripts
+     */
+    public function trigger($name, $scripts)
+    {
+        if (isset($scripts[$name]) && is_callable($func = $scripts[$name])) {
+            $this->execute($func);
+        }
+    }
+
+    /**
      * @param $package
      */
     public function enable($package)
     {
-        $this->migrate($package);
-        $this->trigger($package, 'enable');
+        $scripts = $this->loadScripts($package);
+
+        if (!($current = App::module('system')->config('packages.' . $package->get('module')))) {
+            $current = $this->doInstall($package);
+        }
+
+        if (isset($scripts['updates'])) {
+            $updates = $this->filterUpdates($scripts['updates'], $current);
+            $this->doUpdate($updates);
+        }
+
+        $this->trigger('enable', $this->loadScripts($package));
 
         if ($package->getType() == 'pagekit-theme') {
             App::config('system')->set('site.theme', $package->get('module'));
@@ -102,39 +150,25 @@ class PackageManager
     }
 
     /**
-     * @param $package
+     * @param $updates
+     * @param $current
+     * @return array
      */
-    protected function migrate($package)
+    public function filterUpdates($updates, $current)
     {
-        $scripts = $this->loadScripts($package);
+        $updates = array_filter($updates, function () use (&$updates, $current) {
+            return version_compare(key($updates), $current, '>');
+        });
+        uksort($updates, 'version_compare');
 
-        if (isset($scripts['updates']) && is_array($updates = $scripts['updates']) && $new = $this->getVersion($package)) {
-            $current = App::module('system')->config('migration.' . $package->get('module'));
-
-            if (!$current && isset ($scripts['install'])) {
-                $updates = (array)$scripts['install'];
-            } elseif (!$current) {
-                $updates = [];
-            } else {
-                $updates = array_filter($updates, function () use (&$updates, $current) {
-                    return version_compare(key($updates), $current, '>');
-                });
-            }
-
-            uksort($updates, 'version_compare');
-            array_map(function ($update) {
-                call_user_func($update, App::getInstance());
-            }, $updates);
-
-            App::config('system')->set('migration.' . $package->get('module'), $new);
-        }
+        return $updates;
     }
 
     /**
      * Tries to obtain package version from 'composer.json' or installation log.
      *
      * @param $package
-     * @return bool
+     * @return string
      */
     protected function getVersion($package)
     {
@@ -143,7 +177,7 @@ class PackageManager
         }
 
         if (!file_exists($file = $path . '/composer.json')) {
-            return false;
+            throw new \RuntimeException(__('\'composer.json\' is missing.'));
         }
 
         $package = json_decode(file_get_contents($file), true);
@@ -161,37 +195,28 @@ class PackageManager
             }
         }
 
-        return false;
+        return '0.0.0';
     }
 
     /**
      * @param $package
-     * @param $script
-     * @return mixed
-     */
-    protected function trigger($package, $script)
-    {
-        $scripts = $this->loadScripts($package);
-
-        if (isset($scripts[$script]) && is_callable($func = $scripts[$script])) {
-            return call_user_func($func, App::getInstance());
-        }
-    }
-
-    /**
-     * @param $package
+     * @param $path
      * @return array
      */
-    protected function loadScripts($package)
+    public function loadScripts($package, $path = null)
     {
-        if (!($extra = $package->get('extra')) || !isset($extra['scripts'])) {
-            return [];
+        if (!$path) {
+            if (!($extra = $package->get('extra')) || !isset($extra['scripts'])) {
+                return [];
+            }
+
+            if (!$path = $package->get('path')) {
+                throw new \RuntimeException(__('Package path is missing.'));
+            }
+
+            $path = $path . '/' . $extra['scripts'];
         }
 
-        if (!$path = $package->get('path')) {
-            throw new \RuntimeException(__('Package path is missing.'));
-        }
-
-        return file_exists($path = $path . '/' . $extra['scripts']) ? require $path : [];
+        return file_exists($path) ? require $path : [];
     }
 }

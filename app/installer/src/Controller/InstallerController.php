@@ -7,7 +7,7 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\ConnectionException;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
-use Pagekit\Installer\PackageManager;
+use Pagekit\Installer\Package\PackageManager;
 use Pagekit\Util\Arr;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -125,9 +125,9 @@ class InstallerController
                 App::abort(400, $message);
             }
 
-            if ($version = App::migrator()->create('app/system/migrations')->run()) {
-                App::config()->set('system', compact('version'));
-            }
+            $installer = new PackageManager(new NullOutput());
+            $scripts = $installer->loadScripts(null, App::path() . '/app/system/scripts.php');
+            $installer->trigger('install', $scripts);
 
             App::db()->insert('@system_user', [
                 'name' => $user['username'],
@@ -162,12 +162,11 @@ class InstallerController
             }
 
             if ($this->packages) {
-                $installer = new PackageManager(App::path(), new NullOutput());
                 $installer->install($this->packages);
             }
 
-            if (file_exists(__DIR__.'/../install.php')) {
-                require_once __DIR__.'/../install.php';
+            if (file_exists(__DIR__ . '/../install.php')) {
+                require_once __DIR__ . '/../install.php';
             }
 
             App::module('system/cache')->clearCache();

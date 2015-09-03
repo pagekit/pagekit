@@ -1,15 +1,12 @@
 <?php
 
 use Pagekit\Application as App;
+use Pagekit\Installer\Package\PackageManager;
 
 /********************************************
  * Post install script. Insert sample data. *
  ********************************************/
 
-// Enable blog. TODO: find a prettier way
-
-$app = App::getInstance();
-$blogpath = $app['path.extensions'].'/blog';
 if ($version = $app['migrator']->create($blogpath.'/migrations')->run()) {
     $app['config']('blog')->set('version', $version);
 }

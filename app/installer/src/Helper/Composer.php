@@ -54,7 +54,7 @@ class Composer
      * @param OutputInterface $output
      * @return bool
      */
-    public static function install(array $install, OutputInterface $output = null)
+    public static function install(array $install, $output = null)
     {
         self::setOutput($output);
         self::addPackages($install);
@@ -68,7 +68,7 @@ class Composer
      * @param array|string $uninstall [name, name, ...]
      * @param OutputInterface $output
      */
-    public static function uninstall($uninstall, OutputInterface $output = null)
+    public static function uninstall($uninstall, $output = null)
     {
         self::setOutput($output);
         $uninstall = (array)$uninstall;
@@ -85,8 +85,7 @@ class Composer
      * @param $name
      * @return bool
      */
-    public
-    static function isInstalled($name)
+    public static function isInstalled($name)
     {
         $installed = App::get('path.packages') . '/composer/installed.json';
         $installed = file_exists($installed) ? json_decode(file_get_contents($installed), true) : [];
@@ -101,7 +100,7 @@ class Composer
     /**
      * @param OutputInterface $output
      */
-    public static function setOutput(OutputInterface $output)
+    public static function setOutput($output)
     {
         self::$output = $output;
     }
