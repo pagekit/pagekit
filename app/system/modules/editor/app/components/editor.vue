@@ -14,7 +14,7 @@
 
         compiled: function() {
 
-            this.$add('height', this.options && this.options.height ? this.options.height : 500);
+            this.$set('height', this.options && this.options.height ? this.options.height : 500);
 
             if (this.$el.hasAttributes()) {
 

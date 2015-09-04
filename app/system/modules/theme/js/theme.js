@@ -7,7 +7,11 @@ jQuery(function ($) {
 
         el: '#header',
 
-        data: _.extend({}, window.$pagekit),
+        data: _.extend({
+            nav: null,
+            item: null,
+            subnav: null,
+        }, window.$pagekit),
 
         created: function () {
 
@@ -15,11 +19,11 @@ jQuery(function ($) {
             var item = _.find(menu.root, 'active');
             var vm = this;
 
-            this.$add('nav', menu.root);
+            this.$set('nav', menu.root);
 
             if (item) {
-                this.$add('item', item);
-                this.$add('subnav', menu[item.id]);
+                this.$set('item', item);
+                this.$set('subnav', menu[item.id]);
             }
 
             // main menu order
