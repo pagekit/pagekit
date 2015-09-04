@@ -25,13 +25,13 @@ class BuildCommand extends Command
      */
     protected $excludes = [
        '^(app\/database|packages|storage|tmp|config\.php|pagekit.+\.zip)',
-       '^vendor\/assets\/[^\/]+\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
-       '^vendor\/assets\/(jquery|vue)\/(src|perf)',
-       '^vendor\/lusitanian\/oauth\/examples',
-       '^vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources',
-       '^vendor\/nickic\/php-parser\/(grammar|test_old)',
-       '^vendor\/(phpdocumentor|phpspec|phpunit|sebastian|symfony\/yaml)',
-       '^vendor\/[^\/]+\/[^\/]+\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
+       '^app\/assets\/[^\/]+\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
+       '^app\/assets\/(jquery|vue)\/(src|perf)',
+       '^app\/vendor\/lusitanian\/oauth\/examples',
+       '^app\/vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources',
+       '^app\/vendor\/nickic\/php-parser\/(grammar|test_old)',
+       '^app\/vendor\/(phpdocumentor|phpspec|phpunit|sebastian|symfony\/yaml)',
+       '^app\/vendor\/[^\/]+\/[^\/]+\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
        'node_modules'
    ];
 
@@ -45,7 +45,9 @@ class BuildCommand extends Command
         $vers   = $info['version'];
         $filter = '/'.implode('|', $this->excludes).'/i';
 
-        system('webpack -p');
+        $this->line(sprintf('Starting: webpack'));
+
+        exec('webpack -p');
 
         $finder = Finder::create()->files()->in($path)->ignoreVCS(true)->filter(function ($file) use($filter) {
             return !preg_match($filter, $file->getRelativePathname());
