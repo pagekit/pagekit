@@ -8,10 +8,7 @@ namespace Pagekit\Filter;
 class StringFilter extends AbstractFilter
 {
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed $value
-     * @return string
+     * {@inheritdoc}
      */
     public function filter($value)
     {

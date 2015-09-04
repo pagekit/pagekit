@@ -8,11 +8,7 @@ namespace Pagekit\Filter;
 class JsonFilter extends AbstractFilter
 {
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed  $value
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function filter($value)
     {

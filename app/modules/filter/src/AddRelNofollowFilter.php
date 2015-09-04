@@ -8,11 +8,7 @@ namespace Pagekit\Filter;
 class AddRelNofollowFilter extends AbstractFilter
 {
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed  $value
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function filter($value)
     {

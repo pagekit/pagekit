@@ -83,11 +83,7 @@ class PregReplaceFilter extends AbstractFilter
     }
 
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed $value
-     * @throws \RuntimeException
-     * @return mixed
+     * {@inheritdoc}
      */
     public function filter($value)
     {

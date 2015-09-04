@@ -8,10 +8,7 @@ namespace Pagekit\Filter;
 class BooleanFilter extends AbstractFilter
 {
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed $value
-     * @return bool
+     * {@inheritdoc}
      */
     public function filter($value)
     {

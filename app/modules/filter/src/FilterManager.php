@@ -18,6 +18,7 @@ class FilterManager
         'integer'        => 'Pagekit\Filter\IntFilter',
         'json'           => 'Pagekit\Filter\JsonFilter',
         'pregreplace'    => 'Pagekit\Filter\PregReplaceFilter',
+        'slugify'        => 'Pagekit\Filter\SlugifyFilter',
         'string'         => 'Pagekit\Filter\StringFilter',
         'stripnewlines'  => 'Pagekit\Filter\StripNewlinesFilter'
     ];
@@ -39,17 +40,31 @@ class FilterManager
     }
 
     /**
-     * Get shortcut.
+     * Apply shortcut.
      *
-     * @see get()
+     * @see apply()
      */
-    public function __invoke($name, array $options = [])
+    public function __invoke($value, $name, array $options = [])
     {
-        return $this->get($name, $options);
+        return $this->apply($value, $name, $options);
     }
 
     /**
-     * Gets a filter by name.
+     * Apply a filter.
+     *
+     * @param  mixed  $value
+     * @param  string $name
+     * @param  array  $options
+     * @return FilterInterface The filter
+     * @throws \InvalidArgumentException
+     */
+    public function apply($value, $name, array $options = [])
+    {
+        return $this->get($name, $options)->filter($value);
+    }
+
+    /**
+     * Gets a filter.
      *
      * @param  string $name
      * @param  array  $options

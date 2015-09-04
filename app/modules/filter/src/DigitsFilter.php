@@ -8,11 +8,7 @@ namespace Pagekit\Filter;
 class DigitsFilter extends AbstractFilter
 {
     /**
-     * Returns the filtered value.
-     *
-     * @param  mixed  $value
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function filter($value)
     {
