@@ -128,7 +128,6 @@ class InstallerController
             $installer = new PackageManager(new NullOutput());
             $scripts = $installer->loadScripts(null, App::path() . '/app/system/scripts.php');
             $installer->trigger('install', $scripts);
-            App::config()->set('system', ['version' => App::version()]);
 
             App::db()->insert('@system_user', [
                 'name' => $user['username'],
@@ -136,9 +135,25 @@ class InstallerController
                 'password' => App::get('auth.password')->hash($user['password']),
                 'status' => 1,
                 'email' => $user['email'],
-                'registered' => new \DateTime,
-                'roles' => [2, 3]
-            ], ['string', 'string', 'string', 'string', 'string', 'datetime', 'simple_array']);
+                'registered' => date('Y-m-d H:i:s'),
+                'roles' => '2,3'
+            ]);
+
+            $option['system']['version'] = App::version();
+            $option['system']['extensions'] = ['blog'];
+            $option['system']['site']['theme'] = 'theme-one';
+
+            foreach ($option as $name => $values) {
+                App::config()->set($name, App::config($name)->merge($values));
+            }
+
+            if ($this->packages) {
+                $installer->install($this->packages);
+            }
+
+            if (file_exists(__DIR__ . '/../../install.php')) {
+                require_once __DIR__ . '/../../install.php';
+            }
 
             if (!$this->config) {
 
@@ -156,18 +171,6 @@ class InstallerController
 
                     App::abort(400, __('Can\'t write config.'));
                 }
-            }
-
-            foreach ($option as $name => $values) {
-                App::config()->set($name, $values);
-            }
-
-            if ($this->packages) {
-                $installer->install($this->packages);
-            }
-
-            if (file_exists(__DIR__ . '/../install.php')) {
-                require_once __DIR__ . '/../install.php';
             }
 
             App::module('system/cache')->clearCache();
