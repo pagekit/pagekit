@@ -19,24 +19,15 @@
         {{ 'There is an update available for the uploaded package. Please consider installing it instead.' | trans }}
     </div>
 
-    <div class="uk-grid uk-grid-medium" v-class="uk-grid-width-1-2: package.type == 'theme'">
-        <div v-if="package.type == 'theme'">
+    <p>{{ package.description }}</p>
 
-            <img class="uk-margin-right" width="800" height="600" alt="{{ package.title }}" v-attr="src: package | icon" >
+    <ul class="uk-list">
+        <li v-if="package.license"><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
+        <li v-if="package.authors[0].homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors[0].homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
+        <li v-if="package.authors[0].email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
+    </ul>
 
-        </div>
-        <div>
-
-            <p>{{ package.description }}</p>
-
-            <ul class="uk-list">
-                <li v-if="package.license"><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
-                <li v-if="package.authors[0].homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors[0].homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
-                <li v-if="package.authors[0].email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
-            </ul>
-
-        </div>
-    </div>
+    <img width="800" height="600" alt="{{ package.title }}" v-attr="src: package | image" v-if="package.extra.image">
 
 </template>
 
@@ -73,6 +64,19 @@
                 }
 
                 return extra.icon;
+            },
+
+            image: function (pkg) {
+
+                var extra = pkg.extra || {};
+
+                if (!extra.image) {
+                    return this.$url('app/system/assets/images/placeholder-image.svg');
+                } else if (!extra.image.match(/^(https?:)?\//)) {
+                    return pkg.url + '/' + extra.image;
+                }
+
+                return extra.image;
             }
 
         },
