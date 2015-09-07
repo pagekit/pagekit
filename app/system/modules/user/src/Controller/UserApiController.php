@@ -63,6 +63,46 @@ class UserApiController
     }
 
     /**
+     * @Request({"filter": "array"})
+     */
+    public function countAction($filter = [])
+    {
+        $query  = User::query();
+        $filter = array_merge(array_fill_keys(['status', 'search', 'role', 'order', 'access'], ''), (array)$filter);
+        extract($filter, EXTR_SKIP);
+
+        if (is_numeric($status)) {
+
+            $query->where(['status' => (int) $status]);
+
+            if ($status) {
+                $query->where('access IS NOT NULL');
+            }
+
+        } elseif ('new' == $status) {
+            $query->where(['status' => User::STATUS_ACTIVE, 'access IS NULL']);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->orWhere(['username LIKE :search', 'name LIKE :search', 'email LIKE :search'], ['search' => "%{$search}%"]);
+            });
+        }
+
+        if ($role) {
+            $query->whereInSet('roles', $role);
+        }
+
+        if ($access) {
+            $query->where('access > ?', [date('Y-m-d H:i:s', time() - max(0, (int) $access))]);
+        }
+
+        $count = $query->count();
+
+        return compact('count');
+    }
+
+    /**
      * @Route("/{id}", methods="GET", requirements={"id"="\d+"})
      */
     public function getAction($id)
