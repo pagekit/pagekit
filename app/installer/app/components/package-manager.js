@@ -36,10 +36,20 @@ module.exports = {
 
         icon: function (pkg) {
 
+            if (pkg.extra && pkg.extra.icon) {
+                return pkg.url + '/' + pkg.extra.icon;
+            } else {
+                return this.$url('app/system/assets/images/placeholder-icon.svg');
+            }
+
+        },
+
+        image: function (pkg) {
+
             if (pkg.extra && pkg.extra.image) {
                 return pkg.url + '/' + pkg.extra.image;
             } else {
-                return this.$url('app/system/assets/images/placeholder-icon.svg');
+                return this.$url('app/system/assets/images/placeholder-800x600.svg');
             }
 
         },

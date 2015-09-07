@@ -1,7 +1,7 @@
 <template>
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
-        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.type == 'pagekit-extension'">
+        <img class="uk-margin-right" width="50" height="50" alt="{{ package.title }}" v-attr="src: package | icon" v-if="package.extra.icon">
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
             <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
@@ -66,13 +66,13 @@
 
                 var extra = pkg.extra || {};
 
-                if (!extra.image) {
+                if (!extra.icon) {
                     return this.$url('app/system/assets/images/placeholder-icon.svg');
-                } else if (!extra.image.match(/^(https?:)?\//)) {
-                    return pkg.url + '/' + extra.image;
+                } else if (!extra.icon.match(/^(https?:)?\//)) {
+                    return pkg.url + '/' + extra.icon;
                 }
 
-                return extra.image;
+                return extra.icon;
             }
 
         },
