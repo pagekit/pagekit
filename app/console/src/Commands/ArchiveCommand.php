@@ -58,8 +58,17 @@ class ArchiveCommand extends Command
             if (file_exists($composerJsonPath = $sourcePath . '/composer.json')) {
                 $jsonFile = new JsonFile($composerJsonPath);
                 $jsonData = $jsonFile->read();
+
                 if (!empty($jsonData['archive']['exclude'])) {
                     $exludes = ($jsonData['archive']['exclude']);
+                }
+
+                if (!empty($jsonData['archive']['scripts'])) {
+                    system($jsonData['archive']['scripts'], $return);
+
+                    if ($return !== 0) {
+                        throw new \RuntimeException('Can not executes scripts.');
+                    }
                 }
             }
 
