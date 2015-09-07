@@ -48,8 +48,8 @@ class UserApiController
             $query->where('access > ?', [date('Y-m-d H:i:s', time() - max(0, (int) $access))]);
         }
 
-        if (!preg_match('/^(name|email)\s(asc|desc)$/i', $order, $order)) {
-            $order = [1 => 'name', 2 => 'asc'];
+        if (!preg_match('/^(username|name|email)\s(asc|desc)$/i', $order, $order)) {
+            $order = [1 => 'username', 2 => 'asc'];
         }
 
         $default = App::module('system/user')->config('users_per_page');
