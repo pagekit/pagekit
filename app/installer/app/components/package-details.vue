@@ -5,7 +5,7 @@
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
             <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
-                <li class="uk-text-muted">{{ package.author.name }}</li>
+                <li class="uk-text-muted">{{ package.authors[0].name }}</li>
                 <li class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</li>
             </ul>
         </div>
@@ -30,10 +30,9 @@
             <p>{{ package.description }}</p>
 
             <ul class="uk-list">
-                <li><strong>{{ 'Folder:' | trans }}</strong> /{{ package.name }}</li>
-                <li><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
-                <li v-if="package.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.author.homepage }}" target="_blank">{{ package.author.homepage }}</a></li>
-                <li v-if="package.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.author.email }}">{{ package.author.email }}</a></li>
+                <li v-if="package.license"><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
+                <li v-if="package.authors[0].homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ package.authors[0].homepage }}" target="_blank">{{ package.authors[0].homepage }}</a></li>
+                <li v-if="package.authors[0].email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
             </ul>
 
         </div>

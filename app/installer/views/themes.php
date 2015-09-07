@@ -57,7 +57,7 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No theme found.' | trans }}</h3>
 
-    <v-modal v-ref="details" large>
+    <v-modal v-ref="details">
         <package-details api="{{ api }}" package="{{ package }}"></package-details>
     </v-modal>
 
