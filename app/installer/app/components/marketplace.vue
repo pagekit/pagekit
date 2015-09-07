@@ -34,24 +34,28 @@
                     </button>
                 </div>
 
-                <div class="uk-grid">
-                    <div class="uk-width-1-1">
-                        <h1 class="uk-h2 uk-margin-remove">{{ pkg.title }}</h1>
-                        <ul class="uk-subnav uk-subnav-line uk-margin-top-remove">
-                            <li class="uk-text-muted">{{ pkg.author.name }}</li>
-                            <li class="uk-text-muted">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
-                        </ul>
-                    </div>
+                <div class="uk-modal-header">
+                    <h2 class="uk-margin-small-bottom">{{ pkg.title }}</h2>
+                    <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
+                        <li class="uk-text-muted">{{ pkg.author.name }}</li>
+                        <li class="uk-text-muted">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
+                    </ul>
                 </div>
 
-                <hr class="uk-grid-divider">
-
-                <div class="uk-grid uk-overflow-container pk-marketplace-overflow-container">
+                <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
                         <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
                         <div>{{ pkg.description }}</div>
+
+
+                        <ul class="uk-list">
+                            <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
+                            <li v-if="pkg.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a href="{{ pkg.author.homepage }}" target="_blank">{{ pkg.author.homepage }}</a></li>
+                            <li v-if="pkg.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ pkg.author.email }}">{{ pkg.author.email }}</a></li>
+                        </ul>
+
                     </div>
                 </div>
 
