@@ -72,7 +72,6 @@ class PackageManager
                 if (!$path = $package->get('path')) {
                     throw new \RuntimeException(__('Package path is missing.'));
                 }
-                $path = App::get('path.packages') . '/' . $path;
 
                 $this->output->writeln(__("Removing package folder."));
 
