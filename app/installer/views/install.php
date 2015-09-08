@@ -240,7 +240,7 @@
 
                         <div class="uk-panel uk-panel-box" v-show="status == 'failed'">
                             <h1>{{ 'Installation failed!' | trans }}</h1>
-                            <div class="uk-alert uk-alert-danger">{{ message }}</div>
+                            <div class="uk-text-break">{{ message }}</div>
                             <p class="uk-text-right">
                                 <button type="button" class="uk-button uk-button-primary" v-on="click: stepInstall">{{ 'Retry' | trans }}</button>
                             </p>
