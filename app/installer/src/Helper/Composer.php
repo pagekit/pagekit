@@ -131,8 +131,6 @@ class Composer
      */
     protected function getComposer()
     {
-        chdir($this->paths['path']);
-
         putenv('COMPOSER_HOME=' . $this->paths['path.temp'] . '/composer');
         putenv('COMPOSER_VENDOR_DIR=' . $this->paths['path.packages']);
 

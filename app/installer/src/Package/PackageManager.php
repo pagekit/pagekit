@@ -25,7 +25,7 @@ class PackageManager
     {
         $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
 
-        $paths = array_flip(['path', 'path.temp', 'path.cache', 'path.vendor', 'path.artifact', 'path.packages']);
+        $paths = array_flip(['path.temp', 'path.cache', 'path.vendor', 'path.artifact', 'path.packages']);
         array_walk($paths, function (&$value, $key) {
             $value = App::get($key);
         });
