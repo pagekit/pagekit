@@ -4,7 +4,7 @@
         <v-modal v-ref="output" options="{{ options }}">
             <h1>{{ title }}</h1>
 
-            <pre class="pk-pre" v-html="output"></pre>
+            <pre class="pk-pre uk-text-break" v-html="output"></pre>
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
