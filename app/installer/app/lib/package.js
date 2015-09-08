@@ -54,7 +54,7 @@ module.exports = {
 
             return this.$http.post('admin/system/package/install', {package: pkg}, null, {
                 beforeSend: function (request) {
-                    output.init(request, this.$trans('Installing "%title%"', {title: pkg.title}));
+                    output.init(request, this.$trans('Installing %title% %version%', {title: pkg.title, version: pkg.version}));
                 }
             }).success(function () {
                 if (output.status === 'success' && packages) {
@@ -79,7 +79,7 @@ module.exports = {
 
             return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {
                 beforeSend: function (request) {
-                    output.init(request, this.$trans('Uninstalling "%title%"', {title: pkg.title}));
+                    output.init(request, this.$trans('Uninstalling %title% %version%', {title: pkg.title, version: pkg.version}));
                 }
             }).success(function () {
                 if (output.status === 'success' && packages) {

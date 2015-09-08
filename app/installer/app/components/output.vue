@@ -8,8 +8,8 @@
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
-            <a class="uk-button uk-button-success" v-show="status == 'success'" v-on="click: close">{{ 'Ok' | trans }}</a>
-            <a class="uk-button uk-button-error" v-show="status == 'error'" v-on="click: close">{{ 'Failed' | trans }}</a>
+            <a class="uk-button uk-button-success" v-show="status == 'success'" v-on="click: close">{{ 'Close' | trans }}</a>
+            <a class="uk-button uk-button-error" v-show="status == 'error'" v-on="click: close">{{ 'Close' | trans }}</a>
 
         </v-modal>
     </div>
