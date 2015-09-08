@@ -28,7 +28,6 @@ class InstallerIO extends ConsoleIO
             ob_implicit_flush(true);
             ob_end_flush();
 
-            $this->output->setFormatter(new HtmlOutputFormatter());
         }
     }
 
@@ -37,7 +36,7 @@ class InstallerIO extends ConsoleIO
      */
     public function writeError($messages, $newline = true)
     {
-        foreach ((array) $messages as $message) {
+        foreach ((array)$messages as $message) {
             if (preg_match(self::REGEX, $message, $matches)) {
                 throw new \RuntimeException($matches[0]);
             }
