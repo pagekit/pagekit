@@ -142,11 +142,11 @@
                     }
                 }
 
-                query.limit = this.$get('widget.count');
-
-                this.$resource('api/user/count').query({}, function (data) {
+                this.$resource('api/user/count').query(query, function (data) {
                     this.$set('userscount', data.count);
                 });
+
+                query.limit = this.$get('widget.count');
 
                 this.$resource('api/user/:id').query(query, function (data) {
                     this.$set('users', data.users.slice(0, this.$get('widget.count')));
