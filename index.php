@@ -24,6 +24,7 @@ $config = array(
     'path.cache'      => $path.'/tmp/cache',
     'path.logs'       => $path.'/tmp/logs',
     'path.vendor'     => $path.'/vendor',
+    'path.artifact'   => $path.'/tmp/packages',
     'config.file'     => realpath($path.'/config.php')
 );
 

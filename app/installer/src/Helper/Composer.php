@@ -2,7 +2,6 @@
 
 namespace Pagekit\Installer\Helper;
 
-use Pagekit\Application as App;
 use Composer\Factory;
 use Composer\Installer;
 use Composer\Json\JsonFile;
@@ -17,66 +16,67 @@ class Composer
     /**
      * @var ConsoleIO
      */
-    protected static $io;
+    protected $io;
 
     /**
      * @var OutputInterface
      */
-    protected static $output;
-
-    /**
-     * @var Composer
-     */
-    protected static $composer;
+    protected $output;
 
     /**
      * @var array
      */
-    protected static $packages = [];
+    protected $packages = [];
 
     /**
      * @var string
      */
-    protected static $file = 'packages.php';
+    protected $file = 'packages.php';
 
     /**
-     * @var string
+     * @param $paths
+     * @param $api
+     * @param null $output
      */
-    protected static $config = [
-        'repositories' => [
-            ['type' => 'artifact', 'url' => 'tmp/packages/'],
-            ['type' => 'composer', 'url' => 'http://pagekit.com']
-        ],
-    ];
+    public function __construct($paths, $api, $output = null)
+    {
+        $this->paths = $paths;
+        $this->api = $api;
+        $this->output = $output;
+
+        $this->file = $paths['path.packages'] . '/' . $this->file;
+        $this->blueprint = [
+            'repositories' => [
+                ['type' => 'artifact', 'url' => $paths['path.artifact']],
+                ['type' => 'composer', 'url' => $api]
+            ]
+        ];
+    }
 
     /**
      * @param array $install [name => version, name => version, ...]
-     * @param OutputInterface $output
      * @return bool
      */
-    public static function install(array $install, $output = null)
+    public function install(array $install)
     {
-        self::setOutput($output);
-        self::addPackages($install);
+        $this->addPackages($install);
 
-        self::composerUpdate(array_keys($install));
-        self::writeConfig();
+        $this->composerUpdate(array_keys($install));
+        $this->writeConfig();
     }
 
 
     /**
      * @param array|string $uninstall [name, name, ...]
-     * @param OutputInterface $output
      */
-    public static function uninstall($uninstall, $output = null)
+    public function uninstall($uninstall)
     {
-        self::setOutput($output);
         $uninstall = (array)$uninstall;
 
-        self::removePackages($uninstall);
+        $this->removePackages($uninstall);
 
-        self::composerUpdate($uninstall);
-        self::writeConfig();
+        $this->composerUpdate($uninstall);
+        $this->writeConfig();
     }
 
     /**
@@ -85,9 +85,9 @@ class Composer
      * @param $name
      * @return bool
      */
-    public static function isInstalled($name)
+    public function isInstalled($name)
     {
-        $installed = App::get('path.packages') . '/composer/installed.json';
+        $installed = $this->paths['path.packages'] . '/composer/installed.json';
         $installed = file_exists($installed) ? json_decode(file_get_contents($installed), true) : [];
 
         $installed = array_map(function ($pkg) {
@@ -98,28 +98,20 @@ class Composer
     }
 
     /**
-     * @param OutputInterface $output
-     */
-    public static function setOutput($output)
-    {
-        self::$output = $output;
-    }
-
-    /**
      * Runs Composer Update command.
      *
      * @param  array|bool $updates
      * @return bool
      */
-    protected static function composerUpdate($updates = false)
+    protected function composerUpdate($updates = false)
     {
-        $installed = new JsonFile(App::get('path.vendor') . '/composer/installed.json');
+        $installed = new JsonFile($this->paths['path.vendor'] . '/composer/installed.json');
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
-        $composer = self::getComposer();
+        $composer = $this->getComposer();
 
-        $installer = Installer::create(self::getIO(), $composer)
+        $installer = Installer::create($this->getIO(), $composer)
             ->setAdditionalInstalledRepository($internal)
             ->setPreferDist(true)
             ->setOptimizeAutoloader(true)
@@ -137,63 +129,59 @@ class Composer
      *
      * @return null
      */
-    protected static function getComposer()
+    protected function getComposer()
     {
-        chdir(App::path());
+        chdir($this->paths['path']);
 
-        if (!self::$composer) {
-            putenv('COMPOSER_HOME=' . App::get('path.temp') . '/composer');
-            putenv('COMPOSER_VENDOR_DIR=' . App::get('path.packages'));
+        putenv('COMPOSER_HOME=' . $this->paths['path.temp'] . '/composer');
+        putenv('COMPOSER_VENDOR_DIR=' . $this->paths['path.packages']);
 
-            // set memory limit, if < 512M
-            $memory = trim(ini_get('memory_limit'));
-            if ($memory != -1 && self::memoryInBytes($memory) < 512 * 1024 * 1024) {
-                @ini_set('memory_limit', '512M');
-            }
-
-            $config = self::$config;
-            $config['require'] = self::$packages;
-
-            $composer = Factory::create(self::getIO(), $config);
-            $composer->setLocker(new Locker(
-                self::getIO(),
-                new JsonFile(preg_replace('/\.php$/i', '.lock', App::get('path.packages') . '/' . self::$file)),
-                $composer->getRepositoryManager(),
-                $composer->getInstallationManager(),
-                md5(json_encode($config))
-            ));
-
-            self::$composer = $composer;
+        // set memory limit, if < 512M
+        $memory = trim(ini_get('memory_limit'));
+        if ($memory != -1 && $this->memoryInBytes($memory) < 512 * 1024 * 1024) {
+            @ini_set('memory_limit', '512M');
         }
 
-        return self::$composer;
+        $config = $this->blueprint;
+        $config['require'] = $this->packages;
+
+        $composer = Factory::create($this->getIO(), $config);
+        $composer->setLocker(new Locker(
+            $this->getIO(),
+            new JsonFile(preg_replace('/\.php$/i', '.lock', $this->paths['path.packages'] . '/' . $this->file)),
+            $composer->getRepositoryManager(),
+            $composer->getInstallationManager(),
+            md5(json_encode($config))
+        ));
+
+        return $composer;
     }
 
 
     /**
      * @return InstallerIO
      */
-    protected static function getIO()
+    protected function getIO()
     {
-        return self::$io ?: (self::$io = new InstallerIO(null, self::$output));
+        return $this->io ?: ($this->io = new InstallerIO(null, $this->output));
     }
 
     /**
      * @param $packages
      * @return array
      */
-    protected static function addPackages($packages)
+    protected function addPackages($packages)
     {
-        self::$packages = array_merge(self::readConfig(), $packages);
+        $this->packages = array_merge($this->readConfig(), $packages);
     }
 
     /**
      * @param $packages
      * @return array
      */
-    protected static function removePackages($packages)
+    protected function removePackages($packages)
     {
-        self::$packages = array_diff_key(self::readConfig(), array_flip($packages));
+        $this->packages = array_diff_key($this->readConfig(), array_flip($packages));
     }
 
     /**
@@ -201,17 +189,17 @@ class Composer
      *
      * @return array
      */
-    protected static function readConfig()
+    protected function readConfig()
     {
-        return file_exists($path = App::get('path.packages') . '/' . self::$file) ? require $path : [];
+        return file_exists($this->file) ? require $this->file : [];
     }
 
     /**
      * Writes changes to packages file.
      */
-    protected static function writeConfig()
+    protected function writeConfig()
     {
-        file_put_contents(App::get('path.packages') . '/' . self::$file, '<?php return ' . var_export(self::$packages, true) . ';');
+        file_put_contents($this->file, '<?php return ' . var_export($this->packages, true) . ';');
     }
 
     /**
@@ -220,7 +208,7 @@ class Composer
      * @param $value
      * @return int
      */
-    protected static function memoryInBytes($value)
+    protected function memoryInBytes($value)
     {
         $unit = strtolower(substr($value, -1, 1));
         $value = (int)$value;

@@ -24,6 +24,13 @@ class PackageManager
     public function __construct($output = null)
     {
         $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
+
+        $paths = array_flip(['path', 'path.temp', 'path.cache', 'path.vendor', 'path.artifact', 'path.packages']);
+        array_walk($paths, function (&$value, $key) {
+            $value = App::get($key);
+        });
+
+        $this->composer = new Composer($paths, App::get('system')->config('api'), $output);
     }
 
     /**
@@ -32,7 +39,7 @@ class PackageManager
      */
     public function install(array $install = [])
     {
-        Composer::install($install, $this->output);
+        $this->composer->install($install);
 
         $packages = App::package()->all(null, true);
         foreach ($install as $name => $version) {
@@ -42,20 +49,6 @@ class PackageManager
                 $this->doInstall($packages[$name]);
             }
         }
-    }
-
-    /**
-     * @param $package
-     * @return string
-     */
-    public function doInstall($package)
-    {
-        $this->trigger('install', $this->loadScripts($package));
-        $version = $this->getVersion($package);
-
-        App::config('system')->set('packages.' . $package->get('module'), $version);
-
-        return $version;
     }
 
     /**
@@ -73,8 +66,8 @@ class PackageManager
             $this->trigger('uninstall', $this->loadScripts($package));
             App::config('system')->pull('packages', $package->get('module'));
 
-            if (Composer::isInstalled($package->getName())) {
-                Composer::uninstall($package->getName(), $this->output);
+            if ($this->composer->isInstalled($package->getName())) {
+                $this->composer->uninstall($package->getName());
             } else {
                 if (!$path = $package->get('path')) {
                     throw new \RuntimeException(__('Package path is missing.'));
@@ -144,40 +137,6 @@ class PackageManager
     }
 
     /**
-     * Tries to obtain package version from 'composer.json' or installation log.
-     *
-     * @param $package
-     * @return string
-     */
-    protected function getVersion($package)
-    {
-        if (!$path = $package->get('path')) {
-            throw new \RuntimeException(__('Package path is missing.'));
-        }
-
-        if (!file_exists($file = $path . '/composer.json')) {
-            throw new \RuntimeException(__('\'composer.json\' is missing.'));
-        }
-
-        $package = json_decode(file_get_contents($file), true);
-        if (isset($package['version'])) {
-            return $package['version'];
-        }
-
-        if (file_exists(App::get('path.packages') . '/composer/installed.json')) {
-            $installed = json_decode(file_get_contents($file), true);
-
-            foreach ($installed as $package) {
-                if ($package['name'] === $package->getName()) {
-                    return $package['version'];
-                }
-            }
-        }
-
-        return '0.0.0';
-    }
-
-    /**
      * @param array|callable $scripts
      */
     public function execute($scripts)
@@ -218,5 +177,53 @@ class PackageManager
         }
 
         return file_exists($path) ? require $path : [];
+    }
+
+    /**
+     * @param $package
+     * @return string
+     */
+    protected function doInstall($package)
+    {
+        $this->trigger('install', $this->loadScripts($package));
+        $version = $this->getVersion($package);
+
+        App::config('system')->set('packages.' . $package->get('module'), $version);
+
+        return $version;
+    }
+
+    /**
+     * Tries to obtain package version from 'composer.json' or installation log.
+     *
+     * @param $package
+     * @return string
+     */
+    protected function getVersion($package)
+    {
+        if (!$path = $package->get('path')) {
+            throw new \RuntimeException(__('Package path is missing.'));
+        }
+
+        if (!file_exists($file = $path . '/composer.json')) {
+            throw new \RuntimeException(__('\'composer.json\' is missing.'));
+        }
+
+        $package = json_decode(file_get_contents($file), true);
+        if (isset($package['version'])) {
+            return $package['version'];
+        }
+
+        if (file_exists($this->paths['path.packages'] . '/composer/installed.json')) {
+            $installed = json_decode(file_get_contents($file), true);
+
+            foreach ($installed as $package) {
+                if ($package['name'] === $package->getName()) {
+                    return $package['version'];
+                }
+            }
+        }
+
+        return '0.0.0';
     }
 }
