@@ -52,9 +52,21 @@ module.exports = {
                 output.onClose(onClose);
             }
 
+            var vm = this;
+            output.addButton(this.$trans('Enable and Close'), function () {
+                vm.enablePackage(pkg).success(function () {
+                    this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
+                }).error(function (message) {
+                    this.$notify(message, 'danger');
+                });
+            });
+
             return this.$http.post('admin/system/package/install', {package: pkg}, null, {
                 beforeSend: function (request) {
-                    output.init(request, this.$trans('Installing %title% %version%', {title: pkg.title, version: pkg.version}));
+                    output.init(request, this.$trans('Installing %title% %version%', {
+                        title: pkg.title,
+                        version: pkg.version
+                    }));
                 }
             }).success(function () {
                 if (output.status === 'success' && packages) {
@@ -79,7 +91,10 @@ module.exports = {
 
             return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {
                 beforeSend: function (request) {
-                    output.init(request, this.$trans('Uninstalling %title% %version%', {title: pkg.title, version: pkg.version}));
+                    output.init(request, this.$trans('Uninstalling %title% %version%', {
+                        title: pkg.title,
+                        version: pkg.version
+                    }));
                 }
             }).success(function () {
                 if (output.status === 'success' && packages) {

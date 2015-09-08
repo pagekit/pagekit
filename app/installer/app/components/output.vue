@@ -8,7 +8,12 @@
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
-            <a class="uk-button uk-button" v-show="status != 'loading'" v-on="click: close">{{ 'Close' | trans }}</a>
+            <div class="uk-text-right" v-show="status != 'loading'">
+
+                <a class="uk-button" v-repeat="buttons" v-on="click: close(action)">{{ title }}</a>
+                <a class="uk-button uk-button-primary" v-on="click: close">{{ 'Close' | trans }}</a>
+
+            </div>
 
         </v-modal>
     </div>
@@ -25,6 +30,7 @@
                 output: '',
                 status: 'loading',
                 cb: null,
+                buttons: [],
                 options: {
                     bgclose: false,
                     keyboard: false
@@ -46,6 +52,10 @@
                 };
 
                 this.open();
+            },
+
+            addButton: function (title, action) {
+                this.buttons.push({title: title, action: action});
             },
 
             onClose: function (cb) {
@@ -70,7 +80,11 @@
                 this.$.output.open();
             },
 
-            close: function () {
+            close: function (action) {
+                if (typeof action == 'function') {
+                    action();
+                }
+
                 if (this.cb) {
                     this.cb(this);
                 }
