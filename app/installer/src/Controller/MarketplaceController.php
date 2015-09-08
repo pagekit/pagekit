@@ -20,7 +20,7 @@ class MarketplaceController
                 'title' => 'Themes',
                 'type' => 'pagekit-theme',
                 'api' => App::system()->config('api'),
-                'packages' => App::package()->all('pagekit-theme')
+                'installed' => array_values(App::package()->all('pagekit-theme'))
             ]
         ];
     }
@@ -36,7 +36,7 @@ class MarketplaceController
                 'title' => 'Extensions',
                 'type' => 'pagekit-extension',
                 'api' => App::system()->config('api'),
-                'packages' => App::package()->all('pagekit-extension')
+                'installed' => array_values(App::package()->all('pagekit-extension'))
             ]
         ];
     }

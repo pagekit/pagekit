@@ -19,6 +19,6 @@
         </div>
     </div>
 
-    <marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ packages }}"></marketplace>
+    <marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ installed }}"></marketplace>
 
 </div>
