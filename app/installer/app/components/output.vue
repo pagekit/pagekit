@@ -1,15 +1,14 @@
 <template>
 
     <div>
-        <v-modal v-ref="output" options="{{ options }}" large>
+        <v-modal v-ref="output" options="{{ options }}">
             <h1>{{ title }}</h1>
 
-            <pre v-html="output"></pre>
+            <pre class="pk-pre" v-html="output"></pre>
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
-            <a class="uk-button uk-button-success" v-show="status == 'success'" v-on="click: close">{{ 'Close' | trans }}</a>
-            <a class="uk-button uk-button-error" v-show="status == 'error'" v-on="click: close">{{ 'Close' | trans }}</a>
+            <a class="uk-button uk-button" v-show="status != 'loading'" v-on="click: close">{{ 'Close' | trans }}</a>
 
         </v-modal>
     </div>

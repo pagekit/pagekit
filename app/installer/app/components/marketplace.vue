@@ -15,6 +15,7 @@
                     </div>
 
                     <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>
+
                     <p class="uk-text-muted uk-margin-remove">{{ pkg.author.name }}</p>
                     <a class="uk-position-cover" v-on="click: details(pkg)"></a>
 
@@ -147,10 +148,11 @@
             install: function (pkg) {
 
                 this.$set('status', 'installing');
+                this.modal.hide();
 
                 this.installPackage(pkg, this.installed).error(function (data) {
                     this.$notify(data, 'danger');
-                }).always(function (data) {
+                }).always(function () {
                     this.$set('status', '');
                 });
             },
