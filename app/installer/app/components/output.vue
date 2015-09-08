@@ -2,17 +2,18 @@
 
     <div>
         <v-modal v-ref="output" options="{{ options }}">
-            <h1>{{ title }}</h1>
+
+            <div class="uk-modal-header uk-flex uk-flex-middle">
+                <h2>{{ title }}</h2>
+            </div>
 
             <pre class="pk-pre uk-text-break" v-html="output"></pre>
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
-            <div class="uk-text-right" v-show="status != 'loading'">
-
-                <a class="uk-button" v-repeat="buttons" v-on="click: close(action)">{{ title }}</a>
-                <a class="uk-button uk-button-primary" v-on="click: close">{{ 'Close' | trans }}</a>
-
+            <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
+                <a class="uk-button uk-button-link" v-on="click: close">{{ 'Close' | trans }}</a>
+                <a class="uk-button uk-button-primary" v-repeat="buttons" v-on="click: close(action)">{{ title }}</a>
             </div>
 
         </v-modal>

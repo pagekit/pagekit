@@ -53,7 +53,7 @@ module.exports = {
             }
 
             var vm = this;
-            output.addButton(this.$trans('Enable and Close'), function () {
+            output.addButton(this.$trans('Enable'), function () {
                 vm.enablePackage(pkg).success(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
                 }).error(function (message) {
