@@ -191,7 +191,7 @@ class ExtensionTranslateCommand extends Command
             // extensions
             $root = $this->container->path().'/packages';
         }
-		print $root.'/'.$path;
+
         if (!is_dir($path = "$root/$path")) {
             $this->abort("Can't find extension in '$path'");
         }
