@@ -13,7 +13,7 @@
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: install">{{ 'Install' | trans }}</button>
+                <button class="uk-button uk-button-link" v-on="click: doInstall">{{ 'Install' | trans }}</button>
             </div>
 
         </div>
@@ -87,12 +87,12 @@
                 this.modal.show();
             },
 
-            install: function (e) {
+            doInstall: function (e) {
                 e.preventDefault();
 
                 this.modal.hide();
 
-                this.installPackage(this.upload.package, this.packages,
+                this.install(this.upload.package, this.packages,
                     function (output) {
                         if (output.status === 'success') {
                             setTimeout(function () {

@@ -145,16 +145,15 @@
                 this.modal.show();
             },
 
-            install: function (pkg) {
+            doInstall: function (pkg) {
 
                 this.$set('status', 'installing');
                 this.modal.hide();
 
-                this.installPackage(pkg, this.installed).error(function (data) {
-                    this.$notify(data, 'danger');
-                }).always(function () {
-                    this.$set('status', '');
-                });
+                this.install(pkg, this.installed)
+                    .always(function () {
+                        this.$set('status', '');
+                    });
             },
 
             isInstalled: function (pkg) {

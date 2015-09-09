@@ -89,26 +89,10 @@ module.exports = {
 
         },
 
-        enable: function (pkg) {
-            this.enablePackage(pkg).success(function () {
-                this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
-            }).error(this.error);
-        },
-
-        disable: function (pkg) {
-            this.disablePackage(pkg).success(function () {
-                this.$notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
-            }).error(this.error);
-        },
-
-        uninstall: function (pkg) {
-            this.uninstallPackage(pkg, this.packages);
-        },
-
         update: function (pkg) {
             var vm = this;
 
-            this.installPackage(pkg, this.packages, function (output) {
+            this.install(pkg, this.packages, function (output) {
                 if (output.status === 'success') {
                     vm.updates.$delete(pkg.name);
                 }
@@ -117,10 +101,6 @@ module.exports = {
                     location.reload();
                 }, 300);
             });
-        },
-
-        error: function (message) {
-            this.$notify(message, 'danger');
         }
 
     },
