@@ -24,7 +24,7 @@ class BuildCommand extends Command
      * @var string[]
      */
     protected $excludes = [
-       '^(app\/database|packages|storage|tmp|config\.php|pagekit.+\.zip)',
+       '^(app\/database|packages|tmp|config\.php|pagekit.+\.zip)',
        '^app\/assets\/[^\/]+\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
        '^app\/assets\/(jquery|vue)\/(src|perf)',
        '^app\/vendor\/lusitanian\/oauth\/examples',
@@ -73,7 +73,6 @@ class BuildCommand extends Command
         $zip->addEmptyDir('tmp/sessions');
         $zip->addEmptyDir('tmp/packages');
         $zip->addEmptyDir('app/database');
-        $zip->addEmptyDir('storage');
 
         $zip->close();
 
