@@ -51,6 +51,10 @@ module.exports = {
         },
 
         onClose: function () {
+            if (this.cb) {
+                cb(this);
+            }
+
             this.$destroy();
         }
 

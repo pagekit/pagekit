@@ -27,8 +27,9 @@
 
         methods: {
 
-            install: function (pkg, packages) {
+            install: function (pkg, packages, onClose) {
                 this.$set('pkg', pkg);
+                this.cb = onClose;
 
                 var vm = this;
                 return this.$http.post('admin/system/package/install', {package: pkg}, null, {
