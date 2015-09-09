@@ -18,6 +18,7 @@ return [
         'markdown',
         'installer',
         'system/view',
+        'system/widget',
         'system/cache',
         'system/comment',
         'system/content',
@@ -30,11 +31,7 @@ return [
         'system/settings',
         'system/site',
         'system/theme',
-        'system/user',
-        'system/widget',
-        'system/widget-login',
-        'system/widget-menu',
-        'system/widget-text'
+        'system/user'
 
     ],
 

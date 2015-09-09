@@ -11,8 +11,6 @@ return [
 
     'main' => 'Pagekit\\Site\\SiteModule',
 
-    'include' => 'widgets/widget-*.php',
-
     'autoload' => [
 
         'Pagekit\\Site\\' => 'src'
@@ -47,6 +45,12 @@ return [
             'name' => '@site/api/page',
             'controller' => 'Pagekit\\Site\\Controller\\PageApiController'
         ]
+
+    ],
+
+    'widgets' => [
+
+        'widgets/widget-*.php'
 
     ],
 
@@ -90,7 +94,7 @@ return [
             'parent' => 'site',
             'url' => '@site/settings',
             'access' => 'system: manage settings',
-            'priority' => 20
+            'priority' => 30
         ]
 
     ],

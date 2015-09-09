@@ -3,13 +3,11 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application;
-use Pagekit\Module\Factory\CallableFactory;
-use Pagekit\Module\Factory\FactoryInterface;
-use Pagekit\Module\Factory\ModuleFactory;
+use Pagekit\Module\Loader\ModuleLoader;
 use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
 
-class ModuleManager implements \ArrayAccess, \IteratorAggregate
+class ModuleManager implements \IteratorAggregate
 {
     /**
      * @var Application
@@ -34,12 +32,22 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     /**
      * @var LoaderInterface[]
      */
-    protected $loaders = [];
+    protected $preLoaders = [];
 
     /**
-     * @var FactoryInterface[]
+     * @var LoaderInterface[]
      */
-    protected $factories = [];
+    protected $postLoaders = [];
+
+    /**
+     * @var array
+     */
+    protected $defaults = [
+        'main' => null,
+        'type' => 'module',
+        'class' => 'Pagekit\Module\Module',
+        'config' => []
+    ];
 
     /**
      * Constructor.
@@ -49,7 +57,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->addFactory('module', new ModuleFactory($app));
+        $this->postLoaders = [new ModuleLoader($app)];
     }
 
     /**
@@ -94,12 +102,12 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $resolved = [];
 
         if (is_string($modules)) {
-            $modules = (array)$modules;
+            $modules = (array) $modules;
         }
 
         $this->registerModules();
 
-        foreach ((array)$modules as $name) {
+        foreach ((array) $modules as $name) {
 
             if (!isset($this->registered[$name])) {
                 throw new \RuntimeException("Undefined module: $name");
@@ -112,17 +120,15 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
 
         foreach ($resolved as $name => $module) {
 
-            foreach ($this->loaders as $loader) {
-                $module = $loader->load($name, $module);
+            foreach ($this->preLoaders as $loader) {
+                $module = $loader->load($module);
             }
 
-            if ($factory = $this->getFactory($module['type'])) {
-                $this->modules[$name] = $factory->create($module);
-
-                if (is_a($this->modules[$name], 'Pagekit\Event\EventSubscriberInterface')) {
-                    $this->app->subscribe($this->modules[$name]);
-                }
+            foreach ($this->postLoaders as $loader) {
+                $module = $loader->load($module);
             }
+
+            $this->modules[$name] = $module;
         }
 
         return $this;
@@ -132,11 +138,14 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      * Adds a module path(s).
      *
      * @param  string|array $paths
+     * @param  string $basePath
      * @return self
      */
-    public function addPath($paths)
+    public function addPath($paths, $basePath = null)
     {
-        $this->paths = array_merge($this->paths, (array)$paths);
+        foreach ((array) $paths as $path) {
+            $this->paths[] = $this->resolvePath($path, $basePath);
+        }
 
         return $this;
     }
@@ -145,89 +154,22 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      * Adds a module loader.
      *
      * @param  LoaderInterface|callable $loader
+     * @param  boolean $post
      * @return self
      */
-    public function addLoader($loader)
+    public function addLoader($loader, $post = false)
     {
         if (is_callable($loader)) {
             $loader = new CallableLoader($loader);
         }
 
-        $this->loaders[] = $loader;
-
-        return $this;
-    }
-
-    /**
-     *  Gets a module factory.
-     *
-     * @param  string $type
-     * @return FactoryInterface
-     */
-    public function getFactory($type)
-    {
-        return isset($this->factories[$type]) ? $this->factories[$type] : null;
-    }
-
-    /**
-     * Adds a module factory.
-     *
-     * @param  string $type
-     * @param  FactoryInterface|callable $factory
-     * @return self
-     */
-    public function addFactory($type, $factory)
-    {
-        if (is_callable($factory)) {
-            $factory = new CallableFactory($factory);
+        if (!$post) {
+            $this->preLoaders[] = $loader;
+        } else {
+            $this->postLoaders[] = $loader;
         }
 
-        $this->factories[$type] = $factory;
-
         return $this;
-    }
-
-    /**
-     * Checks if a module exists.
-     *
-     * @param  string $name
-     * @return bool
-     */
-    public function offsetExists($name)
-    {
-        return isset($this->modules[$name]);
-    }
-
-    /**
-     * Gets a module by name.
-     *
-     * @param  string $name
-     * @return bool
-     */
-    public function offsetGet($name)
-    {
-        return $this->get($name);
-    }
-
-    /**
-     * Sets a module.
-     *
-     * @param string $name
-     * @param string $module
-     */
-    public function offsetSet($name, $module)
-    {
-        $this->modules[$name] = $module;
-    }
-
-    /**
-     * Unset a module.
-     *
-     * @param string $name
-     */
-    public function offsetUnset($name)
-    {
-        unset($this->modules[$name]);
     }
 
     /**
@@ -237,7 +179,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->modules);
+        return new \ArrayIterator($this->all());
     }
 
     /**
@@ -246,7 +188,6 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     protected function registerModules()
     {
         $includes = [];
-        $defaults = ['type' => 'module', 'main' => null, 'config' => []];
 
         $app = $this->app;
 
@@ -260,12 +201,12 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                     continue;
                 }
 
-                $module = array_replace($defaults, $module);
+                $module = array_replace($this->defaults, $module);
                 $module['path'] = strtr(dirname($p), '\\', '/');
 
                 if (isset($module['include'])) {
-                    foreach ((array)$module['include'] as $include) {
-                        $includes[] = $this->resolvePath($module, $include);
+                    foreach ((array) $module['include'] as $include) {
+                        $includes[] = $this->resolvePath($include, $module['path']);
                     }
                 }
 
@@ -292,7 +233,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $unresolved[$module['name']] = $module;
 
         if (isset($module['require'])) {
-            foreach ((array)$module['require'] as $required) {
+            foreach ((array) $module['require'] as $required) {
                 if (!isset($resolved[$required])) {
 
                     if (isset($unresolved[$required])) {
@@ -311,18 +252,18 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     }
 
     /**
-     * Resolves a path to a absolute module path.
+     * Resolves a absolute path to a given base path.
      *
-     * @param  array $module
      * @param  string $path
+     * @param  string $basePath
      * @return string
      */
-    protected function resolvePath($module, $path)
+    protected function resolvePath($path, $basePath = null)
     {
         $path = strtr($path, '\\', '/');
 
         if (!($path[0] == '/' || (strlen($path) > 3 && ctype_alpha($path[0]) && $path[1] == ':' && $path[2] == '/'))) {
-            $path = $module['path'] . "/$path";
+            $path = "$basePath/$path";
         }
 
         return $path;

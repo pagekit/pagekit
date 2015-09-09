@@ -24,7 +24,7 @@ class AutoLoader implements LoaderInterface
     /**
      * {@inheritdoc}
      */
-    public function load($name, array $module)
+    public function load($module)
     {
         if (isset($module['autoload'])) {
             foreach ($module['autoload'] as $namespace => $path) {

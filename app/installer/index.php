@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Installer\Package\PackageFactory;
-use Pagekit\Module\Factory\ModuleFactory;
 use Pagekit\Kernel\Exception\NotFoundException;
 
 return [
@@ -14,7 +13,7 @@ return [
             return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
         };
 
-        $app['module']->addLoader(function ($name, $module) use ($app) {
+        $app['module']->addLoader(function ($module) use ($app) {
 
             if ($module['type'] == 'extension') {
                 $app['locator']->add("{$module['name']}:", $module['path']);
@@ -22,14 +21,11 @@ return [
             }
 
             if ($module['type'] == 'theme') {
-                $module['data'] = $app->config('theme')->get($name, []);
+                $module['data'] = $app->config('theme')->get($module['name'], []);
             }
 
             return $module;
         });
-
-        $app['module']->addFactory('theme', new ModuleFactory($app));
-        $app['module']->addFactory('extension', new ModuleFactory($app));
 
         if ($this->config['enabled']) {
 

@@ -13,10 +13,12 @@ return [
         };
 
         if ($app['config.file']) {
-            $app['module']->addLoader(function ($name, $module) use ($app) {
+            $app['module']->addLoader(function ($module) use ($app) {
 
-                if ($app['config']->has($name)) {
-                    $module = array_replace_recursive($module, ['config' => $app['config']->get($name)->toArray()]);
+                if ($app['config']->has($module['name'])) {
+                    $module = array_replace_recursive($module, [
+                        'config' => $app['config']->get($module['name'])->toArray()
+                    ]);
                 }
 
                 return $module;

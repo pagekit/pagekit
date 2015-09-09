@@ -7,9 +7,8 @@ interface LoaderInterface
     /**
      * Loads the module.
      *
-     * @param  string $name
-     * @param  array  $module
-     * @return array
+     * @param  mixed $module
+     * @return mixed
      */
-    public function load($name, array $module);
+    public function load($module);
 }

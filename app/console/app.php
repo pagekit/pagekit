@@ -11,19 +11,17 @@ $app = new App($config);
 $app['autoloader'] = $loader;
 
 $app['module']->addPath([
-    $path.'/app/system/index.php',
-    $path.'/app/modules/*/index.php',
-    $path.'/app/installer/index.php',
-    $path.'/packages/*/*/index.php',
-    __DIR__.'/index.php'
-]);
+    'packages/*/*/index.php',
+    'app/modules/*/index.php',
+    'app/installer/index.php',
+    'app/system/index.php',
+    'app/console/index.php'
+], $path);
 
 $app['module']->addLoader(new AutoLoader($app['autoloader']));
 $app['module']->addLoader(new ConfigLoader(require $path.'/app/system/config.php'));
 $app['module']->addLoader(new ConfigLoader(require $app['config.file']));
-
-$app['module']->load('system');
-$app['module']->load('console');
+$app['module']->load(['system', 'console']);
 
 $console = new Console($app, 'Pagekit');
 $console->run();

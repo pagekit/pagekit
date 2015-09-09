@@ -9,8 +9,6 @@ return [
 
     'label' => 'Login',
 
-    'type' => 'widget',
-
     'events' => [
 
         'view.scripts' => function ($event, $scripts) use ($app) {

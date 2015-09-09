@@ -45,7 +45,7 @@ class SystemModule extends Module
 
         $app->extend('view', function ($view) use ($app) {
 
-            $theme = $app->isAdmin() ? $app['module']['system/theme'] : $app['theme'];
+            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
 
             $view->map('layout', $theme->get('layout', 'views:template.php'));
 

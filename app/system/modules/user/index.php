@@ -17,8 +17,6 @@ return [
 
     ],
 
-    'include' => 'widgets/widget-login.php',
-
     'routes' => [
 
         '/user' => [
@@ -58,6 +56,12 @@ return [
                 'Pagekit\\User\\Controller\\RoleApiController'
             ]
         ]
+
+    ],
+
+    'widgets' => [
+
+        'widgets/widget-login.php'
 
     ],
 

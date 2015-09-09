@@ -31,7 +31,7 @@ return [
             return new Middleware($app['events']);
         };
 
-        $app['module']->addLoader(function ($name, $module) use ($app) {
+        $app['module']->addLoader(function ($module) use ($app) {
 
             if (isset($module['routes'])) {
                 foreach ($module['routes'] as $path => $route) {

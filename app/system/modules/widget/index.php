@@ -1,12 +1,45 @@
 <?php
 
+use Pagekit\Widget\PositionHelper;
+use Pagekit\Widget\PositionManager;
+use Pagekit\Widget\WidgetManager;
 use Pagekit\Widget\Model\Widget;
 
 return [
 
     'name' => 'system/widget',
 
-    'main' => 'Pagekit\\Widget\\WidgetModule',
+    'main' => function ($app) {
+
+        $app['widget'] = function ($app) {
+            return new WidgetManager($app);
+        };
+
+        $app['position'] = function ($app) {
+
+            $positions = new PositionManager($app->config($app['theme']->name));
+
+            foreach ($app['theme']->get('positions', []) as $name => $label) {
+                $positions->register($name, $label);
+            }
+
+            return $positions;
+        };
+
+        $app['module']->addLoader(function ($module) use ($app) {
+
+            if (isset($module['widgets'])) {
+                $app['widget']->addPath($module['widgets'], $module['path']);
+            }
+
+            return $module;
+        });
+
+        $app->extend('view', function ($view) use ($app) {
+            return $view->addHelper(new PositionHelper($app['position']));
+        });
+
+    },
 
     'autoload' => [
 
@@ -49,7 +82,8 @@ return [
             'parent' => 'site',
             'url' => '@site/widget',
             'access' => 'system: manage widgets',
-            'active' => '@site/widget(/edit)?'
+            'active' => '@site/widget(/edit)?',
+            'priority' => 20
         ]
 
     ],
@@ -87,8 +121,8 @@ return [
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
         },
 
-        'model.widget.init' => function ($event, $widget) {
-            if ($type = $this->getType($widget->type)) {
+        'model.widget.init' => function ($event, $widget) use ($app) {
+            if ($type = $app->widget($widget->type)) {
                 $widget->data = array_replace_recursive($type->get('defaults', []), $widget->data ?: []);
             }
         },

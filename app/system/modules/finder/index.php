@@ -73,7 +73,7 @@ return [
             'parent' => 'site',
             'url' => '@site/storage',
             'access' => 'system: manage storage',
-            'priority' => 10
+            'priority' => 20
         ]
 
     ],

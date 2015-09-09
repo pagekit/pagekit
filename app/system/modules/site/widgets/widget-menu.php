@@ -6,8 +6,6 @@ return [
 
     'label' => 'Menu',
 
-    'type' => 'widget',
-
     'defaults' => [
         'start_level' => 1,
         'depth' => 0,

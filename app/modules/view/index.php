@@ -66,7 +66,7 @@ return [
             return new AssetManager($app['assets']);
         };
 
-        $app['module']->addLoader(function ($name, $module) use ($app) {
+        $app['module']->addLoader(function ($module) use ($app) {
 
             if (isset($module['views'])) {
                 $app->extend('view', function($view) use ($module) {

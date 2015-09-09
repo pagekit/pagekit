@@ -96,7 +96,7 @@ class PositionHelper extends Helper
                     or !$widget = $widgets[$id]
                     or !$widget->hasAccess(App::user())
                     or ($nodes = $widget->nodes and !in_array(App::node()->id, $nodes))
-                    or !$type = App::widget()->getType($widget->type)
+                    or !$type = App::widget($widget->type)
                 ) {
                     continue;
                 }

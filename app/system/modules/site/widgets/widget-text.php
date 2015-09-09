@@ -6,8 +6,6 @@ return [
 
     'label' => 'Text',
 
-    'type' => 'widget',
-
     'render' => function ($widget) use ($app) {
         return $app['view']->render('system/site/widget-text.php', compact('widget'));
     },

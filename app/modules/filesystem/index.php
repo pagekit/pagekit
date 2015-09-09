@@ -19,7 +19,7 @@ return [
             return new Locator($this->config['path']);
         };
 
-        $app['module']->addLoader(function ($name, $module) use ($app) {
+        $app['module']->addLoader(function ($module) use ($app) {
 
             if (isset($module['resources'])) {
                 foreach ($module['resources'] as $prefix => $path) {

@@ -10,11 +10,11 @@ $app = new App($config);
 $app['autoloader'] = $loader;
 
 $app['module']->addPath([
-    $path.'/app/installer/index.php',
-    $path.'/app/modules/*/index.php',
-    $path.'/packages/*/*/index.php',
-    __DIR__.'/index.php'
-]);
+    'packages/*/*/index.php',
+    'app/modules/*/index.php',
+    'app/installer/index.php',
+    'app/system/index.php'
+], $path);
 
 $app['module']->addLoader(new AutoLoader($app['autoloader']));
 $app['module']->addLoader(new ConfigLoader(require __DIR__.'/config.php'));
