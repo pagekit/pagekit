@@ -17,23 +17,23 @@ date_default_timezone_set('UTC');
 $env = 'system';
 $path = __DIR__;
 $config = array(
-    'path'            => $path,
-    'path.packages'   => $path.'/packages',
-    'path.storage'    => $path.'/storage',
-    'path.temp'       => $path.'/tmp/temp',
-    'path.cache'      => $path.'/tmp/cache',
-    'path.logs'       => $path.'/tmp/logs',
-    'path.vendor'     => $path.'/vendor',
-    'path.artifact'   => $path.'/tmp/packages',
-    'config.file'     => realpath($path.'/config.php')
+    'path'          => $path,
+    'path.packages' => $path.'/packages',
+    'path.storage'  => $path.'/storage',
+    'path.temp'     => $path.'/tmp/temp',
+    'path.cache'    => $path.'/tmp/cache',
+    'path.logs'     => $path.'/tmp/logs',
+    'path.vendor'   => $path.'/vendor',
+    'path.artifact' => $path.'/tmp/packages',
+    'config.file'   => realpath($path.'/config.php')
 );
-
-if (PHP_SAPI == 'cli') {
-    $env = 'console';
-}
 
 if (!$config['config.file']) {
     $env = 'installer';
+}
+
+if (PHP_SAPI == 'cli') {
+    $env = 'console';
 }
 
 require_once "$path/app/$env/app.php";
