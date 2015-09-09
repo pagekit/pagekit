@@ -4,7 +4,6 @@ namespace Pagekit\System;
 
 use Pagekit\Application as App;
 use Pagekit\Module\Module;
-use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
 
 class SystemModule extends Module
