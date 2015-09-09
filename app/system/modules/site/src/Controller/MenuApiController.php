@@ -51,7 +51,7 @@ class MenuApiController
         $oldId = trim($menu['id']);
         $label = trim($menu['label']);
 
-        if (!$id and !$id = $this->slugify($label)) {
+        if (!$id = App::filter($label, 'slugify')) {
             App::abort(400, __('Invalid id.'));
         }
 
@@ -62,10 +62,11 @@ class MenuApiController
             }
 
             $this->config->remove('menus.'.$oldId);
-            $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
 
             Node::where(['menu = :old'], [':old' => $oldId])->update(['menu' => $id]);
         }
+
+        $this->config->merge(['menus' => [$id => compact('id', 'label')]]);
 
         App::menu()->assign($id, $menu['positions']);
 
@@ -82,17 +83,5 @@ class MenuApiController
         Node::where(['menu = :id'], [':id' => $id])->update(['menu' => 'trash', 'status' => 0]);
 
         return ['message' => 'success'];
-    }
-
-    protected function slugify($slug)
-    {
-        $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
-        $slug = str_replace('-', ' ', $slug);
-        $slug = preg_replace('#[:\#\*"@+=;!><&\.%()\]\/\'\\\\|\[]#', "\x20", $slug);
-        $slug = str_replace('?', '', $slug);
-        $slug = trim(mb_strtolower($slug, 'UTF-8'));
-        $slug = preg_replace('#\x20+#', '-', $slug);
-
-        return $slug;
     }
 }

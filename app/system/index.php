@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Installer\Package\PackageManager;
 use Pagekit\Kernel\Event\ExceptionListener;
 
 return [
@@ -15,7 +16,7 @@ return [
         'application',
         'feed',
         'markdown',
-        'migration',
+        'installer',
         'system/view',
         'system/cache',
         'system/comment',
@@ -24,8 +25,8 @@ return [
         'system/editor',
         'system/finder',
         'system/info',
+        'system/intl',
         'system/mail',
-        'system/package',
         'system/settings',
         'system/site',
         'system/theme',
@@ -37,21 +38,11 @@ return [
 
     ],
 
-    'autoload' => [
-
-        'Pagekit\\System\\' => 'src'
-
-    ],
-
     'routes' => [
 
         '/' => [
             'name' => '@system',
             'controller' => 'Pagekit\\System\\Controller\\AdminController'
-        ],
-        '/system/intl' => [
-            'name' => '@system/intl',
-            'controller' => 'Pagekit\\System\\Controller\\IntlController'
         ],
         '/system/migration' => [
             'name' => '@system/migration',
@@ -68,20 +59,22 @@ return [
 
     'config' => [
 
-        'key' => '',
-
         'site' => [
-            'locale' => 'en_US',
-            'theme' => null
+
+            'theme' => null,
+            'locale' => 'en_US'
+
         ],
 
         'admin' => [
+
             'locale' => 'en_US'
+
         ],
 
-        'timezone' => 'UTC',
+        'extensions' => [],
 
-        'extensions' => []
+        'packages' => []
 
     ],
 
@@ -91,10 +84,6 @@ return [
 
             if (!$app['debug']) {
                 $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
-            }
-
-            if ($app->inConsole()) {
-                $app['isAdmin'] = false;
             }
 
         },
@@ -107,19 +96,10 @@ return [
                     return;
                 }
 
-                $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app['isAdmin'] = $admin = (bool)preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app->module('system/intl')->setLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
-                $app->extend('translator', function ($translator) use ($app, $admin) {
-
-                    $locale = $this->config($admin ? 'admin.locale' : 'site.locale');
-                    $app['intl']->setDefaultLocale($locale);
-                    $translator->setLocale($locale);
-                    $this->loadLocale($locale, $translator);
-
-                    return $translator;
-                });
-
-            }, 50],
+            }, 150],
 
             [function ($event) use ($app) {
 
@@ -134,10 +114,8 @@ return [
         ],
 
         'auth.login' => [function ($event) use ($app) {
-
-            if ($event->getUser()->hasAccess('system: software updates') && $app['migrator']->create('system:migrations', $this->config('version'))->get()) {
-                $event->setResponse($app['response']->redirect('@system/migration'));
-
+            if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), $app->version(), '<')) {
+                $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
             }
 
         }, 8],
@@ -156,10 +134,7 @@ return [
                 }
             }
 
-            if ($result) {
-                $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
-            }
-
+            $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
         }
 
     ]

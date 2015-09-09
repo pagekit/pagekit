@@ -12,35 +12,11 @@ module.exports = function (Vue) {
         return this.$transChoice(id, number, parameters, domain, locale);
     });
 
-    Vue.filter('date', function (date, format) {
-        return this.$date(date, format);
-    });
-
-    Vue.filter('relativeDate', function (value, reference) {
-        try {
-            return this.$relativeDate(value, reference);
-        } catch (e) {
-            return 'NaN';
-        }
-    });
-
     Vue.filter('trim', {
 
         write: function (value) {
             return value.trim();
         }
-
-    });
-
-    Vue.filter('stripTags', function stripTags(value, allowed) {
-
-        var comments = /<!--[\s\S]*?-->/gi, tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
-
-        allowed = ((allowed || '').toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
-
-        return value.replace(comments, '').replace(tags, function(tag, name) {
-            return allowed.indexOf('<' + name.toLowerCase() + '>') > -1 ? tag : '';
-        });
 
     });
 

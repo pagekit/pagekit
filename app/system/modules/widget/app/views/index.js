@@ -63,7 +63,7 @@ module.exports = {
             var filters = {
 
                 selected: function (widget) {
-                    return this.selected.indexOf(widget.id.toString()) !== -1;
+                    return this.selected.indexOf(widget.id) !== -1;
                 },
 
                 assigned: function (widget) {

@@ -2,13 +2,13 @@
 
 namespace Pagekit\Filter\Tests;
 
-use Pagekit\Filter\String;
+use Pagekit\Filter\StringFilter;
 
 class StringTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $filter = new String;
+        $filter = new StringFilter;
 
         $values = [
             23                  => "23",

@@ -48,8 +48,8 @@ class UserApiController
             $query->where('access > ?', [date('Y-m-d H:i:s', time() - max(0, (int) $access))]);
         }
 
-        if (!preg_match('/^(name|email)\s(asc|desc)$/i', $order, $order)) {
-            $order = [1 => 'name', 2 => 'asc'];
+        if (!preg_match('/^(username|name|email)\s(asc|desc)$/i', $order, $order)) {
+            $order = [1 => 'username', 2 => 'asc'];
         }
 
         $default = App::module('system/user')->config('users_per_page');
@@ -60,6 +60,46 @@ class UserApiController
         $users   = array_values($query->offset($page * $limit)->limit($limit)->orderBy($order[1], $order[2])->get());
 
         return compact('users', 'pages', 'count');
+    }
+
+    /**
+     * @Request({"filter": "array"})
+     */
+    public function countAction($filter = [])
+    {
+        $query  = User::query();
+        $filter = array_merge(array_fill_keys(['status', 'search', 'role', 'order', 'access'], ''), (array)$filter);
+        extract($filter, EXTR_SKIP);
+
+        if (is_numeric($status)) {
+
+            $query->where(['status' => (int) $status]);
+
+            if ($status) {
+                $query->where('access IS NOT NULL');
+            }
+
+        } elseif ('new' == $status) {
+            $query->where(['status' => User::STATUS_ACTIVE, 'access IS NULL']);
+        }
+
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->orWhere(['username LIKE :search', 'name LIKE :search', 'email LIKE :search'], ['search' => "%{$search}%"]);
+            });
+        }
+
+        if ($role) {
+            $query->whereInSet('roles', $role);
+        }
+
+        if ($access) {
+            $query->where('access > ?', [date('Y-m-d H:i:s', time() - max(0, (int) $access))]);
+        }
+
+        $count = $query->count();
+
+        return compact('count');
     }
 
     /**

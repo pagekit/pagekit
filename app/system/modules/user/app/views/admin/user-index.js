@@ -54,7 +54,7 @@ module.exports = {
     methods: {
 
         active: function (user) {
-            return this.selected.indexOf(user.id.toString()) != -1;
+            return this.selected.indexOf(user.id) != -1;
         },
 
         save: function (user) {
@@ -119,7 +119,7 @@ module.exports = {
 
         getSelected: function () {
             return this.users.filter(function (user) {
-                return this.selected.indexOf(user.id.toString()) !== -1;
+                return this.selected.indexOf(user.id) !== -1;
             }, this);
         }
 

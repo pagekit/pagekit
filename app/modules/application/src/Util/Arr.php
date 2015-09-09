@@ -147,7 +147,8 @@ class Arr
                 unset($array[$key]);
             }
 
-            $array =& array_values($array);
+            $new = array_values($array);
+            $array =& $new;
         }
 
         return $array;

@@ -138,7 +138,7 @@ return [
 
             Node::defineProperty('theme', function () use ($app) {
 
-                $config  = $app['theme']->config('_nodes.'.$this->id, []);
+                $config = $app['theme']->config('_nodes.' . $this->id, []);
                 $default = $app['theme']->get('node', []);
 
                 return array_replace_recursive($default, $config);
@@ -183,12 +183,12 @@ return [
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('panel-link', 'system/site:app/bundle/panel-link.js', 'vue');
             $scripts->register('input-link', 'system/site:app/bundle/input-link.js', 'panel-link');
-            $scripts->register('page-link', 'system/site:app/bundle/page-link.js', '~panel-link');
-            $scripts->register('page-site', 'system/site:app/bundle/page-site.js', ['~site-edit', 'editor']);
+            $scripts->register('link-page', 'system/site:app/bundle/link-page.js', '~panel-link');
+            $scripts->register('node-page', 'system/site:app/bundle/node-page.js', ['~site-edit', 'editor']);
         },
 
         'model.node.saved' => function ($event, $node) use ($app) {
-            $app->config($app['theme']->name)->set('_nodes.'.$node->id, $node->theme);
+            $app->config($app['theme']->name)->set('_nodes.' . $node->id, $node->theme);
         }
 
     ]

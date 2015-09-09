@@ -45,7 +45,7 @@
     <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
         <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-xlarge" v-if="time">{{ time | date format }}</h1>
 
-        <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date 'long' }}</h2>
+        <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date 'longDate' }}</h2>
         <div class="uk-margin-large-top uk-flex uk-flex-middle uk-flex-space-between uk-flex-wrap" data-uk-margin>
             <h3 class="uk-margin-remove" v-if="widget.city">{{ widget.city }}</h3>
             <h3 class="uk-flex uk-flex-middle uk-margin-remove" v-if="status=='done'">{{ temperature }} <img class="uk-margin-small-left" v-attr="src: icon" width="25" height="25" alt="Weather"></h3>
@@ -89,7 +89,7 @@
                 icon: '',
                 temp: 0,
                 time: 0,
-                format: {time: 'short'}
+                format: 'shortTime'
             };
         },
 

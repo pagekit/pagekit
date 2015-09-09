@@ -4,9 +4,6 @@
 
     <h1 class="uk-article-title">{{ 'Your Profile' | trans }}</h1>
 
-    <div class="uk-alert uk-alert-success" v-show="message">{{ message }}</div>
-    <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
-
     <div class="uk-form-row">
         <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
         <div class="uk-form-controls">

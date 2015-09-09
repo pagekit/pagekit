@@ -1,14 +1,14 @@
 var installer = {
 
     data: function () {
-        return {
+        return _.merge({
             step: 'start',
             status: '',
             message: '',
             config: {},
             option: {},
             user: {}
-        };
+        }, window.$installer);
     },
 
     ready: function () {
@@ -25,6 +25,8 @@ var installer = {
 
                 var vm = this, current = this.$$[this.step], next = this.$$[step];
 
+                this.$compile(next);
+
                 UIkit.Utils.animate(current, 'uk-animation-slide-left uk-animation-reverse').then(function () {
 
                     current.style.display = 'none';
@@ -37,6 +39,21 @@ var installer = {
             } else {
                 this.$set('step', step);
             }
+        },
+
+        stepLanguage: function (e) {
+            e.preventDefault();
+
+            this.$asset({js: [this.$url.route('system/intl/:locale', {locale: this.locale})]}, function () {
+
+                this.$set('option.system.admin.locale', this.locale);
+                this.$set('option.system.site.locale', this.locale);
+
+                this.$locale = window.$locale;
+                this.gotoStep('database');
+
+            });
+
         },
 
         stepDatabase: function (e) {

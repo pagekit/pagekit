@@ -1,7 +1,7 @@
 module.exports = {
 
     bind: function () {
-        this.vm.$add(this.arg);
+        this.vm.$set(this.arg);
     },
 
     unbind: function () {

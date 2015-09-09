@@ -94,12 +94,12 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $resolved = [];
 
         if (is_string($modules)) {
-            $modules = (array) $modules;
+            $modules = (array)$modules;
         }
 
         $this->registerModules();
 
-        foreach ((array) $modules as $name) {
+        foreach ((array)$modules as $name) {
 
             if (!isset($this->registered[$name])) {
                 throw new \RuntimeException("Undefined module: $name");
@@ -136,7 +136,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
      */
     public function addPath($paths)
     {
-        $this->paths = array_merge($this->paths, (array) $paths);
+        $this->paths = array_merge($this->paths, (array)$paths);
 
         return $this;
     }
@@ -172,7 +172,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Adds a module factory.
      *
-     * @param  string                    $type
+     * @param  string $type
      * @param  FactoryInterface|callable $factory
      * @return self
      */
@@ -264,7 +264,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
                 $module['path'] = strtr(dirname($p), '\\', '/');
 
                 if (isset($module['include'])) {
-                    foreach ((array) $module['include'] as $include) {
+                    foreach ((array)$module['include'] as $include) {
                         $includes[] = $this->resolvePath($module, $include);
                     }
                 }
@@ -292,7 +292,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $unresolved[$module['name']] = $module;
 
         if (isset($module['require'])) {
-            foreach ((array) $module['require'] as $required) {
+            foreach ((array)$module['require'] as $required) {
                 if (!isset($resolved[$required])) {
 
                     if (isset($unresolved[$required])) {
@@ -313,7 +313,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
     /**
      * Resolves a path to a absolute module path.
      *
-     * @param  array  $module
+     * @param  array $module
      * @param  string $path
      * @return string
      */
@@ -322,7 +322,7 @@ class ModuleManager implements \ArrayAccess, \IteratorAggregate
         $path = strtr($path, '\\', '/');
 
         if (!($path[0] == '/' || (strlen($path) > 3 && ctype_alpha($path[0]) && $path[1] == ':' && $path[2] == '/'))) {
-            $path = $module['path']."/$path";
+            $path = $module['path'] . "/$path";
         }
 
         return $path;

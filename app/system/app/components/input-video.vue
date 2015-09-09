@@ -118,7 +118,7 @@
     Vue.component('input-video', function (resolve, reject) {
         Vue.asset({
             js: [
-                'vendor/assets/uikit/js/components/upload.min.js',
+                'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
         }, function () {

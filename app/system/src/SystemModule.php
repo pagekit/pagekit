@@ -6,7 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Module\Module;
 use Pagekit\System\Migration\FilesystemLoader;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class SystemModule extends Module
 {
@@ -16,18 +15,19 @@ class SystemModule extends Module
     public function main(App $app)
     {
         $app['system'] = $this;
+        $app['isAdmin'] = false;
 
         $app->factory('finder', function () {
             return Finder::create();
         });
 
-        $app->module('auth')->config['rememberme.key'] = $this->config('key');
+        $app->module('auth')->config['rememberme.key'] = $this->config('secret');
 
         $app['db.em']; // -TODO- fix me
 
         $theme = $this->config('site.theme');
 
-        foreach (array_merge($this->config['extensions'], (array) $theme) as $module) {
+        foreach (array_merge($this->config['extensions'], (array)$theme) as $module) {
             try {
                 $app['module']->load($module);
             } catch (\RuntimeException $e) {
@@ -52,10 +52,6 @@ class SystemModule extends Module
 
             return $view->addGlobal('theme', $app['theme']);
         });
-
-        $app->extend('migrator', function ($migrator) {
-            return $migrator->setLoader(new FilesystemLoader());
-        });
     }
 
     /**
@@ -72,43 +68,12 @@ class SystemModule extends Module
             $menu = new SystemMenu();
 
             foreach (App::module() as $module) {
-                foreach ((array) $module->get('menu') as $id => $item) {
+                foreach ((array)$module->get('menu') as $id => $item) {
                     $menu->addItem($id, $item);
                 }
             }
         }
 
         return $menu;
-    }
-
-    /**
-     * Loads language files.
-     *
-     * @param string              $locale
-     * @param TranslatorInterface $translator
-     */
-    public function loadLocale($locale, TranslatorInterface $translator = null)
-    {
-        $translator = $translator ?: App::translator();
-
-        foreach (App::module() as $module) {
-
-            $domains = [];
-            $files   = glob($module->get('path')."/languages/{$locale}/*") ?: [];
-
-            foreach ($files as $file) {
-
-                $format = substr(strrchr($file, '.'), 1);
-                $domain = basename($file, '.'.$format);
-
-                if (in_array($domain, $domains)) {
-                    continue;
-                }
-
-                $domains[] = $domain;
-
-                $translator->addResource($format, $file, $locale, $domain);
-            }
-        }
     }
 }

@@ -45,7 +45,6 @@ return [
         'cookie',
         'database',
         'filesystem',
-        'intl',
         'log',
         'session',
         'view'

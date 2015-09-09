@@ -8,18 +8,19 @@ class FilterManager
      * @var array
      */
     protected $defaults = [
-        'addrelnofollow' => 'Pagekit\Filter\AddRelNofollow',
-        'alnum'          => 'Pagekit\Filter\Alnum',
-        'alpha'          => 'Pagekit\Filter\Alpha',
-        'bool'           => 'Pagekit\Filter\Boolean',
-        'boolean'        => 'Pagekit\Filter\Boolean',
-        'digits'         => 'Pagekit\Filter\Digits',
-        'int'            => 'Pagekit\Filter\Int',
-        'integer'        => 'Pagekit\Filter\Int',
-        'json'           => 'Pagekit\Filter\Json',
-        'pregreplace'    => 'Pagekit\Filter\PregReplace',
-        'string'         => 'Pagekit\Filter\String',
-        'stripnewlines'  => 'Pagekit\Filter\StripNewlines'
+        'addrelnofollow' => 'Pagekit\Filter\AddRelNofollowFilter',
+        'alnum'          => 'Pagekit\Filter\AlnumFilter',
+        'alpha'          => 'Pagekit\Filter\AlphaFilter',
+        'bool'           => 'Pagekit\Filter\BooleanFilter',
+        'boolean'        => 'Pagekit\Filter\BooleanFilter',
+        'digits'         => 'Pagekit\Filter\DigitsFilter',
+        'int'            => 'Pagekit\Filter\IntFilter',
+        'integer'        => 'Pagekit\Filter\IntFilter',
+        'json'           => 'Pagekit\Filter\JsonFilter',
+        'pregreplace'    => 'Pagekit\Filter\PregReplaceFilter',
+        'slugify'        => 'Pagekit\Filter\SlugifyFilter',
+        'string'         => 'Pagekit\Filter\StringFilter',
+        'stripnewlines'  => 'Pagekit\Filter\StripNewlinesFilter'
     ];
 
     /**
@@ -39,7 +40,31 @@ class FilterManager
     }
 
     /**
-     * Gets a filter by name.
+     * Apply shortcut.
+     *
+     * @see apply()
+     */
+    public function __invoke($value, $name, array $options = [])
+    {
+        return $this->apply($value, $name, $options);
+    }
+
+    /**
+     * Apply a filter.
+     *
+     * @param  mixed  $value
+     * @param  string $name
+     * @param  array  $options
+     * @return FilterInterface The filter
+     * @throws \InvalidArgumentException
+     */
+    public function apply($value, $name, array $options = [])
+    {
+        return $this->get($name, $options)->filter($value);
+    }
+
+    /**
+     * Gets a filter.
      *
      * @param  string $name
      * @param  array  $options

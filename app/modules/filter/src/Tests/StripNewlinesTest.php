@@ -2,6 +2,8 @@
 
 namespace Pagekit\Filter\Tests;
 
+use Pagekit\Filter\StripNewlinesFilter;
+
 class StripNewlinesTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -9,7 +11,7 @@ class StripNewlinesTest extends \PHPUnit_Framework_TestCase
      */
     public function testFilter($input, $output)
     {
-        $filter = new \Pagekit\Filter\StripNewlines;
+        $filter = new StripNewlinesFilter;
 
         $this->assertEquals($output, $filter->filter($input));
     }

@@ -3,11 +3,10 @@
   "dependencies": {
     "lodash": "~3.10.0",
     "uikit": "#master",
-    "vue": "~0.12.9",
-    "vue-resource": "~0.1.11"
+    "vue": "~0.12.12",
+    "vue-resource": "~0.1.14"
   },
   "devDependencies": {
-    "globalize": "~1.0.0",
     "js-md5": "~1.1.0"
   },
   "private": true

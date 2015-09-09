@@ -49,7 +49,7 @@ class NodeApiController
             unset($data['id']);
         }
 
-        if (!$data['slug'] = $this->slugify($data['slug'] ?: $data['title'])) {
+        if (!$data['slug'] = App::filter($data['slug'] ?: $data['title'], 'slugify')) {
             App::abort(400, __('Invalid slug.'));
         }
 
@@ -139,17 +139,5 @@ class NodeApiController
 
         App::config('system/site')->set('frontpage', $id);
         return ['message' => 'success'];
-    }
-
-    protected function slugify($slug)
-    {
-        $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
-        $slug = str_replace('-', ' ', $slug);
-        $slug = preg_replace('#[:\#\*"@+=;!><&\.%()\]\/\'\\\\|\[]#', "\x20", $slug);
-        $slug = str_replace('?', '', $slug);
-        $slug = trim(mb_strtolower($slug, 'UTF-8'));
-        $slug = preg_replace('#\x20+#', '-', $slug);
-
-        return $slug;
     }
 }

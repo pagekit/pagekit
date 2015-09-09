@@ -47,7 +47,6 @@ module.exports = {
     methods: {
 
         save: function (e) {
-
             e.preventDefault();
 
             this.$broadcast('save', {widget: this.widget});
@@ -55,7 +54,7 @@ module.exports = {
                 this.$dispatch('saved');
 
                 if (!this.widget.id) {
-                    window.history.replaceState({}, '', this.$url.route('admin/site/widget/edit', {id: data.widget.id}))
+                    window.history.replaceState({}, '', this.$url.route('admin/site/widget/edit', {id: data.widget.id}));
                 }
 
                 this.$set('widget', data.widget);

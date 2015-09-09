@@ -15,12 +15,15 @@
         <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
             <div class="tm-container">
 
-                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large-black.svg') ?>" width="120" height="120" alt="Pagekit">
+                <img class="uk-margin-large-bottom" src="<?= $view->url()->getStatic('app/system/assets/images/pagekit-logo-large-black.svg') ?>" alt="Pagekit">
 
                 <form class="uk-panel uk-panel-box" action="<?= $view->url('@system/migration/migrate') ?>">
                     <h1><?= __('Update Pagekit') ?></h1>
                     <p><?= __('Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.') ?></p>
                     <p>
+                        <?php if ($redirect): ?>
+                            <input type="hidden" name="redirect" value="<?php echo $redirect ?>">
+                        <?php endif; ?>
                         <button class="uk-button uk-button-primary" type="submit" value=""><?= __('Update') ?></button>
                         <?php $view->token()->get() ?>
                     </p>

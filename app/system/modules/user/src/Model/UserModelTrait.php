@@ -13,7 +13,7 @@ trait UserModelTrait
      */
     public static function findByUsername($username)
     {
-        return self::where(compact('username'))->first();
+        return static::where(compact('username'))->first();
     }
 
     /**
@@ -21,7 +21,7 @@ trait UserModelTrait
      */
     public static function findByEmail($email)
     {
-        return self::where(compact('email'))->first();
+        return static::where(compact('email'))->first();
     }
 
     /**
@@ -29,7 +29,7 @@ trait UserModelTrait
      */
     public static function findByLogin($login)
     {
-        return self::where(['username' => $login])->orWhere(['email' => $login])->first();
+        return static::where(['username' => $login])->orWhere(['email' => $login])->first();
     }
 
     /**
@@ -37,7 +37,7 @@ trait UserModelTrait
      */
     public static function updateLogin(User $user)
     {
-        self::where(['id' => $user->id])->update(['login' => date('Y-m-d H:i:s')]);
+        static::where(['id' => $user->id])->update(['login' => date('Y-m-d H:i:s')]);
     }
 
     /**
@@ -45,7 +45,7 @@ trait UserModelTrait
      */
     public static function updateAccess(User $user)
     {
-        self::where(['id' => $user->id])->update(['access' => date('Y-m-d H:i:s')]);
+        static::where(['id' => $user->id])->update(['access' => date('Y-m-d H:i:s')]);
     }
 
     /**

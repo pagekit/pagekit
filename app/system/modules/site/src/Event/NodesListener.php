@@ -60,7 +60,7 @@ class NodesListener implements EventSubscriberInterface
             if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
                 Node::create([
                     'title' => $route['label'],
-                    'slug' => $this->slugify($route['label']),
+                    'slug' => App::filter($route['label'], 'slugify'),
                     'type' => $type,
                     'status' => 1,
                     'link' => $route['name']
@@ -68,7 +68,6 @@ class NodesListener implements EventSubscriberInterface
             }
         }
     }
-
 
     public function onNodeInit($event, $node)
     {
@@ -93,23 +92,5 @@ class NodesListener implements EventSubscriberInterface
             'model.node.init' => 'onNodeInit',
             'model.role.deleted' => 'onRoleDelete'
         ];
-    }
-
-    /**
-     * Slugifys a string.
-     *
-     * @param  string $slug
-     * @return string
-     */
-    protected function slugify($slug)
-    {
-        $slug = preg_replace('/\xE3\x80\x80/', ' ', $slug);
-        $slug = str_replace('-', ' ', $slug);
-        $slug = preg_replace('#[:\#\*"@+=;!><&\.%()\]\/\'\\\\|\[]#', "\x20", $slug);
-        $slug = str_replace('?', '', $slug);
-        $slug = trim(mb_strtolower($slug, 'UTF-8'));
-        $slug = preg_replace('#\x20+#', '-', $slug);
-
-        return $slug;
     }
 }

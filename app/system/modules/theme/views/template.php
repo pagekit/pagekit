@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?= str_replace('_', '-', $app['intl']->getDefaultLocale()) ?>">
+<html lang="<?= str_replace('_', '-', $intl->getLocaleTag()) ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +15,15 @@
             <div class="uk-container uk-container-center">
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-hidden-small">
-                    <div class="tm-headerbar-primary uk-flex uk-flex-middle" data-uk-dropdown="{mode:'click'}">
+                    <div class="tm-headerbar-primary" data-uk-dropdown="{mode:'click'}">
 
-                        <i class="tm-icon-menu"></i>
-
-                        <h1 class="tm-heading" v-text="item.label | trans"></h1>
+                        <div class="tm-cursor-pointer uk-flex uk-flex-middle">
+                            <i class="tm-icon-menu"></i>
+                            <h1 class="tm-heading" v-text="item.label | trans"></h1>
+                        </div>
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
-                            <ul class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }"  v-el="appnav">
+                            <ul id="js-appnav" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                                 <li v-repeat="item: nav" data-id="{{ item.id }}">
                                     <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
                                         <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">

@@ -8,11 +8,11 @@ module.exports = {
 
         this.$asset({
             css: [
-                'vendor/assets/codemirror/hint.css',
-                'vendor/assets/codemirror/codemirror.css'
+                'app/assets/codemirror/hint.css',
+                'app/assets/codemirror/codemirror.css'
             ],
             js: [
-                'vendor/assets/codemirror/codemirror.js'
+                'app/assets/codemirror/codemirror.js'
             ]
 
         }, function () {

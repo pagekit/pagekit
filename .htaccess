@@ -1,5 +1,5 @@
 # Restricted access to files
-<FilesMatch "\.(cache|db|log|po|pot|sql)$">
+<FilesMatch "((\.(lock|cache|db))|installed.json)$">
     Order allow,deny
 </FilesMatch>
 
@@ -20,6 +20,10 @@ Options -Indexes
 
     <IfModule mod_env.c>
         SetEnv HTTP_MOD_REWRITE On
+    </IfModule>
+
+    <IfModule mod_headers.c>
+        RequestHeader set MOD_REWRITE "On"
     </IfModule>
 
 </IfModule>

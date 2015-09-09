@@ -22,7 +22,7 @@
     <filter>
         <whitelist>
             <exclude>
-                <directory>./vendor/</directory>
+                <directory>./app/vendor/</directory>
                 <directory>./*/src/*/Tests/</directory>
                 <directory>./*/src/Tests</directory>
             </exclude>

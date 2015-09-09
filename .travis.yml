@@ -16,7 +16,7 @@ install:
     - composer install --prefer-source
 
 script:
-    - php vendor/bin/phpunit
+    - php app/vendor/bin/phpunit
 
 matrix:
     allow_failures:

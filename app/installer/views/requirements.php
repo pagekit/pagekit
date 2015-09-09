@@ -5,8 +5,8 @@
         <title>Pagekit Installer Errors</title>
         <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
         <link href="app/system/modules/installer/assets/css/installer.css" rel="stylesheet">
-        <script src="vendor/assets/jquery/dist/jquery.min.js"></script>
-        <script src="vendor/assets/uikit/js/uikit.min.js"></script>
+        <script src="app/assets/jquery/dist/jquery.min.js"></script>
+        <script src="app/assets/uikit/js/uikit.min.js"></script>
     </head>
     <body class="uk-height-1-1">
 

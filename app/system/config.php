@@ -4,13 +4,13 @@ return [
 
     'application' => [
 
-        'version' => '0.8.8'
+        'version' => '0.9.0'
 
     ],
 
     'debug' => [
 
-        'file' => "sqlite:$path/app/database/debug.db"
+        'file' => "sqlite:$path/tmp/temp/debug.db"
 
     ],
 
@@ -39,7 +39,7 @@ return [
                 'driverOptions' => [
                     'userDefinedFunctions' => [
                         'REGEXP' => [
-                            'callback' => function($pattern, $subject) {
+                            'callback' => function ($pattern, $subject) {
                                 return preg_match("/$pattern/", $subject);
                             },
                             'numArgs' => 2

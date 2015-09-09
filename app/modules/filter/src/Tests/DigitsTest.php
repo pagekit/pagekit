@@ -2,19 +2,19 @@
 
 namespace Pagekit\Filter\Tests;
 
-use Pagekit\Filter\Digits;
+use Pagekit\Filter\DigitsFilter;
 
 class DigitsTest extends \PHPUnit_Framework_TestCase
 {
     public function testFilter()
     {
-        $filter = new Digits;
+        $filter = new DigitsFilter;
 
         $values = [
             /* here are the ones the filter should not change */
             "123"   => "123",
             /* now the ones the filter has to fix */
-            "abc"   => "", 
+            "abc"   => "",
             "äöü"   => "", // unicode support please
             "?"     => "",
             "     " => "",
