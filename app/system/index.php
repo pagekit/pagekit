@@ -59,8 +59,6 @@ return [
 
     'config' => [
 
-        'api' => 'http://pagekit.com',
-
         'site' => [
 
             'theme' => null,

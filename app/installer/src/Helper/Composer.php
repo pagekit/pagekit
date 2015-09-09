@@ -34,21 +34,20 @@ class Composer
     protected $file = 'packages.php';
 
     /**
-     * @param $paths
+     * @param $config
      * @param $api
      * @param null $output
      */
-    public function __construct($paths, $api, $output = null)
+    public function __construct($config, $output = null)
     {
-        $this->paths = $paths;
-        $this->api = $api;
+        $this->paths = $config;
         $this->output = $output;
 
-        $this->file = $paths['path.packages'] . '/' . $this->file;
+        $this->file = $config['path.packages'] . '/' . $this->file;
         $this->blueprint = [
             'repositories' => [
-                ['type' => 'artifact', 'url' => $paths['path.artifact']],
-                ['type' => 'composer', 'url' => $api]
+                ['type' => 'artifact', 'url' => $config['path.artifact']],
+                ['type' => 'composer', 'url' => $config['system.api']]
             ]
         ];
     }

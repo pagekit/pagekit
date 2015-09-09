@@ -95,7 +95,7 @@ class SelfupdateCommand extends Command
     protected function getVersions()
     {
         try {
-            $res = $this->client->get($this->container->get('system')->config('api') . '/update');
+            $res = $this->client->get($this->container->get('system.api') . '/update');
         } catch (\Exception $e) {
             if ($e instanceof TransferException) {
                 throw new \RuntimeException('Could not obtain latest Version.');

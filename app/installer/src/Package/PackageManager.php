@@ -25,12 +25,12 @@ class PackageManager
     {
         $this->output = $output ?: new StreamOutput(fopen('php://output', 'w'));
 
-        $paths = array_flip(['path.temp', 'path.cache', 'path.vendor', 'path.artifact', 'path.packages']);
-        array_walk($paths, function (&$value, $key) {
+        $config = array_flip(['path.temp', 'path.cache', 'path.vendor', 'path.artifact', 'path.packages', 'system.api']);
+        array_walk($config, function (&$value, $key) {
             $value = App::get($key);
         });
 
-        $this->composer = new Composer($paths, App::get('system')->config('api'), $output);
+        $this->composer = new Composer($config, $output);
     }
 
     /**

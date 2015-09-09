@@ -25,7 +25,8 @@ $config = array(
     'path.logs'     => $path.'/tmp/logs',
     'path.vendor'   => $path.'/vendor',
     'path.artifact' => $path.'/tmp/packages',
-    'config.file'   => realpath($path.'/config.php')
+    'config.file'   => realpath($path.'/config.php'),
+    'system.api'    => 'http://pagekit.com'
 );
 
 if (!$config['config.file']) {

@@ -19,7 +19,7 @@ class UpdateController
                 'name' => 'installer:views/update.php'
             ],
             '$data' => [
-                'api' => App::system()->config('api'),
+                'api' => App::get('system.api'),
                 'version' => App::version(),
                 'channel' => 'stable'
             ]

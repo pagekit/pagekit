@@ -33,7 +33,7 @@ class PackageController
                 'name' => 'installer:views/themes.php'
             ],
             '$data' => [
-                'api' => App::system()->config('api'),
+                'api' => App::get('system.api'),
                 'packages' => $packages
             ]
         ];
@@ -63,7 +63,7 @@ class PackageController
                 'name' => 'installer:views/extensions.php'
             ],
             '$data' => [
-                'api' => App::system()->config('api'),
+                'api' => App::get('system.api'),
                 'packages' => $packages
             ]
         ];
