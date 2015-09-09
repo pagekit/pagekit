@@ -23,25 +23,21 @@ module.exports = {
             }, success).error(function () {});
         },
 
-        enablePackage: function (pkg, reload) {
+        enablePackage: function (pkg) {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}, function (data) {
                 if (!data.error) {
                     pkg.$set('enabled', true);
-                    if (reload !== false) {
-                        document.location.reload();
-                    }
+                    document.location.reload();
                 }
             });
         },
 
-        disablePackage: function (pkg, reload) {
+        disablePackage: function (pkg) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name}, function (data) {
 
                 if (!data.error) {
                     pkg.$set('enabled', false);
-                    if (reload !== false) {
-                        document.location.reload();
-                    }
+                    document.location.reload();
                 }
             });
         },
