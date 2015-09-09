@@ -145,7 +145,7 @@ class Composer
         $composer = Factory::create($this->getIO(), $config);
         $composer->setLocker(new Locker(
             $this->getIO(),
-            new JsonFile(preg_replace('/\.php$/i', '.lock', $this->paths['path.packages'] . '/' . $this->file)),
+            new JsonFile(preg_replace('/\.php$/i', '.lock', $this->file)),
             $composer->getRepositoryManager(),
             $composer->getInstallationManager(),
             md5(json_encode($config))
