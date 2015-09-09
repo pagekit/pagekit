@@ -39,7 +39,7 @@ return [
         'response' => function ($event, $request, $response) use ($app) {
             if (isset($app['cookie.init'])) {
                 foreach ($app['cookie']->getQueuedCookies() as $cookie) {
-                    $$response->headers->setCookie($cookie);
+                    $response->headers->setCookie($cookie);
                 }
             }
         }
