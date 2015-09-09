@@ -10,7 +10,7 @@ return [
 
     'application' => [
 
-        'debug' => true
+        'debug' => false
 
     ],
 

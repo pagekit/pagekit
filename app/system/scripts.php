@@ -20,7 +20,7 @@ return [
         if ($util->tableExists('@system_node') === false) {
             $util->createTable('@system_node', function ($table) {
                 $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
-                $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10]);
+                $table->addColumn('parent_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('status', 'smallint');
                 $table->addColumn('title', 'string', ['length' => 255]);
@@ -105,9 +105,9 @@ return [
         }
 
         $app['config']->set('system/dashboard', [
-          '55dda578e93b5' => ['type' => 'location', 'column' => 1, 'idx' => 0, 'units' => 'metric', 'id' => '55dda578e93b5', 'uid' => 2911298, 'city' => 'Hamburg', 'country' => 'DE', 'coords' => ['lon' => 10, 'lat' => 53.549999]],
-          '55dda581d5781' => ['type' => 'feed', 'column' => 2, 'idx' => 0, 'count' => 5, 'content' => '1', 'id' => '55dda581d5781', 'title' => 'Pagekit News', 'url' => 'http://pagekit.com/blog/feed'],
-          '55dda6e3dd661' => ['type' => 'user', 'column' => 0, 'idx' => 100, 'show' => 'registered', 'display' => 'thumbnail', 'total' => '1', 'count' => 12, 'id' => '55dda6e3dd661']
+            '55dda578e93b5' => ['type' => 'location', 'column' => 1, 'idx' => 0, 'units' => 'metric', 'id' => '55dda578e93b5', 'uid' => 2911298, 'city' => 'Hamburg', 'country' => 'DE', 'coords' => ['lon' => 10, 'lat' => 53.549999]],
+            '55dda581d5781' => ['type' => 'feed', 'column' => 2, 'idx' => 0, 'count' => 5, 'content' => '1', 'id' => '55dda581d5781', 'title' => 'Pagekit News', 'url' => 'http://pagekit.com/blog/feed'],
+            '55dda6e3dd661' => ['type' => 'user', 'column' => 0, 'idx' => 100, 'show' => 'registered', 'display' => 'thumbnail', 'total' => '1', 'count' => 12, 'id' => '55dda6e3dd661']
         ]);
 
         $app['config']->set('system/site', [
