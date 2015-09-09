@@ -1,6 +1,6 @@
 jQuery(function () {
 
-    var Component = _.merge(require('../components/package-manager.js'),
+    window.Themes = _.merge(require('../components/package-manager.js'),
         {
             filters: {
                 themeorder: function (packages) {
@@ -16,6 +16,6 @@ jQuery(function () {
             }
         });
 
-    (new Vue(Component)).$mount('#themes');
+    (new Vue(window.Themes)).$mount('#themes');
 
 });

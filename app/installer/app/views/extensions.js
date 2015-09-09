@@ -1,7 +1,7 @@
 jQuery(function () {
 
-    var Component = _.merge(require('../components/package-manager.js'), {});
+    window.Extensions = _.merge(require('../components/package-manager.js'), {});
 
-    (new Vue(Component)).$mount('#extensions');
+    (new Vue(window.Extensions)).$mount('#extensions');
 
 });
