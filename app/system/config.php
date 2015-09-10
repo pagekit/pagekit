@@ -33,7 +33,7 @@ return [
             'sqlite' => [
 
                 'driver' => 'pdo_sqlite',
-                'path' => "$path/app/database/pagekit.db",
+                'path' => "$path/pagekit.db",
                 'charset' => 'utf8',
                 'prefix' => '',
                 'driverOptions' => [
