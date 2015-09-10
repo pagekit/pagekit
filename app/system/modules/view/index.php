@@ -84,6 +84,7 @@ return [
             $scripts->register('uikit-sticky', 'app/assets/uikit/js/components/sticky.min.js', 'uikit');
             $scripts->register('uikit-upload', 'app/assets/uikit/js/components/upload.min.js', 'uikit');
             $scripts->register('uikit-lightbox', 'app/assets/uikit/js/components/lightbox.min.js', 'uikit');
+            $scripts->register('uikit-parallax', 'app/assets/uikit/js/components/parallax.min.js', 'uikit');
             $scripts->register('uikit-timepicker', 'app/assets/uikit/js/components/timepicker.js', 'uikit-autocomplete');
             $scripts->register('vue', 'app/system/app/bundle/vue.js', ['vue-dist', 'jquery', 'lodash', 'locale']);
             $scripts->register('vue-dist', 'app/assets/vue/dist/'.($app->debug() ? 'vue.js' : 'vue.min.js'));
