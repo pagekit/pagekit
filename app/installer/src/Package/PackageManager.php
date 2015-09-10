@@ -96,7 +96,7 @@ class PackageManager
 
         if (isset($scripts['updates'])) {
             $updates = $this->filterUpdates($scripts['updates'], $current);
-            $this->doUpdate($updates);
+            $this->execute($updates);
         }
 
         $this->trigger('enable', $this->loadScripts($package));
