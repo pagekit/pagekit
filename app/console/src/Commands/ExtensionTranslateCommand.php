@@ -46,7 +46,7 @@ class ExtensionTranslateCommand extends Command
 
         $this->line("Extracting strings for extension '$extension'");
 
-        chdir($this->config['path']);
+        chdir($this->container->path());
 
         if (!is_dir($languages)) {
             mkdir($languages, 0755, true);
@@ -170,10 +170,10 @@ class ExtensionTranslateCommand extends Command
 
         if ($extension == "system") {
             // add installer files
-            $files->in($this->config['path'].'/app/installer');
+            $files->in($this->container->path().'/app/installer');
         }
 
-        return $files->name('*.{php}');
+        return $files->name('*.{php,vue}');
     }
 
     /**
@@ -186,10 +186,10 @@ class ExtensionTranslateCommand extends Command
     {
         if ($path == 'system') {
             // system module
-            $root = $this->config['path'].'/app';
+            $root = $this->container->path().'/app';
         } else {
             // extensions
-            $root = $this->config['path.extensions'];
+            $root = $this->container->path().'/packages';
         }
 
         if (!is_dir($path = "$root/$path")) {
