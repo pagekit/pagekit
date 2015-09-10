@@ -64,7 +64,7 @@ class PackageManager
 
             $this->disable($package);
             $this->trigger('uninstall', $this->loadScripts($package));
-            App::config('system')->pull('packages', $package->get('module'));
+            App::config('system')->remove('packages.' . $package->get('module'));
 
             if ($this->composer->isInstalled($package->getName())) {
                 $this->composer->uninstall($package->getName());
@@ -98,6 +98,9 @@ class PackageManager
             $updates = $this->filterUpdates($scripts['updates'], $current);
             $this->execute($updates);
         }
+
+        $version = $this->getVersion($package);
+        App::config('system')->set('packages.' . $package->get('module'), $version);
 
         $this->trigger('enable', $this->loadScripts($package));
 
