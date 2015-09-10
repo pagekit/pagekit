@@ -17,11 +17,6 @@ class ModuleManager implements \IteratorAggregate
     /**
      * @var array
      */
-    protected $paths = [];
-
-    /**
-     * @var array
-     */
     protected $modules = [];
 
     /**
@@ -105,8 +100,6 @@ class ModuleManager implements \IteratorAggregate
             $modules = (array) $modules;
         }
 
-        $this->registerModules();
-
         foreach ((array) $modules as $name) {
 
             if (!isset($this->registered[$name])) {
@@ -135,16 +128,42 @@ class ModuleManager implements \IteratorAggregate
     }
 
     /**
-     * Adds a module path(s).
+     * Registers modules from path(s).
      *
      * @param  string|array $paths
      * @param  string $basePath
      * @return self
      */
-    public function addPath($paths, $basePath = null)
+    public function register($paths, $basePath = null)
     {
+        $app = $this->app;
+        $includes = [];
+
         foreach ((array) $paths as $path) {
-            $this->paths[] = $this->resolvePath($path, $basePath);
+
+            $files = glob($this->resolvePath($path, $basePath), GLOB_NOSORT) ?: [];
+
+            foreach ($files as $file) {
+
+                if (!is_array($module = include $file) || !isset($module['name'])) {
+                    continue;
+                }
+
+                $module = array_replace($this->defaults, $module);
+                $module['path'] = strtr(dirname($file), '\\', '/');
+
+                if (isset($module['include'])) {
+                    foreach ((array) $module['include'] as $include) {
+                        $includes[] = $this->resolvePath($include, $module['path']);
+                    }
+                }
+
+                $this->registered[$module['name']] = $module;
+            }
+        }
+
+        if ($includes) {
+            $this->register($includes);
         }
 
         return $this;
@@ -183,43 +202,6 @@ class ModuleManager implements \IteratorAggregate
     }
 
     /**
-     * Register modules from paths.
-     */
-    protected function registerModules()
-    {
-        $includes = [];
-
-        $app = $this->app;
-
-        foreach ($this->paths as $path) {
-
-            $paths = glob($path, GLOB_NOSORT) ?: [];
-
-            foreach ($paths as $p) {
-
-                if (!is_array($module = include $p) || !isset($module['name'])) {
-                    continue;
-                }
-
-                $module = array_replace($this->defaults, $module);
-                $module['path'] = strtr(dirname($p), '\\', '/');
-
-                if (isset($module['include'])) {
-                    foreach ((array) $module['include'] as $include) {
-                        $includes[] = $this->resolvePath($include, $module['path']);
-                    }
-                }
-
-                $this->registered[$module['name']] = $module;
-            }
-        }
-
-        if ($this->paths = $includes) {
-            $this->registerModules();
-        }
-    }
-
-    /**
      * Resolves module requirements.
      *
      * @param array $module
@@ -228,7 +210,7 @@ class ModuleManager implements \IteratorAggregate
      *
      * @throws \RuntimeException
      */
-    protected function resolveModules($module, &$resolved = [], &$unresolved = [])
+    protected function resolveModules(array $module, array &$resolved = [], array &$unresolved = [])
     {
         $unresolved[$module['name']] = $module;
 

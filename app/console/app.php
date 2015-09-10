@@ -10,7 +10,7 @@ $loader = require $path.'/autoload.php';
 $app = new App($config);
 $app['autoloader'] = $loader;
 
-$app['module']->addPath([
+$app['module']->register([
     'packages/*/*/index.php',
     'app/modules/*/index.php',
     'app/installer/index.php',

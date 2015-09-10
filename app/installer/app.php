@@ -16,7 +16,7 @@ if ($failed = $requirements->getFailedRequirements()) {
 $app = new App($config);
 $app['autoloader'] = $loader;
 
-$app['module']->addPath([
+$app['module']->register([
     'app/modules/*/index.php',
     'app/installer/index.php',
     'app/system/index.php'

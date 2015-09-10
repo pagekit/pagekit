@@ -24,7 +24,7 @@ class WidgetManager extends ModuleManager
      */
     public function get($name)
     {
-        $this->load();
+        $this->load(array_keys($this->registered));
 
         return parent::get($name);
     }
@@ -34,18 +34,8 @@ class WidgetManager extends ModuleManager
      */
     public function all()
     {
-        $this->load();
+        $this->load(array_keys($this->registered));
 
         return parent::all();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function load($modules = null)
-    {
-        $this->registerModules();
-
-        return parent::load(array_keys($this->registered));
     }
 }

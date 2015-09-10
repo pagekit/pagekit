@@ -29,7 +29,7 @@ return [
         $app['module']->addLoader(function ($module) use ($app) {
 
             if (isset($module['widgets'])) {
-                $app['widget']->addPath($module['widgets'], $module['path']);
+                $app['widget']->register($module['widgets'], $module['path']);
             }
 
             return $module;
