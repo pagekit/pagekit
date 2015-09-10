@@ -33,31 +33,17 @@ Navigate to the cloned directory and install PHP dependencies.
 composer install
 ```
 
-Install build tool dependencies.
+Install Node dependencies and build the front-end components:
 
 ```
 npm install
 ```
 
-Install asset dependencies (CSS & JS).
+To watch for local LESS asset changes, run `gulp watch`.
 
-```
-bower install
-```
+To watch for JS module changes, run `webpack --watch`.
 
-Compile LESS assets (run `gulp watch` to watch for local file changes).
-
-```
-gulp
-```
-
-Bundle JS modules (run `webpack --watch` to watch for local file changes)
-
-```
-webpack
-```
-
-When these commands have finished, point your browser to the Pagekit URL on your web server and follow the installer.
+When the installer havs finished, point your browser to the Pagekit URL on your web server and follow the installer.
 
 ## Stay up to date
 
