@@ -42,7 +42,7 @@ class WidgetManager extends ModuleManager
     /**
      * {@inheritdoc}
      */
-    public function load()
+    public function load($modules = null)
     {
         $this->registerModules();
 
