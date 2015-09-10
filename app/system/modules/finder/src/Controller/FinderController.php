@@ -24,7 +24,13 @@ class FinderController
         $data = array_fill_keys(['items'], []);
         $data['mode'] = $mode;
 
-        foreach (App::finder()->depth(0)->in($dir) as $file) {
+        $finder = App::finder();
+
+        $finder->sort(function ($a, $b) {
+            return $b->getRealpath() > $a->getRealpath() ? -1 : 1;
+        });
+
+        foreach ($finder->depth(0)->in($dir) as $file) {
 
             if ('-' === $mode = $this->getMode($file->getPathname())) {
                 continue;
