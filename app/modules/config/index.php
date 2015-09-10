@@ -47,7 +47,7 @@ return [
 
     'events' => [
 
-        'response' => [function () use ($app) {
+        'terminate' => [function () use ($app) {
             foreach ($app['config'] as $name => $config) {
                 $app['config']->set($name, $config);
             }
