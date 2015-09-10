@@ -26,7 +26,7 @@ class InstallerIO extends ConsoleIO
         if (PHP_SAPI != 'cli') {
 
             ob_implicit_flush(true);
-            ob_end_flush();
+            @ob_end_flush();
 
         }
     }
