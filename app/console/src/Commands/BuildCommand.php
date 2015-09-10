@@ -31,7 +31,7 @@ class BuildCommand extends Command
        '^app\/vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources',
        '^app\/vendor\/nickic\/php-parser\/(grammar|test_old)',
        '^app\/vendor\/(phpdocumentor|phpspec|phpunit|sebastian|symfony\/yaml)',
-       '^app\/vendor\/[^\/]+\/[^\/]+\/(build|bin|docs?|tests?|changelog|phpunit|upgrade?)',
+       '^app\/vendor\/[^\/]+\/[^\/]+\/(build|docs?|tests?|changelog|phpunit|upgrade?)',
        'node_modules'
    ];
 
