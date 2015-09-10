@@ -12,6 +12,7 @@
 /config.php
 /composer.lock
 /pagekit*.zip
+/pagekit.db
 node_modules
 .DS_Store
 .idea
