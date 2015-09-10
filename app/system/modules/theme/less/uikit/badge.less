@@ -1,0 +1,71 @@
+//
+// Component: Badge
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@badge-background:                              transparent;
+@badge-padding-horizontal:                      10px;
+@badge-font-size:                               round((@global-font-size * 0.78)); // 11px / 12px
+@badge-font-weight:                             normal;
+@badge-line-height:                             round((@badge-font-size * 2)); // 22px / 24px
+@badge-color:                                   @global-primary-background;
+@badge-text-transform:                          uppercase;
+@badge-hover-color:                             @global-primary-background;
+
+@badge-notification-font-size:                  round((@global-font-size * 0.78)); // 11px / 12px
+@badge-notification-line-height:                round((@badge-notification-font-size * 1.81)); // 20px / 22px
+
+@badge-success-background:                      transparent;
+@badge-warning-background:                      transparent;
+@badge-danger-background:                       transparent;
+
+
+// Component
+// ========================================================================
+
+.hook-badge() { border: 1px solid @global-primary-background; }
+
+
+// Color modifier
+// ========================================================================
+
+//
+// Modifier: `badge-success`
+//
+
+.hook-badge-success() {
+    border-color: @global-success-background;
+    color: @global-success-background;
+}
+
+//
+// Modifier: `badge-warning`
+//
+
+.hook-badge-warning() {
+    border-color: @global-warning-background;
+    color: @global-warning-background;
+}
+
+//
+// Modifier: `badge-danger`
+//
+
+.hook-badge-danger() {
+    border-color: @global-danger-background;
+    color: @global-danger-background;
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-badge-misc() {
+
+    .uk-badge-notification { padding: 0 7px; }
+
+}

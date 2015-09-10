@@ -1,0 +1,703 @@
+/* ========================================================================
+   Pagekit
+ ========================================================================== */
+
+[v-cloak] { display: none; }
+
+
+/* Sidebar
+========================================================================== */
+
+.pk-width-sidebar {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (200px + @global-grid-gutter); }
+
+}
+
+/*
+ * Large Gutter
+ */
+
+/* Desktop and bigger */
+@media (min-width: @breakpoint-large) {
+
+    /*
+     * Gutter
+     */
+
+    /* Horizontal */
+    .pk-grid-large { margin-left: -40px; }
+    .pk-grid-large > * { padding-left: 40px; }
+
+    /* Vertical */
+    .pk-grid-large + .pk-grid-large,
+    .pk-grid-large > .uk-grid-margin,
+    .pk-grid-large > * > .uk-panel + .uk-panel { margin-top: 40px; }
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (250px + 40px); }
+
+}
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    /*
+     * Gutter
+     */
+
+    /* Horizontal */
+    .pk-grid-large { margin-left: -50px; }
+    .pk-grid-large > * { padding-left: 50px; }
+
+    /* Vertical */
+    .pk-grid-large + .pk-grid-large,
+    .pk-grid-large > .uk-grid-margin,
+    .pk-grid-large > * > .uk-panel + .uk-panel { margin-top: 50px; }
+
+    /*
+     * Width
+     */
+
+    .pk-width-sidebar { width: (250px + 50px); }
+
+    .pk-width-sidebar-large { width: (270px + 50px); }
+
+}
+
+
+/* Modifier: Side Nav Large (System: Settings + Info, Site: Settings)
+========================================================================== */
+
+.pk-nav-large > li > a {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+
+/* Side Nav Sortable (Users: Roles)
+========================================================================== */
+
+.pk-sortable-dragged-list > * {
+    display: block;
+    padding: 8px 16px;
+    background: #fff;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+    color: @global-color;
+}
+
+
+/* Panel Sortable (Dashboard)
+========================================================================== */
+
+.pk-sortable {
+    padding: 0;
+    list-style: none;
+    min-height: 300px;
+}
+
+.pk-sortable > li + li { margin-top: @grid-gutter-vertical; }
+
+.pk-sortable-dragged-panel > * { box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+
+
+/* Modifier: Search
+========================================================================== */
+
+.pk-search {
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 1px solid @global-border;
+}
+
+
+/* SVG Icons
+ ========================================================================== */
+
+[class*='pk-icon-'] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    vertical-align: middle;
+}
+
+.pk-icon-contain { background-size: contain; }
+
+.pk-icon-delete { background-image: url("../../assets/images/icon-delete.svg"); }
+.pk-icon-block { background-image: url("../../assets/images/icon-block.svg"); }
+.pk-icon-check { background-image: url("../../assets/images/icon-check.svg"); }
+.pk-icon-copy { background-image: url("../../assets/images/icon-copy.svg"); }
+.pk-icon-warning { background-image: url("../../assets/images/icon-warning.svg"); }
+.pk-icon-edit { background-image: url("../../assets/images/icon-edit.svg"); }
+.pk-icon-comment { background-image: url("../../assets/images/icon-comment.svg"); }
+.pk-icon-schedule { background-image: url("../../assets/images/icon-schedule.svg"); }
+.pk-icon-spam { background-image: url("../../assets/images/icon-spam.svg"); }
+.pk-icon-thumbnails { background-image: url("../../assets/images/icon-thumbnails.svg"); }
+.pk-icon-table { background-image: url("../../assets/images/icon-table.svg"); }
+.pk-icon-reply { background-image: url("../../assets/images/icon-reply.svg"); }
+.pk-icon-calendar { background-image: url("../../assets/images/icon-calendar.svg"); }
+.pk-icon-time { background-image: url("../../assets/images/icon-time.svg"); }
+.pk-icon-info { background-image: url("../../assets/images/icon-info.svg"); }
+.pk-icon-permission { background-image: url("../../assets/images/icon-permission.svg"); }
+.pk-icon-select { background-image: url("../../assets/images/icon-select.svg"); }
+.pk-icon-home { background-image: url("../../assets/images/icon-home.svg"); }
+.pk-icon-home-active { background-image: url("../../assets/images/icon-home-active.svg"); }
+.pk-icon-settings { background-image: url("../../assets/images/icon-settings.svg"); }
+.pk-icon-refresh { background-image: url("../../assets/images/icon-refresh.svg"); }
+.pk-icon-star { background-image: url("../../assets/images/icon-star.svg"); }
+.pk-icon-share { background-image: url("../../assets/images/icon-share.svg"); }
+.pk-icon-move { background-image: url("../../assets/images/icon-move.svg"); }
+.pk-icon-pen { background-image: url("../../assets/images/icon-pen.svg"); }
+.pk-icon-link { background-image: url("../../assets/images/icon-link.svg"); }
+
+.pk-icon-folder-circle,
+.pk-icon-file-circle {
+    width: 30px;
+    height: 30px;
+    margin: -2px;
+}
+
+.pk-icon-folder-circle { background-image: url("../../assets/images/icon-folder-circle.svg"); }
+.pk-icon-file-circle { background-image: url("../../assets/images/icon-file-circle.svg"); }
+
+.pk-icon-arrow-up,
+.pk-icon-arrow-down {
+    width: 9px;
+    height: 11px;
+}
+
+.pk-icon-arrow-up { background-image: url("../../assets/images/icon-arrow-up.svg"); }
+.pk-icon-arrow-down { background-image: url("../../assets/images/icon-arrow-down.svg"); }
+
+[class*='pk-icon-circle'] {
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+    background: @global-muted-color;
+}
+
+.pk-icon-circle-primary { background: @global-primary-background; }
+.pk-icon-circle-success { background: @global-success-background; }
+.pk-icon-circle-danger { background: @global-danger-background; }
+.pk-icon-circle-warning { background: @global-warning-background; }
+
+/*
+ * Icon Hover
+ */
+
+.pk-icon-hover { opacity: 0.5; }
+
+.pk-icon-hover:hover,
+.uk-active > .pk-icon-hover { opacity: 1; }
+
+/*
+ * Icon Muted
+ */
+
+.pk-icon-muted { opacity: 0.3; }
+
+/*
+ * Icon Primary
+ */
+
+.pk-icon-primary.pk-icon-comment { background-image: url("../../assets/images/icon-comment-primary.svg"); }
+
+/*
+ * Icon Contrast
+ */
+
+.pk-icon-contrast.pk-icon-edit { background-image: url("../../assets/images/icon-edit-contrast.svg"); }
+
+/*
+ * Icon Large
+ */
+
+[class*='pk-icon-large-'] {
+    width: 25px;
+    height: 25px;
+}
+
+.pk-icon-large-settings { background-image: url("../../assets/images/icon-large-settings.svg"); }
+.pk-icon-large-pin { background-image: url("../../assets/images/icon-large-pin.svg"); }
+.pk-icon-large-mail { background-image: url("../../assets/images/icon-large-mail.svg"); }
+.pk-icon-large-bolt { background-image: url("../../assets/images/icon-large-bolt.svg"); }
+.pk-icon-large-server { background-image: url("../../assets/images/icon-large-server.svg"); }
+.pk-icon-large-code { background-image: url("../../assets/images/icon-large-code.svg"); }
+.pk-icon-large-database { background-image: url("../../assets/images/icon-large-database.svg"); }
+.pk-icon-large-lock-file { background-image: url("../../assets/images/icon-large-lock-file.svg"); }
+.pk-icon-large-comment { background-image: url("../../assets/images/icon-large-comment.svg"); }
+.pk-icon-large-brush { background-image: url("../../assets/images/icon-large-brush.svg"); }
+.pk-icon-large-cone { background-image: url("../../assets/images/icon-large-cone.svg"); }
+
+/*
+ * Link Hover with Icon and Text (Link Picker + Blog)
+ */
+
+.pk-link-icon {
+    display: inline-block;
+    color: @global-muted-color;
+}
+
+.pk-link-icon:hover { color: @global-color; }
+
+.pk-link-icon [class*='pk-icon-'] { opacity: 0.3; }
+.pk-link-icon:hover [class*='pk-icon-'] { opacity: 1; }
+
+/*
+ * Form Icon (Blog: Post Edit)
+ */
+
+.uk-form-icon > [class*='pk-icon-'] {
+  &:extend(.uk-form-icon > [class*='uk-icon-']);
+}
+
+.uk-form-icon-flip > [class*='pk-icon-'] {
+  &:extend(.uk-form-icon-flip > [class*='uk-icon-']);
+}
+
+
+/* Modifier: Subnav Icon
+========================================================================== */
+
+/*
+ * 1. Needed if in table width minimum
+ * 2. Gutter
+ */
+
+.pk-subnav-icon {
+    /* 1 */
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    /* 2 */
+    margin-left: -10px;
+    margin-top: -10px !important;
+    margin-bottom: 0;
+}
+
+.pk-subnav-icon > * {
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.uk-nav-side .pk-subnav-icon > * { padding-left: 5px; }
+
+.pk-subnav-icon > * > * { color: @global-muted-color; }
+
+.pk-subnav-icon > * > :hover,
+.pk-subnav-icon > * > :focus { color: @global-color; }
+
+
+/* Panel Badge Modifiers (Image Picker Fields + System: Themes)
+========================================================================== */
+
+/*
+ * Background Modifier
+ */
+
+.pk-panel-badge {
+    padding: 7px 10px;
+    background: #fff;
+    border-radius: 2px;
+}
+
+/*
+ * Position Modifier
+ */
+
+.pk-panel-badge-bottom-right {
+    position: absolute;
+    right: @panel-box-padding;
+    bottom: @panel-box-padding;
+}
+
+
+/* Text Large (Dashboard)
+========================================================================== */
+
+.pk-text-large {
+    font-family: @base-heading-font-family;
+    font-weight: 400;
+    font-size: @base-h2-font-size;
+    line-height: @base-h2-line-height;
+}
+
+.pk-text-xlarge {
+    font-family: @base-heading-font-family;
+    font-size: 46px;
+    line-height: 52px;
+}
+
+
+/* Modifier Table Large` (Blog: Comments)
+========================================================================== */
+
+.pk-table-large td {
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+
+/* Modifier Table Collapse (Site: Pages: In Nestable)
+========================================================================== */
+
+.pk-table-collapse {
+    padding-left: 6px !important;
+    padding-right: 0 !important;
+}
+
+
+/* Table Modifiers
+========================================================================== */
+
+/*
+ * Make cell as small as possible
+ */
+
+.pk-table-width-minimum { width: 1px; }
+
+/*
+ * Useful width classes for table cells
+ * Text will wrap automatically, a long string will expand the cell
+ */
+
+.pk-table-width-100 { width: 100px; }
+.pk-table-width-150 { width: 150px; }
+.pk-table-width-200 { width: 200px; }
+
+/*
+ * Prevent a long string from expanding the cell
+ * `min-width` is needed to prevent cells from collapsing
+ */
+
+.pk-table-text-break { word-break: break-word; }
+
+.pk-table-min-width-100 { min-width: 100px; }
+.pk-table-min-width-150 { min-width: 150px; }
+.pk-table-min-width-200 { min-width: 200px; }
+.pk-table-min-width-300 { min-width: 300px; }
+
+/*
+ * Need when `uk-text-truncate` is used
+ */
+
+.pk-table-max-width-100 { max-width: 100px; }
+.pk-table-max-width-150 { max-width: 150px; }
+
+
+/* Modifier Table Order
+========================================================================== */
+
+.pk-table-order:hover { cursor: pointer; }
+
+.pk-table-order:hover,
+.pk-table-order.uk-active { color: #666; }
+
+/*
+ * Icon
+ */
+
+.pk-table-order [class*='pk-icon-'] { opacity: 0.3; }
+
+.pk-table-order:hover [class*='pk-icon-'],
+.pk-table-order.uk-active [class*='pk-icon-'] { opacity: 1; }
+
+
+/* Filter
+========================================================================== */
+
+.pk-filter:hover > * { color: #666; }
+
+.pk-filter.uk-active  > * {
+    color: #666;
+    font-weight: bold;
+}
+
+
+/* Table Fake (Site: Pages + Widgets)
+========================================================================== */
+
+.pk-table-fake {
+    display: table;
+    width: 100%;
+    padding: 0;
+}
+
+.pk-table-fake > div {
+    display: table-cell;
+    padding: 16px 12px;
+    vertical-align: middle;
+}
+
+/*
+ * Imitate table header
+ */
+
+.pk-table-fake-header > div {
+    font-size: round((@global-font-size * 0.85)); // 12px / 14px
+    text-transform: uppercase;
+    font-weight: normal;
+    color: @global-muted-color;
+}
+
+.pk-table-fake-border { box-shadow: inset 0 -1px 0  @global-border; }
+
+.pk-table-fake-nestable-padding { padding-left: 28px !important; }
+
+/*
+ * Fix height
+ */
+
+.pk-table-fake .uk-form-select { vertical-align: top; }
+
+
+/* Overflow Container (Finder: Thumbnail View)
+ ========================================================================== */
+
+.tm-overflow-container {
+    margin: -5px;
+    padding: 5px;
+}
+
+
+/* Thumbnail Placeholder (Finder + Image Picker)
+ ========================================================================== */
+
+.pk-thumbnail-folder {
+    background-color: @global-primary-background;
+    background-image: url("../../assets/images/icon-folder-large.svg");
+    background-size: 80px 80px;
+}
+
+.pk-thumbnail-file {
+    background-color: #cfd2d8;
+    background-image: url("../../assets/images/icon-file-large.svg");
+    background-size: 80px 80px;
+}
+
+
+/* Background Contain (Finder: Thumbnail)
+ ========================================================================== */
+
+.pk-background-contain {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+
+/* Panel Teaser (Dashboard)
+ ========================================================================== */
+
+.pk-panel-teaser {
+    margin: @panel-box-teaser-margin @panel-box-teaser-margin @panel-teaser-margin-bottom @panel-box-teaser-margin;
+    padding: @panel-box-padding;
+    border-bottom: 1px solid @global-border;
+}
+
+
+/* Panel Background (Dashboard)
+ ========================================================================== */
+
+.pk-panel-background {
+    margin: -@panel-box-padding;
+    padding: @panel-box-padding;
+    background: @global-primary-background url("../../assets/images/dashboard-location.jpg") 0 0 no-repeat;
+    background-size: cover;
+}
+
+
+/* Overlay Background (System: Themes + Marketplace)
+ ========================================================================== */
+
+.pk-overlay-background { background: rgba(255,255,255,0.2); }
+
+
+/* Modal with IFrame (Marketplace)
+ ========================================================================== */
+
+/*
+ * Position installer buttons
+ */
+
+.pk-modal-dialog-iframe { height: 600px; }
+
+@media (max-width: 767px) {
+
+    .pk-modal-dialog-iframe {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        margin: 10px;
+    }
+
+}
+
+.pk-modal-dialog-badge {
+    position: absolute;
+    top: @modal-dialog-padding;
+    right: @modal-dialog-padding;
+}
+
+
+/* Image Preview (Image Picker)
+ ========================================================================== */
+
+.pk-image-max-height {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+
+/* Form Link (Link Picker)
+ ========================================================================== */
+
+.pk-form-link {
+    display: inline-block;
+    position: relative;
+    max-width: 100%;
+}
+
+.pk-form-link-toggle {
+    display: -ms-flexbox !important;
+    display: -webkit-flex !important;
+    display: flex !important;
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: 10px;
+    font-size: 13px;
+}
+
+.pk-form-link > input { padding-right: 100px !important; }
+
+
+/* List Header (Widget Assignment)
+ ========================================================================== */
+
+.pk-list-header {
+    padding: 8px 0;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+
+/* Editor (Site: Settings)
+========================================================================== */
+
+.pk-editor {
+    padding: @form-padding;
+    border: @form-border-width solid @form-border;
+    background: @form-background;
+    border-radius: @global-border-radius;
+}
+
+
+/* Remove `box-shadow` from Drag'n Drop target
+ ========================================================================== */
+
+.uk-dragover { box-shadow: none; }
+
+
+/* SVG Loader
+ ========================================================================== */
+
+@radius: 13px;
+@size: 15px; // A little larger to prevent overflow clipping
+@offset: round(2 * 3.141 * @radius);
+@duration: 1.4s;
+
+.pk-loader {
+    vertical-align: middle;
+    -webkit-animation: pk-loader-rotate @duration linear infinite;
+    animation: pk-loader-rotate @duration linear infinite;
+}
+
+/*
+ * Group
+ * Only needed because `transform-origin: center` is not working in Firefox
+ */
+
+.pk-loader > * {
+    -webkit-transform: translate(@size, @size);
+    transform: translate(@size, @size);
+}
+
+/*
+ * Circle
+ */
+
+.pk-loader > * > * {
+    stroke-dasharray: @offset;
+    stroke-dashoffset: 0;
+    // transform-origin: center;
+    -webkit-animation: pk-loader-dash @duration ease-in-out infinite,
+                       pk-loader-color (@duration*4) ease-in-out infinite;
+    animation: pk-loader-dash @duration ease-in-out infinite,
+               pk-loader-color (@duration*4) ease-in-out infinite;
+    stroke-linecap: round;
+}
+
+@-webkit-keyframes pk-loader-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(270deg); }
+}
+
+@keyframes pk-loader-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(270deg); }
+}
+
+@-webkit-keyframes pk-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        -webkit-transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        -webkit-transform:rotate(450deg);
+    }
+}
+
+@keyframes pk-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        transform:rotate(450deg);
+    }
+}
+
+@-webkit-keyframes pk-loader-color {
+    0% { stroke: @global-primary-hover-background; }
+    50% { stroke: @global-primary-hover-background; }
+    100% { stroke: @global-primary-hover-background; }
+}
+
+@keyframes pk-loader-color {
+    0% { stroke: @global-primary-hover-background; }
+    50% { stroke: @global-primary-hover-background; }
+    100% { stroke: @global-primary-hover-background; }
+}

@@ -1,47 +1,78 @@
 # Pagekit
 
+[![Build Status](https://travis-ci.org/pagekit/pagekit.svg?branch=develop)](https://travis-ci.org/pagekit/pagekit)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
+
 Pagekit is a modular and lightweight CMS built with Symfony components.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
-
-Join our developer chat. We are online every work day between 8:00 and 18:00 UTC
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
+* [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
 
 ## Getting started
 
-Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver.
-Create a database for Pagekit.
+Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver. Create a database for Pagekit.
 Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
 
-## Developers
+*Fresh packages coming soon.*
 
-First of all, install [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix).
+## Install Pagekit from Source
 
-If you haven't done so already, clone the Pagekit git repo.
+Make sure you have the following tools installed: [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix), [npm](https://www.npmjs.com/), [Bower](http://bower.io/), [Webpack](http://webpack.github.io/), [Gulp](http://gulpjs.com/).
+
+Clone the repository.
+
 ```
-git clone git://github.com/pagekit/pagekit.git
+git clone --branch develop git://github.com/pagekit/pagekit.git
 ```
 
-To install the dependencies of the project, navigate to the cloned directory and run the composer `install` command
+Navigate to the cloned directory and install PHP dependencies.
+
 ```
 composer install
-#or if you don't have composer installed globally:
-php path/to/composer.phar install
 ```
 
-To update Pagekit, you need to pull the Pagekit git repo and run the composer `update` command
+Install build tool dependencies.
+
+```
+npm install
+```
+
+Install asset dependencies (CSS & JS).
+
+```
+bower install
+```
+
+Compile LESS assets (run `gulp watch` to watch for local file changes).
+
+```
+gulp
+```
+
+Bundle JS modules (run `webpack --watch` to watch for local file changes)
+
+```
+webpack
+```
+
+When these commands have finished, point your browser to the Pagekit URL on your web server and follow the installer.
+
+## Stay up to date
+
+If you've set up Pagekit from source, run these commands to get new commits and to rebuild everything you need.
 
 ```
 git pull
 composer update
+npm install
+bower update
+gulp
+webpack
 ```
 
-You may also clear the `app/cache` folder.
-
-### CLI
+## CLI
 
 Pagekit offers a set of commands to run usual tasks on the command line. You can see the available commands with
 ```
@@ -62,3 +93,7 @@ Pagekit is maintained by using the [Semantic Versioning Specification (SemVer)](
 ## Copyright and License
 
 Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE.md).
+
+## Credits
+
+[Half Dome Photo](http://www.youseethenew.com/landscape-outdoors/) by Brendan Lynch / [CC BY](http://creativecommons.org/licenses/by-nd/4.0/)

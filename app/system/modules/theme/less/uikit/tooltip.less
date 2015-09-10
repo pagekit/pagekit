@@ -1,0 +1,47 @@
+//
+// Component: Tooltip
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@tooltip-z-index:                               @global-z-index + 30;
+@tooltip-background:                            #747474;
+
+@tooltip-color:                                 @global-contrast-color;
+@tooltip-font-size:                             round((@global-font-size * 0.85)); // 12px / 14px
+@tooltip-line-height:                           round((@tooltip-font-size * 1.46)); // 18px / 20px
+
+
+// Component
+// ========================================================================
+
+.hook-tooltip() {
+    border-radius: 3px;
+    opacity: 0;
+    -webkit-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-tooltip-misc() {
+
+    .uk-tooltip.uk-active { opacity: 1; }
+
+    .uk-tooltip-top,
+    .uk-tooltip-top-left,
+    .uk-tooltip-top-right { margin-top: -10px; }
+
+    .uk-tooltip-bottom,
+    .uk-tooltip-bottom-left,
+    .uk-tooltip-bottom-right { margin-top: 10px; }
+
+    .uk-tooltip-left { margin-left: -10px; }
+    .uk-tooltip-right { margin-left: 10px; }
+
+}

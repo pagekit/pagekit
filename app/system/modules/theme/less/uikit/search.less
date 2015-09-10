@@ -1,0 +1,102 @@
+//
+// Component: Search
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@search-width:                                  180px;
+@search-focus-width:                            @search-width;
+@search-height:                                 28px !important;
+@search-padding:                                28px !important;
+@search-border:                                 transparent !important;
+@search-border-width:                           0;
+@search-background:                             transparent !important;
+@search-color:                                  @global-color !important;
+@search-placeholder-color:                      @global-muted-color;
+
+@search-icon:                                   "";
+@search-icon-color:                             @global-muted-color;
+
+@dropdown-search-background:                    #fff;
+@dropdown-search-color:                         @global-color;
+@dropdown-search-navbar-margin-top:             5px;
+@dropdown-search-navbar-margin-right:           -15px;
+
+@nav-search-color:                              @global-color;
+@nav-search-active-background:                  @global-primary-background;
+@nav-search-active-color:                       @global-contrast-color;
+@nav-search-header-color:                       @global-muted-color;
+@nav-search-divider-border:                     @global-border;
+@nav-search-nested-color:                       @global-link-color;
+@nav-search-nested-hover-color:                 @global-link-hover-color;
+
+
+// Component
+// ========================================================================
+
+.hook-search() { z-index: 1; }
+
+.hook-search-icon() {
+    height: 28px;
+    background: url("@{global-image-path}/search.svg") 0 0 no-repeat;
+    z-index: -1;
+}
+
+
+// Sub-object `uk-search-field`
+// ========================================================================
+
+.hook-search-field() {
+    padding-left: (@search-padding + 12px) !important;
+    font-size: 18px !important;
+    line-height: 24px !important;
+    font-weight: 300 !important;
+}
+
+.hook-search-field-focus() {}
+
+
+// Dropdown modifier: `uk-dropdown-search`
+// ========================================================================
+
+.hook-dropdown-search() {}
+
+
+// Nav modifier `uk-nav-search`
+// ========================================================================
+
+//
+// Items
+//
+
+.hook-nav-search() {}
+
+// Active
+.hook-nav-search-active() {}
+
+//
+// Sub-object: `uk-nav-header`
+//
+
+.hook-nav-search-header() {}
+
+//
+// Sub-object: `uk-nav-divider`
+//
+
+.hook-nav-search-divider() {}
+
+
+// Search in offcanvas
+// ========================================================================
+
+.hook-offcanvas-search-field() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-search-misc() {}

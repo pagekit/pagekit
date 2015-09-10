@@ -1,0 +1,55 @@
+//
+// Component: Overlay
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@overlay-panel-color:                           @global-contrast-color;
+
+@overlay-panel-background:                      rgba(255,255,255,0.5);
+
+@overlay-icon-color:                            #aaa;
+
+
+// Sub-object `uk-overlay-panel`
+// ========================================================================
+
+.hook-overlay-panel() {}
+
+
+// Sub-object `uk-overlay-background`
+// ========================================================================
+
+.hook-overlay-background() {
+    color: @global-color;
+}
+
+
+// Sub-object `uk-overlay-image`
+// ========================================================================
+
+.hook-overlay-image() {}
+
+
+// Sub-object `uk-overlay-icon`
+// ========================================================================
+
+.hook-overlay-icon() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-overlay-misc() {
+
+    .uk-overlay {
+        min-height: 100px;
+        min-width: 70px;
+        /* Reset fix because it causes a 1px gap */
+        -webkit-transform: none;
+    }
+
+}

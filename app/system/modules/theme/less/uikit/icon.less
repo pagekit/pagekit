@@ -1,0 +1,54 @@
+//
+// Component: Icon
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@icon-small-font-size:                          170%;
+@icon-small-vertical-align:                     -13%;
+
+@icon-hover-color:                              @global-muted-color;
+@icon-hover-hover-color:                        @global-color;
+
+@icon-button-height:                            @icon-button-width;
+@icon-button-background:                        @global-primary-background;
+@icon-button-font-size:                         round((@icon-button-width * 0.5));
+@icon-button-color:                             @global-contrast-color;
+
+@icon-button-hover-background:                  @global-primary-hover-background;
+@icon-button-hover-color:                       @global-contrast-color;
+
+@icon-button-active-background:                 @global-primary-active-background;
+@icon-button-active-color:                      @global-contrast-color;
+
+
+// Modifier: `uk-icon-hover`
+// ========================================================================
+
+.hook-icon-hover() {
+	-webkit-transition: color 0.05s linear;
+    transition: color 0.05s linear;
+}
+
+.hook-icon-hover-hover() {}
+
+
+// Modifier: `uk-icon-button`
+// ========================================================================
+
+.hook-icon-button() {}
+
+// Hover
+.hook-icon-button-hover() {}
+
+// Active
+.hook-icon-button-active() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-icon-misc() {}

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-cone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<path fill="#666666" d="M22,18h-0.583L15.953,0.699C15.822,0.283,15.437,0,15,0h-4c-0.437,0-0.822,0.283-0.954,0.699L4.583,18H4
+	c-1.103,0-2,0.897-2,2v3h0h1h20h1v-1v-2C24,18.897,23.103,18,22,18z M18.789,13H7.211L8.79,8h8.421L18.789,13z M11,1h4l1.895,6
+	H9.105L11,1z M6.895,14h12.21l1.263,4H5.632L6.895,14z M23,22H3v-2c0-0.553,0.448-1,1-1h18c0.552,0,1,0.447,1,1V22z"/>
+</svg>

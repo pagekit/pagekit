@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.9.0 (September 10, 2015)
+
+- Refactored codebase
+- Added site tree
+- Added new default theme
+- Added data-reactive components with Vue.js
+- Added package management using Composer
+
 ### 0.8.8 (November 17, 2014)
 
 - Added pagination in Blog extension

@@ -1,0 +1,75 @@
+//
+// Component: Modal
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@modal-z-index:                                 @global-z-index + 10;
+@modal-background:                              rgba(245,245,245,0.5);
+
+@modal-dialog-padding:                          40px;
+@modal-dialog-background:                       @global-background;
+
+@modal-dialog-large-width-large:                1200px;
+
+@modal-header-margin-bottom:                    @modal-dialog-padding;
+
+@modal-footer-margin-top:                       @modal-dialog-padding;
+
+@modal-caption-color:                           @global-contrast-color;
+
+
+// Component
+// ========================================================================
+
+.hook-modal() {}
+
+
+// Sub-object: `uk-modal-dialog`
+// ========================================================================
+
+.hook-modal-dialog() { box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+
+// Modifier: `uk-modal-dialog-lightbox`
+// ========================================================================
+
+.hook-modal-dialog-lightbox() {}
+
+
+// Sub-object: `uk-modal-header`
+// ========================================================================
+
+.hook-modal-header() { margin-bottom: @modal-header-margin-bottom; }
+
+
+// Sub-object: `uk-modal-footer`
+// ========================================================================
+
+.hook-modal-footer() {
+    margin: @modal-footer-margin-top -@modal-dialog-padding -@modal-dialog-padding -@modal-dialog-padding !important;
+    padding: 15px @modal-dialog-padding;
+    background: fade(@global-default-background, 30%);
+    border-top: 1px solid @global-border;
+}
+
+
+// Sub-object: `uk-modal-caption`
+// ========================================================================
+
+.hook-modal-caption() {}
+
+
+// Sub-object: `uk-modal-spinner`
+// ========================================================================
+
+.hook-modal-spinner() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-modal-misc() {}

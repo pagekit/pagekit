@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-time" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="20px" height="20px" viewBox="0.5 20.5 20 20" enable-background="new 0.5 20.5 20 20" xml:space="preserve">
+<path fill="#727272" d="M14.5,30H10v-4.5c0-0.275-0.224-0.5-0.5-0.5S9,25.225,9,25.5v5C9,30.775,9.224,31,9.5,31h5
+	c0.275,0,0.5-0.225,0.5-0.5S14.775,30,14.5,30z"/>
+<path fill="#727272" d="M10,23c3.859,0,7,3.141,7,7s-3.141,7-7,7c-3.86,0-7-3.141-7-7S6.14,23,10,23 M10,22c-4.418,0-8,3.582-8,8
+	c0,4.419,3.582,8,8,8s8-3.581,8-8C18,25.582,14.418,22,10,22L10,22z"/>
+</svg>

@@ -1,0 +1,263 @@
+@import "uikit/uikit.less";
+@import "../../../assets/less/pagekit.less";
+
+@icon-font-path: "../../../../../app/assets/uikit/fonts";
+@global-image-path: '../../images';
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html { overflow-y: scroll; }
+
+
+/* Font smoothing
+ ========================================================================== */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset */
+.uk-navbar-nav > li > a,
+.uk-badge {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
+
+/* Header
+ ========================================================================== */
+
+.tm-header {
+    position: relative;
+    margin-bottom: 40px;
+    background: @navbar-background;
+    color: @global-contrast-color;
+}
+
+@media (min-height: 700px) {
+
+    .tm-header { margin-bottom: 65px; }
+
+}
+
+
+/* Brand
+ ========================================================================== */
+
+.tm-brand {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50px;
+}
+
+
+/* Headerbar
+ ========================================================================== */
+
+.tm-headerbar { height: 60px; }
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-headerbar { height: 120px; }
+
+}
+
+@media (min-width: @breakpoint-medium) and (min-height: 700px) {
+
+    .tm-headerbar { height: 165px; }
+
+}
+
+.tm-headerbar-primary { position: relative; }
+
+/* Large screen and bigger */
+@media (min-width: @breakpoint-xlarge) {
+
+    .tm-headerbar-primary { margin-left: -(22px + 28px); } // Icon Width + Margin
+
+}
+
+
+/* Icons
+ ========================================================================== */
+
+[class*='tm-icon-'] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: 50% 50% no-repeat;
+    opacity: 0.5;
+    vertical-align: middle;
+    -webkit-transition: opacity 0.1s linear;
+    transition: opacity 0.1s linear;
+}
+
+[class*='tm-icon-']:hover { opacity: 1; }
+
+.tm-icon-visit { background-image: url("../images/icon-visit.svg"); }
+.tm-icon-logout { background-image: url("../images/icon-logout.svg"); }
+.tm-icon-menu { background-image: url("../images/icon-menu.svg"); }
+
+/* Tablet and bigger */
+@media (min-width: @breakpoint-medium) {
+
+    .tm-icon-menu { margin-right: 28px; }
+
+    .tm-headerbar-primary:hover .tm-icon-menu,
+    .tm-headerbar-primary.uk-open .tm-icon-menu { opacity: 1; }
+
+}
+
+
+/* Heading
+ ========================================================================== */
+
+.tm-heading {
+    margin: 0;
+    color: @global-contrast-color;
+}
+
+
+/* Navbar
+ ========================================================================== */
+
+.tm-navbar {
+    margin-top: -28px;
+    margin-left: -(@navbar-nav-padding-horizontal);
+}
+
+
+/* Contrast
+ ========================================================================== */
+
+.tm-contrast a { color: rgba(255,255,255,0.7); }
+
+.tm-contrast a:hover { color: @global-contrast-color; }
+
+
+/*
+ * Icon Hover
+ */
+
+.tm-contrast .uk-icon-hover { color: rgba(255,255,255,0.5); }
+
+.tm-contrast .uk-icon-hover:hover { color: @global-contrast-color; }
+
+
+/* `tm-panel-icon`
+ ========================================================================== */
+
+.tm-panel-icon {
+    padding: 10px 0;
+    color: @global-color;
+    text-align: center;
+}
+
+.tm-panel-icon:hover { color: @global-link-color; }
+
+.tm-panel-icon > p {
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* Dropdown
+ ========================================================================== */
+
+.tm-cursor-pointer:hover { cursor: pointer; }
+
+/*
+ * Dropdown with Sortable Icons
+ */
+
+.tm-dropdown {
+    padding: 35px;
+    width: 400px;
+}
+
+.tm-sortable-dragged .tm-panel-icon {
+    background: @dropdown-background;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.09);
+}
+
+
+/* Main
+ ========================================================================== */
+
+.tm-main { margin-bottom: 25px; }
+
+@media (max-width: @breakpoint-small-max) {
+
+    .tm-main { margin-bottom: 15px; }
+
+}
+
+
+/* Pages for login, error, etc
+ ========================================================================== */
+
+.tm-background {
+    background: lighten(@global-primary-background, 10%) url("../images/background.jpg") 50% 50% no-repeat;
+    background-size: cover;
+}
+
+/*
+ * Container
+ */
+
+.tm-container {
+    width: 500px;
+    max-width: ~"calc(100% - 40px)";
+    padding: 20px;
+}
+
+.tm-container-small { width: 350px; }
+
+.tm-panel-marginless-bottom {
+    margin-left: -50px;
+    margin-right: -50px;
+    margin-bottom: -50px;
+}
+
+/*
+ * Form
+ */
+
+.tm-form input:not([type]),
+.tm-form input[type="text"],
+.tm-form input[type="password"] {
+    padding-left: 0;
+    padding-right: 0;
+    border: none;
+    border-bottom: 1px solid @global-border;
+    background: transparent;
+
+    // Focus state
+    &:focus {
+        border-color: darken(@global-border, 10%);
+        background: transparent;
+        .hook-form-focus;
+    }
+
+}
+
+.tm-form .uk-form-row + .uk-form-row { margin-top: 50px; }
+
+.tm-form button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 0;
+}
+
+.tm-form .uk-panel { padding: 50px; }

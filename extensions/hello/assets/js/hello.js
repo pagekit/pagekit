@@ -1,7 +1,0 @@
-/*
-
-require([dependencies...], function(){
-
-});
-
- */

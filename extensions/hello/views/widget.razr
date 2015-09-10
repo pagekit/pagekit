@@ -1,9 +1,0 @@
-@trans('Hello Widget!')
-
-<p>
-    @if($user.isAuthenticated())
-    You are logged in.
-    @else
-    Not logged in.
-    @endif
-</p>

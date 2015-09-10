@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-edit-contrast" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<path fill="#FFFFFF" d="M18.617,1.382C18.361,1.127,18.027,1,17.693,1c-0.336,0-0.65,0.127-0.906,0.382L7,11.188V13h1.776
+	l9.841-9.807C19.127,2.684,19.127,1.893,18.617,1.382z M18.001,2.514L8.415,12H8v-0.452l9.469-9.551
+	c0.11-0.11,0.198-0.127,0.266-0.127c0.068,0,0.178,0.017,0.287,0.128c0.111,0.109,0.119,0.189,0.119,0.257S18.111,2.4,18.001,2.514z
+	"/>
+<polygon fill="#FFFFFF" points="16,7 16,18 3,18 3,4 13,4 13,3 2,3 2,19 17,19 17,7 "/>
+</svg>

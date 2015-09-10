@@ -1,0 +1,55 @@
+//
+// Component: Utility
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@utility-container-max-width:                   1320px;
+@utility-container-padding-horizontal:          25px;
+
+@utility-container-large-max-width:             @utility-container-max-width;
+@utility-container-large-padding-horizontal:    60px;
+
+@utility-align-horizontal:                      @global-margin;
+@utility-align-vertical:                        @global-margin;
+
+@utility-margin:                                @global-margin;
+@utility-margin-large:                          @global-margin-large;
+
+@utility-heading-large-small-font-size:         round((@global-font-size * 2.6)); // 36px / 42px
+@utility-heading-large-small-line-height:       round((@utility-heading-large-small-font-size * 1.154)); // 42px / 48px
+@utility-heading-large-font-size:               round((@global-font-size * 3.72)); // 52px / 60px
+@utility-heading-large-line-height:             round((@utility-heading-large-font-size * 1.23)); // 64px / 74px
+
+@utility-link-muted-color:                      @global-muted-color;
+@utility-link-muted-hover-color:                @global-color;
+
+@utility-scrollable-box-height:                 200px;
+@utility-scrollable-box-border:                 @global-border;
+
+
+// Container
+// ========================================================================
+
+.hook-container() {}
+
+
+// Scrollable
+// ========================================================================
+
+.hook-scrollable-box() { border-radius: 3px; }
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-utility-misc() {
+
+    @media (max-width: @breakpoint-small-max) {
+        .uk-container { padding: 0 10px; }
+    }
+
+}

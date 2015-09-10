@@ -1,0 +1,295 @@
+@import "../../../system/modules/theme/less/uikit/uikit.less";
+
+/* ========================================================================
+   Theme
+ ========================================================================== */
+
+/*
+ * Force vertical scrollbar
+ */
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
+/* Font smoothing
+ ========================================================================== */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* Background
+ ========================================================================== */
+
+.tm-background {
+    background: lighten(@global-primary-background, 10%) url("../../../system/modules/theme/images/background.jpg") 50% 50% no-repeat;
+    background-size: cover;
+}
+
+/* Not used at the moment */
+.tm-background-clip:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background: lighten(@global-primary-background, 10%) url("../../../system/modules/theme/images/background.jpg") 50% 50% no-repeat;
+    background-size: cover;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%, 50% 75%, 75% 50%, 50% 25%, 25% 50%, 0 50%);
+    -webkit-filter: blur(5px);
+    animation: tm-clip 5s infinite;
+
+}
+
+@keyframes tm-clip {
+    0% { -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, 25% 50%, 50% 75%, 75% 50%, 50% 25%, 25% 50%, 0 50%); }
+    100% { -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%, -100% 50%, 50% 200%, 200% 50%, 50% -100%, -100% 50%, 0 50%); }
+}
+
+
+/* Container
+ ========================================================================== */
+
+.tm-container {
+    width: 500px;
+    max-width: ~"calc(100% - 40px)";
+    padding: 20px;
+}
+
+.tm-container .uk-panel-box { padding: 50px; }
+
+
+/* Modifier: `tm-form-horizontal`
+ ========================================================================== */
+
+/* Only tablets and desktops */
+@media (min-width: @breakpoint-small) {
+
+    .tm-form-horizontal .uk-form-label {
+        width: 120px;
+        margin-top: @form-horizontal-label-margin-top;
+        float: left;
+        /* Theme Reset */
+        font-size: @global-font-size;
+        line-height: @global-line-height;
+        text-transform: none;
+    }
+
+    .tm-form-horizontal .uk-form-controls { margin-left: 135px; }
+
+}
+
+
+/* SVG Loader
+ ========================================================================== */
+
+@radius: 70px;
+@size: 75px; // A little larger to prevent overflow clipping
+@offset: round(2 * 3.141 * @radius);
+@duration: 1.4s;
+
+.tm-loader {
+    vertical-align: middle;
+    -webkit-transform: tm-loader-rotate @duration linear infinite;
+    animation: tm-loader-rotate @duration linear infinite;
+}
+
+/*
+ * Group
+ * Only needed because `transform-origin: center` is not working in Firefox
+ */
+
+.tm-loader > * {
+    -webkit-transform: translate(@size, @size);
+    transform: translate(@size, @size);
+}
+
+/*
+ * Circle
+ */
+
+.tm-loader > * > * {
+    stroke-dasharray: @offset;
+    stroke-dashoffset: 0;
+    // transform-origin: center;
+    -webkit-animation: tm-loader-dash @duration ease-in-out infinite,
+                       tm-loader-color (@duration*4) ease-in-out infinite;
+    animation: tm-loader-dash @duration ease-in-out infinite,
+               tm-loader-color (@duration*4) ease-in-out infinite;
+    stroke-linecap: round;
+}
+
+@-webkit-keyframes tm-loader-rotate {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(270deg); }
+}
+
+@keyframes tm-loader-rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(270deg); }
+}
+
+@-webkit-keyframes tm-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        -webkit-transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        -webkit-transform:rotate(450deg);
+    }
+}
+
+@keyframes tm-loader-dash {
+    0% { stroke-dashoffset: @offset; }
+    50% {
+        stroke-dashoffset: @offset/4;
+        transform:rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: @offset;
+        transform:rotate(450deg);
+    }
+}
+
+@-webkit-keyframes tm-loader-color {
+    0% { stroke: #fff; }
+    50% { stroke: #fff; }
+    100% { stroke: #fff; }
+}
+
+@keyframes tm-loader-color {
+    0% { stroke: #fff; }
+    50% { stroke: #fff; }
+    100% { stroke: #fff; }
+}
+
+
+/* SVG Arrow
+ ========================================================================== */
+
+.tm-arrow {
+    -webkit-animation: tm-arrow 2s ease-out infinite;
+    animation: tm-arrow 2s ease-out infinite;
+}
+
+@-webkit-keyframes tm-arrow {
+    0% { -webkit-transform: translateX(0); }
+    20% { -webkit-transform: translateX(0); }
+    25% { -webkit-transform: translateX(3px); }
+    30% { -webkit-transform: translateX(-3px); }
+    35% { -webkit-transform: translateX(3px); }
+    40% { -webkit-transform: translateX(0); }
+    100% { -webkit-transform: translateX(0); }
+}
+
+@keyframes tm-arrow {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    25% { transform: translateX(3px); }
+    30% { transform: translateX(-3px); }
+    35% { transform: translateX(3px); }
+    40% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+
+/* SVG Checkmark
+ ========================================================================== */
+
+.tm-checkmark {
+  stroke-dashoffset: 132;
+  stroke-dasharray: 132;
+  -webkit-animation: tm-checkmark 1s ease-out forwards;
+  animation: tm-checkmark 1s ease-out forwards;
+}
+
+@-webkit-keyframes tm-checkmark {
+    0% { stroke-dashoffset: 132; }
+    100% { stroke-dashoffset: 0; }
+}
+
+@keyframes tm-checkmark {
+    0% { stroke-dashoffset: 132; }
+    100% { stroke-dashoffset: 0; }
+}
+
+
+/* UIkit modifications
+ ========================================================================== */
+
+.uk-height-viewport {
+    height: auto;
+    min-height: 100vh;
+}
+
+/*
+ * Animation
+ */
+
+[class*='uk-animation-slide-'] {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}
+
+
+/*
+ * Left
+ */
+
+@-webkit-keyframes uk-fade-left {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(-300px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes uk-fade-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*
+ * Right
+ */
+
+@-webkit-keyframes uk-fade-right {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateX(300px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateX(0);
+    }
+}
+
+@keyframes uk-fade-right {
+    0% {
+        opacity: 0;
+        transform: translateX(300px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+

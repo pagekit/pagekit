@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-file-circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<circle fill="#C1C4C9" cx="15" cy="15" r="15"/>
+<g>
+	<polygon fill="#FFFFFF" points="21,22 9,22 9,12 9,8 21,8 	"/>
+</g>
+<rect x="11" y="12" fill="#C1C4C9" width="7" height="1"/>
+<rect x="11" y="14" fill="#C1C4C9" width="5" height="1"/>
+<rect x="11" y="16" fill="#C1C4C9" width="7" height="1"/>
+<rect x="11" y="18" fill="#C1C4C9" width="5" height="1"/>
+</svg>

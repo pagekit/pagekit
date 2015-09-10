@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-large-bolt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<path fill="#666666" d="M17.658,1l-3.484,7H19c0,0-7.036,9.856-11,15c-0.003-0.002,3.265-11,3.265-11H7.528L12,1H17.658 M19.273,0
+	h-1.615H12h-0.673l-0.253,0.624l-4.472,11L6.042,13h1.486h2.397l-1.252,4.215L7.55,20.996l-0.37,1.247
+	c-0.188,0.633-0.35,1.18,0.265,1.589l0.777,0.518l0.569-0.739c3.93-5.099,10.951-14.931,11.021-15.029L20.942,7H19h-3.211
+	l2.765-5.554L19.273,0L19.273,0z"/>
+</svg>

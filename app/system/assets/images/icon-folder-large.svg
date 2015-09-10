@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-folder-large" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="80px" height="80px" viewBox="0 0 80 80" enable-background="new 0 0 80 80" xml:space="preserve">
+<path fill="#FFFFFF" d="M73,22H38.919l-3.044-7.104C34.792,11.917,33.083,12,31,12H9c-2.209,0-4,1.791-4,4v9v4v36
+	c0,1.657,1.343,3,3,3h65c1.657,0,3-1.343,3-3V25C76,23.343,74.657,22,73,22z"/>
+<radialGradient id="SVGID_1_" cx="305.166" cy="-352.8335" r="66.4185" fx="296.0021" fy="-357.4933" gradientTransform="matrix(1 0 0 -1 -282.5 -324)" gradientUnits="userSpaceOnUse">
+	<stop  offset="0.3111" style="stop-color:#489BE0;stop-opacity:0"/>
+	<stop  offset="1" style="stop-color:#489BE0;stop-opacity:0.3"/>
+</radialGradient>
+<path fill="url(#SVGID_1_)" fill-opacity="0" d="M73,22H38.919l-3.044-7.104C34.792,11.917,33.083,12,31,12H9c-2.209,0-4,1.791-4,4
+	v9v4v36c0,1.657,1.343,3,3,3h65c1.657,0,3-1.343,3-3V25C76,23.343,74.657,22,73,22z"/>
+</svg>

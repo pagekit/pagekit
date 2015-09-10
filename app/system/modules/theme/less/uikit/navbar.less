@@ -1,0 +1,98 @@
+//
+// Component: Navbar
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@navbar-background:                             @global-primary-hover-background;
+@navbar-color:                                  @global-contrast-color;
+@navbar-link-color:                             rgba(255,255,255,0.6);
+@navbar-link-hover-color:                       @global-contrast-color;
+
+@navbar-nav-height:                             48px;
+@navbar-nav-padding-horizontal:                 24px;
+@navbar-nav-color:                              rgba(255,255,255,0.6);
+@navbar-nav-font-size:                          @global-font-size;
+@navbar-nav-font-weight:                        300;
+@navbar-nav-font-family:                        "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@navbar-nav-hover-background:                   @global-primary-hover-background;
+@navbar-nav-hover-color:                        @global-contrast-color;
+@navbar-nav-onclick-background:                 @global-primary-hover-background;
+@navbar-nav-onclick-color:                      @global-contrast-color;
+@navbar-nav-active-background:                  @global-primary-hover-background;
+@navbar-nav-active-color:                       @global-contrast-color;
+
+@navbar-brand-font-size:                        @global-font-size;
+@navbar-brand-color:                            @global-contrast-color;
+@navbar-brand-hover-color:                      @global-contrast-color;
+
+@navbar-toggle-font-size:                       round((@global-font-size * 1.28)); // 18px / 20px
+@navbar-toggle-color:                           @global-contrast-color;
+@navbar-toggle-hover-color:                     @global-contrast-color;
+
+
+// Component
+// ========================================================================
+
+.hook-navbar() { position: relative; }
+
+
+// Sub-object: `uk-navbar-nav`
+// ========================================================================
+
+.hook-navbar-nav() {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-transition: color 0.05s linear;
+    transition: color 0.05s linear;
+}
+
+// Hover
+.hook-navbar-nav-hover() {}
+
+// OnClick
+.hook-navbar-nav-onclick() {}
+
+// Active
+.hook-navbar-nav-active() {}
+
+
+// Sub-object: `uk-navbar-content`
+// ========================================================================
+
+.hook-navbar-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-navbar-misc() {
+
+    .uk-navbar-nav > .uk-active:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-bottom: 2px solid #f0f657;
+    }
+
+    /*
+     * `uk-navbar-brand`
+     */
+
+    .uk-navbar-content > a:hover { text-decoration: none; }
+
+    /*
+     * `uk-navbar-brand`
+     */
+
+    .uk-navbar-brand {
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+}

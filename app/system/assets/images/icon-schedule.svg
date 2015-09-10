@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-schedule" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="20px" height="20px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+<path fill="#AFAFB0" d="M18,2h-4V1h-1v1H6V1H5v1H1H0v1v4v1v11v1h0h1h11v-1H1V8h17v4h1V3V2H18z M18,7H1V3h4v3h1V3h7v3h1V3h4V7z"/>
+<circle fill="#2EBF67" cx="16.5" cy="16.5" r="3.5"/>
+</svg>

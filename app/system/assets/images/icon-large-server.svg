@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-large-server" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<rect x="3" y="4" fill="#666666" width="1" height="1"/>
+<rect x="5" y="4" fill="#666666" width="1" height="1"/>
+<rect x="7" y="4" fill="#666666" width="1" height="1"/>
+<rect x="9" y="4" fill="#666666" width="1" height="1"/>
+<rect x="11" y="4" fill="#666666" width="1" height="1"/>
+<rect x="13" y="4" fill="#666666" width="1" height="1"/>
+<g>
+	<path fill="#666666" d="M23.04,2C23.548,2,24,2.421,24,2.941v3.117C24,6.578,23.588,7,23.08,7H1.92C1.412,7,1,6.578,1,6.059V2.941
+		C1,2.421,1.412,2,1.92,2H23 M23.08,1H1.92C0.861,1,0,1.871,0,2.941v3.117C0,7.129,0.861,8,1.92,8h21.16C24.139,8,25,7.129,25,6.059
+		V2.941C25,1.871,24.139,1,23.08,1L23.08,1z"/>
+</g>
+<rect x="3" y="13" fill="#666666" width="1" height="1"/>
+<rect x="5" y="13" fill="#666666" width="1" height="1"/>
+<rect x="7" y="13" fill="#666666" width="1" height="1"/>
+<rect x="9" y="13" fill="#666666" width="1" height="1"/>
+<g>
+	<path fill="#666666" d="M23.04,11c0.508,0,0.96,0.421,0.96,0.941v3.117C24,15.578,23.588,16,23.08,16H1.92
+		C1.412,16,1,15.578,1,15.059v-3.117C1,11.421,1.412,11,1.92,11H23 M23.08,10H1.92C0.861,10,0,10.871,0,11.941v3.117
+		C0,16.129,0.861,17,1.92,17h21.16c1.059,0,1.92-0.871,1.92-1.941v-3.117C25,10.871,24.139,10,23.08,10L23.08,10z"/>
+</g>
+<g>
+	<path fill="#666666" d="M12.5,20c0.827,0,1.5,0.673,1.5,1.5S13.327,23,12.5,23S11,22.327,11,21.5S11.673,20,12.5,20 M12.5,19
+		c-1.381,0-2.5,1.119-2.5,2.5s1.119,2.5,2.5,2.5s2.5-1.119,2.5-2.5S13.881,19,12.5,19L12.5,19z"/>
+</g>
+<rect x="14" y="21" fill="#666666" width="10" height="1"/>
+<rect x="1" y="21" fill="#666666" width="10" height="1"/>
+<rect x="12" y="17" fill="#666666" width="1" height="3"/>
+</svg>

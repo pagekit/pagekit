@@ -1,0 +1,30 @@
+<ul v-if="items.length" class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
+
+    <li v-repeat="folders | searched">
+        <div class="uk-panel uk-panel-box uk-text-center" v-on="click: toggleSelect">
+            <div class="uk-panel-teaser uk-position-relative">
+                <div class="uk-cover-background uk-position-cover pk-thumbnail-folder"></div>
+                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
+            </div>
+            <div class="uk-text-truncate">
+                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
+                <a v-on="click: setPath(path, $event)">{{ name }}</a>
+            </div>
+        </div>
+    </li>
+
+    <li v-repeat="files | searched">
+        <div class="uk-panel uk-panel-box uk-text-center" v-on="click: toggleSelect">
+            <div class="uk-panel-teaser uk-position-relative">
+                <div class="pk-background-contain uk-position-cover" v-if="isImage(path)" v-lazy-background="$url(url)"></div>
+                <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-if="!isImage(path)"></div>
+                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
+            </div>
+            <div class="uk-text-nowrap uk-text-truncate">
+                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
+                {{ name }}
+            </div>
+        </div>
+    </li>
+
+</ul>

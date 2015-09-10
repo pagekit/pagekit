@@ -1,0 +1,55 @@
+//
+// Component: HTML editor
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@htmleditor-navbar-background:                @global-default-background;
+
+@htmleditor-navbar-nav-height:                46px;
+@htmleditor-navbar-nav-padding-horizontal:    19px;
+@htmleditor-navbar-nav-line-height:           @htmleditor-navbar-nav-height;
+@htmleditor-navbar-nav-color:                 fade(@global-color, 80%);
+
+@htmleditor-navbar-nav-hover-background:      rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-hover-color:           darken(@global-color, 20%);
+@htmleditor-navbar-nav-onclick-background:    rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-onclick-color:         darken(@global-color, 20%);
+@htmleditor-navbar-nav-active-background:     rgba(255,255,255,0.5);
+@htmleditor-navbar-nav-active-color:          darken(@global-color, 20%);
+
+@htmleditor-content-border:                   @global-border;
+@htmleditor-content-background:               #fff;
+
+@htmleditor-fullscreen-z-index:               @global-z-index - 10;
+
+
+// Component
+// ========================================================================
+
+
+.hook-htmleditor() {}
+
+.hook-htmleditor-navbar() {}
+
+.hook-htmleditor-navbar-nav() {
+	-webkit-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.hook-htmleditor-navbar-nav-hover() {}
+
+.hook-htmleditor-navbar-nav-onclick() {}
+
+.hook-htmleditor-navbar-nav-active() {}
+
+.hook-htmleditor-content() {}
+
+
+// Miscellaneous
+// ========================================================================
+
+.hook-htmleditor-misc() {}

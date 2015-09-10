@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-large-mail" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<polyline fill="none" stroke="#666666" stroke-linejoin="bevel" stroke-miterlimit="10" points="2.778,8.167 12.5,13.724
+	22.115,8.167 "/>
+<polyline fill="none" stroke="#666666" stroke-linejoin="bevel" stroke-miterlimit="10" points="22.115,16.501 14.864,12.357
+	12.5,13.724 10.029,12.311 2.778,16.501 "/>
+<g>
+	<path fill="#666666" d="M23.04,5C23.548,5,24,5.421,24,5.941v12.118C24,18.578,23.588,19,23.08,19H1.92C1.412,19,1,18.578,1,18.059
+		V5.941C1,5.421,1.412,5,1.92,5H23 M23.08,4H1.92C0.861,4,0,4.871,0,5.941v12.118C0,19.129,0.861,20,1.92,20h21.16
+		c1.059,0,1.92-0.871,1.92-1.941V5.941C25,4.871,24.139,4,23.08,4L23.08,4z"/>
+</g>
+</svg>
