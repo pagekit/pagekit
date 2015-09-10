@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/widget-text',
+    'name' => 'system/text',
 
     'label' => 'Text',
 

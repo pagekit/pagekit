@@ -31,7 +31,7 @@
 
         section: {
             label: 'Settings',
-            active: 'system/widget-text',
+            active: 'system/text',
             priority: 0
         },
 

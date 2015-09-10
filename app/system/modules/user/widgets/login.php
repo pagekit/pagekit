@@ -5,7 +5,7 @@ use Pagekit\Auth\RememberMe;
 
 return [
 
-    'name' => 'system/widget-login',
+    'name' => 'system/login',
 
     'label' => 'Login',
 

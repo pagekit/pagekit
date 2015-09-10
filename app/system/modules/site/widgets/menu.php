@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'system/widget-menu',
+    'name' => 'system/menu',
 
     'label' => 'Menu',
 

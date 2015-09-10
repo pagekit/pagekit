@@ -61,7 +61,7 @@ return [
 
     'widgets' => [
 
-        'widgets/widget-login.php'
+        'widgets/login.php'
 
     ],
 

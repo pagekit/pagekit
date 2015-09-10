@@ -85,7 +85,7 @@
 
         section: {
             label: 'Settings',
-            active: 'system/widget-menu',
+            active: 'system/menu',
             priority: 0
         },
 

@@ -50,7 +50,8 @@ return [
 
     'widgets' => [
 
-        'widgets/widget-*.php'
+        'widgets/menu.php',
+        'widgets/text.php'
 
     ],
 
