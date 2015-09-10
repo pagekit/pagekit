@@ -3,8 +3,8 @@ module.exports = [
     {
         entry: {
             "users": "./app/users",
-            "registration": "./app/views/site/registration",
-            "profile": "./app/views/site/profile",
+            "registration": "./app/views/registration",
+            "profile": "./app/views/profile",
             "permission-index": "./app/views/admin/permission-index",
             "role-index": "./app/views/admin/role-index",
             "settings": "./app/views/admin/settings",
