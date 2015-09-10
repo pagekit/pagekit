@@ -51,7 +51,7 @@ class SelfUpdater
     public function update($file)
     {
         try {
-            $path = App::path() . '/test';
+            $path = App::path();
 
             if (!file_exists($file)) {
                 throw new \RuntimeException('File not found.');
