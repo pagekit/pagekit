@@ -51,7 +51,7 @@ class TranslationFetchCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // TODO system and installer are no longer extensions
-        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'installer', 'blog'];
+        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'blog'];
         $username   = $this->option('username');
         $password   = $this->option('password');
 
@@ -100,7 +100,13 @@ class TranslationFetchCommand extends Command
      */
     protected function getPath($path)
     {
-        $root = $this->config['path.extensions'];
+
+        // TODO: allow packages from other namespace
+        $root = $this->container['path.packages'].'/pagekit';
+
+        if ($path == "system") {
+            $root = $this->container['path'].'/app';
+        }
 
         if (!is_dir($path = "$root/$path")) {
             $this->abort("Can't find extension in '$path'");
