@@ -31,9 +31,15 @@ module.exports = {
         getVersions: function () {
 
             this.$http.get(this.api + '/api/update', function (data) {
-                this.$set('update', data[this.channel == 'nightly' ? 'nightly' : 'latest']);
+                var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+
+                if (channel) {
+                    this.$set('update', channel);
+                } else {
+                    this.error(this.$trans('Cannot obtain versions. Please try again later.'));
+                }
             }).error(function () {
-                this.errors.push(this.$trans('Cannot connect to the server. Please try again later.'));
+                this.error(this.$trans('Cannot connect to the server. Please try again later.'));
             });
 
         },
