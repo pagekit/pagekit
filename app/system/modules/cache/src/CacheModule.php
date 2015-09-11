@@ -108,7 +108,7 @@ class CacheModule extends Module
         if (empty($options) || @$options['cache']) {
             App::cache()->flushAll();
 
-            foreach (glob(App::get('path.cache') . '/*.cache') as $file) {
+            foreach ((array) glob(App::get('path.cache') . '/*.cache') as $file) {
                 @unlink($file);
             }
         }
