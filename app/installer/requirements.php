@@ -434,6 +434,13 @@ class PagekitRequirements extends RequirementCollection
             'Install and enable the <strong>PDO</strong> extension.'
         );
 
+        if (version_compare($installedPhpVersion, '5.6.0', '>=')) {
+            $this->addRequirement(ini_get('always_populate_raw_post_data') !== "1",
+                '$HTTP_RAW_POST_DATA is deprecated',
+                'Set \'always_populate_raw_post_data\' to \'-1\' in php.ini.'
+            );
+        }
+
         if (class_exists('PDO')) {
             $drivers = PDO::getAvailableDrivers();
             $this->addRequirement(
