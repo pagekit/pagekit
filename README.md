@@ -43,7 +43,7 @@ To watch for local LESS asset changes, run `gulp watch`.
 
 To watch for JS module changes, run `webpack --watch`.
 
-When the installer havs finished, point your browser to the Pagekit URL on your web server and follow the installer.
+When the installer has finished, point your browser to the Pagekit URL on your web server and follow the installer.
 
 ## Stay up to date
 
