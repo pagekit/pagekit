@@ -61,7 +61,7 @@ return [
                     $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
 
                     $app['auth']->setUser($user);
-                    $app['events']->dispatch(AuthEvents::LOGIN, new LoginEvent($user));
+                    $app['events']->trigger(AuthEvents::LOGIN, new LoginEvent($user));
 
                 } catch (\Exception $e) {
                 }

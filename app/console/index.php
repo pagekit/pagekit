@@ -23,6 +23,8 @@ return [
 
         }
 
-    ]
+    ],
+
+    'require' => 'application'
 
 ];

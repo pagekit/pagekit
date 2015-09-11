@@ -23,7 +23,7 @@ class ClearCacheCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        foreach (glob($this->container['path.cache'] . '/*.cache') as $file) {
+        foreach ((array) glob($this->container['path.cache'] . '/*.cache') as $file) {
             @unlink($file);
         }
     }

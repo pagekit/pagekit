@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.9.1 (September 11, 2015)
+
+- Extended system requirements (#410)
+- Fixed auto login
+- Fixed login widget (#423)
+- Display errors off as default
+- Added link to gitter chat
+
 ### 0.9.0 (September 10, 2015)
 
 - Refactored codebase

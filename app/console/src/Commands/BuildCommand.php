@@ -40,9 +40,8 @@ class BuildCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $info   = $this->container->info()->get();
         $path   = $this->container->path();
-        $vers   = $info['version'];
+        $vers   = $this->container->version();
         $filter = '/'.implode('|', $this->excludes).'/i';
 
         $this->line(sprintf('Starting: webpack'));

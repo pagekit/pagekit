@@ -27,7 +27,7 @@
 
                 <div class="uk-panel-teaser">
                     <div class="uk-overlay uk-display-block">
-                        <div class="uk-cover-background uk-position-cover" style="background-image: url({{image(pkg)}});"></div>
+                        <div class="uk-cover-background uk-position-cover" style="background-image: url('{{ image(pkg) }}');"></div>
                         <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
                         <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                     </div>
