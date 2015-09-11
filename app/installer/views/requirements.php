@@ -18,7 +18,7 @@
                 <img class="uk-margin-large-bottom" src="app/system/assets/images/pagekit-logo-large-black.svg" alt="Pagekit">
 
                 <div class="uk-panel uk-panel-box">
-                    <h1 class="uk-h2">System Requirements</h1>
+                    <h1>System Requirements</h1>
                     <p>Your server doesn't meet the minimum system requirements. Please fix the following issues to proceed.</p>
                     <?php foreach ($failed as $req) : ?>
                     <p>
