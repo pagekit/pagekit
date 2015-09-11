@@ -1,7 +1,7 @@
 <?php if ($user->isAuthenticated()): ?>
 
 <?= __('Hi %username%', ['%username%' => $user->username]) ?><br>
-<a href="<?= $view->url('@user/logout', ['redirect' => $redirect]) ?>"><?= __('Logout') ?></a>
+<a href="<?= $view->url('@user/logout', ['redirect' => $redirect_logout]) ?>"><?= __('Logout') ?></a>
 
 <?php else: ?>
 
@@ -27,7 +27,7 @@
         <?php endif ?>
     </p>
 
-    <input type="hidden" name="redirect" value="<?= $redirect ?>">
+    <input type="hidden" name="redirect" value="<?= $redirect_login ?>">
     <?php $view->token()->get() ?>
 
 </form>

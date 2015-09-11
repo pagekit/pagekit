@@ -20,11 +20,12 @@ return [
     'render' => function ($widget) use ($app) {
 
         $user              = $app['user'];
-        $redirect          = $widget->get('redirect_login') ?: $app['url']->current(true);
+        $redirect_login    = $widget->get('redirect_login') ?: $app['url']->current(true);
+        $redirect_logout   = $widget->get('redirect_logout') ?: $app['url']->current(true);
         $last_username     = $app['session']->get(Auth::LAST_USERNAME);
         $remember_me_param = RememberMe::REMEMBER_ME_PARAM;
 
-        return $app['view']('system/user/widget-login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return $app['view']('system/user/widget-login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect_login', 'redirect_logout'));
     }
 
 ];
