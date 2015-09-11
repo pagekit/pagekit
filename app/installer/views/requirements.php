@@ -1,32 +1,36 @@
 <!DOCTYPE html>
-<html class="uk-height-1-1">
+<html>
     <head>
-        <meta charset="utf-8">
         <title>Pagekit Installer Errors</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow">
         <link href="app/system/modules/theme/favicon.ico" rel="shortcut icon" type="image/x-icon">
-        <link href="app/system/modules/installer/assets/css/installer.css" rel="stylesheet">
-        <script src="app/assets/jquery/dist/jquery.min.js"></script>
-        <script src="app/assets/uikit/js/uikit.min.js"></script>
+        <link href="app/system/modules/theme/apple_touch_icon.png" rel="apple-touch-icon-precomposed">
+        <link href="app/installer/assets/css/installer.css" rel="stylesheet">
     </head>
-    <body class="uk-height-1-1">
+    <body>
 
-        <div class="tm-slide uk-vertical-align uk-text-center">
+        <div class="uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-text-center">
+            <div class="tm-container">
 
-            <div class="tm-container uk-panel uk-panel-box uk-vertical-align-middle">
+                <img class="uk-margin-large-bottom" src="app/system/assets/images/pagekit-logo-large-black.svg" alt="Pagekit">
 
-                <h1 class="uk-text-center">System Requirements</h1>
-
-                <p class="uk-text-center">Your server doesn't meet the minimum system requirements. Please fix the following issues to proceed.</p>
-
-                <?php foreach ($failed as $req) : ?>
-                <p>
-                    <span class="uk-badge uk-badge-danger">Error</span> <strong><?php echo $req->getTestMessage() ?></strong><br>
-                    <span class="uk-badge">Fix</span> <i><?php echo $req->getHelpHtml() ?></i>
-                </p>
-                <?php endforeach ?>
+                <div class="uk-panel uk-panel-box">
+                    <h1 class="uk-h2">System Requirements</h1>
+                    <p>Your server doesn't meet the minimum system requirements. Please fix the following issues to proceed.</p>
+                    <?php foreach ($failed as $req) : ?>
+                    <p>
+                        <span class="uk-badge uk-badge-danger">Error</span> <?php echo $req->getTestMessage() ?>
+                    </p>
+                    <p>
+                        <span class="uk-badge">Fix</span> <?php echo $req->getHelpHtml() ?>
+                    </p>
+                    <?php endforeach ?>
+                </div>
 
             </div>
-
         </div>
 
     </body>
