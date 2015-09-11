@@ -41,7 +41,7 @@
 
         section: {
             label: 'Settings',
-            active: 'system/widget-login',
+            active: 'system/login',
             priority: 0
         },
 
