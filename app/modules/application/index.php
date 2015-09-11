@@ -16,7 +16,7 @@ return [
         };
 
         $app['debug'] = function () {
-            return (bool) $this->config['debug'];
+            return (bool)$this->config['debug'];
         };
 
         $app['url'] = function ($app) {
@@ -33,7 +33,10 @@ return [
 
         if ($app->inConsole() || $app['debug']) {
             ini_set('display_errors', 1);
+        } else {
+            ini_set('display_errors', 0);
         }
+
     },
 
     'require' => [
