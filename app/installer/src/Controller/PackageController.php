@@ -89,6 +89,8 @@ class PackageController
         $manager = new PackageManager();
         $manager->enable($package);
 
+		App::trigger('enable', [$module]);
+
         App::exception()->setHandler($handler);
 
         return ['message' => 'success'];
@@ -110,7 +112,9 @@ class PackageController
         $manager = new PackageManager();
         $manager->disable($package);
 
-        App::module('system/cache')->clearCache();
+		App::trigger('disable', [$module]);
+
+		App::module('system/cache')->clearCache();
 
         return ['message' => 'success'];
     }
