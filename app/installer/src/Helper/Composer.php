@@ -2,7 +2,6 @@
 
 namespace Pagekit\Installer\Helper;
 
-use Composer\Factory;
 use Composer\Installer;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
@@ -130,8 +129,9 @@ class Composer
      */
     protected function getComposer()
     {
-        putenv('COMPOSER_HOME=' . $this->paths['path.temp'] . '/composer');
-        putenv('COMPOSER_VENDOR_DIR=' . $this->paths['path.packages']);
+        $config = $this->blueprint;
+        $config['config']  = ['vendor-dir' => $this->paths['path.packages']];
+        $config['require'] = $this->packages;
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -139,9 +139,7 @@ class Composer
             @ini_set('memory_limit', '512M');
         }
 
-        $config = $this->blueprint;
-        $config['require'] = $this->packages;
-
+        Factory::setHomeDir($this->paths['path.temp'] . '/composer');
         $composer = Factory::create($this->getIO(), $config);
         $composer->setLocker(new Locker(
             $this->getIO(),
