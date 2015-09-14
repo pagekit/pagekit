@@ -1,5 +1,9 @@
 # Changelog
 
+### WIP
+
+- Added https for Pagekit API (#415)
+
 ### 0.9.1 (September 11, 2015)
 
 - Extended system requirements (#410)
