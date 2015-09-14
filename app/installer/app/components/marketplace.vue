@@ -142,6 +142,8 @@
                 }
 
                 this.$set('pkg', pkg);
+                this.$set('status', '');
+
                 this.modal.show();
             },
 

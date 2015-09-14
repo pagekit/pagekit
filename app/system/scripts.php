@@ -113,6 +113,40 @@ return [
         $app['config']->set('system/site', [
             'menus' => ['main' => ['id' => 'main', 'label' => 'Main']]
         ]);
-    }
+//
+//        foreach ((array) $module->get('nodes') as $type => $route) {
+//            if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
+//                Node::create([
+//                    'title' => $route['label'],
+//                    'slug' => App::filter($route['label'], 'slugify'),
+//                    'type' => $type,
+//                    'status' => 1,
+//                    'link' => $route['name']
+//                ])->save();
+//            }
+//        }
+    },
+
+    'updates' => [
+
+        '0.9.5' => function ($app) {
+            $db = $app['db'];
+
+            $db->insert('@test_table', ['id' => 1, 'name' => 'test']);
+        },
+
+        '0.9.1' => function ($app) {
+
+            $util = $app['db']->getUtility();
+
+            if ($util->tableExists('@test_table') === false) {
+                $util->createTable('@test_table', function ($table) {
+                    $table->addColumn('id', 'integer', ['unsigned' => true, 'length' => 10, 'autoincrement' => true]);
+                    $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
+                    $table->setPrimaryKey(['id']);
+                });
+            }
+        }
+    ]
 
 ];

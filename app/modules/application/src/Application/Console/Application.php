@@ -19,7 +19,7 @@ class Application extends BaseApplication
      * Constructor.
      *
      * @param Container $container
-     * @param string    $name
+     * @param string $name
      */
     public function __construct(Container $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
