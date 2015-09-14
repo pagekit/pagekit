@@ -130,7 +130,7 @@ class Composer
     protected function getComposer()
     {
         $config = $this->blueprint;
-        $config['config']  = ['vendor-dir' => $this->paths['path.packages']];
+        $config['config'] = ['vendor-dir' => $this->paths['path.packages']];
         $config['require'] = $this->packages;
 
         // set memory limit, if < 512M
@@ -139,7 +139,11 @@ class Composer
             @ini_set('memory_limit', '512M');
         }
 
-        Factory::setHomeDir($this->paths['path.temp'] . '/composer');
+        Factory::bootstrap([
+            'home' => $this->paths['path.temp'] . '/composer',
+            'cache-dir' => $this->paths['path.temp'] . '/composer/cache'
+        ]);
+
         $composer = Factory::create($this->getIO(), $config);
         $composer->setLocker(new Locker(
             $this->getIO(),

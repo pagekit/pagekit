@@ -3,25 +3,25 @@
 namespace Pagekit\Installer\Helper;
 
 use Composer\Factory as BaseFactory;
-
+use Composer\IO\IOInterface;
+use Composer\Config;
 
 class Factory extends BaseFactory
 {
 
-    protected static $homeDir;
+    protected static $config = [];
 
-    public static function setHomeDir($homeDir)
+    public static function bootstrap($config)
     {
-        self::$homeDir = $homeDir;
+        self::$config = $config;
     }
 
-    protected static function getHomeDir()
+    public static function createConfig(IOInterface $io = null, $cwd = null)
     {
-        if (static::$homeDir) {
-            return static::$homeDir;
-        }
+        $config = new Config(true, $cwd);
+        $config->merge(['config' => static::$config]);
 
-        return parent::getHomeDir();
+        return $config;
     }
 
 }
