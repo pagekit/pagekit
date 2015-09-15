@@ -68,13 +68,10 @@ You can find further information about the command line tools in the [pagekit do
 
 ## Contributing
 
-Pagekit follows the [GitFlow branching model](http://nvie.com/posts/a-successful-git-branching-model). The ```master``` branch always reflects a production-ready state while the latest development is taking place in the ```develop``` branch.
+Finding bugs, sending pull requests, translating Pagekit or improving our docs.
+Any contribution is welcome and highly appreciated. To get started, head over
+to our [contribution guidelines](CONTRIBUTING.md). Thanks!
 
-Each time you want to work on a fix or a new feature, create a new branch based on the ```develop``` branch: ```git checkout -b BRANCH_NAME develop```. Only pull requests to the ```develop``` branch will be merged.
-
-## Versioning
-
-Pagekit is maintained by using the [Semantic Versioning Specification (SemVer)](http://semver.org).
 
 ## Copyright and License
 
