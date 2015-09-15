@@ -3,6 +3,7 @@
 ### WIP
 
 - Added https for Pagekit API (#415)
+- Removed ussage of environment variables (#428)
 
 ### 0.9.1 (September 11, 2015)
 
