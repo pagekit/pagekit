@@ -48,7 +48,7 @@ return [
 
         'system.finder' => function ($event) use ($app) {
             if ($app['user']->hasAccess('system: manage storage | system: manage storage read only')) {
-                $event->path('#^'.preg_quote($app['path.storage'], '#').'($|\/.*)#', $app['user']->hasAccess('system: manage storage') ? 'w' : 'r');
+                $event->path('#^'.preg_quote(strtr($app['path.storage'], '\\', '/'), '#').'($|\/.*)#', $app['user']->hasAccess('system: manage storage') ? 'w' : 'r');
             }
         }
 
