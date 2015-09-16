@@ -4,10 +4,9 @@ use Pagekit\Session\Csrf\Event\CsrfListener;
 use Pagekit\Session\Csrf\Provider\SessionCsrfProvider;
 use Pagekit\Session\Handler\DatabaseSessionHandler;
 use Pagekit\Session\Message;
+use Pagekit\Session\Session;
 use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 
 return [
@@ -37,13 +36,6 @@ return [
 
                     break;
 
-                case 'array':
-
-                    $storage = new MockArraySessionStorage;
-                    $app['session.test'] = true;
-
-                    break;
-
                 default:
 
                     $handler = new NativeFileSessionHandler($this->config['files']);
@@ -57,7 +49,7 @@ return [
 
         $app['session.options'] = function () {
 
-            $options = $this->config(['name', 'main']);
+            $options = $this->config(['cookie', 'lifetime']);
 
             if (isset($options['cookie'])) {
 
@@ -75,8 +67,6 @@ return [
             return $options;
         };
 
-        $app['session.test'] = false;
-
         $app['csrf'] = function ($app) {
             return new SessionCsrfProvider($app['session']);
         };
@@ -93,13 +83,13 @@ return [
 
         'request' => [function ($event, $request) use ($app) {
 
-            if (!$app['session.test'] && !isset($app['session.options']['cookie_path'])) {
+            if (!isset($app['session.options']['cookie_path'])) {
                 $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
             }
 
             $request->setSession($app['session']);
 
-            if (!$event->isMasterRequest() || !isset($app['session']) || !$app['session.test']) {
+            if (!$event->isMasterRequest() || !isset($app['session'])) {
                 return;
             }
 
@@ -115,7 +105,7 @@ return [
 
         'response' => [function ($event, $request, $response) use ($app) {
 
-            if (!$event->isMasterRequest() || !$app['session.test']) {
+            if (!$event->isMasterRequest()) {
                 return;
             }
 
@@ -144,10 +134,7 @@ return [
         'storage'  => null,
         'lifetime' => 900,
         'files'    => null,
-        'table'    => 'sessions',
-        'cookie'   => [
-            'name' => '',
-        ]
+        'table'    => 'sessions'
 
     ]
 

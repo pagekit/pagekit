@@ -66,6 +66,7 @@ return [
                 $table->addColumn('id', 'string', ['length' => 255]);
                 $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->addColumn('time', 'datetime');
+                $table->addColumn('lifetime', 'int');
                 $table->setPrimaryKey(['id']);
             });
         }
