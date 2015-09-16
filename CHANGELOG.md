@@ -4,6 +4,7 @@
 
 - Added https for Pagekit API (#415)
 - Removed usage of environment variables (#428)
+- Fixed user widget ordering
 
 ### 0.9.1 (September 11, 2015)
 

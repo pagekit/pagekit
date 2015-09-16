@@ -133,12 +133,11 @@
 
                 if (this.$get('widget.show') === 'registered') {
                     query = {
-                        sort: 'registered',
-                        order: 'DESC'
+                        filter: {order: 'registered DESC'}
                     }
                 } else {
                     query = {
-                        filter: {access: 300}
+                        filter: { access: 300, order: 'login DESC' }
                     }
                 }
 
