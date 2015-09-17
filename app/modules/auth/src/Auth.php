@@ -23,6 +23,11 @@ class Auth
     protected $user;
 
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * @var UserProviderInterface
      */
     protected $provider;
@@ -48,10 +53,11 @@ class Auth
      * @param SessionInterface         $session
      * @param EventDispatcherInterface $events
      */
-    public function __construct(EventDispatcherInterface $events, SessionInterface $session = null)
+    public function __construct(EventDispatcherInterface $events, SessionInterface $session = null, $config = null)
     {
         $this->events = $events;
         $this->session = $session;
+        $this->config = $config;
     }
 
     /**
@@ -78,6 +84,12 @@ class Auth
 
         if ($user = $this->session->get($this->getName()) and $user instanceof UserInterface) {
 
+            if ($this->session->get($this->getName('lastActive')) + $this->config['timeout'] < time()) {
+                $this->logout();
+                return false;
+            }
+            $this->session->set($this->getName('lastActive'), time());
+
             if ($this->token != $this->session->get($this->getName('token'))) {
                 $user = $this->getUserProvider()->find($user->getId());
                 $this->session->set($this->getName(), $user);
@@ -99,6 +111,7 @@ class Auth
     {
         $this->session->set($this->getName(), $user);
         $this->session->set($this->getName('token'), $this->token);
+        $this->session->set($this->getName('lastActive'), time());
         $this->user = $user;
     }
 

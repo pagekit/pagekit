@@ -17,7 +17,7 @@ return [
     'main' => function ($app) {
 
         $app['auth'] = function ($app) {
-            return new Auth($app['events'], $app['session']);
+            return new Auth($app['events'], $app['session'], $this->config('auth'));
         };
 
         $app['auth.password'] = function () {
@@ -92,19 +92,18 @@ return [
 
     'config' => [
 
+        'auth' => [
+
+            'timeout' => 900
+
+        ],
+
         'rememberme' => [
 
-            'enabled' => true,
-
-            'key' => '',
-
-            'cookie' => [
-
-                'name' => ''
-
-            ]
+            'enabled' => true
 
         ]
 
     ]
+
 ];
