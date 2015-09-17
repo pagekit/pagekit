@@ -54,7 +54,7 @@ return [
             if (isset($options['cookie'])) {
 
                 foreach ($options['cookie'] as $name => $value) {
-                    $options[$name == 'name' ? 'name' : 'cookie_'.$name] = $value;
+                    $options[$name == 'name' ? 'name' : 'cookie_' . $name] = $value;
                 }
 
                 unset($options['cookie']);
@@ -93,33 +93,7 @@ return [
                 return;
             }
 
-            $session = $app['session'];
-
-            if ($request->cookies->has($session->getName())) {
-                $session->setId($request->cookies->get($session->getName()));
-            } else {
-                $session->migrate(false);
-            }
-
-        }, 100],
-
-        'response' => [function ($event, $request, $response) use ($app) {
-
-            if (!$event->isMasterRequest()) {
-                return;
-            }
-
-            if ($session = $request->getSession() and $session->isStarted()) {
-
-                $session->save();
-
-                $params = session_get_cookie_params();
-//                $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-//
-//                $response->headers->setCookie($cookie);
-            }
-
-        }, -100]
+        }, 100]
 
     ],
 
@@ -131,10 +105,10 @@ return [
 
     'config' => [
 
-        'storage'  => null,
+        'storage' => null,
         'lifetime' => 1209600,
-        'files'    => null,
-        'table'    => 'sessions'
+        'files' => null,
+        'table' => 'sessions'
 
     ]
 
