@@ -89,10 +89,6 @@ return [
 
             $request->setSession($app['session']);
 
-            if (!$event->isMasterRequest() || !isset($app['session'])) {
-                return;
-            }
-
         }, 100]
 
     ],
