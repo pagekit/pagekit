@@ -39,7 +39,7 @@ class RememberMe
      * @param  string $var
      * @return string
      */
-    public function getKey($var = 'user')
+    public function getKey($var = 'userid')
     {
         return "_rememberme.{$var}_" . sha1(get_class($this));
     }
@@ -55,7 +55,7 @@ class RememberMe
     {
         try {
 
-            if (null === $userid = $this->session->get($this->getKey('userid'))) {
+            if (null === $userid = $this->session->get($this->getKey())) {
                 throw new AuthException('No remember me cookie found.');
             }
 
