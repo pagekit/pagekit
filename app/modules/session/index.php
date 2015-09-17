@@ -114,9 +114,9 @@ return [
                 $session->save();
 
                 $params = session_get_cookie_params();
-                $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
-
-                $response->headers->setCookie($cookie);
+//                $cookie = new Cookie($session->getName(), $session->getId(), 0 === $params['lifetime'] ? 0 : time() + $params['lifetime'], $params['path'], $params['domain'], $params['secure'], $params['httponly']);
+//
+//                $response->headers->setCookie($cookie);
             }
 
         }, -100]
@@ -132,7 +132,7 @@ return [
     'config' => [
 
         'storage'  => null,
-        'lifetime' => 900,
+        'lifetime' => 1209600,
         'files'    => null,
         'table'    => 'sessions'
 

@@ -17,11 +17,12 @@ return [
     'session' => [
 
         'storage' => 'database',
-        'lifetime' => 900,
+        'lifetime' => 1209600,
         'files' => "$path/tmp/sessions",
         'table' => '@system_session',
-        'cookie' => [
+        'cookie'   => [
             'name' => 'pagekit_session',
+            'lifetime' => 315360000
         ]
 
     ],
