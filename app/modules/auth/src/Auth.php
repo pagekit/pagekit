@@ -15,7 +15,7 @@ class Auth
 {
     const USERNAME_PARAM = 'username';
     const REDIRECT_PARAM = 'redirect';
-    const LAST_USERNAME  = '_auth.last_username';
+    const LAST_USERNAME = '_auth.last_username';
 
     /**
      * @var UserInterface
@@ -50,7 +50,7 @@ class Auth
     /**
      * Constructor.
      *
-     * @param SessionInterface         $session
+     * @param SessionInterface $session
      * @param EventDispatcherInterface $events
      */
     public function __construct(EventDispatcherInterface $events, SessionInterface $session = null, $config = null)
@@ -66,9 +66,9 @@ class Auth
      * @param  string $var
      * @return string
      */
-    public function getName($var = 'user')
+    public function getKey($var = 'user')
     {
-        return "_auth.{$var}_".sha1(get_class($this));
+        return "_auth.{$var}_" . sha1(get_class($this));
     }
 
     /**
@@ -82,18 +82,18 @@ class Auth
             return $this->user;
         }
 
-        if ($user = $this->session->get($this->getName()) and $user instanceof UserInterface) {
+        if ($user = $this->session->get($this->getKey()) and $user instanceof UserInterface) {
 
-            if ($this->session->get($this->getName('lastActive')) + $this->config['timeout'] < time()) {
-                $this->logout();
+            if ($this->session->getLastActive() + $this->config['timeout'] < time()) {
+                $this->logout(true);
                 return false;
             }
-            $this->session->set($this->getName('lastActive'), time());
+            $this->session->set($this->getKey('lastActive'), time());
 
-            if ($this->token != $this->session->get($this->getName('token'))) {
+            if ($this->token != $this->session->get($this->getKey('token'))) {
                 $user = $this->getUserProvider()->find($user->getId());
-                $this->session->set($this->getName(), $user);
-                $this->session->set($this->getName('token'), $this->token);
+                $this->session->set($this->getKey(), $user);
+                $this->session->set($this->getKey('token'), $this->token);
             }
 
             $this->user = $user;
@@ -109,10 +109,21 @@ class Auth
      */
     public function setUser(UserInterface $user)
     {
-        $this->session->set($this->getName(), $user);
-        $this->session->set($this->getName('token'), $this->token);
-        $this->session->set($this->getName('lastActive'), time());
+        $this->session->set($this->getKey(), $user);
+        $this->session->set($this->getKey('token'), $this->token);
         $this->user = $user;
+    }
+
+    /**
+     * Removes the user.
+     *
+     * @param UserInterface
+     */
+    public function removeUser()
+    {
+        $this->session->remove($this->getKey());
+        $this->session->remove($this->getKey('token'));
+        $this->user = null;
     }
 
     /**
@@ -213,14 +224,13 @@ class Auth
     /**
      * Logs the current user out.
      *
+     * @param bool $auto
      * @return Response
      */
-    public function logout()
+    public function logout($auto = false)
     {
-        $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->user));
-
-        $this->user = null;
-        $this->session->invalidate();
+        $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->user), compact('auto'));
+        $this->removeUser();
 
         return $event->getResponse();
     }

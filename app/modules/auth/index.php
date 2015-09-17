@@ -29,7 +29,15 @@ return [
         };
 
         $app['auth.remember'] = function ($app) {
-            return new RememberMe($this->config('rememberme.key'), $this->config('rememberme.cookie.name') ?: 'remember_'.md5($app['request']->getUriForPath('')), $app['cookie']);
+
+            $config = [
+
+                'gc_maxlifetime' => $app['session.options']['gc_maxlifetime'],
+                'rememberme_lifetime' => $this->config('rememberme.timeout')
+
+            ];
+
+            return new RememberMe($app['session'], $config);
         };
 
     },
@@ -38,15 +46,15 @@ return [
 
         'boot' => function ($event, $app) {
 
-            $app->on('auth.login', function (LoginEvent $event) use ($app) {
+            $app->on(AuthEvents::LOGIN, function (LoginEvent $event) use ($app) {
                 $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
             }, -32);
 
-            $app->on('auth.logout', function (LogoutEvent $event) use ($app) {
+            $app->on(AuthEvents::LOGOUT, function (LogoutEvent $event) use ($app) {
                 $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
             }, -32);
 
-            if (!$this->config('rememberme.enabled') || !$this->config('rememberme.key')) {
+            if (!$this->config('rememberme.enabled')) {
                 return;
             }
 
@@ -72,12 +80,10 @@ return [
                 $app['auth.remember']->set($app['request'], $event->getUser());
             });
 
-            $app->on(AuthEvents::FAILURE, function () use ($app) {
-                $app['auth.remember']->remove();
-            });
-
-            $app->on('auth.logout', function () use ($app) {
-                $app['auth.remember']->remove();
+            $app->on(AuthEvents::LOGOUT, function ($event, $auto = false) use ($app) {
+                if (!$auto) {
+                    $app['auth.remember']->remove();
+                }
             });
 
         }
@@ -100,7 +106,8 @@ return [
 
         'rememberme' => [
 
-            'enabled' => true
+            'enabled' => true,
+            'timeout' => 31536000
 
         ]
 
