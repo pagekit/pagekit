@@ -55,7 +55,7 @@ class RememberMe
     {
         try {
 
-            if (null === $username = $this->session->get($this->getKey('username'))) {
+            if (null === $userid = $this->session->get($this->getKey('userid'))) {
                 throw new AuthException('No remember me cookie found.');
             }
 
@@ -63,8 +63,8 @@ class RememberMe
                 throw new AuthException('The cookie has expired.');
             }
 
-            if (!$user = $provider->findByUsername($username)) {
-                throw new AuthException(sprintf('No user found for "%s".', $username));
+            if (!$user = $provider->find($userid)) {
+                throw new AuthException('No user found.');
             }
 
         } catch (AuthException $e) {
@@ -89,7 +89,7 @@ class RememberMe
             return;
         }
 
-        $this->session->set($this->getKey('username'), $user->getUsername());
+        $this->session->set($this->getKey('userid'), $user->getId());
         $this->session->setLifetime($this->config['rememberme_lifetime']);
     }
 
