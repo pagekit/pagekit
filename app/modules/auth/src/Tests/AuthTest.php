@@ -30,12 +30,6 @@ class AuthTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('Pagekit\Auth\UserInterface', $this->auth->getUser());
 	}
 
-	public function testGetUserUnexpiredToken()
-	{
-		$this->auth->refresh('validToken');
-		$this->assertInstanceOf('Pagekit\Auth\UserInterface', $this->auth->getUser());
-	}
-
 	/**
 	* @expectedException RuntimeException
 	*/
