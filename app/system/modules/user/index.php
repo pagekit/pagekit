@@ -131,11 +131,7 @@ return [
 
         'registration' => 'admin',
         'require_verification' => true,
-        'users_per_page' => 20,
-
-        'auth' => [
-            'refresh_token' => false
-        ]
+        'users_per_page' => 20
 
     ],
 

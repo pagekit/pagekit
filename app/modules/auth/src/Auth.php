@@ -66,7 +66,7 @@ class Auth
      * @param  string $var
      * @return string
      */
-    public function getKey($var = 'user')
+    public function getKey($var = 'userid')
     {
         return "_auth.{$var}_" . sha1(get_class($this));
     }
@@ -82,21 +82,14 @@ class Auth
             return $this->user;
         }
 
-        if ($user = $this->session->get($this->getKey()) and $user instanceof UserInterface) {
+        if ($userid = $this->session->get($this->getKey()) and $user = $this->getUserProvider()->find($userid)) {
+            $this->user = $user;
 
             if ($this->session->getLastActive() + $this->config['timeout'] < time()) {
                 $this->logout(true);
                 return false;
             }
             $this->session->set($this->getKey('lastActive'), time());
-
-            if ($this->token != $this->session->get($this->getKey('token'))) {
-                $user = $this->getUserProvider()->find($user->getId());
-                $this->session->set($this->getKey(), $user);
-                $this->session->set($this->getKey('token'), $this->token);
-            }
-
-            $this->user = $user;
         }
 
         return $this->user;
@@ -109,8 +102,7 @@ class Auth
      */
     public function setUser(UserInterface $user)
     {
-        $this->session->set($this->getKey(), $user);
-        $this->session->set($this->getKey('token'), $this->token);
+        $this->session->set($this->getKey(), $user->getId());
         $this->user = $user;
     }
 
@@ -122,7 +114,6 @@ class Auth
     public function removeUser()
     {
         $this->session->remove($this->getKey());
-        $this->session->remove($this->getKey('token'));
         $this->user = null;
     }
 
@@ -233,15 +224,5 @@ class Auth
         $this->removeUser();
 
         return $event->getResponse();
-    }
-
-    /**
-     * Sets the token used to identify when to refresh the user from the session
-     *
-     * @param integer $token
-     */
-    public function refresh($token = null)
-    {
-        $this->token = $token;
     }
 }
