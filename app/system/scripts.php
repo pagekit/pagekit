@@ -115,6 +115,16 @@ return [
             'menus' => ['main' => ['id' => 'main', 'label' => 'Main']]
         ]);
 
-    }
+    },
+
+    'updates' => [
+        '0.9.2' => function ($app) {
+
+            $db = $app['db'];
+            $db->executeQuery("ALTER TABLE @system_session ADD lifetime INT NOT NULL DEFAULT 1209600;
+                               ALTER TABLE @system_session CHANGE lifetime lifetime INT NOT NULL;");
+
+        }
+    ]
 
 ];

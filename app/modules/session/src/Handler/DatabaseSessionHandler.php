@@ -26,6 +26,13 @@ class DatabaseSessionHandler extends SessionHandlerProxy
     protected $gcCalled = false;
 
     /**
+     * @var bool
+     *
+     * TODO: Remove this in final.
+     */
+    protected $legacy = false;
+
+    /**
      * Constructor.
      *
      * @param Connection $connection
@@ -97,12 +104,19 @@ class DatabaseSessionHandler extends SessionHandlerProxy
     {
         try {
 
-            $data = $this->connection->executeQuery("SELECT data, lifetime FROM {$this->table} WHERE id = :id", ['id' => sha1($id)])->fetchAll(\PDO::FETCH_NUM);
+            $data = $this->connection->executeQuery("SELECT * FROM {$this->table} WHERE id = :id", ['id' => sha1($id)])->fetchAll(\PDO::FETCH_ASSOC);
 
             if ($data) {
-                $this->setLifetime($data[0][1]);
 
-                return base64_decode($data[0][0]);
+                // TODO: Remove this in final.
+                if (isset($data[0]['lifetime'])) {
+                    $this->setLifetime($data[0]['lifetime']);
+                } else {
+                    $this->legacy = true;
+                    $this->setLifetime(1209600);
+                }
+
+                return base64_decode($data[0]['data']);
             }
 
             return '';
@@ -120,7 +134,7 @@ class DatabaseSessionHandler extends SessionHandlerProxy
         try {
 
             $params = ['id' => sha1($id), 'data' => base64_encode($data), 'time' => date('Y-m-d H:i:s'), 'lifetime' => $this->getLifetime()];
-            $sql = $this->getMergeSql();
+            $sql = $this->legacy ? $this->getMergeSqlLegacy() : $this->getMergeSql();
 
             $this->connection->executeQuery($sql, $params);
 
@@ -161,6 +175,27 @@ class DatabaseSessionHandler extends SessionHandlerProxy
             . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
         } elseif ($platform instanceof SqlitePlatform) {
             return "INSERT OR REPLACE INTO {$this->table} (id, data, time, lifetime) VALUES (:id, :data, :time, :lifetime)";
+        }
+
+        throw new \RuntimeException('Not supported database.');
+    }
+
+    /**
+     * Support for old database schema.
+     *
+     * TODO: Remove this in final.
+     *
+     * @return string|null The SQL string or null when not supported
+     */
+    protected function getMergeSqlLegacy()
+    {
+        $platform = $this->connection->getDatabasePlatform();
+
+        if ($platform instanceof MySqlPlatform) {
+            return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
+            . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
+        } elseif ($platform instanceof SqlitePlatform) {
+            return "INSERT OR REPLACE INTO {$this->table} (id, data, time) VALUES (:id, :data, :time)";
         }
 
         throw new \RuntimeException('Not supported database.');
