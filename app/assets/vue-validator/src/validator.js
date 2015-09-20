@@ -1,119 +1,96 @@
-var _ = require('./util');
-
 /**
  * Validator for form input validation.
  */
 
-module.exports = {
+module.exports = function (_) {
 
-    validators: {},
+    var Validator = {
 
-    bind: function (dir) {
+        directives: [],
 
-        var self = this, name = dir.form, vm = findVm(dir.el.form);
+        bind: function (dir) {
+            this.directives.push(dir);
+        },
 
-        if (!vm) {
-            return;
-        }
+        unbind: function (dir) {
+            this.directives.splice(this.directives.indexOf(dir), 1);
+        },
 
-        if (!this.validators[name]) {
+        validate: function (form, submit) {
 
-            this.validators[name] = {
-                form: dir.el.form,
-                vm: vm,
-                handler: function (e) {
-                    e.preventDefault();
-                    _.trigger(e.target, self.validate(name, true) ? 'valid' : 'invalid');
-                },
-                dirs: []
-            };
+            var vm = _.vm(form), name = _.attr(form, 'name'), results = {valid: true, invalid: false};
 
-            vm.$add(name, {});
-            _.on(dir.el.form, 'submit', this.validators[name].handler);
-        }
-
-        this.validators[name].dirs.push(dir);
-    },
-
-    unbind: function (dir) {
-
-        var form = this.validators[dir.form];
-
-        if (!form) {
-            return;
-        }
-
-        form.dirs.splice(form.dirs.indexOf(dir), 1);
-
-        if (!form.dirs.length) {
-            if (form.form) {
-                _.off(form.form, 'submit', form.handler);
-            }
-            form.vm.$delete(dir.form);
-            delete this.validators[dir.form];
-        }
-    },
-
-    validate: function (form, submit) {
-
-        var validator = this.validators[form], results = { valid: true, invalid: false };
-
-        if (!validator) {
-            return true;
-        }
-
-        validator.dirs.forEach(function(dir) {
-
-            var valid = dir.validate(), el = dir.el, name = dir.name;
-
-            if (submit) {
-                el._touched = true;
-            }
-
-            if (!el._touched) {
-                results[name] = {};
+            if (!vm || !name) {
                 return;
             }
 
-            if (!results[name]) {
-                results[name] = {
-                    valid: true,
-                    invalid: false,
-                    touched: el._touched,
-                    dirty: el._dirty
-                };
+            this.directives.forEach(function (dir) {
+
+                var valid = dir.validate(), el = dir.el, name = dir.name;
+
+                if (el.form !== form) {
+                    return;
+                }
+
+                if (submit) {
+                    el._touched = true;
+                }
+
+                if (!el._touched) {
+                    results[name] = {};
+                    return;
+                }
+
+                if (!results[name]) {
+                    results[name] = {
+                        valid: true,
+                        invalid: false,
+                        touched: el._touched,
+                        dirty: el._dirty
+                    };
+                }
+
+                results[name][dir.type] = !valid;
+
+                if (submit && results.valid && !valid) {
+                    el.focus();
+                }
+
+                if (results[name].valid && !valid) {
+                    results[name].valid = results.valid = false;
+                    results[name].invalid = results.invalid = true;
+                }
+            });
+
+            if (vm.$get(name)) {
+                vm.$set(name, results);
+            } else {
+                vm.$add(name, results);
             }
 
-            results[name][dir.type] = !valid;
-
-            if (submit && results.valid && !valid) {
-                el.focus();
+            if (submit && results.invalid) {
+                _.trigger(form, 'invalid');
             }
 
-            if (results[name].valid && !valid) {
-                results[name].valid = results.valid = false;
-                results[name].invalid = results.invalid = true;
-            }
-        });
-
-        validator.vm.$set(form, results);
-
-        return results.valid;
-    }
-
-};
-
-function findVm(elm) {
-
-    do {
-
-        if (elm.__vue__) {
-            return elm.__vue__;
+            return results.valid;
         }
 
-        elm = elm.parentElement;
+    };
 
-    } while (elm);
+    Validator.filter = function (fn) {
 
-    return undefined;
-}
+        return function (e) {
+            e.preventDefault();
+
+            if (Validator.validate(e.target, true)) {
+                fn(e);
+            }
+
+        }.bind(this);
+    };
+
+    Validator.types = require('./validators');
+    Validator.directive = require('./valid')(_);
+
+    return _.validator = Validator;
+};

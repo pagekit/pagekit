@@ -27,10 +27,10 @@ It is model independent and uses the actual element value instead.
 
 The validators are applied through the `v-valid` directive. Any change to the content will trigger form validation.
 
-The validator will catch any `submit` events and in turn triggers `valid` and `invalid` events on the form. The form validation state is published to the current scope using the forms `name` attribute. Similarly, the `name` attributes of the `input` fields specify their properties.
+The validator `valid` filter can be added to any form `submit` event. The form validation state is published to the current scope using the forms `name` attribute. Similarly, the `name` attributes of the `input` fields specify their properties.
 
 ```html
-<form name="form" v-on="valid: save">
+<form name="form" v-on="submit: save | valid">
 
     <input type="text" name="name" v-valid="required, alpha">
     <span v-show="form.name.required">Name cannot be blank.</span>
@@ -45,7 +45,7 @@ The validator will catch any `submit` events and in turn triggers `valid` and `i
 Custom validators may be added globally:
 
 ```javascript
-Vue.validators['myUrl'] = function(value) {
+Vue.validator.types['myUrl'] = function(value) {
     // custom URL validation
 }
 ```

@@ -1,6 +1,6 @@
 <?php $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'editor', 'uikit']); ?>
 
-<form id="site-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
+<form id="site-edit" class="uk-form" name="form" v-on="submit: save | valid" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>

@@ -53,6 +53,10 @@ class WidgetApiController
             App::abort(404, 'Widget not found.');
         }
 
+        if (empty($data['title'])) {
+            App::abort(400, 'Widget title empty.');
+        }
+
         $widget->save($data);
 
         return ['message' => 'success', 'widget' => $widget];

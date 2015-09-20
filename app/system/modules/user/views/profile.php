@@ -1,6 +1,6 @@
 <?php $view->script('profile', 'system/user:app/bundle/profile.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-profile" class="uk-article uk-form uk-form-stacked" name="form" v-on="valid: save">
+<form id="user-profile" class="uk-article uk-form uk-form-stacked" name="form" v-on="submit: save | valid">
 
     <h1 class="uk-article-title">{{ 'Your Profile' | trans }}</h1>
 

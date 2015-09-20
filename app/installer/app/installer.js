@@ -59,10 +59,6 @@ var installer = {
         stepDatabase: function (e) {
             e.preventDefault();
 
-            if (!this.$validator.validate('formDatabase', true)) {
-                return false;
-            }
-
             this.resource.post({action: 'check'}, {config: this.config}, function (data) {
 
                 if (!Vue.util.isPlainObject(data)) {

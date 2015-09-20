@@ -1,6 +1,6 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="uk-article uk-form uk-form-stacked" name="form" v-on="valid: submit" v-cloak>
+<form id="user-registration" class="uk-article uk-form uk-form-stacked" name="form" v-on="submit: submit | valid" v-cloak>
 
     <h1 class="uk-article-title"><?= __('Registration') ?></h1>
 

@@ -63,7 +63,7 @@
 
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formDatabase" v-on="submit: stepDatabase">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formDatabase" v-on="submit: stepDatabase | valid">
                             <div class="uk-form-row">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -142,7 +142,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Create your account' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'You will be the site administrator.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formUser" v-on="valid: stepUser">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formUser" v-on="submit: stepUser | valid">
                             <div class="uk-form-row">
                                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -191,7 +191,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your website details.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="valid: stepSite">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="submit: stepSite | valid">
                             <div class="uk-form-row">
                                 <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
                                 <div class="uk-form-controls">

@@ -1,17 +1,17 @@
-var Directive = require('./valid');
-var Validator = require('./validator');
-var Validators = require('./validators');
-
 /**
  * Install plugin.
  */
 
 module.exports = function (Vue) {
 
-    Vue.validators = Validators;
-    Vue.directive('valid', Directive);
+    var _ = require('./util')(Vue);
+    var v = require('./validator')(_);
 
-    Vue.prototype.$validator = Validator;
+    Vue.validator = v;
+    Vue.filter('valid', v.filter);
+    Vue.directive('valid', v.directive);
+
+    Vue.prototype.$validator = v;
 
 };
 

@@ -1,6 +1,6 @@
 <?php $view->script('user-edit', 'system/user:app/bundle/user-edit.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-edit" class="uk-form uk-form-horizontal" name="form" v-on="valid: save" v-cloak>
+<form id="user-edit" class="uk-form uk-form-horizontal" name="form" v-on="submit: save | valid" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
