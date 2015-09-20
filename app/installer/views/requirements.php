@@ -19,7 +19,7 @@
 
                 <div class="uk-panel uk-panel-box">
                     <h1>System Requirements</h1>
-                    <p>Your server doesn't meet the minimum system requirements. Please fix the following issues to proceed.</p>
+                    <p>Please fix the following issues to proceed.</p>
                     <?php foreach ($failed as $req) : ?>
                     <p>
                         <span class="uk-badge uk-badge-danger">Error</span> <?php echo $req->getTestMessage() ?>

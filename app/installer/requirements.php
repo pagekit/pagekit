@@ -452,10 +452,9 @@ class PagekitRequirements extends RequirementCollection
 
         $writable_directories = ["$path/tmp", "$path/tmp/cache", "$path/tmp/logs", "$path/tmp/sessions"];
 
+        // If config.php doesn't exist, we need the root directory of the app to be writable.
         if (!file_exists("$path/config.php")) {
-          // If config.php doesn't exist, we need the root directory of the app
-          // to be writable.
-          array_unshift($writable_directories, $path);
+            array_unshift($writable_directories, $path);
         }
 
         foreach ($writable_directories as $dir) {
@@ -465,6 +464,11 @@ class PagekitRequirements extends RequirementCollection
                 "Change the permissions of the \"<strong>{$dir}</strong>\" directory so that the web server can write into it."
             );
         }
+
+        $this->addRequirement(
+            file_exists("$path/.htaccess"),
+            ".htaccess does not exist",
+            "Make sure the <strong>.htaccess</strong> file has been uploaded, sometimes hidden files are not uploaded using FTP/SFTP.");
 
         if (function_exists('opcache_invalidate') && ini_get('opcache.enable')) {
             $this->addPhpIniRequirement('opcache.load_comments', true, true);
