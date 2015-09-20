@@ -4,8 +4,10 @@
         <div class="uk-flex-item-1 uk-form-stacked">
 
             <div class="uk-form-row">
+
                 <input class="uk-width-1-1 uk-form-large" type="text" name="title" placeholder="{{ 'Enter Title' | trans }}" v-model="widget.title" v-valid="required">
                 <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
+
             </div>
 
             <div class="uk-form-row">
@@ -30,9 +32,7 @@
     module.exports = {
 
         section: {
-            label: 'Settings',
-            active: 'system/text',
-            priority: 0
+            label: 'Settings'
         },
 
         inherit: true,
@@ -41,6 +41,6 @@
 
     };
 
-    window.Widgets.components['widget-text'] = module.exports;
+    window.Widgets.components['system-text:settings'] = module.exports;
 
 </script>

@@ -1,7 +1,7 @@
 window.Site = module.exports = {
 
     data: function () {
-        return _.merge({}, window.$data);
+        return _.merge({form: {}}, window.$data);
     },
 
     ready: function () {
@@ -13,15 +13,14 @@ window.Site = module.exports = {
 
         sections: function () {
 
-            var type = this.$get('type.id'), sections = [];
+            var sections = [];
 
             _.forIn(this.$options.components, function (component, name) {
 
-                var options = component.options || {}, section = options.section;
+                var options = component.options || {};
 
-                if (section && (!section.active || type && type.match(section.active))) {
-                    section.name = name;
-                    sections.push(section);
+                if (options.section) {
+                    sections.push(_.extend({name: name, priority: 0}, options.section));
                 }
 
             });
@@ -38,7 +37,6 @@ window.Site = module.exports = {
     methods: {
 
         save: function (e) {
-
             e.preventDefault();
 
             var data = {node: this.node};
@@ -63,15 +61,36 @@ window.Site = module.exports = {
 
     },
 
+    filters: {
+
+        active: function (sections) {
+
+            var type = _.kebabCase(this.type.id), active;
+
+            return sections.filter(function (section) {
+
+                active = section.name.match('(.+):(.+)');
+
+                if (active === null) {
+                    return !_.find(sections, {name: type + ':' + section.name});
+                }
+
+                return active[1] == type;
+            }, this);
+        }
+
+    },
+
     partials: {
 
-        settings: require('../templates/settings.html')
+        'settings': require('../templates/settings.html')
 
     },
 
     components: {
 
-        'node-link': require('../components/node-link.vue')
+        'settings': require('../components/node-settings.vue'),
+        'link:settings': require('../components/node-link.vue')
 
     }
 

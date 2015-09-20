@@ -78,9 +78,7 @@
     module.exports = {
 
         section: {
-            label: 'Content',
-            priority: 0,
-            active: '^page$'
+            label: 'Content'
         },
 
         inherit: true,
@@ -133,6 +131,6 @@
 
     };
 
-    window.Site.components['node-page'] = module.exports;
+    window.Site.components['page:settings'] = module.exports;
 
 </script>

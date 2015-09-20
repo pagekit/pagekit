@@ -1,7 +1,7 @@
 module.exports = {
 
     data: function () {
-        return _.extend({}, window.$data);
+        return _.merge({form: {}}, window.$data);
     },
 
     ready: function () {
@@ -24,11 +24,10 @@ module.exports = {
 
             _.forIn(this.$options.components, function (component, name) {
 
-                var options = component.options || {}, section = options.section;
+                var options = component.options || {};
 
-                if (section) {
-                    section.name = name;
-                    sections.push(section);
+                if (options.section) {
+                    sections.push(_.extend({name: name, priority: 0}, options.section));
                 }
 
             });
@@ -76,8 +75,18 @@ module.exports = {
     filters: {
 
         active: function (sections) {
+
+            var type = _.kebabCase(this.widget.type), active;
+
             return sections.filter(function (section) {
-                return !section.active || this.widget.type.match(section.active);
+
+                active = section.name.match('(.+):(.+)');
+
+                if (active === null) {
+                    return !_.find(sections, {name: type + ':' + section.name});
+                }
+
+                return active[1] == type;
             }, this);
         }
 

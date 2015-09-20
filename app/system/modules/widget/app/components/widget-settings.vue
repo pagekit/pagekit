@@ -11,20 +11,6 @@
                 </div>
             </div>
 
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input-link class="uk-form-width-large" link="{{@ widget.data.redirect_login}}"></input-link>
-                </div>
-            </div>
-
-            <div class="uk-form-row">
-                <label class="uk-form-label">{{ 'Logout Redirect' | trans }}</label>
-                <div class="uk-form-controls">
-                    <input-link class="uk-form-width-large" link="{{@ widget.data.redirect_logout}}"></input-link>
-                </div>
-            </div>
-
         </div>
         <div class="pk-width-sidebar pk-width-sidebar-large">
 
@@ -43,12 +29,10 @@
             label: 'Settings'
         },
 
-        replace: false,
+        inherit: true,
 
-        props: ['widget', 'config', 'form']
+        props: ['widget']
 
-    };
-
-    window.Widgets.components['system-login:settings'] = module.exports;
+    }
 
 </script>

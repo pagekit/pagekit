@@ -84,9 +84,7 @@
     module.exports = {
 
         section: {
-            label: 'Settings',
-            active: 'system/menu',
-            priority: 0
+            label: 'Settings'
         },
 
         props: ['widget', 'config', 'form'],
@@ -111,6 +109,6 @@
 
     };
 
-    window.Widgets.components['widget-menu'] = module.exports;
+    window.Widgets.components['system-menu:settings'] = module.exports;
 
 </script>
