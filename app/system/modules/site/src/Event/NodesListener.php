@@ -51,24 +51,6 @@ class NodesListener implements EventSubscriberInterface
         }
     }
 
-    /**
-     * Adds protected node types.
-     */
-    public function onEnable($event, $module)
-    {
-        foreach ((array) $module->get('nodes') as $type => $route) {
-            if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
-                Node::create([
-                    'title' => $route['label'],
-                    'slug' => App::filter($route['label'], 'slugify'),
-                    'type' => $type,
-                    'status' => 1,
-                    'link' => $route['name']
-                ])->save();
-            }
-        }
-    }
-
     public function onNodeInit($event, $node)
     {
         if ('link' === $node->type && $node->get('redirect')) {

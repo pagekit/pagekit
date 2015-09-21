@@ -79,6 +79,17 @@ class SiteModule extends Module
      */
     public function registerType($type, array $route)
     {
+        // TODO: Reduce database queries.
+        if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
+            Node::create([
+                'title' => $route['label'],
+                'slug' => App::filter($route['label'], 'slugify'),
+                'type' => $type,
+                'status' => 1,
+                'link' => $route['name']
+            ])->save();
+        }
+
         $route['id']        = $type;
         $this->types[$type] = $route;
     }
