@@ -99,7 +99,7 @@ class RememberMe
      */
     public function remove()
     {
-        $this->session->remove($this->getKey('username'));
+        $this->session->remove($this->getKey('userid'));
         $this->session->setLifetime($this->config['gc_maxlifetime']);
     }
 
