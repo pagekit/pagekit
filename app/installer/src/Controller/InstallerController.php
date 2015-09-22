@@ -158,6 +158,7 @@ class InstallerController
             if (!$this->config) {
 
                 $configuration = new Config();
+                $configuration->set('application.debug', false);
 
                 foreach ($config as $key => $value) {
                     $configuration->set($key, $value);
