@@ -59,6 +59,13 @@ var installer = {
         stepDatabase: function (e) {
             e.preventDefault();
 
+            var database = this.config.database;
+            Object.keys(database.connections).forEach(function(name) {
+                if (name != database.default) {
+                    delete(database.connections[name]);
+                }
+            });
+
             this.resource.post({action: 'check'}, {config: this.config}, function (data) {
 
                 if (!Vue.util.isPlainObject(data)) {
