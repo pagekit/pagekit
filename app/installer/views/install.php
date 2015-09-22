@@ -18,7 +18,7 @@
                     <a class="uk-panel" v-on="click: gotoStep('language')">
                         <img src="app/system/assets/images/pagekit-logo-large.svg" alt="Pagekit">
                         <p>
-                            <svg class="tm-arrow" width="40px" height="40px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="tm-arrow" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                                 <line fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" x1="2" y1="18" x2="36" y2="18"/>
                                 <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="26.071,6.5 37.601,18.03 26,29.631 "/>
                             </svg>
@@ -40,7 +40,7 @@
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
-                                        <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
                                             <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
                                             <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                             c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
@@ -122,7 +122,7 @@
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
-                                        <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
                                             <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
                                             <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                             c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
@@ -170,7 +170,7 @@
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
-                                        <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
                                             <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
                                             <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                             c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
@@ -208,7 +208,7 @@
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
                                     <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
-                                        <svg class="uk-margin-small-left" width="18px" height="11px" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
+                                        <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
                                             <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
                                             <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
                                             c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
@@ -225,14 +225,14 @@
                 <div v-el="finish" v-show="step == 'finish'">
                     <div v-pre>
                         <div class="uk-text-center" v-show="status == 'install'">
-                            <svg class="tm-loader" width="150px" height="150px" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="tm-loader" width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                                 <g><circle cx="0" cy="0" r="70" fill="none" stroke-width="2"/></g>
                             </svg>
                         </div>
 
                         <div class="uk-text-center" v-show="status == 'finished'">
                             <a class="uk-panel" href="{{ $url.route('admin') }}">
-                                <svg class="tm-checkmark" width="100px" height="100px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <svg class="tm-checkmark" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                                     <polyline fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="5.125,63.25 27.375,89.375 95.25,18.875"/>
                                 </svg>
                             </a>
