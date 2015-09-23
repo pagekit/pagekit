@@ -34,7 +34,7 @@
 
             var nodes = _(this.config.nodes).groupBy('menu').value();
 
-            this.menus = _.mapValues(this.config.menus, function (menu, id) {
+            this.$set('menus', _.mapValues(this.config.menus, function (menu, id) {
 
                 return _.extend(menu, {
 
@@ -45,7 +45,7 @@
                     }
 
                 });
-            });
+            }));
         },
 
         computed: {
