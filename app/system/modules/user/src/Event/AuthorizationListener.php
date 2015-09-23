@@ -48,10 +48,13 @@ class AuthorizationListener implements EventSubscriberInterface
      * Redirects a user after successful login.
      *
      * @param LoginEvent $event
+     * @param bool $auto Auto-login with remember me
      */
-    public function onLogin(LoginEvent $event)
+    public function onLogin(LoginEvent $event, $auto = false)
     {
-        $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
+        if (!$auto) {
+            $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
+        }
     }
 
     /**

@@ -46,14 +46,6 @@ return [
 
         'boot' => function ($event, $app) {
 
-            $app->on(AuthEvents::LOGIN, function (LoginEvent $event) use ($app) {
-                $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
-            }, -32);
-
-            $app->on(AuthEvents::LOGOUT, function (LogoutEvent $event) use ($app) {
-                $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
-            }, -32);
-
             if (!$this->config('rememberme.enabled')) {
                 return;
             }
@@ -69,12 +61,11 @@ return [
                     $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
 
                     $app['auth']->setUser($user);
-                    $app['events']->trigger(AuthEvents::LOGIN, new LoginEvent($user));
+                    $app['events']->trigger(new LoginEvent(AuthEvents::LOGIN, $user), ['auto' => true]);
 
-                } catch (\Exception $e) {
-                }
+                } catch (\Exception $e) {}
 
-            }, 20);
+            }, 49);
 
             $app->on(AuthEvents::SUCCESS, function (AuthenticateEvent $event) use ($app) {
                 $app['auth.remember']->set($app['request'], $event->getUser());

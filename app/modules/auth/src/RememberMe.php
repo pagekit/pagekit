@@ -32,18 +32,6 @@ class RememberMe
         $this->config = $config;
     }
 
-
-    /**
-     * Get a unique identifier for the auth session value.
-     *
-     * @param  string $var
-     * @return string
-     */
-    public function getKey($var = 'userid')
-    {
-        return "_rememberme.{$var}_" . sha1(get_class($this));
-    }
-
     /**
      * Tries to read the username from the session.
      *
@@ -68,7 +56,6 @@ class RememberMe
             }
 
         } catch (AuthException $e) {
-
             $this->remove();
 
             throw $e;
@@ -93,7 +80,6 @@ class RememberMe
         $this->session->setLifetime($this->config['rememberme_lifetime']);
     }
 
-
     /**
      * Deletes the remember-me
      */
@@ -114,5 +100,16 @@ class RememberMe
         $parameter = $request->get(self::REMEMBER_ME_PARAM, null, true);
 
         return $parameter === 'true' || $parameter === 'on' || $parameter === '1' || $parameter === 'yes';
+    }
+
+    /**
+     * Get a unique identifier for the auth session value.
+     *
+     * @param  string $var
+     * @return string
+     */
+    protected function getKey($var = 'userid')
+    {
+        return "_rememberme.{$var}_" . sha1(get_class($this));
     }
 }

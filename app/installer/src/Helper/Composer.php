@@ -34,7 +34,6 @@ class Composer
 
     /**
      * @param $config
-     * @param $api
      * @param null $output
      */
     public function __construct($config, $output = null)

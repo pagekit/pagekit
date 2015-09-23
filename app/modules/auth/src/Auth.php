@@ -83,13 +83,14 @@ class Auth
         }
 
         if ($userid = $this->session->get($this->getKey()) and $user = $this->getUserProvider()->find($userid)) {
-            $this->user = $user;
 
             if ($this->session->getLastActive() + $this->config['timeout'] < time()) {
                 $this->logout(true);
-                return false;
+                return $this->user;
             }
+
             $this->session->set($this->getKey('lastActive'), time());
+            $this->user = $user;
         }
 
         return $this->user;
