@@ -7,6 +7,7 @@
 - Fixed user widget ordering
 - Fixed finder component for non Unix OS's (#448)
 - Updated config file generation
+- Security improvements
 
 ### 0.9.1 (September 11, 2015)
 
