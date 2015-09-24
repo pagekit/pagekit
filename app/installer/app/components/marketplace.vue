@@ -3,7 +3,7 @@
     <div data-uk-observe>
 
         <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
-            <div v-repeat="pkg: packages">
+            <div v-repeat="pkg: packages | sortPackages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
                     <div class="uk-panel-teaser">
@@ -161,6 +161,24 @@
             isInstalled: function (pkg) {
                 return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
             }
+        },
+
+        filters: {
+
+            sortPackages: function (packages) {
+                return packages.sort(function (a, b) {
+                    if (a.author.name === 'Pagekit' && b.author.name !== 'Pagekit') {
+                        return -1;
+                    }
+
+                    if (a.author.name !== 'Pagekit' && b.author.name === 'Pagekit') {
+                        return 1;
+                    }
+
+                    return 0;
+                });
+            }
+
         }
 
     };
