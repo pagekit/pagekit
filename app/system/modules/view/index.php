@@ -36,6 +36,18 @@ return [
 
         'boot' => function ($event, $app) {
             $app->subscribe(new ResponseListener());
+
+            $app->on('view.meta', function ($event, $meta) use ($app) {
+                if ($meta->get('title')){
+                    $title[] = $meta->get('title');
+                }
+                $title[] = $app->config('system/site')->get('title');
+                if ($app->request()->getPathInfo() === '/') {
+                    $title = array_reverse($title);
+                }
+
+                $meta->add('title', implode(' | ', $title));
+            });
         },
 
         'site' => function ($event, $app) {

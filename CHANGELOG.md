@@ -10,6 +10,7 @@
 - Security improvements
 - Removed site description
 - Removed Pagekit version from generator tag
+- Added site title to browser title
 
 ### 0.9.1 (September 11, 2015)
 
