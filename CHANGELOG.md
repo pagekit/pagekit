@@ -8,6 +8,7 @@
 - Fixed finder component for non Unix OS's (#448)
 - Updated config file generation
 - Security improvements
+- Removed site description
 
 ### 0.9.1 (September 11, 2015)
 
