@@ -19,13 +19,6 @@
         </div>
 
         <div class="uk-form-row">
-            <label for="form-description" class="uk-form-label">{{ 'Description' | trans }}</label>
-            <div class="uk-form-controls">
-                <textarea id="form-description" class="uk-form-width-large" rows="5" v-model="config.description"></textarea>
-            </div>
-        </div>
-
-        <div class="uk-form-row">
             <label for="form-appicon" class="uk-form-label">{{ 'Logo' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
                 <input-image source="{{@ config.view.logo }}"></input-image>

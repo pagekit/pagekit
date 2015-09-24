@@ -189,21 +189,12 @@
                     <div v-pre>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
-                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your website details.' | trans }}</div>
+                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your website title.' | trans }}</div>
 
                         <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="submit: stepSite | valid">
                             <div class="uk-form-row">
-                                <label for="form-sitename" class="uk-form-label">{{ 'Name' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-valid="required">
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
-                                </div>
-                            </div>
-                            <div class="uk-form-row">
-                                <label for="form-sitedescription" class="uk-form-label">{{ 'Description' | trans }}</label>
-                                <div class="uk-form-controls">
-                                    <textarea id="form-sitedescription" class="uk-width-1-1" name="description" rows="4" v-model="option['system/site'].description"></textarea>
-                                </div>
+                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-valid="required">
+                                <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
                             </div>
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
