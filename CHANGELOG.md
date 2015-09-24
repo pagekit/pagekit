@@ -9,6 +9,7 @@
 - Updated config file generation
 - Security improvements
 - Removed site description
+- Removed Pagekit version from generator tag
 
 ### 0.9.1 (September 11, 2015)
 
