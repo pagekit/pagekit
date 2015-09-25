@@ -83,6 +83,18 @@ return [
                 $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
             }
 
+            $app->on('view.meta', function ($event, $meta) use ($app) {
+                if ($meta->get('title')) {
+                    $title[] = $meta->get('title');
+                }
+                $title[] = $app->config('system/site')->get('title');
+                if ($app->request()->getPathInfo() === '/') {
+                    $title = array_reverse($title);
+                }
+
+                $meta->add('title', implode(' | ', $title));
+            });
+
         },
 
         'request' => [
