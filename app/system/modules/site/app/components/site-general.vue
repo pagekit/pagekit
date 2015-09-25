@@ -54,7 +54,7 @@
             priority: 10
         },
 
-        props: ['config']
+        props: ['config', 'form']
 
     }
 
