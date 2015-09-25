@@ -149,7 +149,7 @@ class Composer
             new JsonFile(preg_replace('/\.php$/i', '.lock', $this->file)),
             $composer->getRepositoryManager(),
             $composer->getInstallationManager(),
-            md5(json_encode($config))
+            json_encode($config)
         ));
 
         return $composer;
