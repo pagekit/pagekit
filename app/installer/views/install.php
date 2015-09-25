@@ -193,8 +193,8 @@
 
                         <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="submit: stepSite | valid">
                             <div class="uk-form-row">
-                                <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-valid="required">
-                                <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
+                                <input id="form-sitetitle" class="uk-width-1-1" type="text" name="title" v-model="option['system/site'].title" v-valid="required">
+                                <p class="uk-form-help-block uk-text-danger" v-show="formSite.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
                             </div>
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">

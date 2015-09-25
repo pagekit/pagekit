@@ -1,6 +1,6 @@
 <?php $view->script('site-settings', 'system/site:app/bundle/settings.js', ['vue', 'editor']) ?>
 
-<form id="settings" class="uk-form uk-form-horizontal" v-on="submit: save" v-cloak>
+<form id="settings" name="form" class="uk-form uk-form-horizontal" v-on="submit: save | valid" v-cloak>
 
     <div class="uk-grid pk-grid-large" data-uk-grid-margin>
         <div class="pk-width-sidebar">
