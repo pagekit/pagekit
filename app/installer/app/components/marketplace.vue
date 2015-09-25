@@ -30,9 +30,7 @@
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
-                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-show="!isInstalled(pkg)">
-                        {{ 'Install' | trans }} <i class="uk-icon-spinner uk-icon-spin" v-show="status == 'installing'"></i>
-                    </button>
+                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-show="!isInstalled(pkg)">{{ 'Install' | trans }}</button>
                 </div>
 
                 <div class="uk-modal-header">
@@ -149,13 +147,9 @@
 
             doInstall: function (pkg) {
 
-                this.$set('status', 'installing');
                 this.modal.hide();
+                this.install(pkg, this.installed);
 
-                this.install(pkg, this.installed)
-                    .always(function () {
-                        this.$set('status', '');
-                    });
             },
 
             isInstalled: function (pkg) {
