@@ -1,8 +1,7 @@
 <div class="uk-form-row">
     <label for="form-menu-title" class="uk-form-label">{{ 'Menu Title' | trans }}</label>
     <div class="uk-form-controls">
-        <input id="form-menu-title" class="uk-form-width-large" type="text" name="title" v-model="node.title" v-valid="required">
-        <div class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Invalid name.' | trans }}</div>
+        <input id="form-menu-title" class="uk-form-width-large" type="text" name="title" v-model="node.title">
     </div>
 </div>
 
