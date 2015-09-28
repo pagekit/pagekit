@@ -131,13 +131,17 @@ return [
 
         'registration' => 'admin',
         'require_verification' => true,
-        'users_per_page' => 20
+        'users_per_page' => 20,
+
+        'auth' => [
+            'refresh_token' => false
+        ]
 
     ],
 
     'events' => [
 
-        'boot' => function($event, $app) {
+        'boot' => function ($event, $app) {
             $app->subscribe(
                 new AccessListener,
                 new AuthorizationListener,
@@ -146,7 +150,7 @@ return [
             );
         },
 
-        'view.scripts' => function ($event, $scripts) use($app) {
+        'view.scripts' => function ($event, $scripts) use ($app) {
             if ($app['user']->hasAccess('user: manage users')) {
                 $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
             }
