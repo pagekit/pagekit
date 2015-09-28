@@ -1,9 +1,9 @@
 <?php
 
+use Pagekit\Kernel\ExceptionHandler;
 use Pagekit\Application\Response;
 use Pagekit\Application\UrlProvider;
 use Symfony\Component\Debug\ErrorHandler;
-use Symfony\Component\Debug\ExceptionHandler;
 
 return [
 
