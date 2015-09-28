@@ -5,7 +5,7 @@ module.exports = [
             "index": "./app/views/index"
         },
         output: {
-            filename: "./app/bundle/[name].js",
+            filename: "./app/bundle/[name].js"
         },
         module: {
             loaders: [

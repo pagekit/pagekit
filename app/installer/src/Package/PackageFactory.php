@@ -171,8 +171,6 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      */
     protected function loadPackages()
     {
-        $app = App::getInstance();
-
         foreach ($this->paths as $path) {
 
             $paths = glob($path, GLOB_NOSORT) ?: [];

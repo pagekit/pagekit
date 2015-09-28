@@ -2,7 +2,7 @@
 
 namespace Pagekit\Filesystem\Archive;
 
-use Pagekit\File\Exception\RuntimeException;
+use Pagekit\Filesystem\Exception\RuntimeException;
 
 class Zip implements ArchiveInterface
 {

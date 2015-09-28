@@ -71,6 +71,8 @@
 
             update: function (src) {
 
+                var matches;
+
                 this.$set('imageSrc', undefined);
                 this.$set('videoSrc', undefined);
 

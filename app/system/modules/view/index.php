@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\View\Event\CanonicalListener;
 use Pagekit\View\Event\ResponseListener;
 
 return [

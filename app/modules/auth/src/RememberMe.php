@@ -2,7 +2,6 @@
 
 namespace Pagekit\Auth;
 
-
 use Pagekit\Auth\Exception\AuthException;
 use Symfony\Component\HttpFoundation\Request;
 

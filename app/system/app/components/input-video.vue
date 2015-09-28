@@ -78,6 +78,8 @@
 
             update: function (src) {
 
+                var matches;
+
                 this.$set('image', undefined);
                 this.$set('video', undefined);
 

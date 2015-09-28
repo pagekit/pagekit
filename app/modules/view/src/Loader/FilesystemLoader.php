@@ -3,8 +3,8 @@
 namespace Pagekit\View\Loader;
 
 use Pagekit\Filesystem\Locator;
-use Symfony\Component\Templating\Storage\FileStorage;
 use Symfony\Component\Templating\Loader\LoaderInterface;
+use Symfony\Component\Templating\Storage\FileStorage;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 class FilesystemLoader implements LoaderInterface

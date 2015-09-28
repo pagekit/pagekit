@@ -3,6 +3,7 @@
 namespace Pagekit\Installer\Helper;
 
 use Composer\Installer;
+use Composer\IO\ConsoleIO;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
 use Composer\Repository\CompositeRepository;

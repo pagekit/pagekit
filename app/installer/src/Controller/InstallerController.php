@@ -111,7 +111,7 @@ class InstallerController
      */
     public function installAction($config = [], $option = [], $user = [])
     {
-        $status = $this->checkAction($config, false);
+        $status = $this->checkAction($config);
         $message = $status['message'];
         $status = $status['status'];
 

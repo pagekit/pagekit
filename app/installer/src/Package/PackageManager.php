@@ -10,7 +10,6 @@ use Symfony\Component\Console\Output\StreamOutput;
 
 class PackageManager
 {
-
     /**
      * @var OutputInterface
      */
@@ -216,6 +215,7 @@ class PackageManager
             return $package['version'];
         }
 
+        // TODO $this->paths is undefined?
         if (file_exists($this->paths['path.packages'] . '/composer/installed.json')) {
             $installed = json_decode(file_get_contents($file), true);
 

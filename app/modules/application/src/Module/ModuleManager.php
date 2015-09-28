@@ -3,9 +3,9 @@
 namespace Pagekit\Module;
 
 use Pagekit\Application;
-use Pagekit\Module\Loader\ModuleLoader;
 use Pagekit\Module\Loader\CallableLoader;
 use Pagekit\Module\Loader\LoaderInterface;
+use Pagekit\Module\Loader\ModuleLoader;
 
 class ModuleManager implements \IteratorAggregate
 {

@@ -20,8 +20,8 @@ exports.compare = function (v1, v2, operator) {
   this.php_js.ENV = this.php_js.ENV || {};
   // END REDUNDANT
   // Important: compare must be initialized at 0.
-  var i = 0,
-    x = 0,
+  var i,
+    x,
     compare = 0,
     // vm maps textual PHP versions to negatives so they're less than 0.
     // PHP currently defines these as CASE-SENSITIVE. It is important to
@@ -57,7 +57,7 @@ exports.compare = function (v1, v2, operator) {
       v = v.replace(/([^.\d]+)/g, '.$1.')
         .replace(/\.{2,}/g, '.');
       return (!v.length ? [-8] : v.split('.'));
-    };
+    },
   // This converts a version component to a number.
   // Empty component becomes 0.
   // Non-numerical component becomes a negative number.
