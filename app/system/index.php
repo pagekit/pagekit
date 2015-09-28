@@ -1,6 +1,5 @@
 <?php
 
-use Pagekit\Installer\Package\PackageManager;
 use Pagekit\Kernel\Event\ExceptionListener;
 
 return [

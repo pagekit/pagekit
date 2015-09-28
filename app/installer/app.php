@@ -1,7 +1,6 @@
 <?php
 
 use Pagekit\Application as App;
-use Pagekit\Installer\Controller\UpdateController;
 use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
 

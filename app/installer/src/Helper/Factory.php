@@ -2,9 +2,9 @@
 
 namespace Pagekit\Installer\Helper;
 
+use Composer\Config;
 use Composer\Factory as BaseFactory;
 use Composer\IO\IOInterface;
-use Composer\Config;
 
 class Factory extends BaseFactory
 {

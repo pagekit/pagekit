@@ -5,10 +5,8 @@ use Pagekit\Auth\AuthEvents;
 use Pagekit\Auth\Encoder\NativePasswordEncoder;
 use Pagekit\Auth\Event\AuthenticateEvent;
 use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\RememberMe;
 use RandomLib\Factory;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 return [
 

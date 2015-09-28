@@ -3,12 +3,11 @@
 namespace Pagekit\Installer\Helper;
 
 use Composer\IO\ConsoleIO;
-use Composer\Console\HtmlOutputFormatter;
+use Symfony\Component\Console\Helper\HelperSet;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
-use Symfony\Component\Console\Helper\HelperSet;
 
 class InstallerIO extends ConsoleIO
 {

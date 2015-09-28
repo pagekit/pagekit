@@ -1,9 +1,9 @@
 <?php
 
+use Pagekit\Widget\Model\Widget;
 use Pagekit\Widget\PositionHelper;
 use Pagekit\Widget\PositionManager;
 use Pagekit\Widget\WidgetManager;
-use Pagekit\Widget\Model\Widget;
 
 return [
 

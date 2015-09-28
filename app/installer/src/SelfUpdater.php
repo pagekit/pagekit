@@ -2,8 +2,8 @@
 
 namespace Pagekit\Installer;
 
-use Pagekit\Application as App;
 use Composer\Console\HtmlOutputFormatter;
+use Pagekit\Application as App;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 

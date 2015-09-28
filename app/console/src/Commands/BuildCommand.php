@@ -2,11 +2,11 @@
 
 namespace Pagekit\Console\Commands;
 
+use Pagekit\Application as App;
 use Pagekit\Application\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
-use Pagekit\Application as App;
 
 class BuildCommand extends Command
 {
