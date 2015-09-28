@@ -43,7 +43,6 @@ class UserListener implements EventSubscriberInterface
         return [
             'auth.login' => 'onUserLogin',
             'terminate' => 'onUserAccess',
-            'terminate' => 'onUserAccess',
             'model.role.saved' => 'onUserChange',
             'model.role.deleted' => 'onUserChange',
             'model.user.saved' => 'onUserChange',
