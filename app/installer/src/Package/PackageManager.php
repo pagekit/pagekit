@@ -215,8 +215,7 @@ class PackageManager
             return $package['version'];
         }
 
-        // TODO $this->paths is undefined?
-        if (file_exists($this->paths['path.packages'] . '/composer/installed.json')) {
+        if (file_exists(App::get('path.packages') . '/composer/installed.json')) {
             $installed = json_decode(file_get_contents($file), true);
 
             foreach ($installed as $package) {
