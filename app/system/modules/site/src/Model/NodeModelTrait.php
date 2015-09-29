@@ -111,8 +111,8 @@ trait NodeModelTrait
         if ($id && $path != $node->path) {
             $db->executeUpdate(
                 'UPDATE '.self::getMetadata()->getTable()
-                .' SET path = REPLACE ('.$db->getDatabasePlatform()->getConcatExpression($db->quote('//'), 'path').", '//{$node->path}//', '{$path}')"
-                .' WHERE path LIKE '.$db->quote($node->path.'%'));
+                .' SET path = REPLACE ('.$db->getDatabasePlatform()->getConcatExpression($db->quote('//'), 'path').", '//{$node->path}', '{$path}')"
+                .' WHERE path LIKE '.$db->quote($node->path.'//%'));
         }
 
         $node->path = $path;
