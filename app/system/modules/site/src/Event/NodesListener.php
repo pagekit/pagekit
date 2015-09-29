@@ -15,11 +15,15 @@ class NodesListener implements EventSubscriberInterface
     {
         $site      = App::module('system/site');
         $frontpage = $site->config('frontpage');
-        $nodes     = Node::where(['status' => 1])->get();
+        $nodes     = Node::findAll(true);
+
+        uasort($nodes, function($a, $b) {
+            return strcmp(substr_count($a->path, '/'), substr_count($b->path, '/')) * -1;
+        });
 
         foreach ($nodes as $node) {
 
-            if (!$type = $site->getType($node->type)) {
+            if ($node->status !== 1 || !$type = $site->getType($node->type)) {
                 continue;
             }
 

@@ -54,7 +54,7 @@ trait ModelTrait
     }
 
     /**
-     * Create a new QueryBuilder instance.
+     * Creates a new QueryBuilder instance.
      *
      * @return QueryBuilder
      */
@@ -64,7 +64,7 @@ trait ModelTrait
     }
 
     /**
-     * Create a new QueryBuilder instance and set the WHERE condition.
+     * Creates a new QueryBuilder instance and set the WHERE condition.
      *
      * @param  mixed $condition
      * @param  array $params
@@ -76,7 +76,7 @@ trait ModelTrait
     }
 
     /**
-     * Retrieve an entity by its identifier.
+     * Retrieves an entity by its identifier.
      *
      * @param  mixed $id
      * @return static
@@ -87,7 +87,7 @@ trait ModelTrait
     }
 
     /**
-     * Retrieve all entities.
+     * Retrieves all entities.
      *
      * @return static[]
      */

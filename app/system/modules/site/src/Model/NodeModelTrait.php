@@ -7,7 +7,53 @@ use Pagekit\Database\ORM\ModelTrait;
 
 trait NodeModelTrait
 {
-    use ModelTrait;
+    use ModelTrait {
+        find as modelFind;
+        findAll as modelFindAll;
+    }
+
+    protected static $nodes;
+
+    /**
+     * Retrieves an entity by its identifier.
+     *
+     * @param  mixed $id
+     * @param  bool  $cached
+     * @return static
+     */
+    public static function find($id, $cached = false)
+    {
+        if (!$cached || !isset(self::$nodes[$id])) {
+            self::$nodes[$id] = self::modelFind($id);
+        }
+
+        return self::$nodes[$id];
+    }
+
+    /**
+     * Retrieves all entities.
+     *
+     * @param  bool $cached
+     * @return static[]
+     */
+    public static function findAll($cached = false)
+    {
+        if (!$cached || null === self::$nodes) {
+            self::$nodes = self::modelFindAll();
+        }
+
+        return self::$nodes;
+    }
+
+    /**
+     * Retrieves all nodes by menu.
+     *
+     * @return static[]
+     */
+    public static function findByMenu($menu, $cached = false)
+    {
+        return array_filter(self::findAll($cached), function ($node) use ($menu) { return $menu == $node->menu; });
+    }
 
     /**
      * Sets parent_id of orphaned nodes to zero.
@@ -38,7 +84,7 @@ trait NodeModelTrait
     {
         $db = self::getConnection();
 
-        $i  = 2;
+        $i = 2;
         $id = $node->id;
 
         if (!$node->slug) {
