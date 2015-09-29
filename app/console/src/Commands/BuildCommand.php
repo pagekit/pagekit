@@ -71,7 +71,6 @@ class BuildCommand extends Command
         $zip->addEmptyDir('tmp/logs');
         $zip->addEmptyDir('tmp/sessions');
         $zip->addEmptyDir('tmp/packages');
-        $zip->addEmptyDir('app/database');
 
         $zip->close();
 
