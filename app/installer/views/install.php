@@ -136,18 +136,26 @@
                     </div>
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el="user" v-show="step == 'user'">
+                <div class="uk-panel uk-panel-box" v-el="site" v-show="step == 'site'">
                     <div v-pre>
 
-                        <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Create your account' | trans }}</h1>
-                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'You will be the site administrator.' | trans }}</div>
+                        <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
+                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Chose a title and create the administrator account.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formUser" v-on="submit: stepUser | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="submit: stepSite | valid">
+                            <div class="uk-form-row">
+                                <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
+                                <div class="uk-form-controls">
+                                    <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-valid="required">
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
+                                </div>
+                            </div>
+
                             <div class="uk-form-row">
                                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-valid="required">
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formUser.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
                             <div class="uk-form-row">
@@ -157,48 +165,19 @@
                                         <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-valid="required">
                                         <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                     </div>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formUser.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
                             <div class="uk-form-row">
                                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-valid="email, required">
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formUser.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                                 </div>
                             </div>
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">
-                                    <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
-                                        <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
-                                            <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
-                                            <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
-                                            c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0l4.95,4.95c0.195,0.195,0.195,0.512,0,0.707l-4.95,4.95
-                                            C10.756,10.852,10.628,10.9,10.5,10.9z"/>
-                                        </svg>
-                                    </span>
-                                </button>
-                            </p>
-                        </form>
-
-                    </div>
-
-                </div>
-
-                <div class="uk-panel uk-panel-box" v-el="site" v-show="step == 'site'">
-                    <div v-pre>
-
-                        <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
-                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Enter your website title.' | trans }}</div>
-
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" name="formSite" v-on="submit: stepSite | valid">
-                            <div class="uk-form-row">
-                                <input id="form-sitetitle" class="uk-width-1-1" type="text" name="title" v-model="option['system/site'].title" v-valid="required">
-                                <p class="uk-form-help-block uk-text-danger" v-show="formSite.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
-                            </div>
-                            <p class="uk-text-right">
-                                <button class="uk-button uk-button-primary" type="submit">
-                                    <span class="uk-flex-inline uk-flex-middle">{{ 'Next' | trans }}
+                                    <span class="uk-flex-inline uk-flex-middle">{{ 'Install' | trans }}
                                         <svg class="uk-margin-small-left" width="18" height="11" viewBox="0 0 18 11" xmlns="http://www.w3.org/2000/svg">
                                             <line fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-miterlimit="10" x1="3" y1="5.5" x2="15" y2="5.5"/>
                                             <path fill="#FFFFFF" d="M10.5,10.9c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707l4.597-4.597l-4.597-4.597
