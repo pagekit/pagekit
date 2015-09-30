@@ -15,6 +15,7 @@
 - Updated site tree to add its leaf node routes first (#420)
 - Fixed nodes reordering
 - Fixed internal URLs not being resolved in feeds (#466)
+- Added mysql character set compatibility (#434, #465)
 
 ### 0.9.1 (September 11, 2015)
 
