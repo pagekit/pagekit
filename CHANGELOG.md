@@ -13,7 +13,8 @@
 - Added site title to browser title
 - Fixed HttpExceptions returning with Code 500
 - Updated site tree to add its leaf node routes first (#420)
-- Fixes nodes reordering
+- Fixed nodes reordering
+- Fixed internal URLs not being resolved in feeds (#466)
 
 ### 0.9.1 (September 11, 2015)
 
