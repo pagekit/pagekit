@@ -1,11 +1,32 @@
-module.exports = {
+window.User = module.exports = {
 
     data: window.$data,
+
+    ready: function () {
+        this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
+    },
 
     computed: {
 
         isNew: function () {
             return !this.user.access && this.user.status;
+        },
+
+        sections: function () {
+
+            var sections = [];
+
+            _.forIn(this.$options.components, function (component, name) {
+
+                var options = component.options || {};
+
+                if (options.section) {
+                    sections.push(_.extend({name: name, priority: 0}, options.section));
+                }
+
+            });
+
+            return sections;
         }
 
     },
@@ -29,6 +50,12 @@ module.exports = {
                 this.$notify(data, 'danger');
             });
         }
+
+    },
+
+    components: {
+
+        'settings': require('../../components/user-settings.vue')
 
     }
 
