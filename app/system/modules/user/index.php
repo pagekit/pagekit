@@ -154,7 +154,8 @@ return [
             if ($app['user']->hasAccess('user: manage users')) {
                 $scripts->register('widget-user', 'system/user:app/bundle/widget-user.js', '~dashboard');
             }
-            $scripts->register('link-user', 'system/user:app/bundle/link-user.js', '~panel-link');
+            $scripts->register('users', 'system/user:app/bundle/users.js', 'vue');
+            $scripts->register('user-link', 'system/user:app/bundle/link-user.js', '~panel-link');
         }
 
     ]
