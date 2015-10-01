@@ -47,26 +47,7 @@ return [
      * that it can be placed anywhere in the menu structure. The
      * resulting route is therefore determined on runtime.
      */
-    'nodes' => [
-
-        '{{ name }}' => [
-
-            // The name of the node route
-            'name' => '@{{ name }}',
-
-            // Label to display in the backend
-            'label' => '{{ title }}',
-
-            // The controller for this node. Each controller action will be mounted
-            'controller' => '{{ namespace }}\\Controller\\SiteController',
-
-            // Optional: Prevent node from being removed. Will end up in "not linked" menu instead
-            'protected' => true,
-
-            'fontpage' => true
-        ]
-
-    ],
+    'nodes' => [],
 
 
     /*
@@ -77,7 +58,7 @@ return [
         '/{{ name }}' => [
             'name' => '@{{ name }}/admin',
             'controller' => [
-                '{{ namespace }}\\Controller\\HelloController'
+                '{{ namespace }}\\Controller\\Controller'
             ]
         ]
 

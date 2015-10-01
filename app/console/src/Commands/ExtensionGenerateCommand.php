@@ -39,7 +39,7 @@ class ExtensionGenerateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $options = $this->getGeneratorOptions($output);
-        $this->generateTemplateFiles($output);
+        $this->generateTemplateFiles($options);
     }
 
     protected function generateTemplateFiles($options) {
@@ -77,14 +77,12 @@ class ExtensionGenerateCommand extends Command
         // fill in the templates, write to the extension directory
         foreach ($files as $file) {
             $relativeFilePath = str_replace($templateDirectory, '',  $file->getPathname());
-            $destinationFilePath = $outputDirectory . '/' . $relativeFilePath;
+            $destinationFilePath = $outputDirectory . '/' . str_replace('.twig', '', $relativeFilePath);
 
             file_put_contents($destinationFilePath, $twig->render($relativeFilePath, $options));
             $progress->advance();
         }
         $progress->finish();
-
-        $this->line('\\n');
         $this->line('Your extension has been created in packages/' . $options['name']);
     }
 
