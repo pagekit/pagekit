@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    <ul class="uk-tab" v-el="tab">
-        <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+    <ul class="uk-tab" v-el="tab" v-show="sections.length > 1">
+        <li v-repeat="section: sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin-large-top" v-el="content">
-        <div v-repeat="section: sections | active | orderBy 'priority'">
+        <div v-repeat="section: sections | orderBy 'priority'">
             <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}" form="{{@ form}}"></component>
         </div>
     </div>

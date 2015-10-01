@@ -20,7 +20,7 @@ module.exports = {
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], type = _.kebabCase(this.widget.type), active;
 
             _.forIn(this.$options.components, function (component, name) {
 
@@ -32,7 +32,17 @@ module.exports = {
 
             });
 
-            return sections;
+            return sections.filter(function (section) {
+
+                active = section.name.match('(.+):(.+)');
+
+                if (active === null) {
+                    return !_.find(sections, {name: type + ':' + section.name});
+                }
+
+                return active[1] == type;
+            }, this);
+
         },
 
         positionOptions: function () {
@@ -68,26 +78,6 @@ module.exports = {
             e.preventDefault();
 
             this.$dispatch('cancel');
-        }
-
-    },
-
-    filters: {
-
-        active: function (sections) {
-
-            var type = _.kebabCase(this.widget.type), active;
-
-            return sections.filter(function (section) {
-
-                active = section.name.match('(.+):(.+)');
-
-                if (active === null) {
-                    return !_.find(sections, {name: type + ':' + section.name});
-                }
-
-                return active[1] == type;
-            }, this);
         }
 
     },

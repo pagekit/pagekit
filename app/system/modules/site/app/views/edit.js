@@ -13,7 +13,7 @@ window.Site = module.exports = {
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], type = _.kebabCase(this.type.id), active;
 
             _.forIn(this.$options.components, function (component, name) {
 
@@ -25,7 +25,17 @@ window.Site = module.exports = {
 
             });
 
-            return sections;
+            return sections.filter(function (section) {
+
+                active = section.name.match('(.+):(.+)');
+
+                if (active === null) {
+                    return !_.find(sections, {name: type + ':' + section.name});
+                }
+
+                return active[1] == type;
+            }, this);
+
         },
 
         path: function () {
@@ -57,26 +67,6 @@ window.Site = module.exports = {
 
                 this.$notify(data, 'danger');
             });
-        }
-
-    },
-
-    filters: {
-
-        active: function (sections) {
-
-            var type = _.kebabCase(this.type.id), active;
-
-            return sections.filter(function (section) {
-
-                active = section.name.match('(.+):(.+)');
-
-                if (active === null) {
-                    return !_.find(sections, {name: type + ':' + section.name});
-                }
-
-                return active[1] == type;
-            }, this);
         }
 
     },
