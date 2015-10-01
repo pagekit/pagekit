@@ -22,8 +22,10 @@
     </ul>
 
     <div class="uk-switcher uk-margin" v-el="content">
-        <div v-repeat="section: sections | orderBy 'priority'">
-            <component is="{{ section.name }}" user="{{@ user }}"></component>
+        <div>
+            <div v-repeat="section: sections | orderBy 'priority'">
+                <component is="{{ section.name }}"></component>
+            </div>
         </div>
     </div>
 
