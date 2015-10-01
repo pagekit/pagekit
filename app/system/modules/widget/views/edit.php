@@ -22,10 +22,8 @@
     </ul>
 
     <div class="uk-switcher uk-margin-large-top" v-el="content">
-        <div>
-            <div v-repeat="section: sections | orderBy 'priority'">
-                <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}" form="{{@ form}}"></component>
-            </div>
+        <div v-repeat="section: sections | orderBy 'priority'">
+            <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}" form="{{@ form}}"></component>
         </div>
     </div>
 
