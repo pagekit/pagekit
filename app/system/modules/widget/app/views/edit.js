@@ -4,6 +4,35 @@ module.exports = {
         return _.merge({form: {}}, window.$data);
     },
 
+    created: function () {
+
+        var sections = [], type = _.kebabCase(this.widget.type), active;
+
+        _.forIn(this.$options.components, function (component, name) {
+
+            var options = component.options || {};
+
+            if (options.section) {
+                sections.push(_.extend({name: name, priority: 0}, options.section));
+            }
+
+        });
+
+        sections = _.sortBy(sections.filter(function (section) {
+
+            active = section.name.match('(.+):(.+)');
+
+            if (active === null) {
+                return !_.find(sections, {name: type + ':' + section.name});
+            }
+
+            return active[1] == type;
+        }, this), 'priority');
+
+        this.$set('sections', sections);
+
+    },
+
     ready: function () {
 
         UIkit.tab(this.$$.tab, {connect: this.$$.content});
@@ -17,33 +46,6 @@ module.exports = {
     },
 
     computed: {
-
-        sections: function () {
-
-            var sections = [], type = _.kebabCase(this.widget.type), active;
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {};
-
-                if (options.section) {
-                    sections.push(_.extend({name: name, priority: 0}, options.section));
-                }
-
-            });
-
-            return sections.filter(function (section) {
-
-                active = section.name.match('(.+):(.+)');
-
-                if (active === null) {
-                    return !_.find(sections, {name: type + ':' + section.name});
-                }
-
-                return active[1] == type;
-            }, this);
-
-        },
 
         positionOptions: function () {
             return _.map(this.config.positions, function (position) {

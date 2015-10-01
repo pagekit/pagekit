@@ -2,6 +2,24 @@ window.User = module.exports = {
 
     data: window.$data,
 
+    created: function () {
+
+        var sections = [];
+
+        _.forIn(this.$options.components, function (component, name) {
+
+            var options = component.options || {};
+
+            if (options.section) {
+                sections.push(_.extend({name: name, priority: 0}, options.section));
+            }
+
+        });
+
+        this.$set('sections', _.sortBy(sections, 'priority'));
+
+    },
+
     ready: function () {
         this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
     },
@@ -10,23 +28,6 @@ window.User = module.exports = {
 
         isNew: function () {
             return !this.user.access && this.user.status;
-        },
-
-        sections: function () {
-
-            var sections = [];
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {};
-
-                if (options.section) {
-                    sections.push(_.extend({name: name, priority: 0}, options.section));
-                }
-
-            });
-
-            return sections;
         }
 
     },

@@ -18,14 +18,12 @@
     </div>
 
     <ul class="uk-tab" v-el="tab" v-show="sections.length > 1">
-        <li v-repeat="section: sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+        <li v-repeat="section: sections"><a>{{ section.label | trans }}</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin" v-el="content">
-        <div>
-            <div v-repeat="section: sections | orderBy 'priority'">
-                <component is="{{ section.name }}"></component>
-            </div>
+        <div v-repeat="section: sections">
+            <component is="{{ section.name }}"></component>
         </div>
     </div>
 
