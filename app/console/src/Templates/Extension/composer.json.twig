@@ -1,0 +1,17 @@
+{% block json %}
+{
+    "name": "{{ name }}",
+    "type": "pagekit-extension",
+    "version": "0.1.0",
+    "title": "{{ title }}",
+    "description": "An extension by {{ author }}",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "{{ author }}",
+            "email": "{{ email }}",
+            "homepage": ""
+        }
+    ]
+}
+{% endblock json %}
