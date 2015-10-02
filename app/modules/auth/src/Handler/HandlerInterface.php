@@ -9,7 +9,7 @@ interface HandlerInterface
      *
      * @return int|null
      */
-    public function find();
+    public function read();
 
     /**
      * Sets the current user.
@@ -17,12 +17,12 @@ interface HandlerInterface
      * @param  int $user
      * @param  bool          $remember
      */
-    public function set($user, $remember = false);
+    public function write($user, $remember = false);
 
     /**
      * Removes the user.
      *
      * @param UserInterface
      */
-    public function remove();
+    public function destroy();
 }

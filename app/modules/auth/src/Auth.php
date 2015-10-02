@@ -56,7 +56,7 @@ class Auth
      */
     public function getUser()
     {
-        if ($this->user === null && $id = $this->handler->find()) {
+        if ($this->user === null && $id = $this->handler->read()) {
             $this->user = $this->getUserProvider()->find($id);
         }
 
@@ -71,7 +71,7 @@ class Auth
      */
     public function setUser(UserInterface $user, $remember = false)
     {
-        $this->handler->set($user->getId(), $remember);
+        $this->handler->write($user->getId(), $remember);
         $this->user = $user;
     }
 
@@ -82,7 +82,7 @@ class Auth
      */
     public function removeUser()
     {
-        $this->handler->remove($this->user);
+        $this->handler->destroy();
         $this->user = null;
     }
 

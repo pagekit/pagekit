@@ -60,7 +60,7 @@ class DatabaseHandler implements HandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function find()
+    public function read()
     {
         if ($token = $this->getToken()
             and $data = $this->connection->executeQuery("SELECT user_id, status, access FROM {$this->config['table']} WHERE id = :id AND status > :status", [
@@ -89,7 +89,7 @@ class DatabaseHandler implements HandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function set($user, $remember = false)
+    public function write($user, $remember = false)
     {
         if ($token = $this->getToken()) {
             $this->connection->delete($this->config['table'], ['id' => sha1($token)]);
@@ -114,7 +114,7 @@ class DatabaseHandler implements HandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function remove()
+    public function destroy()
     {
         if ($token = $this->getToken()) {
             $this->connection->update($this->config['table'], ['status' => 0], ['id' => sha1($token)]);
