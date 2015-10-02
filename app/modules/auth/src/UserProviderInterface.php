@@ -5,7 +5,7 @@ namespace Pagekit\Auth;
 interface UserProviderInterface
 {
     /**
-     * Retrieve a user by its unique identifier.
+     * Retrieves a user by its unique identifier.
      *
      * @param  string $id
      * @return UserInterface|null
@@ -13,7 +13,7 @@ interface UserProviderInterface
     public function find($id);
 
     /**
-     * Retrieve a user by their unique username.
+     * Retrieves a user by their unique username.
      *
      * @param  string $username
      * @return UserInterface|null
@@ -21,7 +21,7 @@ interface UserProviderInterface
     public function findByUsername($username);
     
     /**
-     * Retrieve a user by the given credentials.
+     * Retrieves a user by the given credentials.
      *
      * @param  array $credentials
      * @return UserInterface|null
@@ -29,7 +29,7 @@ interface UserProviderInterface
     public function findByCredentials(array $credentials);
 
     /**
-     * Validate a user against the given credentials.
+     * Validates a user against the given credentials.
      *
      * @param  UserInterface $user
      * @param  array         $credentials

@@ -56,14 +56,14 @@ class PackageManager
      */
     public function uninstall($uninstall)
     {
-        foreach ((array)$uninstall as $name) {
+        foreach ((array) $uninstall as $name) {
             if (!$package = App::package($name)) {
                 throw new \RuntimeException(__('Unable to find "%name%".', ['%name%' => $name]));
             }
 
             $this->disable($package);
             $this->trigger('uninstall', $this->loadScripts($package));
-            App::config('system')->remove('packages.' . $package->get('module'));
+            App::config('system')->remove('packages.'.$package->get('module'));
 
             if ($this->composer->isInstalled($package->getName())) {
                 $this->composer->uninstall($package->getName());
@@ -89,7 +89,7 @@ class PackageManager
     {
         $scripts = $this->loadScripts($package);
 
-        if (!($current = App::module('system')->config('packages.' . $package->get('module')))) {
+        if (!($current = App::module('system')->config('packages.'.$package->get('module')))) {
             $current = $this->doInstall($package);
         }
 
@@ -99,7 +99,7 @@ class PackageManager
         }
 
         $version = $this->getVersion($package);
-        App::config('system')->set('packages.' . $package->get('module'), $version);
+        App::config('system')->set('packages.'.$package->get('module'), $version);
 
         $this->trigger('enable', $this->loadScripts($package));
 
@@ -144,7 +144,7 @@ class PackageManager
     {
         array_map(function ($script) {
             call_user_func($script, App::getInstance());
-        }, (array)$scripts);
+        }, (array) $scripts);
     }
 
     /**
@@ -174,7 +174,7 @@ class PackageManager
                 throw new \RuntimeException(__('Package path is missing.'));
             }
 
-            $path = $path . '/' . $extra['scripts'];
+            $path = $path.'/'.$extra['scripts'];
         }
 
         return file_exists($path) ? require $path : [];
@@ -189,7 +189,7 @@ class PackageManager
         $this->trigger('install', $this->loadScripts($package));
         $version = $this->getVersion($package);
 
-        App::config('system')->set('packages.' . $package->get('module'), $version);
+        App::config('system')->set('packages.'.$package->get('module'), $version);
 
         return $version;
     }
@@ -206,7 +206,7 @@ class PackageManager
             throw new \RuntimeException(__('Package path is missing.'));
         }
 
-        if (!file_exists($file = $path . '/composer.json')) {
+        if (!file_exists($file = $path.'/composer.json')) {
             throw new \RuntimeException(__('\'composer.json\' is missing.'));
         }
 
@@ -215,7 +215,7 @@ class PackageManager
             return $package['version'];
         }
 
-        if (file_exists(App::get('path.packages') . '/composer/installed.json')) {
+        if (file_exists(App::get('path.packages').'/composer/installed.json')) {
             $installed = json_decode(file_get_contents($file), true);
 
             foreach ($installed as $package) {

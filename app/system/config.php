@@ -4,7 +4,19 @@ return [
 
     'application' => [
 
-        'version' => '0.9.1'
+        // TODO revert to 0.9.1
+        'version' => '0.9.2'
+
+    ],
+
+    'auth' => [
+
+        'table' => '@system_auth',
+
+        'cookie' => [
+            'name' => 'pagekit_auth',
+            'lifetime' => 315360000
+        ]
 
     ],
 

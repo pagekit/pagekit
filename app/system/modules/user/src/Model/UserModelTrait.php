@@ -41,14 +41,6 @@ trait UserModelTrait
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public static function updateAccess(User $user)
-    {
-        static::where(['id' => $user->id])->update(['access' => date('Y-m-d H:i:s')]);
-    }
-
-    /**
      * Finds user's roles.
      *
      * @param  User $user
