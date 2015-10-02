@@ -38,7 +38,11 @@ return [
     'config' => [
 
         'timeout' => 900,
-        'table' => 'auth'
+        'table' => 'auth',
+        'cookie'   => [
+            'name' => '',
+            'lifetime' => 315360000
+        ]
 
     ]
 

@@ -4,7 +4,7 @@ use Pagekit\Session\Csrf\Event\CsrfListener;
 use Pagekit\Session\Csrf\Provider\SessionCsrfProvider;
 use Pagekit\Session\Handler\DatabaseSessionHandler;
 use Pagekit\Session\Message;
-use Pagekit\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 
@@ -100,10 +100,13 @@ return [
 
     'config' => [
 
-        'storage' => null,
-        'lifetime' => 1209600,
-        'files' => null,
-        'table' => 'sessions'
+        'storage'  => null,
+        'lifetime' => 900,
+        'files'    => null,
+        'table'    => 'sessions',
+        'cookie'   => [
+            'name' => '',
+        ]
 
     ]
 

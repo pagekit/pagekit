@@ -76,7 +76,6 @@ return [
             $util->createTable('@system_session', function ($table) {
                 $table->addColumn('id', 'string', ['length' => 255]);
                 $table->addColumn('time', 'datetime');
-                $table->addColumn('lifetime', 'integer');
                 $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->setPrimaryKey(['id']);
             });
