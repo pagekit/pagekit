@@ -9,7 +9,6 @@ trait NodeModelTrait
 {
     use ModelTrait {
         find as modelFind;
-        findAll as modelFindAll;
     }
 
     protected static $nodes;
@@ -39,7 +38,7 @@ trait NodeModelTrait
     public static function findAll($cached = false)
     {
         if (!$cached || null === self::$nodes) {
-            self::$nodes = self::modelFindAll();
+            self::$nodes = self::query()->orderBy('priority')->get();
         }
 
         return self::$nodes;
