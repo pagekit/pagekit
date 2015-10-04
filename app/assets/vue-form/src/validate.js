@@ -1,5 +1,5 @@
 /**
- * Valid directive.
+ * Validate directive.
  */
 
 module.exports = function (_) {
@@ -14,25 +14,25 @@ module.exports = function (_) {
                 return;
             }
 
-            this.name  = _.camelize(name);
-            this.type  = this.arg || this.expression;
+            this.name = _.camelize(name);
+            this.type = this.arg || this.expression;
             this.value = this.el.value;
 
-            this.el._dirty   = false;
+            this.el._dirty = false;
             this.el._touched = false;
 
-            _.on(this.el, 'input', this.listener.bind(this));
             _.on(this.el, 'blur', this.listener.bind(this));
+            _.on(this.el, 'input', this.listener.bind(this));
 
-            _.validator.bind(this);
+            _.validator.add(this);
         },
 
         unbind: function () {
 
-            _.off(this.el, 'input', this.listener);
             _.off(this.el, 'blur', this.listener);
+            _.off(this.el, 'input', this.listener);
 
-            _.validator.unbind(this);
+            _.validator.remove(this);
         },
 
         update: function (value) {
@@ -53,7 +53,7 @@ module.exports = function (_) {
                 this.el._dirty = true;
             }
 
-            _.validator.validate(this.el.form);
+            _.validator.validate(this.el);
         },
 
         validate: function () {

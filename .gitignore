@@ -4,6 +4,7 @@
 /app/assets/*
 !/app/assets/codemirror
 !/app/assets/marked
+!/app/assets/vue-form
 !/app/assets/vue-intl
 !/app/assets/vue-validator
 /app/installer/assets/css/*

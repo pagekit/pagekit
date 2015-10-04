@@ -6,9 +6,9 @@ function install (Vue) {
      * Libraries
      */
 
+    require('vue-form');
     require('vue-intl');
     require('vue-resource');
-    require('vue-validator');
     require('./lib/asset')(Vue);
     require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
@@ -25,7 +25,7 @@ function install (Vue) {
 
     require('./components/input-date.vue');
     require('./components/input-image.vue');
-    
+
     require('./components/input-image-meta.vue');
     require('./components/input-video.vue');
 

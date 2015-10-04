@@ -84,7 +84,7 @@
     </div>
 
     <v-modal v-ref="modal">
-        <form class="uk-form uk-form-stacked" name="form" v-on="submit: saveMenu(edit) | valid">
+        <form class="uk-form uk-form-stacked" v-validator="form" v-on="submit: saveMenu(edit) | valid">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Add Menu' | trans }}</h2>
@@ -93,7 +93,7 @@
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-width-1-1 uk-form-large" name="label" type="text" v-model="edit.label | trim" v-valid="required">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" name="label" type="text" v-model="edit.label | trim" v-validate="required">
                     <p class="uk-form-help-block uk-text-danger" v-show="form.label.invalid">{{ 'Invalid name.' | trans }}</p>
                 </div>
             </div>
