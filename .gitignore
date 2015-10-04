@@ -6,7 +6,6 @@
 !/app/assets/marked
 !/app/assets/vue-form
 !/app/assets/vue-intl
-!/app/assets/vue-validator
 /app/installer/assets/css/*
 /app/system/modules/theme/css/*
 /packages/*
