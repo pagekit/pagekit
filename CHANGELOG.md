@@ -17,6 +17,7 @@
 - Fixed internal URLs not being resolved in feeds (#466)
 - Added mysql character set compatibility (#434, #465)
 - Updated translations from Transifex
+- Refactored user authentication
 
 ### 0.9.1 (September 11, 2015)
 
