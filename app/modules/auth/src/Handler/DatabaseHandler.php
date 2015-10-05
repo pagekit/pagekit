@@ -148,7 +148,7 @@ class DatabaseHandler implements HandlerInterface
         $util = $this->connection->getUtility();
         if ($util->tableExists($this->config['table']) === false) {
             $util->createTable($this->config['table'], function ($table) {
-                $table->addColumn('id', 'string', ['length' => 64]);
+                $table->addColumn('id', 'string', ['length' => 255]);
                 $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
                 $table->addColumn('access', 'datetime', ['notnull' => false]);
                 $table->addColumn('status', 'smallint');
