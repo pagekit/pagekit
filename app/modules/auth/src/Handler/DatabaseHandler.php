@@ -99,7 +99,18 @@ class DatabaseHandler implements HandlerInterface
 
         $this->cookie->set($this->config['cookie']['name'], $id, $this->config['cookie']['lifetime'] + time());
 
-        $this->setData($id, $user, $remember);
+        $this->createTable();
+
+        $this->connection->insert($this->config['table'], [
+            'id' => sha1($id),
+            'user_id' => $user,
+            'access' => date('Y-m-d H:i:s'),
+            'status' => $remember ? self::STATUS_REMEMBERED : self::STATUS_ACTIVE,
+            'data' => json_encode([
+                'ip' => $this->getRequest()->getClientIp(),
+                'user-agent' => $this->getRequest()->headers->get('User-Agent')
+            ])
+        ]);
     }
 
     /**
@@ -128,32 +139,6 @@ class DatabaseHandler implements HandlerInterface
     protected function getRequest()
     {
         return $this->requests->getCurrentRequest();
-    }
-
-    /**
-     * @param string $id
-     * @param int    $user
-     * @param bool   $remember
-     */
-    protected function setData($id, $user, $remember)
-    {
-        try {
-
-            $this->connection->insert($this->config['table'], [
-                'id' => sha1($id),
-                'user_id' => $user,
-                'access' => date('Y-m-d H:i:s'),
-                'status' => $remember ? self::STATUS_REMEMBERED : self::STATUS_ACTIVE,
-                'data' => json_encode([
-                    'ip' => $this->getRequest()->getClientIp(),
-                    'user-agent' => $this->getRequest()->headers->get('User-Agent')
-                ])
-            ]);
-
-        } catch (TableNotFoundException $e) {
-            $this->createTable();
-            $this->setData($id, $user, $remember);
-        }
     }
 
     /**
