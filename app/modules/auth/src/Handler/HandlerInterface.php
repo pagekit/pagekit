@@ -14,8 +14,8 @@ interface HandlerInterface
     /**
      * Sets the current user.
      *
-     * @param  int $user
-     * @param  bool          $remember
+     * @param  int  $user
+     * @param  bool $remember
      */
     public function write($user, $remember = false);
 

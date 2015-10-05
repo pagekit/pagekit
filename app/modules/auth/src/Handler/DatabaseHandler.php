@@ -63,7 +63,10 @@ class DatabaseHandler implements HandlerInterface
      */
     public function read()
     {
-        if ($token = $this->getToken() and $data = $this->getData($token)) {
+        if ($token = $this->getToken() and $data = $this->connection->executeQuery("SELECT user_id, status, access FROM {$this->config['table']} WHERE id = :id AND status > :status", [
+                'id' => sha1($token),
+                'status' => self::STATUS_INACTIVE
+            ])->fetch(\PDO::FETCH_ASSOC)) {
 
             if (strtotime($data['access']) + $this->config['timeout'] < time()) {
 
@@ -96,16 +99,7 @@ class DatabaseHandler implements HandlerInterface
 
         $this->cookie->set($this->config['cookie']['name'], $id, $this->config['cookie']['lifetime'] + time());
 
-        $this->connection->insert($this->config['table'], [
-            'id' => sha1($id),
-            'user_id' => $user,
-            'access' => date('Y-m-d H:i:s'),
-            'status' => $remember ? self::STATUS_REMEMBERED : self::STATUS_ACTIVE,
-            'data' => json_encode([
-                'ip' => $this->getRequest()->getClientIp(),
-                'user-agent' => $this->getRequest()->headers->get('User-Agent')
-            ])
-        ]);
+        $this->setData($id, $user, $remember);
     }
 
     /**
@@ -137,21 +131,28 @@ class DatabaseHandler implements HandlerInterface
     }
 
     /**
-     * @param  string $token
-     * @return array
+     * @param string $id
+     * @param int    $user
+     * @param bool   $remember
      */
-    protected function getData($token)
+    protected function setData($id, $user, $remember)
     {
         try {
 
-            return $this->connection->executeQuery("SELECT user_id, status, access FROM {$this->config['table']} WHERE id = :id AND status > :status", [
-                'id' => sha1($token),
-                'status' => self::STATUS_INACTIVE
-            ])->fetch(\PDO::FETCH_ASSOC);
+            $this->connection->insert($this->config['table'], [
+                'id' => sha1($id),
+                'user_id' => $user,
+                'access' => date('Y-m-d H:i:s'),
+                'status' => $remember ? self::STATUS_REMEMBERED : self::STATUS_ACTIVE,
+                'data' => json_encode([
+                    'ip' => $this->getRequest()->getClientIp(),
+                    'user-agent' => $this->getRequest()->headers->get('User-Agent')
+                ])
+            ]);
 
         } catch (TableNotFoundException $e) {
             $this->createTable();
-            return $this->getData($token);
+            $this->setData($id, $user, $remember);
         }
     }
 
