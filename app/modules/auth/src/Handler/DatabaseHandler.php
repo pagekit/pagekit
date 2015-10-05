@@ -2,7 +2,6 @@
 
 namespace Pagekit\Auth\Handler;
 
-use Doctrine\DBAL\Exception\TableNotFoundException;
 use Pagekit\Cookie\CookieJar;
 use Pagekit\Database\Connection;
 use RandomLib\Generator;
