@@ -12,9 +12,9 @@
 - Config file generation
 
 ### Removed
-- Removed usage of environment variables (#428)
-- Removed site description
-- Removed Pagekit version from generator tag
+- Usage of environment variables (#428)
+- Site description
+- Pagekit version from generator tag
 
 ### Fixed
 - User widget ordering
