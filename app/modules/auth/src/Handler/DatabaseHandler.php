@@ -2,6 +2,7 @@
 
 namespace Pagekit\Auth\Handler;
 
+use Doctrine\DBAL\Exception\TableNotFoundException;
 use Pagekit\Cookie\CookieJar;
 use Pagekit\Database\Connection;
 use RandomLib\Generator;
@@ -62,12 +63,8 @@ class DatabaseHandler implements HandlerInterface
      */
     public function read()
     {
-        if ($token = $this->getToken()
-            and $data = $this->connection->executeQuery("SELECT user_id, status, access FROM {$this->config['table']} WHERE id = :id AND status > :status", [
-                'id' => sha1($token),
-                'status' => self::STATUS_INACTIVE
-            ])->fetch(\PDO::FETCH_ASSOC)
-        ) {
+        if ($token = $this->getToken() and $data = $this->getData($token)) {
+
             if (strtotime($data['access']) + $this->config['timeout'] < time()) {
 
                 if ($data['status'] == self::STATUS_REMEMBERED) {
@@ -137,5 +134,42 @@ class DatabaseHandler implements HandlerInterface
     protected function getRequest()
     {
         return $this->requests->getCurrentRequest();
+    }
+
+    /**
+     * @param  string $token
+     * @return array
+     */
+    protected function getData($token)
+    {
+        try {
+
+            return $this->connection->executeQuery("SELECT user_id, status, access FROM {$this->config['table']} WHERE id = :id AND status > :status", [
+                'id' => sha1($token),
+                'status' => self::STATUS_INACTIVE
+            ])->fetch(\PDO::FETCH_ASSOC);
+
+        } catch (TableNotFoundException $e) {
+            $this->createTable();
+            return $this->getData($token);
+        }
+    }
+
+    /**
+     * @deprecated to be removed in Pagekit 1.0
+     */
+    protected function createTable()
+    {
+        $util = $this->connection->getUtility();
+        if ($util->tableExists($this->config['table']) === false) {
+            $util->createTable($this->config['table'], function ($table) {
+                $table->addColumn('id', 'string', ['length' => 64]);
+                $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
+                $table->addColumn('access', 'datetime', ['notnull' => false]);
+                $table->addColumn('status', 'smallint');
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
+                $table->setPrimaryKey(['id']);
+            });
+        }
     }
 }
