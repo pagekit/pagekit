@@ -4,8 +4,7 @@ return [
 
     'application' => [
 
-        // TODO revert to 0.9.1
-        'version' => '0.9.2'
+        'version' => '0.9.1'
 
     ],
 
@@ -31,7 +30,7 @@ return [
         'lifetime' => 900,
         'files' => "$path/tmp/sessions",
         'table' => '@system_session',
-        'cookie'   => [
+        'cookie' => [
             'name' => 'pagekit_session'
         ]
 

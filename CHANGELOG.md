@@ -1,89 +1,122 @@
 # Changelog
 
-### WIP
+## WIP
+### Added
+- Https for Pagekit API (#415)
+- Site title to browser title
+- Mysql character set compatibility (#434, #465)
 
-- Added https for Pagekit API (#415)
+### Changed
+- Site tree adds its leaf node routes first (#420)
+- User authentication uses separate table
+- Config file generation
+
+### Removed
 - Removed usage of environment variables (#428)
-- Fixed user widget ordering
-- Fixed finder component for non Unix OS's (#448)
-- Updated config file generation
-- Security improvements
 - Removed site description
 - Removed Pagekit version from generator tag
-- Added site title to browser title
-- Fixed HttpExceptions returning with Code 500
-- Updated site tree to add its leaf node routes first (#420)
-- Fixed nodes reordering
-- Fixed internal URLs not being resolved in feeds (#466)
-- Added mysql character set compatibility (#434, #465)
-- Updated translations from Transifex
-- Refactored user authentication
 
-### 0.9.1 (September 11, 2015)
+### Fixed
+- User widget ordering
+- Nodes reordering
+- Finder component for non Unix OS's (#448)
+- HttpExceptions returning with Code 500
+- Internal URLs not being resolved in feeds (#466)
 
-- Extended system requirements (#410)
-- Fixed auto login
-- Fixed login widget (#423)
-- Display errors off as default
-- Added link to gitter chat
+## 0.9.1 (September 11, 2015)
+### Added
+- Additional system requirements (#410)
+- Link to gitter chat
 
-### 0.9.0 (September 10, 2015)
+### Changed
+- By default "display errors" are set to"off"
 
-- Refactored codebase
-- Added site tree
-- Added new default theme
-- Added data-reactive components with Vue.js
-- Added package management using Composer
+### Fixed
+- Auto login
+- Login widget (#423)
 
-### 0.8.8 (November 17, 2014)
+## 0.9.0 (September 10, 2015)
+### Added
+- Site tree
+- New default theme
+- Data-reactive components with Vue.js
+- Package management using Composer
 
-- Added pagination in Blog extension
-- Added languages from Transifex
-- Fixed comment status bug
-- Fixed reordering menu bug
-- Fixed marketplace grid
-- Fixed thumbnail grid in Storage
-- Fixed several issues for shared hosters
+### Changed
+- Codebase
+
+## 0.8.8 (November 17, 2014)
+### Added
+- Pagination in Blog extension
+- Languages from Transifex
+
+### Changed
 - Updated UIkit to 2.11.1
 
-### 0.8.7 (September 8, 2014)
+### Fixed
+- Comment status bug
+- Reordering menu bug
+- Marketplace grid
+- Thumbnail grid in Storage
+- Several issues for shared hosters
 
-- Added OAuth api
-- Fixed option cache issue
-- Updated library dependencies
+## 0.8.7 (September 8, 2014)
+### Added
+- OAuth api
 
-### 0.8.6 (August 28, 2014)
+### Changed
+- Library dependencies
 
-- IMPORTANT: Removed 'settings' from extension/theme config, use 'parameters' instead
-- Fixed blog extension settings
-- Fixed blog/page url handling
-- Updated requirejs scripts ordering
-- Removed GLOB_BRACE for Solaris compatiblity
+### Fixed
+- Option cache issue
 
-### 0.8.5 (August 22, 2014)
+## 0.8.6 (August 28, 2014)
 
-- Added marketplace pagination
-- Added beautified system emails
-- Added admin theme font subset latin, latin-ext
-- Fixed simple plugin regex
-- Fixed gravatar on https
+### Changed
+- Requirejs scripts ordering
+
+### Removed
+- 'settings' from extension/theme config, use 'parameters' instead
+- GLOB_BRACE for Solaris compatiblity
+
+### Fixed
+- Blog/Page url handling
+- Blog extension settings
+
+## 0.8.5 (August 22, 2014)
+### Added
+- Marketplace pagination
+- Beautified system emails
+- Admin theme font subset latin, latin-ext
+
+### Changed
 - Updated UIkit to 2.9
-- Removed username in password reset
 
-### 0.8.4 (July 25, 2014)
+### Removed
+- Username in password reset
 
-- Added Finnish, French, Spanish, Russian translation
-- Added pagination in user manager
-- Fixed comments ordering (blog)
-- Fixed comments auto approval (blog)
-- Fixed finder (Windows)
-- Fixed demo data for SQLite versions < 3.7.11
-- Fixed language registration for Themes and Extensions
-- Fixed blank renderer in theme skeleton
-- Fixed redirect after installation
-- Fixed Apache configuration to serve SVG files with correct mime type
-- Fixed verify mail action
-- Updated mod_rewrite check
-- Updated widgets now rendering themeselves
-- Removed that the app root needs to be writable if the config already exists
-- Refactored comments settings in blog
+### Fixed
+- Simple plugin regex
+- Gravatar on https
+
+## 0.8.4 (July 25, 2014)
+### Added
+- Finnish, French, Spanish, Russian translations
+- Pagination in user manager
+
+### Changed
+- mod_rewrite check
+- Widgets render themselves now
+- Comments settings in blog
+- The app root no longer needs to be writable if the config already exists
+
+### Fixed
+- Comments ordering (blog)
+- Comments auto approval (blog)
+- Finder (Windows)
+- Demo data for SQLite versions < 3.7.11
+- Language registration for Themes and Extensions
+- Blank renderer in theme skeleton
+- Redirect after installation
+- Apache configuration to serve SVG files with correct mime type
+- Verify mail action
