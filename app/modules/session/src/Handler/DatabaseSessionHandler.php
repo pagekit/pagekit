@@ -2,12 +2,12 @@
 
 namespace Pagekit\Session\Handler;
 
+use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Pagekit\Database\Connection;
-use Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy;
 
-class DatabaseSessionHandler extends SessionHandlerProxy
+class DatabaseSessionHandler implements \SessionHandlerInterface
 {
     /**
      * @var Connection
@@ -18,19 +18,6 @@ class DatabaseSessionHandler extends SessionHandlerProxy
      * @var string
      */
     protected $table;
-
-
-    /**
-     * @var bool Whether gc() has been called
-     */
-    protected $gcCalled = false;
-
-    /**
-     * @var bool
-     *
-     * TODO: Remove this in final.
-     */
-    protected $legacy = false;
 
     /**
      * Constructor.
@@ -57,21 +44,6 @@ class DatabaseSessionHandler extends SessionHandlerProxy
      */
     public function close()
     {
-        if ($this->gcCalled) {
-            try {
-
-                $platform = $this->connection->getDatabasePlatform();
-
-                if ($platform instanceof MySqlPlatform) {
-                    $this->connection->executeQuery("DELETE FROM {$this->table} WHERE DATE_ADD(time, INTERVAL lifetime SECOND) < :time", ['time' => date('Y-m-d H:i:s')]);
-                } elseif ($platform instanceof SqlitePlatform) {
-                    $this->connection->executeQuery("DELETE FROM {$this->table} WHERE (CAST(strftime('%s', time) AS integer) + lifetime) < :time", ['time' => time()], ['time' => \PDO::PARAM_INT]);
-                }
-
-            } catch (\PDOException $e) {
-            }
-        }
-
         return true;
     }
 
@@ -81,7 +53,7 @@ class DatabaseSessionHandler extends SessionHandlerProxy
     public function destroy($id)
     {
         try {
-            $this->connection->delete($this->table, ['id' => sha1($id)]);
+            $this->connection->delete($this->table, ['id' => $id]);
         } catch (\PDOException $e) {
             throw new \RuntimeException(sprintf('PDOException was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
         }
@@ -94,7 +66,13 @@ class DatabaseSessionHandler extends SessionHandlerProxy
      */
     public function gc($lifetime)
     {
-        return $this->gcCalled = true;
+        try {
+            $this->connection->executeQuery("DELETE FROM {$this->table} WHERE time < :time", ['time' => date('Y-m-d H:i:s', time() - $lifetime)]);
+        } catch (\PDOException $e) {
+            throw new \RuntimeException(sprintf('PDOException was thrown when trying to manipulate session data: %s', $e->getMessage()), 0, $e);
+        }
+
+        return true;
     }
 
     /**
@@ -104,19 +82,10 @@ class DatabaseSessionHandler extends SessionHandlerProxy
     {
         try {
 
-            $data = $this->connection->executeQuery("SELECT * FROM {$this->table} WHERE id = :id", ['id' => sha1($id)])->fetchAll(\PDO::FETCH_ASSOC);
+            $data = $this->connection->executeQuery("SELECT data FROM {$this->table} WHERE id = :id", ['id' => $id])->fetchAll(\PDO::FETCH_NUM);
 
             if ($data) {
-
-                // TODO: Remove this in final.
-                if (isset($data[0]['lifetime'])) {
-                    $this->setLifetime($data[0]['lifetime']);
-                } else {
-                    $this->legacy = true;
-                    $this->setLifetime(1209600);
-                }
-
-                return base64_decode($data[0]['data']);
+                return base64_decode($data[0][0]);
             }
 
             return '';
@@ -133,32 +102,32 @@ class DatabaseSessionHandler extends SessionHandlerProxy
     {
         try {
 
-            $params = ['id' => sha1($id), 'data' => base64_encode($data), 'time' => date('Y-m-d H:i:s'), 'lifetime' => $this->getLifetime()];
-            $sql = $this->legacy ? $this->getMergeSqlLegacy() : $this->getMergeSql();
+            $params = ['id' => $id, 'data' => base64_encode($data), 'time' => date('Y-m-d H:i:s')];
 
-            $this->connection->executeQuery($sql, $params);
+            if (null !== $sql = $this->getMergeSql()) {
+                $this->connection->executeQuery($sql, $params);
+                return true;
+            }
+
+            $this->connection->beginTransaction();
+
+            try {
+
+                $this->connection->delete($this->table, ['id' => $id]);
+                $this->connection->insert($this->table, $params);
+                $this->connection->commit();
+
+            } catch (ConnectionException $e) {
+                $this->connection->rollback();
+
+                throw $e;
+            }
 
         } catch (\PDOException $e) {
             throw new \RuntimeException(sprintf('PDOException was thrown when trying to write the session data: %s', $e->getMessage()), 0, $e);
         }
 
         return true;
-    }
-
-    /**
-     * @return int
-     */
-    protected function getLifetime()
-    {
-        return (int)ini_get('session.gc_maxlifetime');
-    }
-
-    /**
-     * @param int $lifetime
-     */
-    protected function setLifetime($lifetime)
-    {
-        ini_set('session.gc_maxlifetime', $lifetime);
     }
 
     /**
@@ -171,33 +140,10 @@ class DatabaseSessionHandler extends SessionHandlerProxy
         $platform = $this->connection->getDatabasePlatform();
 
         if ($platform instanceof MySqlPlatform) {
-            return "INSERT INTO {$this->table} (id, data, time, lifetime) VALUES (:id, :data, :time , :lifetime) "
-            . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
-        } elseif ($platform instanceof SqlitePlatform) {
-            return "INSERT OR REPLACE INTO {$this->table} (id, data, time, lifetime) VALUES (:id, :data, :time, :lifetime)";
-        }
-
-        throw new \RuntimeException('Not supported database.');
-    }
-
-    /**
-     * Support for old database schema.
-     *
-     * TODO: Remove this in final.
-     *
-     * @return string|null The SQL string or null when not supported
-     */
-    protected function getMergeSqlLegacy()
-    {
-        $platform = $this->connection->getDatabasePlatform();
-
-        if ($platform instanceof MySqlPlatform) {
             return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
             . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
         } elseif ($platform instanceof SqlitePlatform) {
-            return "INSERT OR REPLACE INTO {$this->table} (id, data, time) VALUES (:id, :data, :time)";
+            return  "INSERT OR REPLACE INTO {$this->table} (id, data, time) VALUES (:id, :data, :time)";
         }
-
-        throw new \RuntimeException('Not supported database.');
     }
 }

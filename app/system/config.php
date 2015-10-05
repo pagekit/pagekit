@@ -4,7 +4,18 @@ return [
 
     'application' => [
 
-        'version' => '0.9.1'
+        // TODO revert to 0.9.1
+        'version' => '0.9.2'
+
+    ],
+
+    'auth' => [
+
+        'table' => '@system_auth',
+        'cookie' => [
+            'name' => 'pagekit_auth',
+            'lifetime' => 315360000
+        ]
 
     ],
 
@@ -17,12 +28,11 @@ return [
     'session' => [
 
         'storage' => 'database',
-        'lifetime' => 1209600,
+        'lifetime' => 900,
         'files' => "$path/tmp/sessions",
         'table' => '@system_session',
         'cookie'   => [
-            'name' => 'pagekit_session',
-            'lifetime' => 315360000
+            'name' => 'pagekit_session'
         ]
 
     ],

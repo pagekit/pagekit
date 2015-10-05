@@ -7,35 +7,15 @@ use Pagekit\Auth\Event\AuthorizeEvent;
 use Pagekit\Auth\Event\LoginEvent;
 use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Exception\BadCredentialsException;
+use Pagekit\Auth\Handler\HandlerInterface;
 use Pagekit\Event\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Auth
 {
-    const USERNAME_PARAM = 'username';
-    const REDIRECT_PARAM = 'redirect';
-    const LAST_USERNAME = '_auth.last_username';
-
-    /**
-     * @var UserInterface
-     */
-    protected $user;
-
-    /**
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * @var UserProviderInterface
-     */
-    protected $provider;
-
-    /**
-     * @var SessionInterface
-     */
-    protected $session;
+    const REDIRECT_PARAM    = 'redirect';
+    const LAST_USERNAME     = '_auth.last_username';
+    const REMEMBER_ME_PARAM = '_remember_me';
 
     /**
      * @var EventDispatcherInterface
@@ -43,57 +23,41 @@ class Auth
     protected $events;
 
     /**
-     * @var string
+     * @var HandlerInterface
      */
-    protected $token;
+    protected $handler;
+
+    /**
+     * @var UserProviderInterface
+     */
+    protected $provider;
+
+    /**
+     * @var UserInterface
+     */
+    protected $user;
 
     /**
      * Constructor.
      *
-     * @param SessionInterface $session
      * @param EventDispatcherInterface $events
+     * @param HandlerInterface         $handler
      */
-    public function __construct(EventDispatcherInterface $events, SessionInterface $session = null, $config = null)
+    public function __construct(EventDispatcherInterface $events, HandlerInterface $handler)
     {
         $this->events = $events;
-        $this->session = $session;
-        $this->config = $config;
+        $this->handler = $handler;
     }
 
     /**
-     * Get a unique identifier for the auth session value.
-     *
-     * @param  string $var
-     * @return string
-     */
-    public function getKey($var = 'user')
-    {
-        return "_auth.{$var}_" . sha1(get_class($this));
-    }
-
-    /**
-     * Gets the current user
+     * Gets the current user.
      *
      * @return UserInterface|null
      */
     public function getUser()
     {
-        if ($this->user === null && $user = $this->session->get($this->getKey()) and $user instanceof UserInterface) {
-
-            if ($this->session->getLastActive() + $this->config['timeout'] < time()) {
-                $this->logout(true);
-                return $this->user;
-            }
-
-            $this->session->set($this->getKey('lastActive'), time());
-
-            if ($this->token != $this->session->get($this->getKey('token'))) {
-                $user = $this->getUserProvider()->find($user->getId());
-                $this->session->set($this->getKey(), $user);
-                $this->session->set($this->getKey('token'), $this->token);
-            }
-
-            $this->user = $user;
+        if ($this->user === null && $id = $this->handler->read()) {
+            $this->user = $this->getUserProvider()->find($id);
         }
 
         return $this->user;
@@ -102,12 +66,12 @@ class Auth
     /**
      * Sets the user to be used.
      *
-     * @param UserInterface
+     * @param  UserInterface $user
+     * @param  bool          $remember
      */
-    public function setUser(UserInterface $user)
+    public function setUser(UserInterface $user, $remember = false)
     {
-        $this->session->set($this->getKey(), $user);
-        $this->session->set($this->getKey('token'), $this->token);
+        $this->handler->write($user->getId(), $remember);
         $this->user = $user;
     }
 
@@ -118,8 +82,7 @@ class Auth
      */
     public function removeUser()
     {
-        $this->session->remove($this->getKey());
-        $this->session->remove($this->getKey('token'));
+        $this->handler->destroy();
         $this->user = null;
     }
 
@@ -149,26 +112,6 @@ class Auth
     }
 
     /**
-     * Gets the session.
-     *
-     * @return SessionInterface
-     */
-    public function getSession()
-    {
-        return $this->session;
-    }
-
-    /**
-     * Sets the session.
-     *
-     * @param SessionInterface $session
-     */
-    public function setSession(SessionInterface $session)
-    {
-        $this->session = $session;
-    }
-
-    /**
      * Attempts to authenticate the given user according to the passed credentials.
      *
      * @param  array $credentials
@@ -179,22 +122,21 @@ class Auth
     {
         $this->events->trigger(new AuthenticateEvent(AuthEvents::PRE_AUTHENTICATE, $credentials));
 
-        if (!$user = $this->getUserProvider()->findByCredentials($credentials) or !$this->getUserProvider()->validateCredentials($user, $credentials)) {
-
-            $this->session->set(self::LAST_USERNAME, $credentials[self::USERNAME_PARAM]);
+        if (!$user = $this->getUserProvider()->findByCredentials($credentials)
+            or !$this->getUserProvider()->validateCredentials($user, $credentials)
+        ) {
             $this->events->trigger(new AuthenticateEvent(AuthEvents::FAILURE, $credentials, $user));
 
             throw new BadCredentialsException($credentials);
         }
 
         $this->events->trigger(new AuthenticateEvent(AuthEvents::SUCCESS, $credentials, $user));
-        $this->session->remove(self::LAST_USERNAME);
 
         return $user;
     }
 
     /**
-     * Authorize a user.
+     * Authorizes a user.
      *
      * @param  UserInterface $user
      * @throws Exception\AuthException
@@ -205,15 +147,15 @@ class Auth
     }
 
     /**
-     * Log an user into the application.
+     * Logs an user into the application.
      *
-     * @param UserInterface $user
+     * @param  UserInterface $user
+     * @param  bool          $remember
      * @return Response
      */
-    public function login(UserInterface $user)
+    public function login(UserInterface $user, $remember = false)
     {
-        $this->session->migrate();
-        $this->setUser($user);
+        $this->setUser($user, $remember);
 
         return $this->events->trigger(new LoginEvent(AuthEvents::LOGIN, $user))->getResponse();
     }
@@ -221,24 +163,13 @@ class Auth
     /**
      * Logs the current user out.
      *
-     * @param bool $auto
      * @return Response
      */
-    public function logout($auto = false)
+    public function logout()
     {
-        $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->user), compact('auto'));
+        $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->getUser()));
         $this->removeUser();
 
         return $event->getResponse();
-    }
-
-    /**
-     * Sets the token used to identify when to refresh the user from the session
-     *
-     * @param integer $token
-     */
-    public function refresh($token = null)
-    {
-        $this->token = $token;
     }
 }
