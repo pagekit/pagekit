@@ -71,7 +71,7 @@ class DatabaseHandler implements HandlerInterface
             if (strtotime($data['access']) + $this->config['timeout'] < time()) {
 
                 if ($data['status'] == self::STATUS_REMEMBERED) {
-                    $this->set($data['user_id'], self::STATUS_REMEMBERED);
+                    $this->write($data['user_id'], self::STATUS_REMEMBERED);
                 } else {
                     return null;
                 }
