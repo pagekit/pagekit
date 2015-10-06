@@ -15,6 +15,10 @@ class MigrationController
      */
     public function indexAction($redirect = null)
     {
+        if (!$this->getUpdates()) {
+            return App::redirect($redirect ?: '@system');
+        }
+
         return [
             '$view' => [
                 'title' => __('Update Pagekit'),
@@ -30,17 +34,15 @@ class MigrationController
      */
     public function migrateAction($redirect = null)
     {
-        $config = App::config('system');
-        $manager = new PackageManager();
-
-        $scripts = $manager->loadScripts(null, __DIR__ . '/../../scripts.php');
-        if (isset($scripts['updates'])) {
-            $updates = $manager->filterUpdates($scripts['updates'], $config->get('version'));
+        if ($updates = $this->getUpdates()) {
+            $manager = new PackageManager();
             $manager->execute($updates);
+            $message =  __('Your Pagekit database has been updated successfully.');
+        } else {
+            $message =  __('Your database is up to date.');
         }
 
-        $config->set('version', App::version());
-        $message =  __('Your Pagekit database has been updated successfully.');
+        App::config('system')->set('version', App::version());
 
         if ($redirect) {
             App::message()->success($message);
@@ -48,5 +50,20 @@ class MigrationController
         }
 
         return App::response()->json(compact('status', 'message'));
+    }
+
+    /**
+     * @return array
+     */
+    protected function getUpdates()
+    {
+        $manager = new PackageManager();
+
+        $scripts = $manager->loadScripts(null, __DIR__ . '/../../scripts.php');
+        if (isset($scripts['updates'])) {
+            return $manager->filterUpdates($scripts['updates'], App::config('system')->get('version'));
+        }
+
+        return [];
     }
 }

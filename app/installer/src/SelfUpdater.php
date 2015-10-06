@@ -87,6 +87,10 @@ class SelfUpdater
             $this->setUpdateMode(false);
             $this->output->writeln('<info>done.</info>');
 
+            if (function_exists('opcache_reset')) {
+                opcache_reset();
+            }
+
         } catch (\Exception $e) {
             @unlink($file);
 
@@ -224,5 +228,4 @@ class SelfUpdater
     {
         // TODO: Implement this.
     }
-
 }

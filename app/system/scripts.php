@@ -124,24 +124,6 @@ return [
             'menus' => ['main' => ['id' => 'main', 'label' => 'Main']]
         ]);
 
-    },
-
-    'updates' => [
-        '0.9.2' => function ($app) {
-
-            $util = $app['db']->getUtility();
-            if ($util->tableExists('@system_auth') === false) {
-                $util->createTable('@system_auth', function ($table) {
-                    $table->addColumn('id', 'string', ['length' => 255]);
-                    $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
-                    $table->addColumn('access', 'datetime', ['notnull' => false]);
-                    $table->addColumn('status', 'smallint');
-                    $table->addColumn('data', 'json_array', ['notnull' => false]);
-                    $table->setPrimaryKey(['id']);
-                });
-            }
-
-        }
-    ]
+    }
 
 ];
