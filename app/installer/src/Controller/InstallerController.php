@@ -8,6 +8,7 @@ use Doctrine\DBAL\Exception\ConnectionException;
 use Pagekit\Application as App;
 use Pagekit\Config\Config;
 use Pagekit\Installer\Package\PackageManager;
+use Pagekit\Installer\Package\PackageScripts;
 use Pagekit\Util\Arr;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -36,6 +37,10 @@ class InstallerController
      */
     public function __construct()
     {
+        if (function_exists('opcache_reset')) {
+            opcache_reset();
+        }
+
         $this->config = file_exists($this->configFile);
     }
 
@@ -125,9 +130,8 @@ class InstallerController
                 App::abort(400, $message);
             }
 
-            $installer = new PackageManager(new NullOutput());
-            $scripts = $installer->loadScripts(null, App::path() . '/app/system/scripts.php');
-            $installer->trigger('install', $scripts);
+            $scripts = new PackageScripts(App::path().'/app/system/scripts.php');
+            $scripts->install();
 
             App::db()->insert('@system_user', [
                 'name' => $user['username'],
@@ -148,11 +152,12 @@ class InstallerController
             }
 
             if ($this->packages) {
+                $installer = new PackageManager(new NullOutput());
                 $installer->install($this->packages);
             }
 
-            if (file_exists(__DIR__ . '/../../install.php')) {
-                require_once __DIR__ . '/../../install.php';
+            if (file_exists(__DIR__.'/../../install.php')) {
+                require_once __DIR__.'/../../install.php';
             }
 
             if (!$this->config) {

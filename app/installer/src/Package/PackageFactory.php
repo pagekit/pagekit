@@ -30,7 +30,7 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      * Gets a package.
      *
      * @param  string $name
-     * @param bool $force
+     * @param  bool   $force
      * @return mixed|null
      */
     public function get($name, $force = false)
@@ -46,7 +46,7 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      * Gets all packages.
      *
      * @param  string $type
-     * @param bool $force
+     * @param bool    $force
      * @return array
      */
     public function all($type = null, $force = false)
@@ -108,7 +108,7 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      */
     public function addPath($paths)
     {
-        $this->paths = array_merge($this->paths, (array)$paths);
+        $this->paths = array_merge($this->paths, (array) $paths);
 
         return $this;
     }

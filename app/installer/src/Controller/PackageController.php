@@ -10,6 +10,16 @@ use Pagekit\Installer\Package\PackageManager;
  */
 class PackageController
 {
+    /**
+     * @var PackageManager
+     */
+    protected $manager;
+
+    public function __construct()
+    {
+        $this->manager = new PackageManager();
+    }
+
     public function themesAction()
     {
         $packages = array_values(App::package()->all('pagekit-theme'));
@@ -86,8 +96,7 @@ class PackageController
             App::abort(400, __('Unable to enable "%name%".', ['%name%' => $package->get('title')]));
         }
 
-        $manager = new PackageManager();
-        $manager->enable($package);
+        $this->manager->enable($package);
 
         App::exception()->setHandler($handler);
 
@@ -107,8 +116,7 @@ class PackageController
             App::abort(400, __('"%name%" has not been loaded.', ['%name%' => $package->get('title')]));
         }
 
-        $manager = new PackageManager();
-        $manager->disable($package);
+        $this->manager->disable($package);
 
         App::module('system/cache')->clearCache();
 
@@ -153,8 +161,7 @@ class PackageController
             try {
                 $package = App::package()->load($package);
 
-                $manager = new PackageManager();
-                $manager->install([$package->getName() => $package->get('version')]);
+                $this->manager->install([$package->getName() => $package->get('version')]);
 
                 echo "\nstatus=success";
 
@@ -175,8 +182,7 @@ class PackageController
 
             try {
 
-                $manger = new PackageManager();
-                $manger->uninstall($name);
+                $this->manager->uninstall($name);
 
                 echo "\nstatus=success";
 

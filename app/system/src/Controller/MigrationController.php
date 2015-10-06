@@ -3,7 +3,7 @@
 namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
-use Pagekit\Installer\Package\PackageManager;
+use Pagekit\Installer\Package\PackageScripts;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -11,11 +11,22 @@ use Pagekit\Installer\Package\PackageManager;
 class MigrationController
 {
     /**
+     * @var PackageScripts
+     */
+    protected $scripts;
+
+    public function __construct()
+    {
+        $system = App::system();
+        $this->scripts = new PackageScripts($system->path.'/scripts.php', $system->config('version'));
+    }
+
+    /**
      * @Request({"redirect": "string"})
      */
     public function indexAction($redirect = null)
     {
-        if (!$this->getUpdates()) {
+        if (!$this->scripts->hasUpdates()) {
             return App::redirect($redirect ?: '@system');
         }
 
@@ -34,9 +45,8 @@ class MigrationController
      */
     public function migrateAction($redirect = null)
     {
-        if ($updates = $this->getUpdates()) {
-            $manager = new PackageManager();
-            $manager->execute($updates);
+        if ($updates = $this->scripts->hasUpdates()) {
+            $this->scripts->update();
             $message =  __('Your Pagekit database has been updated successfully.');
         } else {
             $message =  __('Your database is up to date.');
@@ -50,20 +60,5 @@ class MigrationController
         }
 
         return App::response()->json(compact('status', 'message'));
-    }
-
-    /**
-     * @return array
-     */
-    protected function getUpdates()
-    {
-        $manager = new PackageManager();
-
-        $scripts = $manager->loadScripts(null, __DIR__ . '/../../scripts.php');
-        if (isset($scripts['updates'])) {
-            return $manager->filterUpdates($scripts['updates'], App::config('system')->get('version'));
-        }
-
-        return [];
     }
 }
