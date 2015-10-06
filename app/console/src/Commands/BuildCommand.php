@@ -54,7 +54,7 @@ class BuildCommand extends Command
 
         $zip = new \ZipArchive;
 
-        if (true !== $zip->open($zipFile = "{$path}/pagekit-{$vers}.zip", \ZipArchive::OVERWRITE)) {
+        if (true !== $zip->open($zipFile = "{$path}/pagekit-{$vers}.zip", \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
             $this->abort("Can't open ZIP extension in '{$zipFile}'");
         }
 
