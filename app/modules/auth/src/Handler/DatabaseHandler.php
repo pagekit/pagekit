@@ -129,7 +129,9 @@ class DatabaseHandler implements HandlerInterface
      */
     protected function getToken()
     {
-        return $this->getRequest()->cookies->get($this->config['cookie']['name']);
+        if ($request = $this->getRequest()) {
+            return $request->cookies->get($this->config['cookie']['name']);
+        }
     }
 
     /**
