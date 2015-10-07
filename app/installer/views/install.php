@@ -140,7 +140,7 @@
                     <div v-pre>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
-                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Chose a title and create the administrator account.' | trans }}</div>
+                        <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Choose a title and create the administrator account.' | trans }}</div>
 
                         <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" v-on="submit: stepSite | valid">
                             <div class="uk-form-row">
