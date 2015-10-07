@@ -25,6 +25,7 @@
 - HttpExceptions returning with Code 500
 - Internal URLs not being resolved in feeds (#466)
 - Theme updates (#472)
+- Extensions and themes view in IE
 
 ## 0.9.1 (September 11, 2015)
 
