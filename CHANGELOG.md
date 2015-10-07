@@ -22,6 +22,7 @@
 - Finder component for non Unix OS's (#448)
 - HttpExceptions returning with Code 500
 - Internal URLs not being resolved in feeds (#466)
+- Theme updates (#472)
 
 ## 0.9.1 (September 11, 2015)
 ### Added
