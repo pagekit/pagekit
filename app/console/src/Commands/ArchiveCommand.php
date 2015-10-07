@@ -44,15 +44,15 @@ class ArchiveCommand extends Command
             $targetDir = $this->container->path();
         }
 
-        $sourcePath = $this->container->get('path.packages') . '/' . $name;
+        $sourcePath = $this->container->get('path.packages').'/'.$name;
 
         $filesystem->ensureDirectoryExists($targetDir);
 
-        $target = realpath($targetDir) . '/' . $packageName . '.zip';
+        $target = realpath($targetDir).'/'.$packageName.'.zip';
         $filesystem->ensureDirectoryExists(dirname($target));
 
         $exludes = [];
-        if (file_exists($composerJsonPath = $sourcePath . '/composer.json')) {
+        if (file_exists($composerJsonPath = $sourcePath.'/composer.json')) {
             $jsonFile = new JsonFile($composerJsonPath);
             $jsonData = $jsonFile->read();
 
@@ -69,7 +69,7 @@ class ArchiveCommand extends Command
             }
         }
 
-        $tempTarget = sys_get_temp_dir() . '/composer_archive' . uniqid() . '.zip';
+        $tempTarget = sys_get_temp_dir().'/composer_archive'.uniqid().'.zip';
         $filesystem->ensureDirectoryExists(dirname($tempTarget));
 
         $archiver = new PharArchiver();

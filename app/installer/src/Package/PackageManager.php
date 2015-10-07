@@ -141,7 +141,7 @@ class PackageManager
     }
 
     /**
-     * @param $package
+     * @param  $package
      * @return string
      */
     protected function doInstall($package)
@@ -157,7 +157,7 @@ class PackageManager
     /**
      * Tries to obtain package version from 'composer.json' or installation log.
      *
-     * @param $package
+     * @param  $package
      * @return string
      */
     protected function getVersion($package)

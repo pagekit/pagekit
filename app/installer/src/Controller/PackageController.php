@@ -159,6 +159,7 @@ class PackageController
         return App::response()->stream(function () use ($package) {
 
             try {
+
                 $package = App::package()->load($package);
 
                 $this->manager->install([$package->getName() => $package->get('version')]);
@@ -231,7 +232,6 @@ class PackageController
             App::abort(400, __('Can\'t load json file from package.'));
         }
     }
-
 
     /**
      * @param  string $name
