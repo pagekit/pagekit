@@ -27,6 +27,7 @@
 - Theme updates (#472)
 - Extensions and themes view in IE
 - Permissions issue on site edit (#471)
+- Redirect to login, if failed, due to insufficient user rights
 
 ## 0.9.1 (September 11, 2015)
 
@@ -35,7 +36,7 @@
 - Link to gitter chat
 
 ### Changed
-- By default "display errors" are set to"off"
+- By default "display errors" are set to "off"
 
 ### Fixed
 - Auto login

@@ -6,6 +6,7 @@ use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Pagekit\Application as App;
 use Pagekit\Auth\Event\AuthorizeEvent;
+use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\User\Annotation\Access;
 
@@ -43,23 +44,24 @@ class AccessListener implements EventSubscriberInterface
         $access = [];
 
         foreach (array_merge($this->reader->getClassAnnotations($route->getControllerClass()), $this->reader->getMethodAnnotations($route->getControllerMethod())) as $annot) {
-            if ($annot instanceof Access) {
+            if (!$annot instanceof Access) {
+                continue;
+            }
 
-                if ($expression = $annot->getExpression()) {
-                    $access[] = $expression;
-                }
+            if ($expression = $annot->getExpression()) {
+                $access[] = $expression;
+            }
 
-                if ($admin = $annot->getAdmin() !== null) {
+            if ($admin = $annot->getAdmin() !== null) {
 
-                    $route->setPath('admin'.rtrim($route->getPath(), '/'));
-                    $permission = 'system: access admin area';
+                $route->setPath('admin'.rtrim($route->getPath(), '/'));
+                $permission = 'system: access admin area';
 
-                    if ($admin) {
-                        $access[] = $permission;
-                    } else {
-                        if ($key = array_search($permission, $access)) {
-                            unset($access[$key]);
-                        }
+                if ($admin) {
+                    $access[] = $permission;
+                } else {
+                    if ($key = array_search($permission, $access)) {
+                        unset($access[$key]);
                     }
                 }
             }
@@ -73,12 +75,13 @@ class AccessListener implements EventSubscriberInterface
     /**
      * Checks if the user is authorized to login to administration section.
      *
-     * @param AuthorizeEvent $event
+     * @param  AuthorizeEvent $event
+     * @throws AuthException
      */
     public function onAuthorize(AuthorizeEvent $event)
     {
         if (strpos(App::request()->get('redirect'), App::url('@system', [], true)) === 0 && !$event->getUser()->hasAccess('system: access admin area')) {
-            App::abort(403, __('You do not have access to the administration area of this site.'));
+            throw new AuthException(__('You do not have access to the administration area of this site.'));
         }
     }
 
