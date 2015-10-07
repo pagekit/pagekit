@@ -1,10 +1,12 @@
 # Changelog
 
 ## WIP
+
 ### Added
 - Https for Pagekit API (#415)
 - Site title to browser title
 - Mysql character set compatibility (#434, #465)
+- Sections tabs in user edit view (#390)
 
 ### Changed
 - Site tree adds its leaf node routes first (#420)
@@ -25,6 +27,7 @@
 - Theme updates (#472)
 
 ## 0.9.1 (September 11, 2015)
+
 ### Added
 - Additional system requirements (#410)
 - Link to gitter chat
@@ -37,6 +40,7 @@
 - Login widget (#423)
 
 ## 0.9.0 (September 10, 2015)
+
 ### Added
 - Site tree
 - New default theme
@@ -47,6 +51,7 @@
 - Codebase
 
 ## 0.8.8 (November 17, 2014)
+
 ### Added
 - Pagination in Blog extension
 - Languages from Transifex
@@ -62,6 +67,7 @@
 - Several issues for shared hosters
 
 ## 0.8.7 (September 8, 2014)
+
 ### Added
 - OAuth api
 
@@ -85,6 +91,7 @@
 - Blog extension settings
 
 ## 0.8.5 (August 22, 2014)
+
 ### Added
 - Marketplace pagination
 - Beautified system emails
@@ -101,6 +108,7 @@
 - Gravatar on https
 
 ## 0.8.4 (July 25, 2014)
+
 ### Added
 - Finnish, French, Spanish, Russian translations
 - Pagination in user manager
