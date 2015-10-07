@@ -45,8 +45,12 @@ class UserApiController
         }
 
         if ($access) {
-            $query->join('@system_auth as a', 'a.user_id = @system_user.id');
-            $query->where(['a.access > :access', 'a.status > :status'], ['access' => date('Y-m-d H:i:s', time() - max(0, (int) $access)), 'status' => 0]);
+            $query->whereExists(function($query) use ($access) {
+                $query
+                    ->select('id')->from('@system_auth as a')
+                    ->where('a.user_id = @system_user.id')
+                    ->where(['a.access > :access', 'a.status > :status'], ['access' => date('Y-m-d H:i:s', time() - max(0, (int) $access)), 'status' => 0]);
+            });
         }
 
         if (preg_match('/^(username|name|email|registered|login)\s(asc|desc)$/i', $order, $match)) {
@@ -97,8 +101,12 @@ class UserApiController
         }
 
         if ($access) {
-            $query->join('@system_auth as a', 'a.user_id = @system_user.id');
-            $query->where(['a.access > :access', 'a.status > :status'], ['access' => date('Y-m-d H:i:s', time() - max(0, (int) $access)), 'status' => 0]);
+            $query->whereExists(function($query) use ($access) {
+                $query
+                    ->select('id')->from('@system_auth as a')
+                    ->where('a.user_id = @system_user.id')
+                    ->where(['a.access > :access', 'a.status > :status'], ['access' => date('Y-m-d H:i:s', time() - max(0, (int) $access)), 'status' => 0]);
+            });
         }
 
         $count = $query->count();

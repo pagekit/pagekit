@@ -665,7 +665,6 @@ class QueryBuilder
 
             default:
                 $sql = $this->getSQLForSelect();
-                break;
         }
 
         if ($type == 'select') {
