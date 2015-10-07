@@ -26,6 +26,7 @@
 - Internal URLs not being resolved in feeds (#466)
 - Theme updates (#472)
 - Extensions and themes view in IE
+- Permissions issue on site edit (#471)
 
 ## 0.9.1 (September 11, 2015)
 

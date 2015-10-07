@@ -6,7 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Site\Model\Page;
 
 /**
- * @Access("site: manage pages")
+ * @Access("site: manage site")
  */
 class PageApiController
 {
