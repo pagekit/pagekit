@@ -63,7 +63,7 @@ class PackageController
                 $package->set('enabled', true);
                 $package->set('settings', $settings);
                 $package->set('config', $module->config);
-                $package->set('permissions', (bool)$module->get('permissions'));
+                $package->set('permissions', (bool) $module->get('permissions'));
             }
         }
 
@@ -162,7 +162,11 @@ class PackageController
 
                 $package = App::package()->load($package);
 
-                $this->manager->install([$package->getName() => $package->get('version')]);
+                if (!$package) {
+                    throw new \RuntimeException('Invalid parameters.');
+                }
+
+                $this->manager->install([(string) $package->getName() => $package->get('version')]);
 
                 echo "\nstatus=success";
 
