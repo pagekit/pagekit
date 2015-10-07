@@ -1,6 +1,8 @@
 window.User = module.exports = {
 
-    data: window.$data,
+    data: function() {
+        return _.merge({password: ''}, window.$data);
+    },
 
     created: function () {
 
