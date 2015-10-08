@@ -15,11 +15,15 @@ class NodesListener implements EventSubscriberInterface
     {
         $site      = App::module('system/site');
         $frontpage = $site->config('frontpage');
-        $nodes     = Node::where(['status' => 1])->get();
+        $nodes     = Node::findAll(true);
+
+        uasort($nodes, function($a, $b) {
+            return strcmp(substr_count($a->path, '/'), substr_count($b->path, '/')) * -1;
+        });
 
         foreach ($nodes as $node) {
 
-            if (!$type = $site->getType($node->type)) {
+            if ($node->status !== 1 || !$type = $site->getType($node->type)) {
                 continue;
             }
 
@@ -48,24 +52,6 @@ class NodesListener implements EventSubscriberInterface
             App::routes()->get('/', function () {
                 return __('No Frontpage assigned.');
             });
-        }
-    }
-
-    /**
-     * Adds protected node types.
-     */
-    public function onEnable($event, $module)
-    {
-        foreach ((array) $module->get('nodes') as $type => $route) {
-            if (isset($route['protected']) and $route['protected'] and !Node::where(['type = ?'], [$type])->first()) {
-                Node::create([
-                    'title' => $route['label'],
-                    'slug' => App::filter($route['label'], 'slugify'),
-                    'type' => $type,
-                    'status' => 1,
-                    'link' => $route['name']
-                ])->save();
-            }
         }
     }
 

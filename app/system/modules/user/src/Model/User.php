@@ -52,9 +52,6 @@ class User implements UserInterface, \JsonSerializable
     public $name;
 
     /** @Column(type="datetime") */
-    public $access;
-
-    /** @Column(type="datetime") */
     public $login;
 
     /** @Column */

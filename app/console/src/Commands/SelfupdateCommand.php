@@ -2,10 +2,10 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Application\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\TransferException;
+use Pagekit\Application\Console\Command;
 use Pagekit\Installer\SelfUpdater;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

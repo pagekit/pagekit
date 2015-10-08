@@ -4,30 +4,41 @@ window.Site = module.exports = {
         return _.merge({}, window.$data);
     },
 
+    created: function () {
+
+        var sections = [], type = _.kebabCase(this.type.id), active;
+
+        _.forIn(this.$options.components, function (component, name) {
+
+            var options = component.options || {};
+
+            if (options.section) {
+                sections.push(_.extend({name: name, priority: 0}, options.section));
+            }
+
+        });
+
+        sections = _.sortBy(sections.filter(function (section) {
+
+            active = section.name.match('(.+):(.+)');
+
+            if (active === null) {
+                return !_.find(sections, {name: type + ':' + section.name});
+            }
+
+            return active[1] == type;
+        }, this), 'priority');
+
+        this.$set('sections', sections);
+
+    },
+
     ready: function () {
         this.Nodes = this.$resource('api/site/node/:id');
         this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
     },
 
     computed: {
-
-        sections: function () {
-
-            var type = this.$get('type.id'), sections = [];
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {}, section = options.section;
-
-                if (section && (!section.active || type && type.match(section.active))) {
-                    section.name = name;
-                    sections.push(section);
-                }
-
-            });
-
-            return sections;
-        },
 
         path: function () {
             return (this.node.path ? this.node.path.split('/').slice(0, -1).join('/') : '') + '/' + (this.node.slug || '');
@@ -38,7 +49,6 @@ window.Site = module.exports = {
     methods: {
 
         save: function (e) {
-
             e.preventDefault();
 
             var data = {node: this.node};
@@ -65,13 +75,14 @@ window.Site = module.exports = {
 
     partials: {
 
-        settings: require('../templates/settings.html')
+        'settings': require('../templates/settings.html')
 
     },
 
     components: {
 
-        'node-link': require('../components/node-link.vue')
+        'settings': require('../components/node-settings.vue'),
+        'link:settings': require('../components/node-link.vue')
 
     }
 

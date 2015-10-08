@@ -14,14 +14,8 @@
         <div class="uk-form-row">
             <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-title" class="uk-form-width-large" type="text" v-model="config.title">
-            </div>
-        </div>
-
-        <div class="uk-form-row">
-            <label for="form-description" class="uk-form-label">{{ 'Description' | trans }}</label>
-            <div class="uk-form-controls">
-                <textarea id="form-description" class="uk-form-width-large" rows="5" v-model="config.description"></textarea>
+                <input id="form-title" class="uk-form-width-large" name="title" type="text" v-model="config.title" v-validate="required">
+                <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
             </div>
         </div>
 
@@ -60,7 +54,7 @@
             priority: 10
         },
 
-        props: ['config']
+        props: ['config', 'form']
 
     }
 

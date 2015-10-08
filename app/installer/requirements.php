@@ -436,7 +436,7 @@ class PagekitRequirements extends RequirementCollection
 
         if (version_compare($installedPhpVersion, '5.6', '>=') && version_compare($installedPhpVersion, '7.0.0', '<')) {
             $this->addRequirement(!(ini_get('display_startup_errors') && ini_get('always_populate_raw_post_data') !== "-1"),
-                '\'display_startup_errors\' is enabled and \'always_populate_raw_post_data\' is not disabled',
+                '\'display_startup_errors\' is enabled and \'always_populate_raw_post_data\' is not set to \'-1\'',
                 'Disable startup errors or set \'always_populate_raw_post_data\' to \'-1\' in php.ini.'
             );
         }
@@ -452,10 +452,9 @@ class PagekitRequirements extends RequirementCollection
 
         $writable_directories = ["$path/tmp", "$path/tmp/cache", "$path/tmp/logs", "$path/tmp/sessions"];
 
+        // If config.php doesn't exist, we need the root directory of the app to be writable.
         if (!file_exists("$path/config.php")) {
-          // If config.php doesn't exist, we need the root directory of the app
-          // to be writable.
-          array_unshift($writable_directories, $path);
+            array_unshift($writable_directories, $path);
         }
 
         foreach ($writable_directories as $dir) {
@@ -465,6 +464,11 @@ class PagekitRequirements extends RequirementCollection
                 "Change the permissions of the \"<strong>{$dir}</strong>\" directory so that the web server can write into it."
             );
         }
+
+        $this->addRequirement(
+            file_exists("$path/.htaccess"),
+            ".htaccess does not exist",
+            "Make sure the <strong>.htaccess</strong> file has been uploaded, sometimes hidden files are not uploaded using FTP/SFTP.");
 
         if (function_exists('opcache_invalidate') && ini_get('opcache.enable')) {
             $this->addPhpIniRequirement('opcache.load_comments', true, true);

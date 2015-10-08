@@ -3,23 +3,15 @@
 namespace Pagekit\Cookie;
 
 use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Request;
 
 class CookieJar
 {
-    /*
-     * The current request instance.
-     *
-     * @var Request
-     */
-    protected $request;
-
     /**
      * The default path.
      *
      * @var string
      */
-    protected $path;
+    protected $path = '/';
 
     /**
      * The default domain.
@@ -34,45 +26,41 @@ class CookieJar
     protected $cookies = [];
 
     /**
-     * Constructor.
+     * Sets the default path and domain.
      *
-     * @param  Request $request
-     * @param  string  $path
-     * @param  string  $domain
+     * @param string $path
+     * @param null   $domain
      */
-    public function __construct(Request $request, $path = '/', $domain = null)
+    public function setDefaultPathAndDomain($path = '/', $domain = null)
     {
-        $this->request = $request;
-        $this->path    = $path;
-        $this->domain  = $domain;
+        $this->path = $path;
+        $this->domain = $domain;
     }
 
-
     /**
-     * Determine if a cookie exists and is not null.
+     * Determines if a cookie has been queued.
      *
-     * @param  string $key
+     * @param  string $name
      * @return bool
      */
-    public function has($key)
+    public function has($name)
     {
-        return $this->request->cookies->has($key);
+        return isset($this->cookies[$name]);
     }
 
     /**
-     * Get the value of the given cookie.
+     * Get a queued cookie instance.
      *
-     * @param  string $key
-     * @param  mixed  $default
-     * @return mixed
+     * @param  string $name
+     * @return Cookie
      */
-    public function get($key, $default = null)
+    public function get($name)
     {
-        return $this->request->cookies->get($key, $default);
+        return isset($this->cookies[$name]) ? $this->cookies[$name] : null;
     }
 
     /**
-     * Create a new cookie instance.
+     * Creates a new cookie instance.
      *
      * @param  string $name
      * @param  string $value
@@ -93,11 +81,11 @@ class CookieJar
             $domain = $this->domain;
         }
 
-        return $this->cookies[] = new Cookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
+        return $this->cookies[$name] = new Cookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
     }
 
     /**
-     * Expire the given cookie.
+     * Expires the given cookie.
      *
      * @param  string $name
      * @param  string $path
@@ -118,7 +106,7 @@ class CookieJar
     }
 
     /**
-     * Return queued cookies to set on response.
+     * Returns queued cookies to set on response.
      *
      * @return Cookie[]
      */

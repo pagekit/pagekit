@@ -20,8 +20,6 @@ class SystemModule extends Module
             return Finder::create();
         });
 
-        $app->module('auth')->config['rememberme.key'] = $this->config('secret');
-
         $app['db.em']; // -TODO- fix me
 
         $theme = $this->config('site.theme');

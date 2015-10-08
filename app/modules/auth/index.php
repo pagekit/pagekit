@@ -1,14 +1,9 @@
 <?php
 
 use Pagekit\Auth\Auth;
-use Pagekit\Auth\AuthEvents;
 use Pagekit\Auth\Encoder\NativePasswordEncoder;
-use Pagekit\Auth\Event\AuthenticateEvent;
-use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Auth\Event\LogoutEvent;
-use Pagekit\Auth\RememberMe;
+use Pagekit\Auth\Handler\DatabaseHandler;
 use RandomLib\Factory;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 return [
 
@@ -17,7 +12,7 @@ return [
     'main' => function ($app) {
 
         $app['auth'] = function ($app) {
-            return new Auth($app['events'], $app['session']);
+            return new Auth($app['events'], $app['auth.handler']);
         };
 
         $app['auth.password'] = function () {
@@ -28,61 +23,11 @@ return [
             return (new Factory)->getMediumStrengthGenerator();
         };
 
-        $app['auth.remember'] = function ($app) {
-            return new RememberMe($this->config('rememberme.key'), $this->config('rememberme.cookie.name') ?: 'remember_'.md5($app['request']->getUriForPath('')), $app['cookie']);
+        $app['auth.handler'] = function ($app) {
+            return new DatabaseHandler($app['db'], $app['request.stack'], $app['cookie'], $app['auth.random'], $this->config);
         };
 
     },
-
-    'events' => [
-
-        'boot' => function ($event, $app) {
-
-            $app->on('auth.login', function (LoginEvent $event) use ($app) {
-                $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
-            }, -32);
-
-            $app->on('auth.logout', function (LogoutEvent $event) use ($app) {
-                $event->setResponse(new RedirectResponse($app['request']->get(Auth::REDIRECT_PARAM)));
-            }, -32);
-
-            if (!$this->config('rememberme.enabled') || !$this->config('rememberme.key')) {
-                return;
-            }
-
-            $app->on('request', function () use ($app) {
-
-                try {
-
-                    if (null !== $app['auth']->getUser()) {
-                        return;
-                    }
-
-                    $user = $app['auth.remember']->autoLogin($app['auth']->getUserProvider());
-
-                    $app['auth']->setUser($user);
-                    $app['events']->trigger(AuthEvents::LOGIN, new LoginEvent($user));
-
-                } catch (\Exception $e) {
-                }
-
-            }, 20);
-
-            $app->on(AuthEvents::SUCCESS, function (AuthenticateEvent $event) use ($app) {
-                $app['auth.remember']->set($app['request'], $event->getUser());
-            });
-
-            $app->on(AuthEvents::FAILURE, function () use ($app) {
-                $app['auth.remember']->remove();
-            });
-
-            $app->on('auth.logout', function () use ($app) {
-                $app['auth.remember']->remove();
-            });
-
-        }
-
-    ],
 
     'autoload' => [
 
@@ -92,19 +37,13 @@ return [
 
     'config' => [
 
-        'rememberme' => [
-
-            'enabled' => true,
-
-            'key' => '',
-
-            'cookie' => [
-
-                'name' => ''
-
-            ]
-
+        'timeout' => 900,
+        'table' => 'auth',
+        'cookie'   => [
+            'name' => '',
+            'lifetime' => 315360000
         ]
 
     ]
+
 ];

@@ -1,6 +1,6 @@
 <?php $view->script('site-edit', 'system/site:app/bundle/edit.js', ['vue', 'editor', 'uikit']); ?>
 
-<form id="site-edit" class="uk-form" name="form" v-on="valid: save" v-cloak>
+<form id="site-edit" class="uk-form" v-validator="form" v-on="submit: save | valid" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
@@ -18,11 +18,11 @@
     </div>
 
     <ul class="uk-tab" v-el="tab" v-show="sections.length > 1">
-        <li v-repeat="section: sections | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+        <li v-repeat="section: sections"><a>{{ section.label | trans }}</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin" v-el="content">
-        <div v-repeat="section: sections | orderBy 'priority'">
+        <div v-repeat="section: sections">
             <component is="{{ section.name }}" node="{{@ node }}"></component>
         </div>
     </div>

@@ -1,10 +1,10 @@
 {
   "name": "pagekit",
   "dependencies": {
-    "lodash": "~3.10.0",
+    "lodash": "~3.10.1",
     "uikit": "#master",
-    "vue": "~0.12.12",
-    "vue-resource": "~0.1.14"
+    "vue": "~0.12.15",
+    "vue-resource": "~0.1.16"
   },
   "devDependencies": {
     "js-md5": "~1.1.0"

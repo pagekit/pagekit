@@ -1,7 +1,36 @@
 module.exports = {
 
     data: function () {
-        return _.extend({}, window.$data);
+        return _.merge({}, window.$data);
+    },
+
+    created: function () {
+
+        var sections = [], type = _.kebabCase(this.widget.type), active;
+
+        _.forIn(this.$options.components, function (component, name) {
+
+            var options = component.options || {};
+
+            if (options.section) {
+                sections.push(_.extend({name: name, priority: 0}, options.section));
+            }
+
+        });
+
+        sections = _.sortBy(sections.filter(function (section) {
+
+            active = section.name.match('(.+):(.+)');
+
+            if (active === null) {
+                return !_.find(sections, {name: type + ':' + section.name});
+            }
+
+            return active[1] == type;
+        }, this), 'priority');
+
+        this.$set('sections', sections);
+
     },
 
     ready: function () {
@@ -11,30 +40,12 @@ module.exports = {
 
         // set position from get param
         if (!this.widget.id) {
-            var match = RegExp('[?&]position=([^&]*)').exec(location.search);
+            var match = new RegExp('[?&]position=([^&]*)').exec(location.search);
             this.widget.position = (match && decodeURIComponent(match[1].replace(/\+/g, ' '))) || '';
         }
     },
 
     computed: {
-
-        sections: function () {
-
-            var sections = [];
-
-            _.forIn(this.$options.components, function (component, name) {
-
-                var options = component.options || {}, section = options.section;
-
-                if (section) {
-                    section.name = name;
-                    sections.push(section);
-                }
-
-            });
-
-            return sections;
-        },
 
         positionOptions: function () {
             return _.map(this.config.positions, function (position) {
@@ -69,16 +80,6 @@ module.exports = {
             e.preventDefault();
 
             this.$dispatch('cancel');
-        }
-
-    },
-
-    filters: {
-
-        active: function (sections) {
-            return sections.filter(function (section) {
-                return !section.active || this.widget.type.match(section.active);
-            }, this);
         }
 
     },

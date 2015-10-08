@@ -3,12 +3,12 @@
     <div data-uk-observe>
 
         <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
-            <div v-repeat="pkg: packages">
+            <div v-repeat="pkg: packages | sortPackages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
                     <div class="uk-panel-teaser">
                         <div class="uk-overlay uk-display-block">
-                            <div class="uk-cover-background uk-position-cover" style="background-image: url({{ pkg.extra.image }});"></div>
+                            <div class="uk-cover-background uk-position-cover" v-style="background-image: 'url('+pkg.extra.image+')'"></div>
                             <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
                             <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                         </div>
@@ -30,9 +30,7 @@
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
-                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-show="!isInstalled(pkg)">
-                        {{ 'Install' | trans }} <i class="uk-icon-spinner uk-icon-spin" v-show="status == 'installing'"></i>
-                    </button>
+                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-show="!isInstalled(pkg)">{{ 'Install' | trans }}</button>
                 </div>
 
                 <div class="uk-modal-header">
@@ -142,23 +140,39 @@
                 }
 
                 this.$set('pkg', pkg);
+                this.$set('status', '');
+
                 this.modal.show();
             },
 
             doInstall: function (pkg) {
 
-                this.$set('status', 'installing');
                 this.modal.hide();
+                this.install(pkg, this.installed);
 
-                this.install(pkg, this.installed)
-                    .always(function () {
-                        this.$set('status', '');
-                    });
             },
 
             isInstalled: function (pkg) {
                 return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
             }
+        },
+
+        filters: {
+
+            sortPackages: function (packages) {
+                return packages.sort(function (a, b) {
+                    if (a.author.name === 'Pagekit' && b.author.name !== 'Pagekit') {
+                        return -1;
+                    }
+
+                    if (a.author.name !== 'Pagekit' && b.author.name === 'Pagekit') {
+                        return 1;
+                    }
+
+                    return 0;
+                });
+            }
+
         }
 
     };

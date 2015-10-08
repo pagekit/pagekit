@@ -16,7 +16,8 @@ class SiteModule extends Module
     public function main(App $app)
     {
         $app['node'] = function ($app) {
-            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id)) {
+
+            if ($id = $app['request']->attributes->get('_node') and $node = Node::find($id, true)) {
                 return $node;
             }
 
@@ -79,7 +80,17 @@ class SiteModule extends Module
      */
     public function registerType($type, array $route)
     {
-        $route['id']        = $type;
+        if (isset($route['protected']) and $route['protected'] and !array_filter(Node::findAll(true), function ($node) use ($type) { return $type === $node->type; })) {
+            Node::create([
+                'title' => $route['label'],
+                'slug' => App::filter($route['label'], 'slugify'),
+                'type' => $type,
+                'status' => 1,
+                'link' => $route['name']
+            ])->save();
+        }
+
+        $route['id'] = $type;
         $this->types[$type] = $route;
     }
 }

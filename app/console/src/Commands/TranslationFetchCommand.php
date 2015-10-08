@@ -50,8 +50,7 @@ class TranslationFetchCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // TODO system and installer are no longer extensions
-        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'blog'];
+        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'pagekit/blog'];
         $username   = $this->option('username');
         $password   = $this->option('password');
 
@@ -65,7 +64,6 @@ class TranslationFetchCommand extends Command
             $this->line("Translations for ${extension} ...");
             $this->transifexPull($extension);
         }
-
     }
 
     /**
@@ -73,10 +71,12 @@ class TranslationFetchCommand extends Command
      */
     protected function transifexPull($extension)
     {
-        foreach ($this->api->fetchLocales($extension) as $locale) {
+        $resource = basename($extension);
+
+        foreach ($this->api->fetchLocales($resource) as $locale) {
 
             $this->line("Fetching for ${locale} ...");
-            $translations = $this->api->fetchTranslations($extension, $locale);
+            $translations = $this->api->fetchTranslations($resource, $locale);
 
             // New languages don't have a folder yet
             $folder = sprintf('%s/languages/%s/', $this->getPath($extension), $locale);
@@ -100,9 +100,7 @@ class TranslationFetchCommand extends Command
      */
     protected function getPath($path)
     {
-
-        // TODO: allow packages from other namespace
-        $root = $this->container['path.packages'].'/pagekit';
+        $root = $this->container['path.packages'];
 
         if ($path == "system") {
             $root = $this->container['path'].'/app';

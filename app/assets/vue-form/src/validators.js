@@ -1,5 +1,5 @@
 /**
- * Validate functions.
+ * Validator functions.
  */
 
 exports.required = function (value, arg) {

@@ -133,6 +133,16 @@ class ExtensionTranslateCommand extends Command
             $pairs[] = [$domain, $string];
         }
 
+        // vue, js files
+        // something.$trans('foo', [args])
+        // something.$transChoice('foo'[, args])
+        preg_match_all('/\.\$trans(Choice)?\((\'|")((?:(?!\2).)+)\2/', $content, $matches);
+        foreach ($matches[3] as $i => $string) {
+            $domain = 'messages'; // TODO: allow custom domain
+
+            $pairs[] = [$domain, $string];
+        }
+
         // php matches ...->trans('foo'[, args]) or __('foo'[, args])
         // php matches ...->transChoice('foo'[, args]) or _c('foo'[, args])
         $this->visitor->traverse([$file]);
@@ -173,7 +183,7 @@ class ExtensionTranslateCommand extends Command
             $files->in($this->container->path().'/app/installer');
         }
 
-        return $files->name('*.{php,vue}');
+        return $files->name('*.{php,vue,js}');
     }
 
     /**

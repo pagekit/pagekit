@@ -5,7 +5,18 @@ return [
     'install' => function ($app) {
 
         $db = $app['db'];
-        $util = $app['db']->getUtility();
+        $util = $db->getUtility();
+
+        if ($util->tableExists('@system_auth') === false) {
+            $util->createTable('@system_auth', function ($table) {
+                $table->addColumn('id', 'string', ['length' => 255]);
+                $table->addColumn('user_id', 'integer', ['unsigned' => true, 'length' => 10, 'default' => 0]);
+                $table->addColumn('access', 'datetime', ['notnull' => false]);
+                $table->addColumn('status', 'smallint');
+                $table->addColumn('data', 'json_array', ['notnull' => false]);
+                $table->setPrimaryKey(['id']);
+            });
+        }
 
         if ($util->tableExists('@system_config') === false) {
             $util->createTable('@system_config', function ($table) {
@@ -64,8 +75,8 @@ return [
         if ($util->tableExists('@system_session') === false) {
             $util->createTable('@system_session', function ($table) {
                 $table->addColumn('id', 'string', ['length' => 255]);
-                $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->addColumn('time', 'datetime');
+                $table->addColumn('data', 'text', ['length' => 65532]);
                 $table->setPrimaryKey(['id']);
             });
         }
@@ -81,7 +92,6 @@ return [
                 $table->addColumn('status', 'smallint', ['default' => 0]);
                 $table->addColumn('registered', 'datetime');
                 $table->addColumn('login', 'datetime', ['notnull' => false]);
-                $table->addColumn('access', 'datetime', ['notnull' => false]);
                 $table->addColumn('activation', 'string', ['length' => 255, 'notnull' => false]);
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
@@ -113,6 +123,7 @@ return [
         $app['config']->set('system/site', [
             'menus' => ['main' => ['id' => 'main', 'label' => 'Main']]
         ]);
+
     }
 
 ];

@@ -93,8 +93,9 @@ class MenuHelper extends Helper
         $startLevel = (int) $parameters['start_level'] ?: 1;
         $maxDepth = $startLevel + ($parameters['depth'] ?: PHP_INT_MAX);
 
-        $nodes = Node::where(['menu' => $menu, 'status' => 1])->orderBy('priority')->get();
+        $nodes = Node::findByMenu($menu, true);
         $nodes[0] = new Node(['path' => '/']);
+        $nodes[0]->status = 1;
         $nodes[0]->parent_id = null;
 
         $node = App::node();
@@ -121,7 +122,8 @@ class MenuHelper extends Helper
 
             $node->set('active', 0 === strpos($path, $node->path.'/'));
 
-            if ($depth >= $maxDepth
+            if ($node->status !== 1
+                || $depth >= $maxDepth
                 || !$node->hasAccess($user)
                 || $node->get('menu_hide')
                 || !($parameters['mode'] == 'all'
@@ -129,6 +131,7 @@ class MenuHelper extends Helper
                     || 0 === strpos($node->path.'/', $rootPath)
                     || $depth == $startLevel)
             ) {
+                $node->setParent();
                 continue;
             }
 

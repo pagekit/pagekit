@@ -4,7 +4,6 @@ namespace Pagekit\System\Controller;
 
 use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
-use Pagekit\Auth\RememberMe;
 use Pagekit\User\Model\User;
 
 class AdminController
@@ -34,7 +33,7 @@ class AdminController
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
             'redirect' => App::request()->get('redirect') ? : App::url('@system', [], true),
-            'remember_me_param' => RememberMe::REMEMBER_ME_PARAM
+            'remember_me_param' => Auth::REMEMBER_ME_PARAM
         ];
     }
 

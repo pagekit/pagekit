@@ -4,7 +4,7 @@
         <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
-                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" v-valid="required" lazy>
+                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" v-validate="required" lazy>
 
                 <div class="uk-form-help-block uk-text-danger" v-show="form['page[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</div>
             </div>
@@ -78,9 +78,7 @@
     module.exports = {
 
         section: {
-            label: 'Content',
-            priority: 0,
-            active: '^page$'
+            label: 'Content'
         },
 
         inherit: true,
@@ -119,7 +117,7 @@
 
                     if (id) {
                         this.$resource('api/site/page/:id').get({id: id}, function (page) {
-                            this.$set('page', page);
+                            this.page = page;
                         });
                     }
 
@@ -133,6 +131,6 @@
 
     };
 
-    window.Site.components['node-page'] = module.exports;
+    window.Site.components['page:settings'] = module.exports;
 
 </script>

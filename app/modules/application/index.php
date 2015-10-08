@@ -2,8 +2,8 @@
 
 use Pagekit\Application\Response;
 use Pagekit\Application\UrlProvider;
+use Pagekit\Kernel\ExceptionHandler;
 use Symfony\Component\Debug\ErrorHandler;
-use Symfony\Component\Debug\ExceptionHandler;
 
 return [
 

@@ -30,6 +30,7 @@ window.Widgets = module.exports = {
 
     components: {
 
+        settings: require('./components/widget-settings.vue'),
         visibility: require('./components/widget-visibility.vue')
 
     }

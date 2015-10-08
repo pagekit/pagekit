@@ -8,15 +8,8 @@ return [
 
     'main' => function ($app) {
 
-        $app['cookie'] = function ($app) {
-
-            $app['cookie.init'] = true;
-
-            if (!$path = $this->config['path']) {
-                $path = $app['request']->getBasePath() ?: '/';
-            }
-
-            return new CookieJar($app['request'], $path, $this->config['domain']);
+        $app['cookie'] = function () {
+            return new CookieJar();
         };
 
     },
@@ -36,11 +29,18 @@ return [
 
     'events' => [
 
+        'request' => function ($event, $request) use ($app) {
+
+            if (!$path = $this->config['path']) {
+                $path = $request->getBasePath() ?: '/';
+            }
+
+            $app['cookie']->setDefaultPathAndDomain($path, $this->config['domain']);
+        },
+
         'response' => function ($event, $request, $response) use ($app) {
-            if (isset($app['cookie.init'])) {
-                foreach ($app['cookie']->getQueuedCookies() as $cookie) {
-                    $response->headers->setCookie($cookie);
-                }
+            foreach ($app['cookie']->getQueuedCookies() as $cookie) {
+                $response->headers->setCookie($cookie);
             }
         }
 

@@ -10,7 +10,7 @@ jQuery(function ($) {
         data: _.extend({
             nav: null,
             item: null,
-            subnav: null,
+            subnav: null
         }, window.$pagekit),
 
         created: function () {

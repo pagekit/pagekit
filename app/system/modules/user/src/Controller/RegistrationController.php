@@ -120,7 +120,7 @@ class RegistrationController
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'access IS NULL'])->first()) {
+        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
             App::message()->error(__('Invalid key.'));
             return App::redirect();
         }

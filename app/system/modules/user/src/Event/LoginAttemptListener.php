@@ -51,7 +51,7 @@ class LoginAttemptListener implements EventSubscriberInterface
         App::cache()->save($key, $attempts);
     }
 
-    /*
+    /**
      * Reset failed login attempts after successful login
      *
      * @param AuthenticateEvent $event

@@ -34,6 +34,6 @@ class UninstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $updater = new PackageManager($output);
-        $updater->uninstall((array)$this->argument('packages'));
+        $updater->uninstall((array) $this->argument('packages'));
     }
 }

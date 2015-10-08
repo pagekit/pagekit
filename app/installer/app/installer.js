@@ -59,9 +59,12 @@ var installer = {
         stepDatabase: function (e) {
             e.preventDefault();
 
-            if (!this.$validator.validate('formDatabase', true)) {
-                return false;
-            }
+            var database = this.config.database;
+            Object.keys(database.connections).forEach(function(name) {
+                if (name != database.default) {
+                    delete(database.connections[name]);
+                }
+            });
 
             this.resource.post({action: 'check'}, {config: this.config}, function (data) {
 
@@ -70,19 +73,13 @@ var installer = {
                 }
 
                 if (data.status == 'no-tables') {
-                    this.gotoStep('user');
+                    this.gotoStep('site');
                 } else {
                     this.$set('status', data.status);
                     this.$set('message', data.message);
                 }
 
             });
-        },
-
-        stepUser: function (e) {
-            e.preventDefault();
-
-            this.gotoStep('site');
         },
 
         stepSite: function (e) {

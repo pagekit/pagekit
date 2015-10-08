@@ -27,7 +27,7 @@
 
                 <div class="uk-panel-teaser">
                     <div class="uk-overlay uk-display-block">
-                        <div class="uk-cover-background uk-position-cover" style="background-image: url('{{ image(pkg) }}');"></div>
+                        <div class="uk-cover-background uk-position-cover" v-style="background-image: 'url('+image(pkg)+')'"></div>
                         <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
                         <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                     </div>
@@ -41,7 +41,7 @@
 
                 <div class="pk-panel-badge-bottom-right">
                     <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled && pkg.settings" v-on="click: settings(pkg)">Customize</button>
-                    <button class="uk-button uk-button-success uk-button-small" v-on="click: update(updates[pkg.name].version)" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
+                    <button class="uk-button uk-button-success uk-button-small" v-on="click: update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
                 </div>
 
                 <div class="uk-panel-badge pk-panel-badge uk-hidden" v-if="!pkg.enabled">

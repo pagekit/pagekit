@@ -1,6 +1,6 @@
 <?php $view->script('widget-edit', 'system/widget:app/bundle/edit.js', ['widgets', 'editor']) ?>
 
-<form id="widget-edit" class="uk-form" name="form" v-on="submit: save" v-cloak>
+<form id="widget-edit" class="uk-form" v-validator="form" v-on="submit: save | valid" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
@@ -17,12 +17,12 @@
         </div>
     </div>
 
-    <ul class="uk-tab" v-el="tab">
-        <li v-repeat="section: sections | active | orderBy 'priority'"><a>{{ section.label | trans }}</a></li>
+    <ul class="uk-tab" v-el="tab" v-show="sections.length > 1">
+        <li v-repeat="section: sections"><a>{{ section.label | trans }}</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin-large-top" v-el="content">
-        <div v-repeat="section: sections | active | orderBy 'priority'">
+        <div v-repeat="section: sections">
             <component is="{{ section.name }}" widget="{{@ widget }}" config="{{ config }}" form="{{@ form}}"></component>
         </div>
     </div>

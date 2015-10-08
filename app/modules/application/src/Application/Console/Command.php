@@ -44,6 +44,13 @@ class Command extends BaseCommand
     protected $container;
 
     /**
+     * The Pagekit config.
+     *
+     * @var array
+     */
+    protected $config;
+
+    /**
      * Create a new console command instance.
      */
     public function __construct()

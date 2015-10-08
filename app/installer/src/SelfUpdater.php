@@ -2,8 +2,8 @@
 
 namespace Pagekit\Installer;
 
-use Pagekit\Application as App;
 use Composer\Console\HtmlOutputFormatter;
+use Pagekit\Application as App;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\StreamOutput;
 
@@ -86,6 +86,10 @@ class SelfUpdater
             $this->output->write('Deactivating update mode...');
             $this->setUpdateMode(false);
             $this->output->writeln('<info>done.</info>');
+
+            if (function_exists('opcache_reset')) {
+                opcache_reset();
+            }
 
         } catch (\Exception $e) {
             @unlink($file);
@@ -224,5 +228,4 @@ class SelfUpdater
     {
         // TODO: Implement this.
     }
-
 }

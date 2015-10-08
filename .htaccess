@@ -12,11 +12,27 @@ Options -Indexes
     Options -MultiViews
 
     RewriteEngine On
+
+    # Set base if your site is running in a VirtualDocumentRoot
     # RewriteBase /
 
+    # Redirect requests to access the site with the 'www.' prefix
+    # RewriteCond %{HTTP_HOST} .
+    # RewriteCond %{HTTP_HOST} !^www\. [NC]
+    # RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Redirect requests to access the site without the 'www.' prefix
+    # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    # RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+    # Redirect requests to access the site with HTTPS
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R]
+
+    # Rewrite request to use the index.php
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule .* index.php [L]
+    RewriteRule ^ index.php [L]
 
     <IfModule mod_env.c>
         SetEnv HTTP_MOD_REWRITE On
@@ -46,4 +62,9 @@ Options -Indexes
         AddEncoding gzip svgz
     </IfModule>
 
+</IfModule>
+
+# Avoid PHP 5.6 deprecated $HTTP_RAW_POST_DATA warnings
+<IfModule mod_php5.c>
+    php_value always_populate_raw_post_data -1
 </IfModule>

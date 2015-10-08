@@ -1,6 +1,6 @@
 <?php
 
-use Pagekit\Installer\Package\PackageManager;
+use Pagekit\Installer\Package\PackageScripts;
 use Pagekit\Kernel\Event\ExceptionListener;
 
 return [
@@ -93,7 +93,7 @@ return [
                     return;
                 }
 
-                $app['isAdmin'] = $admin = (bool)preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
+                $app['isAdmin'] = $admin = (bool) preg_match('#^/admin(/?$|/.+)#', $request->getPathInfo());
                 $app->module('system/intl')->setLocale($this->config($admin ? 'admin.locale' : 'site.locale'));
 
             }, 150],
@@ -112,9 +112,15 @@ return [
 
         'auth.login' => [function ($event) use ($app) {
             if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), $app->version(), '<')) {
-                $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
-            }
 
+                $scripts = new PackageScripts($this->path.'/scripts.php', $this->config('version'));
+
+                if ($scripts->hasUpdates()) {
+                    $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
+                } else {
+                    $app->config('system')->set('version', $app->version());
+                }
+            }
         }, 8],
 
         'view.messages' => function ($event) use ($app) {
@@ -132,6 +138,18 @@ return [
             }
 
             $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
+        },
+
+        'view.meta' => function ($event, $meta) use ($app) {
+            if ($meta->get('title')) {
+                $title[] = $meta->get('title');
+            }
+            $title[] = $app->config('system/site')->get('title');
+            if ($app->request()->getPathInfo() === '/') {
+                $title = array_reverse($title);
+            }
+
+            $meta->add('title', implode(' | ', $title));
         }
 
     ]

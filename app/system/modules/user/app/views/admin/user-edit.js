@@ -1,6 +1,30 @@
-module.exports = {
+window.User = module.exports = {
 
-    data: window.$data,
+    data: function() {
+        return _.merge({password: ''}, window.$data);
+    },
+
+    created: function () {
+
+        var sections = [];
+
+        _.forIn(this.$options.components, function (component, name) {
+
+            var options = component.options || {};
+
+            if (options.section) {
+                sections.push(_.extend({name: name, priority: 0}, options.section));
+            }
+
+        });
+
+        this.$set('sections', _.sortBy(sections, 'priority'));
+
+    },
+
+    ready: function () {
+        this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
+    },
 
     computed: {
 
@@ -29,6 +53,12 @@ module.exports = {
                 this.$notify(data, 'danger');
             });
         }
+
+    },
+
+    components: {
+
+        'settings': require('../../components/user-settings.vue')
 
     }
 

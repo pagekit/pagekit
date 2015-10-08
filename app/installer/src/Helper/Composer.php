@@ -2,8 +2,8 @@
 
 namespace Pagekit\Installer\Helper;
 
-use Composer\Factory;
 use Composer\Installer;
+use Composer\IO\ConsoleIO;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
 use Composer\Repository\CompositeRepository;
@@ -35,7 +35,6 @@ class Composer
 
     /**
      * @param $config
-     * @param $api
      * @param null $output
      */
     public function __construct($config, $output = null)
@@ -130,8 +129,9 @@ class Composer
      */
     protected function getComposer()
     {
-        putenv('COMPOSER_HOME=' . $this->paths['path.temp'] . '/composer');
-        putenv('COMPOSER_VENDOR_DIR=' . $this->paths['path.packages']);
+        $config = $this->blueprint;
+        $config['config'] = ['vendor-dir' => $this->paths['path.packages']];
+        $config['require'] = $this->packages;
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));
@@ -139,8 +139,10 @@ class Composer
             @ini_set('memory_limit', '512M');
         }
 
-        $config = $this->blueprint;
-        $config['require'] = $this->packages;
+        Factory::bootstrap([
+            'home' => $this->paths['path.temp'] . '/composer',
+            'cache-dir' => $this->paths['path.temp'] . '/composer/cache'
+        ]);
 
         $composer = Factory::create($this->getIO(), $config);
         $composer->setLocker(new Locker(
@@ -148,7 +150,7 @@ class Composer
             new JsonFile(preg_replace('/\.php$/i', '.lock', $this->file)),
             $composer->getRepositoryManager(),
             $composer->getInstallationManager(),
-            md5(json_encode($config))
+            json_encode($config)
         ));
 
         return $composer;

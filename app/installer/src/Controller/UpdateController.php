@@ -3,6 +3,7 @@
 namespace Pagekit\Installer\Controller;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\TransferException;
 use Pagekit\Application as App;
 use Pagekit\Installer\SelfUpdater;
 

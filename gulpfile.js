@@ -60,7 +60,7 @@ gulp.task('compile', function () {
 /**
  * Watch for changes in files
  */
-gulp.task('watch', function () {
+gulp.task('watch', function (cb) {
     gulp.watch('**/*.less', ['compile']);
 });
 

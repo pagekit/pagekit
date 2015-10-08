@@ -18,7 +18,7 @@ return [
             'wrapperClass' => 'Pagekit\Database\Connection'
         ];
 
-        $app['dbs'] = function ($app) use ($default) {
+        $app['dbs'] = function () use ($default) {
 
             $dbs = [];
 
@@ -50,7 +50,7 @@ return [
             return new PrefixEventDispatcher('model.', $app['events']);
         };
 
-        $app['db.debug_stack'] = function ($app) {
+        $app['db.debug_stack'] = function () {
             return new DebugStack();
         };
 
@@ -80,7 +80,10 @@ return [
                 'engine'   => 'InnoDB',
                 'charset'  => 'utf8',
                 'collate'  => 'utf8_unicode_ci',
-                'prefix'   => ''
+                'prefix'   => '',
+                'driverOptions' => [
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                ]
 
             ]
 

@@ -23,12 +23,12 @@ class DatabaseSessionHandler implements \SessionHandlerInterface
      * Constructor.
      *
      * @param Connection $connection
-     * @param string     $table
+     * @param string $table
      */
     public function __construct(Connection $connection, $table = 'sessions')
     {
         $this->connection = $connection;
-        $this->table      = $table;
+        $this->table = $table;
     }
 
     /**
@@ -141,7 +141,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface
 
         if ($platform instanceof MySqlPlatform) {
             return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
-                . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
+            . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
         } elseif ($platform instanceof SqlitePlatform) {
             return  "INSERT OR REPLACE INTO {$this->table} (id, data, time) VALUES (:id, :data, :time)";
         }

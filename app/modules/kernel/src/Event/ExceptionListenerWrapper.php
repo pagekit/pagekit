@@ -2,7 +2,7 @@
 
 namespace Pagekit\Kernel\Event;
 
-use Pagekit\Exception\HttpException;
+use Pagekit\Kernel\Exception\HttpException;
 use Symfony\Component\HttpFoundation\Response;
 
 class ExceptionListenerWrapper
