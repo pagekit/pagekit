@@ -4,7 +4,7 @@ return [
 
     'application' => [
 
-        'version' => '0.9.2'
+        'version' => '0.9.3'
 
     ],
 
