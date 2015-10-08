@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Freezing browser at marketplace
+
 ## 0.9.2 (October 8, 2015)
 
 ### Added
