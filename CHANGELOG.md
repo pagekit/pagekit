@@ -47,6 +47,7 @@
 ### Added
 - Site tree
 - New default theme
+- New admin panel
 - Data-reactive components with Vue.js
 - Package management using Composer
 
