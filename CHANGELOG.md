@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.9.2 (October 8, 2015)
 
 ### Added
 - Https for Pagekit API (#415)
