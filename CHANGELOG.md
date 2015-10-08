@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.3 (October 8, 2015)
+
+### Fixed
+- Freezing browser in marketplace
+
 ## 0.9.2 (October 8, 2015)
 
 ### Added
@@ -47,6 +52,7 @@
 ### Added
 - Site tree
 - New default theme
+- New admin panel
 - Data-reactive components with Vue.js
 - Package management using Composer
 

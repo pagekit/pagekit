@@ -147,7 +147,7 @@
                                 <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-validate="required">
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site name cannot be blank.' | trans }}</p>
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
 

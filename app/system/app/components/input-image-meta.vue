@@ -21,7 +21,7 @@
 
     </div>
 
-    <v-modal v-ref="modal" closed="{{ close }}">
+    <v-modal v-ref="modal">
         <form class="uk-form uk-form-stacked" v-on="submit: update">
 
             <div class="uk-modal-header">
