@@ -4,7 +4,6 @@ namespace Pagekit\Cookie\Tests;
 
 use Pagekit\Cookie\CookieJar;
 use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Request;
 
 class CookieJarTest extends \PHPUnit_Framework_TestCase
 {
