@@ -30,7 +30,7 @@ class CookieJarTest extends \PHPUnit_Framework_TestCase
 	public function testHasGet() {
 		$this->cookieJar->set('testCookie', 'testValue');
 		$this->assertTrue($this->cookieJar->has('testCookie'));
-		$this->assertEquals('testValue', $this->cookieJar->get('testCookie'));
+		$this->assertEquals('testValue', $this->cookieJar->get('testCookie')->getValue());
 	}
 
 	public function testRemove() {
