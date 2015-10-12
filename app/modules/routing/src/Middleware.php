@@ -34,7 +34,7 @@ class Middleware
     }
 
     /**
-     * Sets a callback to act before
+     * Sets a callback to act before a route is executed.
      *
      * @param string   $name
      * @param callable $callback
@@ -46,6 +46,8 @@ class Middleware
     }
 
     /**
+     * Sets a callback to act after a route is executed.
+     *
      * @param string   $name
      * @param callable $callback
      * @param int      $priority
