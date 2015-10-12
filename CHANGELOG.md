@@ -4,6 +4,7 @@
 
 ### Fixed
 - Date conversion to ISO8601
+- Feed charset and feed title escaping
 
 ## 0.9.3 (October 8, 2015)
 
