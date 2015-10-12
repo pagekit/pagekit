@@ -20,10 +20,6 @@ return [
                 $app['locator']->add("views:{$module['name']}", "{$module['path']}/views");
             }
 
-            if ($module['type'] == 'theme') {
-                $module['data'] = $app->config('theme')->get($module['name'], []);
-            }
-
             return $module;
         });
 
