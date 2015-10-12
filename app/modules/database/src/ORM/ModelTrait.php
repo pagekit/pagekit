@@ -137,7 +137,7 @@ trait ModelTrait
                     $value = $value ?: new \stdClass();
                     break;
                 case 'datetime':
-                    $value = $value ? $value->format(\DateTime::ISO8601) : null;
+                    $value = $value ? $value->format(\DateTime::ATOM) : null;
                     break;
             }
 

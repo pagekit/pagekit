@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Date conversion to ISO8601
+
 ## 0.9.3 (October 8, 2015)
 
 ### Fixed
