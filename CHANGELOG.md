@@ -12,6 +12,7 @@
 ### Fixed
 - Date conversion to ISO8601
 - Feed charset and feed title escaping
+- Openweathermap.org requires Api key now
 
 ## 0.9.3 (October 8, 2015)
 
