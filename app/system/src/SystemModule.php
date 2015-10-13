@@ -22,7 +22,36 @@ class SystemModule extends Module
 
         $app['db.em']; // -TODO- fix me
 
+        $app->extend('view', function ($view) use ($app) {
+
+            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
+
+            $view->map('layout', $theme->get('layout', 'views:template.php'));
+
+            return $view->addGlobal('theme', $app['theme']);
+        });
+
         $theme = $this->config('site.theme');
+
+        $app['module']->addLoader(function ($module) use ($app, $theme) {
+
+            if (in_array($module['name'], $this->config['extensions'])) {
+
+                $module['type'] = 'extension';
+
+                $app['locator']->add("{$module['name']}:", $module['path']);
+                $app['locator']->add("views:{$module['name']}", "{$module['path']}/views");
+
+            } else if ($module['name'] == $theme) {
+
+                $module['type'] = 'theme';
+
+                $app['locator']->add("theme:", $module['path']);
+                $app['locator']->add("views:", "{$module['path']}/views");
+            }
+
+            return $module;
+        });
 
         foreach (array_merge($this->config['extensions'], (array) $theme) as $module) {
             try {
@@ -34,21 +63,15 @@ class SystemModule extends Module
 
         if (!$app['theme'] = $app->module($theme)) {
             $app['theme'] = new Module([
-                'name' => 'default-theme',
+                'name' => 'theme-default',
+                'type' => 'theme',
                 'path' => '',
                 'config' => [],
                 'layout' => 'views:system/blank.php'
             ]);
         }
 
-        $app->extend('view', function ($view) use ($app) {
 
-            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
-
-            $view->map('layout', $theme->get('layout', 'views:template.php'));
-
-            return $view->addGlobal('theme', $app['theme']);
-        });
     }
 
     /**

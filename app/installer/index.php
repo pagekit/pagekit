@@ -13,16 +13,6 @@ return [
             return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
         };
 
-        $app['module']->addLoader(function ($module) use ($app) {
-
-            if ($module['type'] == 'extension') {
-                $app['locator']->add("{$module['name']}:", $module['path']);
-                $app['locator']->add("views:{$module['name']}", "{$module['path']}/views");
-            }
-
-            return $module;
-        });
-
         if ($this->config['enabled']) {
 
             $app['routes']->add([

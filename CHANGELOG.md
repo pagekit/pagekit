@@ -2,6 +2,12 @@
 
 ## WIP
 
+### Added
+- Resource paths for themes are added by default
+
+### Changed
+- Made type in module definition for extensions/themes obsolete
+
 ### Fixed
 - Date conversion to ISO8601
 - Feed charset and feed title escaping
