@@ -16,8 +16,13 @@ use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\Loader\FilesystemLoader;
 use Pagekit\View\PhpEngine;
+use Pagekit\View\TwigCache;
+use Pagekit\View\TwigEngine;
+use Pagekit\View\TwigLoader;
 use Pagekit\View\View;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Templating\Loader\FilesystemLoader as SymfonyFilesystemLoader;
+use Symfony\Component\Templating\TemplateNameParser;
 
 return [
 
@@ -28,9 +33,19 @@ return [
         $app['view'] = function ($app) {
 
             $view = new View(new PrefixEventDispatcher('view.', $app['events']));
-            $view->addEngine(new PhpEngine(null, isset($app['locator']) ? new FilesystemLoader($app['locator']) : null));
+
+            $loader = isset($app['locator']) ? new FilesystemLoader($app['locator']) : new SymfonyFilesystemLoader([]);
+
+            $view->addEngine(new PhpEngine(null, $loader));
+
+            $view->addEngine(new TwigEngine(new Twig_Environment(new TwigLoader($loader), [
+                'cache' => new TwigCache($app['path.cache']),
+                'auto_reload' => true
+            ]), new TemplateNameParser()));
+
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
+
             $view->addHelpers([
                 new DataHelper(),
                 new DeferredHelper($app['events']),

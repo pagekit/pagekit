@@ -83,5 +83,5 @@ interface AssetInterface
      * @param  array $filters
      * @return string
      */
-    public function dump(array $filters = array());
+    public function dump(array $filters = []);
 }

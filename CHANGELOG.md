@@ -3,6 +3,7 @@
 ## WIP
 
 ### Added
+- Twig support
 - Resource paths for themes are added by default
 
 ### Changed

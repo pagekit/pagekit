@@ -7,7 +7,7 @@ class StringAsset extends Asset
     /**
      * {@inheritdoc}
      */
-    public function __construct($name, $source, array $dependencies = array(), array $options = array())
+    public function __construct($name, $source, array $dependencies = [], array $options = [])
     {
         parent::__construct($name, null, $dependencies, $options);
 
