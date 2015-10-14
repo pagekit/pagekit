@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "composer/composer": "1.0.x-dev",
+        "composer/composer": "dev-master#7a9eb02190d334513e99a479510f87eed18cf958",
         "doctrine/annotations": "~1.2.3",
         "doctrine/dbal": "~2.5.1",
         "guzzlehttp/guzzle": "~5.3.0",
@@ -32,7 +32,8 @@
         "symfony/stopwatch": "~2.7.3",
         "symfony/templating": "~2.7.3",
         "symfony/translation": "~2.7.3",
-        "symfony/var-dumper": "~2.7.3"
+        "symfony/var-dumper": "~2.7.3",
+        "twig/twig": "^1.22"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.7.3"

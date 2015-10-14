@@ -16,6 +16,15 @@ return [
             return $view;
         });
 
+        $app->extend('twig', function ($twig) use ($app) {
+
+            $twig->addFilter(new Twig_SimpleFilter('trans', '__'));
+            $twig->addFilter(new Twig_SimpleFilter('transChoice', '_c'));
+
+            return $twig;
+
+        });
+
         $app->extend('assets', function ($assets) use ($app) {
 
             $assets->register('file', 'Pagekit\View\Asset\FileLocatorAsset');

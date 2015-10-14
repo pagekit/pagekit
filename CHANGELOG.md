@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.9.4 (October 14, 2015)
+
+### Added
+- Twig support
+- Resource paths for themes are added by default
+
+### Changed
+- Made type in module definition for extensions/themes obsolete
+
+### Fixed
+- Date conversion to ISO8601
+- Feed charset and feed title escaping
+- Openweathermap.org requires Api key now
+
 ## 0.9.3 (October 8, 2015)
 
 ### Fixed

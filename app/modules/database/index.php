@@ -82,7 +82,7 @@ return [
                 'collate'  => 'utf8_unicode_ci',
                 'prefix'   => '',
                 'driverOptions' => [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'
+                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8 COLLATE utf8_unicode_ci'
                 ]
 
             ]

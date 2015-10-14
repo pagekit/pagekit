@@ -84,9 +84,9 @@ class ExceptionListener implements EventSubscriberInterface
     {
         if ($this->logger !== null) {
             if (!$exception instanceof HttpException || $exception->getCode() >= 500) {
-                $this->logger->critical($message, array('exception' => $exception));
+                $this->logger->critical($message, ['exception' => $exception]);
             } else {
-                $this->logger->error($message, array('exception' => $exception));
+                $this->logger->error($message, ['exception' => $exception]);
             }
         }
     }

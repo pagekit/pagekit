@@ -190,7 +190,7 @@ abstract class Feed implements FeedInterface
      */
     public function output()
     {
-        header("Content-Type: ".$this->getMimeType());
+        header("Content-Type: ".$this->getMimeType()."; charset=".$this->encoding);
         echo $this->generate();
     }
 
@@ -232,7 +232,8 @@ abstract class Feed implements FeedInterface
             $item = $doc->createElement($name);
             $item->appendChild($doc->createCDATASection($value));
         } else {
-            $item = $doc->createElement($name, $value);
+            $item = $doc->createElement($name);
+            $item->appendChild($doc->createTextNode($value));
         }
 
         return $this->buildAttributes($item, (array) $attributes);

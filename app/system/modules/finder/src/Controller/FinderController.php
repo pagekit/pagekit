@@ -47,7 +47,7 @@ class FinderController
             if (!$file->isDir()) {
                 $info = array_merge($info, [
                     'size'         => $this->formatFileSize($file->getSize()),
-                    'lastmodified' => date(\DateTime::ISO8601, $file->getMTime())
+                    'lastmodified' => date(\DateTime::ATOM, $file->getMTime())
                 ]);
             }
 
