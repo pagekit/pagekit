@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View;
+namespace Pagekit\Twig;
 
 use Symfony\Component\Templating\EngineInterface;
 use Symfony\Component\Templating\StreamingEngineInterface;

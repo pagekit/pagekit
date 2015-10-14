@@ -1,6 +1,6 @@
 <?php
 
-namespace Pagekit\View;
+namespace Pagekit\Twig;
 
 use Pagekit\View\Loader\FilesystemLoader;
 use Symfony\Component\Templating\TemplateNameParser;

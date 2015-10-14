@@ -1,6 +1,7 @@
 <?php
 
 use Pagekit\Event\PrefixEventDispatcher;
+use Pagekit\Twig\TwigEngine;
 use Pagekit\View\Asset\AssetFactory;
 use Pagekit\View\Asset\AssetManager;
 use Pagekit\View\Helper\DataHelper;
@@ -16,17 +17,21 @@ use Pagekit\View\Helper\TokenHelper;
 use Pagekit\View\Helper\UrlHelper;
 use Pagekit\View\Loader\FilesystemLoader;
 use Pagekit\View\PhpEngine;
-use Pagekit\View\TwigCache;
-use Pagekit\View\TwigEngine;
-use Pagekit\View\TwigLoader;
 use Pagekit\View\View;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Templating\Loader\FilesystemLoader as SymfonyFilesystemLoader;
 use Symfony\Component\Templating\TemplateNameParser;
 
 return [
 
     'name' => 'view',
+
+    'include' => 'modules/*/index.php',
+
+    'require' => [
+
+        'view/twig'
+
+    ],
 
     'main' => function ($app) {
 
@@ -34,14 +39,11 @@ return [
 
             $view = new View(new PrefixEventDispatcher('view.', $app['events']));
 
-            $loader = isset($app['locator']) ? new FilesystemLoader($app['locator']) : new SymfonyFilesystemLoader([]);
+            $view->addEngine(new PhpEngine(null, isset($app['locator']) ? new FilesystemLoader($app['locator']) : null));
 
-            $view->addEngine(new PhpEngine(null, $loader));
-
-            $view->addEngine(new TwigEngine(new Twig_Environment(new TwigLoader($loader), [
-                'cache' => new TwigCache($app['path.cache']),
-                'auto_reload' => true
-            ]), new TemplateNameParser()));
+            if (isset($app['twig'])) {
+                $view->addEngine(new TwigEngine($app['twig'], new TemplateNameParser()));
+            }
 
             $view->addGlobal('app', $app);
             $view->addGlobal('view', $view);
