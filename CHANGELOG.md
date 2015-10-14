@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.9.4 (October 14, 2015)
 
 ### Added
 - Twig support
