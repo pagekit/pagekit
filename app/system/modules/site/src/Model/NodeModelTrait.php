@@ -99,7 +99,7 @@ trait NodeModelTrait
 
         // Update own path
         $path = '/'.$node->slug;
-        if ($node->parent_id && $parent = Node::find($node->parent_id) and $parent->menu == $node->menu) {
+        if ($node->parent_id && $parent = Node::find($node->parent_id) && $parent->menu == $node->menu) {
             $path = $parent->path.$path;
         } else {
             // set Parent to 0, if old parent is not found
