@@ -3,7 +3,7 @@
   "dependencies": {
     "lodash": "~3.10.1",
     "uikit": "#master",
-    "vue": "~0.12.15",
+    "vue": "1.0.0-migration",
     "vue-resource": "~0.1.16"
   },
   "devDependencies": {

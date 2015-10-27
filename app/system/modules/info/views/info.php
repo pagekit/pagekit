@@ -112,10 +112,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-repeat="info.directories">
-                                <td>{{ $key }}</td>
-                                <td class="uk-text-success" v-show="$value">{{ 'Writable' | trans }}</span></td>
-                                <td class="uk-text-danger" v-show="!$value">{{ 'Unwritable' | trans }}</span></td>
+                            <tr v-for="(dir, writable) in info.directories">
+                                <td>{{ dir }}</td>
+                                <td class="uk-text-success" v-if="writable">{{ 'Writable' | trans }}</span></td>
+                                <td class="uk-text-danger" v-else>{{ 'Unwritable' | trans }}</span></td>
                             </tr>
                         </tbody>
                     </table>
