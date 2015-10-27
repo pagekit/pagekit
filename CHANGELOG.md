@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Added
+- Widget copy API function
+
 ### Changed
 - Random string generator uses low strength now (#478)
 

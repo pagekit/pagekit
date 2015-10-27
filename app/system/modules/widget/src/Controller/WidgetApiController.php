@@ -78,6 +78,26 @@ class WidgetApiController
     }
 
     /**
+     * @Route(methods="POST")
+     * @Request({"ids": "int[]"}, csrf=true)
+     */
+    public function copyAction($ids = [])
+    {
+        foreach ($ids as $id) {
+            if ($widget = Widget::find((int) $id)) {
+                $copy = clone $widget;
+                $copy->id = null;
+                $copy->status = 0;
+                $copy->title = $widget->title.' - '.__('Copy');
+                $copy->position = $widget->position;
+                $copy->save();
+            }
+        }
+
+        return ['message' => 'success', 'positions' => array_values(App::position()->all())];
+    }
+
+    /**
      * @Route("/bulk", methods="POST")
      * @Request({"widgets": "array"}, csrf=true)
      */
