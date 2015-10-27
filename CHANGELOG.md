@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Installer error messages use correct locale now
+
 ## 0.9.4 (October 14, 2015)
 
 ### Added
