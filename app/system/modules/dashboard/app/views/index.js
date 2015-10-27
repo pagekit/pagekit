@@ -27,14 +27,7 @@ window.Dashboard = module.exports = {
 
         this.$set('editing', {});
 
-        this.$http.get(this.api + '/api/update', function (data) {
-
-            var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
-
-            if (channel) {
-                this.$set('update', channel);
-            }
-        });
+        this.checkVersion();
     },
 
     ready: function () {
@@ -145,6 +138,24 @@ window.Dashboard = module.exports = {
             });
 
             return types;
+        },
+
+        checkVersion: function() {
+
+            if (this.$cache.get('pagekit.update')) {
+                this.$set('update', this.$cache.get('pagekit.update'));
+            } else {
+                this.$http.get(this.api + '/api/update', function (data) {
+
+                    var update = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+
+                    if (update) {
+                        this.$cache.set('pagekit.update', update, 1440);
+                        this.$set('update', update);
+                    }
+                });
+            }
+
         }
 
     },

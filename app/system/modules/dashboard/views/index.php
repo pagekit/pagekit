@@ -2,7 +2,7 @@
 
 <div id="dashboard">
 
-    <div class="uk-alert uk-alert-warning" v-show="hasUpdate"><a href="admin/system/update">{{ 'Please update Pagekit to version %version%!' | trans update }}</a></div>
+    <div class="uk-alert uk-alert-info" v-show="hasUpdate"><a href="admin/system/update">{{ 'Pagekit %version% is available! Please update now.' | trans update }}</a></div>
 
     <div class="uk-margin uk-flex uk-flex-right" data-uk-margin>
         <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
