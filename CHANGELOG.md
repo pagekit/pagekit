@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Changed
+- Random string generator uses low strength now (#478)
+
 ### Fixed
 - Installer error messages use correct locale now
 
