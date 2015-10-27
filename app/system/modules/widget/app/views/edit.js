@@ -35,7 +35,7 @@ module.exports = {
 
     ready: function () {
 
-        UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        UIkit.tab(this.$els.tab, {connect: this.$els.content});
         // this.$set('widget.data', _.defaults({}, this.widget.data, this.type.defaults));
 
         // set position from get param

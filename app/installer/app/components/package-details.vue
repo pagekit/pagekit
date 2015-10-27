@@ -90,7 +90,7 @@
                 }
 
                 if (_.isArray(this.package.authors)) {
-                    this.package.$add('author', this.package.authors[0]);
+                    this.package.$set('author', this.package.authors[0]);
                 }
 
                 this.$set('messages', {});

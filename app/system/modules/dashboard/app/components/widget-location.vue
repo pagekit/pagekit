@@ -20,8 +20,8 @@
             <label for="form-city" class="uk-form-label">{{ 'Location' | trans }}</label>
 
             <div class="uk-form-controls">
-                <div v-el="autocomplete" class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" placeholder="{{ location }}" v-el="location" v-on="blur: clear" autocomplete="off">
+                <div v-el:autocomplete class="uk-autocomplete uk-width-1-1">
+                    <input id="form-city" class="uk-width-1-1" type="text" placeholder="{{ location }}" v-el:location v-on="blur: clear" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -98,7 +98,7 @@
             var vm = this, list;
 
             UIkit
-                .autocomplete(this.$$.autocomplete, {
+                .autocomplete(this.$els.autocomplete, {
 
                     source: function (release) {
 
@@ -130,7 +130,7 @@
                     var location = _.find(list, 'id', data.id);
 
                     Vue.nextTick(function () {
-                        vm.$$.location.blur();
+                        vm.$els.location.blur();
                     });
 
                     if (!location) {
@@ -290,7 +290,7 @@
             },
 
             clear: function () {
-                this.$$.location.value = '';
+                this.$els.location.value = '';
             }
 
         },

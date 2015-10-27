@@ -14,7 +14,7 @@
 
         </div>
 
-        <div class="pf-profiler-panel" v-el="panel" v-style="display: panel ? 'block' : 'none', height: height"></div>
+        <div class="pf-profiler-panel" v-el:panel :style="{display: panel ? 'block' : 'none', height: height}"></div>
 
     </div>
 
@@ -49,7 +49,7 @@
 
                 $.each(this.$options.components, function (name, component) {
                     if (data[name]) {
-                        sections.$add(name, $.extend({name: name}, component.options.section));
+                        sections.$set(name, $.extend({name: name}, component.options.section));
                     }
                 });
 
@@ -82,7 +82,7 @@
                     }
 
                     panel = section.vm.$addChild({el: el, template: section.panel, inherit: true});
-                    panel.$appendTo(this.$$.panel);
+                    panel.$appendTo(this.$els.panel);
 
                     this.$set('panel', panel);
                 }

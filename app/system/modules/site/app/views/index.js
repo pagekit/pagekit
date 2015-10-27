@@ -212,7 +212,7 @@ module.exports = {
             var vm = this;
 
             // TODO this is still buggy
-            UIkit.nestable(this.$$.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
+            UIkit.nestable(this.$els.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
 
                 if (type && type !== 'removed') {
 

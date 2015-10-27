@@ -24,9 +24,9 @@
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul id="js-appnav" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                                <li v-repeat="item: nav" data-id="{{ item.id }}">
-                                    <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
-                                        <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
+                                <li v-for="item in nav" data-id="{{ item.id }}">
+                                    <a class="uk-panel tm-panel-icon" :href="item.url">
+                                        <img width="50" height="50" alt="{{ item.label | trans }}" :src="item.icon">
                                         <p>{{ item.label | trans }}</p>
                                     </a>
                                 </li>
@@ -48,8 +48,8 @@
 
                 <nav class="uk-navbar tm-navbar uk-hidden-small" v-show="subnav">
                     <ul class="uk-navbar-nav">
-                        <li v-class="uk-active: item.active" v-repeat="item: subnav">
-                            <a v-attr="href: item.url" v-text="item.label | trans"></a>
+                        <li :class="{ 'uk-active': item.active }" v-for="item in subnav">
+                            <a :href="item.url" v-text="item.label | trans"></a>
                         </li>
                     </ul>
                 </nav>
@@ -78,14 +78,14 @@
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header" v-show="subnav">{{ item.label | trans }}</li>
-                    <li v-class="uk-active: item.active" v-repeat="item: subnav">
-                        <a v-attr="href: item.url">{{ item.label | trans }}</a>
+                    <li :class="{ 'uk-active': item.active }" v-for="item in subnav">
+                        <a :href="item.url">{{ item.label | trans }}</a>
                     </li>
                     <li class="uk-nav-divider" v-show="subnav"></li>
                     <li class="uk-nav-header">{{ 'Extensions' | trans }}</li>
-                    <li v-class="uk-active: item.active" v-repeat="item: nav">
-                        <a v-attr="href: item.url">
-                            <img class="uk-margin-small-right" width="34" height="34" alt="{{ item.label | trans }}" v-attr="src: item.icon"> {{ item.label | trans }}
+                    <li :class="{ 'uk-active': item.active }" v-for="item in nav">
+                        <a :href="item.url">
+                            <img class="uk-margin-small-right" width="34" height="34" alt="{{ item.label | trans }}" :src="item.icon"> {{ item.label | trans }}
                         </a>
                     </li>
                 </ul>

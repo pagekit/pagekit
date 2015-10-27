@@ -6,7 +6,7 @@ window.Site = module.exports = {
 
     ready: function() {
 
-        UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        UIkit.tab(this.$els.tab, {connect: this.$els.content});
 
     },
 

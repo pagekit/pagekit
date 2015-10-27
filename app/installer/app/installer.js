@@ -23,7 +23,7 @@ var installer = {
 
             if (UIkit.support.animation) {
 
-                var vm = this, current = this.$$[this.step], next = this.$$[step];
+                var vm = this, current = this.$els[this.step], next = this.$els[step];
 
                 this.$compile(next);
 

@@ -111,7 +111,7 @@ module.exports = function (_) {
                 this.name = _.camelize(name);
                 this.el._validator = this;
 
-                this.vm.$add(this.name);
+                this.vm.$set(this.name);
                 this.vm.$on('hook:compiled', function () {
                     _.validator.validate(self.el);
                 });

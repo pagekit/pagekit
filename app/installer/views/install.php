@@ -13,7 +13,7 @@
         <div id="installer" class="tm-background uk-height-viewport uk-flex uk-flex-center uk-flex-middle" >
             <div class="tm-container">
 
-                <div class="uk-text-center" v-el="start" v-show="step == 'start'">
+                <div class="uk-text-center" v-el:start v-show="step == 'start'">
 
                     <a class="uk-panel" v-on="click: gotoStep('language')">
                         <img src="app/system/assets/images/pagekit-logo-large.svg" alt="Pagekit">
@@ -27,7 +27,7 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el="language" v-show="step == 'language'" >
+                <div class="uk-panel uk-panel-box" v-el:language v-show="step == 'language'" >
                     <div v-pre>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
@@ -55,7 +55,7 @@
 
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el="database" v-show="step == 'database'">
+                <div class="uk-panel uk-panel-box" v-el:database v-show="step == 'database'">
                     <div v-pre>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Connect database' | trans }}</h1>
@@ -136,7 +136,7 @@
                     </div>
                 </div>
 
-                <div class="uk-panel uk-panel-box" v-el="site" v-show="step == 'site'">
+                <div class="uk-panel uk-panel-box" v-el:site v-show="step == 'site'">
                     <div v-pre>
 
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
@@ -192,7 +192,7 @@
                     </div>
                 </div>
 
-                <div v-el="finish" v-show="step == 'finish'">
+                <div v-el:finish v-show="step == 'finish'">
                     <div v-pre>
                         <div class="uk-text-center" v-show="status == 'install'">
                             <svg class="tm-loader" width="150" height="150" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">

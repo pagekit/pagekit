@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <textarea autocomplete="off" v-style="height: height + 'px'" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
+        <textarea autocomplete="off" v-style="height: height + 'px'" v-class="uk-invisible: !show" v-el:editor v-model="value"></textarea>
     </div>
 
 </template>
@@ -21,7 +21,7 @@
                 var attrs = this.$el.attributes;
 
                 for (var i = attrs.length - 1; i >= 0; i--) {
-                    this.$$.editor.setAttribute(attrs[i].name, attrs[i].value);
+                    this.$els.editor.setAttribute(attrs[i].name, attrs[i].value);
                     this.$el.removeAttribute(attrs[i].name);
                 }
 
@@ -30,7 +30,7 @@
             var components = this.$options.components, type = 'editor-'+this.type, self = this;
 
             this
-                .$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea'])
+                .$addChild({ el: this.$els.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea'])
                 .$on('ready', function() {
 
                     _.forIn(self.$options.components, function (component) {

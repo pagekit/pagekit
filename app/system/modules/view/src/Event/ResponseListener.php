@@ -8,6 +8,7 @@ use Pagekit\Event\EventSubscriberInterface;
 class ResponseListener implements EventSubscriberInterface
 {
     const REGEX_URL = '/
+                        \s                              # match a space
                         (?<attr>href|src|poster)=       # match the attribute
                         ([\"\'])                        # start with a single or double quote
                         (?!\/|\#|[a-z0-9\-\.]+\:)       # make sure it is a relative path

@@ -3,10 +3,10 @@
     <a class="uk-button uk-button-primary uk-form-file">
         <span v-show="!progress">{{ 'Upload' | trans }}</span>
         <span v-show="progress"><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
-        <input type="file" name="file" v-el="input">
+        <input type="file" name="file" v-el:input>
     </a>
 
-    <div class="uk-modal" v-el="modal">
+    <div class="uk-modal" v-el:modal>
         <div class="uk-modal-dialog">
 
             <package-details api="{{ api }}" package="{{ package }}"></package-details>
@@ -51,9 +51,9 @@
                     allcomplete: this.onComplete
                 };
 
-            UIkit.uploadSelect(this.$$.input, settings);
+            UIkit.uploadSelect(this.$els.input, settings);
 
-            this.modal = UIkit.modal(this.$$.modal);
+            this.modal = UIkit.modal(this.$els.modal);
         },
 
         methods: {

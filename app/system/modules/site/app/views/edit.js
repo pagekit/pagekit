@@ -35,7 +35,7 @@ window.Site = module.exports = {
 
     ready: function () {
         this.Nodes = this.$resource('api/site/node/:id');
-        this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
     },
 
     computed: {

@@ -25,7 +25,7 @@
 
         <v-pagination page="{{@ page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
 
-        <div class="uk-modal" v-el="modal">
+        <div class="uk-modal" v-el:modal>
             <div class="uk-modal-dialog uk-modal-dialog-large">
 
                 <div class="pk-modal-dialog-badge">
@@ -136,7 +136,7 @@
             details: function (pkg) {
 
                 if (!this.modal) {
-                    this.modal = UIkit.modal(this.$$.modal);
+                    this.modal = UIkit.modal(this.$els.modal);
                 }
 
                 this.$set('pkg', pkg);

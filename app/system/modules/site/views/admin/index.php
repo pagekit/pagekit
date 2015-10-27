@@ -72,7 +72,7 @@
                     <div class="pk-table-width-150">{{ 'URL' | trans }}</div>
                 </div>
 
-                <ul class="uk-nestable uk-margin-remove" v-el="nestable" v-show="tree[0]">
+                <ul class="uk-nestable uk-margin-remove" v-el:nestable v-show="tree[0]">
                     <node v-repeat="node: tree[0]"></node>
                 </ul>
 
