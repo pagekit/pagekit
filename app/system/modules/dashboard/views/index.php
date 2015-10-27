@@ -1,6 +1,6 @@
 <?php $view->script('dashboard', 'system/dashboard:app/bundle/index.js', ['vue', 'uikit-autocomplete']) ?>
 
-<div id="dashboard">
+<div id="dashboard" v-cloak>
 
     <div class="uk-alert uk-alert-info" v-show="hasUpdate"><a href="admin/system/update">{{ 'Pagekit %version% is available! Please update now.' | trans update }}</a></div>
 
