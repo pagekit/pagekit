@@ -14,9 +14,6 @@
             </div>
 
         </div>
-        <div data-uk-margin>
-
-        </div>
     </div>
 
     <marketplace api="{{ api }}" search="{{ search }}" type="{{ type }}" installed="{{ installed }}"></marketplace>
