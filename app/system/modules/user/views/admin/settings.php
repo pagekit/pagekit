@@ -1,6 +1,6 @@
 <?php $view->script('settings', 'system/user:app/bundle/settings.js', 'vue') ?>
 
-<div id="settings" class="uk-form uk-form-horizontal">
+<div id="settings" class="uk-form uk-form-horizontal" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>

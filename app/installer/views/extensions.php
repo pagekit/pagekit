@@ -1,6 +1,6 @@
 <?php $view->script('extensions', 'installer:app/bundle/extensions.js', ['vue', 'uikit-upload']) ?>
 
-<div id="extensions">
+<div id="extensions" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
