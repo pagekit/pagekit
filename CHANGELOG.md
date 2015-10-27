@@ -4,6 +4,7 @@
 
 ### Added
 - Widget copy API function
+- Preliminary update notifications to dashboard
 
 ### Changed
 - Random string generator uses low strength now (#478)
