@@ -11,6 +11,7 @@
 
 ### Fixed
 - Installer error messages use correct locale now
+- Canonical routes are absolute now
 
 ## 0.9.4 (October 14, 2015)
 
