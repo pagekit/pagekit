@@ -1,7 +1,7 @@
 {
   "name": "pagekit",
   "scripts": {
-    "install": "bower install && webpack && gulp"
+    "install": "bower install; webpack; cd app/assets/vue-intl; npm install; cd ./; gulp"
   },
   "devDependencies": {
     "cldr-localenames-modern": "^27.0.3",
