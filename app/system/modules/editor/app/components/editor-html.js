@@ -29,22 +29,18 @@ module.exports = {
                     }
                 });
 
+            this.$watch('value', function (value) {
+                if (value != this.editor.editor.getValue()) {
+                    this.editor.editor.setValue(value);
+                }
+            });
+
+            this.$watch('options.markdown', function (markdown) {
+                this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
+            });
+
             this.$emit('ready');
         });
-
-    },
-
-    watch: {
-
-        value: function (value) {
-            if (this.editor && value != this.editor.editor.getValue()) {
-                this.editor.editor.setValue(value);
-            }
-        },
-
-        'options.markdown': function (markdown) {
-            this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
-        }
 
     }
 
