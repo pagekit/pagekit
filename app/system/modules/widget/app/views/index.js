@@ -113,16 +113,7 @@ module.exports = {
         },
 
         copy: function () {
-
-            var widgets = _.merge([], this.widgets.filter(function (widget) {
-                return -1 !== this.selected.indexOf(widget.id);
-            }, this));
-
-            widgets.forEach(function (widget) {
-                delete widget.id;
-            });
-
-            this.resource.save({id: 'bulk'}, {widgets: widgets}, function (data) {
+            this.resource.save({id: 'copy'}, {ids: this.selected}, function (data) {
                 this.load();
                 this.$set('config.positions', data.positions);
                 this.$set('selected', []);

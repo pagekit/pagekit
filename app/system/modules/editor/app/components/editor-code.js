@@ -38,18 +38,15 @@ module.exports = {
                 $el.trigger('input');
             });
 
+            this.$watch('value', function (value) {
+                if (value != this.editor.getValue()) {
+                    this.editor.setValue(value);
+                }
+            });
+
             this.$emit('ready');
 
         });
-    },
-
-    watch: {
-
-        value: function (value) {
-            if (this.editor && value != this.editor.getValue()) {
-                this.editor.setValue(value);
-            }
-        }
-
     }
+
 };

@@ -1,6 +1,6 @@
 <?php $view->script('marketplace', 'installer:app/bundle/marketplace.js', 'vue') ?>
 
-<div id="marketplace">
+<div id="marketplace" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
@@ -12,9 +12,6 @@
                     <input class="uk-search-field" type="text" v-model="search" debounce="300">
                 </div>
             </div>
-
-        </div>
-        <div data-uk-margin>
 
         </div>
     </div>

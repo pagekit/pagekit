@@ -49,12 +49,9 @@ return [
         'site' => function ($event, $app) {
             $app->on('view.meta', function ($event, $meta) use ($app) {
 
-                $route = $app['url']->get(
-                    $app['request']->attributes->get('_route'),
-                    $app['request']->attributes->get('_route_params', [])
-                );
+                $route = $app['url']->get($app['request']->attributes->get('_route'), $app['request']->attributes->get('_route_params', []), true);
 
-                if ($route != $app['request']->getRequestUri()) {
+                if ($route != $app['request']->getSchemeAndHttpHost().$app['request']->getRequestUri()) {
                     $meta->add('canonical', $route);
                 }
 

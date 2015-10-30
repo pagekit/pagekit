@@ -198,16 +198,16 @@
 
                 var weatherKey = 'weather-' + this.widget.uid;
 
-                if (this.$session[weatherKey]) {
+                if (this.$cache.get(weatherKey)) {
 
-                    this.init(JSON.parse(this.$session[weatherKey]));
+                    this.init(this.$cache.get(weatherKey));
 
                 } else {
 
                     this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric', APPID: apiKey}, function (data) {
 
                         if (data.cod == 200) {
-                            this.$session[weatherKey] = JSON.stringify(data);
+                            this.$cache.set(weatherKey, data, 60);
                             this.init(data)
                         } else {
                             this.$set('status', 'error');
@@ -221,9 +221,9 @@
 
                 var timezoneKey = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
 
-                if (this.$session[timezoneKey]) {
+                if (this.$cache.get(timezoneKey)) {
 
-                    this.$set('timezone', JSON.parse(this.$session[timezoneKey]));
+                    this.$set('timezone', this.$cache.get(timezoneKey));
 
                 } else {
 
@@ -231,7 +231,7 @@
 
                         data.offset = data.rawOffset + data.dstOffset;
 
-                        this.$session[timezoneKey] = JSON.stringify(data);
+                        this.$cache.set(timezoneKey, data, 1440);
                         this.$set('timezone', data);
 
                     }).error(function () {

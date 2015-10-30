@@ -11,19 +11,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-
 class SelfupdateCommand extends Command
 {
-
-    protected $cleanFolder = ['app', 'vendor'];
-
-    protected $ignoreFolder = ['vendor/packages'];
-
     /**
      * {@inheritdoc}
      */
     protected $name = 'self-update';
 
+    protected $client;
 
     /**
      * {@inheritdoc}
@@ -53,10 +48,10 @@ class SelfupdateCommand extends Command
                 $output->writeln('<info>done.</info>');
 
                 $output->writeln('');
-                $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
+                $output->writeln('<comment>Latest Version: '.$versions['latest']['version'].'</comment> ');
                 $output->writeln('');
 
-                if (!$this->confirm('Update to Version ' . $versions['latest']['version'] . '? [y/n]')) {
+                if (!$this->confirm('Update to Version '.$versions['latest']['version'].'? [y/n]')) {
                     return;
                 }
 
@@ -82,7 +77,11 @@ class SelfupdateCommand extends Command
             system(sprintf('php %s migrate', $_SERVER['PHP_SELF']));
 
         } catch (\Exception $e) {
-            unlink($tmpFile);
+
+            if (isset($tmpFile) && file_exists($tmpFile)) {
+                unlink($tmpFile);
+            }
+
             throw $e;
         }
 
@@ -95,7 +94,7 @@ class SelfupdateCommand extends Command
     protected function getVersions()
     {
         try {
-            $res = $this->client->get($this->container->get('system.api') . '/update');
+            $res = $this->client->get($this->container->get('system.api').'/update');
         } catch (\Exception $e) {
             if ($e instanceof TransferException) {
                 throw new \RuntimeException('Could not obtain latest Version.');
@@ -115,6 +114,7 @@ class SelfupdateCommand extends Command
     public function download($url, $shasum, $file)
     {
         try {
+
             if (!$url) {
                 throw new \RuntimeException('Package url is missing.');
             }

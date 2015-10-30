@@ -20,7 +20,7 @@ return [
         };
 
         $app['auth.random'] = function () {
-            return (new Factory)->getMediumStrengthGenerator();
+            return (new Factory)->getLowStrengthGenerator();
         };
 
         $app['auth.handler'] = function ($app) {

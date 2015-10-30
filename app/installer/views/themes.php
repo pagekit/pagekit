@@ -1,6 +1,6 @@
 <?php $view->script('themes', 'installer:app/bundle/themes.js', ['vue', 'uikit-upload', 'editor']) ?>
 
-<div id="themes">
+<div id="themes" v-cloak>
 
     <div class="uk-margin-large uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
