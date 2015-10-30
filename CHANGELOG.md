@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.9.5 (October 30, 2015)
 
 ### Added
 - Widget copy API function
