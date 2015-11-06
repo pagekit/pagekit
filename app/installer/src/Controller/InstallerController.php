@@ -51,7 +51,7 @@ class InstallerController
         return [
             '$view' => [
                 'title' => __('Pagekit Installer'),
-                'name' => 'app/installer/views/install.php',
+                'name' => 'app/installer/views/installer.php',
             ],
             '$installer' => [
                 'locale' => $intl->getLocale(),

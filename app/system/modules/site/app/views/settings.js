@@ -14,7 +14,7 @@ window.Site = module.exports = {
 
         sections: function () {
 
-            var sections = [];
+            var sections = [], hash = window.location.hash.replace('#', '');
 
             _.forIn(this.$options.components, function (component, name) {
 
@@ -22,6 +22,7 @@ window.Site = module.exports = {
 
                 if (section) {
                     section.name = name;
+                    section.active = name == hash;
                     sections.push(section);
                 }
 

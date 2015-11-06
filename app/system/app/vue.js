@@ -69,6 +69,7 @@ function install (Vue) {
     Vue.url.current = Vue.url.parse(window.location.href);
 
     Vue.prototype.$session = window.sessionStorage || {};
+    Vue.prototype.$cache = require('lscache');
 }
 
 if (window.Vue) {

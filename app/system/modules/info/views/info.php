@@ -1,6 +1,6 @@
 <?php $view->script('info', 'app/system/modules/info/app/bundle/info.js', 'vue') ?>
 
-<div id="info" class="uk-grid pk-grid-large" data-uk-grid-margin>
+<div id="info" class="uk-grid pk-grid-large" data-uk-grid-margin v-cloak>
     <div class="pk-width-sidebar">
 
         <div class="uk-panel">

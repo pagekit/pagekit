@@ -34,7 +34,10 @@ class DashboardController
                 'name'  => 'system/dashboard:views/index.php'
             ],
             '$data' => [
-                'widgets' => array_values($this->dashboard->getWidgets())
+                'widgets' => array_values($this->dashboard->getWidgets()),
+                'api' => App::get('system.api'),
+                'version' => App::version(),
+                'channel' => 'stable'
             ]
         ];
     }

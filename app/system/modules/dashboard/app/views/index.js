@@ -1,3 +1,5 @@
+var Version = require('../../../../../installer/app/lib/version');
+
 window.Dashboard = module.exports = {
 
     data: function () {
@@ -24,6 +26,8 @@ window.Dashboard = module.exports = {
         }));
 
         this.$set('editing', {});
+
+        this.checkVersion();
     },
 
     ready: function () {
@@ -90,6 +94,10 @@ window.Dashboard = module.exports = {
             return _.groupBy(this.widgets, function () {
                 return i++ % 3;
             });
+        },
+
+        hasUpdate: function () {
+            return this.update && Version.compare(this.update.version, this.version, '>');
         }
 
     },
@@ -130,6 +138,24 @@ window.Dashboard = module.exports = {
             });
 
             return types;
+        },
+
+        checkVersion: function() {
+
+            if (this.$cache.get('pagekit.update')) {
+                this.$set('update', this.$cache.get('pagekit.update'));
+            } else {
+                this.$http.get(this.api + '/api/update', function (data) {
+
+                    var update = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+
+                    if (update) {
+                        this.$cache.set('pagekit.update', update, 1440);
+                        this.$set('update', update);
+                    }
+                });
+            }
+
         }
 
     },

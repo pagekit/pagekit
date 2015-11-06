@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.9.5 (October 30, 2015)
+
+### Added
+- Widget copy API function
+- Preliminary update notifications to dashboard
+
+### Changed
+- Random string generator uses low strength now (#478)
+
+### Fixed
+- Installer error messages use correct locale now
+- Canonical routes are absolute now
+
 ## 0.9.4 (October 14, 2015)
 
 ### Added

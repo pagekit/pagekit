@@ -21,13 +21,13 @@ return [
                 'controller' => 'Pagekit\Installer\Controller\InstallerController'
             ]);
 
-            $app->on('request', function ($event) use ($app) {
+            $app->on('request', function ($event, $request) use ($app) {
 
+                $locale = $request->get('locale') ?: $app['request']->getPreferredLanguage();
                 $available = $app->module('system/intl')->getAvailableLanguages();
-                $preferred = $app['request']->getPreferredLanguage();
 
-                if (isset($available[$preferred])) {
-                    $app->module('system/intl')->setLocale($preferred);
+                if (isset($available[$locale])) {
+                    $app->module('system/intl')->setLocale($locale);
                 }
 
             });
