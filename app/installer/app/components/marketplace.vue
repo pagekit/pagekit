@@ -3,7 +3,7 @@
     <div data-uk-observe>
 
         <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
-            <div v-repeat="pkg: packages">
+            <div v-for="pkg in packages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
                     <div class="uk-panel-teaser">

@@ -6,9 +6,9 @@
             <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text">
                 <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
-                <ul class="uk-list uk-margin-top-remove" v-repeat="menu: menus" v-show="menu.getNodes().length">
+                <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-show="menu.getNodes().length">
                     <li class="pk-list-header">{{ menu.label }}</li>
-                    <node v-repeat="node: menu.getNodes()"></node>
+                    <node v-for="node in menu.getNodes()"></node>
                 </ul>
             </div>
         </div>
@@ -69,7 +69,7 @@
                                 ' {{ node.title }}' +
                             '</label>' +
                             '<ul class="uk-list" v-if="menu.getNodes(node)">' +
-                                '<node v-repeat="node: menu.getNodes(node)"></node>' +
+                                '<node v-for="node in menu.getNodes(node)"></node>' +
                             '</ul>'+
                         '<li>'
 

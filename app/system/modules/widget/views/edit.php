@@ -18,11 +18,11 @@
     </div>
 
     <ul class="uk-tab" v-el:tab v-show="sections.length > 1">
-        <li v-repeat="section: sections"><a>{{ section.label | trans }}</a></li>
+        <li v-for="section in sections"><a>{{ section.label | trans }}</a></li>
     </ul>
 
     <div class="uk-switcher uk-margin-large-top" v-el:content>
-        <div v-repeat="section: sections">
+        <div v-for="section in sections">
             <component :is="section.name" :widget.sync="widget" :config="config" :form.sync="form"></component>
         </div>
     </div>

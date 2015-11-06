@@ -14,9 +14,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="records">
-                    <td>{{ message }}</td>
-                    <td>{{ level_name }}</td>
+                <tr v-for="record in records">
+                    <td>{{ record.message }}</td>
+                    <td>{{ record.level_name }}</td>
                 </tr>
             </tbody>
         </table>

@@ -21,7 +21,7 @@
                         <a @click="select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li :class="{'uk-active': active(pos)}" v-repeat="pos: config.positions" v-var="pos.widgets: pos.assigned | assigned">
+                    <li :class="{'uk-active': active(pos)}" v-for="pos in config.positions" v-var="pos.widgets: pos.assigned | assigned">
                         <a @click="select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
@@ -49,7 +49,7 @@
                                     <a class="pk-icon-move pk-icon-hover" :title="'Move' | trans" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                     <div class="uk-dropdown uk-dropdown-small">
                                         <ul class="uk-nav uk-nav-dropdown">
-                                            <li v-repeat="config.positions" track-by="name"><a @click="move(name, selected)">{{ label }}</a></li>
+                                            <li v-for="p in config.positions" track-by="p.name"><a @click="move(p.name, selected)">{{ p.label }}</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -72,7 +72,7 @@
                         <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="type: types"><a :href="$url.route('admin/site/widget/edit', {type: type.name, position:(position ? position.name:'')})">{{ type.label || type.name }}</a></li>
+                                <li v-for="type in types"><a :href="$url.route('admin/site/widget/edit', {type: type.name, position:(position ? position.name:'')})">{{ type.label || type.name }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
 
                 </template>
 
-                <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
+                <div class="uk-margin-bottom" v-for="pos in positions" track-by="name" v-show="pos | show">
 
                     <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': (!pos.widgets.length || (position && emptyafterfilter(pos.widgets)))}" v-show="position || (!position && !emptyafterfilter(pos.widgets))">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
@@ -113,7 +113,7 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" data-:position="pos.name" inline-template>
-                        <li :class="{'uk-active': isSelected(widget.id)}" v-repeat="widget: pos.widgets" v-var="type: widget | type" data-:id="widget.id" v-show="infilter(widget)">
+                        <li :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" v-var="type: widget | type" data-:id="widget.id" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id"></div>

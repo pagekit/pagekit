@@ -47,9 +47,9 @@
         </div>
 
         <ul class="uk-breadcrumb uk-margin-large-top">
-            <li v-repeat="breadcrumbs" :class="{'uk-active': current}">
-                <span v-show="current">{{ title }}</span>
-                <a v-else @click.prevent="setPath(path)">{{ title }}</a>
+            <li v-for="bc in breadcrumbs" :class="{'uk-active': bc.current}">
+                <span v-show="bc.current">{{ bc.title }}</span>
+                <a v-else @click.prevent="setPath(bc.path)">{{ bc.title }}</a>
             </li>
         </ul>
 

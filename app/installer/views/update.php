@@ -2,7 +2,7 @@
 
 <div id="update" v-cloak>
 
-    <p class="uk-alert uk-alert-warning" v-repeat="errors">{{ $value }}</p>
+    <p class="uk-alert uk-alert-warning" v-for="error in errors">{{ error }}</p>
 
     <div v-show="update && view == 'index'">
 

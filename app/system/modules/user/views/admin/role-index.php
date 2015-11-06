@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
-                    <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" vref:ordered :class="{'uk-active': current.id === role.id}">
+                    <li class="uk-visible-hover" v-for="role in roles | orderBy 'priority'" vref:ordered :class="{'uk-active': current.id === role.id}">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
                             <li><a class="pk-icon-edit pk-icon-hover" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
                             <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
@@ -28,7 +28,7 @@
 
             <h2>{{ current.name }}</h2>
 
-            <div class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
+            <div class="uk-overflow-container uk-margin-large" v-for="group in permissions">
                 <table class="uk-table uk-table-hover uk-table-middle">
                     <thead>
                         <tr>
@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-repeat="permission: group" :class="{'uk-visible-hover-inline': permission.trusted}">
+                        <tr v-for="permission in group" :class="{'uk-visible-hover-inline': permission.trusted}">
                             <td class="pk-table-text-break">
                                 <span :title="permission.description | trans" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                             </td>

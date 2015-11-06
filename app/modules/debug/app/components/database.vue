@@ -33,13 +33,13 @@
             <em>No queries.</em>
         </p>
 
-        <div v-repeat="statements">
+        <div v-for="statement in statements">
 
-            <pre><code>{{ sql }}</code></pre>
+            <pre><code>{{ statement.sql }}</code></pre>
 
             <p class="pf-submenu">
-                <span>{{ duration_str }}</span>
-                <span>{{ params | json }}</span>
+                <span>{{ statement.duration_str }}</span>
+                <span>{{ statement.params | json }}</span>
             </p>
 
         </div>

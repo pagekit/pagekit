@@ -15,10 +15,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="routes">
-                    <td>{{ name }}</td>
-                    <td>{{ pattern }} {{ methods | str }}</td>
-                    <td><abbr :title="controller">{{ controller | short }}</abbr></td>
+                <tr v-for="route in routes">
+                    <td>{{ route.name }}</td>
+                    <td>{{ route.pattern }} {{ route.methods | str }}</td>
+                    <td><abbr :title="route.controller">{{ route.controller | short }}</abbr></td>
                 </tr>
             </tbody>
         </table>

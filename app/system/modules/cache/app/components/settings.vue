@@ -17,7 +17,7 @@
         <span class="uk-form-label">{{ 'Cache' | trans }}</span>
 
         <div class="uk-form-controls uk-form-controls-text">
-            <p class="uk-form-controls-condensed" v-repeat="cache: caches">
+            <p class="uk-form-controls-condensed" v-for="cache in caches">
                 <label><input type="radio" :value="$key" v-model="config.caches.cache.storage" :disabled="!cache.supported"> {{ cache.name }}</label>
             </p>
         </div>

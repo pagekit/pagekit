@@ -5,8 +5,8 @@
         <div class="pf-navbar">
 
             <ul class="pf-navbar-nav">
-                <li v-repeat="sections | orderBy 'priority'" @click="open(name)">
-                    <component :is="name" :data="data[name]"></component>
+                <li v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
+                    <component :is="section.name" :data="data[section.name]"></component>
                 </li>
             </ul>
 

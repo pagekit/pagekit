@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="uk-visible-hover-inline" v-repeat="pkg: packages | filterBy search in 'title'">
+                <tr class="uk-visible-hover-inline" v-for="pkg in packages | filterBy search in 'title'">
                     <td class="pk-table-width-minimum">
                         <div class="uk-position-relative">
                             <div class="uk-cover-background uk-position-cover" :style="{'background-image': 'url('+icon(pkg)+')'}"></div>

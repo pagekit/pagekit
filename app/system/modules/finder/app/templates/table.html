@@ -7,25 +7,25 @@
     </thead>
     <tbody>
 
-        <tr v-repeat="folders | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" :value="name" v-checkbox="selected"></td>
+        <tr v-for="folder in folders | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect">
+            <td><input type="checkbox" name="name" :value="folder.name" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
             </td>
-            <td class="pk-table-text-break pk-table-min-width-200"><a @click="setPath(path)">{{ name }}</a></td>
+            <td class="pk-table-text-break pk-table-min-width-200"><a @click="setPath(folder.path)">{{ folder.name }}</a></td>
             <td></td>
             <td></td>
         </tr>
 
-        <tr v-repeat="files | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" :value="name" v-checkbox="selected"></td>
+        <tr v-for="file in files | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect">
+            <td><input type="checkbox" name="name" :value="file.name" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
-                <i v-if="isImage(url)" class="pk-icon-contain" v-lazy-background="$url(url)"></i>
+                <i v-if="isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
                 <i v-else class="pk-icon-file-circle"></i>
             </td>
-            <td class="pk-table-text-break pk-table-min-width-200">{{ name }}</td>
-            <td class="uk-text-right uk-text-nowrap">{{ size }}</td>
-            <td class="uk-text-nowrap">{{ lastmodified | relativeDate }}</td>
+            <td class="pk-table-text-break pk-table-min-width-200">{{ file.name }}</td>
+            <td class="uk-text-right uk-text-nowrap">{{ file.size }}</td>
+            <td class="uk-text-nowrap">{{ file.lastmodified | relativeDate }}</td>
         </tr>
 
     </tbody>

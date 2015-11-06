@@ -55,7 +55,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="check-item" v-repeat="user: users" :class="{'uk-active': active(user)}">
+                <tr class="check-item" v-for="user in users" :class="{'uk-active': active(user)}">
                     <td><input type="checkbox" name="id" :value="user.id"></td>
                     <td class="pk-table-width-minimum">
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="user.name" v-gravatar="user.email">

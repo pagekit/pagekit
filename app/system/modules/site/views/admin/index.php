@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side">
-                    <li class="uk-visible-hover" :class="{'uk-active': isActive(menu), 'uk-nav-divider': menu.divider}" v-repeat="menu: menus | divided">
+                    <li class="uk-visible-hover" :class="{'uk-active': isActive(menu), 'uk-nav-divider': menu.divider}" v-for="menu in menus | divided">
                         <a @click="selectMenu(menu, false)" v-if="!menu.divider">{{ menu.label }}</a>
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed && !menu.divider">
                             <li><a class="pk-icon-edit pk-icon-hover" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click="editMenu(menu)"></a></li>
@@ -39,7 +39,7 @@
                                 <a class="pk-icon-move pk-icon-hover" :title="'Move' | trans" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="menus | trash"><a @click="moveNodes(id)">{{ label }}</a></li>
+                                        <li v-for="m in menus | trash"><a @click="moveNodes(m.id)">{{ m.label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -54,7 +54,7 @@
                         <a class="uk-button uk-button-primary" @click.prevent v-show="menu.id != 'trash'">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="types | protected | orderBy 'label'"><a :href="$url.route('admin/site/page/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
+                                <li v-for="type in types | protected | orderBy 'label'"><a :href="$url.route('admin/site/page/edit', { id: type.id, menu: menu.id })">{{ label }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                 </div>
 
                 <ul class="uk-nestable uk-margin-remove" v-el:nestable v-show="tree[0]">
-                    <node v-repeat="node: tree[0]"></node>
+                    <node v-for="node in tree[0]"></node>
                 </ul>
 
             </div>
@@ -101,8 +101,8 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-repeat="config.menus" v-var="assigned: getMenu(name)">
-                        <label><input type="checkbox" :value="name" v-checkbox="edit.positions"> {{ label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
+                    <p class="uk-form-controls-condensed" v-for="m in config.menus" v-var="assigned: getMenu(m.name)">
+                        <label><input type="checkbox" :value="m.name" v-checkbox="edit.positions"> {{ label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
                     </p>
                 </div>
             </div>
@@ -146,7 +146,7 @@
         </div>
 
         <ul class="uk-nestable-list" v-if="tree[node.id]">
-            <node v-repeat="node: tree[node.id]" track-by="node.id"></node>
+            <node v-for="node in tree[node.id]" track-by="node.id"></node>
         </ul>
 
     </li>

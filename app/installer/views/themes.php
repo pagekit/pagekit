@@ -22,7 +22,7 @@
     </div>
 
     <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-medium-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin>
-        <div v-repeat="pkg: packages | filterBy search in 'title' | themeorder">
+        <div v-for="pkg in packages | filterBy search in 'title' | themeorder">
             <div class="uk-panel uk-panel-box uk-visible-hover uk-overlay-hover">
 
                 <div class="uk-panel-teaser">

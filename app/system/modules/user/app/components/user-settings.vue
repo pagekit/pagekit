@@ -43,8 +43,8 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-repeat="statuses">
-                        <label><input type="radio" v-model="user.status" :value="$key" :disabled="config.currentUser == user.id" number> {{ $value }}</label>
+                    <p class="uk-form-controls-condensed" v-for="status in statuses">
+                        <label><input type="radio" v-model="user.status" :value="$key" :disabled="config.currentUser == user.id" number> {{ status }}</label>
                     </p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-repeat="role: roles">
+                    <p class="uk-form-controls-condensed" v-for="role in roles">
                         <label><input type="checkbox" :value="role.id" v-checkbox="user.roles" :disabled="role.disabled" number> {{ role.name }}</label>
                     </p>
                 </div>
