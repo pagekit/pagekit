@@ -52,7 +52,7 @@
                                     <span class="uk-position-cover" v-if="!current.administrator" v-on="click: addPermission(current, $key), click: savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" value="{{ $key }}" v-show="!showFakeCheckbox(current, $key)" v-checkbox="current.permissions" v-on="click: savePermissions(current)">
+                                <input type="checkbox" value="{{ $key }}" v-else v-checkbox="current.permissions" v-on="click: savePermissions(current)">
 
                             </td>
                         </tr>

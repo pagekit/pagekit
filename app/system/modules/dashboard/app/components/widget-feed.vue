@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class="uk-text-center" v-if="status == 'loading'">
+    <div class="uk-text-center" v-else>
         <v-loader></v-loader>
     </div>
 

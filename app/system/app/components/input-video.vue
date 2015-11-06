@@ -5,7 +5,7 @@
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Video' | trans }}</p>
     </a>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="source">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
         <img v-attr="src: image" v-if="image">
         <video class="uk-width-1-1" v-attr="src: video" v-if="video"></video>

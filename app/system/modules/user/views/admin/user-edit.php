@@ -6,7 +6,7 @@
         <div data-uk-margin>
 
             <h2 class="uk-margin-remove" v-if="user.id">{{ 'Edit User' | trans }}</h2>
-            <h2 class="uk-margin-remove" v-if="!user.id">{{ 'Add User' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-else>{{ 'Add User' | trans }}</h2>
 
         </div>
         <div data-uk-margin>

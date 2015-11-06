@@ -2,7 +2,7 @@
 
     <a class="uk-button uk-button-primary uk-form-file">
         <span v-show="!progress">{{ 'Upload' | trans }}</span>
-        <span v-show="progress"><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
+        <span v-else><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
         <input type="file" name="file" v-el:input>
     </a>
 

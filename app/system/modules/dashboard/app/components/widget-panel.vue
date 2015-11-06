@@ -5,12 +5,14 @@
             <li v-show="editing[widget.id]">
                 <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a>
             </li>
-            <li v-show="type.editable !== false && !editing[widget.id]">
-                <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
-            </li>
-            <li v-show="type.editable !== false && editing[widget.id]">
-                <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
-            </li>
+            <template v-show="type.editable !== false">
+                <li v-show="!editing[widget.id]">
+                    <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+                </li>
+                <li v-else>
+                    <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+                </li>
+            </template>
         </ul>
     </div>
 

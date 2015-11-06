@@ -5,7 +5,7 @@
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-if="source">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else">
 
         <img v-attr="src: $url(source)">
 

@@ -30,7 +30,7 @@
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
-                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-show="!isInstalled(pkg)">{{ 'Install' | trans }}</button>
+                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-else>{{ 'Install' | trans }}</button>
                 </div>
 
                 <div class="uk-modal-header">

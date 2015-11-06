@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="image.src">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
         <img v-attr="src: $url(image.src), alt: image.alt">
 

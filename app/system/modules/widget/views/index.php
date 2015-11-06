@@ -35,24 +35,29 @@
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
                     <h2 class="uk-margin-remove" v-show="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
-                    <h2 class="uk-margin-remove" v-else>{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
 
-                    <div class="uk-margin-left" v-show="selected.length">
-                        <ul class="uk-subnav pk-subnav-icon">
-                            <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                            <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                            <li><a class="pk-icon-copy pk-icon-hover" title="{{ 'Copy' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: copy()"></a></li>
-                            <li data-uk-dropdown="{mode: 'click'}">
-                                <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
-                                <div class="uk-dropdown uk-dropdown-small">
-                                    <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
-                        </ul>
-                    </div>
+                    <template v-else>
+
+                        <h2 class="uk-margin-remove">{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
+
+                        <div class="uk-margin-left">
+                            <ul class="uk-subnav pk-subnav-icon">
+                                <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                                <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                                <li><a class="pk-icon-copy pk-icon-hover" title="{{ 'Copy' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: copy()"></a></li>
+                                <li data-uk-dropdown="{mode: 'click'}">
+                                    <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
+                                    <div class="uk-dropdown uk-dropdown-small">
+                                        <ul class="uk-nav uk-nav-dropdown">
+                                            <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                            </ul>
+                        </div>
+
+                    </template>
 
                     <div class="pk-search">
                         <div class="uk-search">
@@ -77,18 +82,21 @@
 
             <div class="uk-overflow-container">
 
-                <div class="pk-table-fake pk-table-fake-header pk-table-fake-border" v-show="!position && emptyafterfilter()">
-                    <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
-                    <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
-                    <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
-                    <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
-                    <div class="pk-table-width-100">
-                        <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}" number></input-filter>
+                <template v-show="!position && emptyafterfilter()">
+
+                    <div class="pk-table-fake pk-table-fake-header pk-table-fake-border">
+                        <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
+                        <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
+                        <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
+                        <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
+                        <div class="pk-table-width-100">
+                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}" number></input-filter>
+                        </div>
                     </div>
-                </div>
 
-                <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom" v-show="!position && emptyafterfilter()">{{ 'No widgets found.' | trans }}</h3>
+                    <h3 class="uk-h1 uk-text-muted uk-text-center uk-margin-bottom">{{ 'No widgets found.' | trans }}</h3>
 
+                </template>
 
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
@@ -111,7 +119,7 @@
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
                                 <div class="pk-table-min-width-100">
                                     <a href="{{ $url.route('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
-                                    <span v-if="!type">{{ widget.title }}</span>
+                                    <span v-else>{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">

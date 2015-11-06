@@ -43,7 +43,7 @@
                     </td>
                     <td class="uk-text-nowrap">
                         <a v-on="click: settings(pkg)" v-show="pkg.enabled && pkg.settings">{{ pkg.title }}</a>
-                        <span v-show="!pkg.enabled || !pkg.settings">{{ pkg.title }}</span>
+                        <span v-else>{{ pkg.title }}</span>
                         <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
                     </td>
                     <td>
@@ -51,7 +51,7 @@
                     </td>
                     <td class="uk-text-center">
                         <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
-                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-show="!pkg.enabled" v-on="click: enable(pkg)"></a>
+                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-else v-on="click: enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
                     <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>

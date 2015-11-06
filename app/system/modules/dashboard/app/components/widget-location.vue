@@ -2,14 +2,16 @@
 
     <div class="uk-panel-badge">
         <ul class="uk-subnav pk-subnav-icon">
-            <li v-show="$parent.editing[widget.id]">
-                <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.remove()" v-confirm="'Delete widget?'"></a>
-            </li>
-            <li v-show="!$parent.editing[widget.id]">
+            <template v-show="$parent.editing[widget.id]">
+                <li>
+                    <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.remove()" v-confirm="'Delete widget?'"></a>
+                </li>
+                <li>
+                    <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
+                </li>
+            </template>
+            <li v-else>
                 <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
-            </li>
-            <li v-show="$parent.editing[widget.id]">
-                <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $parent.edit()"></a>
             </li>
         </ul>
     </div>
@@ -52,7 +54,7 @@
         </div>
     </div>
 
-    <div class="uk-text-center" v-if="status == 'loading'">
+    <div class="uk-text-center" v-else>
         <v-loader></v-loader>
     </div>
 

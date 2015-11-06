@@ -15,7 +15,7 @@
 
     </div>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="video.src">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
         <img class="uk-width-1-1" v-attr="src: imageSrc" v-if="imageSrc">
         <video class="uk-width-1-1" v-attr="src: videoSrc" v-if="videoSrc"></video>

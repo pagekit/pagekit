@@ -6,7 +6,7 @@
         <div data-uk-margin>
 
             <h2 class="uk-margin-remove" v-if="node.id">{{ 'Edit %type%' | trans {type:type.label} }}</h2>
-            <h2 class="uk-margin-remove" v-if="!node.id">{{ 'Add %type%' | trans {type:type.label} }}</h2>
+            <h2 class="uk-margin-remove" v-else>{{ 'Add %type%' | trans {type:type.label} }}</h2>
 
         </div>
         <div data-uk-margin>

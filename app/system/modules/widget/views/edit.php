@@ -6,7 +6,7 @@
         <div data-uk-margin>
 
             <h2 class="uk-margin-remove" v-if="widget.id">{{ 'Edit Widget' | trans }}</h2>
-            <h2 class="uk-margin-remove" v-if="!widget.id">{{ 'Add Widget' | trans }}</h2>
+            <h2 class="uk-margin-remove" v-else>{{ 'Add Widget' | trans }}</h2>
 
         </div>
         <div data-uk-margin>

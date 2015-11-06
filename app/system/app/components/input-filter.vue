@@ -3,7 +3,7 @@
     <div class="uk-form-select pk-filter">
         <span>{{ label }}</span>
         <select v-if="isNumber" v-model="value" options="list" number></select>
-        <select v-if="!isNumber" v-model="value" options="list"></select>
+        <select v-else v-model="value" options="list"></select>
     </div>
 
 </template>

@@ -6,15 +6,20 @@
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users' | transChoice count {count:count} }}</h2>
-            <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% User selected|]1,Inf[ %count% Users selected' | transChoice selected.length {count:selected.length} }}</h2>
 
-            <div class="uk-margin-left" v-show="selected.length">
-                <ul class="uk-subnav pk-subnav-icon">
-                    <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                    <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                    <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete users?'"></a></li>
-                </ul>
-            </div>
+            <template v-else>
+
+                <h2 class="uk-margin-remove">{{ '{1} %count% User selected|]1,Inf[ %count% Users selected' | transChoice selected.length {count:selected.length} }}</h2>
+
+                <div class="uk-margin-left">
+                    <ul class="uk-subnav pk-subnav-icon">
+                        <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
+                        <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete users?'"></a></li>
+                    </ul>
+                </div>
+
+            </template>
 
             <div class="pk-search">
                 <div class="uk-search">
