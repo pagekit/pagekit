@@ -54,7 +54,7 @@
         </ul>
 
         <div class="uk-progress uk-progress-mini uk-margin-remove" v-show="upload.running">
-            <div class="uk-progress-bar" v-style="width: upload.progress + '%'"></div>
+            <div class="uk-progress-bar" :style="{width: upload.progress + '%'}"></div>
         </div>
 
         <div class="uk-overflow-container tm-overflow-container">
