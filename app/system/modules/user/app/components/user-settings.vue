@@ -32,7 +32,7 @@
                 <div class="uk-form-controls uk-form-controls-text js-password" v-show="user.id">
                     <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
                 </div>
-                <div class="uk-form-controls js-password" v-class="'uk-hidden' : user.id">
+                <div class="uk-form-controls js-password" :class="{'uk-hidden' : user.id}">
                     <div class="uk-form-password">
                         <input id="form-password" class="uk-form-width-large" type="password" v-model="password">
                         <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
@@ -82,11 +82,7 @@
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove uk-text-break">{{ user.name }}
-                    <i title="{{ (isNew ? 'New' : statuses[user.status]) | trans }}" v-class="
-                        pk-icon-circle-primary: isNew,
-                        pk-icon-circle-success: user.access && user.status,
-                        pk-icon-circle-danger: !user.status
-                    "></i>
+                    <i title="{{ (isNew ? 'New' : statuses[user.status]) | trans }}" :class="{'pk-icon-circle-primary': isNew, 'pk-icon-circle-success': user.access && user.status, 'pk-icon-circle-danger': !user.status}"></i>
                 </h3>
 
                 <div>

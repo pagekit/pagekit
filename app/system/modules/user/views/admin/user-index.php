@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="check-item" v-repeat="user: users" v-class="uk-active: active(user)">
+                <tr class="check-item" v-repeat="user: users" :class="{'uk-active': active(user)}">
                     <td><input type="checkbox" name="id" value="{{ user.id }}"></td>
                     <td class="pk-table-width-minimum">
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ user.name }}" v-gravatar="user.email">
@@ -60,11 +60,7 @@
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a href="#" title="{{ user.statusText }}" v-class="
-                            pk-icon-circle-success: user.login && user.status,
-                            pk-icon-circle-danger: !user.status,
-                            pk-icon-circle-primary: user.status
-                        " v-on="click: toggleStatus(user)"></a>
+                        <a href="#" title="{{ user.statusText }}" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" v-on="click: toggleStatus(user)"></a>
                     </td>
                     <td>
                         <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" title="{{ 'Verified Email Address' | trans }}" v-if="showVerified(user)"></i>

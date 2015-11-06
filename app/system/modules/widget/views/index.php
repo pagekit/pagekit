@@ -14,14 +14,14 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side">
-                    <li v-class="uk-active: active()">
+                    <li :class="{'uk-active': active()}">
                         <a v-on="click: select()">{{ 'All' | trans }}</a>
                     </li>
-                    <li v-class="uk-active: active(unassigned)" v-show="unassigned.widgets.length">
+                    <li :class="{'uk-active': active(unassigned)}" v-show="unassigned.widgets.length">
                         <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li v-class="uk-active: active(pos)" v-repeat="pos: config.positions" v-var="pos.widgets: pos.assigned | assigned">
+                    <li :class="{'uk-active': active(pos)}" v-repeat="pos: config.positions" v-var="pos.widgets: pos.assigned | assigned">
                         <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
@@ -35,7 +35,7 @@
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
                     <h2 class="uk-margin-remove" v-show="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
-                    <h2 class="uk-margin-remove" v-show="selected.length">{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
+                    <h2 class="uk-margin-remove" v-else>{{ '{1} %count% Widget selected|]1,Inf[ %count% Widgets selected' | transChoice selected.length {count:selected.length} }}</h2>
 
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
@@ -92,7 +92,7 @@
 
                 <div class="uk-margin-bottom" v-repeat="pos: positions" track-by="name" v-show="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: (!pos.widgets.length || (position && emptyafterfilter(pos.widgets)))" v-show="position || (!position && !emptyafterfilter(pos.widgets))">
+                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': (!pos.widgets.length || (position && emptyafterfilter(pos.widgets)))}" v-show="position || (!position && !emptyafterfilter(pos.widgets))">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
@@ -105,7 +105,7 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" data-position="{{ pos.name }}" inline-template>
-                        <li v-class="uk-active: isSelected(widget.id)" v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
+                        <li :class="{'uk-active': isSelected(widget.id)}" v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
-                                        <a v-class="pk-icon-circle-danger: !widget.status, pk-icon-circle-success: widget.status" v-on="click: toggleStatus(widget)"></a>
+                                        <a :class="{'pk-icon-circle-danger': !widget.status, 'pk-icon-circle-success': widget.status}" v-on="click: toggleStatus(widget)"></a>
                                     </td>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.label || type.name }}</div>

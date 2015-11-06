@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="permission: group" v-class="uk-visible-hover-inline: permission.trusted">
+                <tr v-repeat="permission: group" :class="{'uk-visible-hover-inline': permission.trusted}">
                     <td class="pk-table-text-break">
                         <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                     </td>

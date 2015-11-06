@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-nav uk-nav-side">
-                    <li class="uk-visible-hover" v-class="uk-active: isActive(menu), uk-nav-divider: menu.divider" v-repeat="menu: menus | divided">
+                    <li class="uk-visible-hover" :class="{'uk-active': isActive(menu), 'uk-nav-divider': menu.divider}" v-repeat="menu: menus | divided">
                         <a v-on="click: selectMenu(menu, false)" v-if="!menu.divider">{{ menu.label }}</a>
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed && !menu.divider">
                             <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: editMenu(menu)"></a></li>
@@ -64,7 +64,7 @@
 
             <div class="uk-overflow-container">
 
-                <div class="pk-table-fake pk-table-fake-header" v-class="pk-table-fake-border: !tree[0]">
+                <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !tree[0]}">
                     <div class="pk-table-width-minimum pk-table-fake-nestable-padding"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
                     <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
                     <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
@@ -119,7 +119,7 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" v-class="uk-parent: tree[node.id], uk-active: isSelected(node)" data-id="{{ node.id }}">
+    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': isSelected(node)}" data-id="{{ node.id }}">
         <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
@@ -135,13 +135,13 @@
             </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
-                    <a v-class="pk-icon-circle-danger: !node.status, pk-icon-circle-success: node.status" v-on="click: toggleStatus(node)"></a>
+                    <a :class="{'pk-icon-circle-danger': !node.status, 'pk-icon-circle-success': node.status}" v-on="click: toggleStatus(node)"></a>
                 </td>
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
                 <a title="{{ node.url }}" target="_blank" v-attr="href: $url.route(node.url.substr(1))" v-if="node.accessible && node.url">{{ decodeURI(node.url) }}</a>
-                <span v-if="!node.accessible || !node.url">{{ node.path }}</span>
+                <span v-else>{{ node.path }}</span>
             </div>
         </div>
 

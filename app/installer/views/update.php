@@ -29,11 +29,11 @@
 
         <p>{{ message | trans }}</p>
 
-        <div class="uk-progress uk-progress-striped" v-class="
-            uk-progress-danger:  errors.length,
-            uk-progress-success: progress == 100,
-            uk-active:           progress != 100 && !errors.length
-        ">
+        <div class="uk-progress uk-progress-striped" :class="{
+            'uk-progress-danger':  errors.length,
+            'uk-progress-success': progress == 100,
+            'uk-active':           progress != 100 && !errors.length
+        "}>
             <div class="uk-progress-bar" v-style="width: progress + '%'">{{ progress }}%</div>
         </div>
 

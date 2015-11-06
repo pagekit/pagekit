@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
-                    <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" v-class="uk-active: current.id === role.id">
+                    <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" :class="{'uk-active': current.id === role.id}">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
                             <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit(role)"></a></li>
                             <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove(role)" v-confirm="'Delete role?'"></a></li>
@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-repeat="permission: group" v-class="uk-visible-hover-inline: permission.trusted">
+                        <tr v-repeat="permission: group" :class="{'uk-visible-hover-inline': permission.trusted}">
                             <td class="pk-table-text-break">
                                 <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                             </td>

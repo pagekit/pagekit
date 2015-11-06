@@ -26,10 +26,10 @@
 
                 <div class="uk-margin-right">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li v-class="'uk-active': view == 'table'">
+                        <li :class="{'uk-active': view == 'table'}">
                             <a class="pk-icon-table pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: view = 'table'"></a>
                         </li>
-                        <li v-class="'uk-active': view == 'thumbnail'">
+                        <li class="{'uk-active': view == 'thumbnail'}">
                             <a class="pk-icon-thumbnails pk-icon-hover" title="{{ 'Thumbnails View' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: view = 'thumbnail'"></a>
                         </li>
                     </ul>
@@ -37,7 +37,7 @@
 
                 <div>
                     <button class="uk-button uk-margin-small-right" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
-                    <span class="uk-button uk-form-file" v-class="uk-button-primary: !modal">
+                    <span class="uk-button uk-form-file" :class="{'uk-button-primary': !modal}">
                         {{ 'Upload' | trans }}
                         <input type="file" name="files[]" multiple="multiple">
                     </span>
@@ -47,9 +47,9 @@
         </div>
 
         <ul class="uk-breadcrumb uk-margin-large-top">
-            <li v-repeat="breadcrumbs" v-class="'uk-active': current">
+            <li v-repeat="breadcrumbs" :class="{'uk-active': current}">
                 <span v-show="current">{{ title }}</span>
-                <a v-show="!current" v-on="click: setPath(path)">{{ title }}</a>
+                <a v-else v-on="click: setPath(path)">{{ title }}</a>
             </li>
         </ul>
 
