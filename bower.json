@@ -6,6 +6,7 @@
     "uikit": "#master",
     "vue": "~0.12.15",
     "vue-form": "pagekit/vue-form#0.1.0",
+    "vue-intl": "~0.1.0",
     "vue-resource": "~0.1.16"
   },
   "devDependencies": {

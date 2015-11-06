@@ -1,6 +1,0 @@
-/dist/*
-!/dist/locales
-/dist/locales/*
-!/dist/locales/en.json
-/node_modules
-.DS_Store
