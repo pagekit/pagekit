@@ -34,10 +34,7 @@ window.Settings = module.exports = {
 
     methods: {
 
-        save: function(e) {
-
-            e.preventDefault();
-
+        save: function() {
             this.$broadcast('save', this.$data);
             this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
                 this.$notify('Settings saved.');

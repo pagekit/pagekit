@@ -48,9 +48,7 @@ window.Site = module.exports = {
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             var data = {node: this.node};
 
             this.$broadcast('save', data);
@@ -75,7 +73,7 @@ window.Site = module.exports = {
 
     partials: {
 
-        'settings': require('../templates/settings.html')
+        settings: require('../templates/settings.html')
 
     },
 

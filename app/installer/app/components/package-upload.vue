@@ -13,7 +13,7 @@
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: doInstall">{{ 'Install' | trans }}</button>
+                <button class="uk-button uk-button-link" @click.prevent="doInstall">{{ 'Install' | trans }}</button>
             </div>
 
         </div>
@@ -87,8 +87,7 @@
                 this.modal.show();
             },
 
-            doInstall: function (e) {
-                e.preventDefault();
+            doInstall: function () {
 
                 this.modal.hide();
 

@@ -13,9 +13,9 @@
 
                 <div class="uk-margin-left">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                        <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete users?'"></a></li>
+                        <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                        <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete users?'"></a></li>
                     </ul>
                 </div>
 
@@ -65,7 +65,7 @@
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a href="#" title="{{ user.statusText }}" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" v-on="click: toggleStatus(user)"></a>
+                        <a href="#" title="{{ user.statusText }}" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" @click="toggleStatus(user)"></a>
                     </td>
                     <td>
                         <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" title="{{ 'Verified Email Address' | trans }}" v-if="showVerified(user)"></i>

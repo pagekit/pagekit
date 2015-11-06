@@ -1,6 +1,6 @@
 <template>
 
-    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
+    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
         <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
@@ -11,11 +11,11 @@
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
-        <a class="uk-position-cover" v-on="click: pick()"></a>
+        <a class="uk-position-cover" @click.prevent="pick"></a>
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 
@@ -27,7 +27,7 @@
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !hasSelection()" v-on="click: select()">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !hasSelection()" @click.prevent="select">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>

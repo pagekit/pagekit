@@ -1,6 +1,6 @@
 window.User = module.exports = {
 
-    data: function() {
+    data: function () {
         return _.merge({password: ''}, window.$data);
     },
 
@@ -36,9 +36,7 @@ window.User = module.exports = {
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             var data = {user: this.user, password: this.password};
 
             this.$broadcast('save', data);
@@ -62,7 +60,7 @@ window.User = module.exports = {
 
     components: {
 
-        'settings': require('../../components/user-settings.vue')
+        settings: require('../../components/user-settings.vue')
 
     }
 

@@ -15,14 +15,14 @@
 
                 <ul class="uk-nav uk-nav-side">
                     <li :class="{'uk-active': active()}">
-                        <a v-on="click: select()">{{ 'All' | trans }}</a>
+                        <a @click.prevent="select">{{ 'All' | trans }}</a>
                     </li>
                     <li :class="{'uk-active': active(unassigned)}" v-show="unassigned.widgets.length">
-                        <a v-on="click: select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
+                        <a @click="select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
                     <li :class="{'uk-active': active(pos)}" v-repeat="pos: config.positions" v-var="pos.widgets: pos.assigned | assigned">
-                        <a v-on="click: select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
+                        <a @click="select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
 
@@ -42,18 +42,18 @@
 
                         <div class="uk-margin-left">
                             <ul class="uk-subnav pk-subnav-icon">
-                                <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                                <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
-                                <li><a class="pk-icon-copy pk-icon-hover" title="{{ 'Copy' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: copy()"></a></li>
+                                <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                                <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
+                                <li><a class="pk-icon-copy pk-icon-hover" title="{{ 'Copy' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="copy"></a></li>
                                 <li data-uk-dropdown="{mode: 'click'}">
-                                    <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
+                                    <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                     <div class="uk-dropdown uk-dropdown-small">
                                         <ul class="uk-nav uk-nav-dropdown">
-                                            <li v-repeat="config.positions" track-by="name"><a v-on="click: move(name, selected)">{{ label }}</a></li>
+                                            <li v-repeat="config.positions" track-by="name"><a @click="move(name, selected)">{{ label }}</a></li>
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove"></a></li>
+                                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
                             </ul>
                         </div>
 
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
                                     <td class="uk-text-center">
-                                        <a :class="{'pk-icon-circle-danger': !widget.status, 'pk-icon-circle-success': widget.status}" v-on="click: toggleStatus(widget)"></a>
+                                        <a :class="{'pk-icon-circle-danger': !widget.status, 'pk-icon-circle-success': widget.status}" @click="toggleStatus(widget)"></a>
                                     </td>
                                 </div>
                                 <div class="pk-table-width-150">{{ type.label || type.name }}</div>

@@ -17,7 +17,7 @@
                     <h2 class="uk-panel-title uk-margin-remove">{{ pkg.title }}</h2>
 
                     <p class="uk-text-muted uk-margin-remove">{{ pkg.author.name }}</p>
-                    <a class="uk-position-cover" v-on="click: details(pkg)"></a>
+                    <a class="uk-position-cover" @click="details(pkg)"></a>
 
                 </div>
             </div>
@@ -30,7 +30,7 @@
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
-                    <button class="uk-button uk-button-primary" v-on="click: doInstall(pkg)" v-else>{{ 'Install' | trans }}</button>
+                    <button class="uk-button uk-button-primary" @click="doInstall(pkg)" v-else>{{ 'Install' | trans }}</button>
                 </div>
 
                 <div class="uk-modal-header">

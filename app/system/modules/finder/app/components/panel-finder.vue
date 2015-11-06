@@ -10,8 +10,8 @@
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" title="{{ 'Rename' | trans 'domain' 'asdf' 'asdf2' }}" data-uk-tooltip="{delay: 500}" v-on="click: rename"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove" v-confirm="'Delete files?'"></a></li>
+                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
                     </ul>
                 </div>
 
@@ -27,16 +27,16 @@
                 <div class="uk-margin-right">
                     <ul class="uk-subnav pk-subnav-icon">
                         <li :class="{'uk-active': view == 'table'}">
-                            <a class="pk-icon-table pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: view = 'table'"></a>
+                            <a class="pk-icon-table pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'table'"></a>
                         </li>
                         <li class="{'uk-active': view == 'thumbnail'}">
-                            <a class="pk-icon-thumbnails pk-icon-hover" title="{{ 'Thumbnails View' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: view = 'thumbnail'"></a>
+                            <a class="pk-icon-thumbnails pk-icon-hover" title="{{ 'Thumbnails View' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'thumbnail'"></a>
                         </li>
                     </ul>
                 </div>
 
                 <div>
-                    <button class="uk-button uk-margin-small-right" v-on="click: createFolder()">{{ 'Add Folder' | trans }}</button>
+                    <button class="uk-button uk-margin-small-right" @click.prevent="createFolder()">{{ 'Add Folder' | trans }}</button>
                     <span class="uk-button uk-form-file" :class="{'uk-button-primary': !modal}">
                         {{ 'Upload' | trans }}
                         <input type="file" name="files[]" multiple="multiple">
@@ -49,7 +49,7 @@
         <ul class="uk-breadcrumb uk-margin-large-top">
             <li v-repeat="breadcrumbs" :class="{'uk-active': current}">
                 <span v-show="current">{{ title }}</span>
-                <a v-else v-on="click: setPath(path)">{{ title }}</a>
+                <a v-else @click.prevent="setPath(path)">{{ title }}</a>
             </li>
         </ul>
 

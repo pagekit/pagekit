@@ -17,7 +17,7 @@
         </div>
 
         <p>
-            <a class="uk-button uk-button-primary" v-on="click: install()" v-show="hasUpdate">
+            <a class="uk-button uk-button-primary" @click.prevent="install" v-show="hasUpdate">
                 <span>{{ 'Update' | trans }}</span>
             </a>
             <a class="uk-button uk-button-success" v-attr="href: update.url">{{ 'Download %version%' | trans update }}</a>

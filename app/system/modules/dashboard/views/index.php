@@ -6,11 +6,11 @@
 
     <div class="uk-margin uk-flex uk-flex-right" data-uk-margin>
         <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-            <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()">{{ 'Add Widget' || trans }}</a>
+            <a class="uk-button uk-button-primary" @click.prevent>{{ 'Add Widget' || trans }}</a>
             <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                 <ul class="uk-nav uk-nav-dropdown">
                     <li v-repeat="type: getTypes()">
-                        <a class="uk-dropdown-close" v-on="click: add(type)">{{ type.label }}</a>
+                        <a class="uk-dropdown-close" @click="add(type)">{{ type.label }}</a>
                     </li>
                 </ul>
             </div>

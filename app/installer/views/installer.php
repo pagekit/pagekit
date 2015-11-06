@@ -15,7 +15,7 @@
 
                 <div class="uk-text-center" v-el:start v-show="step == 'start'">
 
-                    <a class="uk-panel" v-on="click: gotoStep('language')">
+                    <a class="uk-panel" @click="gotoStep('language')">
                         <img src="app/system/assets/images/pagekit-logo-large.svg" alt="Pagekit">
                         <p>
                             <svg class="tm-arrow" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ "Select your site language." | trans }}</div>
 
-                        <form class="uk-form" v-on="submit: stepLanguage">
+                        <form class="uk-form" @submit="stepLanguage">
 
                             <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions"></select>
 
@@ -63,7 +63,7 @@
 
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formDatabase" v-on="submit: stepDatabase | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formDatabase" @submit="stepDatabase | valid">
                             <div class="uk-form-row">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -142,7 +142,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Choose a title and create the administrator account.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" v-on="submit: stepSite | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" @submit="stepSite | valid">
                             <div class="uk-form-row">
                                 <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -212,7 +212,7 @@
                             <h1>{{ 'Installation failed!' | trans }}</h1>
                             <div class="uk-text-break">{{ message }}</div>
                             <p class="uk-text-right">
-                                <button type="button" class="uk-button uk-button-primary" v-on="click: stepInstall">{{ 'Retry' | trans }}</button>
+                                <button type="button" class="uk-button uk-button-primary" @click="stepInstall">{{ 'Retry' | trans }}</button>
                             </p>
                         </div>
                     </div>

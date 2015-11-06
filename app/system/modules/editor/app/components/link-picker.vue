@@ -2,7 +2,7 @@
 
     <div>
         <v-modal v-ref="modal" closed="{{ close }}">
-            <form class="uk-form uk-form-stacked" v-on="submit: update">
+            <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
                     <h2>{{ 'Add Link' | trans }}</h2>
@@ -53,8 +53,7 @@
                 this.$destroy(true);
             },
 
-            update: function (e) {
-                e.preventDefault();
+            update: function () {
                 this.$.modal.close();
                 this.$emit('select', this.link);
             }

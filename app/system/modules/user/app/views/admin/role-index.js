@@ -30,10 +30,7 @@ module.exports = {
             this.$.modal.open();
         },
 
-        save: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
+        save: function () {
             if (!this.role) {
                 return;
             }

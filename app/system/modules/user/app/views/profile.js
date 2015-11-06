@@ -4,9 +4,7 @@ module.exports = {
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             this.$http.post('user/profile/save', {user: this.user}, function () {
                 this.$notify('Profile Updated', 'success');
             }).error(function (error) {

@@ -86,8 +86,8 @@
 
     <div class="uk-form-row">
         <div class="uk-form-controls">
-            <button class="uk-button" type="button" v-on="click: test('smtp')" v-show="'smtp' == options.driver">{{ 'Check Connection' | trans }}</button>
-            <button class="uk-button" type="button" v-on="click: test('email')">{{ 'Send Test Email' | trans }}</button>
+            <button class="uk-button" type="button" @click="test('smtp')" v-show="'smtp' == options.driver">{{ 'Check Connection' | trans }}</button>
+            <button class="uk-button" type="button" @click="test('email')">{{ 'Send Test Email' | trans }}</button>
         </div>
     </div>
 

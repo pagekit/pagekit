@@ -3,14 +3,14 @@
     <div class="uk-panel-badge" v-if="!type.disableToolbar">
         <ul class="uk-subnav pk-subnav-icon">
             <li v-show="editing[widget.id]">
-                <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()" v-confirm="'Delete widget?'"></a>
+                <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete widget?'"></a>
             </li>
             <template v-show="type.editable !== false">
                 <li v-show="!editing[widget.id]">
-                    <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+                    <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent"edit"></a>
                 </li>
                 <li v-else>
-                    <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit()"></a>
+                    <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="edit"></a>
                 </li>
             </template>
         </ul>

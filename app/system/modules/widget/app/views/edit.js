@@ -57,9 +57,7 @@ module.exports = {
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             this.$broadcast('save', {widget: this.widget});
             this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
@@ -76,9 +74,7 @@ module.exports = {
             });
         },
 
-        cancel: function (e) {
-            e.preventDefault();
-
+        cancel: function () {
             this.$dispatch('cancel');
         }
 

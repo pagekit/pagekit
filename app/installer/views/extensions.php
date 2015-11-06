@@ -42,25 +42,25 @@
                         </div>
                     </td>
                     <td class="uk-text-nowrap">
-                        <a v-on="click: settings(pkg)" v-show="pkg.enabled && pkg.settings">{{ pkg.title }}</a>
+                        <a @click="settings(pkg)" v-show="pkg.enabled && pkg.settings">{{ pkg.title }}</a>
                         <span v-else>{{ pkg.title }}</span>
                         <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
                     </td>
                     <td>
-                        <a class="uk-button uk-button-success uk-button-small" v-on="click: update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</a>
+                        <a class="uk-button uk-button-success uk-button-small" @click="update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" v-on="click: disable(pkg)"></a>
-                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-else v-on="click: enable(pkg)"></a>
+                        <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" @click="disable(pkg)"></a>
+                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-else @click="enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
                     <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>
                     <td class="uk-text-right">
                         <div class="uk-invisible">
                             <ul class="uk-subnav pk-subnav-icon">
-                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: details(pkg)"></a></li>
+                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" @click="details(pkg)"></a></li>
                                 <li v-show="pkg.enabled && pkg.permissions"><a class="pk-icon-permission pk-icon-hover" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url.route('admin/user/permissions#:name',{name:pkg.module})"></a></li>
-                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg, packages)" v-confirm="'Uninstall extension?'"></a></li>
+                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall extension?'"></a></li>
                             </ul>
                         </div>
                     </td>

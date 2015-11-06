@@ -5,12 +5,12 @@
         <div class="pf-navbar">
 
             <ul class="pf-navbar-nav">
-                <li v-repeat="sections | orderBy 'priority'" v-on="click: open(name)">
+                <li v-repeat="sections | orderBy 'priority'" @click="open(name)">
                     <component is="{{ name }}" data="{{ data[name] }}"></component>
                 </li>
             </ul>
 
-            <a class="pf-close" v-on="click: close"></a>
+            <a class="pf-close" @click.prevent="close"></a>
 
         </div>
 

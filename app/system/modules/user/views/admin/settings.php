@@ -10,7 +10,7 @@
         </div>
         <div data-uk-margin>
 
-            <button class="uk-button uk-button-primary" v-on="click: save">{{ 'Save' | trans }}</button>
+            <button class="uk-button uk-button-primary" @click.prevent="save">{{ 'Save' | trans }}</button>
 
         </div>
     </div>

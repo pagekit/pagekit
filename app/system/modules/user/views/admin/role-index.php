@@ -10,15 +10,15 @@
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
                     <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" :class="{'uk-active': current.id === role.id}">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
-                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit(role)"></a></li>
-                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove(role)" v-confirm="'Delete role?'"></a></li>
+                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
+                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
                         </ul>
-                        <a v-on="click: config.role = role.id">{{ role.name }}</a>
+                        <a @click.prevent="config.role = role.id">{{ role.name }}</a>
                     </li>
                 </ul>
 
                 <p>
-                    <a class="uk-button" v-on="click: edit()">{{ 'Add Role' | trans }}</a>
+                    <a class="uk-button" @click.prevent="edit">{{ 'Add Role' | trans }}</a>
                 </p>
 
             </div>
@@ -49,10 +49,10 @@
 
                                 <span class="uk-position-relative" v-show="showFakeCheckbox(current, $key)">
                                     <input type="checkbox" checked disabled>
-                                    <span class="uk-position-cover" v-if="!current.administrator" v-on="click: addPermission(current, $key), click: savePermissions(current)"></span>
+                                    <span class="uk-position-cover" v-if="!current.administrator" @click="addPermission(current, $key)" @click="savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" value="{{ $key }}" v-else v-checkbox="current.permissions" v-on="click: savePermissions(current)">
+                                <input type="checkbox" value="{{ $key }}" v-else v-checkbox="current.permissions" @click="savePermissions(current)">
 
                             </td>
                         </tr>
@@ -64,7 +64,7 @@
     </div>
 
     <v-modal v-ref="modal">
-        <form class="uk-form uk-form-stacked" v-validator="form" v-on="submit: save | valid">
+        <form class="uk-form uk-form-stacked" v-validator="form" @submit.prevent.stop="save | valid">
 
             <div class="uk-modal-header">
                 <h2>{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>

@@ -37,17 +37,17 @@
 
                 <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
 
-                <a class="uk-position-cover" v-on="click: details(pkg)"></a>
+                <a class="uk-position-cover" @click="details(pkg)"></a>
 
                 <div class="pk-panel-badge-bottom-right">
-                    <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled && pkg.settings" v-on="click: settings(pkg)">Customize</button>
-                    <button class="uk-button uk-button-success uk-button-small" v-on="click: update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
+                    <button class="uk-button uk-button-primary uk-button-small" v-show="pkg.enabled && pkg.settings" @click="settings(pkg)">Customize</button>
+                    <button class="uk-button uk-button-success uk-button-small" @click="update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</button>
                 </div>
 
                 <div class="uk-panel-badge pk-panel-badge uk-hidden" v-if="!pkg.enabled">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-star pk-icon-hover" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: enable(pkg)"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: uninstall(pkg, packages)" v-confirm="'Uninstall theme?'"></a></li>
+                        <li><a class="pk-icon-star pk-icon-hover" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" @click="enable(pkg)"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall theme?'"></a></li>
                     </ul>
                 </div>
 

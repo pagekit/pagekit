@@ -9,16 +9,16 @@
 
                 <ul class="uk-nav uk-nav-side">
                     <li class="uk-visible-hover" :class="{'uk-active': isActive(menu), 'uk-nav-divider': menu.divider}" v-repeat="menu: menus | divided">
-                        <a v-on="click: selectMenu(menu, false)" v-if="!menu.divider">{{ menu.label }}</a>
+                        <a @click="selectMenu(menu, false)" v-if="!menu.divider">{{ menu.label }}</a>
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed && !menu.divider">
-                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: editMenu(menu)"></a></li>
-                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: removeMenu(menu)" v-confirm="'Delete menu?'"></a></li>
+                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click="editMenu(menu)"></a></li>
+                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="removeMenu(menu)" v-confirm="'Delete menu?'"></a></li>
                         </ul>
                     </li>
                 </ul>
 
                 <p>
-                    <a class="uk-button" v-on="click: editMenu()">{{ 'Add Menu' | trans }}</a>
+                    <a class="uk-button" @click.prevent="editMenu">{{ 'Add Menu' | trans }}</a>
                 </p>
 
             </div>
@@ -33,17 +33,17 @@
 
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
-                            <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(1)"></a></li>
-                            <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: status(0)"></a></li>
+                            <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                            <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
                             <li v-show="showMove" data-uk-dropdown="{ mode: 'click' }">
-                                <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: $event.preventDefault()"></a>
+                                <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
-                                        <li v-repeat="menus | trash"><a v-on="click: moveNodes(id)">{{ label }}</a></li>
+                                        <li v-repeat="menus | trash"><a @click="moveNodes(id)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
-                            <li v-show="showDelete"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: removeNodes" v-confirm="'Delete item?'"></a></li>
+                            <li v-show="showDelete"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="removeNodes" v-confirm="'Delete item?'"></a></li>
                         </ul>
                     </div>
 
@@ -51,7 +51,7 @@
                 <div class="uk-position-relative" data-uk-margin>
 
                     <div data-uk-dropdown="{ mode: 'click' }">
-                        <a class="uk-button uk-button-primary" v-on="click: $event.preventDefault()" v-show="menu.id != 'trash'">{{ 'Add Page' | trans }}</a>
+                        <a class="uk-button uk-button-primary" @click.prevent v-show="menu.id != 'trash'">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
                                 <li v-repeat="types | protected | orderBy 'label'"><a v-attr="href: $url.route('admin/site/page/edit', { id: id, menu: menu.id })">{{ label }}</a></li>
@@ -84,7 +84,7 @@
     </div>
 
     <v-modal v-ref="modal">
-        <form class="uk-form uk-form-stacked" v-validator="form" v-on="submit: saveMenu(edit) | valid">
+        <form class="uk-form uk-form-stacked" v-validator="form" @submit="saveMenu(edit) | valid">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Add Menu' | trans }}</h2>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="uk-modal-footer uk-text-right">
-                <button class="uk-button uk-button-link uk-modal-close" type="button" v-on="click: cancel">{{ 'Cancel' | trans }}</button>
+                <button class="uk-button uk-button-link uk-modal-close" type="button" @click.prevent="cancel">{{ 'Cancel' | trans }}</button>
                 <button class="uk-button uk-button-link" v-attr="disabled: form.invalid || !edit.label">{{ 'Save' | trans }}</button>
             </div>
 
@@ -130,12 +130,12 @@
                 <span class="uk-text-muted uk-text-small uk-margin-small-left" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" v-on="click: setFrontpage(node)"></a>
+                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" @click="setFrontpage(node)"></a>
                 <i class="pk-icon-home-active pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
-                    <a :class="{'pk-icon-circle-danger': !node.status, 'pk-icon-circle-success': node.status}" v-on="click: toggleStatus(node)"></a>
+                    <a :class="{'pk-icon-circle-danger': !node.status, 'pk-icon-circle-success': node.status}" @click="toggleStatus(node)"></a>
                 </td>
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>

@@ -15,8 +15,8 @@
             <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Error' | trans}}</div>
 
             <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
-                <a class="uk-button uk-button-link" v-on="click: close">{{ 'Close' | trans }}</a>
-                <a class="uk-button uk-button-primary" v-on="click: enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
+                <a class="uk-button uk-button-link" @click.prevent="close">{{ 'Close' | trans }}</a>
+                <a class="uk-button uk-button-primary" @click.prevent="enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
             </div>
 
         </v-modal>

@@ -32,7 +32,7 @@
             </p>
 
             <p>
-                <button class="uk-button uk-button-primary" type="button" v-on="click: open">{{ 'Clear Cache' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" @click.prevent="open">{{ 'Clear Cache' | trans }}</button>
             </p>
         </div>
     </div>
@@ -56,7 +56,7 @@
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: clear">{{ 'Clear' | trans }}</button>
+                <button class="uk-button uk-button-link" @click.prevent="clear">{{ 'Clear' | trans }}</button>
             </div>
 
         </form>
@@ -84,17 +84,12 @@
 
         methods: {
 
-            open: function (e) {
-                e.preventDefault();
-
+            open: function () {
                 this.$set('cache', {cache: true});
-
                 this.$.modal.open();
             },
 
-            clear: function (e) {
-                e.preventDefault();
-
+            clear: function () {
                 this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
                     this.$notify('Cache cleared.')
                 });
