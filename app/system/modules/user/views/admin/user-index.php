@@ -13,9 +13,9 @@
 
                 <div class="uk-margin-left">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Activate' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
-                        <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Block' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete users?'"></a></li>
+                        <li><a class="pk-icon-check pk-icon-hover" :title="'Activate' | trans" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                        <li><a class="pk-icon-block pk-icon-hover" :title="'Block' | trans" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete users?'"></a></li>
                     </ul>
                 </div>
 
@@ -44,31 +44,31 @@
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <input-filter title="{{ 'Status' | trans }}" value="{{@ config.filter.status}}" options="{{ statuses }}"></input-filter>
+                        <input-filter :title="'Status' | trans" :value.sync="config.filter.status" :options="statuses"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-order="email: config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
-                        <input-filter title="{{ 'Roles' | trans }}" value="{{@ config.filter.role}}" options="{{ roles }}"></input-filter>
+                        <input-filter :title="'Roles' | trans" :value.sync="config.filter.role" :options="roles"></input-filter>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="check-item" v-repeat="user: users" :class="{'uk-active': active(user)}">
-                    <td><input type="checkbox" name="id" value="{{ user.id }}"></td>
+                    <td><input type="checkbox" name="id" :value="user.id"></td>
                     <td class="pk-table-width-minimum">
-                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ user.name }}" v-gravatar="user.email">
+                        <img class="uk-img-preserve uk-border-circle" width="40" height="40" :alt="user.name" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
                         <a :href="$url.route('admin/user/edit', { id: user.id })">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a href="#" title="{{ user.statusText }}" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" @click="toggleStatus(user)"></a>
+                        <a href="#" :title="user.statusText" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" @click="toggleStatus(user)"></a>
                     </td>
                     <td>
-                        <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" title="{{ 'Verified Email Address' | trans }}" v-if="showVerified(user)"></i>
+                        <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" :title="'Verified Email Address' | trans" v-if="showVerified(user)"></i>
                     </td>
                     <td>
                         {{ showRoles(user) }}
@@ -80,6 +80,6 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="users && !users.length">{{ 'No user found.' | trans }}</h3>
 
-    <v-pagination page="{{@ config.page }}" pages="{{ pages }}" v-show="pages > 1"></v-pagination>
+    <v-pagination :page.sync="config.page" :pages="pages" v-show="pages > 1"></v-pagination>
 
 </div>

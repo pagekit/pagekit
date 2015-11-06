@@ -44,7 +44,7 @@
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="statuses">
-                        <label><input type="radio" v-model="user.status" value="{{ $key }}" :disabled="config.currentUser == user.id" number> {{ $value }}</label>
+                        <label><input type="radio" v-model="user.status" :value="$key" :disabled="config.currentUser == user.id" number> {{ $value }}</label>
                     </p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="role: roles">
-                        <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" :disabled="role.disabled" number> {{ role.name }}</label>
+                        <label><input type="checkbox" :value="role.id" v-checkbox="user.roles" :disabled="role.disabled" number> {{ role.name }}</label>
                     </p>
                 </div>
             </div>
@@ -82,11 +82,11 @@
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove uk-text-break">{{ user.name }}
-                    <i title="{{ (isNew ? 'New' : statuses[user.status]) | trans }}" :class="{'pk-icon-circle-primary': isNew, 'pk-icon-circle-success': user.access && user.status, 'pk-icon-circle-danger': !user.status}"></i>
+                    <i :title="(isNew ? 'New' : statuses[user.status]) | trans" :class="{'pk-icon-circle-primary': isNew, 'pk-icon-circle-success': user.access && user.status, 'pk-icon-circle-danger': !user.status}"></i>
                 </h3>
 
                 <div>
-                    <a class="uk-text-break" href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" title="{{ 'Verified email address' | trans }}" v-show="config.emailVerification && user.data.verified"></i>
+                    <a class="uk-text-break" href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" :title="'Verified email address' | trans" v-show="config.emailVerification && user.data.verified"></i>
                 </div>
 
             </div>

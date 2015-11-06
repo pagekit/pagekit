@@ -66,7 +66,7 @@ module.exports = {
                 .$on('select', function (image) {
                     image.replace(this.$interpolate(
                         (image.tag || editor.getCursorMode()) == 'html' ?
-                            '<img src="{{ image.src }}" alt="{{ image.alt }}">'
+                            '<img :src="image.src" :alt="image.alt">'
                             : '![{{ image.alt }}]({{ image.src }})'
                         )
                     );

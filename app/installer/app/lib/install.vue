@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="output" options="{{ options }}">
+        <v-modal v-ref="output" :options="options">
 
             <div class="uk-modal-header uk-flex uk-flex-middle">
                 <h2>{{ 'Installing %title% %version%' | trans {title:pkg.title,version:pkg.version} }}</h2>

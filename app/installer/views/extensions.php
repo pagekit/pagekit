@@ -16,7 +16,7 @@
         </div>
         <div data-uk-margin>
 
-            <package-upload api="{{ api }}" packages="{{ packages }}" type="extension"></package-upload>
+            <package-upload :api="api" :packages="packages" type="extension"></package-upload>
 
         </div>
     </div>
@@ -50,17 +50,17 @@
                         <a class="uk-button uk-button-success uk-button-small" @click="update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</a>
                     </td>
                     <td class="uk-text-center">
-                        <a class="pk-icon-circle-success" title="{{ 'Enabled' | trans }}" v-show="pkg.enabled" @click="disable(pkg)"></a>
-                        <a class="pk-icon-circle-danger" title="{{ 'Disabled' | trans }}" v-else @click="enable(pkg)"></a>
+                        <a class="pk-icon-circle-success" :title="'Enabled' | trans" v-show="pkg.enabled" @click="disable(pkg)"></a>
+                        <a class="pk-icon-circle-danger" :title="'Disabled' | trans" v-else @click="enable(pkg)"></a>
                     </td>
                     <td class="uk-text-center">{{ pkg.version }}</td>
                     <td class="pk-table-max-width-150 uk-text-truncate">/{{ pkg.name }}</td>
                     <td class="uk-text-right">
                         <div class="uk-invisible">
                             <ul class="uk-subnav pk-subnav-icon">
-                                <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" @click="details(pkg)"></a></li>
+                                <li><a class="pk-icon-info pk-icon-hover" :title="'View Details' | trans" data-uk-tooltip="{delay: 500}" @click="details(pkg)"></a></li>
                                 <li v-show="pkg.enabled && pkg.permissions"><a class="pk-icon-permission pk-icon-hover" :title="'View Permissions' | trans" data-uk-tooltip="{delay: 500}" :href="$url.route('admin/user/permissions#:name', {name:pkg.module})"></a></li>
-                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall extension?'"></a></li>
+                                <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall extension?'"></a></li>
                             </ul>
                         </div>
                     </td>
@@ -72,11 +72,11 @@
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No extension found.' | trans }}</h3>
 
     <v-modal v-ref="details">
-        <package-details api="{{ api }}" package="{{ package }}"></package-details>
+        <package-details :api="api" :package="package"></package-details>
     </v-modal>
 
     <v-modal v-ref="settings">
-        <component is="{{ view }}" package="{{ package }}"></component>
+        <component :is="view" :package="package"></component>
     </v-modal>
 
 </div>

@@ -42,18 +42,18 @@
 
                         <div class="uk-margin-left">
                             <ul class="uk-subnav pk-subnav-icon">
-                                <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
-                                <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
-                                <li><a class="pk-icon-copy pk-icon-hover" title="{{ 'Copy' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="copy"></a></li>
+                                <li><a class="pk-icon-check pk-icon-hover" :title="'Publish' | trans" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                                <li><a class="pk-icon-block pk-icon-hover" :title="'Unpublish' | trans" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
+                                <li><a class="pk-icon-copy pk-icon-hover" :title="'Copy' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="copy"></a></li>
                                 <li data-uk-dropdown="{mode: 'click'}">
-                                    <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent></a>
+                                    <a class="pk-icon-move pk-icon-hover" :title="'Move' | trans" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                     <div class="uk-dropdown uk-dropdown-small">
                                         <ul class="uk-nav uk-nav-dropdown">
                                             <li v-repeat="config.positions" track-by="name"><a @click="move(name, selected)">{{ label }}</a></li>
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
                             </ul>
                         </div>
 
@@ -72,7 +72,7 @@
                         <button class="uk-button uk-button-primary" type="button">{{ 'Add Widget' | trans }}</button>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-repeat="type: types"><a href="{{ $url.route('admin/site/widget/edit', {type: type.name, position:(position ? position.name:'')}) }}">{{ type.label || type.name }}</a></li>
+                                <li v-repeat="type: types"><a :href="$url.route('admin/site/widget/edit', {type: type.name, position:(position ? position.name:'')})">{{ type.label || type.name }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                         <div class="pk-table-width-100">
-                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}" number></input-filter>
+                            <input-filter :title="'Pages' | trans" :value.sync="config.filter.node" :options="nodes" number></input-filter>
                         </div>
                     </div>
 
@@ -106,19 +106,19 @@
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
                         <div class="pk-table-width-100">
-                            <input-filter title="{{ 'Pages' | trans }}" value="{{@ config.filter.node}}" options="{{ nodes }}" number></input-filter>
+                            <input-filter :title="'Pages' | trans" :value.sync="config.filter.node" :options="nodes" number></input-filter>
                         </div>
                     </div>
 
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" data-position="{{ pos.name }}" inline-template>
-                        <li :class="{'uk-active': isSelected(widget.id)}" v-repeat="widget: pos.widgets" v-var="type: widget | type" data-id="{{ widget.id }}" v-show="infilter(widget)">
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-component="position" v-show="!emptyafterfilter(pos.widgets)" data-:position="pos.name" inline-template>
+                        <li :class="{'uk-active': isSelected(widget.id)}" v-repeat="widget: pos.widgets" v-var="type: widget | type" data-:id="widget.id" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
-                                <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ widget.id }}"></div>
+                                <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id"></div>
                                 <div class="pk-table-min-width-100">
-                                    <a href="{{ $url.route('admin/site/widget/edit', {id: widget.id}) }}" v-if="type">{{ widget.title }}</a>
+                                    <a :href="$url.route('admin/site/widget/edit', {id: widget.id})" v-if="type">{{ widget.title }}</a>
                                     <span v-else>{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">

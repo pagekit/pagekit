@@ -68,7 +68,7 @@ module.exports = {
 
                     link.replace(this.$interpolate(
                         (link.tag || editor.getCursorMode()) == 'html' ?
-                            (link.outerHTML ? link.outerHTML : '<a href="{{ link.link }}">{{ link.txt }}</a>')
+                            (link.outerHTML ? link.outerHTML : '<a :href="link.link">{{ link.txt }}</a>')
                             : '[{{ link.txt }}]({{ link.link }})'
                         )
                     );

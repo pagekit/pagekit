@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div v-component="{{ type }}" link="{{@ link }}" v-if="type"></div>
+    <div v-component="{{ type }}" :link.sync="link" v-if="type"></div>
 
 </template>
 

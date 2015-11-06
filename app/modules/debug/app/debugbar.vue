@@ -6,7 +6,7 @@
 
             <ul class="pf-navbar-nav">
                 <li v-repeat="sections | orderBy 'priority'" @click="open(name)">
-                    <component is="{{ name }}" data="{{ data[name] }}"></component>
+                    <component :is="name" :data="data[name]"></component>
                 </li>
             </ul>
 

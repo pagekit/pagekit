@@ -16,7 +16,7 @@
         </div>
         <div data-uk-margin>
 
-            <package-upload api="{{ api }}" packages="{{ packages }}" type="theme"></package-upload>
+            <package-upload :api="api" :packages="packages" type="theme"></package-upload>
 
         </div>
     </div>
@@ -46,8 +46,8 @@
 
                 <div class="uk-panel-badge pk-panel-badge uk-hidden" v-if="!pkg.enabled">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-star pk-icon-hover" title="{{ 'Enable' | trans }}" data-uk-tooltip="{delay: 500}" @click="enable(pkg)"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall theme?'"></a></li>
+                        <li><a class="pk-icon-star pk-icon-hover" :title="'Enable' | trans" data-uk-tooltip="{delay: 500}" @click="enable(pkg)"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall theme?'"></a></li>
                     </ul>
                 </div>
 
@@ -58,11 +58,11 @@
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No theme found.' | trans }}</h3>
 
     <v-modal v-ref="details">
-        <package-details api="{{ api }}" package="{{ package }}"></package-details>
+        <package-details :api="api" :package="package"></package-details>
     </v-modal>
 
     <v-modal v-ref="settings">
-        <component is="{{ view }}" package="{{ package }}"></component>
+        <component :is="view" :package="package"></component>
     </v-modal>
 
 </div>

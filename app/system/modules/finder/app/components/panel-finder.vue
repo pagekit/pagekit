@@ -10,8 +10,8 @@
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" title="{{ 'Rename' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
-                        <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
+                        <li v-show="selected.length === 1"><a class="pk-icon-edit pk-icon-hover" :title="'Rename' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="rename"></a></li>
+                        <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove" v-confirm="'Delete files?'"></a></li>
                     </ul>
                 </div>
 
@@ -27,10 +27,10 @@
                 <div class="uk-margin-right">
                     <ul class="uk-subnav pk-subnav-icon">
                         <li :class="{'uk-active': view == 'table'}">
-                            <a class="pk-icon-table pk-icon-hover" title="{{ 'Table View' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'table'"></a>
+                            <a class="pk-icon-table pk-icon-hover" :title="'Table View' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'table'"></a>
                         </li>
                         <li class="{'uk-active': view == 'thumbnail'}">
-                            <a class="pk-icon-thumbnails pk-icon-hover" title="{{ 'Thumbnails View' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'thumbnail'"></a>
+                            <a class="pk-icon-thumbnails pk-icon-hover" :title="'Thumbnails View' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="view = 'thumbnail'"></a>
                         </li>
                     </ul>
                 </div>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="uk-overflow-container tm-overflow-container">
-            <partial name="{{ view }}"></partial>
+            <partial :name="view"></partial>
             <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!hasItems">{{ 'No files found.' | trans }}</h3>
         </div>
 

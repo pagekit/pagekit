@@ -5,7 +5,7 @@
         <div class="uk-form-row">
             <label for="form-url" class="uk-form-label">{{ 'Url' | trans }}</label>
             <div class="uk-form-controls">
-                <input-link id="form-url" class="uk-form-width-large" name="link" link="{{@ node.link}}" required></input-link>
+                <input-link id="form-url" class="uk-form-width-large" name="link" :link.sync="node.link" required></input-link>
                 <div class="uk-form-help-block uk-text-danger" v-show="form.link.invalid">{{ 'Invalid url.' | trans }}</div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" closed="{{ close }}">
+        <v-modal v-ref="modal" :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
@@ -9,13 +9,13 @@
                 </div>
 
                 <div class="uk-form-row">
-                    <input-video source="{{@ video.src }}"></input-video>
+                    <input-video :source.sync="video.src"></input-video>
                 </div>
 
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" placeholder="{{ 'URL' | trans }}" v-model="video.src" lazy>
+                        <input class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.src" lazy>
                     </div>
                 </div>
 

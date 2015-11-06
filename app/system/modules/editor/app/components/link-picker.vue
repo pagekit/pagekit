@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" closed="{{ close }}">
+        <v-modal v-ref="modal" :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
@@ -18,7 +18,7 @@
                 <div class="uk-form-row">
                     <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-link id="form-link-url" class="uk-width-1-1" link="{{@ link.link}}"></input-link>
+                        <input-link id="form-link-url" class="uk-width-1-1" :link.sync="link.link"></input-link>
                     </div>
                 </div>
 

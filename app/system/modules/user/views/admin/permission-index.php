@@ -4,7 +4,7 @@
 
     <h2>{{ 'Permissions' | trans }}</h2>
 
-    <div id="{{ $key }}" class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
+    <div :id="$key" class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
@@ -16,10 +16,10 @@
             <tbody>
                 <tr v-repeat="permission: group" :class="{'uk-visible-hover-inline': permission.trusted}">
                     <td class="pk-table-text-break">
-                        <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
+                        <span :title="permission.description | trans" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                     </td>
                     <td>
-                        <i class="pk-icon-warning uk-invisible" title="{{ 'This permission has security implications. Give it trusted roles only.' | trans }}" data-uk-tooltip v-if="permission.trusted"></i>
+                        <i class="pk-icon-warning uk-invisible" :title="'This permission has security implications. Give it trusted roles only.' | trans" data-uk-tooltip v-if="permission.trusted"></i>
                     </td>
                     <td class="uk-text-center" v-repeat="role: roles">
 
@@ -28,7 +28,7 @@
                             <span class="uk-position-cover" v-if="!role.administrator" @click="addPermission(role, $parent.$key)" @click="savePermissions(role)"></span>
                         </span>
 
-                        <input type="checkbox" value="{{ $parent.$key }}" v-else v-checkbox="role.permissions" @click="savePermissions(role)">
+                        <input type="checkbox" :value="$parent.$key" v-else v-checkbox="role.permissions" @click="savePermissions(role)">
                     </td>
                 </tr>
             </tbody>

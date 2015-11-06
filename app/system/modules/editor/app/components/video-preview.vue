@@ -2,14 +2,14 @@
 
     <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.src">
 
-        <img width="60" height="60" alt="{{ 'Placeholder Video' | trans }}" :src="$url('app/system/assets/images/placeholder-video.svg')">
+        <img width="60" height="60" :alt="'Placeholder Video' | trans" :src="$url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Video' | trans }}</p>
 
         <a class="uk-position-cover" @click.prevent="config"></a>
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 
@@ -26,7 +26,7 @@
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 

@@ -20,8 +20,8 @@
     <div class="uk-grid uk-grid-medium uk-grid-match" data-uk-grid-margin>
         <div class="uk-width-medium-1-3" v-repeat="[0,1,2]">
 
-            <ul class="uk-sortable pk-sortable" data-column="{{ $index }}">
-                <li v-repeat="widget: widgets | column $index" data-id="{{ widget.id }}" data-idx="{{ widget.idx }}">
+            <ul class="uk-sortable pk-sortable" data-:column="$index">
+                <li v-repeat="widget: widgets | column $index" data-:id="widget.id" data-:idx="widget.idx">
                     <panel class="uk-panel uk-panel-box uk-visible-hover-inline"></panel>
                 </li>
                 <li class="uk-hidden" v-if="false">Vue fix for empty lists<li>

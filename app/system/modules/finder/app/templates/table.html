@@ -8,7 +8,7 @@
     <tbody>
 
         <tr v-repeat="folders | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
+            <td><input type="checkbox" name="name" :value="name" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
             </td>
@@ -18,7 +18,7 @@
         </tr>
 
         <tr v-repeat="files | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
+            <td><input type="checkbox" name="name" :value="name" v-checkbox="selected"></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(url)" class="pk-icon-contain" v-lazy-background="$url(url)"></i>
                 <i v-else class="pk-icon-file-circle"></i>

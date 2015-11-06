@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" closed="{{ close }}">
+        <v-modal v-ref="modal" :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="uk-form-row">
-                    <input-image source="{{@ image.src }}"></input-image>
+                    <input-image :source.sync="image.src"></input-image>
                 </div>
 
                 <div class="uk-form-row">

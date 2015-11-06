@@ -18,7 +18,7 @@
                 <tr v-repeat="routes">
                     <td>{{ name }}</td>
                     <td>{{ pattern }} {{ methods | str }}</td>
-                    <td><abbr title="{{ controller }}">{{ controller | short }}</abbr></td>
+                    <td><abbr :title="controller">{{ controller | short }}</abbr></td>
                 </tr>
             </tbody>
         </table>

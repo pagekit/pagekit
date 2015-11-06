@@ -4,14 +4,14 @@
         <ul class="uk-subnav pk-subnav-icon">
             <template v-show="$parent.editing[widget.id]">
                 <li>
-                    <a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
+                    <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
                 </li>
                 <li>
-                    <a class="pk-icon-check pk-icon-hover" title="{{ 'Close' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
+                    <a class="pk-icon-check pk-icon-hover" :title="'Close' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
                 </li>
             </template>
             <li v-else>
-                <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
+                <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
             </li>
         </ul>
     </div>
@@ -23,7 +23,7 @@
 
             <div class="uk-form-controls">
                 <div v-el:autocomplete class="uk-autocomplete uk-width-1-1">
-                    <input id="form-city" class="uk-width-1-1" type="text" placeholder="{{ location }}" v-el:location @blur="clear" autocomplete="off">
+                    <input id="form-city" class="uk-width-1-1" type="text" :placeholder="location" v-el:location @blur="clear" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -116,7 +116,7 @@
                     },
 
                     template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">\
-                                  {{~items}}<li data-value="{{$item.name}}" data-id="{{$item.id}}"><a>{{$item.name}} <span>, {{$item.sys.country}}</span></a></li>{{/items}}\
+                                  {{~items}}<li :data-value="$item.name" :data-id="$item.id"><a>{{$item.name}} <span>, {{$item.sys.country}}</span></a></li>{{/items}}\
                                   {{^items.length}}<li class="uk-skip"><a class="uk-text-muted">{{msgNoResults}}</a></li>{{/end}} \
                                </ul>',
 

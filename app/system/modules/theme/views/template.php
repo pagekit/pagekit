@@ -24,9 +24,9 @@
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul id="js-appnav" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                                <li v-for="item in nav" data-id="{{ item.id }}">
+                                <li v-for="item in nav" data-:id="item.id">
                                     <a class="uk-panel tm-panel-icon" :href="item.url">
-                                        <img width="50" height="50" alt="{{ item.label | trans }}" :src="item.icon">
+                                        <img width="50" height="50" :alt="item.label | trans" :src="item.icon">
                                         <p>{{ item.label | trans }}</p>
                                     </a>
                                 </li>
@@ -37,10 +37,10 @@
                     <div class="tm-contrast">
 
                         <ul class="uk-grid uk-grid-small uk-flex-middle">
-                            <li><a class="tm-icon-help" href="https://gitter.im/pagekit/pagekit" title="{{ 'Get Help' | trans }}" target="_blank"></a></li>
-                            <li><a class="tm-icon-visit" href="{{ $url.route('') }}" title="{{ 'Visit Site' | trans }}" target="_blank"></a></li>
-                            <li><a class="tm-icon-logout" href="{{ $url.route('user/logout', {redirect: 'admin/login'}) }}" title="{{ 'Logout' | trans }}"></a></li>
-                            <li class="uk-margin-small-left"><a href="{{ $url.route('admin/user/edit', {id: user.id}) }}" title="{{ 'Profile' | trans }}"><img class="uk-border-circle uk-margin-small-right uk-invisible" height="32" width="32" title="{{ user.name }}" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
+                            <li><a class="tm-icon-help" href="https://gitter.im/pagekit/pagekit" :title="'Get Help' | trans" target="_blank"></a></li>
+                            <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
+                            <li><a class="tm-icon-logout" :href="$url.route('user/logout', {redirect: 'admin/login'})" :title="'Logout' | trans"></a></li>
+                            <li class="uk-margin-small-left"><a :href="$url.route('admin/user/edit', {id: user.id})" :title="'Profile' | trans"><img class="uk-border-circle uk-margin-small-right uk-invisible" height="32" width="32" :title="user.name" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
                         </ul>
 
                     </div>
@@ -60,7 +60,7 @@
                     <h1 class="tm-heading uk-h3">{{ item.label | trans }}</h1>
 
                     <a href="#offcanvas-flip" data-uk-offcanvas>
-                        <img class="uk-border-circle" height="36" width="36" alt="{{ user.username }}" v-gravatar="user.email">
+                        <img class="uk-border-circle" height="36" width="36" :alt="user.username" v-gravatar="user.email">
                     </a>
                 </div>
 
@@ -85,7 +85,7 @@
                     <li class="uk-nav-header">{{ 'Extensions' | trans }}</li>
                     <li :class="{ 'uk-active': item.active }" v-for="item in nav">
                         <a :href="item.url">
-                            <img class="uk-margin-small-right" width="34" height="34" alt="{{ item.label | trans }}" :src="item.icon"> {{ item.label | trans }}
+                            <img class="uk-margin-small-right" width="34" height="34" :alt="item.label | trans" :src="item.icon"> {{ item.label | trans }}
                         </a>
                     </li>
                 </ul>
@@ -98,9 +98,9 @@
 
                 <ul class="uk-nav uk-nav-offcanvas">
                     <li class="uk-nav-header">{{ user.username }}</li>
-                    <li><a href="{{ $url.route('') }}" target="_blank">{{ 'Visit Site' | trans }}</a></li>
-                    <li><a href="{{ $url.route('admin/user/edit', {id: user.id}) }}">{{ 'Settings' | trans }}</a></li>
-                    <li><a href="{{ $url.route('user/logout', {redirect: 'admin/login'}) }}">{{ 'Logout' | trans }}</a></li>
+                    <li><a :href="$url.route('')" target="_blank">{{ 'Visit Site' | trans }}</a></li>
+                    <li><a :href="$url.route('admin/user/edit', {id: user.id})">{{ 'Settings' | trans }}</a></li>
+                    <li><a :href="$url.route('user/logout', {redirect: 'admin/login'})">{{ 'Logout' | trans }}</a></li>
                 </ul>
 
             </div>

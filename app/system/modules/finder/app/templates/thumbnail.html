@@ -7,7 +7,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
+                <input type="checkbox" :value="name" v-checkbox="selected">
                 <a @click="setPath(path, $event)">{{ name }}</a>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
+                <input type="checkbox" :value="name" v-checkbox="selected">
                 {{ name }}
             </div>
         </div>

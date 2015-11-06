@@ -1,7 +1,7 @@
 <template>
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!image.src" @click.prevent="pick">
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" :src="$url('app/system/assets/images/placeholder-image.svg')">
+        <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
     </a>
 
@@ -15,7 +15,7 @@
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 
@@ -29,7 +29,7 @@
             </div>
 
             <div class="uk-form-row">
-                <input-image source="{{@ img.src }}"></input-image>
+                <input-image :source.sync="img.src"></input-image>
             </div>
 
             <div class="uk-form-row">

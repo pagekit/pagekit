@@ -9,7 +9,7 @@
     <div class="uk-modal" v-el:modal>
         <div class="uk-modal-dialog">
 
-            <package-details api="{{ api }}" package="{{ package }}"></package-details>
+            <package-details :api="api" :package="package"></package-details>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>

@@ -11,8 +11,8 @@
                     <li class="uk-visible-hover" :class="{'uk-active': isActive(menu), 'uk-nav-divider': menu.divider}" v-repeat="menu: menus | divided">
                         <a @click="selectMenu(menu, false)" v-if="!menu.divider">{{ menu.label }}</a>
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!menu.fixed && !menu.divider">
-                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click="editMenu(menu)"></a></li>
-                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="removeMenu(menu)" v-confirm="'Delete menu?'"></a></li>
+                            <li><a class="pk-icon-edit pk-icon-hover" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click="editMenu(menu)"></a></li>
+                            <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="removeMenu(menu)" v-confirm="'Delete menu?'"></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -33,17 +33,17 @@
 
                     <div class="uk-margin-left" v-show="selected.length">
                         <ul class="uk-subnav pk-subnav-icon">
-                            <li><a class="pk-icon-check pk-icon-hover" title="{{ 'Publish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
-                            <li><a class="pk-icon-block pk-icon-hover" title="{{ 'Unpublish' | trans }}" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
+                            <li><a class="pk-icon-check pk-icon-hover" :title="'Publish' | trans" data-uk-tooltip="{delay: 500}" @click="status(1)"></a></li>
+                            <li><a class="pk-icon-block pk-icon-hover" :title="'Unpublish' | trans" data-uk-tooltip="{delay: 500}" @click="status(0)"></a></li>
                             <li v-show="showMove" data-uk-dropdown="{ mode: 'click' }">
-                                <a class="pk-icon-move pk-icon-hover" title="{{ 'Move' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent></a>
+                                <a class="pk-icon-move pk-icon-hover" :title="'Move' | trans" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav uk-nav-dropdown">
                                         <li v-repeat="menus | trash"><a @click="moveNodes(id)">{{ label }}</a></li>
                                     </ul>
                                 </div>
                             </li>
-                            <li v-show="showDelete"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="removeNodes" v-confirm="'Delete item?'"></a></li>
+                            <li v-show="showDelete"><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="removeNodes" v-confirm="'Delete item?'"></a></li>
                         </ul>
                     </div>
 
@@ -102,7 +102,7 @@
                 <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="config.menus" v-var="assigned: getMenu(name)">
-                        <label><input type="checkbox" value="{{ name }}" v-checkbox="edit.positions"> {{ label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
+                        <label><input type="checkbox" :value="name" v-checkbox="edit.positions"> {{ label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
                     </p>
                 </div>
             </div>
@@ -119,19 +119,19 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': isSelected(node)}" data-id="{{ node.id }}">
+    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': isSelected(node)}" data-:id="node.id">
         <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
             </div>
-            <div class="pk-table-width-minimum"><input type="checkbox" name="id" value="{{ node.id }}"></div>
+            <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="node.id"></div>
             <div class="pk-table-min-width-100">
                 <a :href="$url.route('admin/site/page/edit', { id: node.id })">{{ node.title }}</a>
                 <span class="uk-text-muted uk-text-small uk-margin-small-left" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home pk-icon-hover uk-invisible" title="{{ 'Set as frontpage' | trans }}" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" @click="setFrontpage(node)"></a>
-                <i class="pk-icon-home-active pk-icon-muted uk-float-right" title="{{ 'Frontpage' | trans }}" v-if="isFrontpage"></i>
+                <a class="pk-icon-home pk-icon-hover uk-invisible" :title="'Set as frontpage' | trans" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" @click="setFrontpage(node)"></a>
+                <i class="pk-icon-home-active pk-icon-muted uk-float-right" :title="'Frontpage' | trans" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
@@ -140,7 +140,7 @@
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>
             <div class="pk-table-width-150 pk-table-max-width-150 uk-text-truncate">
-                <a title="{{ node.url }}" target="_blank" :href="$url.route(node.url.substr(1))" v-if="node.accessible && node.url">{{ decodeURI(node.url) }}</a>
+                <a :title="node.url" target="_blank" :href="$url.route(node.url.substr(1))" v-if="node.accessible && node.url">{{ decodeURI(node.url) }}</a>
                 <span v-else>{{ node.path }}</span>
             </div>
         </div>

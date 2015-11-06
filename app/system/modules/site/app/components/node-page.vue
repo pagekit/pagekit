@@ -4,13 +4,13 @@
         <div class="uk-flex-item-1">
 
             <div class="uk-form-row">
-                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" placeholder="{{ 'Enter Title' | trans }}" v-model="page.title" v-validate="required" lazy>
+                <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" :placeholder="'Enter Title' | trans" v-model="page.title" v-validate="required" lazy>
 
                 <div class="uk-form-help-block uk-text-danger" v-show="form['page[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</div>
             </div>
 
             <div class="uk-form-row">
-                <v-editor value="{{@ page.content }}" options="{{ {markdown : page.data.markdown} }}"></v-editor>
+                <v-editor :value.sync="page.content" :options="{markdown : page.data.markdown}"></v-editor>
                 <p>
                     <label><input type="checkbox" v-model="page.data.markdown"> {{ 'Enable Markdown' | trans }}</label>
                 </p>
@@ -53,7 +53,7 @@
 
                     <div class="uk-form-controls uk-form-controls-text">
                         <p v-repeat="role: roles" class="uk-form-controls-condensed">
-                            <label><input type="checkbox" value="{{ role.id }}" v-checkbox="node.roles" number> {{ role.name }}</label>
+                            <label><input type="checkbox" :value="role.id" v-checkbox="node.roles" number> {{ role.name }}</label>
                         </p>
                     </div>
                 </div>

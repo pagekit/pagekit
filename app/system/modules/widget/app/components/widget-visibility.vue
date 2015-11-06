@@ -65,7 +65,7 @@
                 template:
                         '<li>'+
                             '<label>' +
-                                '<input type="checkbox" value="{{ node.id }}" v-checkbox="widget.nodes" number>' +
+                                '<input type="checkbox" :value="node.id" v-checkbox="widget.nodes" number>' +
                                 ' {{ node.title }}' +
                             '</label>' +
                             '<ul class="uk-list" v-if="menu.getNodes(node)">' +
