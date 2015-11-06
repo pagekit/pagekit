@@ -43,7 +43,7 @@
 
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
-                        <img width="800" height="600" alt="{{ pkg.title }}" v-attr="src: pkg.extra.image">
+                        <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
                         <div>{{ pkg.description }}</div>

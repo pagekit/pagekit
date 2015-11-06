@@ -44,7 +44,7 @@
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="statuses">
-                        <label><input type="radio" v-model="user.status" value="{{ $key }}" v-attr="disabled: config.currentUser == user.id" number> {{ $value }}</label>
+                        <label><input type="radio" v-model="user.status" value="{{ $key }}" :disabled="config.currentUser == user.id" number> {{ $value }}</label>
                     </p>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-repeat="role: roles">
-                        <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" v-attr="disabled: role.disabled" number> {{ role.name }}</label>
+                        <label><input type="checkbox" value="{{ role.id }}" v-checkbox="user.roles" :disabled="role.disabled" number> {{ role.name }}</label>
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
             <div class="uk-panel uk-panel-box uk-text-center" v-show="user.name">
 
                 <div class="uk-panel-teaser">
-                    <img height="280" width="280" v-attr="alt: user.name" v-gravatar="user.email">
+                    <img height="280" width="280" :alt="user.name" v-gravatar="user.email">
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove uk-text-break">{{ user.name }}

@@ -1,13 +1,13 @@
 <template>
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-image.svg')">
+        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" :src="$url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else">
 
-        <img v-attr="src: $url(source)">
+        <img :src="$url(source)">
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
@@ -27,7 +27,7 @@
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !hasSelection()" @click.prevent="select">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" :disabled="!hasSelection()" @click.prevent="select">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>

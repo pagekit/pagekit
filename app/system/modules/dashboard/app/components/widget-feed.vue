@@ -63,7 +63,7 @@
 
         <ul class="uk-list uk-list-line uk-margin-remove">
             <li v-repeat="entry: feed.entries | count">
-                <a v-attr="href: entry.link" target="_blank">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
+                <a :href="entry.link" target="_blank">{{ entry.title }}</a> <span class="uk-text-muted uk-text-nowrap">{{ entry.publishedDate | relativeDate }}</span>
 
                 <p class="uk-margin-small-top" v-if="widget.content == '1'">{{ entry.contentSnippet }}</p>
 

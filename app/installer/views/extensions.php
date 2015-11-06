@@ -59,7 +59,7 @@
                         <div class="uk-invisible">
                             <ul class="uk-subnav pk-subnav-icon">
                                 <li><a class="pk-icon-info pk-icon-hover" title="{{ 'View Details' | trans }}" data-uk-tooltip="{delay: 500}" @click="details(pkg)"></a></li>
-                                <li v-show="pkg.enabled && pkg.permissions"><a class="pk-icon-permission pk-icon-hover" title="{{ 'View Permissions' | trans }}" data-uk-tooltip="{delay: 500}" v-attr="href: $url.route('admin/user/permissions#:name',{name:pkg.module})"></a></li>
+                                <li v-show="pkg.enabled && pkg.permissions"><a class="pk-icon-permission pk-icon-hover" :title="'View Permissions' | trans" data-uk-tooltip="{delay: 500}" :href="$url.route('admin/user/permissions#:name', {name:pkg.module})"></a></li>
                                 <li v-show="!pkg.enabled"><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall extension?'"></a></li>
                             </ul>
                         </div>

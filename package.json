@@ -16,7 +16,7 @@
     "json-loader": "^0.5.2",
     "lodash": "^3.7.0",
     "merge-stream": "^0.1.7",
-    "vue-loader": "^2.1.1",
+    "vue-loader": "^6.0.4",
     "webpack": "^1.11.0"
   }
 }

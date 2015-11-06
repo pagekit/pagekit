@@ -1,5 +1,7 @@
 function install (Vue) {
 
+    //Vue.config.debug = true;
+
     var config = window.$pagekit;
 
     /**

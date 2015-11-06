@@ -20,7 +20,7 @@
             <a class="uk-button uk-button-primary" @click.prevent="install" v-show="hasUpdate">
                 <span>{{ 'Update' | trans }}</span>
             </a>
-            <a class="uk-button uk-button-success" v-attr="href: update.url">{{ 'Download %version%' | trans update }}</a>
+            <a class="uk-button uk-button-success" :href="update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
 
     </div>
@@ -39,7 +39,7 @@
 
         <pre v-html="output" v-show="output"></pre>
 
-        <a class="uk-button uk-button-{{ status }}" v-attr="href: $url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
+        <a class="uk-button uk-button-{{ status }}" :href="$url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
 
     </div>
 

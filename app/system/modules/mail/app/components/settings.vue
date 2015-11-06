@@ -75,8 +75,8 @@
             <div class="uk-form-controls">
                 <select id="form-smtpencryption" class="uk-form-width-large" v-model="options.encryption">
                     <option value="">{{ 'None' | trans }}</option>
-                    <option value="ssl" v-attr="disabled: !ssl">{{ 'SSL' | trans }}</option>
-                    <option value="tls" v-attr="disabled: !ssl">{{ 'TLS' | trans }}</option>
+                    <option value="ssl" :disabled="!ssl">{{ 'SSL' | trans }}</option>
+                    <option value="tls" :disabled="!ssl">{{ 'TLS' | trans }}</option>
                 </select>
                 <p class="uk-form-help-block" v-if="!ssl">{{ 'Please enable the PHP Open SSL extension.' | trans }}</p>
             </div>

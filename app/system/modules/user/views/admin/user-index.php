@@ -30,7 +30,7 @@
         </div>
         <div data-uk-margin>
 
-            <a class="uk-button uk-button-primary" v-attr="href: $url.route('admin/user/edit')">{{ 'Add User' | trans }}</a>
+            <a class="uk-button uk-button-primary" :href="$url.route('admin/user/edit')">{{ 'Add User' | trans }}</a>
 
         </div>
     </div>
@@ -61,7 +61,7 @@
                         <img class="uk-img-preserve uk-border-circle" width="40" height="40" alt="{{ user.name }}" v-gravatar="user.email">
                     </td>
                     <td class="uk-text-nowrap">
-                        <a v-attr="href: $url.route('admin/user/edit', { id: user.id })">{{ user.username }}</a>
+                        <a :href="$url.route('admin/user/edit', { id: user.id })">{{ user.username }}</a>
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
