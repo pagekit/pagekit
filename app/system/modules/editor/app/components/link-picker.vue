@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" :closed="close">
+        <v-modal vref:modal :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
@@ -44,7 +44,7 @@
         },
 
         ready: function () {
-            this.$.modal.open();
+            this.$refs.modal.open();
         },
 
         methods: {
@@ -54,7 +54,7 @@
             },
 
             update: function () {
-                this.$.modal.close();
+                this.$refs.modal.close();
                 this.$emit('select', this.link);
             }
 

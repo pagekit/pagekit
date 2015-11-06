@@ -54,7 +54,7 @@ module.exports = {
 
             this.$set('edit', _.merge({positions: []}, menu));
 
-            this.$.modal.open();
+            this.$refs.modal.open();
         },
 
         saveMenu: function (menu) {
@@ -75,7 +75,7 @@ module.exports = {
         },
 
         cancel: function () {
-            this.$.modal.close();
+            this.$refs.modal.close();
         },
 
         setFrontpage: function (node) {

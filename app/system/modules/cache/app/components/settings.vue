@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <v-modal v-ref="modal">
+    <v-modal vref:modal>
         <form class="uk-form-stacked">
 
             <div class="uk-modal-header">
@@ -86,7 +86,7 @@
 
             open: function () {
                 this.$set('cache', {cache: true});
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             clear: function () {
@@ -94,7 +94,7 @@
                     this.$notify('Cache cleared.')
                 });
 
-                this.$.modal.close();
+                this.$refs.modal.close();
             }
 
         }

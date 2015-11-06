@@ -27,7 +27,7 @@ module.exports = {
 
         edit: function (role) {
             this.$set('role', $.extend({}, role));
-            this.$.modal.open();
+            this.$refs.modal.open();
         },
 
         save: function () {
@@ -52,7 +52,7 @@ module.exports = {
                 this.$notify(data, 'danger');
             });
 
-            this.$.modal.close();
+            this.$refs.modal.close();
         },
 
         remove: function (role) {
@@ -70,7 +70,7 @@ module.exports = {
 
             var children = sortable.element.children();
 
-            this.$.ordered.forEach(function (model) {
+            this.$refs.ordered.forEach(function (model) {
                 model.role.priority = children.index(model.$el);
             });
 

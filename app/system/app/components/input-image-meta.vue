@@ -21,7 +21,7 @@
 
     </div>
 
-    <v-modal v-ref="modal">
+    <v-modal vref:modal>
         <form class="uk-form uk-form-stacked" @submit="update">
 
             <div class="uk-modal-header">
@@ -90,13 +90,13 @@
             pick: function() {
                 this.img.src = this.image.src;
                 this.img.alt = this.image.alt;
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             update: function() {
                 this.image.src = this.img.src;
                 this.image.alt = this.img.alt;
-                this.$.modal.close();
+                this.$refs.modal.close();
             },
 
             remove: function() {

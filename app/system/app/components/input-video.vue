@@ -22,9 +22,9 @@
 
     </div>
 
-    <v-modal v-ref="modal" large>
+    <v-modal vref:modal large>
 
-        <panel-finder :root="storage" :modal="true" v-ref="finder"></panel-finder>
+        <panel-finder :root="storage" :modal="true" vref:finder></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -48,8 +48,8 @@
         computed: {
 
             selectButton: function () {
-                var selected = this.$.finder.getSelected();
-                return selected.length === 1 && this.$.finder.isVideo(selected[0])
+                var selected = this.$refs.finder.getSelected();
+                return selected.length === 1 && this.$refs.finder.isVideo(selected[0])
             }
 
         },
@@ -64,12 +64,12 @@
         methods: {
 
             pick: function () {
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             select: function () {
-                this.source = this.$.finder.getSelected()[0];
-                this.$.modal.close();
+                this.source = this.$refs.finder.getSelected()[0];
+                this.$refs.modal.close();
             },
 
             remove: function () {

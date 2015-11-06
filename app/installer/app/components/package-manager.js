@@ -56,7 +56,7 @@ module.exports = {
 
         details: function (pkg) {
             this.$set('package', pkg);
-            this.$.details.open();
+            this.$refs.details.open();
         },
 
         settings: function (pkg) {
@@ -81,7 +81,7 @@ module.exports = {
 
                 this.$set('package', pkg);
                 this.$set('view', view);
-                this.$.settings.open();
+                this.$refs.settings.open();
 
             } else {
                 window.location = pkg.settings;

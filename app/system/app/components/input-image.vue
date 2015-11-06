@@ -21,9 +21,9 @@
 
     </div>
 
-    <v-modal v-ref="modal" large>
+    <v-modal vref:modal large>
 
-        <panel-finder :root="storage" v-ref="finder" :modal="true"></panel-finder>
+        <panel-finder :root="storage" vref:finder :modal="true"></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -50,14 +50,14 @@
         methods: {
 
             pick: function() {
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             select: function() {
-                this.source = this.$.finder.getSelected()[0];
+                this.source = this.$refs.finder.getSelected()[0];
                 this.$dispatch('image-selected', this.source);
-                this.$.finder.removeSelection();
-                this.$.modal.close();
+                this.$refs.finder.removeSelection();
+                this.$refs.modal.close();
             },
 
             remove: function() {
@@ -65,8 +65,8 @@
             },
 
             hasSelection: function() {
-                var selected = this.$.finder.getSelected();
-                return selected.length === 1 && this.$.finder.isImage(selected[0])
+                var selected = this.$refs.finder.getSelected();
+                return selected.length === 1 && this.$refs.finder.isImage(selected[0])
             }
 
         }

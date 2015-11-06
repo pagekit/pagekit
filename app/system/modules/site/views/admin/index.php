@@ -83,7 +83,7 @@
         </div>
     </div>
 
-    <v-modal v-ref="modal">
+    <v-modal vref:modal>
         <form class="uk-form uk-form-stacked" v-validator="form" @submit="saveMenu(edit) | valid">
 
             <div class="uk-modal-header">

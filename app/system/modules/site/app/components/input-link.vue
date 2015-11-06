@@ -9,7 +9,7 @@
 
     <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
 
-    <v-modal v-ref="modal">
+    <v-modal vref:modal>
 
         <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
@@ -17,7 +17,7 @@
                 <h2>{{ 'Select Link' | trans }}</h2>
             </div>
 
-            <panel-link v-ref="links"></panel-link>
+            <panel-link vref:links></panel-link>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
@@ -72,21 +72,21 @@
             },
 
             open: function () {
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             update: function () {
-                this.$set('link', this.$.links.link);
+                this.$set('link', this.$refs.links.link);
 
                 Vue.nextTick(function() {
                     this.$els.input.dispatchEvent(new Event('input'));
                 }.bind(this));
 
-                this.$.modal.close();
+                this.$refs.modal.close();
             },
 
             showUpdate: function () {
-                return !!this.$.links.link;
+                return !!this.$refs.links.link;
             }
 
         }

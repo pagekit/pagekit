@@ -71,11 +71,11 @@
 
     <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages | empty">{{ 'No extension found.' | trans }}</h3>
 
-    <v-modal v-ref="details">
+    <v-modal vref:details>
         <package-details :api="api" :package="package"></package-details>
     </v-modal>
 
-    <v-modal v-ref="settings">
+    <v-modal vref:settings>
         <component :is="view" :package="package"></component>
     </v-modal>
 
