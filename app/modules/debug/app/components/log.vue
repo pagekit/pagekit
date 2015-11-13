@@ -38,10 +38,6 @@
 
         data: function () {
             return this.data;
-        },
-
-        created: function () {
-            this.$parent.add(this);
         }
 
     };

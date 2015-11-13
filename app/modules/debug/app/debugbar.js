@@ -13,7 +13,7 @@ Debugbar.component('log', require('./components/log.vue'));
 
 $(function () {
 
-    new Debugbar().$appendTo('body');
+    new Debugbar().$mount().$appendTo('body');
 
 });
 

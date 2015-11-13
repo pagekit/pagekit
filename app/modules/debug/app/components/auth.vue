@@ -43,10 +43,6 @@
             return this.data;
         },
 
-        created: function () {
-            this.$parent.add(this);
-        },
-
         computed: {
 
             label: function () {

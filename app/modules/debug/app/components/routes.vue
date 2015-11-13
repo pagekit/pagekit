@@ -5,7 +5,6 @@
     <script id="panel-routes" type="text/template">
 
         <h1>Routes</h1>
-
         <table class="pf-table">
             <thead>
                 <tr>
@@ -40,10 +39,6 @@
 
         data: function () {
             return this.data;
-        },
-
-        created: function () {
-            this.$parent.add(this);
         },
 
         filters: {
