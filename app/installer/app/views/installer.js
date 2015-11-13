@@ -39,17 +39,16 @@ var installer = {
             } else {
                 this.$set('step', step);
             }
+
         },
 
         stepLanguage: function () {
-            this.$asset({js: [this.$url.route('system/intl/:locale', {locale: this.locale})]}, function () {
 
+            this.$asset({js: [this.$url.route('system/intl/:locale', {locale: this.locale})]}, function () {
                 this.$set('option.system.admin.locale', this.locale);
                 this.$set('option.system.site.locale', this.locale);
-
                 this.$locale = window.$locale;
                 this.gotoStep('database');
-
             });
 
         },
@@ -57,6 +56,7 @@ var installer = {
         stepDatabase: function () {
 
             var database = this.config.database;
+
             Object.keys(database.connections).forEach(function(name) {
                 if (name != database.default) {
                     delete(database.connections[name]);
@@ -81,8 +81,10 @@ var installer = {
         },
 
         stepSite: function () {
+
             this.gotoStep('finish');
             this.stepInstall();
+
         },
 
         stepInstall: function () {

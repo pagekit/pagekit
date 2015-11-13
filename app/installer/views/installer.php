@@ -33,7 +33,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Choose language' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ "Select your site language." | trans }}</div>
 
-                        <form class="uk-form" @submit="stepLanguage">
+                        <form class="uk-form" @submit.prevent="stepLanguage">
 
                             <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions"></select>
 
@@ -63,7 +63,7 @@
 
                         <div class="uk-alert uk-alert-danger uk-margin uk-text-center" v-show="message"><p>{{ message }}</p></div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formDatabase" @submit="stepDatabase | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formDatabase" @submit.prevent="stepDatabase | valid">
                             <div class="uk-form-row">
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
@@ -142,7 +142,7 @@
                         <h1 class="uk-margin-small-bottom uk-text-center">{{ 'Setup your site' | trans }}</h1>
                         <div class="uk-margin-large-bottom uk-text-muted uk-text-center">{{ 'Choose a title and create the administrator account.' | trans }}</div>
 
-                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" @submit="stepSite | valid">
+                        <form class="uk-form uk-form-horizontal tm-form-horizontal" v-validator="formSite" @submit.prevent="stepSite | valid">
                             <div class="uk-form-row">
                                 <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
                                 <div class="uk-form-controls">
