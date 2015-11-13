@@ -49,7 +49,7 @@
 
                 $.each(this.$options.components, function (name, component) {
                     if (data[name]) {
-                        sections.$set(name, $.extend({name: name}, component.options.section));
+                        Vue.set(sections, name, $.extend({name: name}, component.options.section));
                     }
                 });
 

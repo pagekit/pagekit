@@ -59,6 +59,12 @@ module.exports = {
             this.$notify(message, 'danger');
         }
 
+    },
+
+    components: {
+
+        'package-details': require('../components/package-details.vue')
+
     }
 
 };

@@ -1,6 +1,6 @@
 <template>
 
-    <a title="Routes"><div class="pf-icon pf-icon-routes"></div> Routes</a>
+    <a :title="'Routes' | trans"><span class="pf-icon pf-icon-routes"></span>Routes</a>
 
     <script id="panel-routes" type="text/template">
 
@@ -29,32 +29,35 @@
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 20,
-        panel: '#panel-routes'
-    },
-
-    props: ['data'],
-
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    },
-
-    filters: {
-
-        str: function (methods) {
-            return methods.length ? '(' + methods + ')' : '';
+        section: {
+            priority: 20,
+            panel: '#panel-routes'
         },
 
-        short: function (controller) {
-            return controller.split('\\').pop();
+        props: ['data'],
+
+        data: function () {
+            return this.data;
+        },
+
+        created: function () {
+            this.$parent.add(this);
+        },
+
+        filters: {
+
+            str: function (methods) {
+                return methods.length ? '(' + methods + ')' : '';
+            },
+
+            short: function (controller) {
+                return controller.split('\\').pop();
+            }
+
         }
 
-    }
-
-  };
+    };
 
 </script>

@@ -16,7 +16,6 @@ module.exports = {
 
     components: {
 
-        'package-details': require('./package-details.vue'),
         'package-upload': require('./package-upload.vue')
 
     },

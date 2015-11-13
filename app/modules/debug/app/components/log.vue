@@ -27,20 +27,23 @@
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 70,
-        panel: '#panel-log'
-    },
+        section: {
+            priority: 70,
+            panel: '#panel-log'
+        },
 
-    props: ['data'],
+        props: ['data'],
 
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    }
+        data: function () {
+            return this.data;
+        },
 
-  };
+        created: function () {
+            this.$parent.add(this);
+        }
+
+    };
 
 </script>
