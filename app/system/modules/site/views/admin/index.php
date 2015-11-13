@@ -65,7 +65,7 @@
             <div class="uk-overflow-container">
 
                 <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !tree[0]}">
-                    <div class="pk-table-width-minimum pk-table-fake-nestable-padding"><input type="checkbox" v-check-all="selected: input[name=id]" number></div>
+                    <div class="pk-table-width-minimum pk-table-fake-nestable-padding"><input type="checkbox" v-check-all:selected.literal="input[name=id]" number></div>
                     <div class="pk-table-min-width-100">{{ 'Title' | trans }}</div>
                     <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                     <div class="pk-table-width-100">{{ 'Type' | trans }}</div>

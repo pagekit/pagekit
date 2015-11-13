@@ -39,14 +39,14 @@
         <table class="uk-table uk-table-hover uk-table-middle">
             <thead>
                 <tr>
-                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=id]" number></th>
-                    <th colspan="2" v-order="username: config.filter.order">
+                    <th class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected.literal="input[name=id]" number></th>
+                    <th colspan="2" v-order:username="config.filter.order">
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
                         <input-filter :title="'Status' | trans" :value.sync="config.filter.status" :options="statuses"></input-filter>
                     </th>
-                    <th class="pk-table-width-200" v-order="email: config.filter.order">
+                    <th class="pk-table-width-200" v-order:email="config.filter.order">
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
@@ -65,10 +65,14 @@
                         <div class="uk-text-muted">{{ user.name }}</div>
                     </td>
                     <td class="uk-text-center">
-                        <a href="#" :title="user.statusText" :class="{'pk-icon-circle-success': user.login && user.status, 'pk-icon-circle-danger': !user.status,'pk-icon-circle-primary': user.status" @click="toggleStatus(user)"></a>
+                        <a href="#" :title="user.statusText" :class="{
+                            'pk-icon-circle-success': user.login && user.status,
+                            'pk-icon-circle-danger': !user.status,
+                            'pk-icon-circle-primary': user.status
+                        }" @click="toggleStatus(user)"></a>
                     </td>
                     <td>
-                        <a href="mailto:{{ user.email }}">{{ user.email }}</a> <i class="uk-icon-check" :title="'Verified Email Address' | trans" v-if="showVerified(user)"></i>
+                        <a :href="'mailto:'+user.email">{{ user.email }}</a> <i class="uk-icon-check" :title="'Verified Email Address' | trans" v-if="showVerified(user)"></i>
                     </td>
                     <td>
                         {{ showRoles(user) }}

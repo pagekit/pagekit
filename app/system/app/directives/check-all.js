@@ -1,7 +1,5 @@
 module.exports = {
 
-    isLiteral: true,
-
     bind: function () {
 
         var self = this, keypath = this.arg, selector = this.expression;
