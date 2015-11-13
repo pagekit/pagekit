@@ -43,15 +43,17 @@
 
         props: ['config', 'options'],
 
-        data: function() {
-            return _.merge({
-                link: '<a href="https://www.transifex.com/pagekit/pagekit-cms/">Transifex</a>'
-            }, window.$system);
+        data: function () {
+            return {locales: window.$system.locales};
         },
 
         computed: {
 
-            option: function() {
+            link: function () {
+                return '<a href="https://www.transifex.com/pagekit/pagekit-cms/">Transifex</a>';
+            },
+
+            option: function () {
                 return this.$root.$get('options.system');
             }
 

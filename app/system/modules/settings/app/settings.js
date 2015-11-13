@@ -4,7 +4,7 @@ window.Settings = module.exports = {
         return window.$settings;
     },
 
-    ready: function() {
+    ready: function () {
 
         UIkit.tab(this.$els.tab, {connect: this.$els.content});
 
@@ -34,9 +34,9 @@ window.Settings = module.exports = {
 
     methods: {
 
-        save: function() {
+        save: function () {
             this.$broadcast('save', this.$data);
-            this.$resource('admin/system/settings/save').save({ config: this.config, options: this.options }, function() {
+            this.$resource('admin/system/settings/save').save({config: this.config, options: this.options}, function () {
                 this.$notify('Settings saved.');
             }, function (data) {
                 this.$notify(data, 'danger');

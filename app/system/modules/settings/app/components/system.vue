@@ -43,7 +43,7 @@
 
         props: ['config', 'options'],
 
-        data: function() {
+        data: function () {
             return window.$system;
         }
 
