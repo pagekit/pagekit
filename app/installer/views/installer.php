@@ -35,7 +35,9 @@
 
                         <form class="uk-form" @submit.prevent="stepLanguage">
 
-                            <select class="uk-width-1-1" size="10" v-model="locale" options="locales | toOptions"></select>
+                            <select class="uk-width-1-1" size="10" v-model="locale">
+                                <option v-for="lang in locales" :value="$key">{{ lang }}</option>
+                            </select>
 
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-primary" type="submit">

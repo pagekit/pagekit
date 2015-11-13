@@ -14,8 +14,9 @@
             <div class="uk-form-row">
                 <label for="form-menu" class="uk-form-label">{{ 'Menu' | trans }}</label>
                 <div class="uk-form-controls">
-                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu" options="menuOptions">
+                    <select id="form-menu" class="uk-form-width-large" v-model="widget.data.menu">
                         <option value="">{{ '- Menu -' | trans }}</option>
+                        <option v-for="m in menus" :value="m.id">{{ m.label }}</option>
                     </select>
                 </div>
             </div>
@@ -95,16 +96,6 @@
                     return menu.id !== 'trash';
                 }));
             });
-        },
-
-        computed: {
-
-            menuOptions: function () {
-                return _.map(this.menus, function (menu) {
-                    return {text: menu.label, value: menu.id};
-                });
-            }
-
         }
 
     };
