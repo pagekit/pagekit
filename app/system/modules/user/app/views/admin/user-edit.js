@@ -1,7 +1,7 @@
 window.User = module.exports = {
 
     data: function () {
-        return _.merge({password: ''}, window.$data);
+        return _.extend({sections: []}, window.$data);
     },
 
     created: function () {
@@ -26,18 +26,11 @@ window.User = module.exports = {
         this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
     },
 
-    computed: {
-
-        isNew: function () {
-            return !this.user.access && this.user.status;
-        }
-
-    },
-
     methods: {
 
         save: function () {
-            var data = {user: this.user, password: this.password};
+
+            var data = {user: this.user};
 
             this.$broadcast('save', data);
 
@@ -54,6 +47,7 @@ window.User = module.exports = {
             }).error(function (data) {
                 this.$notify(data, 'danger');
             });
+
         }
 
     },

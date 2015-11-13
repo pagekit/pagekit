@@ -1,6 +1,6 @@
-<?php $view->script('user-edit', 'system/user:app/bundle/user-edit.js', ['vue', 'uikit-form-password']) ?>
+<?php $view->script('user-edit', 'system/user:app/bundle/user-edit.js', ['vue']) ?>
 
-<form id="user-edit" class="uk-form uk-form-horizontal" v-validator="form" @submit="save | valid" v-cloak>
+<form id="user-edit" class="uk-form uk-form-horizontal" v-validator="form" @submit.prevent="save | valid" v-cloak>
 
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div data-uk-margin>
@@ -23,7 +23,7 @@
 
     <div class="uk-switcher uk-margin" v-el:content>
         <div v-for="section in sections">
-            <component :is="section.name"></component>
+            <component :is="section.name" :data="$data"></component>
         </div>
     </div>
 

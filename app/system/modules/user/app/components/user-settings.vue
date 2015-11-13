@@ -22,7 +22,7 @@
             <div class="uk-form-row">
                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-email" class="uk-form-width-large" type="text" name="email" v-model="user.email" v-validate="email, required" lazy>
+                    <input id="form-email" class="uk-form-width-large" type="text" name="email" v-model="user.email" v-validate="email" v-validate="required" lazy>
                     <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                 </div>
             </div>
@@ -30,12 +30,12 @@
             <div class="uk-form-row">
                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
                 <div class="uk-form-controls uk-form-controls-text js-password" v-show="user.id">
-                    <a href="#" data-uk-toggle="{ target: '.js-password' }">{{ 'Change password' | trans }}</a>
+                    <a href="#" data-uk-toggle="{target: '.js-password'}">{{ 'Change password' | trans }}</a>
                 </div>
                 <div class="uk-form-controls js-password" :class="{'uk-hidden' : user.id}">
                     <div class="uk-form-password">
-                        <input id="form-password" class="uk-form-width-large" type="password" v-model="password">
-                        <a href="" class="uk-form-password-toggle" data-uk-form-password="{ lblShow: '{{ 'Show' | trans }}', lblHide: '{{ 'Hide' | trans }}' }">{{ 'Show' | trans }}</a>
+                        <input id="form-password" class="uk-form-width-large" :type="hidePassword ? 'password' : 'text'" v-model="password">
+                        <a href="#" class="uk-form-password-toggle" @click.prevent="hidePassword = !hidePassword">{{ hidePassword ? 'Show' : 'Hide' | trans }}</a>
                     </div>
                 </div>
             </div>
@@ -82,11 +82,15 @@
                 </div>
 
                 <h3 class="uk-panel-tile uk-margin-bottom-remove uk-text-break">{{ user.name }}
-                    <i :title="(isNew ? 'New' : statuses[user.status]) | trans" :class="{'pk-icon-circle-primary': isNew, 'pk-icon-circle-success': user.access && user.status, 'pk-icon-circle-danger': !user.status}"></i>
+                    <i :title="(isNew ? 'New' : statuses[user.status]) | trans" :class="{
+                        'pk-icon-circle-primary': isNew,
+                        'pk-icon-circle-success': user.access && user.status,
+                        'pk-icon-circle-danger': !user.status
+                    }"></i>
                 </h3>
 
                 <div>
-                    <a class="uk-text-break" href="mailto:{{ user.email }}">{{ user.email }}</a><i class="uk-icon-check" :title="'Verified email address' | trans" v-show="config.emailVerification && user.data.verified"></i>
+                    <a class="uk-text-break" :href="'mailto:'+user.email">{{ user.email }}</a><i class="uk-icon-check" :title="'Verified email address' | trans" v-show="config.emailVerification && user.data.verified"></i>
                 </div>
 
             </div>
@@ -100,10 +104,34 @@
 
     module.exports = {
 
-        inherit: true,
-
         section: {
             label: 'User'
+        },
+
+        props: ['data'],
+
+        data: function () {
+            return _.extend({password: '', hidePassword: true}, this.data)
+        },
+
+        ready: function () {
+            UIkit.init(this.$el);
+        },
+
+        computed: {
+
+            isNew: function () {
+                return !this.user.login && this.user.status;
+            }
+
+        },
+
+        events: {
+
+            save: function (data) {
+                data.password = this.password;
+            }
+
         }
 
     };

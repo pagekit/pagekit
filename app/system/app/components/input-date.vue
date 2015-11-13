@@ -4,13 +4,13 @@
         <div class="uk-width-large-1-2">
             <div class="uk-form-icon uk-display-block">
                 <i class="pk-icon-calendar pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-el:datepicker v-model="date" v-validate="required: isRequired" lazy>
+                <input class="uk-width-1-1" type="text" v-el:datepicker v-model="date" v-validate:required="isRequired" lazy>
             </div>
         </div>
         <div class="uk-width-large-1-2">
             <div class="uk-form-icon uk-display-block" v-el:timepicker>
                 <i class="pk-icon-time pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-model="time" v-validate="required: isRequired" lazy>
+                <input class="uk-width-1-1" type="text" v-model="time" v-validate:required="isRequired" lazy>
             </div>
         </div>
     </div>

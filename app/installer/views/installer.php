@@ -173,7 +173,7 @@
                             <div class="uk-form-row">
                                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-validate="email, required">
+                                    <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-validate="email" v-validate="required">
                                     <p class="uk-form-help-block uk-text-danger" v-show="formSite.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                                 </div>
                             </div>
