@@ -5,7 +5,7 @@ jQuery(function ($) {
 
         inherit: true,
 
-        el: '#header',
+        el: '#sidebar',
 
         data: _.extend({
             nav: null,
@@ -39,6 +39,31 @@ jQuery(function ($) {
                     // message?
                 });
             });
+        }
+
+    });
+
+    // current page title
+    var title = new Vue({
+
+        inherit: true,
+
+        el: '#header',
+
+        data: _.extend({
+            item: null,
+        }, window.$pagekit),
+
+        created: function () {
+
+            var menu = _(this.menu).sortBy('priority').groupBy('parent').value();
+            var item = _.find(menu.root, 'active');
+
+            if (item) {
+                this.$set('item', item);
+                this.$set('subnav', menu[item.id]);
+            }
+
         }
 
     });

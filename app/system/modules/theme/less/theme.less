@@ -19,6 +19,10 @@ html { overflow-y: scroll; }
  ========================================================================== */
 
 body {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -30,6 +34,22 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 
+/* Sidebar
+ ========================================================================== */
+
+.tm-sidebar {
+    width: 200px;
+    height: 100%;
+    background: @sidebar-background;
+    color: @global-contrast-color;
+}
+
+/* Sidebar
+ ========================================================================== */
+
+.tm-content {
+    flex: 1;
+}
 
 /* Header
  ========================================================================== */
@@ -62,19 +82,9 @@ body {
 /* Headerbar
  ========================================================================== */
 
-.tm-headerbar { height: 60px; }
-
-/* Tablet and bigger */
-@media (min-width: @breakpoint-medium) {
-
-    .tm-headerbar { height: 120px; }
-
-}
-
-@media (min-width: @breakpoint-medium) and (min-height: 800px) {
-
-    .tm-headerbar { height: 165px; }
-
+.tm-headerbar {
+    height: 85px;
+    margin-bottom: 30px;
 }
 
 .tm-headerbar-primary { position: relative; }
@@ -87,14 +97,29 @@ body {
 }
 
 
-/* Icons
+/* Avatar + Icons
  ========================================================================== */
+
+.tm-avatar {
+    margin-right: 42px;
+}
+
+.tm-avatar img {
+    width: 24px;
+    height: 24px;
+}
+
+.tm-avatar span {
+    margin-left: 2px;
+}
 
 [class*='tm-icon-'] {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 23px;
+    margin-left: 5px;
     background: 50% 50% no-repeat;
+    background-size: 23px;
     opacity: 0.5;
     vertical-align: middle;
     -webkit-transition: opacity 0.1s linear;
@@ -124,6 +149,7 @@ body {
 
 .tm-heading {
     margin: 0;
+    margin-left: 48px;
     color: @global-contrast-color;
 }
 
