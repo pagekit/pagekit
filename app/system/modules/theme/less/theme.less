@@ -38,17 +38,52 @@ body {
  ========================================================================== */
 
 .tm-sidebar {
-    width: 200px;
+    position: fixed;
+    width: @sidebar-full-width;
     height: 100%;
     background: @sidebar-background;
     color: @global-contrast-color;
 }
 
-/* Sidebar
+.tm-sidebar ul li {
+    display: block;
+    width: 100%;
+}
+
+.tm-sidebar ul li a {
+    display: flex;
+    padding: 12px 16px 14px 16px;
+    align-items: center;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+}
+
+.tm-sidebar ul li a img {
+    width: 20px;
+}
+
+.tm-sidebar ul li a p {
+    margin-left: 14px;
+    margin-top: 0px;
+    font-size: 13px;
+    color: @global-contrast-color;
+    opacity: 0.6;
+}
+
+.tm-sidebar ul li a:hover {
+    background: @sidebar-hover-background;
+}
+
+.tm-sidebar ul li a:hover p {
+    opacity: 1.0;
+}
+
+/* Content
  ========================================================================== */
 
 .tm-content {
     flex: 1;
+    margin-left: @sidebar-full-width;
 }
 
 /* Header
