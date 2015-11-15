@@ -8,7 +8,8 @@ jQuery(function ($) {
         el: '#sidebar',
 
         data: _.extend({
-            nav: null,
+            navContent: null,
+            navSetup: null,
             item: null,
             subnav: null
         }, window.$pagekit),
@@ -19,15 +20,21 @@ jQuery(function ($) {
             var item = _.find(menu.root, 'active');
             var vm = this;
 
-            this.$set('nav', menu.root);
+            this.$set('navContent', menu.root.filter(function(menuItem) {
+                return !menuItem.setupSection;
+            }));
+
+            this.$set('navSetup', menu.root.filter(function(menuItem) {
+                return menuItem.setupSection;
+            }));
 
             if (item) {
                 this.$set('item', item);
                 this.$set('subnav', menu[item.id]);
             }
 
-            // main menu order
-            $('#js-appnav').on('stop.uk.sortable', function () {
+            // content menu order
+            $('#js-appnav-content').on('stop.uk.sortable', function () {
 
                 var data = {};
 
@@ -35,6 +42,31 @@ jQuery(function ($) {
                     data[$(this).data('id')] = i;
                 });
 
+                $('#js-appnav-setup').children().each(function (i) {
+                    data[$(this).data('id')] = i;
+                });
+
+                console.log(data);
+                vm.$http.post('admin/adminmenu', {order: data}, function () {
+                    // message?
+                });
+            });
+
+            // setup menu order
+            $('#js-appnav-setup').on('stop.uk.sortable', function () {
+
+                var data = {};
+
+                $('#js-appnav-content').children().each(function (i) {
+                    data[$(this).data('id')] = i;
+                });
+
+                $(this).children().each(function (i) {
+                    data[$(this).data('id')] = i;
+                });
+
+                console.log('TEST');
+                console.log(data);
                 vm.$http.post('admin/adminmenu', {order: data}, function () {
                     // message?
                 });

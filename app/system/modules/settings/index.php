@@ -41,6 +41,7 @@ return [
             'icon' => 'settings:assets/images/icon-settings.svg',
             'access' => 'system: access settings',
             'url' => '@system/settings',
+            'setupSection' => true,
             'priority' => 120
         ],
 
