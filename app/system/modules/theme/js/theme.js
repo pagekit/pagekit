@@ -20,11 +20,27 @@ jQuery(function ($) {
             var item = _.find(menu.root, 'active');
             var vm = this;
 
+            if (this.compactMode == 'true') {
+                $('body').addClass('compact');
+            }
+
             this.$set('navContent', menu.root.filter(function(menuItem) {
+                if (item && menuItem.label == item.label) {
+                    menuItem.class = 'active';
+                } else {
+                    menuItem.class = 'inactive';
+                }
+
                 return !menuItem.setupSection;
             }));
 
             this.$set('navSetup', menu.root.filter(function(menuItem) {
+                if (item && menuItem.label == item.label) {
+                    menuItem.class = 'active';
+                } else {
+                    menuItem.class = 'inactive';
+                }
+
                 return menuItem.setupSection;
             }));
 
@@ -46,7 +62,6 @@ jQuery(function ($) {
                     data[$(this).data('id')] = i;
                 });
 
-                console.log(data);
                 vm.$http.post('admin/adminmenu', {order: data}, function () {
                     // message?
                 });
@@ -65,8 +80,6 @@ jQuery(function ($) {
                     data[$(this).data('id')] = i;
                 });
 
-                console.log('TEST');
-                console.log(data);
                 vm.$http.post('admin/adminmenu', {order: data}, function () {
                     // message?
                 });
@@ -199,4 +212,12 @@ jQuery(function ($) {
         modal.show();
     };
 
+    // sidebar mode toggle
+    $('#sidebar-mode-toggle').on('click', function () {
+        $('body').toggleClass('compact');
+
+        $.post('admin/adminmenu', {compactMode: String($('body').hasClass('compact'))}, function (data) {
+            // EMPTY!
+        });
+    });
 });

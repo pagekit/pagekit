@@ -96,4 +96,14 @@ class SystemModule extends Module
 
         return $menu;
     }
+
+    /**
+    * Checks whether the sidebar menu is in compact mode.
+    *
+    * @return bool
+    */
+    public function getCompactMode()
+    {
+        return App::user()->get('admin.menu.compactmode', false);
+    }
 }

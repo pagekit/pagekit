@@ -11,10 +11,20 @@
     </head>
     <body>
         <sidebar id="sidebar" class="tm-sidebar">
-            <div class="tm-sidebar-menu-container" id="tm-sidebar-menu-content">
+            <div class="tm-sidebar-menu-container">
                 <p class="tm-sidebar-header" id="sidebar-header-content">Manage your content</p>
                 <ul id="js-appnav-content" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                    <li v-repeat="item: navContent" data-id="{{ item.id }}">
+                    <li v-repeat="item: navContent" data-id="{{ item.id }}" class="{{ item.class }}">
+                        <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
+                            <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
+                            <p>{{ item.label | trans }}</p>
+                        </a>
+                    </li>
+                </ul>
+
+                <p class="tm-sidebar-header" id="sidebar-header-setup">Setup Pagekit</p>
+                <ul id="js-appnav-setup" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
+                    <li v-repeat="item: navSetup" data-id="{{ item.id }}" class="{{ item.class }}">
                         <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
                             <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
                             <p>{{ item.label | trans }}</p>
@@ -23,16 +33,9 @@
                 </ul>
             </div>
 
-            <div class="tm-sidebar-menu-container" id="tm-sidebar-menu-setup">
-                <p class="tm-sidebar-header" id="sidebar-header-setup">Setup Pagekit</p>
-                <ul id="js-appnav-setup" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                    <li v-repeat="item: navSetup" data-id="{{ item.id }}">
-                        <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
-                            <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
-                            <p>{{ item.label | trans }}</p>
-                        </a>
-                    </li>
-                </ul>
+            <div class="tm-sidebar-mode-button" id="sidebar-mode-toggle">
+                <span class="tm-sidebar-mode-button-icon"></span>
+                <p>Collapse sidebar</p>
             </div>
     	</sidebar>
 
