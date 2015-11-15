@@ -216,7 +216,7 @@ jQuery(function ($) {
     $('#sidebar-mode-toggle').on('click', function () {
         $('body').toggleClass('compact');
 
-        $.post('admin/adminmenu', {compactMode: String($('body').hasClass('compact'))}, function (data) {
+        $.post('/admin/adminmenumode', {compactMode: String($('body').hasClass('compact'))}, function (data) {
             // EMPTY!
         });
     });

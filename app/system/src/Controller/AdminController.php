@@ -56,7 +56,6 @@ class AdminController
 
     /**
      * @Access(admin=true)
-     * @Route("/admin/adminmenu")
      * @Request({"compactMode": "string"})
      */
     public function adminMenuModeAction($compactMode)
