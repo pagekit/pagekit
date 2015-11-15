@@ -185,6 +185,7 @@ body.compact .tm-sidebar ul li a p {
     color: @global-contrast-color;
     background: darken(desaturate(@sidebar-background, 10%), 5%);
     border-radius: 4px;
+    overflow: visible;
     opacity: 0.0;
     transition: margin-left 0.25s;
 }
@@ -468,3 +469,12 @@ body.compact .tm-sidebar .tm-sidebar-mode-button p {
 }
 
 .tm-form .uk-panel { padding: 50px; }
+
+/*
+ * Browser-specific settings
+ */
+@-moz-document url-prefix() {
+    body.compact .tm-sidebar ul li a p {
+        margin-top: -13px;
+    }
+}
