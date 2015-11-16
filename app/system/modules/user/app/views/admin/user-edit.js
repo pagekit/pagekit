@@ -29,7 +29,7 @@ window.User = module.exports = {
     computed: {
 
         isNew: function () {
-            return !this.user.access && this.user.status;
+            return !this.user.login && this.user.status;
         }
 
     },
