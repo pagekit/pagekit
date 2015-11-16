@@ -467,4 +467,7 @@
   'Edit Widget' => '',
   'Name' => '',
   'Please enable the PHP Open SSL extension.' => '',
+  'Manage your content' => '',
+  'Setup Pagekit' => '',
+  'Collapse sidebar' => '',
 );

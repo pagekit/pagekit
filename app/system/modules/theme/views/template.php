@@ -12,7 +12,7 @@
     <body>
         <sidebar id="sidebar" class="tm-sidebar">
             <div class="tm-sidebar-menu-container">
-                <p class="tm-sidebar-header" id="sidebar-header-content">Manage your content</p>
+                <p class="tm-sidebar-header" id="sidebar-header-content">{{ 'Manage your content' | trans }}</p>
                 <ul id="js-appnav-content" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                     <li v-repeat="item: navContent" data-id="{{ item.id }}" class="{{ item.class }}">
                         <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
@@ -22,7 +22,7 @@
                     </li>
                 </ul>
 
-                <p class="tm-sidebar-header" id="sidebar-header-setup">Setup Pagekit</p>
+                <p class="tm-sidebar-header" id="sidebar-header-setup">{{ 'Setup Pagekit' | trans }}</p>
                 <ul id="js-appnav-setup" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                     <li v-repeat="item: navSetup" data-id="{{ item.id }}" class="{{ item.class }}">
                         <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
@@ -35,7 +35,7 @@
 
             <div class="tm-sidebar-mode-button" id="sidebar-mode-toggle">
                 <span class="tm-sidebar-mode-button-icon"></span>
-                <p>Collapse sidebar</p>
+                <p>{{ 'Collapse sidebar' | trans }}</p>
             </div>
     	</sidebar>
 

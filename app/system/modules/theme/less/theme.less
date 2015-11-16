@@ -160,8 +160,16 @@ body.compact .tm-sidebar {
 }
 
 body.compact .tm-sidebar .tm-sidebar-header {
-    margin: 0;
-    opacity: 0;
+    display: none;
+}
+
+body.compact .tm-sidebar ul {
+    margin-top: 24px;
+}
+
+body.compact .tm-sidebar ul#js-appnav-setup {
+    padding-top: 24px;
+    border-top: solid 1px darken(@sidebar-background, 3%);
 }
 
 body.compact .tm-sidebar ul li a {
