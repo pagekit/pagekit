@@ -50,6 +50,18 @@ body {
     -moz-osx-font-smoothing: auto;
 }
 
+.tm-sidebar .tm-sidebar-logo {
+    width: 100%;
+    height: auto;
+    padding: 30px 48px 14px 26px;
+    opacity: 0.2;
+    box-sizing: border-box;
+}
+
+.tm-sidebar .tm-sidebar-logo-compact {
+    display: none;
+}
+
 .tm-sidebar-menu-container {
     flex: 1;
     padding-bottom: 12px;
@@ -159,17 +171,27 @@ body.compact .tm-sidebar {
     z-index: 1;
 }
 
+body.compact .tm-sidebar .tm-sidebar-logo {
+    display: none;
+}
+
+body.compact .tm-sidebar .tm-sidebar-logo-compact {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: 26px auto 2px auto;
+    padding-right: 3px;
+    opacity: 0.2;
+    box-sizing: border-box;
+}
+
 body.compact .tm-sidebar .tm-sidebar-header {
     display: none;
 }
 
 body.compact .tm-sidebar ul {
     margin-top: 24px;
-}
-
-body.compact .tm-sidebar ul#js-appnav-setup {
     padding-top: 24px;
-    border-top: solid 1px darken(@sidebar-background, 3%);
 }
 
 body.compact .tm-sidebar ul li a {

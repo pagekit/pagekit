@@ -11,6 +11,9 @@
     </head>
     <body>
         <sidebar id="sidebar" class="tm-sidebar">
+            <img class="tm-sidebar-logo" src="<?= $view->url()->getStatic('storage/pagekit-logo-contrast.svg') ?>" alt="Pagekit Logo" />
+            <img class="tm-sidebar-logo-compact" src="<?= $view->url()->getStatic('storage/pagekit-logo-mark.svg') ?>" alt="Pagekit Logo" />
+
             <div class="tm-sidebar-menu-container">
                 <p class="tm-sidebar-header" id="sidebar-header-content">{{ 'Manage your content' | trans }}</p>
                 <ul id="js-appnav-content" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
