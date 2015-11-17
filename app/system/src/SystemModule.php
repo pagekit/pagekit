@@ -104,6 +104,6 @@ class SystemModule extends Module
     */
     public function getCompactMode()
     {
-        return App::user()->get('admin.menu.compactmode', false);
+        return App::user()->get('admin.compactmode', false);
     }
 }

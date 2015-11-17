@@ -61,7 +61,7 @@ class AdminController
     public function adminMenuModeAction($compactMode)
     {
         $user = User::find(App::user()->id);
-        $user->set('admin.menu.compactmode', $compactMode);
+        $user->set('admin.compactmode', $compactMode);
         $user->save();
 
         return ['message' => __('Sidebar mode saved.')];
