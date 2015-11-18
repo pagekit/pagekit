@@ -2,16 +2,14 @@
 
     <div class="uk-panel-badge">
         <ul class="uk-subnav pk-subnav-icon">
-            <template v-show="$parent.editing[widget.id]">
-                <li>
-                    <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
-                </li>
-                <li>
-                    <a class="pk-icon-check pk-icon-hover" :title="'Close' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
-                </li>
-            </template>
-            <li v-else>
+            <li v-show="!editing">
                 <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
+            </li>
+            <li v-show="editing">
+                <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
+            </li>
+            <li v-show="editing">
+                <a class="pk-icon-check pk-icon-hover" :title="'Close' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.save"></a>
             </li>
         </ul>
     </div>
@@ -72,7 +70,6 @@
             label: 'Location',
             disableToolbar: true,
             description: function () {
-
             },
             defaults: {
                 units: 'metric'

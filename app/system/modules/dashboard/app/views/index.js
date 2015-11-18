@@ -3,7 +3,7 @@ var Version = require('../../../../../installer/app/lib/version');
 window.Dashboard = module.exports = {
 
     data: function () {
-        return _.extend({editing: false}, window.$data);
+        return window.$data;
     },
 
     created: function () {
@@ -24,8 +24,6 @@ window.Dashboard = module.exports = {
 
             return false;
         }));
-
-        this.$set('editing', {});
 
         this.checkVersion();
     },
@@ -115,6 +113,21 @@ window.Dashboard = module.exports = {
             this.Widgets.save({widget: _.merge({type: type.id, column: column, idx: 100}, type.defaults)}, function (data) {
                 this.widgets.push(data);
                 this.editing.$set(data.id, true);
+            });
+        },
+
+        save: function (widget) {
+
+            var data = {widget: widget};
+
+            this.$broadcast('save', data);
+            this.Widgets.save({id: widget.id}, data);
+        },
+
+        remove: function (widget) {
+
+            this.Widgets.delete({id: widget.id}, function () {
+                this.widgets.splice(_.findIndex(this.widgets, {id: widget.id}), 1);
             });
         },
 
