@@ -19,7 +19,7 @@
                 <ul id="js-appnav-content" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
                     <li v-repeat="item: navContent" data-id="{{ item.id }}" class="{{ item.class }}">
                         <a class="uk-panel tm-panel-icon" v-attr="href: item.url">
-                            <img width="50" height="50" alt="{{ item.label | trans }}" v-attr="src: item.icon">
+                            <img width="20" height="20" alt="{{ item.label | trans }}" v-attr="src: item.icon">
                             <p>{{ item.label | trans }}</p>
                         </a>
                     </li>
