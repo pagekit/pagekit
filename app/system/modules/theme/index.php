@@ -41,7 +41,8 @@ return [
                     'email' => $user->email,
                     'username' => $user->username
                 ],
-                'menu' => array_values($app['system']->getMenu()->getItems())
+                'menu' => array_values($app['system']->getMenu()->getItems()),
+                'compactMode' => $app['system']->getCompactMode()
             ]);
 
             $subsets = 'latin,latin-ext';

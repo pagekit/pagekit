@@ -94,6 +94,7 @@ return [
             'icon' => 'installer:assets/images/icon-marketplace.svg',
             'url' => '@system/marketplace/extensions',
             'access' => 'system: manage packages',
+            'setupSection' => true,
             'priority' => 125
         ],
 

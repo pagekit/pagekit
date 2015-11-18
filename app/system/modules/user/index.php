@@ -97,6 +97,7 @@ return [
             'url' => '@user',
             'active' => '@user(/*)?',
             'access' => 'user: manage users || user: manage user permissions || system: manage settings',
+            'setupSection' => true,
             'priority' => 115
         ],
         'user: users' => [

@@ -53,4 +53,17 @@ class AdminController
 
         return ['message' => __('Order saved.')];
     }
+
+    /**
+     * @Access(admin=true)
+     * @Request({"compactMode": "string"})
+     */
+    public function adminMenuModeAction($compactMode)
+    {
+        $user = User::find(App::user()->id);
+        $user->set('admin.compactmode', $compactMode);
+        $user->save();
+
+        return ['message' => __('Sidebar mode saved.')];
+    }
 }
