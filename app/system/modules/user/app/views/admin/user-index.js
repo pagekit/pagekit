@@ -12,7 +12,7 @@ module.exports = {
     created: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({search: '', status: '', role: '', order: 'name asc'}, this.config.filter);
+        this.config.filter = _.extend({order: 'name asc'}, this.config.filter);
 
     },
 

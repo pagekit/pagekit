@@ -44,7 +44,7 @@
                         {{ 'User' | trans }}
                     </th>
                     <th class="pk-table-width-100 uk-text-center">
-                        <input-filter :title="'Status' | trans" :value.sync="config.filter.status" :options="statuses"></input-filter>
+                        <input-filter :title="$trans('Status')" :value.sync="config.filter.status" :options="statuses"></input-filter>
                     </th>
                     <th class="pk-table-width-200" v-order:email="config.filter.order">
                         {{ 'Email' | trans }}
