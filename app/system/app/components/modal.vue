@@ -3,7 +3,7 @@
     <div class="uk-modal">
         <div class="uk-modal-dialog" :class="[modifier]" :class="{'uk-modal-dialog-large': large, 'uk-modal-dialog-lightbox': lightbox}">
             <div v-if="opened">
-                <content></content>
+                <slot></slot>
             </div>
         </div>
     </div>
