@@ -28,6 +28,12 @@
 
         props: ['title', 'value', 'options', 'number'],
 
+        created: function () {
+            if (this.value === undefined) {
+                this.value = '';
+            }
+        },
+
         computed: {
 
             isNumber: function() {
