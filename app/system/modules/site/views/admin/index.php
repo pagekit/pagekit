@@ -51,10 +51,11 @@
                 <div class="uk-position-relative" data-uk-margin>
 
                     <div data-uk-dropdown="{ mode: 'click' }">
-                        <a class="uk-button uk-button-primary" @click.prevent v-show="menu.id != 'trash'">{{ 'Add Page' | trans }}</a>
+                        <a class="uk-button uk-button-primary" @click.prevent v-if="menu.id != 'trash'">{{ 'Add Page' | trans }}</a>
                         <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                             <ul class="uk-nav uk-nav-dropdown">
-                                <li v-for="type in types | protected | orderBy 'label'"><a :href="$url.route('admin/site/page/edit', { id: type.id, menu: menu.id })">{{ label }}</a></li>
+                                <li v-for="type in types | protected | orderBy 'label'">
+                                    <a :href="$url.route('admin/site/page/edit', { id: type.id, menu: menu.id })">{{ type.label }}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -73,7 +74,7 @@
                 </div>
 
                 <ul class="uk-nestable uk-margin-remove" v-el:nestable v-show="tree[0]">
-                    <node v-for="node in tree[0]"></node>
+                    <node v-for="node in tree[0]" :tree="tree" :node="node"></node>
                 </ul>
 
             </div>
@@ -83,7 +84,7 @@
         </div>
     </div>
 
-    <v-modal vref:modal>
+    <v-modal v-ref:modal>
         <form class="uk-form uk-form-stacked" v-validator="form" @submit="saveMenu(edit) | valid">
 
             <div class="uk-modal-header">
@@ -119,7 +120,7 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': isSelected(node)}" data-:id="node.id">
+    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': $root.isSelected(node)}" :data-id="node.id">
         <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
@@ -130,12 +131,12 @@
                 <span class="uk-text-muted uk-text-small uk-margin-small-left" v-if="node.data.menu_hide">{{ 'Hidden' | trans }}</span>
             </div>
             <div class="pk-table-width-minimum">
-                <a class="pk-icon-home pk-icon-hover uk-invisible" :title="'Set as frontpage' | trans" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" @click="setFrontpage(node)"></a>
+                <a class="pk-icon-home pk-icon-hover uk-invisible" :title="'Set as frontpage' | trans" data-uk-tooltip="{delay: 500}" v-if="!isFrontpage && node.status && type.frontpage !== false" @click="setFrontpage"></a>
                 <i class="pk-icon-home-active pk-icon-muted uk-float-right" :title="'Frontpage' | trans" v-if="isFrontpage"></i>
             </div>
             <div class="pk-table-width-100 uk-text-center">
                 <td class="uk-text-center">
-                    <a :class="{'pk-icon-circle-danger': !node.status, 'pk-icon-circle-success': node.status}" @click="toggleStatus(node)"></a>
+                    <a :class="{'pk-icon-circle-danger': !node.status, 'pk-icon-circle-success': node.status}" @click="toggleStatus"></a>
                 </td>
             </div>
             <div class="pk-table-width-100">{{ type.label }}</div>
@@ -146,7 +147,7 @@
         </div>
 
         <ul class="uk-nestable-list" v-if="tree[node.id]">
-            <node v-for="node in tree[node.id]" track-by="node.id"></node>
+            <node v-for="node in tree[node.id]" :tree="tree" :node="node"></node>
         </ul>
 
     </li>

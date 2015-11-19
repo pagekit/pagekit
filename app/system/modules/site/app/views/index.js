@@ -3,7 +3,7 @@ module.exports = {
     data: function () {
         return _.merge({
             edit: undefined,
-            menu: undefined,
+            menu: {},
             menus: [],
             nodes: [],
             tree: [],
@@ -78,13 +78,6 @@ module.exports = {
             this.$refs.modal.close();
         },
 
-        setFrontpage: function (node) {
-            this.Nodes.save({id: 'frontpage'}, {id: node.id}, function () {
-                this.load();
-                this.$notify('Frontpage updated.');
-            });
-        },
-
         status: function (status) {
 
             var nodes = this.getSelected();
@@ -99,16 +92,6 @@ module.exports = {
             });
         },
 
-        toggleStatus: function (node) {
-
-            node.status = node.status === 1 ? 0 : 1;
-
-            this.Nodes.save({id: node.id}, {node: node}, function () {
-                this.load();
-                this.$notify('Page saved.');
-            });
-        },
-
         moveNodes: function (menu) {
 
             var nodes = this.getSelected();
@@ -119,7 +102,12 @@ module.exports = {
 
             this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
                 this.load();
-                this.$notify(this.$trans('Pages moved to %menu%.', {menu: _.find(this.menus.concat({id: 'trash', label: this.$trans('Trash')}), 'id', menu).label}));
+                this.$notify(this.$trans('Pages moved to %menu%.', {
+                    menu: _.find(this.menus.concat({
+                        id: 'trash',
+                        label: this.$trans('Trash')
+                    }), 'id', menu).label
+                }));
             });
         },
 
@@ -212,7 +200,10 @@ module.exports = {
             var vm = this;
 
             // TODO this is still buggy
-            UIkit.nestable(this.$els.nestable, {maxDepth: 20, group: 'site.nodes'}).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
+            UIkit.nestable(this.$els.nestable, {
+                maxDepth: 20,
+                group: 'site.nodes'
+            }).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
 
                 if (type && type !== 'removed') {
 
@@ -262,7 +253,8 @@ module.exports = {
 
         node: {
 
-            inherit: true,
+            name: 'node',
+            props: ['node', 'tree'],
             template: '#node',
 
             computed: {
@@ -272,9 +264,29 @@ module.exports = {
                 },
 
                 type: function () {
-                    return this.getType(this.node);
+                    return this.$root.getType(this.node) || {};
                 }
 
+            },
+
+            methods: {
+
+                setFrontpage: function () {
+                    this.$root.Nodes.save({id: 'frontpage'}, {id: this.node.id}, function () {
+                        this.$root.load();
+                        this.$notify('Frontpage updated.');
+                    });
+                },
+
+                toggleStatus: function () {
+
+                    this.node.status = this.node.status === 1 ? 0 : 1;
+
+                    this.$root.Nodes.save({id: this.node.id}, {node: this.node}, function () {
+                        this.$root.load();
+                        this.$notify('Page saved.');
+                    });
+                }
             }
         }
 
