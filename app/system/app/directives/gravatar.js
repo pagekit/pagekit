@@ -8,14 +8,16 @@ module.exports = {
             url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 'd=mm', 's=' + (size * 2), 'd=404'].join('&'),
             key = 'gravatar.' + url;
 
+        el.classList.add('uk-invisible');
+
         // load image url from cache if exists
         if (cache[key]) {
+            el.classList.remove('uk-invisible');
             el.setAttribute('src', cache[key]);
             return;
         }
 
         Vue.asset({image: url}, function () {
-            cache[key] = url;
             el.setAttribute('src', url);
             el.classList.remove('uk-invisible');
         }, function () {
@@ -24,7 +26,6 @@ module.exports = {
             el.classList.remove('uk-invisible');
         });
 
-        el.classList.add('uk-invisible');
     },
 
     letterAvatar: function (name, size, colored) {
