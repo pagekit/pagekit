@@ -8,7 +8,7 @@
     <tbody>
 
         <tr v-for="folder in folders | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" :value="folder.name" v-checkbox="selected"></td>
+            <td><input type="checkbox" name="name" :value="folder.name" v-model="selected"></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
             </td>
@@ -18,7 +18,7 @@
         </tr>
 
         <tr v-for="file in files | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect">
-            <td><input type="checkbox" name="name" :value="file.name" v-checkbox="selected"></td>
+            <td><input type="checkbox" name="name" :value="file.name" v-model="selected"></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
                 <i v-else class="pk-icon-file-circle"></i>

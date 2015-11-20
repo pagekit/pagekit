@@ -8,7 +8,7 @@
             <div class="uk-panel">
 
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
-                    <li class="uk-visible-hover" v-for="role in roles | orderBy 'priority'" vref:ordered :class="{'uk-active': current.id === role.id}">
+                    <li class="uk-visible-hover" v-for="role in roles | orderBy 'priority'" v-ref:ordered :class="{'uk-active': current.id === role.id}">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
                             <li><a class="pk-icon-edit pk-icon-hover" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
                             <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
@@ -52,7 +52,7 @@
                                     <span class="uk-position-cover" v-if="!current.administrator" @click="addPermission(current, $key)" @click="savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" :value="$key" v-else v-checkbox="current.permissions" @click="savePermissions(current)">
+                                <input type="checkbox" :value="$key" v-else v-model="current.permissions" @click="savePermissions(current)">
 
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <v-modal vref:modal>
+    <v-modal v-ref:modal>
         <form class="uk-form uk-form-stacked" v-validator="form" @submit.prevent.stop="save | valid">
 
             <div class="uk-modal-header">

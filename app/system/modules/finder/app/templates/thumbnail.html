@@ -7,7 +7,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-truncate">
-                <input type="checkbox" :value="folder.name" v-checkbox="selected">
+                <input type="checkbox" :value="folder.name" v-model="selected">
                 <a @click="setPath(folder.path, $event)">{{ name }}</a>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" :value="file.name" v-checkbox="selected">
+                <input type="checkbox" :value="file.name" v-model="selected">
                 {{ file.name }}
             </div>
         </div>

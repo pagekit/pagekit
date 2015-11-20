@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal vref:modal :closed="close">
+        <v-modal v-ref:modal :closed="close">
             <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">

@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <v-modal vref:modal>
+    <v-modal v-ref:modal>
         <form class="uk-form-stacked">
 
             <div class="uk-modal-header">

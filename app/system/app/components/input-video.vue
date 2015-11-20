@@ -22,9 +22,9 @@
 
     </div>
 
-    <v-modal vref:modal large>
+    <v-modal v-ref:modal large>
 
-        <panel-finder :root="storage" :modal="true" vref:finder></panel-finder>
+        <panel-finder :root="storage" :modal="true" v-ref:finder></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>

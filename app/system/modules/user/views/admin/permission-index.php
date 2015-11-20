@@ -28,7 +28,7 @@
                             <span class="uk-position-cover" v-if="!role.administrator" @click="addPermission(role, $parent.$key)" @click="savePermissions(role)"></span>
                         </span>
 
-                        <input type="checkbox" :value="$parent.$key" v-else v-checkbox="role.permissions" @click="savePermissions(role)">
+                        <input type="checkbox" :value="$parent.$key" v-else v-model="role.permissions" @click="savePermissions(role)">
                     </td>
                 </tr>
             </tbody>
