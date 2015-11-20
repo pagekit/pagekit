@@ -72,14 +72,28 @@
 
         replace : true,
 
-        props: ['root', 'path', 'mode', 'view', 'modal'],
+        props: {
+            root: {
+                type: String,
+                default: '/'
+            },
+            path: {
+                type: String,
+                default: '/'
+            },
+            mode: {
+                type: String,
+                default: 'write'
+            },
+            view: {
+                type: String,
+                default: 'table'
+            },
+            modal: Boolean
+        },
 
         data: function () {
             return {
-                root: '/',
-                path: '/',
-                mode: 'write',
-                view: 'table',
                 upload: {},
                 selected: [],
                 items: false
@@ -190,16 +204,7 @@
             },
 
             toggleSelect: function (name) {
-
-                if (name.targetVM) {
-                    if (name.target.tagName == 'INPUT' || name.target.tagName == 'A') {
-                        return;
-                    }
-                    name = name.targetVM.$data.name;
-                }
-
                 var index = this.selected.indexOf(name);
-
                 -1 === index ? this.selected.push(name) : this.selected.splice(index, 1);
             },
 
