@@ -5,7 +5,7 @@
     <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-            <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users' | transChoice count {count:count} }}</h2>
+            <h2 class="uk-margin-remove" v-if="!selected.length">{{ '{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users' | transChoice count {count:count} }}</h2>
 
             <template v-else>
 
@@ -50,7 +50,7 @@
                         {{ 'Email' | trans }}
                     </th>
                     <th class="pk-table-width-100">
-                        <input-filter :title="'Roles' | trans" :value.sync="config.filter.role" :options="roles"></input-filter>
+                        <input-filter :title="$trans('Roles')" :value.sync="config.filter.role" :options="roles"></input-filter>
                     </th>
                 </tr>
             </thead>

@@ -33,7 +33,7 @@ module.exports = {
 
         statuses: function () {
 
-            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.$data.statuses, function (status, id) {
+            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.config.statuses, function (status, id) {
                 return {text: status, value: id};
             }));
 
@@ -42,7 +42,7 @@ module.exports = {
 
         roles: function () {
 
-            var options = this.$data.roles.map(function (role) {
+            var options = this.config.roles.map(function (role) {
                 return {text: role.name, value: role.id};
             });
 

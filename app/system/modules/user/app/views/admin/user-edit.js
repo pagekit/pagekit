@@ -1,7 +1,7 @@
 window.User = module.exports = {
 
     data: function () {
-        return _.extend({sections: []}, window.$data);
+        return _.extend({sections: [], form: {}}, window.$data);
     },
 
     created: function () {

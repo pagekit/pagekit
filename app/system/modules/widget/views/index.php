@@ -34,7 +34,7 @@
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
-                    <h2 class="uk-margin-remove" v-show="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
+                    <h2 class="uk-margin-remove" v-if="!selected.length">{{ position ? position.label : 'All' | trans }}</h2>
 
                     <template v-else>
 

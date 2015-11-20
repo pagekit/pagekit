@@ -79,14 +79,14 @@
                                 <div class="uk-form-row">
                                     <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.mysql.host" v-validate="required">
+                                        <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.mysql.host" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.host.invalid">{{ 'Host cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
                                     <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-validate="required">
+                                        <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.user.invalid">{{ 'User cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                 <div class="uk-form-row">
                                     <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="dbname" value="pagekit" v-model="config.database.connections.mysql.dbname" v-validate="required">
+                                        <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="dbname" value="pagekit" v-model="config.database.connections.mysql.dbname" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.dbname.invalid">{{ 'Database name cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
@@ -148,7 +148,7 @@
                             <div class="uk-form-row">
                                 <label for="form-sitename" class="uk-form-label">{{ 'Site Title' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-validate="required">
+                                    <input id="form-sitename" class="uk-width-1-1" type="text" name="name" v-model="option['system/site'].title" v-validate:required>
                                     <p class="uk-form-help-block uk-text-danger" v-show="formSite.name.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                             <div class="uk-form-row">
                                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-validate="required">
+                                    <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-validate:required>
                                     <p class="uk-form-help-block uk-text-danger" v-show="formSite.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@
                                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <div class="uk-form-password uk-width-1-1">
-                                        <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-validate="required">
+                                        <input id="form-password" class="uk-width-1-1" type="password" name="password" v-model="user.password" v-validate:required>
                                         <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                     </div>
                                     <p class="uk-form-help-block uk-text-danger" v-show="formSite.password.invalid">{{ 'Password cannot be blank.' | trans }}</p>
@@ -173,7 +173,7 @@
                             <div class="uk-form-row">
                                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-validate="email" v-validate="required">
+                                    <input id="form-email" class="uk-width-1-1" type="email" name="email" v-model="user.email" v-validate:email v-validate:required>
                                     <p class="uk-form-help-block uk-text-danger" v-show="formSite.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                                 </div>
                             </div>

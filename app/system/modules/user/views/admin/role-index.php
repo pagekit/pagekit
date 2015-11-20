@@ -73,7 +73,7 @@
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" name="name" v-model="role.name" v-validate="required">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" name="name" v-model="role.name" v-validate:required>
                     <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>
