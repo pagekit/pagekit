@@ -68,14 +68,12 @@ module.exports = {
                 return;
             }
 
-            var children = sortable.element.children();
-
-            this.$refs.ordered.forEach(function (model) {
-                model.role.priority = children.index(model.$el);
+            sortable.element.children().each(function(i) {
+                this.__vfrag__.scope.$set('role.priority', i);
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                // this.$notify('Roles reordered.');
+                this.$notify('Roles reordered.');
             }, function (data) {
                 this.$notify(data, 'danger');
             });
