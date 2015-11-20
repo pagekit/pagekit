@@ -17,7 +17,7 @@
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
-        <img :src="$url(image.src), alt: image.alt">
+        <img :src="$url(image.src)" :alt="image.alt">
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 

@@ -12,6 +12,12 @@
 
         props: ['type', 'value', 'options'],
 
+        data: function () {
+            return {
+                editor: {}
+            }
+        },
+
         compiled: function () {
 
             this.$set('height', this.options && this.options.height ? this.options.height : 500);
@@ -36,7 +42,7 @@
 
                 _.forIn(self.$options.components, function (Component) {
                     if (Component.options && Component.options.plugin) {
-                        new Component({parent: this});
+                        new Component({parent: self});
                     }
                 }, this);
 
