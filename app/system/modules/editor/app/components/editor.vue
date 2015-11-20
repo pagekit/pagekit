@@ -12,7 +12,7 @@
 
         props: ['type', 'value', 'options'],
 
-        compiled: function() {
+        compiled: function () {
 
             this.$set('height', this.options && this.options.height ? this.options.height : 500);
 
@@ -27,28 +27,27 @@
 
             }
 
-            var components = this.$options.components, type = 'editor-'+this.type, self = this;
+            var components = this.$options.components, type = 'editor-' + this.type, self = this;
 
-            this
-                .$addChild({ el: this.$els.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea'])
-                .$on('ready', function() {
+            new (components[type] || components['editor-' + window.$pagekit.editor] || components['editor-textarea'])({
+                parent: this,
+                el: this.$els.editor
+            }).$on('ready', function () {
 
-                    _.forIn(self.$options.components, function (component) {
+                _.forIn(self.$options.components, function (Component) {
+                    if (Component.options && Component.options.plugin) {
+                        new Component({parent: this});
+                    }
+                }, this);
 
-                        if (component.options && component.options.plugin) {
-                            this.$addChild({ inherit: true }, component);
-                        }
-
-                    }, this);
-
-                });
+            });
         },
 
         components: {
 
             'editor-textarea': {
 
-                ready: function() {
+                ready: function () {
                     this.$emit('ready');
                     this.$parent.$set('show', true);
                 }
