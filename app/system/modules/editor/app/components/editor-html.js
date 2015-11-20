@@ -18,7 +18,7 @@ module.exports = {
 
         }, function () {
 
-            this.editor = UIkit.htmleditor(this.$el, _.extend({ marked: window.marked, CodeMirror: window.CodeMirror }, this.options));
+            this.editor = UIkit.htmleditor(this.$el, _.extend({marked: window.marked, CodeMirror: window.CodeMirror}, this.options));
 
             this.editor.element
                 .on('htmleditor-save', function (e, editor) {
@@ -35,9 +35,10 @@ module.exports = {
                 }
             });
 
-            this.$watch('options.markdown', function (markdown) {
-                this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
-            });
+            this.$watch('$parent.options.markdown', function (markdown) {
+                    this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
+                }, {immediate: true}
+            );
 
             this.$emit('ready');
         });
