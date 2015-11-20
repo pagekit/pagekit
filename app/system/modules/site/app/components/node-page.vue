@@ -53,7 +53,7 @@
 
                     <div class="uk-form-controls uk-form-controls-text">
                         <p v-for="role in roles" class="uk-form-controls-condensed">
-                            <label><input type="checkbox" :value="role.id" v-checkbox="node.roles" number> {{ role.name }}</label>
+                            <label><input type="checkbox" :value="role.id" v-model="node.roles" number> {{ role.name }}</label>
                         </p>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
             label: 'Content'
         },
 
-        inherit: true,
+        props: ['node', 'roles'],
 
         data: function () {
             return {
@@ -91,7 +91,7 @@
             };
         },
 
-        ready: function() {
+        ready: function () {
 
             if (!this.node.id) this.node.status = 1;
 
@@ -117,7 +117,9 @@
 
                     if (id) {
                         this.$resource('api/site/page/:id').get({id: id}, function (page) {
-                            this.page = page;
+                            this.$set('page', page);
+
+                            console.log(page)
                         });
                     }
 

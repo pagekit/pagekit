@@ -32,13 +32,13 @@
 
     module.exports = {
 
-        inherit: true,
-
         section: {
             label: 'Settings',
             priority: 0,
             active: 'link'
         },
+
+        props: ['node'],
 
         created: function () {
             if (this.behavior === 'redirect') {

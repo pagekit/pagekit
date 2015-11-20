@@ -35,8 +35,6 @@
             label: 'Settings'
         },
 
-        inherit: true,
-
         props: ['widget', 'config']
 
     };

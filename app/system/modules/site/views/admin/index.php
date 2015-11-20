@@ -102,7 +102,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-for="m in config.menus" v-var="assigned: getMenu(m.name)">
+                    <p class="uk-form-controls-condensed" v-for="m in config.menus" v-var:assigned="getMenu(m.name)">
                         <label><input type="checkbox" :value="m.name" v-checkbox="edit.positions"> {{ label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
                     </p>
                 </div>
