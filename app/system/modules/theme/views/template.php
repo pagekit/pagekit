@@ -24,7 +24,7 @@
 
                         <div class="uk-dropdown uk-dropdown-navbar tm-dropdown">
                             <ul id="js-appnav" class="uk-sortable uk-grid uk-grid-small uk-grid-width-1-3" data-url="<?= $view->url('@system/adminmenu') ?>" data-uk-sortable="{ dragCustomClass: 'tm-sortable-dragged', handleClass: 'uk-panel' }">
-                                <li v-for="item in nav" data-:id="item.id">
+                                <li v-for="item in nav" :data-id="item.id">
                                     <a class="uk-panel tm-panel-icon" :href="item.url">
                                         <img width="50" height="50" :alt="item.label | trans" :src="item.icon">
                                         <p>{{ item.label | trans }}</p>

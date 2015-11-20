@@ -1,5 +1,7 @@
 module.exports = {
 
+    mixins: [window.Widgets],
+
     data: $.extend(true, {
         position: undefined,
         selected: [],
@@ -247,9 +249,7 @@ module.exports = {
 
         }
 
-    },
-
-    mixins: [window.Widgets]
+    }
 
 };
 
