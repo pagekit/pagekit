@@ -4,23 +4,23 @@ module.exports = {
 
     update: function (value) {
 
-        var el = this.el, cache = this.vm.$cache, vm = this, size = (el.getAttribute('height') || 50),
+        var el = this.el, cache = this.vm.$session, vm = this, size = (el.getAttribute('height') || 50),
             url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 'd=mm', 's=' + (size * 2), 'd=404'].join('&'),
             key = 'gravatar.' + url;
 
         // load image url from cache if exists
-        if (cache.get(key)) {
-            el.setAttribute('src', cache.get(key));
+        if (cache[key]) {
+            el.setAttribute('src', cache[key]);
             return;
         }
 
         Vue.asset({image: url}, function () {
-            cache.set(key, url, 10);
+            cache[key] = url;
             el.setAttribute('src', url);
             el.classList.remove('uk-invisible');
         }, function () {
-            cache.set(key, url = vm.letterAvatar(el.getAttribute('title') || el.getAttribute('alt'), size, el.getAttribute('colored')), 10);
-            el.setAttribute('src', url);
+            cache[key] = vm.letterAvatar(el.getAttribute('title') || el.getAttribute('alt'), size, el.getAttribute('colored'));
+            el.setAttribute('src', cache[key]);
             el.classList.remove('uk-invisible');
         });
 

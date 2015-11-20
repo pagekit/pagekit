@@ -123,7 +123,7 @@ module.exports = function (Vue) {
 
             return new Promise(function (resolve, reject) {
 
-                var img = document.createElement('img');
+                var img = new Image();
 
                 img.onload = function () {
                     resolve(url);
