@@ -96,7 +96,7 @@ module.exports = {
 
         showRoles: function (user) {
             return _.reduce(user.roles, function (roles, id) {
-                var role = _.find(this.$data.roles, 'id', id);
+                var role = _.find(this.config.roles, 'id', id);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }
