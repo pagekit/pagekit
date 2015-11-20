@@ -41,12 +41,19 @@
             require('../lib/package')
         ],
 
-        props: ['api', 'package'],
+        props: {
+            api: {
+                type: String,
+                default: ''
+            },
+            package: {
+                type: Object,
+                default: {}
+            }
+        },
 
         data: function () {
             return {
-                api: '',
-                package: {},
                 messages: {}
             };
         },

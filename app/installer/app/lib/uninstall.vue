@@ -27,6 +27,8 @@
 
     module.exports = {
 
+        mixins: [require('./output')],
+
         methods: {
 
             uninstall: function (pkg, packages) {
@@ -47,11 +49,8 @@
                 });
             }
 
-        },
+        }
 
-        mixins: [
-            require('./output')
-        ]
     };
 
 </script>

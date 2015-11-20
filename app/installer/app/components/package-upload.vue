@@ -25,11 +25,17 @@
 
     module.exports = {
 
-        props: ['api', 'type', 'packages'],
+        props: {
+            api: {
+                type: String,
+                default: ''
+            },
+            packages: Array,
+            type: String
+        },
 
         data: function () {
             return {
-                api: '',
                 package: {},
                 upload: null,
                 progress: ''

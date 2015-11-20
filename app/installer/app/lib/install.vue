@@ -28,6 +28,8 @@
 
     module.exports = {
 
+        mixins: [require('./output')],
+
         methods: {
 
             install: function (pkg, packages, onClose) {
@@ -59,11 +61,8 @@
                 this.$parent.enable(this.pkg);
                 this.close();
             }
-        },
+        }
 
-        mixins: [
-            require('./output')
-        ]
     };
 
 </script>

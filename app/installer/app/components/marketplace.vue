@@ -77,17 +77,30 @@
             require('../lib/package')
         ],
 
-        props: ['api', 'search', 'type', 'installed'],
+        props: {
+            api: {
+                type: String,
+                default: ''
+            },
+            search: {
+                type: String,
+                default: ''
+            },
+            type: {
+                type: String,
+                default: 'pagekit-extension'
+            },
+            installed: {
+                type: Array,
+                default: []
+            }
+        },
 
         data: function () {
             return {
-                api: '',
-                search: '',
-                type: 'pagekit-extension',
                 pkg: null,
                 packages: null,
                 updates: null,
-                installed: [],
                 page: 0,
                 pages: 0,
                 iframe: '',

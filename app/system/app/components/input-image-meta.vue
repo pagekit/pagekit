@@ -60,12 +60,16 @@
 
     module.exports = {
 
-        props: ['class', 'image'],
+        props: {
+            class: {
+                type: String,
+                default: ''
+            },
+            image: String
+        },
 
         data: function () {
-            return _.merge({
-                'class': ''
-            }, $pagekit);
+            return _.merge({}, $pagekit);
         },
 
         ready: function () {

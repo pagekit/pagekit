@@ -1,23 +1,21 @@
 module.exports = {
 
+    mixins: [
+        require('../lib/package')
+    ],
+
     data: function () {
-        return _.extend(window.$data, {
+        return _.extend({
             package: {},
             view: false,
             updates: null,
             search: '',
             status: ''
-        });
+        }, window.$data);
     },
 
     ready: function () {
         this.load();
-    },
-
-    components: {
-
-        'package-upload': require('./package-upload.vue')
-
     },
 
     methods: {
@@ -112,8 +110,10 @@ module.exports = {
 
     },
 
-    mixins: [
-        require('../lib/package')
-    ]
+    components: {
+
+        'package-upload': require('./package-upload.vue')
+
+    }
 
 };
