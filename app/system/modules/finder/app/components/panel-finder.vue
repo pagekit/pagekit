@@ -73,22 +73,10 @@
         replace : true,
 
         props: {
-            root: {
-                type: String,
-                default: '/'
-            },
-            path: {
-                type: String,
-                default: '/'
-            },
-            mode: {
-                type: String,
-                default: 'write'
-            },
-            view: {
-                type: String,
-                default: 'table'
-            },
+            root: {type: String, default: '/'},
+            path: {type: String, default: '/'},
+            mode: {type: String, default: 'write'},
+            view: {type: String, default: 'table'},
             modal: Boolean
         },
 
@@ -159,14 +147,6 @@
 
             count: function() {
                 return this.items ? this.items.length : 0;
-            },
-
-            folders: function () {
-                return _.filter(this.items, 'mime', 'application/folder');
-            },
-
-            files: function () {
-                return _.filter(this.items, 'mime', 'application/file');
             }
 
         },
