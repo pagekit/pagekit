@@ -19,6 +19,19 @@
                     </div>
                 </div>
 
+                <div class="uk-form-row">
+                    <label><input type="checkbox" v-model="video.autoplay"> {{ 'Autoplay' | trans }}</label>
+                    <label><input type="checkbox" v-model="video.controls"> {{ 'Controls' | trans }}</label>
+                    <label><input type="checkbox" v-model="video.loop"> {{ 'Loop' | trans }}</label>
+                </div>
+
+                <div class="uk-form-row">
+                    <label for="form-src" class="uk-form-label">{{ 'Thumbnail' | trans }}</label>
+                    <div class="uk-form-controls">
+                        <input-image class="uk-width-1-1" :source.sync="video.poster"></input-image>
+                    </div>
+                </div>
+
                 <div class="uk-modal-footer uk-text-right">
                     <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
                     <button class="uk-button uk-button-link" type="submit">{{ 'Update' | trans }}</button>
@@ -37,7 +50,7 @@
 
         data: function () {
             return {
-                video: {src: '', alt: ''}
+                video: {src: '', alt: '', controls: true}
             }
         },
 
@@ -53,6 +66,7 @@
 
             update: function () {
                 this.$refs.modal.close();
+
                 this.$emit('select', this.video);
             }
 

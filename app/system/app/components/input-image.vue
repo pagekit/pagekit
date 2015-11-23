@@ -5,7 +5,7 @@
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else>
 
         <img :src="$url(source)">
 
@@ -38,13 +38,10 @@
 
     module.exports = {
 
-        props: ['class', 'source'],
+        props: {class: {default: ''}, source: {default: ''}},
 
         data: function () {
-            return _.merge({
-                'class': '',
-                'source': ''
-            }, $pagekit);
+            return _.merge({}, $pagekit);
         },
 
         methods: {

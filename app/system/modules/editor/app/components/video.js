@@ -10,7 +10,7 @@ module.exports = {
 
     created: function () {
 
-        var vm = this, editor = this.editor;
+        var vm = this, editor = this.$parent.editor;
 
         if (!editor || !editor.htmleditor) {
             return;
@@ -26,12 +26,12 @@ module.exports = {
         editor.options.toolbar.push('video');
 
         editor
-            .on('action.video', function(e, editor) {
-                vm.openModal(_.find(vm.videos, function(vid) {
+            .on('action.video', function (e, editor) {
+                vm.openModal(_.find(vm.videos, function (vid) {
                     return vid.inRange(editor.getCursor());
                 }));
             })
-            .on('render', function() {
+            .on('render', function () {
                 vm.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
@@ -40,7 +40,7 @@ module.exports = {
                     vm.$children[0].$destroy();
                 }
 
-                Vue.nextTick(function() {
+                Vue.nextTick(function () {
                     vm.$compile(editor.preview[0]);
                 });
 
@@ -52,9 +52,9 @@ module.exports = {
 
     methods: {
 
-        openModal: function(video) {
+        openModal: function (video) {
 
-            var editor = this.editor, cursor = editor.editor.getCursor();
+            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!video) {
                 video = {
@@ -64,20 +64,19 @@ module.exports = {
                 };
             }
 
-            this
-                .$addChild({
-                    data: {
-                        video: video
-                    }
-                }, Picker)
-                .$mount()
+            new Picker({
+                parent: this,
+                data: {
+                    video: video
+                }
+            }).$mount()
                 .$appendTo('body')
                 .$on('select', function (video) {
-                    video.replace('(video)' + JSON.stringify({src: video.src}));
+                    video.replace('(video)' + JSON.stringify({src: video.src, autoplay: video.autoplay, controls: video.controls, loop: video.loop, poster: video.poster}));
                 });
         },
 
-        replaceInPreview: function(data, index) {
+        replaceInPreview: function (data, index) {
 
             var settings;
 
@@ -85,11 +84,12 @@ module.exports = {
 
                 settings = JSON.parse(data.matches[1]);
 
-            } catch (e) {}
+            } catch (e) {
+            }
 
-            _.merge(data, settings || { src: '' });
+            _.merge(data, settings || {src: ''});
 
-            return '<video-preview index="'+index+'"></video-preview>';
+            return '<video-preview index="' + index + '"></video-preview>';
         }
 
     },

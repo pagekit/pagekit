@@ -57,7 +57,6 @@ module.exports = {
                 };
             }
 
-
             new Picker({
                 parent: this,
                 data: {
