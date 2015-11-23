@@ -26,7 +26,7 @@ class ResponseListener implements EventSubscriberInterface
         }
 
         $response->setContent(preg_replace_callback(self::REGEX_URL, function ($matches) {
-            return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
+            return sprintf(' %s="%s"', $matches['attr'], App::url($matches['url']));
         }, $content));
     }
 
