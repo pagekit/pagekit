@@ -2,16 +2,29 @@ module.exports = {
 
     mixins: [window.Widgets],
 
-    data: $.extend(true, {
-        position: undefined,
-        selected: [],
-        config: {filter: {search: '', node: ''}}
-    }, window.$data),
+    data: function () {
+        return _.merge({
+            position: undefined,
+            selected: [],
+            config: {filter: {search: '', node: ''}}
+        }, window.$data)
+    },
 
     ready: function () {
 
         UIkit.init();
         this.load();
+
+    },
+
+    watch: {
+
+        widgets: 'attachWidgets',
+
+        'config.positions': {
+            handler: 'attachWidgets',
+            immediate: true
+        }
 
     },
 
@@ -22,9 +35,7 @@ module.exports = {
         },
 
         unassigned: function () {
-
             var widgets = this.get('unassigned');
-
             return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(widgets, 'id'), widgets: widgets};
         },
 
@@ -86,7 +97,7 @@ module.exports = {
         },
 
         active: function (position) {
-            return this.position === position || this.position.name == position.name;
+            return this.position === position || (position && this.position && this.position.name == position.name);
         },
 
         select: function (position) {
@@ -124,7 +135,7 @@ module.exports = {
         },
 
         remove: function () {
-            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function() {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function () {
                 this.load();
                 this.$set('selected', []);
             });
@@ -193,6 +204,12 @@ module.exports = {
 
         isSelected: function (id) {
             return this.selected.indexOf(id) !== -1;
+        },
+
+        attachWidgets: function () {
+            this.config.positions.forEach(function (position) {
+                position.widgets = this.$options.filters.assigned.bind(this)(position.assigned);
+            }, this);
         }
 
     },
@@ -202,7 +219,7 @@ module.exports = {
         show: function (position) {
 
             if (!this.position) {
-                return (position.name != '_unassigned' ? position.widgets.length : 0);
+                return position.name != '_unassigned' ? position.widgets.length : 0;
             }
 
             return this.active(position);
@@ -222,29 +239,32 @@ module.exports = {
 
     },
 
-    components: {
+    directives: {
 
-        position: {
+        sortable: {
 
-            inherit: true,
-            replace: false,
+            params: ['group'],
 
-            ready: function () {
+            bind: function () {
 
                 var vm = this;
 
                 // disable sorting on unassigned position
-                if (this.$el.getAttribute('data-position') == '_unassigned') {
+                if (this.el.getAttribute('data-position') == '_unassigned') {
                     return;
                 }
 
-                UIkit.sortable(this.$el, {group: 'position', removeWhitespace: false})
-                    .element.off('change.uk.sortable')
-                    .on('change.uk.sortable', function (e, sortable, element, action) {
-                        if (action == 'added' || action == 'moved') {
-                            vm.assign(vm.pos.name, _.pluck(sortable.serialize(), 'id'));
-                        }
-                    });
+                Vue.nextTick(function () {
+
+                    UIkit.sortable(this.el, {group: 'position', removeWhitespace: false})
+                        .element.off('change.uk.sortable')
+                        .on('change.uk.sortable', function (e, sortable, element, action) {
+                            if (action == 'added' || action == 'moved') {
+                                vm.vm.assign(vm._frag.scope.$get('pos.name'), _.pluck(sortable.serialize(), 'id'));
+                            }
+                        });
+
+                }.bind(this));
             }
 
         }
