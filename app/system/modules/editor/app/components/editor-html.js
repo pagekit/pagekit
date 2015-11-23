@@ -32,7 +32,7 @@ module.exports = {
                     }
                 });
 
-            this.$watch('value', function (value) {
+            this.$watch('$parent.value', function (value) {
                 if (value != editor.editor.getValue()) {
                     editor.editor.setValue(value);
                 }

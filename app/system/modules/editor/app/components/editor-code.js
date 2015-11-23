@@ -38,7 +38,7 @@ module.exports = {
                 $el.trigger('input');
             });
 
-            this.$watch('value', function (value) {
+            this.$watch('$parent.value', function (value) {
                 if (value != this.editor.getValue()) {
                     this.editor.setValue(value);
                 }
