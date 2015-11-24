@@ -6,6 +6,7 @@
             <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
                 <h2 class="uk-margin-remove" v-show="!selected.length">{{ '{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files' | transChoice count {count:count} }}</h2>
+
                 <h2 class="uk-margin-remove" v-else>{{ '{1} %count% File selected|]1,Inf[ %count% Files selected' | transChoice selected.length {count:selected.length} }}</h2>
 
                 <div class="uk-margin-left" v-if="isWritable" v-show="selected.length">
@@ -59,7 +60,7 @@
 
         <div class="uk-overflow-container tm-overflow-container">
             <partial :name="view"></partial>
-            <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!hasItems">{{ 'No files found.' | trans }}</h3>
+            <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!count">{{ 'No files found.' | trans }}</h3>
         </div>
 
     </div>
@@ -69,8 +70,6 @@
 <script>
 
     module.exports = {
-
-        replace : true,
 
         props: {
             root: {type: String, default: '/'},
@@ -106,17 +105,13 @@
             },
 
             selected: function () {
-                this.$dispatch('select.finder', this.getSelected(), this)
-            }
+                this.$dispatch('select.finder', this.getSelected(), this);
+            },
 
-        },
-
-        filters: {
-
-            searched: function (files) {
-                return files.filter(function (file) {
-                    return !this.search || file.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
-                }, this);
+            search: function () {
+                this.$set('selected', _.filter(this.selected, function (name) {
+                    return _.find(this.searched, 'name', name);
+                }, this));
             }
 
         },
@@ -132,21 +127,23 @@
                                 return str.length;
                             })
                             .map(function (part) {
-                                return { path: path += '/' + part, title: part };
+                                return {path: path += '/' + part, title: part};
                             })
-                    );
+                        );
 
                 crumbs[crumbs.length - 1].current = true;
 
                 return crumbs;
             },
 
-            hasItems: function() {
-                return this.$options.filters.searched(this.items || []).length;
+            searched: function () {
+                return _.filter(this.items, function (file) {
+                    return !this.search || file.name.toLowerCase().indexOf(this.search.toLowerCase()) !== -1;
+                }, this);
             },
 
-            count: function() {
-                return this.items ? this.items.length : 0;
+            count: function () {
+                return this.searched.length;
             }
 
         },
@@ -166,10 +163,10 @@
             },
 
             getFullPath: function () {
-                return this.getRoot()+'/'+this.path.replace(/^\/+|\/+$/g, '')+'/';
+                return (this.getRoot() + this.getPath()).replace(/^\/+|\/+$/g, '') + '/';
             },
 
-            getRoot: function() {
+            getRoot: function () {
                 return this.root.replace(/^\/+|\/+$/g, '')
             },
 
@@ -179,7 +176,7 @@
                 }, this);
             },
 
-            removeSelection: function() {
+            removeSelection: function () {
                 this.selected = [];
             },
 
@@ -194,11 +191,11 @@
 
             createFolder: function () {
 
-                UIkit.modal.prompt(this.$trans('Folder Name'), '', function(name){
+                UIkit.modal.prompt(this.$trans('Folder Name'), '', function (name) {
 
                     if (!name) return;
 
-                    this.command('createfolder', { name: name });
+                    this.command('createfolder', {name: name});
 
                 }.bind(this));
             },
@@ -211,11 +208,11 @@
 
                 if (!oldname) return;
 
-                UIkit.modal.prompt(this.$trans('Name'), oldname, function(newname){
+                UIkit.modal.prompt(this.$trans('Name'), oldname, function (newname) {
 
                     if (!newname) return;
 
-                    this.command('rename', { oldname: oldname, newname: newname });
+                    this.command('rename', {oldname: oldname, newname: newname});
 
                 }.bind(this), {title: this.$trans('Rename')});
             },
@@ -227,7 +224,7 @@
                 }
 
                 if (names) {
-                    this.command('removefiles', { names: names });
+                    this.command('removefiles', {names: names});
                 }
             },
 
@@ -272,7 +269,7 @@
                     this.$set('selected', []);
                     this.$dispatch('path.finder', this.getFullPath(), this);
 
-                }).error(function() {
+                }).error(function () {
 
                     this.$notify('Unable to access directory.', 'danger');
 
@@ -295,7 +292,7 @@
                         action: this.$url.route('system/finder/upload'),
 
                         before: function (options) {
-                            $.extend(options.params, { path: finder.path, root: finder.getRoot(), _csrf: $pagekit.csrf });
+                            $.extend(options.params, {path: finder.path, root: finder.getRoot(), _csrf: $pagekit.csrf});
                         },
 
                         loadstart: function () {
@@ -325,7 +322,7 @@
                     };
 
                 UIkit.uploadSelect(this.$el.querySelector('.uk-form-file > input'), settings);
-                UIkit.uploadDrop($(this.$el).parents('.uk-modal').length ? this.$el: $('html'), settings);
+                UIkit.uploadDrop($(this.$el).parents('.uk-modal').length ? this.$el : $('html'), settings);
             }
 
         },

@@ -6,7 +6,7 @@ module.exports = {
 
     bind: function () {
 
-        var self = this, el = this.el, buttons = (_.attr(el, 'buttons') || '').split(',');
+        var self = this, el = this.el, buttons = (_.getAttr(el, 'buttons') || '').split(',');
 
         this.options = {
             title: false,

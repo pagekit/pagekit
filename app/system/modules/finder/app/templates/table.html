@@ -7,7 +7,7 @@
     </thead>
     <tbody>
 
-        <tr v-for="folder in items | filterBy 'application/folder' in 'mime' | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect(folder.name)">
+        <tr v-for="folder in searched | filterBy 'application/folder' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect(folder.name)">
             <td><input type="checkbox" name="name" :value="folder.name" v-model="selected" @click.stop></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
@@ -17,7 +17,7 @@
             <td></td>
         </tr>
 
-        <tr v-for="file in items | filterBy 'application/file' in 'mime' | searched" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect(file.name)">
+        <tr v-for="file in searched | filterBy 'application/file' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect(file.name)">
             <td><input type="checkbox" name="name" :value="file.name" v-model="selected" @click.stop></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
