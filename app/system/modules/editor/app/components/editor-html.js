@@ -21,7 +21,7 @@ module.exports = {
             var editor = this.$parent.editor = UIkit.htmleditor(this.$el, _.extend({
                 marked: window.marked,
                 CodeMirror: window.CodeMirror
-            }, this.options));
+            }, this.$parent.options));
 
             editor.element
                 .on('htmleditor-save', function (e, editor) {

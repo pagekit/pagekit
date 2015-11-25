@@ -1,7 +1,7 @@
 window.Site = module.exports = {
 
     data: function () {
-        return _.merge({sections: []}, window.$data);
+        return _.merge({sections: [], form: {}}, window.$data);
     },
 
     created: function () {

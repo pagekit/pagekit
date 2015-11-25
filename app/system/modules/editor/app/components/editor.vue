@@ -14,13 +14,16 @@
 
         data: function () {
             return {
-                editor: {}
+                editor: {},
+                height: 500
             }
         },
 
         compiled: function () {
 
-            this.$set('height', this.options && this.options.height ? this.options.height : 500);
+            if (this.options && this.options.height) {
+                this.height = this.options.height
+            }
 
             if (this.$el.hasAttributes()) {
 
