@@ -25,7 +25,7 @@
             lightbox: Boolean,
             closed: Function,
             modifier: {type: String, default: ''},
-            options: {type: Object, default: {}}
+            options: {type: Object, default: function () {return {};}}
         },
 
         ready: function () {
@@ -47,7 +47,7 @@
             this.modal.on('show.uk.modal', function () {
 
                 // catch .uk-overflow-container
-                setTimeout(function() {
+                setTimeout(function () {
                     vm.modal.resize();
                 }, 250)
             });
