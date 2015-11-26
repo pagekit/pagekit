@@ -4,11 +4,11 @@
 
         <div class="uk-form-row">
             <span class="uk-form-label">Pages</span>
-            <div class="uk-form-controls uk-form-controls-text">
+            <div class="uk-form-controls uk-form-controls-text" v-if="menus">
                 <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
-                <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-show="menu.getNodes().length">
+                <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.getNodes().length">
                     <li class="pk-list-header">{{ menu.label }}</li>
-                    <node v-for="node in menu.getNodes()"></node>
+                    <node v-for="node in menu.getNodes()" :widget.sync="widget" :node="node" :menu="menu"></node>
                 </ul>
             </div>
         </div>
@@ -26,9 +26,15 @@
             priority: 100
         },
 
+        data: function () {
+          return {
+              menus: false
+          }
+        },
+
         inherit: true,
 
-        props: ['widget'],
+        props: ['widget', 'config'],
 
         ready: function () {
 
@@ -41,11 +47,14 @@
                     nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parent_id').value(),
 
                     getNodes: function (node) {
-                        return node ? this.nodes[node.id] : this.nodes[0];
+                        return (node ? this.nodes[node.id] : this.nodes[0]) || [];
                     }
 
                 });
             }));
+
+            console.log(this.menus)
+
         },
 
         computed: {
@@ -60,16 +69,20 @@
 
             node: {
 
-                inherit: true,
+                props: ['widget', 'node', 'menu'],
+
+                created: function () {
+                    this.$options.components.node = this.$parent.$options.components.node;
+                },
 
                 template:
                         '<li>'+
                             '<label>' +
-                                '<input type="checkbox" :value="node.id" v-checkbox="widget.nodes" number>' +
+                                '<input type="checkbox" :value="node.id" v-model="widget.nodes" number>' +
                                 ' {{ node.title }}' +
                             '</label>' +
                             '<ul class="uk-list" v-if="menu.getNodes(node)">' +
-                                '<node v-for="node in menu.getNodes(node)"></node>' +
+                                '<node v-for="node in menu.getNodes(node)" :widget.sync="widget" :node="node" :menu="menu"></node>' +
                             '</ul>'+
                         '<li>'
 

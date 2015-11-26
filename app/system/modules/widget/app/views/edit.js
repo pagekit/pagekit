@@ -1,7 +1,9 @@
 module.exports = {
 
+    mixins: [window.Widgets],
+
     data: function () {
-        return _.merge({}, window.$data);
+        return _.merge({form: {}, sections: []}, window.$data);
     },
 
     created: function () {
@@ -43,16 +45,8 @@ module.exports = {
             var match = new RegExp('[?&]position=([^&]*)').exec(location.search);
             this.widget.position = (match && decodeURIComponent(match[1].replace(/\+/g, ' '))) || '';
         }
-    },
 
-    computed: {
-
-        positionOptions: function () {
-            return _.map(this.config.positions, function (position) {
-                return {text: this.$trans(position.label), value: position.name};
-            }, this);
-        }
-
+        console.log(this)
     },
 
     methods: {
@@ -78,9 +72,7 @@ module.exports = {
             this.$dispatch('cancel');
         }
 
-    },
-
-    mixins: [window.Widgets]
+    }
 
 };
 

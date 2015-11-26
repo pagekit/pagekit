@@ -23,7 +23,7 @@
 
     <div class="uk-switcher uk-margin-large-top" v-el:content>
         <div v-for="section in sections">
-            <component :is="section.name" :widget.sync="widget" :config="config" :form.sync="form"></component>
+            <component :is="section.name" :widget.sync="widget" :config="config"></component>
         </div>
     </div>
 

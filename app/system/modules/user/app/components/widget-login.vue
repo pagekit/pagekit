@@ -7,7 +7,7 @@
                 <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
                 <div class="uk-form-controls">
                     <input id="form-title" class="uk-form-width-large" type="text" name="title" v-model="widget.title" v-validate:required>
-                    <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
+                    <p class="uk-form-help-block uk-text-danger" v-show="form && form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
@@ -45,7 +45,11 @@
 
         replace: false,
 
-        props: ['widget', 'config', 'form']
+        props: ['widget', 'config', 'form'],
+
+        created: function () {
+            this.$options.partials = this.$parent.$options.partials;
+        }
 
     };
 
