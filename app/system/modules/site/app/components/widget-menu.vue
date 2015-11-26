@@ -9,8 +9,7 @@
                 <div class="uk-form-controls">
                     <input id="form-title" class="uk-form-width-large" type="text" name="title" v-model="widget.title" v-validate:required>
 
-                    <p class="uk-form-help-block uk-text-danger" v-show="$parent.form && $parent.form.title.invalid">{{
-                        'Title cannot be blank.' | trans }}</p>
+                    <p class="uk-form-help-block uk-text-danger" v-show="$parent.form && $parent.form.title.invalid">{{ 'Title cannot be blank.' | trans }}</p>
                 </div>
             </div>
 
@@ -69,13 +68,11 @@
 
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed">
-                        <label><input type="radio" value="all" v-model="widget.data.mode"> {{ 'Show all' | trans
-                            }}</label>
+                        <label><input type="radio" value="all" v-model="widget.data.mode"> {{ 'Show all' | trans }}</label>
                     </p>
 
                     <p class="uk-form-controls-condensed">
-                        <label><input type="radio" value="active" v-model="widget.data.mode"> {{ 'Show only for active
-                            item' | trans }}</label>
+                        <label><input type="radio" value="active" v-model="widget.data.mode"> {{ 'Show only for active item' | trans }}</label>
                     </p>
                 </div>
             </div>
