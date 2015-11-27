@@ -184,6 +184,8 @@ module.exports = {
         menu: function (menu) {
 
             this.$set('selected', []);
+            this.$set('nodes', []);
+            this.$set('tree',[]);
 
             this.Nodes.query({menu: menu.id}, function (nodes) {
                 this.$set('nodes', nodes);

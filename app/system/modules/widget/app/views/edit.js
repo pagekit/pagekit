@@ -46,7 +46,6 @@ module.exports = {
             this.widget.position = (match && decodeURIComponent(match[1].replace(/\+/g, ' '))) || '';
         }
 
-        console.log(this)
     },
 
     methods: {

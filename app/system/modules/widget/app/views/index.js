@@ -32,9 +32,6 @@ module.exports = {
     computed: {
 
         positions: function () {
-
-            console.log(this.config.positions.concat(this.unassigned))
-
             return this.config.positions.concat(this.unassigned);
         },
 
