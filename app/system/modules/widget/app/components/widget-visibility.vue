@@ -32,8 +32,6 @@
           }
         },
 
-        inherit: true,
-
         props: ['widget', 'config'],
 
         ready: function () {
@@ -53,8 +51,6 @@
                 });
             }));
 
-            console.log(this.menus)
-
         },
 
         computed: {
@@ -71,9 +67,7 @@
 
                 props: ['widget', 'node', 'menu'],
 
-                created: function () {
-                    this.$options.components.node = this.$parent.$options.components.node;
-                },
+                name: 'node',
 
                 template:
                         '<li>'+

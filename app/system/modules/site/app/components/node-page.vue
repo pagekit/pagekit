@@ -6,7 +6,7 @@
             <div class="uk-form-row">
                 <input class="uk-width-1-1 uk-form-large" type="text" name="page[title]" :placeholder="'Enter Title' | trans" v-model="page.title" v-validate:required lazy>
 
-                <div class="uk-form-help-block uk-text-danger" v-show="$parent.form && $parent.form['page[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</div>
+                <div class="uk-form-help-block uk-text-danger" v-show="form['page[title]'].invalid">{{ 'Title cannot be blank.' | trans }}</div>
             </div>
 
             <div class="uk-form-row">
@@ -81,7 +81,7 @@
             label: 'Content'
         },
 
-        props: ['node', 'roles'],
+        props: ['node', 'roles', 'form'],
 
         data: function () {
             return {

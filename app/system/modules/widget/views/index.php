@@ -15,13 +15,13 @@
 
                 <ul class="uk-nav uk-nav-side">
                     <li :class="{'uk-active': active()}">
-                        <a @click.prevent="select()">{{ 'All' | trans }}</a>
+                        <a @click="select()">{{ 'All' | trans }}</a>
                     </li>
                     <li :class="{'uk-active': active(unassigned)}" v-show="unassigned.widgets.length">
                         <a @click="select(unassigned)">{{ 'Unassigned' | trans }} <span class="uk-text-muted uk-float-right">{{ unassigned.widgets.length }}</span></a>
                     </li>
                     <li class="uk-nav-header">{{ 'Positions' | trans }}</li>
-                    <li :class="{'uk-active': active(pos)}" v-for="pos in config.positions" track-by="pos.name">
+                    <li :class="{'uk-active': active(pos)}" v-for="pos in config.positions">
                         <a @click="select(pos)">{{ pos.label }}  <span class="uk-text-muted uk-float-right" v-show="pos.widgets.length">{{ pos.widgets.length }}</span></a>
                     </li>
                 </ul>
@@ -49,7 +49,7 @@
                                     <a class="pk-icon-move pk-icon-hover" :title="'Move' | trans" data-uk-tooltip="{delay: 500}" @click.prevent></a>
                                     <div class="uk-dropdown uk-dropdown-small">
                                         <ul class="uk-nav uk-nav-dropdown">
-                                            <li v-for="pos in config.positions" track-by="pos.name"><a @click="move(pos.name, selected)">{{ pos.label }}</a></li>
+                                            <li v-for="pos in config.positions" track-by="name"><a @click="move(pos.name, selected)">{{ pos.label }}</a></li>
                                         </ul>
                                     </div>
                                 </li>
@@ -98,9 +98,9 @@
 
                 </template>
 
-                <div class="uk-margin-bottom" :data-pos="pos.name" v-for="pos in positions" track-by="name" v-show="pos | show">
+                <div class="uk-margin-bottom" :data-pos="pos.name" v-for="pos in positions" track-by="name" v-if="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}" v-show="position || (!position && !emptyafterfilter(pos.widgets))">
+                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}" v-if="position || (!position && !emptyafterfilter(pos.widgets))">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected="'[data-pos='+ pos.name +'] input[name=id]'" number></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
@@ -110,15 +110,15 @@
                         </div>
                     </div>
 
-                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
+                    <h3 class="uk-h1 uk-text-muted uk-text-center" v-if="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
-                    <ul class="uk-sortable uk-list uk-margin-remove" v-sortable v-show="!emptyafterfilter(pos.widgets)" :data-position="pos.name">
+                    <ul class="uk-sortable uk-list uk-margin-remove" v-sortable v-if="!emptyafterfilter(pos.widgets)" :data-position="pos.name">
                         <li :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" v-var:type="widget | type" :data-id="widget.id" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id"></div>
                                 <div class="pk-table-min-width-100">
-                                    <a :href="$url.route('admin/site/widget/edit', {id: widget.id})" v-if="type">{{ widget.title }}</a>
+                                    <a :href="$url.route('admin/site/widget/edit', {id: widget.id})" v-if="widget | type">{{ widget.title }}</a>
                                     <span v-else>{{ widget.title }}</span>
                                 </div>
                                 <div class="pk-table-width-100 uk-text-center">
@@ -126,7 +126,7 @@
                                         <a :class="{'pk-icon-circle-danger': !widget.status, 'pk-icon-circle-success': widget.status}" @click="toggleStatus(widget)"></a>
                                     </td>
                                 </div>
-                                <div class="pk-table-width-150">{{ type.label || type.name }}</div>
+                                <div class="pk-table-width-150">{{ widget | type }}</div>
                                 <div class="pk-table-width-100">{{ getPageFilter(widget) }}</div>
                             </div>
 

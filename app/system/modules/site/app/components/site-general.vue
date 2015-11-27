@@ -15,7 +15,7 @@
             <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
                 <input id="form-title" class="uk-form-width-large" name="title" type="text" v-model="config.title" v-validate:required>
-                <p class="uk-form-help-block uk-text-danger" v-show="$parent.form && $parent.form.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
+                <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
             </div>
         </div>
 

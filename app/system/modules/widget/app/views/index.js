@@ -6,7 +6,8 @@ module.exports = {
         return _.merge({
             position: undefined,
             selected: [],
-            config: {filter: {search: '', node: ''}}
+            config: {filter: {search: '', node: ''}},
+            type: {}
         }, window.$data)
     },
 
@@ -31,11 +32,15 @@ module.exports = {
     computed: {
 
         positions: function () {
+
+            console.log(this.config.positions.concat(this.unassigned))
+
             return this.config.positions.concat(this.unassigned);
         },
 
         unassigned: function () {
             var widgets = this.get('unassigned');
+
             return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(widgets, 'id'), widgets: widgets};
         },
 
@@ -207,8 +212,9 @@ module.exports = {
         },
 
         attachWidgets: function () {
+
             this.config.positions.forEach(function (position) {
-                position.widgets = this.$options.filters.assigned.bind(this)(position.assigned);
+                Vue.set(position, 'widgets', this.$options.filters.assigned.bind(this)(position.assigned));
             }, this);
         }
 
@@ -226,7 +232,9 @@ module.exports = {
         },
 
         type: function (widget) {
-            return _.find(this.types, {name: widget.type});
+            var type = _.find(this.types, {name: widget.type});
+
+            return type.label || type.name;
         },
 
         assigned: function (ids) {

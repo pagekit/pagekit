@@ -23,7 +23,7 @@
 
     <div class="uk-switcher uk-margin" v-el:content>
         <div v-for="section in sections">
-            <component :is="section.name" :node.sync="node" :roles.sync="roles"></component>
+            <component :is="section.name" :node.sync="node" :roles.sync="roles" :form="form"></component>
         </div>
     </div>
 
