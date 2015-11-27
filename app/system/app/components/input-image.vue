@@ -38,7 +38,10 @@
 
     module.exports = {
 
-        props: {class: {default: ''}, source: {default: ''}},
+        props: {
+            class: {default: ''},
+            source: {default: ''}
+        },
 
         data: function () {
             return _.merge({}, $pagekit);

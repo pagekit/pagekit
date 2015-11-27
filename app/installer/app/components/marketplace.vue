@@ -78,21 +78,13 @@
         ],
 
         props: {
-            api: {
-                type: String,
-                default: ''
-            },
-            search: {
-                type: String,
-                default: ''
-            },
-            type: {
-                type: String,
-                default: 'pagekit-extension'
-            },
+            api: {type: String, default: ''},
+            search: {type: String, default: ''},
+            type: {type: String, default: 'pagekit-extension'},
             installed: {
-                type: Array,
-                default: []
+                type: Array, default: function () {
+                    return [];
+                }
             }
         },
 

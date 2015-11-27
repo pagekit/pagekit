@@ -2,6 +2,7 @@
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
         <img class="uk-margin-right" width="50" height="50" :alt="package.title" :src="package | icon" v-if="package.extra.icon">
+
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
             <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
@@ -48,7 +49,9 @@
             },
             package: {
                 type: Object,
-                default: {}
+                default: function () {
+                    return {};
+                }
             }
         },
 

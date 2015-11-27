@@ -26,10 +26,7 @@
     module.exports = {
 
         props: {
-            api: {
-                type: String,
-                default: ''
-            },
+            api: {type: String, default: ''},
             packages: Array,
             type: String
         },

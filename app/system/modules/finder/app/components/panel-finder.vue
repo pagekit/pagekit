@@ -83,7 +83,8 @@
             return {
                 upload: {},
                 selected: [],
-                items: false
+                items: false,
+                search: ''
             };
         },
 
