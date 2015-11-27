@@ -1,6 +1,6 @@
 function install (Vue) {
 
-    Vue.config.debug = true;
+    Vue.config.debug = false;
 
     var config = window.$pagekit;
 
