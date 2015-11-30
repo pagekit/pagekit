@@ -114,6 +114,13 @@
 
         props: ['widget', 'editing'],
 
+        data: function () {
+            return {
+                users: [],
+                userscount: null
+            }
+        },
+
         watch: {
 
             'widget.show': {
@@ -137,7 +144,7 @@
                     }
                 } else {
                     query = {
-                        filter: { access: 300, order: 'login DESC' }
+                        filter: {access: 300, order: 'login DESC'}
                     }
                 }
 

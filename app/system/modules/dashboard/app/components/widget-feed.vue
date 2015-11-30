@@ -106,6 +106,13 @@
 
         props: ['widget', 'editing'],
 
+        data: function () {
+            return {
+                status: '',
+                feed: {}
+            }
+        },
+
         filters: {
 
             count: function (entries) {
