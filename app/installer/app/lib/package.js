@@ -30,7 +30,7 @@ module.exports = {
             return this.$http.post('admin/system/package/enable', {name: pkg.name})
                 .success(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
-                    pkg.$set('enabled', true);
+                    Vue.set(pkg, 'enabled', true);
                     document.location.reload();
                 }).error(this.error);
         },
@@ -38,7 +38,8 @@ module.exports = {
         disable: function (pkg) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name})
                 .success(function () {
-                    pkg.$set('enabled', false);
+                    this.$notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
+                    Vue.set(pkg, 'enabled', false);
                     document.location.reload();
                 }).error(this.error);
         },
