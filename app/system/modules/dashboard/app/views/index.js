@@ -3,7 +3,10 @@ var Version = require('../../../../../installer/app/lib/version');
 window.Dashboard = module.exports = {
 
     data: function () {
-        return window.$data;
+        return _.extend({
+            editing: {},
+            update: {}
+        }, window.$data);
     },
 
     created: function () {
@@ -62,11 +65,11 @@ window.Dashboard = module.exports = {
                         data[widget.id] = widget;
                     });
 
-                    self.$http.post('admin/dashboard/savewidgets', {widgets: data}).then(function() {
+                    self.$http.post('admin/dashboard/savewidgets', {widgets: data}).then(function () {
 
                         // cleanup empty items - maybe fixed with future vue.js version
-                        sortables.children().each(function() {
-                            if(!this.children.length) $(this).remove();
+                        sortables.children().each(function () {
+                            if (!this.children.length) $(this).remove();
                         });
                     });
             }
@@ -112,7 +115,7 @@ window.Dashboard = module.exports = {
 
             this.Widgets.save({widget: _.merge({type: type.id, column: column, idx: 100}, type.defaults)}, function (data) {
                 this.widgets.push(data);
-                this.editing.$set(data.id, true);
+                this.editing[data.id] = true;
             });
         },
 
@@ -153,7 +156,7 @@ window.Dashboard = module.exports = {
             return types;
         },
 
-        checkVersion: function() {
+        checkVersion: function () {
 
             if (this.$cache.get('pagekit.update')) {
                 this.$set('update', this.$cache.get('pagekit.update'));

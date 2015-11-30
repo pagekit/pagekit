@@ -26,12 +26,10 @@
 
 module.exports = {
 
-    props: ['widget'],
+    props: {'widget': {}, 'editing': {default: false}},
 
-    data: function () {
-        return {
-            editing: false
-        };
+    created: function () {
+        this.$options.components = this.$parent.$options.components;
     },
 
     computed: {

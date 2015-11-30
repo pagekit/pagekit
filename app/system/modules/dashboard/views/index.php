@@ -22,10 +22,8 @@
 
             <ul class="uk-sortable pk-sortable" :data-column="i">
                 <li v-for="widget in widgets | column i" :data-id="widget.id" :data-idx="widget.idx">
-                    <panel class="uk-panel uk-panel-box uk-visible-hover-inline" :widget="widget"></panel>
+                    <panel class="uk-panel uk-panel-box uk-visible-hover-inline" :widget="widget" :editing.sync="editing[widget.id]"></panel>
                 </li>
-                <!-- TODO: fix workaround-->
-                <li class="uk-hidden" v-if="false">Vue fix for empty lists<li>
             </ul>
 
         </div>
