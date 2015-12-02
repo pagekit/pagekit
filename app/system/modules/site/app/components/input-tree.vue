@@ -55,13 +55,9 @@
 
         methods: {
 
-            getNodesForMenu: function (menu) {
-                return menu.count ? this.grouped[menu.id] : [];
-            },
-
             getSubNodes: function(menu, node) {
 
-                var nodes = this.getNodesForMenu(menu);
+                var nodes = this.grouped[menu.id] || [];
                 return (node ? nodes[node.id] : nodes[0]) || [];
 
             },
