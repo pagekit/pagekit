@@ -1,7 +1,9 @@
 <template>
-    <ul class="uk-list uk-margin-top-remove" v-for="menu in getMenus()" v-if="menu.getNodes().length">
+
+    <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="hasNodes(menu)">
+    </pre>
         <li class="pk-list-header">{{ menu.label }}</li>
-        <partial name="node-partial" v-for="node in menu.getNodes()"></partial>
+        <partial name="node-partial" v-for="node in getSubNodes(menu, node)"></partial>
     </ul>
 </template>
 
@@ -43,22 +45,28 @@
 
         methods: {
 
-            getMenus: function () {
+            hasNodes: function (menu) {
 
-                var nodes = _(this.allnodes).groupBy('menu').value();
-                
-                return  _.mapValues(this.menus, function (menu) {
+                var grouped = _(this.allnodes).groupBy('menu').value();
+                return (grouped[menu.id].length > 0);
 
-                    return _.extend(menu, {
-
-                        nodes: _(nodes[menu.id] || {}).sortBy('priority').groupBy('parent_id').value(),
-
-                        getNodes: function (node) {
-                            return (node ? this.nodes[node.id] : this.nodes[0]) || [];
-                        }
-                    });
-                });
             },
+
+            getNodesForMenu: function (menu) {
+
+                var grouped = _(this.allnodes).groupBy('menu').value();
+                var sorted = _(grouped[menu.id] || {}).sortBy('priority').groupBy('parent_id').value();
+                return sorted;
+
+            },
+
+            getSubNodes: function(menu, node) {
+
+                var nodes = this.getNodesForMenu(menu);
+                return (node ? nodes[node.id] : nodes[0]) || [];
+
+            },
+
         },
 
         partials: {
@@ -68,7 +76,7 @@
                     '<input type="checkbox" :value="node.id" v-model="nodes" number>' +
                     ' {{ node.title }}' +
                 '</label>' +
-                '<partial name="node-partial" v-for="node in menu.getNodes(node)"></partial>' +
+                '<partial name="node-partial" v-for="node in getSubNodes(menu, node)"></partial>' +
             '<li>'
 
         }
