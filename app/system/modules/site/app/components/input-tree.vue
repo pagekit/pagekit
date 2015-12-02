@@ -1,7 +1,7 @@
 <template>
     <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.count">
         <li class="pk-list-header">{{ menu.label }}</li>
-        <partial name="node-partial" v-for="node in getNodes(menu, node)"></partial>
+        <partial name="node-partial" v-for="node in grouped[menu.id][0]"></partial>
     </ul>
 </template>
 
@@ -49,22 +49,13 @@
             }
         },
 
-        methods: {
-
-            getNodes: function(menu, node) {
-
-                var nodes = this.grouped[menu.id] || {};
-                return (node ? nodes[node.id] : nodes[0]) || [];
-
-            }
-
-        },
-
         partials: {
 
-            'node-partial': '<li>'+
+            'node-partial': '<li>' +
                 '<label><input type="checkbox" :value="node.id" v-model="nodes" number> {{ node.title }}</label>' +
-                '<partial name="node-partial" v-for="node in getNodes(menu, node)"></partial>' +
+                '<ul class="uk-list" v-if="grouped[menu.id][node.id]">' +
+                    '<partial name="node-partial" v-for="node in grouped[menu.id][node.id]"></partial>' +
+                '</ul>' +
             '<li>'
 
         }
