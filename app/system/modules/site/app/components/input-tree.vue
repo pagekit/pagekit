@@ -7,6 +7,8 @@
 
 <script>
 
+    var Promise = require('promise');
+
     module.exports = {
 
         props: ['nodes'],
@@ -23,16 +25,17 @@
 
             var vm = this;
 
-            // TODO: use promises instead
-            this.$http.get('api/site/menu', function (menus) {
-
-                vm.$http.get('api/site/node', function (nodes) {
-                    vm.prepare(nodes, menus);
+            Promise
+                .all([
+                    this.$http.get('api/site/node'),
+                    this.$http.get('api/site/menu')
+                ])
+                .then(function(responses) {
+                    vm.prepare(responses[0].data, responses[1].data);
+                })
+                .catch(function () {
+                    vm.$notify('Could not load config.', 'danger');
                 });
-
-            }).error(function () {
-                vm.$notify('Could not load config.');
-            });
 
         },
 
