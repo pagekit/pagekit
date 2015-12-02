@@ -1,5 +1,5 @@
 <template>
-    <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.getNodes().length">
+    <ul class="uk-list uk-margin-top-remove" v-for="menu in getMenus()" v-if="menu.getNodes().length">
         <li class="pk-list-header">{{ menu.label }}</li>
         <partial name="node-partial" v-for="node in menu.getNodes()"></partial>
     </ul>
@@ -17,7 +17,8 @@
 
         data: function () {
             return {
-                'menus': []
+                'menus': [],
+                'allnodes': []
             }
         },
 
@@ -31,7 +32,8 @@
                     this.$http.get('api/site/menu')
                 ])
                 .then(function(responses) {
-                    vm.prepare(responses[0].data, responses[1].data);
+                    vm.allnodes  = responses[0].data;
+                    vm.menus     = responses[1].data;
                     done();
                 })
                 .catch(function () {
@@ -41,11 +43,11 @@
 
         methods: {
 
-            prepare: function (nodes_raw, menus_raw) {
+            getMenus: function () {
 
-                var nodes = _(nodes_raw).groupBy('menu').value();
-
-                this.$set('menus', _.mapValues(menus_raw, function (menu) {
+                var nodes = _(this.allnodes).groupBy('menu').value();
+                
+                return  _.mapValues(this.menus, function (menu) {
 
                     return _.extend(menu, {
 
@@ -54,11 +56,9 @@
                         getNodes: function (node) {
                             return (node ? this.nodes[node.id] : this.nodes[0]) || [];
                         }
-
                     });
-                }));
-
-            }
+                });
+            },
         },
 
         partials: {
