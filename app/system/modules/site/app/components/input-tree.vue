@@ -1,7 +1,5 @@
 <template>
-
-    <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="hasNodes(menu)">
-    </pre>
+    <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.count">
         <li class="pk-list-header">{{ menu.label }}</li>
         <partial name="node-partial" v-for="node in getSubNodes(menu, node)"></partial>
     </ul>
@@ -34,8 +32,8 @@
                     this.$http.get('api/site/menu')
                 ])
                 .then(function(responses) {
-                    vm.allnodes  = responses[0].data;
-                    vm.menus     = responses[1].data;
+                    vm.$set('allnodes', responses[0].data);
+                    vm.$set('menus', responses[1].data);
                     done();
                 })
                 .catch(function () {
@@ -43,21 +41,22 @@
                 });
         },
 
+        computed: {
+
+            grouped: function() {
+
+                var groupedNodes = _(this.allnodes).groupBy('menu').value();
+                return _.mapValues(groupedNodes, function(nodes) {
+                    return _(nodes || {}).sortBy('priority').groupBy('parent_id').value();
+                });
+
+            }
+        },
+
         methods: {
 
-            hasNodes: function (menu) {
-
-                var grouped = _(this.allnodes).groupBy('menu').value();
-                return (grouped[menu.id].length > 0);
-
-            },
-
             getNodesForMenu: function (menu) {
-
-                var grouped = _(this.allnodes).groupBy('menu').value();
-                var sorted = _(grouped[menu.id] || {}).sortBy('priority').groupBy('parent_id').value();
-                return sorted;
-
+                return menu.count ? this.grouped[menu.id] : [];
             },
 
             getSubNodes: function(menu, node) {
