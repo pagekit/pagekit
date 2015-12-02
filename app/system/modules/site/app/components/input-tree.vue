@@ -1,7 +1,7 @@
 <template>
     <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.count">
         <li class="pk-list-header">{{ menu.label }}</li>
-        <partial name="node-partial" v-for="node in getSubNodes(menu, node)"></partial>
+        <partial name="node-partial" v-for="node in getNodes(menu, node)"></partial>
     </ul>
 </template>
 
@@ -12,8 +12,6 @@
     module.exports = {
 
         props: ['nodes'],
-
-        replace: true,
 
         data: function () {
             return {
@@ -44,38 +42,33 @@
         computed: {
 
             grouped: function() {
-
-                var groupedNodes = _(this.allnodes).groupBy('menu').value();
-                return _.mapValues(groupedNodes, function(nodes) {
+                return _(this.allnodes).groupBy('menu').mapValues(function(nodes) {
                     return _(nodes || {}).sortBy('priority').groupBy('parent_id').value();
-                });
+                }).value();
 
             }
         },
 
         methods: {
 
-            getSubNodes: function(menu, node) {
+            getNodes: function(menu, node) {
 
-                var nodes = this.grouped[menu.id] || [];
+                var nodes = this.grouped[menu.id] || {};
                 return (node ? nodes[node.id] : nodes[0]) || [];
 
-            },
+            }
 
         },
 
         partials: {
 
             'node-partial': '<li>'+
-                '<label>' +
-                    '<input type="checkbox" :value="node.id" v-model="nodes" number>' +
-                    ' {{ node.title }}' +
-                '</label>' +
-                '<partial name="node-partial" v-for="node in getSubNodes(menu, node)"></partial>' +
+                '<label><input type="checkbox" :value="node.id" v-model="nodes" number> {{ node.title }}</label>' +
+                '<partial name="node-partial" v-for="node in getNodes(menu, node)"></partial>' +
             '<li>'
 
         }
-    }
+    };
 
     window.Vue.component('input-tree', function (resolve) {
         resolve(module.exports);
