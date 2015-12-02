@@ -1,35 +1,67 @@
 <template>
-
     <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.getNodes().length">
         <li class="pk-list-header">{{ menu.label }}</li>
         <node v-for="node in menu.getNodes()" :nodes.sync="nodes" :node="node" :menu="menu"></node>
     </ul>
-
 </template>
 
 <script>
 
     module.exports = {
 
-        props: ['config', 'nodes'],
+        props: ['nodes'],
 
-        ready: function () {
+        replace: true,
 
-            var nodes = _(this.config.nodes).groupBy('menu').value();
+        data: function () {
+            return {
+                'menus': [],
+                'config': {}
+            }
+        },
 
-            this.$set('menus', _.mapValues(this.config.menus, function (menu, id) {
+        created: function () {
 
-                return _.extend(menu, {
+            var vm = this;
 
-                    nodes: _(nodes[id] || {}).sortBy('priority').groupBy('parent_id').value(),
+            // TODO: use promises instead
+            this.$http.get('api/site/menu', function (menus) {
 
-                    getNodes: function (node) {
-                        return (node ? this.nodes[node.id] : this.nodes[0]) || [];
-                    }
+                vm.$http.get('api/site/node', function (nodes) {
+                    console.log('success');
+                    vm.$set('config.menus', menus);
+                    vm.$set('config.nodes', nodes);
 
+                    vm.prepare();
                 });
-            }));
 
+            }).error(function () {
+                vm.$notify('Could not load config.');
+            });
+
+        },
+
+        methods: {
+
+            prepare: function () {
+
+
+                var nodes = _(this.config.nodes).groupBy('menu').value();
+
+                this.$set('menus', _.mapValues(this.config.menus, function (menu) {
+
+                    return _.extend(menu, {
+
+                        nodes: _(nodes[menu.id] || {}).sortBy('priority').groupBy('parent_id').value(),
+
+                        getNodes: function (node) {
+                            return (node ? this.nodes[node.id] : this.nodes[0]) || [];
+                        }
+
+                    });
+                }));
+
+            }
         },
 
         components: {
@@ -53,5 +85,9 @@
             }
         }
     }
+
+    window.Vue.component('input-tree', function (resolve) {
+        resolve(module.exports);
+    });
 
 </script>

@@ -7,9 +7,7 @@
             <div class="uk-form-controls uk-form-controls-text" v-if="config.menus">
                 <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
 
-                <input-tree
-                    :config="config"
-                    :nodes.sync="widget.nodes"></input-tree>
+                <input-tree :nodes.sync="widget.nodes"></input-tree>
 
             </div>
         </div>
@@ -40,12 +38,6 @@
             all: function () {
                 return !this.widget.nodes || !this.widget.nodes.length;
             }
-
-        },
-
-        components: {
-
-            inputTree: require('../../../site/app/components/input-tree.vue')
 
         }
 
