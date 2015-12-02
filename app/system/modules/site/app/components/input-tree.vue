@@ -15,8 +15,7 @@
 
         data: function () {
             return {
-                'menus': [],
-                'config': {}
+                'menus': []
             }
         },
 
@@ -28,11 +27,7 @@
             this.$http.get('api/site/menu', function (menus) {
 
                 vm.$http.get('api/site/node', function (nodes) {
-                    console.log('success');
-                    vm.$set('config.menus', menus);
-                    vm.$set('config.nodes', nodes);
-
-                    vm.prepare();
+                    vm.prepare(nodes, menus);
                 });
 
             }).error(function () {
@@ -43,12 +38,11 @@
 
         methods: {
 
-            prepare: function () {
+            prepare: function (nodes_raw, menus_raw) {
 
+                var nodes = _(nodes_raw).groupBy('menu').value();
 
-                var nodes = _(this.config.nodes).groupBy('menu').value();
-
-                this.$set('menus', _.mapValues(this.config.menus, function (menu) {
+                this.$set('menus', _.mapValues(menus_raw, function (menu) {
 
                     return _.extend(menu, {
 
