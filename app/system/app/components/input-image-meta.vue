@@ -2,6 +2,7 @@
 
     <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!image.src" @click.prevent="pick">
         <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-image.svg')">
+
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
     </a>
 
@@ -15,7 +16,9 @@
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
+                <li>
+                    <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a>
+                </li>
             </ul>
         </div>
 
@@ -65,7 +68,10 @@
                 type: String,
                 default: ''
             },
-            image: String
+            image: {
+                type: Object,
+                default: {src: '', alt: ''}
+            }
         },
 
         data: function () {
@@ -74,14 +80,12 @@
 
         ready: function () {
 
-            this.image = this.image && typeof(this.image) == 'object' ? this.image : {src: '', alt: ''};
             this.$set('img', {src: this.image.src, alt: this.image.alt});
-
-            this.$on('image-selected', function(path) {
+            this.$on('image-selected', function (path) {
 
                 if (path && !this.img.alt) {
 
-                    var alt   = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '').replace(/(_|-)/g, ' ').trim(),
+                    var alt = path.split('/').slice(-1)[0].replace(/\.(jpeg|jpg|png|svg|gif)$/i, '').replace(/(_|-)/g, ' ').trim(),
                         first = alt.charAt(0).toUpperCase();
 
                     this.img.alt = first + alt.substr(1);
@@ -91,19 +95,19 @@
 
         methods: {
 
-            pick: function() {
+            pick: function () {
                 this.img.src = this.image.src;
                 this.img.alt = this.image.alt;
                 this.$refs.modal.open();
             },
 
-            update: function() {
+            update: function () {
                 this.image.src = this.img.src;
                 this.image.alt = this.img.alt;
                 this.$refs.modal.close();
             },
 
-            remove: function() {
+            remove: function () {
                 this.img.src = '';
                 this.image.src = '';
             }
