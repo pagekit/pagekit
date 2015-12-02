@@ -21,7 +21,7 @@
             }
         },
 
-        created: function () {
+        activate: function (done) {
 
             var vm = this;
 
@@ -32,11 +32,11 @@
                 ])
                 .then(function(responses) {
                     vm.prepare(responses[0].data, responses[1].data);
+                    done();
                 })
                 .catch(function () {
                     vm.$notify('Could not load config.', 'danger');
                 });
-
         },
 
         methods: {
