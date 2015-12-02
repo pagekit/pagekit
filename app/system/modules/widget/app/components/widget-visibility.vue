@@ -33,7 +33,7 @@
           }
         },
 
-        props: ['widget', 'config'],
+        props: ['widget', 'config', 'form'],
 
         computed: {
 
