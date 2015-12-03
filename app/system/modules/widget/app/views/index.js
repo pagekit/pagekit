@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#widgets',
+
     mixins: [window.Widgets],
 
     data: function () {
@@ -278,8 +280,4 @@ module.exports = {
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#widgets');
-
-});
+Vue.ready(module.exports);

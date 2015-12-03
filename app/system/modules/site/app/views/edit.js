@@ -1,4 +1,6 @@
-window.Site = module.exports = {
+window.Site = {
+
+    el: '#site-edit',
 
     data: function () {
         return _.merge({sections: [], form: {}}, window.$data);
@@ -86,8 +88,4 @@ window.Site = module.exports = {
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#site-edit');
-
-});
+Vue.ready(window.Site);

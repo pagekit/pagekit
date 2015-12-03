@@ -1,4 +1,6 @@
-window.Settings = module.exports = {
+window.Settings = {
+
+    el: '#settings',
 
     data: function () {
         return window.$settings;
@@ -54,8 +56,4 @@ window.Settings = module.exports = {
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#settings');
-
-});
+Vue.ready(window.Settings);

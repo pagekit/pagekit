@@ -1,4 +1,6 @@
-jQuery(function ($) {
+Vue.ready(function () {
+
+    var $ = jQuery;
 
     var Menu = Vue.extend({
 

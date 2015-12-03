@@ -1,6 +1,8 @@
 var Version = require('../../../../../installer/app/lib/version');
 
-window.Dashboard = module.exports = {
+window.Dashboard = {
+
+    el: '#dashboard',
 
     data: function () {
         return _.extend({
@@ -186,8 +188,4 @@ window.Dashboard = module.exports = {
 
 };
 
-jQuery(function () {
-
-    new Vue(module.exports).$mount('#dashboard');
-
-});
+Vue.ready(window.Dashboard);

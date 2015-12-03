@@ -1,4 +1,6 @@
-var installer = {
+var Installer = {
+
+    el: '#installer',
 
     data: function () {
         return _.merge({
@@ -121,6 +123,4 @@ var installer = {
 
 };
 
-jQuery(function () {
-    new Vue(installer).$mount('#installer');
-});
+Vue.ready(Installer);

@@ -72,6 +72,25 @@ function install (Vue) {
 
     Vue.prototype.$session = window.sessionStorage || {};
     Vue.prototype.$cache = require('lscache');
+
+    Vue.ready = function (fn) {
+
+        if (Vue.util.isObject(fn)) {
+
+            var options = fn;
+
+            fn = function () {
+                new Vue(options);
+            };
+
+        }
+
+        if (document.readyState !== 'loading') {
+            fn();
+        } else {
+            window.document.addEventListener('DOMContentLoaded', fn);
+        }
+    };
 }
 
 if (window.Vue) {

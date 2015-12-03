@@ -2,6 +2,8 @@ var Version = require('../lib/version');
 
 module.exports = {
 
+    el: '#update',
+
     data: function () {
         return _.extend({
             view: 'index',
@@ -107,8 +109,4 @@ module.exports = {
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#update');
-
-});
+Vue.ready(module.exports);
