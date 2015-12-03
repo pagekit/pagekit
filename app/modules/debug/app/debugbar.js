@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var Debugbar = Vue.extend(require('./debugbar.vue'));
 
 Debugbar.component('system', require('./components/system.vue'));
@@ -11,7 +10,7 @@ Debugbar.component('request', require('./components/request.vue'));
 Debugbar.component('auth', require('./components/auth.vue'));
 Debugbar.component('log', require('./components/log.vue'));
 
-$(function () {
+Vue.ready(function () {
 
     new Debugbar().$mount().$appendTo('body');
 

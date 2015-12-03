@@ -1,4 +1,6 @@
-window.User = module.exports = {
+window.User = {
+
+    el: '#user-edit',
 
     data: function () {
         return _.extend({sections: [], form: {}}, window.$data);
@@ -60,8 +62,4 @@ window.User = module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-edit');
-
-});
+Vue.ready(window.User);

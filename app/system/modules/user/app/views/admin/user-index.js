@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#users',
+
     data: function () {
         return _.merge({
             users: false,
@@ -127,6 +129,4 @@ module.exports = {
 
 };
 
-$(function () {
-    new Vue(module.exports).$mount('#users');
-});
+Vue.ready(module.exports);

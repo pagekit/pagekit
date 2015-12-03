@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#roles',
+
     mixins: [
         require('../../lib/permissions')
     ],
@@ -83,8 +85,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#roles');
-
-});
+Vue.ready(module.exports);

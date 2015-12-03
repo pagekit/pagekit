@@ -1,5 +1,1 @@
-$(function () {
-
-    new Vue(require('../../lib/permissions')).$mount('#permissions');
-
-});
+Vue.ready(_.merge(require('../../lib/permissions'), {el: '#permissions'}));

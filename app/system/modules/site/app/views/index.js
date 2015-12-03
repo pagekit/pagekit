@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#site',
+
     data: function () {
         return _.merge({
             edit: undefined,
@@ -296,8 +298,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    (new Vue(module.exports)).$mount('#site');
-
-});
+Vue.ready(module.exports);

@@ -1,4 +1,6 @@
-window.Site = module.exports = {
+window.Site = {
+
+    el: '#settings',
 
     data: function () {
         return _.merge({form: {}}, window.$data);
@@ -57,8 +59,4 @@ window.Site = module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#settings');
-
-});
+Vue.ready(window.Site);

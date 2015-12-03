@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#user-registration',
+
     data: {
         user: {},
         error: null
@@ -19,8 +21,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-registration');
-
-});
+Vue.ready(module.exports);

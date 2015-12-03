@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#user-profile',
+
     data: window.$data,
 
     methods: {
@@ -16,8 +18,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-profile');
-
-});
+Vue.ready(module.exports);
