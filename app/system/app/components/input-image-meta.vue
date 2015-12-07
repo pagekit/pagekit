@@ -75,7 +75,7 @@
         },
 
         data: function () {
-            return _.merge({}, $pagekit);
+            return _.merge({img: {}}, $pagekit);
         },
 
         ready: function () {

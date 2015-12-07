@@ -1,8 +1,8 @@
 function install (Vue) {
 
-    Vue.config.debug = false;
-
     var config = window.$pagekit;
+
+    Vue.config.debug = false;
 
     /**
      * Libraries
@@ -27,7 +27,6 @@ function install (Vue) {
 
     require('./components/input-date.vue');
     require('./components/input-image.vue');
-
     require('./components/input-image-meta.vue');
     require('./components/input-video.vue');
 
@@ -88,7 +87,7 @@ function install (Vue) {
         if (document.readyState !== 'loading') {
             fn();
         } else {
-            window.document.addEventListener('DOMContentLoaded', fn);
+            document.addEventListener('DOMContentLoaded', fn);
         }
     };
 }
