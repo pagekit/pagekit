@@ -41,6 +41,9 @@
         props: ['node'],
 
         created: function () {
+            
+            this.$options.partials = this.$parent.$options.partials;
+
             if (this.behavior === 'redirect') {
                 this.node.link = this.node.data.redirect;
             }
