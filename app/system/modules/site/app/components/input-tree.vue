@@ -12,7 +12,14 @@
 
     module.exports = {
 
-        props: ['active'],
+        props: {
+            active: {
+                type: Array,
+                default: function() {
+                    return [];
+                }
+            }
+        },
 
         data: function () {
             return {
@@ -21,7 +28,7 @@
             }
         },
 
-        activate: function (done) {
+        ready: function () {
 
             var vm = this;
 
@@ -33,7 +40,6 @@
                 .then(function(responses) {
                     vm.$set('nodes', responses[0].data);
                     vm.$set('menus', responses[1].data);
-                    done();
                 })
                 .catch(function () {
                     vm.$notify('Could not load config.', 'danger');
@@ -46,7 +52,6 @@
                 return _(this.nodes).groupBy('menu').mapValues(function(nodes) {
                     return _(nodes || {}).sortBy('priority').groupBy('parent_id').value();
                 }).value();
-
             },
 
             all: function () {
