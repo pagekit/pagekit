@@ -18,7 +18,7 @@
                 </ul>
 
                 <p>
-                    <a class="uk-button" @click.prevent="edit">{{ 'Add Role' | trans }}</a>
+                    <a class="uk-button" @click.prevent="edit()">{{ 'Add Role' | trans }}</a>
                 </p>
 
             </div>

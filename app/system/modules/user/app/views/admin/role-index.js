@@ -28,7 +28,7 @@ module.exports = {
     methods: {
 
         edit: function (role) {
-            this.$set('role', $.extend({}, role));
+            this.$set('role', $.extend({}, role || {}));
             this.$refs.modal.open();
         },
 
