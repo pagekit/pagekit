@@ -68,10 +68,7 @@
                 type: String,
                 default: ''
             },
-            image: {
-                type: Object,
-                default: {src: '', alt: ''}
-            }
+            image: Object
         },
 
         data: function () {
@@ -82,7 +79,7 @@
 
             this.$set('image', this.image || {src: '', alt: ''});
             this.$set('img', _.extend({}, this.image));
-            
+
             this.$on('image-selected', function (path) {
 
                 if (path && !this.img.alt) {
