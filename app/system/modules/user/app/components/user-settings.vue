@@ -68,7 +68,7 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Registered since' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    {{ $trans('%date%', { date: $date(user.registered) }) }}
+                    {{ user.registered ? $trans('%date%', { date: $date(user.registered) }) : '' }}
                 </div>
             </div>
 
