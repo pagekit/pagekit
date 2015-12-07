@@ -1,4 +1,5 @@
 <template>
+    <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
     <ul class="uk-list uk-margin-top-remove" v-for="menu in menus" v-if="menu.count">
         <li class="pk-list-header">{{ menu.label }}</li>
         <partial name="node-partial" v-for="node in grouped[menu.id][0]"></partial>
@@ -46,7 +47,12 @@
                     return _(nodes || {}).sortBy('priority').groupBy('parent_id').value();
                 }).value();
 
+            },
+
+            all: function () {
+                return !this.active || !this.active.length;
             }
+
         },
 
         partials: {

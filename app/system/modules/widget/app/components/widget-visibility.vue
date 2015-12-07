@@ -5,7 +5,6 @@
         <div class="uk-form-row">
             <span class="uk-form-label">Pages</span>
             <div class="uk-form-controls uk-form-controls-text" v-if="config.menus">
-                <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
 
                 <input-tree :active.sync="widget.nodes"></input-tree>
 
@@ -31,15 +30,7 @@
           }
         },
 
-        props: ['widget', 'config', 'form'],
-
-        computed: {
-
-            all: function () {
-                return !this.widget.nodes || !this.widget.nodes.length;
-            }
-
-        }
+        props: ['widget', 'config', 'form']
 
     }
 
