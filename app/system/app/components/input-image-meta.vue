@@ -80,7 +80,9 @@
 
         ready: function () {
 
-            this.$set('img', {src: this.image.src, alt: this.image.alt});
+            this.$set('image', this.image || {src: '', alt: ''});
+            this.$set('img', _.extend({}, this.image));
+            
             this.$on('image-selected', function (path) {
 
                 if (path && !this.img.alt) {
