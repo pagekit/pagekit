@@ -11,12 +11,12 @@
 
     module.exports = {
 
-        props: ['nodes'],
+        props: ['active'],
 
         data: function () {
             return {
                 'menus': [],
-                'allnodes': []
+                'nodes': []
             }
         },
 
@@ -30,7 +30,7 @@
                     this.$http.get('api/site/menu')
                 ])
                 .then(function(responses) {
-                    vm.$set('allnodes', responses[0].data);
+                    vm.$set('nodes', responses[0].data);
                     vm.$set('menus', responses[1].data);
                     done();
                 })
@@ -42,7 +42,7 @@
         computed: {
 
             grouped: function() {
-                return _(this.allnodes).groupBy('menu').mapValues(function(nodes) {
+                return _(this.nodes).groupBy('menu').mapValues(function(nodes) {
                     return _(nodes || {}).sortBy('priority').groupBy('parent_id').value();
                 }).value();
 
@@ -52,7 +52,7 @@
         partials: {
 
             'node-partial': '<li>' +
-                '<label><input type="checkbox" :value="node.id" v-model="nodes" number> {{ node.title }}</label>' +
+                '<label><input type="checkbox" :value="node.id" v-model="active" number> {{ node.title }}</label>' +
                 '<ul class="uk-list" v-if="grouped[menu.id][node.id]">' +
                     '<partial name="node-partial" v-for="node in grouped[menu.id][node.id]"></partial>' +
                 '</ul>' +

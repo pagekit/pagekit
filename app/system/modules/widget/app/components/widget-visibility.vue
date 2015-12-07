@@ -7,7 +7,7 @@
             <div class="uk-form-controls uk-form-controls-text" v-if="config.menus">
                 <p><strong>{{ all ? 'All Pages' : 'Only selected pages' | trans }}</strong></p>
 
-                <input-tree :nodes.sync="widget.nodes"></input-tree>
+                <input-tree :active.sync="widget.nodes"></input-tree>
 
             </div>
         </div>
