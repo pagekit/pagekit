@@ -46,11 +46,19 @@ class VideoPlugin implements EventSubscriberInterface
 
         if (preg_match(self::REGEX_YOUTUBE, $src, $matches)) {
 
+            if ($options['loop']) {
+                $options['playlist'] = $matches[2];
+            }
+
             $query = http_build_query($options);
             $src = "$matches[1]/embed/$matches[2]" . ($matches[3] ? "?$matches[3]" . '&' . $query : '?' . $query);
             $html = '<iframe class="uk-width-1-1" src="%s" height="360"></iframe>';
 
         } elseif (preg_match(self::REGEX_YOUTUBE_SHORT, $src, $matches)) {
+
+            if ($options['loop']) {
+                $options['playlist'] = $matches[1];
+            }
 
             $query = http_build_query($options);
             $src = '//www.youtube.com/embed/' . array_pop(explode('/', $matches[1])) . '?' . $query;

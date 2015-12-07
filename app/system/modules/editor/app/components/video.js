@@ -72,7 +72,7 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (video) {
-                    video.replace('(video)' + JSON.stringify({src: video.src, autoplay: video.autoplay, controls: video.controls, loop: video.loop, poster: video.poster}));
+                    video.replace('(video)' + JSON.stringify({src: video.src, autoplay: Number(video.autoplay), controls: Number(video.controls), loop: Number(video.loop), muted: Number(video.muted), poster: video.poster}));
                 });
         },
 
