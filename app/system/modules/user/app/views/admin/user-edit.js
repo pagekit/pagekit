@@ -1,7 +1,9 @@
-window.User = module.exports = {
+window.User = {
 
-    data: function() {
-        return _.merge({password: ''}, window.$data);
+    el: '#user-edit',
+
+    data: function () {
+        return _.extend({sections: [], form: {}}, window.$data);
     },
 
     created: function () {
@@ -23,23 +25,14 @@ window.User = module.exports = {
     },
 
     ready: function () {
-        this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
-    },
-
-    computed: {
-
-        isNew: function () {
-            return !this.user.login && this.user.status;
-        }
-
+        this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
     },
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
+        save: function () {
 
-            var data = {user: this.user, password: this.password};
+            var data = {user: this.user};
 
             this.$broadcast('save', data);
 
@@ -56,20 +49,17 @@ window.User = module.exports = {
             }).error(function (data) {
                 this.$notify(data, 'danger');
             });
+
         }
 
     },
 
     components: {
 
-        'settings': require('../../components/user-settings.vue')
+        settings: require('../../components/user-settings.vue')
 
     }
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-edit');
-
-});
+Vue.ready(window.User);

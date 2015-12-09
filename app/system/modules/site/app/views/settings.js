@@ -1,12 +1,14 @@
-window.Site = module.exports = {
+window.Site = {
+
+    el: '#settings',
 
     data: function () {
         return _.merge({form: {}}, window.$data);
     },
 
-    ready: function() {
+    ready: function () {
 
-        UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        UIkit.tab(this.$els.tab, {connect: this.$els.content});
 
     },
 
@@ -35,17 +37,14 @@ window.Site = module.exports = {
 
     methods: {
 
-        save: function(e) {
-            e.preventDefault();
-
+        save: function () {
             this.$broadcast('save', this.config);
 
-            this.$http.post('admin/system/settings/config', { name: 'system/site', config: this.config }, function() {
-                 this.$notify('Settings saved.');
-            }).error(function(data) {
-                 this.$notify(data, 'danger');
+            this.$http.post('admin/system/settings/config', {name: 'system/site', config: this.config}, function () {
+                this.$notify('Settings saved.');
+            }).error(function (data) {
+                this.$notify(data, 'danger');
             });
-
         }
 
     },
@@ -60,8 +59,4 @@ window.Site = module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#settings');
-
-});
+Vue.ready(window.Site);

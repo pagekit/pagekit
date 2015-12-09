@@ -1,6 +1,7 @@
 window.Themes = _.merge(
     require('../components/package-manager.js'),
     {
+        el: '#themes',
         filters: {
             themeorder: function (packages) {
 
@@ -16,8 +17,4 @@ window.Themes = _.merge(
     }
 );
 
-jQuery(function () {
-
-    (new Vue(window.Themes)).$mount('#themes');
-
-});
+Vue.ready(window.Themes);

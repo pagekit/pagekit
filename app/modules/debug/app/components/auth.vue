@@ -1,6 +1,6 @@
 <template>
 
-    <a title="User"><div class="pf-icon pf-icon-auth" v-class="pf-parent: user"></div> {{ label }}</a>
+    <a title="User"><span class="pf-icon pf-icon-auth" :class="{'pf-parent': user}"></span>{{ label }}</a>
 
     <div class="pf-dropdown" v-show="user">
 
@@ -31,32 +31,31 @@
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 60
-    },
+        section: {
+            priority: 60
+        },
 
-    props: ['data'],
+        props: ['data'],
 
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    },
+        data: function () {
+            return this.data;
+        },
 
-    computed: {
+        computed: {
 
-        label: function () {
+            label: function () {
 
-            if (this.user) {
-                return this.user;
+                if (this.user) {
+                    return this.user;
+                }
+
+                return this.enabled ? 'You are not authenticated.' : 'Authentication is disabled.';
             }
 
-            return this.enabled ? 'You are not authenticated.' : 'Authentication is disabled.';
         }
 
-    }
-
-  };
+    };
 
 </script>

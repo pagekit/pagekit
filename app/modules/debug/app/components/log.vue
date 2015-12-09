@@ -14,9 +14,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-repeat="records">
-                    <td>{{ message }}</td>
-                    <td>{{ level_name }}</td>
+                <tr v-for="record in records">
+                    <td>{{ record.message }}</td>
+                    <td>{{ record.level_name }}</td>
                 </tr>
             </tbody>
         </table>
@@ -27,20 +27,19 @@
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 70,
-        panel: '#panel-log'
-    },
+        section: {
+            priority: 70,
+            panel: '#panel-log'
+        },
 
-    props: ['data'],
+        props: ['data'],
 
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    }
+        data: function () {
+            return this.data;
+        }
 
-  };
+    };
 
 </script>

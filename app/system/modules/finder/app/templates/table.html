@@ -1,31 +1,31 @@
 <table class="uk-table uk-table-hover uk-table-middle">
     <thead>
-        <th class="pk-table-width-minimum"><input type="checkbox" v-check-all="selected: input[name=name]"></th>
+        <th class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected.literal="input[name=name]"></th>
         <th colspan="2">{{ 'Name' | trans }}</th>
         <th class="pk-table-width-minimum uk-text-center">{{ 'Size' | trans }}</th>
         <th class="pk-table-width-minimum">{{ 'Modified' | trans }}</th>
     </thead>
     <tbody>
 
-        <tr v-repeat="folders | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
-            <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
+        <tr v-for="folder in searched | filterBy 'application/folder' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect(folder.name)">
+            <td><input type="checkbox" name="name" :value="folder.name" v-model="selected" @click.stop></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
             </td>
-            <td class="pk-table-text-break pk-table-min-width-200"><a v-on="click: setPath(path)">{{ name }}</a></td>
+            <td class="pk-table-text-break pk-table-min-width-200"><a @click.stop="setPath(folder.path)">{{ folder.name }}</a></td>
             <td></td>
             <td></td>
         </tr>
 
-        <tr v-repeat="files | searched" class="uk-visible-hover" v-class="uk-active: isSelected(name)" v-on="click: toggleSelect">
-            <td><input type="checkbox" name="name" value="{{ name }}" v-checkbox="selected"></td>
+        <tr v-for="file in searched | filterBy 'application/file' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect(file.name)">
+            <td><input type="checkbox" name="name" :value="file.name" v-model="selected" @click.stop></td>
             <td class="pk-table-width-minimum">
-                <i v-if="isImage(url)" class="pk-icon-contain" v-lazy-background="$url(url)"></i>
-                <i v-if="!isImage(url)" class="pk-icon-file-circle"></i>
+                <i v-if="isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
+                <i v-else class="pk-icon-file-circle"></i>
             </td>
-            <td class="pk-table-text-break pk-table-min-width-200">{{ name }}</td>
-            <td class="uk-text-right uk-text-nowrap">{{ size }}</td>
-            <td class="uk-text-nowrap">{{ lastmodified | relativeDate }}</td>
+            <td class="pk-table-text-break pk-table-min-width-200">{{ file.name }}</td>
+            <td class="uk-text-right uk-text-nowrap">{{ file.size }}</td>
+            <td class="uk-text-nowrap">{{ file.lastmodified | relativeDate }}</td>
         </tr>
 
     </tbody>

@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#marketplace',
+
     data: _.extend(window.$data, {
         search: ''
     }),
@@ -10,8 +12,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#marketplace');
-
-});
+Vue.ready(module.exports);

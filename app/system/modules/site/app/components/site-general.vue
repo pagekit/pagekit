@@ -14,7 +14,7 @@
         <div class="uk-form-row">
             <label for="form-title" class="uk-form-label">{{ 'Title' | trans }}</label>
             <div class="uk-form-controls">
-                <input id="form-title" class="uk-form-width-large" name="title" type="text" v-model="config.title" v-validate="required">
+                <input id="form-title" class="uk-form-width-large" name="title" type="text" v-model="config.title" v-validate:required>
                 <p class="uk-form-help-block uk-text-danger" v-show="form.title.invalid">{{ 'Site title cannot be blank.' | trans }}</p>
             </div>
         </div>
@@ -22,21 +22,21 @@
         <div class="uk-form-row">
             <label for="form-appicon" class="uk-form-label">{{ 'Logo' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image source="{{@ config.view.logo }}"></input-image>
+                <input-image :source.sync="config.view.logo"></input-image>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-favicon" class="uk-form-label">{{ 'Favicon' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image source="{{@ config.icons.favicon }}"></input-image>
+                <input-image :source.sync="config.icons.favicon"></input-image>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-appicon" class="uk-form-label">{{ 'Appicon' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input-image source="{{@ config.icons.appicon }}"></input-image>
+                <input-image :source.sync="config.icons.appicon"></input-image>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
             priority: 10
         },
 
-        props: ['config', 'form']
+        props: ['config']
 
     }
 

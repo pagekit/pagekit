@@ -62,11 +62,6 @@ class Metadata
     protected $reflClass;
 
     /**
-     * @var object
-     */
-    protected $prototype;
-
-    /**
      * Constructor.
      *
      * @param MetadataManager $manager
@@ -303,11 +298,7 @@ class Metadata
      */
     public function newInstance()
     {
-        if ($this->prototype === null) {
-            $this->prototype = unserialize(sprintf('O:%d:"%s":0:{}', strlen($this->class), $this->class));
-        }
-
-        return clone $this->prototype;
+        return $this->getReflectionClass()->newInstanceWithoutConstructor();
     }
 
     /**

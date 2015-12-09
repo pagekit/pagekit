@@ -5,16 +5,16 @@
         <div class="pf-navbar">
 
             <ul class="pf-navbar-nav">
-                <li v-repeat="sections | orderBy 'priority'" v-on="click: open(name)">
-                    <component is="{{ name }}" data="{{ data[name] }}"></component>
+                <li v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
+                    <component :is="section.name" :data="data[section.name]"></component>
                 </li>
             </ul>
 
-            <a class="pf-close" v-on="click: close"></a>
+            <a class="pf-close" @click.prevent="close"></a>
 
         </div>
 
-        <div class="pf-profiler-panel" v-el="panel" v-style="display: panel ? 'block' : 'none', height: height"></div>
+        <div class="pf-profiler-panel" v-el:panel :style="{display: panel ? 'block' : 'none', height: height}"></div>
 
     </div>
 
@@ -22,14 +22,10 @@
 
 <script>
 
-    var $ = require('jquery');
+    var _ = require('lodash');
     var config = window.$debugbar;
 
     module.exports = {
-
-        el: function () {
-            return document.createElement('div');
-        },
 
         data: function () {
             return {
@@ -45,13 +41,11 @@
 
                 this.$set('data', data);
 
-                var sections = this.sections;
-
-                $.each(this.$options.components, function (name, component) {
+                _.forIn(this.$options.components, function (component, name) {
                     if (data[name]) {
-                        sections.$add(name, $.extend({name: name}, component.options.section));
+                        Vue.set(this.sections, name, _.merge({name: name}, component.options.section));
                     }
-                });
+                }, this);
 
             });
 
@@ -67,25 +61,27 @@
 
         methods: {
 
-            add: function (vm) {
-                this.sections[vm.$options.name]['vm'] = vm;
-            },
-
             open: function (name) {
 
-                var section = this.sections[name], el = document.createElement('div'), panel;
+                var section = this.sections[name], panel, vm = _.find(this.$children, '$options.name', name);
 
-                if (section.panel) {
-
-                    if (this.panel) {
-                        this.panel.$destroy(true);
-                    }
-
-                    panel = section.vm.$addChild({el: el, template: section.panel, inherit: true});
-                    panel.$appendTo(this.$$.panel);
-
-                    this.$set('panel', panel);
+                if (!section.panel) {
+                    return;
                 }
+
+                if (this.panel) {
+                    this.close();
+                }
+
+                panel = new Vue({
+                    parent: vm,
+                    template: section.panel,
+                    data: this.data[section.name],
+                    filters: vm.$options.filters.__proto__
+                });
+                panel.$mount().$appendTo(this.$els.panel);
+
+                this.$set('panel', panel);
             },
 
             close: function () {

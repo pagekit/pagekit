@@ -1,7 +1,9 @@
-window.Site = module.exports = {
+window.Site = {
+
+    el: '#site-edit',
 
     data: function () {
-        return _.merge({}, window.$data);
+        return _.merge({sections: [], form: {}}, window.$data);
     },
 
     created: function () {
@@ -35,7 +37,7 @@ window.Site = module.exports = {
 
     ready: function () {
         this.Nodes = this.$resource('api/site/node/:id');
-        this.tab = UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
     },
 
     computed: {
@@ -48,9 +50,7 @@ window.Site = module.exports = {
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             var data = {node: this.node};
 
             this.$broadcast('save', data);
@@ -75,7 +75,7 @@ window.Site = module.exports = {
 
     partials: {
 
-        'settings': require('../templates/settings.html')
+        settings: require('../templates/settings.html')
 
     },
 
@@ -88,8 +88,4 @@ window.Site = module.exports = {
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#site-edit');
-
-});
+Vue.ready(window.Site);

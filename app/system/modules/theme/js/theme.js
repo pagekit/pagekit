@@ -1,23 +1,21 @@
-jQuery(function ($) {
+Vue.ready(function () {
 
-    // main menu
-    var menu = new Vue({
+    var $ = jQuery;
 
-        inherit: true,
+    var Menu = Vue.extend({
 
-        el: '#header',
-
-        data: _.extend({
-            nav: null,
-            item: null,
-            subnav: null
-        }, window.$pagekit),
+        data: function () {
+            return _.extend({
+                nav: null,
+                item: null,
+                subnav: null
+            }, window.$pagekit);
+        },
 
         created: function () {
 
-            var menu = _(this.menu).sortBy('priority').groupBy('parent').value();
-            var item = _.find(menu.root, 'active');
-            var vm = this;
+            var menu = _(this.menu).sortBy('priority').groupBy('parent').value(),
+                item = _.find(menu.root, 'active');
 
             this.$set('nav', menu.root);
 
@@ -25,27 +23,28 @@ jQuery(function ($) {
                 this.$set('item', item);
                 this.$set('subnav', menu[item.id]);
             }
-
-            // main menu order
-            $('#js-appnav').on('stop.uk.sortable', function () {
-
-                var data = {};
-
-                $(this).children().each(function (i) {
-                    data[$(this).data('id')] = i;
-                });
-
-                vm.$http.post('admin/adminmenu', {order: data}, function () {
-                    // message?
-                });
-            });
         }
 
     });
 
-    // offcanvas menu
-    menu.$addChild({el: '#offcanvas', inherit: true});
-    menu.$addChild({el: '#offcanvas-flip', inherit: true});
+    // mount menus
+    new Menu().$mount('#header');
+    new Menu().$mount('#offcanvas');
+    new Menu().$mount('#offcanvas-flip');
+
+    // main menu order
+    $('#js-appnav').on('stop.uk.sortable', function () {
+
+        var data = {};
+
+        $(this).children().each(function (i) {
+            data[$(this).data('id')] = i;
+        });
+
+        Vue.http.post('admin/adminmenu', {order: data}, function () {
+            // TODO message?
+        });
+    });
 
     // show system messages
     UIkit.notify.message.defaults.timeout = 2000;

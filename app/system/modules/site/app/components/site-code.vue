@@ -15,18 +15,17 @@
         <div class="uk-form-row">
             <label for="form-codeheader" class="uk-form-label">{{ 'Header' | trans }}</label>
             <div class="uk-form-controls">
-                <v-editor type="code" value="{{@ config.code.header }}"></v-editor>
+                <v-editor type="code" :value.sync="config.code.header"></v-editor>
             </div>
         </div>
 
         <div class="uk-form-row">
             <label for="form-codeheader" class="uk-form-label">{{ 'Footer' | trans }}</label>
             <div class="uk-form-controls">
-                <v-editor type="code" value="{{@ config.code.footer }}"></v-editor>
+                <v-editor type="code" :value.sync="config.code.footer"></v-editor>
             </div>
         </div>
     </div>
-
 
 </template>
 

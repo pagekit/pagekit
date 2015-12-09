@@ -1,27 +1,27 @@
 <template>
 
-    <div v-attr="class: class">
+    <div :class="[class]">
         <div class="pk-form-link uk-width-1-1">
-            <input class="uk-width-1-1" type="text" v-model="link" v-attr="name: name, id: id" v-validate="required: isRequired" v-el="input" lazy>
-            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" v-on="click: open">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
+            <input class="uk-width-1-1" type="text" v-model="link" :id="id" :name="name" v-validate:required="isRequired" v-el:input lazy>
+            <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" @click.prevent="open">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
         </div>
     </div>
 
     <p class="uk-text-muted uk-margin-small-top uk-margin-bottom-remove" v-show="url">{{ url }}</p>
 
-    <v-modal v-ref="modal">
+    <v-modal v-ref:modal>
 
-        <form class="uk-form uk-form-stacked" v-on="submit: update">
+        <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
             <div class="uk-modal-header">
                 <h2>{{ 'Select Link' | trans }}</h2>
             </div>
 
-            <panel-link v-ref="links"></panel-link>
+            <panel-link v-ref:links></panel-link>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" type="submit" v-attr="disabled: !showUpdate()">{{ 'Update' | trans }}</button>
+                <button class="uk-button uk-button-link" type="submit" :disabled="!showUpdate()">{{ 'Update' | trans }}</button>
             </div>
 
         </form>
@@ -71,25 +71,22 @@
                 }
             },
 
-            open: function (e) {
-                e.preventDefault();
-                this.$.modal.open();
+            open: function () {
+                this.$refs.modal.open();
             },
 
-            update: function (e) {
-                e.preventDefault();
-
-                this.$set('link', this.$.links.link);
+            update: function () {
+                this.$set('link', this.$refs.links.link);
 
                 Vue.nextTick(function() {
-                    this.$$.input.dispatchEvent(new Event('input'));
+                    this.$els.input.dispatchEvent(new Event('input'));
                 }.bind(this));
 
-                this.$.modal.close();
+                this.$refs.modal.close();
             },
 
             showUpdate: function () {
-                return !!this.$.links.link;
+                return !!this.$refs.links.link;
             }
 
         }

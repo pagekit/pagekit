@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#roles',
+
     mixins: [
         require('../../lib/permissions')
     ],
@@ -26,14 +28,11 @@ module.exports = {
     methods: {
 
         edit: function (role) {
-            this.$set('role', $.extend({}, role));
-            this.$.modal.open();
+            this.$set('role', $.extend({}, role || {}));
+            this.$refs.modal.open();
         },
 
-        save: function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
+        save: function () {
             if (!this.role) {
                 return;
             }
@@ -55,7 +54,7 @@ module.exports = {
                 this.$notify(data, 'danger');
             });
 
-            this.$.modal.close();
+            this.$refs.modal.close();
         },
 
         remove: function (role) {
@@ -71,14 +70,12 @@ module.exports = {
                 return;
             }
 
-            var children = sortable.element.children();
-
-            this.$.ordered.forEach(function (model) {
-                model.role.priority = children.index(model.$el);
+            sortable.element.children().each(function(i) {
+                this.__vfrag__.scope.$set('role.priority', i);
             });
 
             this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
-                // this.$notify('Roles reordered.');
+                this.$notify('Roles reordered.');
             }, function (data) {
                 this.$notify(data, 'danger');
             });
@@ -88,8 +85,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#roles');
-
-});
+Vue.ready(module.exports);

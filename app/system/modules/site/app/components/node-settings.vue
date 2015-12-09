@@ -10,10 +10,14 @@
 
     module.exports = {
 
-        inherit: true,
+        props: ['node'],
 
         section: {
             label: 'Settings'
+        },
+
+        created: function () {
+            this.$options.partials.settings = this.$root.$options.partials.settings;
         }
 
     };

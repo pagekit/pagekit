@@ -27,7 +27,7 @@ module.exports = {
                 indentUnit: 4,
                 indentWithTabs: false,
                 tabSize: 4
-            }, this.options));
+            }, this.$parent.options));
 
             $parent.attr('data-uk-check-display', 'true').on('display.uk.check', function (e) {
                 self.editor.refresh();
@@ -38,7 +38,7 @@ module.exports = {
                 $el.trigger('input');
             });
 
-            this.$watch('value', function (value) {
+            this.$watch('$parent.value', function (value) {
                 if (value != this.editor.getValue()) {
                     this.editor.setValue(value);
                 }

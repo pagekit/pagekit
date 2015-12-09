@@ -23,7 +23,7 @@
                 <label><input type="checkbox" value="1" v-model="$root.config.application.debug"> {{ 'Enable debug mode' | trans }}</label>
             </p>
             <p class="uk-form-controls-condensed">
-                <label><input type="checkbox" value="1" v-model="$root.config.debug.enabled" v-attr="disabled: !sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
+                <label><input type="checkbox" value="1" v-model="$root.config.debug.enabled" :disabled="!sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
             </p>
             <p class="uk-form-help-block" v-if="!sqlite">{{ 'Please enable the SQLite database extension.' | trans }}</p>
         </div>
@@ -43,7 +43,7 @@
 
         props: ['config', 'options'],
 
-        data: function() {
+        data: function () {
             return window.$system;
         }
 

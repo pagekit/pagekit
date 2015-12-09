@@ -1,13 +1,11 @@
 module.exports = {
 
+    el: '#info',
+
     data: {
         info: window.$info
     }
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#info');
-
-});
+Vue.ready(module.exports);

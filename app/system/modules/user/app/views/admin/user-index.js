@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#users',
+
     data: function () {
         return _.merge({
             users: false,
@@ -12,7 +14,7 @@ module.exports = {
     created: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({search: '', status: '', role: '', order: 'name asc'}, this.config.filter);
+        this.config.filter = _.extend({order: 'name asc'}, this.config.filter);
 
     },
 
@@ -33,7 +35,7 @@ module.exports = {
 
         statuses: function () {
 
-            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.$data.statuses, function (status, id) {
+            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.config.statuses, function (status, id) {
                 return {text: status, value: id};
             }));
 
@@ -42,7 +44,7 @@ module.exports = {
 
         roles: function () {
 
-            var options = this.$data.roles.map(function (role) {
+            var options = this.config.roles.map(function (role) {
                 return {text: role.name, value: role.id};
             });
 
@@ -96,7 +98,7 @@ module.exports = {
 
         showRoles: function (user) {
             return _.reduce(user.roles, function (roles, id) {
-                var role = _.find(this.$data.roles, 'id', id);
+                var role = _.find(this.config.roles, 'id', id);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }
@@ -127,6 +129,4 @@ module.exports = {
 
 };
 
-$(function () {
-    new Vue(module.exports).$mount('#users');
-});
+Vue.ready(module.exports);

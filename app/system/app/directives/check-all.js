@@ -1,11 +1,10 @@
 module.exports = {
 
-    isLiteral: true,
+    update: function (selector) {
 
-    bind: function () {
+        var self = this, keypath = this.arg;
 
-        var self = this, keypath = this.arg, selector = this.expression;
-
+        this.selector = selector;
         this.$el = this.vm.$el;
         this.checked = false;
         this.number = this.el.getAttribute('number') !== null;
@@ -35,7 +34,6 @@ module.exports = {
             self.selected();
             self.state();
         });
-
     },
 
     unbind: function () {
@@ -64,7 +62,7 @@ module.exports = {
 
         var self = this, keypath = this.arg, selected = [], values = [], value;
 
-        $(this.expression, this.$el).each(function () {
+        $(this.selector, this.$el).each(function () {
 
             value = self.toNumber($(this).val());
             values.push(value);

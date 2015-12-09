@@ -1,15 +1,14 @@
 <template>
 
     <div class="uk-modal">
-        <div class="uk-modal-dialog{{ modifier ? ' '+modifier : '' }}" v-class="'uk-modal-dialog-large': large, 'uk-modal-dialog-lightbox': lightbox">
+        <div class="uk-modal-dialog" :class="classes">
             <div v-if="opened">
-                <content></content>
+                <slot></slot>
             </div>
         </div>
     </div>
 
 </template>
-
 
 <script>
 
@@ -25,8 +24,8 @@
             large: Boolean,
             lightbox: Boolean,
             closed: Function,
-            modifier: String,
-            options: Object
+            modifier: {type: String, default: ''},
+            options: {type: Object, default: function () {return {};}}
         },
 
         ready: function () {
@@ -48,16 +47,34 @@
             this.modal.on('show.uk.modal', function () {
 
                 // catch .uk-overflow-container
-                setTimeout(function() {
+                setTimeout(function () {
                     vm.modal.resize();
                 }, 250)
             });
 
         },
 
+        computed: {
+
+            classes: function () {
+                var classes = this.modifier.split(' ');
+
+                if (this.large) {
+                    classes.push('uk-modal-dialog-large');
+                }
+
+                if (this.lightbox) {
+                    classes.push('uk-modal-dialog-lightbox');
+                }
+
+                return classes;
+            }
+
+        },
+
         methods: {
 
-            open: function (data) {
+            open: function () {
                 this.opened = true;
                 this.modal.show();
             },

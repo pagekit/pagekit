@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="output" options="{{ options }}">
+        <v-modal v-ref:output :options="options">
 
             <div class="uk-modal-header uk-flex uk-flex-middle">
                 <h2>{{ 'Installing %title% %version%' | trans {title:pkg.title,version:pkg.version} }}</h2>
@@ -15,8 +15,8 @@
             <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Error' | trans}}</div>
 
             <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
-                <a class="uk-button uk-button-link" v-on="click: close">{{ 'Close' | trans }}</a>
-                <a class="uk-button uk-button-primary" v-on="click: enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
+                <a class="uk-button uk-button-link" @click.prevent="close">{{ 'Close' | trans }}</a>
+                <a class="uk-button uk-button-primary" @click.prevent="enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
             </div>
 
         </v-modal>
@@ -27,6 +27,8 @@
 <script>
 
     module.exports = {
+
+        mixins: [require('./output')],
 
         methods: {
 
@@ -59,11 +61,8 @@
                 this.$parent.enable(this.pkg);
                 this.close();
             }
-        },
+        }
 
-        mixins: [
-            require('./output')
-        ]
     };
 
 </script>
