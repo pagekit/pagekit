@@ -9,27 +9,27 @@
                 </div>
 
                 <div class="uk-form-row">
-                    <input-video :source.sync="video.src"></input-video>
+                    <input-video :source.sync="video.data.src"></input-video>
                 </div>
 
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.src" lazy>
+                        <input class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.data.src" debounce="500">
                     </div>
                 </div>
 
                 <div class="uk-form-row">
-                    <label><input type="checkbox" v-model="video.autoplay"> {{ 'Autoplay' | trans }}</label>
-                    <label v-show="!isVimeo"><input type="checkbox" v-model="video.controls"> {{ 'Controls' | trans }}</label>
-                    <label><input type="checkbox" v-model="video.loop"> {{ 'Loop' | trans }}</label>
-                    <label v-show="!isVimeo && !isYoutube"><input type="checkbox" v-model="video.muted"> {{ 'Muted' | trans }}</label>
+                    <label><input type="checkbox" v-model="video.data.autoplay"> {{ 'Autoplay' | trans }}</label>
+                    <label v-show="!isVimeo"><input type="checkbox" v-model="video.data.controls"> {{ 'Controls' | trans }}</label>
+                    <label><input type="checkbox" v-model="video.data.loop"> {{ 'Loop' | trans }}</label>
+                    <label v-show="!isVimeo && !isYoutube"><input type="checkbox" v-model="video.data.muted"> {{ 'Muted' | trans }}</label>
                 </div>
 
                 <div class="uk-form-row" v-show="!isYoutube && !isVimeo">
                     <label for="form-src" class="uk-form-label">{{ 'Poster Image' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-image class="uk-width-1-1" :source.sync="video.poster"></input-image>
+                        <input-image class="uk-width-1-1" :source.sync="video.data.poster"></input-image>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
 
         data: function () {
             return {
-                video: {src: '', alt: '', controls: true}
+                video: {data: {src: '', controls: true}}
             }
         },
 
@@ -62,11 +62,11 @@
         computed: {
 
             isYoutube: function () {
-                return Boolean(this.video.src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || this.video.src.match(/youtu\.be\/(.*)/));
+                return Boolean(this.video.data.src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || this.video.data.src.match(/youtu\.be\/(.*)/));
             },
 
             isVimeo: function () {
-                return Boolean(this.video.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/));
+                return Boolean(this.video.data.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/));
             }
 
         },
@@ -79,6 +79,19 @@
 
             update: function () {
                 this.$refs.modal.close();
+
+                var vm = this;
+                _.forEach(this.video.data, function (value, key) {
+
+                    if (_.isBoolean(value)) {
+                        vm.video.data[key] = Number(value);
+                    }
+
+                    if ((!value && (key !== 'controls' || !vm.isYoutube))) {
+                        Vue.delete(vm.video.data, key);
+                    }
+
+                });
 
                 this.$emit('select', this.video);
             }

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.src">
+    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!video.data.src">
 
         <img width="60" height="60" :alt="'Placeholder Video' | trans" :src="$url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Video' | trans }}</p>
@@ -45,7 +45,7 @@
         },
 
         watch: {
-            'video.src': {
+            'video.data.src': {
                 handler: 'update',
                 immediate: true
             }

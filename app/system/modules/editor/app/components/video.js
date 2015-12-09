@@ -72,7 +72,7 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (video) {
-                    video.replace('(video)' + JSON.stringify({src: video.src, autoplay: Number(video.autoplay), controls: Number(video.controls), loop: Number(video.loop), muted: Number(video.muted), poster: video.poster}));
+                    video.replace('(video)' + JSON.stringify(video.data));
                 });
         },
 
@@ -87,7 +87,7 @@ module.exports = {
             } catch (e) {
             }
 
-            _.merge(data, settings || {src: ''});
+            data.data = settings || {src: ''};
 
             return '<video-preview index="' + index + '"></video-preview>';
         }
