@@ -14,16 +14,20 @@ module.exports = {
             self.selected(true);
         });
 
-        $(this.$el).on('change.check-all', selector, function () {
-            self.selected(true);
-            self.state();
-        });
-
-        $(this.$el).on('click.check-all', '.check-item', function (e) {
-            if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
-                $(this).find(selector).trigger('click');
+        this.handler = [
+            function () {
+                self.selected(true);
+                self.state();
+            },
+            function (e) {
+                if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
+                    $(this).find(selector).trigger('click');
+                }
             }
-        });
+        ];
+
+        $(this.$el).on('change.check-all', selector, this.handler[0]);
+        $(this.$el).on('click.check-all', '.check-item', this.handler[1]);
 
         this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
 
@@ -38,8 +42,15 @@ module.exports = {
 
     unbind: function () {
 
+        var self = this;
+
         $(this.el).off('.check-all');
-        $(this.$el).off('.check-all');
+
+        if (this.handler) {
+            this.handler.forEach(function (handler) {
+                $(self.$el).off('.check-all', handler);
+            });
+        }
 
         if (this.unbindWatcher) {
             this.unbindWatcher();
