@@ -43,12 +43,12 @@ class MenuApiController
     }
 
     /**
-     * @Route("/{id}", methods="POST", defaults={"id" = ""})
-     * @Request({"id", "menu":"array"}, csrf=true)
+     * @Route("/", methods="POST")
+     * @Request({"menu":"array"}, csrf=true)
      */
-    public function saveAction($id, $menu)
+    public function saveAction($menu)
     {
-        $oldId = trim($menu['id']);
+        $oldId = isset($menu['id']) ? trim($menu['id']) : null;
         $label = trim($menu['label']);
 
         if (!$id = App::filter($label, 'slugify')) {

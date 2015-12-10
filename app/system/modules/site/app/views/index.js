@@ -1,3 +1,5 @@
+var Promise = require('promise');
+
 module.exports = {
 
     el: '#site',
@@ -16,14 +18,33 @@ module.exports = {
     created: function () {
         this.Menus = this.$resource('api/site/menu/:id');
         this.Nodes = this.$resource('api/site/node/:id');
-        this.load();
+
+        var vm = this;
+        this.load().then(function () {
+            vm.$set('menu', _.find(vm.menus, 'id', vm.$get('menu.id')) || vm.menus[0]);
+        });
     },
 
     methods: {
 
         load: function () {
-            return this.Menus.query(function (data) {
-                this.$set('menus', data);
+
+            var vm = this;
+            return Promise.all([
+
+                this.Menus.query(function (data) {
+                    this.$set('menus', data);
+                }),
+
+                this.Nodes.query(function (nodes) {
+                    this.$set('nodes', nodes);
+                    this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
+                })
+
+            ]).then(function () {
+                vm.$set('selected', []);
+            }, function () {
+                vm.$notify('Loading failed.', 'danger');
             });
         },
 
@@ -31,14 +52,11 @@ module.exports = {
             return this.menu && this.menu.id === menu.id;
         },
 
-        selectMenu: function (menu, reload) {
-            if (reload === false) {
-                this.$set('menu', menu);
-            } else {
-                this.load().success(function () {
-                    this.$set('menu', menu);
-                });
-            }
+        selectMenu: function (menu) {
+
+            this.$set('selected', []);
+            this.$set('menu', menu);
+
         },
 
         removeMenu: function (menu) {
@@ -61,9 +79,7 @@ module.exports = {
 
         saveMenu: function (menu) {
 
-            this.Menus.save({id: menu.id}, {menu: menu}, function () {
-                this.load();
-            }).error(function (msg) {
+            this.Menus.save({menu: menu}, this.load).error(function (msg) {
                 this.$notify(msg, 'danger');
             });
 
@@ -183,27 +199,10 @@ module.exports = {
 
     watch: {
 
-        menu: function (menu) {
-
-            this.$set('selected', []);
-            this.$set('nodes', []);
-            this.$set('tree',[]);
-
-            this.Nodes.query({menu: menu.id}, function (nodes) {
-                this.$set('nodes', nodes);
-                this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
-            });
-        },
-
-        menus: function (menus) {
-            this.selectMenu(_.find(menus, 'id', this.$get('menu.id')) || menus[0], false);
-        },
-
         nodes: function () {
 
             var vm = this;
 
-            // TODO this is still buggy
             UIkit.nestable(this.$els.nestable, {
                 maxDepth: 20,
                 group: 'site.nodes'
@@ -211,20 +210,7 @@ module.exports = {
 
                 if (type && type !== 'removed') {
 
-                    vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, function () {
-
-                        // @TODO reload everything on reorder really needed?
-                        this.load().success(function () {
-
-                            // hack for weird flickr bug
-                            if (el.parent()[0] === nestable.element[0]) {
-                                setTimeout(function () {
-                                    el.remove();
-                                }, 50);
-                            }
-                        });
-
-                    }).error(function () {
+                    vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, vm.load).error(function () {
                         this.$notify('Reorder failed.', 'danger');
                     });
                 }

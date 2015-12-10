@@ -74,7 +74,7 @@
                 </div>
 
                 <ul class="uk-nestable uk-margin-remove" v-el:nestable v-show="tree[0]">
-                    <node v-for="node in tree[0]" :tree="tree" :node="node"></node>
+                    <node v-for="node in tree[0]" :tree="tree" :node="node" v-if="node.menu === menu.id"></node>
                 </ul>
 
             </div>
