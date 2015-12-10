@@ -183,7 +183,7 @@ class View
     public function render($name, array $parameters = [])
     {
         $event = new ViewEvent('render', $name);
-        $event->setParameters(array_replace($this->globals, end($this->parameters) ?: [], $parameters));
+        $event->setParameters(array_replace(end($this->parameters) ?: [], $parameters, $this->globals));
 
         $this->events->trigger($event, [$this]);
 
