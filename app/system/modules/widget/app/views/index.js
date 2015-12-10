@@ -145,7 +145,7 @@ module.exports = {
             });
         },
 
-        status: function () {
+        status: function (status) {
 
             var widgets = this.get('selected');
 
