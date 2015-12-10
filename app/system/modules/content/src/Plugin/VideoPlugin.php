@@ -44,6 +44,7 @@ class VideoPlugin implements EventSubscriberInterface
         }
         $html .= '></video>';
 
+        $options['wmode'] = 'transparent';
         if (preg_match(self::REGEX_YOUTUBE, $src, $matches)) {
 
             if ($options['loop']) {
