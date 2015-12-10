@@ -14,20 +14,20 @@
 
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
-                    <div class="uk-form-controls">
+                    <div id="form-src" class="uk-form-controls">
                         <input class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.data.src" debounce="500">
                     </div>
                 </div>
 
                 <div class="uk-form-row">
                     <label><input type="checkbox" v-model="video.data.autoplay"> {{ 'Autoplay' | trans }}</label>
-                    <label v-show="!isVimeo"><input type="checkbox" v-model="video.data.controls"> {{ 'Controls' | trans }}</label>
-                    <label><input type="checkbox" v-model="video.data.loop"> {{ 'Loop' | trans }}</label>
-                    <label v-show="!isVimeo && !isYoutube"><input type="checkbox" v-model="video.data.muted"> {{ 'Muted' | trans }}</label>
+                    <label class="uk-margin-small-left" v-show="!isVimeo"><input type="checkbox" v-model="video.data.controls"> {{ 'Controls' | trans }}</label>
+                    <label class="uk-margin-small-left"><input type="checkbox" v-model="video.data.loop"> {{ 'Loop' | trans }}</label>
+                    <label class="uk-margin-small-left" v-show="!isVimeo && !isYoutube"><input type="checkbox" v-model="video.data.muted"> {{ 'Muted' | trans }}</label>
                 </div>
 
                 <div class="uk-form-row" v-show="!isYoutube && !isVimeo">
-                    <label for="form-src" class="uk-form-label">{{ 'Poster Image' | trans }}</label>
+                    <span class="uk-form-label">{{ 'Poster Image' | trans }}</span>
                     <div class="uk-form-controls">
                         <input-image class="uk-width-1-1" :source.sync="video.data.poster"></input-image>
                     </div>
