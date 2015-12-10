@@ -14,8 +14,8 @@
 
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
-                    <div id="form-src" class="uk-form-controls">
-                        <input class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.data.src" debounce="500">
+                    <div class="uk-form-controls">
+                        <input id="form-src" class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.data.src" debounce="500">
                     </div>
                 </div>
 
