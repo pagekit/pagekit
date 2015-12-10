@@ -74,12 +74,12 @@
                 </div>
 
                 <ul class="uk-nestable uk-margin-remove" v-el:nestable v-show="tree[0]">
-                    <node v-for="node in tree[0]" :tree="tree" :node="node" v-if="node.menu === menu.id"></node>
+                    <node v-for="node in tree[0]" :tree="tree" :node="node"></node>
                 </ul>
 
             </div>
 
-            <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!tree[0]">{{ 'No pages found.' | trans }}</h3>
+            <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="tree !== false && !tree[0]">{{ 'No pages found.' | trans }}</h3>
 
         </div>
     </div>

@@ -10,7 +10,7 @@ module.exports = {
             menu: {},
             menus: [],
             nodes: [],
-            tree: [],
+            tree: false,
             selected: []
         }, window.$data);
     },
@@ -25,24 +25,46 @@ module.exports = {
         });
     },
 
+    ready: function () {
+
+        var vm = this;
+
+        UIkit.nestable(this.$els.nestable, {
+            maxDepth: 20,
+            group: 'site.nodes'
+        }).on('change.uk.nestable', function (e, nestable, el, type) {
+
+            if (type && type !== 'removed') {
+
+                vm.Nodes.save({id: 'updateOrder'}, {
+                    menu: vm.menu.id,
+                    nodes: nestable.list()
+                }, vm.load).error(function () {
+                    this.$notify('Reorder failed.', 'danger');
+                });
+            }
+        });
+
+    },
+
     methods: {
 
         load: function () {
 
             var vm = this;
             return Promise.all([
+                this.Menus.query(),
+                this.Nodes.query()
+            ]).then(function (responses) {
 
-                this.Menus.query(function (data) {
-                    this.$set('menus', data);
-                }),
-
-                this.Nodes.query(function (nodes) {
-                    this.$set('nodes', nodes);
-                    this.$set('tree', _(nodes).sortBy('priority').groupBy('parent_id').value());
-                })
-
-            ]).then(function () {
+                vm.$set('menus', responses[0].data);
+                vm.$set('nodes', responses[1].data);
                 vm.$set('selected', []);
+
+                if (!_.find(vm.menus, 'id', vm.$get('menu.id'))) {
+                    vm.$set('menu', vm.menus[0]);
+                }
+
             }, function () {
                 vm.$notify('Loading failed.', 'danger');
             });
@@ -199,22 +221,11 @@ module.exports = {
 
     watch: {
 
-        nodes: function () {
-
-            var vm = this;
-
-            UIkit.nestable(this.$els.nestable, {
-                maxDepth: 20,
-                group: 'site.nodes'
-            }).off('change.uk.nestable').on('change.uk.nestable', function (e, nestable, el, type) {
-
-                if (type && type !== 'removed') {
-
-                    vm.Nodes.save({id: 'updateOrder'}, {menu: vm.menu.id, nodes: nestable.list()}, vm.load).error(function () {
-                        this.$notify('Reorder failed.', 'danger');
-                    });
-                }
-            });
+        'menu + nodes': {
+            handler: function () {
+                this.$set('tree', _(this.nodes).filter({menu: this.menu.id}).sortBy('priority').groupBy('parent_id').value());
+            },
+            deep: true
         }
 
     },
