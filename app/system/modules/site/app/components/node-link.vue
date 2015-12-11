@@ -38,7 +38,7 @@
             active: 'link'
         },
 
-        props: ['node'],
+        props: ['node', 'roles', 'form'],
 
         created: function () {
             
