@@ -23,7 +23,7 @@ module.exports = [
             loaders: [
                 { test: /\.vue$/, loader: "vue" },
                 { test: /\.json$/, loader: "json" },
-                { test: /\.html$/, loader: "html" }
+                { test: /\.html$/, loader: "vue-html" }
             ]
         }
     }
