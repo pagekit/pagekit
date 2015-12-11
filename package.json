@@ -10,7 +10,7 @@
     "babel-preset-es2015": "^6.1.2",
     "babel-runtime": "^5.8.0",
     "cldr-core": "^28.0.2",
-    "cldr-localenames-modern": "^27.0.3",
+    "cldr-localenames-modern": "^28.0.0",
     "css-loader": "*",
     "glob": "^5.0.5",
     "gulp": "^3.9.0",
