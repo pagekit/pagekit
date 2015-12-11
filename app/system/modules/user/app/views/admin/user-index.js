@@ -63,6 +63,9 @@ module.exports = {
             this.resource.save({id: user.id}, {user: user}, function (data) {
                 this.load();
                 this.$notify('User saved.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -77,6 +80,9 @@ module.exports = {
             this.resource.save({id: 'bulk'}, {users: users}, function (data) {
                 this.load();
                 this.$notify('Users saved.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -84,6 +90,9 @@ module.exports = {
             this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
                 this.load();
                 this.$notify('Users deleted.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -116,6 +125,8 @@ module.exports = {
                 this.$set('count', data.count);
                 this.$set('config.page', page);
                 this.$set('selected', []);
+            }).error(function () {
+                this.$notify('Loading failed.', 'danger');
             });
         },
 
