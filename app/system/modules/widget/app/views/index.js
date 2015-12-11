@@ -233,6 +233,10 @@ module.exports = {
         type: function (widget) {
             var type = _.find(this.types, {name: widget.type});
 
+            if (!type) {
+                return undefined;
+            }
+
             return type.label || type.name;
         },
 
