@@ -7,18 +7,18 @@
     </thead>
     <tbody>
 
-        <tr v-for="folder in searched | filterBy 'application/folder' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" @click.prevent="toggleSelect(folder.name)">
-            <td><input type="checkbox" name="name" :value="folder.name" v-model="selected" @click.stop></td>
+        <tr v-for="folder in searched | filterBy 'application/folder' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(folder.name)}" v-on:click.prevent="toggleSelect(folder.name)">
+            <td><input type="checkbox" name="name" :value="folder.name" v-model="selected" v-on:click.stop></td>
             <td class="pk-table-width-minimum">
                 <i class="pk-icon-folder-circle"></i>
             </td>
-            <td class="pk-table-text-break pk-table-min-width-200"><a @click.stop="setPath(folder.path)">{{ folder.name }}</a></td>
+            <td class="pk-table-text-break pk-table-min-width-200"><a v-on:click.stop="setPath(folder.path)">{{ folder.name }}</a></td>
             <td></td>
             <td></td>
         </tr>
 
-        <tr v-for="file in searched | filterBy 'application/file' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" @click.prevent="toggleSelect(file.name)">
-            <td><input type="checkbox" name="name" :value="file.name" v-model="selected" @click.stop></td>
+        <tr v-for="file in searched | filterBy 'application/file' in 'mime'" class="uk-visible-hover" :class="{'uk-active': isSelected(file.name)}" v-on:click.prevent="toggleSelect(file.name)">
+            <td><input type="checkbox" name="name" :value="file.name" v-model="selected" v-on:click.stop></td>
             <td class="pk-table-width-minimum">
                 <i v-if="isImage(file.url)" class="pk-icon-contain" v-lazy-background="$url(file.url)"></i>
                 <i v-else class="pk-icon-file-circle"></i>
