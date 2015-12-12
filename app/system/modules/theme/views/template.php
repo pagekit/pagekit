@@ -15,7 +15,7 @@
             <div class="uk-container uk-container-center">
 
                 <div class="tm-headerbar uk-flex uk-flex-space-between uk-flex-middle uk-hidden-small">
-                    <div class="tm-headerbar-primary" data-uk-dropdown="{mode:'click'}">
+                    <div class="tm-headerbar-primary" data-uk-dropdown="{mode:'click', preventflip: 'y'}">
 
                         <div class="tm-cursor-pointer uk-flex uk-flex-middle">
                             <i class="tm-icon-menu"></i>
