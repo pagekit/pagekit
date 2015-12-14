@@ -92,7 +92,7 @@
                 'app/assets/uikit/js/components/datepicker.min.js',
                 'app/assets/uikit/js/components/timepicker.min.js'
             ]
-        }, function () {
+        }).then(function () {
             resolve(module.exports);
         })
     });

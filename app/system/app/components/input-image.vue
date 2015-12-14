@@ -79,7 +79,7 @@
                 'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
-        }, function () {
+        }).then(function () {
             resolve(module.exports);
         })
     });
