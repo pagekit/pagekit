@@ -89,7 +89,6 @@ class WidgetApiController
                 $copy->id = null;
                 $copy->status = 0;
                 $copy->title = $widget->title.' - '.__('Copy');
-                $copy->position = $widget->position;
                 $copy->save();
             }
         }
