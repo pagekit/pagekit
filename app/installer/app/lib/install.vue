@@ -36,12 +36,7 @@
                 this.$set('pkg', pkg);
                 this.cb = onClose;
 
-                var vm = this;
-                return this.$http.post('admin/system/package/install', {package: pkg}, null, {
-                    beforeSend: function (request) {
-                        vm.init(request);
-                    }
-                }).success(function () {
+                return this.$http.post('admin/system/package/install', {package: pkg},null, {xhr: this.init()}).success(function () {
                     if (this.status === 'success' && packages) {
                         var index = _.findIndex(packages, 'name', pkg.name);
 

@@ -11,7 +11,8 @@
 
             <v-loader v-show="status == 'loading'"></v-loader>
 
-            <div class="uk-alert uk-alert-success" v-show="status == 'success'">{{ 'Successfully removed.' | trans }}</div>
+            <div class="uk-alert uk-alert-success" v-show="status == 'success'">{{ 'Successfully removed.' | trans }}
+            </div>
             <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Error' | trans}}</div>
 
             <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
@@ -35,11 +36,7 @@
                 this.$set('pkg', pkg);
 
                 var vm = this;
-                return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {
-                    beforeSend: function (request) {
-                        vm.init(request);
-                    }
-                }).success(function () {
+                return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {xhr: this.init()}).success(function () {
                     if (this.status === 'success' && packages) {
                         packages.splice(packages.indexOf(pkg), 1);
                     }

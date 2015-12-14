@@ -18,14 +18,16 @@ module.exports = {
 
     methods: {
 
-        init: function (request) {
+        init: function () {
             var vm = this;
 
-            request.onprogress = function () {
-                vm.setOutput(this.responseText);
-            };
-
             this.open();
+            return {
+                onprogress: function () {
+                    vm.setOutput(this.responseText);
+                }
+            }
+
         },
 
         setOutput: function (output) {
