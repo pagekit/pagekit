@@ -9,7 +9,7 @@ module.exports = function (Vue) {
      */
     function Asset(assets, success, error) {
 
-        var promises = [], $url = (this.$url || Vue.url), _assets = [];
+        var self = this, promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
 
         Object.keys(assets).forEach(function (type) {
 
@@ -34,8 +34,46 @@ module.exports = function (Vue) {
 
         });
 
-        return Promise.all(promises).then(success, error);
+        promise = Promise.all(promises);
 
+        promise.success = function (fn) {
+
+            promise.then(function (response) {
+                fn.call(self, response);
+            });
+
+            return promise;
+        };
+
+        promise.error = function (fn) {
+
+            promise.then(undefined, function (response) {
+                fn.call(self, response);
+            });
+
+            return promise;
+        };
+
+        promise.always = function (fn) {
+
+            var cb = function (response) {
+                fn.call(self, response);
+            };
+
+            promise.then(cb, cb);
+
+            return promise;
+        };
+
+        if (success) {
+            promise.success(success);
+        }
+
+        if (error) {
+            promise.error(error);
+        }
+
+        return promise;
     }
 
     _.extend(Asset, {
