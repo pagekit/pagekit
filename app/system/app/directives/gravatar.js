@@ -20,7 +20,7 @@ module.exports = {
         Vue.asset({image: url}).then(function () {
             el.setAttribute('src', url);
             el.classList.remove('uk-invisible');
-        }).catch(function () {
+        }, function () {
             cache[key] = vm.letterAvatar(el.getAttribute('title') || el.getAttribute('alt'), size, el.getAttribute('colored'));
             el.setAttribute('src', cache[key]);
             el.classList.remove('uk-invisible');
