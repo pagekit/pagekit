@@ -15,7 +15,7 @@ module.exports = {
                 'app/assets/codemirror/codemirror.js'
             ]
 
-        }, function () {
+        }).then(function () {
 
             this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
                 mode: 'htmlmixed',

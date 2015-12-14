@@ -6,7 +6,7 @@ module.exports = function (Vue) {
     /**
      * Asset provides a promise based assets manager.
      */
-    function Asset(assets, success, error) {
+    function Asset(assets) {
 
         var promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
 
@@ -33,7 +33,7 @@ module.exports = function (Vue) {
 
         });
 
-        return Vue.promise.all(promises).bind(this).then(success, error);
+        return Vue.promise.all(promises).bind(this);
     }
 
     _.extend(Asset, {

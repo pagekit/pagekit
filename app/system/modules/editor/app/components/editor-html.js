@@ -16,7 +16,7 @@ module.exports = {
                 'app/assets/uikit/js/components/htmleditor.min.js'
             ]
 
-        }, function () {
+        }).then(function () {
 
             var editor = this.$parent.editor = UIkit.htmleditor(this.$el, _.extend({
                 marked: window.marked,
@@ -44,7 +44,7 @@ module.exports = {
             );
 
             this.$emit('ready');
-        });
+        })
 
     }
 
