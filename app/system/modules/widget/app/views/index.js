@@ -115,6 +115,7 @@ module.exports = {
 
         assign: function (position, ids) {
             return this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
+                this.load();
                 this.$set('config.positions', data.positions);
                 this.$set('selected', []);
             });
