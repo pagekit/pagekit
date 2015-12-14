@@ -44,7 +44,7 @@
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
                     <p class="uk-form-controls-condensed" v-for="status in config.statuses">
-                        <label><input type="radio" v-model="user.status" :value="$key" :disabled="config.currentUser == user.id" number> {{ status }}</label>
+                        <label><input type="radio" v-model="user.status" :value="parseInt($key)" :disabled="config.currentUser == user.id"> {{ status }}</label>
                     </p>
                 </div>
             </div>
