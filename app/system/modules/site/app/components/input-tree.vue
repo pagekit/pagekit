@@ -8,8 +8,6 @@
 
 <script>
 
-    var Promise = require('promise');
-
     module.exports = {
 
         props: {
@@ -32,8 +30,7 @@
 
             var vm = this;
 
-            Promise
-                .all([
+            Vue.promise.all([
                     this.$http.get('api/site/node'),
                     this.$http.get('api/site/menu')
                 ])

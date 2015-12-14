@@ -1,5 +1,3 @@
-var Promise = require('promise');
-
 module.exports = {
 
     el: '#site',
@@ -52,7 +50,7 @@ module.exports = {
         load: function () {
 
             var vm = this;
-            return Promise.all([
+            return Vue.promise.all([
                 this.Menus.query(),
                 this.Nodes.query()
             ]).then(function (responses) {
