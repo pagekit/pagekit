@@ -29,10 +29,10 @@
 
             <div class="uk-form-row">
                 <label for="form-password" class="uk-form-label">{{ 'Password' | trans }}</label>
-                <div class="uk-form-controls uk-form-controls-text js-password" v-show="user.id">
-                    <a href="#" data-uk-toggle="{target: '.js-password'}">{{ 'Change password' | trans }}</a>
+                <div class="uk-form-controls uk-form-controls-text" v-show="user.id && !editingPassword">
+                    <a href="#" @click.prevent="editingPassword = true">{{ 'Change password' | trans }}</a>
                 </div>
-                <div class="uk-form-controls js-password" :class="{'uk-hidden' : user.id}">
+                <div class="uk-form-controls" :class="{'uk-hidden' : (user.id && !editingPassword)}">
                     <div class="uk-form-password">
                         <input id="form-password" class="uk-form-width-large" :type="hidePassword ? 'password' : 'text'" v-model="password">
                         <a href="#" class="uk-form-password-toggle" @click.prevent="hidePassword = !hidePassword">{{ hidePassword ? 'Show' : 'Hide' | trans }}</a>
@@ -112,7 +112,7 @@
         props: ['user', 'config', 'form'],
 
         data: function () {
-            return {password: '', hidePassword: true}
+            return {password: '', hidePassword: true, editingPassword: false}
         },
 
         ready: function () {
