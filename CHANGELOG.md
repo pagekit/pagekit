@@ -2,8 +2,13 @@
 
 ## WIP
 
+### Added
+- Added options to video picker
+
 ### Changed
 - Switched to Vuejs 1.0
+- Optimized site tree
+- Optimized user settings
 
 ### Fixed
 - On widget copy, theme settings are copied too
