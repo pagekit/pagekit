@@ -35,7 +35,6 @@ function install (Vue) {
      */
 
     Vue.directive('check-all', require('./directives/check-all'));
-    Vue.directive('checkbox', require('./directives/checkbox'));
     Vue.directive('confirm', require('./directives/confirm'));
     Vue.directive('gravatar', require('./directives/gravatar'));
     Vue.directive('order', require('./directives/order'));
