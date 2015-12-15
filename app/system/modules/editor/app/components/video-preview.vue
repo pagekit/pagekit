@@ -76,6 +76,7 @@
                 this.$set('imageSrc', undefined);
                 this.$set('videoSrc', undefined);
 
+                src = src || '';
                 if (matches = (src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || src.match(/youtu\.be\/(.*)/))) {
 
                     this.imageSrc = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
