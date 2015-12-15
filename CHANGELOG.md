@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.0
+## 0.10.0 (Dezember 15, 2015)
 
 ### Added
 - Added options to video picker
