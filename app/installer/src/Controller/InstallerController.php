@@ -28,8 +28,8 @@ class InstallerController
      * @var array
      */
     protected $packages = [
-        'pagekit/blog' => '0.9.*',
-        'pagekit/theme-one' => '0.9.*'
+        'pagekit/blog' => '0.10.*',
+        'pagekit/theme-one' => '0.10.*'
     ];
 
     /**
