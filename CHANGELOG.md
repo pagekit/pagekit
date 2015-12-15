@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.10.0
 
 ### Added
 - Added options to video picker
