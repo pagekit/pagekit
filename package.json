@@ -1,22 +1,32 @@
 {
   "name": "pagekit",
   "scripts": {
-    "install": "bower install; webpack; cd app/assets/vue-intl; npm install; cd ./; gulp"
+    "install": "bower install; webpack; gulp"
   },
   "devDependencies": {
-    "cldr-localenames-modern": "^27.0.3",
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.1.0",
+    "babel-plugin-transform-runtime": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-runtime": "^5.8.0",
+    "cldr-core": "28.0.0",
+    "cldr-localenames-modern": "28.0.0",
+    "css-loader": "*",
     "glob": "^5.0.5",
-    "gulp": "^3.8.10",
+    "gulp": "^3.9.0",
     "gulp-eslint": "^0.7.0",
     "gulp-header": "^1.2.2",
     "gulp-less": "^3.0.0",
     "gulp-rename": "^1.2.0",
     "gulp-util": "^3.0.4",
-    "html-loader": "^0.3.0",
     "json-loader": "^0.5.2",
-    "lodash": "^3.7.0",
+    "less": "^2.5.1",
+    "lodash": "^3.10.1",
     "merge-stream": "^0.1.7",
-    "vue-loader": "^2.1.1",
-    "webpack": "^1.11.0"
+    "style-loader": "*",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^7.2.0",
+    "webpack": "^1.12.9"
   }
 }

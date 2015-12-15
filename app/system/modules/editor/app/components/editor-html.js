@@ -16,11 +16,14 @@ module.exports = {
                 'app/assets/uikit/js/components/htmleditor.min.js'
             ]
 
-        }, function () {
+        }).then(function () {
 
-            this.editor = UIkit.htmleditor(this.$el, _.extend({ marked: window.marked, CodeMirror: window.CodeMirror }, this.options));
+            var editor = this.$parent.editor = UIkit.htmleditor(this.$el, _.extend({
+                marked: window.marked,
+                CodeMirror: window.CodeMirror
+            }, this.$parent.options));
 
-            this.editor.element
+            editor.element
                 .on('htmleditor-save', function (e, editor) {
                     if (editor.element[0].form) {
                         var event = document.createEvent('HTMLEvents');
@@ -29,18 +32,19 @@ module.exports = {
                     }
                 });
 
-            this.$watch('value', function (value) {
-                if (value != this.editor.editor.getValue()) {
-                    this.editor.editor.setValue(value);
+            this.$watch('$parent.value', function (value) {
+                if (value != editor.editor.getValue()) {
+                    editor.editor.setValue(value);
                 }
             });
 
-            this.$watch('options.markdown', function (markdown) {
-                this.editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
-            });
+            this.$watch('$parent.options.markdown', function (markdown) {
+                    editor.trigger(markdown ? 'enableMarkdown' : 'disableMarkdown');
+                }, {immediate: true}
+            );
 
             this.$emit('ready');
-        });
+        })
 
     }
 

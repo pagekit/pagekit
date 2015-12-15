@@ -3,11 +3,13 @@
     <div class="uk-form-row">
         <label for="form-style" class="uk-form-label">{{ 'Extension' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-style" class="uk-width-1-1" v-model="type" options="types"></select>
+            <select id="form-style" class="uk-width-1-1" v-model="type">
+                <option v-for="type in types" :value="type.value">{{ type.text }}</option>
+            </select>
         </div>
     </div>
 
-    <div v-component="{{ type }}" link="{{@ link }}" v-if="type"></div>
+    <div :is="type" :link.sync="link" v-if="type"></div>
 
 </template>
 

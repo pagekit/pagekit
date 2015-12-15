@@ -1,8 +1,8 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" closed="{{ close }}">
-            <form class="uk-form uk-form-stacked" v-on="submit: update">
+        <v-modal v-ref:modal :closed="close">
+            <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
                     <h2>{{ 'Add Link' | trans }}</h2>
@@ -18,7 +18,7 @@
                 <div class="uk-form-row">
                     <label for="form-link-url" class="uk-form-label">{{ 'Url' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input-link id="form-link-url" class="uk-width-1-1" link="{{@ link.link}}"></input-link>
+                        <input-link id="form-link-url" class="uk-width-1-1" :link.sync="link.link"></input-link>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
         },
 
         ready: function () {
-            this.$.modal.open();
+            this.$refs.modal.open();
         },
 
         methods: {
@@ -53,9 +53,8 @@
                 this.$destroy(true);
             },
 
-            update: function (e) {
-                e.preventDefault();
-                this.$.modal.close();
+            update: function () {
+                this.$refs.modal.close();
                 this.$emit('select', this.link);
             }
 

@@ -75,8 +75,8 @@
             <div class="uk-form-controls">
                 <select id="form-smtpencryption" class="uk-form-width-large" v-model="options.encryption">
                     <option value="">{{ 'None' | trans }}</option>
-                    <option value="ssl" v-attr="disabled: !ssl">{{ 'SSL' | trans }}</option>
-                    <option value="tls" v-attr="disabled: !ssl">{{ 'TLS' | trans }}</option>
+                    <option value="ssl" :disabled="!ssl">{{ 'SSL' | trans }}</option>
+                    <option value="tls" :disabled="!ssl">{{ 'TLS' | trans }}</option>
                 </select>
                 <p class="uk-form-help-block" v-if="!ssl">{{ 'Please enable the PHP Open SSL extension.' | trans }}</p>
             </div>
@@ -86,8 +86,8 @@
 
     <div class="uk-form-row">
         <div class="uk-form-controls">
-            <button class="uk-button" type="button" v-on="click: test('smtp')" v-show="'smtp' == options.driver">{{ 'Check Connection' | trans }}</button>
-            <button class="uk-button" type="button" v-on="click: test('email')">{{ 'Send Test Email' | trans }}</button>
+            <button class="uk-button" type="button" @click="test('smtp')" v-show="'smtp' == options.driver">{{ 'Check Connection' | trans }}</button>
+            <button class="uk-button" type="button" @click="test('email')">{{ 'Send Test Email' | trans }}</button>
         </div>
     </div>
 
@@ -105,7 +105,7 @@
 
         props: ['config', 'options'],
 
-        data: function() {
+        data: function () {
             return window.$mail;
         },
 
@@ -113,7 +113,7 @@
 
             test: function (driver) {
 
-                this.$http.post('admin/system/' + driver, { option: this.options }, function (data) {
+                this.$http.post('admin/system/' + driver, {option: this.options}, function (data) {
                     this.$notify(data.message, data.success ? '' : 'danger');
                 }).error(function () {
                     this.$notify('Ajax request to server failed.', 'danger');

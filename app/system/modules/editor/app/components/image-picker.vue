@@ -1,15 +1,15 @@
 <template>
 
     <div>
-        <v-modal v-ref="modal" closed="{{ close }}">
-            <form class="uk-form uk-form-stacked" v-on="submit: update">
+        <v-modal v-ref:modal :closed="close">
+            <form class="uk-form uk-form-stacked" @submit.prevent="update">
 
                 <div class="uk-modal-header">
                     <h2>{{ 'Add Image' | trans }}</h2>
                 </div>
 
                 <div class="uk-form-row">
-                    <input-image source="{{@ image.src }}"></input-image>
+                    <input-image :source.sync="image.src"></input-image>
                 </div>
 
                 <div class="uk-form-row">
@@ -49,7 +49,7 @@
 
         ready: function () {
 
-            this.$.modal.open();
+            this.$refs.modal.open();
 
             this.$on('image-selected', function(path) {
 
@@ -69,11 +69,8 @@
                 this.$destroy(true);
             },
 
-            update: function (e) {
-
-                e.preventDefault();
-
-                this.$.modal.close();
+            update: function () {
+                this.$refs.modal.close();
                 this.$emit('select', this.image);
             }
 

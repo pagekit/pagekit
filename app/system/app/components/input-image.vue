@@ -1,33 +1,33 @@
 <template>
 
-    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-image.svg')">
+    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
+        <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Image' | trans }}</p>
     </a>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-if="source">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else>
 
-        <img v-attr="src: $url(source)">
+        <img :src="$url(source)">
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
-        <a class="uk-position-cover" v-on="click: pick()"></a>
+        <a class="uk-position-cover" @click.prevent="pick"></a>
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 
     </div>
 
-    <v-modal v-ref="modal" large>
+    <v-modal v-ref:modal large>
 
-        <panel-finder root="{{ storage }}" v-ref="finder" modal="true"></panel-finder>
+        <panel-finder :root="storage" v-ref:finder :modal="true"></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !hasSelection()" v-on="click: select()">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" :disabled="!hasSelection()" @click.prevent="select">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>
@@ -38,26 +38,26 @@
 
     module.exports = {
 
-        props: ['class', 'source'],
+        props: {
+            class: {default: ''},
+            source: {default: ''}
+        },
 
         data: function () {
-            return _.merge({
-                'class': '',
-                'source': ''
-            }, $pagekit);
+            return _.merge({}, $pagekit);
         },
 
         methods: {
 
             pick: function() {
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             select: function() {
-                this.source = this.$.finder.getSelected()[0];
+                this.source = this.$refs.finder.getSelected()[0];
                 this.$dispatch('image-selected', this.source);
-                this.$.finder.removeSelection();
-                this.$.modal.close();
+                this.$refs.finder.removeSelection();
+                this.$refs.modal.close();
             },
 
             remove: function() {
@@ -65,8 +65,8 @@
             },
 
             hasSelection: function() {
-                var selected = this.$.finder.getSelected();
-                return selected.length === 1 && this.$.finder.isImage(selected[0])
+                var selected = this.$refs.finder.getSelected();
+                return selected.length === 1 && this.$refs.finder.isImage(selected[0])
             }
 
         }
@@ -79,7 +79,7 @@
                 'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
-        }, function () {
+        }).then(function () {
             resolve(module.exports);
         })
     });

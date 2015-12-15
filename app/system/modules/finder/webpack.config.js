@@ -10,7 +10,7 @@ module.exports = [
         },
         module: {
             loaders: [
-                { test: /\.html$/, loader: "html" },
+                { test: /\.html$/, loader: "vue-html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
         }

@@ -8,17 +8,17 @@
             <div class="uk-panel">
 
                 <ul class="uk-sortable uk-nav uk-nav-side" data-uk-sortable="{dragCustomClass:'pk-sortable-dragged-list'}">
-                    <li class="uk-visible-hover" v-repeat="role: roles | orderBy 'priority'" v-ref="ordered" v-class="uk-active: current.id === role.id">
+                    <li class="uk-visible-hover" v-for="role in roles | orderBy 'priority'" :class="{'uk-active': current.id === role.id}">
                         <ul class="uk-subnav pk-subnav-icon uk-hidden" v-if="!role.locked">
-                            <li><a class="pk-icon-edit pk-icon-hover" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: edit(role)"></a></li>
-                            <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove(role)" v-confirm="'Delete role?'"></a></li>
+                            <li><a class="pk-icon-edit pk-icon-hover" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click="edit(role)"></a></li>
+                            <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="remove(role)" v-confirm="'Delete role?'"></a></li>
                         </ul>
-                        <a v-on="click: config.role = role.id">{{ role.name }}</a>
+                        <a @click.prevent="config.role = role.id">{{ role.name }}</a>
                     </li>
                 </ul>
 
                 <p>
-                    <a class="uk-button" v-on="click: edit()">{{ 'Add Role' | trans }}</a>
+                    <a class="uk-button" @click.prevent="edit()">{{ 'Add Role' | trans }}</a>
                 </p>
 
             </div>
@@ -28,7 +28,7 @@
 
             <h2>{{ current.name }}</h2>
 
-            <div class="uk-overflow-container uk-margin-large" v-repeat="group: permissions">
+            <div class="uk-overflow-container uk-margin-large" v-for="group in permissions">
                 <table class="uk-table uk-table-hover uk-table-middle">
                     <thead>
                         <tr>
@@ -38,21 +38,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-repeat="permission: group" v-class="uk-visible-hover-inline: permission.trusted">
+                        <tr v-for="permission in group" :class="{'uk-visible-hover-inline': permission.trusted}">
                             <td class="pk-table-text-break">
-                                <span title="{{ permission.description | trans }}" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
+                                <span :title="permission.description | trans" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                             </td>
                             <td>
-                                <i class="pk-icon-warning uk-invisible" title="{{ 'This permission has security implications. Give it trusted roles only.' | trans }}" data-uk-tooltip v-if="permission.trusted"></i>
+                                <i class="pk-icon-warning uk-invisible" :title="'This permission has security implications. Give it trusted roles only.' | trans" data-uk-tooltip v-if="permission.trusted"></i>
                             </td>
                             <td class="uk-text-center">
 
                                 <span class="uk-position-relative" v-show="showFakeCheckbox(current, $key)">
                                     <input type="checkbox" checked disabled>
-                                    <span class="uk-position-cover" v-if="!current.administrator" v-on="click: addPermission(current, $key), click: savePermissions(current)"></span>
+                                    <span class="uk-position-cover" v-if="!current.administrator" @click="addPermission(current, $key)" @click="savePermissions(current)"></span>
                                 </span>
 
-                                <input type="checkbox" value="{{ $key }}" v-show="!showFakeCheckbox(current, $key)" v-checkbox="current.permissions" v-on="click: savePermissions(current)">
+                                <input type="checkbox" :value="$key" v-else v-model="current.permissions" @click="savePermissions(current)">
 
                             </td>
                         </tr>
@@ -63,8 +63,8 @@
         </div>
     </div>
 
-    <v-modal v-ref="modal">
-        <form class="uk-form uk-form-stacked" v-validator="form" v-on="submit: save | valid">
+    <v-modal v-ref:modal>
+        <form class="uk-form uk-form-stacked" v-validator="form" @submit.prevent.stop="save | valid">
 
             <div class="uk-modal-header">
                 <h2>{{ (role.id ? 'Edit Role':'Add Role') | trans }}</h2>
@@ -73,7 +73,7 @@
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" name="name" v-model="role.name" v-validate="required">
+                    <input id="form-name" class="uk-width-1-1 uk-form-large" type="text" name="name" v-model="role.name" v-validate:required>
                     <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>

@@ -1,28 +1,28 @@
 <ul v-if="items.length" class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
 
-    <li v-repeat="folders | searched">
-        <div class="uk-panel uk-panel-box uk-text-center" v-on="click: toggleSelect">
+    <li v-for="folder in searched | filterBy 'application/folder' in 'mime'">
+        <div class="uk-panel uk-panel-box uk-text-center" @click.prevent="toggleSelect(folder.name)">
             <div class="uk-panel-teaser uk-position-relative">
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-folder"></div>
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
-                <a v-on="click: setPath(path, $event)">{{ name }}</a>
+                <input type="checkbox" :value="folder.name" v-model="selected" @click.stop>
+                <a @click.stop="setPath(folder.path, $event)">{{ folder.name }}</a>
             </div>
         </div>
     </li>
 
-    <li v-repeat="files | searched">
-        <div class="uk-panel uk-panel-box uk-text-center" v-on="click: toggleSelect">
+    <li v-for="file in searched | filterBy 'application/file' in 'mime'">
+        <div class="uk-panel uk-panel-box uk-text-center" @click.prevent="toggleSelect(file.name)">
             <div class="uk-panel-teaser uk-position-relative">
-                <div class="pk-background-contain uk-position-cover" v-if="isImage(path)" v-lazy-background="$url(url)"></div>
-                <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-if="!isImage(path)"></div>
+                <div class="pk-background-contain uk-position-cover" v-if="isImage(file.path)" v-lazy-background="$url(file.url)"></div>
+                <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-else></div>
                 <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
-                <input type="checkbox" value="{{ name }}" v-checkbox="selected">
-                {{ name }}
+                <input type="checkbox" :value="file.name" v-model="selected" @click.stop>
+                {{ file.name }}
             </div>
         </div>
     </li>

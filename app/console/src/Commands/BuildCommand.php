@@ -48,6 +48,8 @@ class BuildCommand extends Command
 
         exec('webpack -p');
 
+        $this->line(sprintf('Building Package.'));
+
         $finder = Finder::create()->files()->in($path)->ignoreVCS(true)->filter(function ($file) use ($filter) {
             return !preg_match($filter, $file->getRelativePathname());
         });
@@ -77,6 +79,6 @@ class BuildCommand extends Command
         $name = basename($zipFile);
         $size = filesize($zipFile) / 1024 / 1024;
 
-        $this->line(sprintf('Building: %s (%.2f MB)', $name, $size));
+        $this->line(sprintf('Build: %s (%.2f MB)', $name, $size));
     }
 }

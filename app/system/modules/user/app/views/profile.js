@@ -1,12 +1,12 @@
 module.exports = {
 
+    el: '#user-profile',
+
     data: window.$data,
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             this.$http.post('user/profile/save', {user: this.user}, function () {
                 this.$notify('Profile Updated', 'success');
             }).error(function (error) {
@@ -18,8 +18,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-profile');
-
-});
+Vue.ready(module.exports);

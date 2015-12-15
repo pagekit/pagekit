@@ -17,8 +17,8 @@
         <span class="uk-form-label">{{ 'Cache' | trans }}</span>
 
         <div class="uk-form-controls uk-form-controls-text">
-            <p class="uk-form-controls-condensed" v-repeat="cache: caches">
-                <label><input type="radio" value="{{ $key }}" v-model="config.caches.cache.storage" v-attr="disabled: !cache.supported"> {{ cache.name }}</label>
+            <p class="uk-form-controls-condensed" v-for="cache in caches">
+                <label><input type="radio" :value="$key" v-model="config.caches.cache.storage" :disabled="!cache.supported"> {{ cache.name }}</label>
             </p>
         </div>
     </div>
@@ -32,12 +32,12 @@
             </p>
 
             <p>
-                <button class="uk-button uk-button-primary" type="button" v-on="click: open">{{ 'Clear Cache' | trans }}</button>
+                <button class="uk-button uk-button-primary" type="button" @click.prevent="open">{{ 'Clear Cache' | trans }}</button>
             </p>
         </div>
     </div>
 
-    <v-modal v-ref="modal">
+    <v-modal v-ref:modal>
         <form class="uk-form-stacked">
 
             <div class="uk-modal-header">
@@ -56,7 +56,7 @@
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: clear">{{ 'Clear' | trans }}</button>
+                <button class="uk-button uk-button-link" @click.prevent="clear">{{ 'Clear' | trans }}</button>
             </div>
 
         </form>
@@ -84,22 +84,17 @@
 
         methods: {
 
-            open: function (e) {
-                e.preventDefault();
-
+            open: function () {
                 this.$set('cache', {cache: true});
-
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
-            clear: function (e) {
-                e.preventDefault();
-
+            clear: function () {
                 this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
                     this.$notify('Cache cleared.')
                 });
 
-                this.$.modal.close();
+                this.$refs.modal.close();
             }
 
         }

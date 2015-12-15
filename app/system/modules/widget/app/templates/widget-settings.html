@@ -12,16 +12,17 @@
     <div class="uk-form-row">
         <label for="form-position" class="uk-form-label">{{ 'Position' | trans }}</label>
         <div class="uk-form-controls">
-            <select id="form-position" name="position" class="uk-width-1-1" v-model="widget.position" options="$parent.positionOptions">
+            <select id="form-position" name="position" class="uk-width-1-1" v-model="widget.position">
                 <option value="">{{ '- Assign -' | trans }}</option>
+                <option v-for="position in config.positions" :value="position.name">{{ position.label }}</option>
             </select>
         </div>
     </div>
     <div class="uk-form-row">
         <span class="uk-form-label">{{ 'Restrict Access' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
-            <p v-repeat="role: config.roles" class="uk-form-controls-condensed">
-                <label><input type="checkbox" value="{{ role.id }}" v-checkbox="widget.roles" number> {{ role.name }}</label>
+            <p v-for="role in config.roles" class="uk-form-controls-condensed">
+                <label><input type="checkbox" :value="role.id" v-model="widget.roles" number> {{ role.name }}</label>
             </p>
         </div>
     </div>

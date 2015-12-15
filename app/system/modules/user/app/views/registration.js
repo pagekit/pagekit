@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#user-registration',
+
     data: {
         user: {},
         error: null
@@ -7,9 +9,7 @@ module.exports = {
 
     methods: {
 
-        submit: function (e) {
-            e.preventDefault();
-
+        submit: function () {
             this.$http.post('user/registration/register', {user: this.user}, function (data) {
                 window.location.replace(data.redirect);
             }).error(function (error) {
@@ -21,8 +21,4 @@ module.exports = {
 
 };
 
-$(function () {
-
-    new Vue(module.exports).$mount('#user-registration');
-
-});
+Vue.ready(module.exports);

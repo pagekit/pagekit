@@ -4,7 +4,6 @@
 /app/assets/*
 !/app/assets/codemirror
 !/app/assets/marked
-!/app/assets/vue-intl
 /app/installer/assets/css/*
 /app/system/modules/theme/css/*
 /packages/*

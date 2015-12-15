@@ -8,6 +8,7 @@ use Pagekit\Event\EventSubscriberInterface;
 class ResponseListener implements EventSubscriberInterface
 {
     const REGEX_URL = '/
+                        \s                              # match a space
                         (?<attr>href|src|poster)=       # match the attribute
                         ([\"\'])                        # start with a single or double quote
                         (?!\/|\#|[a-z0-9\-\.]+\:)       # make sure it is a relative path
@@ -25,7 +26,7 @@ class ResponseListener implements EventSubscriberInterface
         }
 
         $response->setContent(preg_replace_callback(self::REGEX_URL, function ($matches) {
-            return sprintf('%s="%s"', $matches['attr'], App::url($matches['url']));
+            return sprintf(' %s="%s"', $matches['attr'], App::url($matches['url']));
         }, $content));
     }
 

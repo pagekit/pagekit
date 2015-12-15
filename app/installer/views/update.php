@@ -2,7 +2,7 @@
 
 <div id="update" v-cloak>
 
-    <p class="uk-alert uk-alert-warning" v-repeat="errors">{{ $value }}</p>
+    <p class="uk-alert uk-alert-warning" v-for="error in errors">{{ error }}</p>
 
     <div v-show="update && view == 'index'">
 
@@ -17,10 +17,10 @@
         </div>
 
         <p>
-            <a class="uk-button uk-button-primary" v-on="click: install()" v-show="hasUpdate">
+            <a class="uk-button uk-button-primary" @click.prevent="install" v-show="hasUpdate">
                 <span>{{ 'Update' | trans }}</span>
             </a>
-            <a class="uk-button uk-button-success" v-attr="href: update.url">{{ 'Download %version%' | trans update }}</a>
+            <a class="uk-button uk-button-success" :href="update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
 
     </div>
@@ -29,17 +29,17 @@
 
         <p>{{ message | trans }}</p>
 
-        <div class="uk-progress uk-progress-striped" v-class="
-            uk-progress-danger:  errors.length,
-            uk-progress-success: progress == 100,
-            uk-active:           progress != 100 && !errors.length
-        ">
-            <div class="uk-progress-bar" v-style="width: progress + '%'">{{ progress }}%</div>
+        <div class="uk-progress uk-progress-striped" :class="{
+            'uk-progress-danger':  errors.length,
+            'uk-progress-success': progress == 100,
+            'uk-active':           progress != 100 && !errors.length
+        }">
+            <div class="uk-progress-bar" :style="{width: progress + '%'}">{{ progress }}%</div>
         </div>
 
         <pre v-html="output" v-show="output"></pre>
 
-        <a class="uk-button uk-button-{{ status }}" v-attr="href: $url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
+        <a class="uk-button uk-button-{{ status }}" :href="$url.route('admin')" v-show="finished">{{ 'Ok' | trans }}</a>
 
     </div>
 

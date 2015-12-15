@@ -183,7 +183,7 @@ class ExtensionTranslateCommand extends Command
             $files->in($this->container->path().'/app/installer');
         }
 
-        return $files->name('*.{php,vue,js}');
+        return $files->name('*.{php,vue,js,html}');
     }
 
     /**

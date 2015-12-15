@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.0
+
+### Added
+- Added options to video picker
+
+### Changed
+- Switched to Vuejs 1.0
+- Optimized site tree
+- Optimized user settings
+
+### Fixed
+- On widget copy, theme settings are copied too
+- Fixed password edit on user view
+
 ## 0.9.5 (October 30, 2015)
 
 ### Added

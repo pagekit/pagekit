@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <textarea autocomplete="off" v-style="height: height + 'px'" v-class="uk-invisible: !show" v-el="editor" v-model="value"></textarea>
+        <textarea autocomplete="off" :style="{height: height + 'px'}" :class="{'uk-invisible': !show}" v-el:editor v-model="value"></textarea>
     </div>
 
 </template>
@@ -12,43 +12,51 @@
 
         props: ['type', 'value', 'options'],
 
-        compiled: function() {
+        data: function () {
+            return {
+                editor: {},
+                height: 500
+            }
+        },
 
-            this.$set('height', this.options && this.options.height ? this.options.height : 500);
+        compiled: function () {
+
+            if (this.options && this.options.height) {
+                this.height = this.options.height
+            }
 
             if (this.$el.hasAttributes()) {
 
                 var attrs = this.$el.attributes;
 
                 for (var i = attrs.length - 1; i >= 0; i--) {
-                    this.$$.editor.setAttribute(attrs[i].name, attrs[i].value);
+                    this.$els.editor.setAttribute(attrs[i].name, attrs[i].value);
                     this.$el.removeAttribute(attrs[i].name);
                 }
 
             }
 
-            var components = this.$options.components, type = 'editor-'+this.type, self = this;
+            var components = this.$options.components, type = 'editor-' + this.type, self = this;
 
-            this
-                .$addChild({ el: this.$$.editor, inherit: true }, components[type] || components['editor-'+window.$pagekit.editor] || components['editor-textarea'])
-                .$on('ready', function() {
+            new (components[type] || components['editor-' + window.$pagekit.editor] || components['editor-textarea'])({
+                parent: this,
+                el: this.$els.editor
+            }).$on('ready', function () {
 
-                    _.forIn(self.$options.components, function (component) {
+                _.forIn(self.$options.components, function (Component) {
+                    if (Component.options && Component.options.plugin) {
+                        new Component({parent: self});
+                    }
+                }, this);
 
-                        if (component.options && component.options.plugin) {
-                            this.$addChild({ inherit: true }, component);
-                        }
-
-                    }, this);
-
-                });
+            });
         },
 
         components: {
 
             'editor-textarea': {
 
-                ready: function() {
+                ready: function () {
                     this.$emit('ready');
                     this.$parent.$set('show', true);
                 }

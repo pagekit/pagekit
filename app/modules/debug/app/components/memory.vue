@@ -1,24 +1,23 @@
 <template>
 
-    <a title="Memory"><div class="pf-icon pf-icon-memory"></div> {{ peak_usage_str }}</a>
+    <a title="Memory"><span class="pf-icon pf-icon-memory"></span> {{ peak_usage_str }}</a>
 
 </template>
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 40
-    },
+        section: {
+            priority: 40
+        },
 
-    props: ['data'],
+        props: ['data'],
 
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    }
+        data: function () {
+            return this.data;
+        }
 
-  };
+    };
 
 </script>

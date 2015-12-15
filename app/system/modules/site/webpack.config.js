@@ -10,7 +10,6 @@ module.exports = [
         },
         module: {
             loaders: [
-                { test: /\.html$/, loader: "html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
         }
@@ -21,6 +20,7 @@ module.exports = [
             "edit": "./app/views/edit",
             "index": "./app/views/index",
             "input-link": "./app/components/input-link.vue",
+            "input-tree": "./app/components/input-tree.vue",
             "link-page": "./app/components/link-page.vue",
             "node-page": "./app/components/node-page.vue",
             "settings": "./app/views/settings",
@@ -38,7 +38,7 @@ module.exports = [
         },
         module: {
             loaders: [
-                { test: /\.html$/, loader: "html" },
+                { test: /\.html$/, loader: "vue-html" },
                 { test: /\.vue$/, loader: "vue" }
             ]
         }

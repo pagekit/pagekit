@@ -4,9 +4,10 @@
     "lodash": "~3.10.1",
     "lscache": "~1.0.5",
     "uikit": "#master",
-    "vue": "~0.12.15",
-    "vue-form": "pagekit/vue-form#0.1.0",
-    "vue-resource": "~0.1.16"
+    "vue": "~1.0.11",
+    "vue-form": "pagekit/vue-form#master",
+    "vue-intl": "~0.1.1",
+    "vue-resource": "#develop"
   },
   "devDependencies": {
     "js-md5": "~1.1.0"

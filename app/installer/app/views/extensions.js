@@ -1,7 +1,3 @@
-window.Extensions = _.merge(require('../components/package-manager.js'), {});
+window.Extensions = _.merge(require('../components/package-manager.js'), {el: '#extensions'});
 
-jQuery(function () {
-
-    (new Vue(window.Extensions)).$mount('#extensions');
-
-});
+Vue.ready(window.Extensions);

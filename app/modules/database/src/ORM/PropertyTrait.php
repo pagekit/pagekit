@@ -66,6 +66,15 @@ trait PropertyTrait
     }
 
     /**
+     * Clones the object properties.
+     */
+    public function __clone() {
+        foreach (static::$_properties as $name => $value) {
+            $this->$name = $this->__get($name);
+        }
+    }
+
+    /**
      * Checks for an object property.
      *
      * @param  string $name

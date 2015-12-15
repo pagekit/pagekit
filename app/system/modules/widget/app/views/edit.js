@@ -1,7 +1,11 @@
 module.exports = {
 
+    el: '#widget-edit',
+
+    mixins: [window.Widgets],
+
     data: function () {
-        return _.merge({}, window.$data);
+        return _.merge({form: {}, sections: []}, window.$data);
     },
 
     created: function () {
@@ -35,7 +39,7 @@ module.exports = {
 
     ready: function () {
 
-        UIkit.tab(this.$$.tab, {connect: this.$$.content});
+        UIkit.tab(this.$els.tab, {connect: this.$els.content});
         // this.$set('widget.data', _.defaults({}, this.widget.data, this.type.defaults));
 
         // set position from get param
@@ -43,23 +47,12 @@ module.exports = {
             var match = new RegExp('[?&]position=([^&]*)').exec(location.search);
             this.widget.position = (match && decodeURIComponent(match[1].replace(/\+/g, ' '))) || '';
         }
-    },
-
-    computed: {
-
-        positionOptions: function () {
-            return _.map(this.config.positions, function (position) {
-                return {text: this.$trans(position.label), value: position.name};
-            }, this);
-        }
 
     },
 
     methods: {
 
-        save: function (e) {
-            e.preventDefault();
-
+        save: function () {
             this.$broadcast('save', {widget: this.widget});
             this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
                 this.$dispatch('saved');
@@ -76,20 +69,12 @@ module.exports = {
             });
         },
 
-        cancel: function (e) {
-            e.preventDefault();
-
+        cancel: function () {
             this.$dispatch('cancel');
         }
 
-    },
-
-    mixins: [window.Widgets]
+    }
 
 };
 
-jQuery(function () {
-
-    (new Vue(module.exports)).$mount('#widget-edit');
-
-});
+Vue.ready(module.exports);

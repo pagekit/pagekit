@@ -1,24 +1,23 @@
 <template>
 
-    <a title="Events"><div class="pf-icon pf-icon-events"></div> Events</a>
+    <a title="Events"><span class="pf-icon pf-icon-events"></span> Events</a>
 
 </template>
 
 <script>
 
-  module.exports = {
+    module.exports = {
 
-    section: {
-        priority: 10
-    },
+        section: {
+            priority: 10
+        },
 
-    props: ['data'],
+        props: ['data'],
 
-    created: function () {
-        this.$data = this.data;
-        this.$parent.add(this);
-    }
+        data: function () {
+            return this.data;
+        }
 
-  };
+    };
 
 </script>

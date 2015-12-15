@@ -1,5 +1,5 @@
-var Install = require('./install.vue');
-var Uninstall = require('./uninstall.vue');
+var Install = Vue.extend(require('./install.vue'));
+var Uninstall = Vue.extend(require('./uninstall.vue'));
 
 module.exports = {
 
@@ -30,7 +30,7 @@ module.exports = {
             return this.$http.post('admin/system/package/enable', {name: pkg.name})
                 .success(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
-                    pkg.$set('enabled', true);
+                    Vue.set(pkg, 'enabled', true);
                     document.location.reload();
                 }).error(this.error);
         },
@@ -38,19 +38,20 @@ module.exports = {
         disable: function (pkg) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name})
                 .success(function () {
-                    pkg.$set('enabled', false);
+                    this.$notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
+                    Vue.set(pkg, 'enabled', false);
                     document.location.reload();
                 }).error(this.error);
         },
 
         install: function (pkg, packages) {
-            var install = this.$addChild(Install);
+            var install = new Install({parent: this});
 
             return install.install(pkg, packages);
         },
 
         uninstall: function (pkg, packages) {
-            var uninstall = this.$addChild(Uninstall);
+            var uninstall = new Uninstall({parent: this});
 
             return uninstall.uninstall(pkg, packages);
         },
@@ -58,6 +59,12 @@ module.exports = {
         error: function (message) {
             this.$notify(message, 'danger');
         }
+
+    },
+
+    components: {
+
+        'package-details': require('../components/package-details.vue')
 
     }
 

@@ -1,15 +1,14 @@
 module.exports = function (Vue) {
 
     var _ = Vue.util;
-    var Promise = require('promise');
     var cache = {};
 
     /**
      * Asset provides a promise based assets manager.
      */
-    function Asset(assets, success, error) {
+    function Asset(assets) {
 
-        var self = this, promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
+        var promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
 
         Object.keys(assets).forEach(function (type) {
 
@@ -34,46 +33,7 @@ module.exports = function (Vue) {
 
         });
 
-        promise = Promise.all(promises);
-
-        promise.success = function (fn) {
-
-            promise.then(function (response) {
-                fn.call(self, response);
-            });
-
-            return promise;
-        };
-
-        promise.error = function (fn) {
-
-            promise.then(undefined, function (response) {
-                fn.call(self, response);
-            });
-
-            return promise;
-        };
-
-        promise.always = function (fn) {
-
-            var cb = function (response) {
-                fn.call(self, response);
-            };
-
-            promise.then(cb, cb);
-
-            return promise;
-        };
-
-        if (success) {
-            promise.success(success);
-        }
-
-        if (error) {
-            promise.error(error);
-        }
-
-        return promise;
+        return Vue.promise.all(promises).bind(this);
     }
 
     _.extend(Asset, {
@@ -123,7 +83,7 @@ module.exports = function (Vue) {
 
             return new Promise(function (resolve, reject) {
 
-                var img = document.createElement('img');
+                var img = new Image();
 
                 img.onload = function () {
                     resolve(url);

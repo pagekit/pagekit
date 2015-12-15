@@ -10,7 +10,7 @@ module.exports = {
 
     created: function () {
 
-        var vm = this, editor = this.editor;
+        var vm = this, editor = this.$parent.editor;
 
         if (!editor || !editor.htmleditor) {
             return;
@@ -35,7 +35,7 @@ module.exports = {
                     vm.$children[0].$destroy();
                 }
 
-                Vue.nextTick(function() {
+                Vue.nextTick(function () {
                     vm.$compile(editor.preview[0]);
                 });
 
@@ -47,7 +47,7 @@ module.exports = {
 
         openModal: function (link) {
 
-            var editor = this.editor, cursor = editor.editor.getCursor();
+            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!link) {
                 link = {
@@ -57,12 +57,12 @@ module.exports = {
                 };
             }
 
-            this.$addChild({
-                    data: {
-                        link: link
-                    }
-                }, Picker)
-                .$mount()
+            new Picker({
+                parent: this,
+                data: {
+                    link: link
+                }
+            }).$mount()
                 .$appendTo('body')
                 .$on('select', function (link) {
 
@@ -81,9 +81,9 @@ module.exports = {
 
                 var anchor = $(data.matches[0]);
 
-                data.link      = anchor.attr('href');
-                data.txt       = anchor.html();
-                data.class     = anchor.attr('class') || '';
+                data.link = anchor.attr('href');
+                data.txt = anchor.html();
+                data.class = anchor.attr('class') || '';
 
                 data.outerHTML = anchor.attr('href', '{{ link.link }}').text('{{ link.txt }}')[0].outerHTML;
 
@@ -91,13 +91,13 @@ module.exports = {
 
                 if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
 
-                data.link    = data.matches[2];
-                data.txt     = data.matches[1];
-                data.class   = '';
+                data.link = data.matches[2];
+                data.txt = data.matches[1];
+                data.class = '';
 
             }
 
-            return '<link-preview index="'+index+'"></link-preview>';
+            return '<link-preview index="' + index + '"></link-preview>';
         }
 
     },

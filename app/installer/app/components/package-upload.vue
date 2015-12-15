@@ -2,18 +2,18 @@
 
     <a class="uk-button uk-button-primary uk-form-file">
         <span v-show="!progress">{{ 'Upload' | trans }}</span>
-        <span v-show="progress"><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
-        <input type="file" name="file" v-el="input">
+        <span v-else><i class="uk-icon-spinner uk-icon-spin"></i> {{ progress }}</span>
+        <input type="file" name="file" v-el:input>
     </a>
 
-    <div class="uk-modal" v-el="modal">
+    <div class="uk-modal" v-el:modal>
         <div class="uk-modal-dialog">
 
-            <package-details api="{{ api }}" package="{{ package }}"></package-details>
+            <package-details :api="api" :package="package"></package-details>
 
             <div class="uk-modal-footer uk-text-right">
                 <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-                <button class="uk-button uk-button-link" v-on="click: doInstall">{{ 'Install' | trans }}</button>
+                <button class="uk-button uk-button-link" @click.prevent="doInstall">{{ 'Install' | trans }}</button>
             </div>
 
         </div>
@@ -25,11 +25,14 @@
 
     module.exports = {
 
-        props: ['api', 'type', 'packages'],
+        props: {
+            api: {type: String, default: ''},
+            packages: Array,
+            type: String
+        },
 
         data: function () {
             return {
-                api: '',
                 package: {},
                 upload: null,
                 progress: ''
@@ -51,9 +54,9 @@
                     allcomplete: this.onComplete
                 };
 
-            UIkit.uploadSelect(this.$$.input, settings);
+            UIkit.uploadSelect(this.$els.input, settings);
 
-            this.modal = UIkit.modal(this.$$.modal);
+            this.modal = UIkit.modal(this.$els.modal);
         },
 
         methods: {
@@ -87,8 +90,7 @@
                 this.modal.show();
             },
 
-            doInstall: function (e) {
-                e.preventDefault();
+            doInstall: function () {
 
                 this.modal.hide();
 

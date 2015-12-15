@@ -1,5 +1,7 @@
 module.exports = {
 
+    el: '#users',
+
     data: function () {
         return _.merge({
             users: false,
@@ -12,7 +14,7 @@ module.exports = {
     created: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({search: '', status: '', role: '', order: 'name asc'}, this.config.filter);
+        this.config.filter = _.extend({order: 'name asc'}, this.config.filter);
 
     },
 
@@ -33,7 +35,7 @@ module.exports = {
 
         statuses: function () {
 
-            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.$data.statuses, function (status, id) {
+            var options = [{text: this.$trans('New'), value: 'new'}].concat(_.map(this.config.statuses, function (status, id) {
                 return {text: status, value: id};
             }));
 
@@ -42,7 +44,7 @@ module.exports = {
 
         roles: function () {
 
-            var options = this.$data.roles.map(function (role) {
+            var options = this.config.roles.map(function (role) {
                 return {text: role.name, value: role.id};
             });
 
@@ -61,6 +63,9 @@ module.exports = {
             this.resource.save({id: user.id}, {user: user}, function (data) {
                 this.load();
                 this.$notify('User saved.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -75,6 +80,9 @@ module.exports = {
             this.resource.save({id: 'bulk'}, {users: users}, function (data) {
                 this.load();
                 this.$notify('Users saved.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -82,6 +90,9 @@ module.exports = {
             this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
                 this.load();
                 this.$notify('Users deleted.');
+            }).error(function (msg) {
+                this.load();
+                this.$notify(msg, 'danger');
             });
         },
 
@@ -96,7 +107,7 @@ module.exports = {
 
         showRoles: function (user) {
             return _.reduce(user.roles, function (roles, id) {
-                var role = _.find(this.$data.roles, 'id', id);
+                var role = _.find(this.config.roles, 'id', id);
                 if (id !== 2 && role) {
                     roles.push(role.name);
                 }
@@ -114,6 +125,8 @@ module.exports = {
                 this.$set('count', data.count);
                 this.$set('config.page', page);
                 this.$set('selected', []);
+            }).error(function () {
+                this.$notify('Loading failed.', 'danger');
             });
         },
 
@@ -127,6 +140,4 @@ module.exports = {
 
 };
 
-$(function () {
-    new Vue(module.exports).$mount('#users');
-});
+Vue.ready(module.exports);

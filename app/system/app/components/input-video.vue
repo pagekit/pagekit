@@ -1,34 +1,34 @@
 <template>
 
-    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" v-on="click: pick()">
-        <img width="60" height="60" alt="{{ 'Placeholder Image' | trans }}" v-attr="src: $url('app/system/assets/images/placeholder-video.svg')">
+    <a class="uk-placeholder uk-text-center uk-display-block uk-margin-remove" v-if="!source" @click.prevent="pick">
+        <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-video.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Select Video' | trans }}</p>
     </a>
 
-    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-if="source">
+    <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
-        <img v-attr="src: image" v-if="image">
-        <video class="uk-width-1-1" v-attr="src: video" v-if="video"></video>
+        <img :src="image" v-if="image">
+        <video class="uk-width-1-1" :src="video" v-if="video"></video>
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
-        <a class="uk-position-cover" v-on="click: pick()"></a>
+        <a class="uk-position-cover" @click.prevent="pick"></a>
 
         <div class="uk-panel-badge pk-panel-badge uk-hidden">
             <ul class="uk-subnav pk-subnav-icon">
-                <li><a class="pk-icon-delete pk-icon-hover" title="{{ 'Delete' | trans }}" data-uk-tooltip="{delay: 500}" v-on="click: remove()"></a></li>
+                <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="remove"></a></li>
             </ul>
         </div>
 
     </div>
 
-    <v-modal v-ref="modal" large>
+    <v-modal v-ref:modal large>
 
-        <panel-finder root="{{ storage }}" v-ref="finder" modal="true"></panel-finder>
+        <panel-finder :root="storage" :modal="true" v-ref:finder></panel-finder>
 
         <div class="uk-modal-footer uk-text-right">
             <button class="uk-button uk-button-link uk-modal-close" type="button">{{ 'Cancel' | trans }}</button>
-            <button class="uk-button uk-button-primary" type="button" v-attr="disabled: !selectButton" v-on="click: select()">{{ 'Select' | trans }}</button>
+            <button class="uk-button uk-button-primary" type="button" :disabled="!selectButton" @click.prevent="select">{{ 'Select' | trans }}</button>
         </div>
 
     </v-modal>
@@ -48,8 +48,8 @@
         computed: {
 
             selectButton: function () {
-                var selected = this.$.finder.getSelected();
-                return selected.length === 1 && this.$.finder.isVideo(selected[0])
+                var selected = this.$refs.finder.getSelected();
+                return selected.length === 1 && this.$refs.finder.isVideo(selected[0])
             }
 
         },
@@ -64,12 +64,12 @@
         methods: {
 
             pick: function () {
-                this.$.modal.open();
+                this.$refs.modal.open();
             },
 
             select: function () {
-                this.source = this.$.finder.getSelected()[0];
-                this.$.modal.close();
+                this.source = this.$refs.finder.getSelected()[0];
+                this.$refs.modal.close();
             },
 
             remove: function () {
@@ -123,7 +123,7 @@
                 'app/assets/uikit/js/components/upload.min.js',
                 'app/system/modules/finder/app/bundle/panel-finder.js'
             ]
-        }, function () {
+        }).then(function () {
             resolve(module.exports);
         })
     });

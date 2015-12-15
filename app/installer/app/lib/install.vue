@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref="output" options="{{ options }}">
+        <v-modal v-ref:output :options="options">
 
             <div class="uk-modal-header uk-flex uk-flex-middle">
                 <h2>{{ 'Installing %title% %version%' | trans {title:pkg.title,version:pkg.version} }}</h2>
@@ -15,8 +15,8 @@
             <div class="uk-alert uk-alert-danger" v-show="status == 'error'">{{ 'Error' | trans}}</div>
 
             <div class="uk-modal-footer uk-text-right" v-show="status != 'loading'">
-                <a class="uk-button uk-button-link" v-on="click: close">{{ 'Close' | trans }}</a>
-                <a class="uk-button uk-button-primary" v-on="click: enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
+                <a class="uk-button uk-button-link" @click.prevent="close">{{ 'Close' | trans }}</a>
+                <a class="uk-button uk-button-primary" @click.prevent="enable" v-show="status == 'success'">{{ 'Enable' | trans }}</a>
             </div>
 
         </v-modal>
@@ -28,18 +28,15 @@
 
     module.exports = {
 
+        mixins: [require('./output')],
+
         methods: {
 
             install: function (pkg, packages, onClose) {
                 this.$set('pkg', pkg);
                 this.cb = onClose;
 
-                var vm = this;
-                return this.$http.post('admin/system/package/install', {package: pkg}, null, {
-                    beforeSend: function (request) {
-                        vm.init(request);
-                    }
-                }).success(function () {
+                return this.$http.post('admin/system/package/install', {package: pkg},null, {xhr: this.init()}).success(function () {
                     if (this.status === 'success' && packages) {
                         var index = _.findIndex(packages, 'name', pkg.name);
 
@@ -59,11 +56,8 @@
                 this.$parent.enable(this.pkg);
                 this.close();
             }
-        },
+        }
 
-        mixins: [
-            require('./output')
-        ]
     };
 
 </script>

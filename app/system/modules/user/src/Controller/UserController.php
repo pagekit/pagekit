@@ -26,9 +26,9 @@ class UserController
                 'name' => 'system/user/admin/user-index.php'
             ],
             '$data' => [
-                'statuses' => User::getStatuses(),
-                'roles' => array_values($roles),
                 'config' => [
+                    'statuses' => User::getStatuses(),
+                    'roles' => array_values($roles),
                     'emailVerification' => App::module('system/user')->config('require_verification'),
                     'filter' => $filter,
                     'page' => $page
@@ -58,9 +58,9 @@ class UserController
             ],
             '$data' => [
                 'user' => $user,
-                'statuses' => User::getStatuses(),
-                'roles' => array_values($this->getRoles($user)),
                 'config' => [
+                    'statuses' => User::getStatuses(),
+                    'roles' => array_values($this->getRoles($user)),
                     'emailVerification' => App::module('system/user')->config('require_verification'),
                     'currentUser' => App::user()->id
                 ]

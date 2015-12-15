@@ -4,13 +4,13 @@
         <div class="uk-width-large-1-2">
             <div class="uk-form-icon uk-display-block">
                 <i class="pk-icon-calendar pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-el="datepicker" v-model="date" v-validate="required: isRequired" lazy>
+                <input class="uk-width-1-1" type="text" v-el:datepicker v-model="date" v-validate:required="isRequired" lazy>
             </div>
         </div>
         <div class="uk-width-large-1-2">
-            <div class="uk-form-icon uk-display-block" v-el="timepicker">
+            <div class="uk-form-icon uk-display-block" v-el:timepicker>
                 <i class="pk-icon-time pk-icon-muted"></i>
-                <input class="uk-width-1-1" type="text" v-model="time" v-validate="required: isRequired" lazy>
+                <input class="uk-width-1-1" type="text" v-model="time" v-validate:required="isRequired" lazy>
             </div>
         </div>
     </div>
@@ -24,8 +24,8 @@
         props: ['datetime', 'required'],
 
         ready: function () {
-            UIkit.datepicker(this.$$.datepicker, {format: this.dateFormat, pos: 'bottom'});
-            UIkit.timepicker(this.$$.timepicker, {format: this.clockFormat});
+            UIkit.datepicker(this.$els.datepicker, {format: this.dateFormat, pos: 'bottom'});
+            UIkit.timepicker(this.$els.timepicker, {format: this.clockFormat});
         },
 
         computed: {
@@ -92,7 +92,7 @@
                 'app/assets/uikit/js/components/datepicker.min.js',
                 'app/assets/uikit/js/components/timepicker.min.js'
             ]
-        }, function () {
+        }).then(function () {
             resolve(module.exports);
         })
     });
