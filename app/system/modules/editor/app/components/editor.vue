@@ -36,12 +36,10 @@
 
             }
 
-            var components = this.$options.components, type = 'editor-' + this.type, self = this;
+            var components = this.$options.components, type = 'editor-' + this.type, self = this,
+                Editor = components[type] || components['editor-' + window.$pagekit.editor] || components['editor-textarea'];
 
-            new (components[type] || components['editor-' + window.$pagekit.editor] || components['editor-textarea'])({
-                parent: this,
-                el: this.$els.editor
-            }).$on('ready', function () {
+            new Editor({parent: this}).$on('ready', function () {
 
                 _.forIn(self.$options.components, function (Component) {
                     if (Component.options && Component.options.plugin) {
@@ -56,7 +54,7 @@
 
             'editor-textarea': {
 
-                ready: function () {
+                created: function () {
                     this.$emit('ready');
                     this.$parent.$set('show', true);
                 }

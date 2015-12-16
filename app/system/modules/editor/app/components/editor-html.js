@@ -1,6 +1,6 @@
 module.exports = {
 
-    ready: function () {
+    created: function () {
 
         this.$parent.$set('height', this.$parent.height + 47);
 
@@ -18,7 +18,7 @@ module.exports = {
 
         }).then(function () {
 
-            var editor = this.$parent.editor = UIkit.htmleditor(this.$el, _.extend({
+            var editor = this.$parent.editor = UIkit.htmleditor(this.$parent.$els.editor, _.extend({
                 marked: window.marked,
                 CodeMirror: window.CodeMirror
             }, this.$parent.options));

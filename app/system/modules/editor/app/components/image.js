@@ -17,7 +17,7 @@ module.exports = {
         }
 
         this.images = [];
-        console.log(editor.htmleditor)
+
         editor
             .off('action.image')
             .on('action.image', function (e, editor) {
