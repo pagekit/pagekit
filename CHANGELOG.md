@@ -5,6 +5,9 @@ WIP
 ### Added
 - 'storage:' file path
 
+### Fixed
+- Editor preview handles Vuejs markup
+
 ## 0.10.0 (Dezember 15, 2015)
 
 ### Added
