@@ -46,8 +46,8 @@ class SystemModule extends Module
 
                 $module['type'] = 'theme';
 
-                $app['locator']->add("theme:", $module['path']);
-                $app['locator']->add("views:", "{$module['path']}/views");
+                $app['locator']->add('theme:', $module['path']);
+                $app['locator']->add('views:', "{$module['path']}/views");
             }
 
             return $module;
