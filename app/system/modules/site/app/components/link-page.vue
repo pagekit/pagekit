@@ -30,10 +30,10 @@
 
         created: function () {
             //TODO don't retrieve entire page objects
-            this.$resource('api/site/page').get(function (pages) {
-                this.pages = pages;
-                if (pages.length) {
-                    this.page = pages[0].id;
+            this.$http.get('api/site/page').then(function (res) {
+                this.pages = res.data;
+                if (this.pages.length) {
+                    this.page = this.pages[0].id;
                 }
             });
         },

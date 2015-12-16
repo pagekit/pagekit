@@ -107,8 +107,8 @@
 
             this.$options.partials = this.$parent.$options.partials;
 
-            this.$resource('api/site/menu').query(function (data) {
-                this.$set('menus', data.filter(function (menu) {
+            this.$http.get('api/site/menu').then(function (res) {
+                this.$set('menus', res.data.filter(function (menu) {
                     return menu.id !== 'trash';
                 }));
             });

@@ -61,11 +61,11 @@
 
             load: function () {
                 if (this.link) {
-                    this.$http.get('api/site/link', {link: this.link}, function (data) {
-                        this.url = data.url ? data.url : false;
-                    }).error(function () {
-                        this.url = false;
-                    })
+                    this.$http.get('api/site/link', {link: this.link}).then(function (res) {
+                                this.url = res.data.url || false;
+                            }, function () {
+                                this.url = false;
+                            });
                 } else {
                     this.url = false;
                 }

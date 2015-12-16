@@ -7,11 +7,12 @@ module.exports = {
     methods: {
 
         save: function () {
-            this.$http.post('user/profile/save', {user: this.user}, function () {
-                this.$notify('Profile Updated', 'success');
-            }).error(function (error) {
-                this.$notify(error, 'danger');
-            });
+            this.$http.post('user/profile/save', {user: this.user}).then(function () {
+                        this.$notify('Profile Updated', 'success');
+                    }, function (res) {
+                        this.$notify(res.data, 'danger');
+                    }
+                );
         }
 
     }

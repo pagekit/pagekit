@@ -105,7 +105,8 @@
 
                 this.$set('messages', {});
 
-                this.queryPackage(this.package, function (data) {
+                this.queryPackage(this.package, function (res) {
+                    var data = res.data;
 
                     var version = this.package.version, pkg = data.versions[version];
 

@@ -37,8 +37,8 @@
 
         created: function () {
 
-            this.$http.get(config.url, function (data) {
-
+            this.$http.get(config.url).then(function (res) {
+                var data = res.data;
                 this.$set('data', data);
 
                 _.forIn(this.$options.components, function (component, name) {

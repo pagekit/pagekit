@@ -37,8 +37,7 @@
                 .then(function(responses) {
                     vm.$set('nodes', responses[0].data);
                     vm.$set('menus', responses[1].data);
-                })
-                .catch(function () {
+                }, function () {
                     vm.$notify('Could not load config.', 'danger');
                 });
         },

@@ -60,12 +60,12 @@ module.exports = {
         },
 
         save: function (user) {
-            this.resource.save({id: user.id}, {user: user}, function (data) {
+            this.resource.save({id: user.id}, {user: user}).then(function () {
                 this.load();
                 this.$notify('User saved.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 
@@ -77,22 +77,22 @@ module.exports = {
                 user.status = status;
             });
 
-            this.resource.save({id: 'bulk'}, {users: users}, function (data) {
+            this.resource.save({id: 'bulk'}, {users: users}).then(function () {
                 this.load();
                 this.$notify('Users saved.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 
         remove: function () {
-            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                 this.load();
                 this.$notify('Users deleted.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 

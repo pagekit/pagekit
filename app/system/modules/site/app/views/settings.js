@@ -40,11 +40,11 @@ window.Site = {
         save: function () {
             this.$broadcast('save', this.config);
 
-            this.$http.post('admin/system/settings/config', {name: 'system/site', config: this.config}, function () {
-                this.$notify('Settings saved.');
-            }).error(function (data) {
-                this.$notify(data, 'danger');
-            });
+            this.$http.post('admin/system/settings/config', {name: 'system/site', config: this.config}).then(function () {
+                        this.$notify('Settings saved.');
+                    }, function (res) {
+                        this.$notify(res.data, 'danger');
+                    });
         }
 
     },

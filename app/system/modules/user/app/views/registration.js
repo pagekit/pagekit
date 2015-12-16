@@ -10,11 +10,12 @@ module.exports = {
     methods: {
 
         submit: function () {
-            this.$http.post('user/registration/register', {user: this.user}, function (data) {
-                window.location.replace(data.redirect);
-            }).error(function (error) {
-                this.error = error;
-            });
+            this.$http.post('user/registration/register', {user: this.user}).then(function (res) {
+                        window.location.replace(res.data.redirect);
+                    }, function (error) {
+                        this.error = error.data;
+                    }
+                );
         }
 
     }

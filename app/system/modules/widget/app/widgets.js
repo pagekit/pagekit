@@ -14,8 +14,8 @@ window.Widgets = module.exports = {
 
         load: function () {
 
-            return this.resource.query(function (data) {
-                this.$set('widgets', data);
+            return this.resource.query().then(function (res) {
+                this.$set('widgets', res.data);
             });
 
         }

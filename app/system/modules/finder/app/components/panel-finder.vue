@@ -92,7 +92,7 @@
 
             this.resource = this.$resource('system/finder/:cmd');
 
-            this.load().success(function () {
+            this.load().then(function () {
                 this.$dispatch('ready.finder', this);
             });
 
@@ -251,30 +251,25 @@
 
             command: function (cmd, params) {
 
-                return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.getRoot()}, params), function (data) {
-
-                    this.load();
-                    this.$notify(data.message, data.error ? 'danger' : '');
-
-                }).error(function (data, status) {
-
-                    this.$notify(status == 500 ? 'Unknown error.' : data, 'danger');
-                });
+                return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.getRoot()}, params)).then(function (res) {
+                            this.load();
+                            this.$notify(res.data.message, res.data.error ? 'danger' : '');
+                        }, function (res) {
+                            this.$notify(res.status == 500 ? 'Unknown error.' : res.data, 'danger');
+                        }
+                    );
             },
 
             load: function () {
 
-                return this.resource.get({path: this.path, root: this.getRoot()}, function (data) {
-
-                    this.$set('items', data.items || []);
-                    this.$set('selected', []);
-                    this.$dispatch('path.finder', this.getFullPath(), this);
-
-                }).error(function () {
-
-                    this.$notify('Unable to access directory.', 'danger');
-
-                });
+                return this.resource.get({path: this.path, root: this.getRoot()}).then(function (res) {
+                            this.$set('items', res.data.items || []);
+                            this.$set('selected', []);
+                            this.$dispatch('path.finder', this.getFullPath(), this);
+                        }, function () {
+                            this.$notify('Unable to access directory.', 'danger');
+                        }
+                    );
             }
 
         },

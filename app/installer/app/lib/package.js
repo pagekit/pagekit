@@ -15,33 +15,31 @@ module.exports = {
 
             return this.$http.post(this.api + '/api/package/update', {
                 packages: JSON.stringify(pkgs)
-            }, success, options);
+            }, options).then(success, this.error);
         },
 
         queryPackage: function (pkg, success) {
             return this.$http.get(this.api + '/api/package/:name', {
                 name: _.isObject(pkg) ? pkg.name : pkg
-            }, success).error(function () {
-            });
+            }).then(success, this.error);
         },
 
 
         enable: function (pkg) {
-            return this.$http.post('admin/system/package/enable', {name: pkg.name})
-                .success(function () {
+            return this.$http.post('admin/system/package/enable', {name: pkg.name}).then(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
                     Vue.set(pkg, 'enabled', true);
                     document.location.reload();
-                }).error(this.error);
+                }, this.error);
         },
 
         disable: function (pkg) {
             return this.$http.post('admin/system/package/disable', {name: pkg.name})
-                .success(function () {
+                .then(function () {
                     this.$notify(this.$trans('"%title%" disabled.', {title: pkg.title}));
                     Vue.set(pkg, 'enabled', false);
                     document.location.reload();
-                }).error(this.error);
+                }, this.error);
         },
 
         install: function (pkg, packages) {
@@ -57,7 +55,7 @@ module.exports = {
         },
 
         error: function (message) {
-            this.$notify(message, 'danger');
+            this.$notify(message.data, 'danger');
         }
 
     },

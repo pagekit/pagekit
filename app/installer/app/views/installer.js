@@ -65,8 +65,9 @@ var Installer = {
                 }
             });
 
-            this.resource.post({action: 'check'}, {config: this.config, locale: this.locale}, function (data) {
+            this.resource.post({action: 'check'}, {config: this.config, locale: this.locale}).then(function (res) {
 
+                var data = res.data;
                 if (!Vue.util.isPlainObject(data)) {
                     data = {message: 'Whoops, something went wrong'};
                 }
@@ -93,7 +94,9 @@ var Installer = {
 
             this.$set('status', 'install');
 
-            this.resource.post({action: 'install'}, {config: this.config, option: this.option, user: this.user, locale: this.locale}, function (data) {
+            this.resource.post({action: 'install'}, {config: this.config, option: this.option, user: this.user, locale: this.locale}).then(function (res) {
+
+                var data = res.data;
 
                 setTimeout(function () {
 
