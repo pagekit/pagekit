@@ -10,6 +10,12 @@ return [
 
     ],
 
+    'main' => function ($app) {
+        $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
+        $app['path.storage']     = $app['path'].$this->config['storage'];
+        $app['locator']->add('storage:', $app['path.storage']);
+    },
+
     'routes' => [
 
         '/system/finder' => [
@@ -30,12 +36,6 @@ return [
     ],
 
     'events' => [
-
-        'boot' => function ($event, $app) {
-            $this->config['storage'] = '/'.trim(($this->config['storage'] ?: 'storage'), '/');
-            $app['path.storage']     = $app['path'].$this->config['storage'];
-            $app['locator']->add('storage:', $app['path.storage']);
-        },
 
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('panel-finder', 'system/finder:app/bundle/panel-finder.js', ['vue', 'uikit-upload']);
