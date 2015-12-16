@@ -141,6 +141,7 @@ return [
         },
 
         'view.meta' => function ($event, $meta) use ($app) {
+
             if ($meta->get('title')) {
                 $title[] = $meta->get('title');
             }

@@ -17,7 +17,7 @@ module.exports = {
         }
 
         this.images = [];
-
+        console.log(editor.htmleditor)
         editor
             .off('action.image')
             .on('action.image', function (e, editor) {
@@ -36,7 +36,9 @@ module.exports = {
                 }
 
                 Vue.nextTick(function () {
-                    vm.$compile(editor.preview[0]);
+                    editor.preview.find('image-preview').each(function () {
+                        vm.$compile(this);
+                    });
                 });
             });
 

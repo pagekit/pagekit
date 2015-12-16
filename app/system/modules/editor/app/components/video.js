@@ -41,7 +41,9 @@ module.exports = {
                 }
 
                 Vue.nextTick(function () {
-                    vm.$compile(editor.preview[0]);
+                    editor.preview.find('video-preview').each(function () {
+                        vm.$compile(this);
+                    });
                 });
 
             });

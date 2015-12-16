@@ -1,9 +1,17 @@
 # Changelog
 
+WIP
+
+### Added
+- 'storage:' file path
+
+### Fixed
+- Editor preview handles Vuejs markup
+
 ## 0.10.0 (Dezember 15, 2015)
 
 ### Added
-- Added options to video picker
+- Options in video picker
 
 ### Changed
 - Switched to Vuejs 1.0
@@ -12,7 +20,7 @@
 
 ### Fixed
 - On widget copy, theme settings are copied too
-- Fixed password edit on user view
+- Password edit on user view
 
 ## 0.9.5 (October 30, 2015)
 
