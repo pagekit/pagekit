@@ -252,7 +252,7 @@ class Router implements RouterInterface, UrlGeneratorInterface
         } catch (RouteNotFoundException $e) {
 
             if (filter_var($url, FILTER_VALIDATE_URL) === false && strpos($url, '/') !== 0) {
-                $url = $this->getRequest()->getBasePath()."/$url";
+                $url = "{$this->getRequest()->getBaseUrl()}/$url";
             }
         }
 

@@ -7,6 +7,7 @@ WIP
 
 ### Fixed
 - Editor preview handles Vuejs markup
+- Redirects on login and logout
 
 ## 0.10.0 (Dezember 15, 2015)
 

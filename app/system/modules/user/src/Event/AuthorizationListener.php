@@ -54,7 +54,7 @@ class AuthorizationListener implements EventSubscriberInterface
     {
         App::session()->migrate();
 
-        $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     /**
@@ -64,7 +64,7 @@ class AuthorizationListener implements EventSubscriberInterface
      */
     public function onLogout(LogoutEvent $event)
     {
-        $event->setResponse(App::response()->redirect(App::request()->get(Auth::REDIRECT_PARAM)));
+        $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     public function onSuccess()
