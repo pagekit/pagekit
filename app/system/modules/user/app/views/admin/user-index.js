@@ -119,13 +119,15 @@ module.exports = {
 
             page = page !== undefined ? page : this.config.page;
 
-            this.resource.query({filter: this.config.filter, page: page}, function (data) {
+            this.resource.query({filter: this.config.filter, page: page}).then( function (res) {
+                var data = res.data;
+
                 this.$set('users', data.users);
                 this.$set('pages', data.pages);
                 this.$set('count', data.count);
                 this.$set('config.page', page);
                 this.$set('selected', []);
-            }).error(function () {
+            }, function () {
                 this.$notify('Loading failed.', 'danger');
             });
         },
