@@ -71,11 +71,8 @@ return [
             return $view;
         };
 
-        $app['assets'] = function ($app) {
-            $secret = $app['system']->config['secret'];
-            $version = substr(sha1($app['version'] . $secret), 0, 6);
-
-            return new AssetFactory($version);
+        $app['assets'] = function () {
+            return new AssetFactory();
         };
 
         $app['styles'] = function ($app) {

@@ -18,10 +18,11 @@ class AssetFactory
     protected $version;
 
     /**
-     * AssetFactory constructor.
-     * @param string $version
+     * Set a version number for cache breaking.
+     *
+     * @param $version
      */
-    public function __construct($version = null)
+    public function setVersion($version)
     {
         $this->version = $version;
     }
@@ -50,7 +51,7 @@ class AssetFactory
             $options['type'] = 'file';
         }
 
-        if ($options['type'] === 'file' && !isset($options['version']) && !preg_match('#(https?:)?//#', $source)) {
+        if ($options['type'] === 'file' && !isset($options['version'])) {
             $options['version'] = $this->version;
         }
 
