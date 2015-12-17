@@ -2,33 +2,54 @@ var md5 = require('md5');
 
 module.exports = {
 
+    priority: 100,
+
+    params: ['title', 'alt', 'colored', 'height'],
+
     update: function (value) {
 
-        var el = this.el, cache = this.vm.$session, vm = this, size = (el.getAttribute('height') || 50),
-            url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 'd=mm', 's=' + (size * 2), 'd=404'].join('&'),
-            key = 'gravatar.' + url;
-
-        el.classList.add('uk-invisible');
+        var el = this.el, vm = this, cache = this.vm.$session, img = new Image(),
+            name = this.params.title || this.params.alt,
+            colored = this.params.colored,
+            size = this.params.height || 50,
+            url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size * 2)].join('&'),
+            key = 'gravatar.' + [url, colored, name, size].join('.');
 
         // load image url from cache if exists
         if (cache[key]) {
-            el.classList.remove('uk-invisible');
             el.setAttribute('src', cache[key]);
             return;
         }
 
-        Vue.asset({image: url}).then(function () {
-            el.setAttribute('src', url);
-            el.classList.remove('uk-invisible');
-        }, function () {
-            cache[key] = vm.letterAvatar(el.getAttribute('title') || el.getAttribute('alt'), size, el.getAttribute('colored'));
-            el.setAttribute('src', cache[key]);
-            el.classList.remove('uk-invisible');
-        });
+        cache[key] = vm.letterAvatar(name, size, colored);
+        el.setAttribute('src', cache[key]);
 
+        if (img.crossOrigin !== undefined) {
+
+            img.crossOrigin = 'anonymous';
+            url += '&d=blank';
+            img.onload = function () {
+                cache[key] = vm.letterAvatar(name, size, colored, img);
+                el.setAttribute('src', cache[key]);
+                el.classList.remove('uk-invisible');
+            };
+
+        } else {
+
+            // IE Fallback (no CORS support for img):
+            url += '&d=404';
+            img.onload = function () {
+                delete cache[key]; // remove dummy image from cache
+                el.setAttribute('src', url);
+                el.classList.remove('uk-invisible');
+            };
+
+        }
+
+        img.src = url;
     },
 
-    letterAvatar: function (name, size, colored) {
+    letterAvatar: function (name, size, colored, img) {
         name = name || '';
         size = size || 60;
 
@@ -59,11 +80,15 @@ module.exports = {
         context = canvas.getContext("2d");
 
         context.fillStyle = colored ? colours[colourIndex - 1] : '#cfd2d7';
-        context.fillRect (0, 0, canvas.width, canvas.height);
+        context.fillRect(0, 0, canvas.width, canvas.height);
         context.font = Math.round(canvas.width / 2) + "px Arial";
         context.textAlign = "center";
         context.fillStyle = "#FFF";
         context.fillText(initials, size / 2, size / 1.5);
+
+        if (img) {
+            context.drawImage(img, 0, 0, size, size);
+        }
 
         dataURI = canvas.toDataURL();
         canvas = null;
