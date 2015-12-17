@@ -83,18 +83,19 @@ function install (Vue) {
 
         }
 
-        var cb = function () {
-            document.removeEventListener( "DOMContentLoaded", cb);
-            window.removeEventListener( "load", cb);
+        var handle = function () {
+            document.removeEventListener( "DOMContentLoaded", handle);
+            window.removeEventListener( "load", handle);
             fn();
         };
 
         if (document.readyState === 'complete') {
             fn();
         } else {
-            document.addEventListener('DOMContentLoaded', cb);
-            window.addEventListener('load', cb);
+            document.addEventListener('DOMContentLoaded', handle);
+            window.addEventListener('load', handle);
         }
+
     };
 }
 
