@@ -3,9 +3,15 @@
 WIP
 
 ### Added
+- Version cache break for JS and CSS
 - 'storage:' file path
 
+### Changed
+- Updated Vue-Resource
+- Improved handling of Gravatar images
+
 ### Fixed
+- Admin panel for IE
 - System Messages
 - Editor preview handles Vuejs markup
 - Redirects on login and logout
