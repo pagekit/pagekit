@@ -40,7 +40,7 @@ module.exports = function (Vue) {
 
         css: function (url) {
 
-            return new Vue.resource.Promise(function (resolve, reject) {
+            return new Vue.promise(function (resolve, reject) {
 
                 var link = document.createElement('link');
 
@@ -62,7 +62,7 @@ module.exports = function (Vue) {
 
         js: function (url) {
 
-            return new Vue.resource.Promise(function (resolve, reject) {
+            return new Vue.promise(function (resolve, reject) {
 
                 var script = document.createElement('script');
 
@@ -81,7 +81,7 @@ module.exports = function (Vue) {
 
         image: function (url) {
 
-            return new Vue.resource.Promise(function (resolve, reject) {
+            return new Vue.promise(function (resolve, reject) {
 
                 var img = new Image();
 
