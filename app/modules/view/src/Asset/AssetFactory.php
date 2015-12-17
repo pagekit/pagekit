@@ -13,6 +13,20 @@ class AssetFactory
     ];
 
     /**
+     * @var string
+     */
+    protected $version;
+
+    /**
+     * AssetFactory constructor.
+     * @param string $version
+     */
+    public function __construct($version = null)
+    {
+        $this->version = $version;
+    }
+
+    /**
      * Create an asset instance.
      *
      * @param  string $name
@@ -34,6 +48,10 @@ class AssetFactory
 
         if (!isset($options['type'])) {
             $options['type'] = 'file';
+        }
+
+        if ($options['type'] === 'file' && !isset($options['version']) && !preg_match('#(https?:)?//#', $source)) {
+            $options['version'] = $this->version;
         }
 
         if (isset($this->types[$options['type']])) {

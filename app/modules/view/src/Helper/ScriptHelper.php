@@ -70,7 +70,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
 
         foreach ($this->scripts as $script) {
             if ($source = $script->getSource()) {
-                $output .= sprintf("        <script src=\"%s\"></script>\n", $source);
+                $output .= sprintf("        <script src=\"%s%s\"></script>\n", $source, $script->getOption('version') ? '?' . $script->getOption('version') : '');
             } elseif ($content = $script->getContent()) {
                 $output .= sprintf("        <script>%s</script>\n", $content);
             }

@@ -70,7 +70,7 @@ class StyleHelper implements HelperInterface, \IteratorAggregate
 
         foreach ($this->styles as $style) {
             if ($source = $style->getSource()) {
-                $output .= sprintf("        <link href=\"%s\" rel=\"stylesheet\">\n", $source);
+                $output .= sprintf("        <link href=\"%s%s\" rel=\"stylesheet\">\n", $source, $style->getOption('version') ? '?' . $style->getOption('version') : '');
             } elseif ($content = $style->getContent()) {
                 $output .= sprintf("        <style>%s</style>\n", $content);
             }
