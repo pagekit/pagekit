@@ -4,14 +4,14 @@ module.exports = {
 
     priority: 100,
 
-    params: ['title', 'alt', 'colored', 'height'],
+    params: ['colored'],
 
     update: function (value) {
 
         var el = this.el, vm = this, cache = this.vm.$session, img = new Image(),
-            name = this.params.title || this.params.alt,
+            name = this.el.getAttribute('title') || this.el.getAttribute('alt'),
             colored = this.params.colored,
-            size = this.params.height || 50,
+            size = this.el.getAttribute('height') || 50,
             url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size * 2)].join('&'),
             key = 'gravatar.' + [url, colored, name, size].join('.');
 

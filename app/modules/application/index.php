@@ -16,7 +16,7 @@ return [
         };
 
         $app['debug'] = function () {
-            return (bool)$this->config['debug'];
+            return (bool) $this->config['debug'];
         };
 
         $app['url'] = function ($app) {
@@ -57,7 +57,7 @@ return [
     'config' => [
 
         'version' => '',
-        'debug'   => false
+        'debug' => false
 
     ]
 
