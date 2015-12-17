@@ -84,8 +84,8 @@ function install (Vue) {
         }
 
         var handle = function () {
-            document.removeEventListener( "DOMContentLoaded", handle);
-            window.removeEventListener( "load", handle);
+            document.removeEventListener('DOMContentLoaded', handle);
+            window.removeEventListener('load', handle);
             fn();
         };
 
