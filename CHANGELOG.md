@@ -6,6 +6,7 @@ WIP
 - 'storage:' file path
 
 ### Fixed
+- System Messages
 - Editor preview handles Vuejs markup
 - Redirects on login and logout
 
