@@ -1,6 +1,6 @@
 # Changelog
 
-WIP
+## 0.10.1 (Dezember 17, 2015)
 
 ### Added
 - Version cache break for JS and CSS
