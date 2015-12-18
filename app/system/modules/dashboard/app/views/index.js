@@ -115,7 +115,8 @@ window.Dashboard = {
                 column = (this.children.length < sortables.eq(column)[0].children.length) ? idx : column;
             });
 
-            this.Widgets.save({widget: _.merge({type: type.id, column: column, idx: 100}, type.defaults)}, function (data) {
+            this.Widgets.save({widget: _.merge({type: type.id, column: column, idx: 100}, type.defaults)}).then(function (res) {
+                var data = res.data;
                 this.widgets.push(data);
                 this.editing[data.id] = true;
             });
@@ -131,7 +132,7 @@ window.Dashboard = {
 
         remove: function (widget) {
 
-            this.Widgets.delete({id: widget.id}, function () {
+            this.Widgets.delete({id: widget.id}).then(function () {
                 this.widgets.splice(_.findIndex(this.widgets, {id: widget.id}), 1);
             });
         },
@@ -163,8 +164,8 @@ window.Dashboard = {
             if (this.$cache.get('pagekit.update')) {
                 this.$set('update', this.$cache.get('pagekit.update'));
             } else {
-                this.$http.get(this.api + '/api/update', function (data) {
-
+                this.$http.get(this.api + '/api/update').then(function (res) {
+                    var data = res.data;
                     var update = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
                     if (update) {

@@ -161,21 +161,19 @@
                 this.$set('status', 'loading');
 
                 // TODO: The Google Feed API is deprecated.
-                this.$http.jsonp('//ajax.googleapis.com/ajax/services/feed/load', {v: '1.0', q: this.$get('widget.url'), num: this.$get('widget.count')}, function (data) {
+                this.$http.jsonp('//ajax.googleapis.com/ajax/services/feed/load', {v: '1.0', q: this.$get('widget.url'), num: this.$get('widget.count')}).then(function (res) {
+                            var data = res.data;
 
-                    if (data.responseStatus === 200) {
-                        this.$set('feed', data.responseData.feed);
-                        this.$set('status', 'done');
-                    } else {
-                        this.$set('status', 'error');
-                    }
-
-                }).error(function () {
-
-                    this.$set('status', 'error');
-
-                });
-
+                            if (data.responseStatus === 200) {
+                                this.$set('feed', data.responseData.feed);
+                                this.$set('status', 'done');
+                            } else {
+                                this.$set('status', 'error');
+                            }
+                        }, function () {
+                            this.$set('status', 'error');
+                        }
+                    );
             }
 
         }

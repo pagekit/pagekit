@@ -3,7 +3,7 @@
 use Pagekit\Session\Csrf\Event\CsrfListener;
 use Pagekit\Session\Csrf\Provider\SessionCsrfProvider;
 use Pagekit\Session\Handler\DatabaseSessionHandler;
-use Pagekit\Session\Message;
+use Pagekit\Session\MessageBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
@@ -21,7 +21,7 @@ return [
         };
 
         $app['message'] = function () {
-            return new Message;
+            return new MessageBag();
         };
 
         $app['session.storage'] = function ($app) {
@@ -87,6 +87,8 @@ return [
             }
 
             $request->setSession($app['session']);
+
+            $app['session']->start();
 
         }, 100]
 

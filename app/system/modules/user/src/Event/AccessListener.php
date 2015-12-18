@@ -114,7 +114,7 @@ class AccessListener implements EventSubscriberInterface
 
         // redirect to default URL for POST requests and don't explicitly redirect the default URL
         if ('POST' !== $request->getMethod() && $request->attributes->get('_route') != '@system') {
-            $params['redirect'] = App::url()->current(true);
+            $params['redirect'] = App::url()->current();
         }
 
         $event->setResponse(App::response()->redirect('@system/login', $params));

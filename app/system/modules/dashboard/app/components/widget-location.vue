@@ -101,14 +101,17 @@
 
                     source: function (release) {
 
-                        vm.$http.get(api + '/find', {q: this.input.val(), type: 'like', APPID: apiKey}, function (data) {
+                        vm.$http.get(api + '/find', {q: this.input.val(), type: 'like', APPID: apiKey}).then(
+                            function (res) {
 
-                            list = data.list || [];
-                            release(list);
+                                var data = res.data;
+                                list = data.list || [];
+                                release(list);
 
-                        }).error(function () {
-                            release([]);
-                        });
+                            },
+                            function () {
+                                release([]);
+                            });
 
                     },
 
@@ -203,18 +206,21 @@
 
                 } else {
 
-                    this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric', APPID: apiKey}, function (data) {
+                    this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric', APPID: apiKey}).then(
+                        function (res) {
+                            var data = res.data;
+                            if (data.cod == 200) {
+                                this.$cache.set(weatherKey, data, 60);
+                                this.init(data)
+                            } else {
+                                this.$set('status', 'error');
+                            }
 
-                        if (data.cod == 200) {
-                            this.$cache.set(weatherKey, data, 60);
-                            this.init(data)
-                        } else {
+                        },
+                        function () {
                             this.$set('status', 'error');
                         }
-
-                    }).error(function () {
-                        this.$set('status', 'error');
-                    });
+                    );
 
                 }
 
@@ -226,16 +232,16 @@
 
                 } else {
 
-                    this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)}, function (data) {
+                    this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)}).then(function (res) {
+                                var data = res.data;
+                                data.offset = data.rawOffset + data.dstOffset;
 
-                        data.offset = data.rawOffset + data.dstOffset;
+                                this.$cache.set(timezoneKey, data, 1440);
+                                this.$set('timezone', data);
 
-                        this.$cache.set(timezoneKey, data, 1440);
-                        this.$set('timezone', data);
-
-                    }).error(function () {
-                        this.$set('status', 'error');
-                    });
+                            }, function () {
+                                this.$set('status', 'error');
+                            });
 
                 }
 

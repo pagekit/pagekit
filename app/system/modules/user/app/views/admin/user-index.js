@@ -60,12 +60,12 @@ module.exports = {
         },
 
         save: function (user) {
-            this.resource.save({id: user.id}, {user: user}, function (data) {
+            this.resource.save({id: user.id}, {user: user}).then(function () {
                 this.load();
                 this.$notify('User saved.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 
@@ -77,22 +77,22 @@ module.exports = {
                 user.status = status;
             });
 
-            this.resource.save({id: 'bulk'}, {users: users}, function (data) {
+            this.resource.save({id: 'bulk'}, {users: users}).then(function () {
                 this.load();
                 this.$notify('Users saved.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 
         remove: function () {
-            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function (data) {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                 this.load();
                 this.$notify('Users deleted.');
-            }).error(function (msg) {
+            }, function (res) {
                 this.load();
-                this.$notify(msg, 'danger');
+                this.$notify(res.data, 'danger');
             });
         },
 
@@ -119,13 +119,15 @@ module.exports = {
 
             page = page !== undefined ? page : this.config.page;
 
-            this.resource.query({filter: this.config.filter, page: page}, function (data) {
+            this.resource.query({filter: this.config.filter, page: page}).then( function (res) {
+                var data = res.data;
+
                 this.$set('users', data.users);
                 this.$set('pages', data.pages);
                 this.$set('count', data.count);
                 this.$set('config.page', page);
                 this.$set('selected', []);
-            }).error(function () {
+            }, function () {
                 this.$notify('Loading failed.', 'danger');
             });
         },

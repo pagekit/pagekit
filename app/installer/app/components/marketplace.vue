@@ -102,7 +102,8 @@
 
         created: function () {
             this.query();
-            this.queryUpdates(this.installed, function (data) {
+            this.queryUpdates(this.installed, function (res) {
+                var data = res.data;
                 this.$set('updates', data.packages.length ? data.packages : null);
             });
         },
@@ -129,13 +130,14 @@
 
                 var url = this.api + '/api/package/search', options = {emulateJSON: true};
 
-                this.$http.post(url, {q: this.search, type: this.type, page: page || 0}, function (data) {
-                    this.$set('packages', data.packages);
-                    this.$set('pages', data.pages);
-                }, options).error(function () {
-                    this.$set('packages', null);
-                    this.$set('status', 'error');
-                });
+                this.$http.post(url, {q: this.search, type: this.type, page: page || 0}, options).then(function (res) {
+                            var data = res.data;
+                            this.$set('packages', data.packages);
+                            this.$set('pages', data.pages);
+                        }, function () {
+                            this.$set('packages', null);
+                            this.$set('status', 'error');
+                        });
             },
 
             details: function (pkg) {

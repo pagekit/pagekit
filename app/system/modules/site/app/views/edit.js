@@ -55,20 +55,20 @@ window.Site = {
 
             this.$broadcast('save', data);
 
-            this.Nodes.save({id: this.node.id}, data, function (data) {
+            this.Nodes.save({id: this.node.id}, data).then(function (res) {
+                        var data = res.data;
+                        if (!this.node.id) {
+                            window.history.replaceState({}, '', this.$url.route('admin/site/page/edit', {id: data.node.id}));
+                        }
 
-                if (!this.node.id) {
-                    window.history.replaceState({}, '', this.$url.route('admin/site/page/edit', {id: data.node.id}));
-                }
+                        this.$set('node', data.node);
 
-                this.$set('node', data.node);
+                        this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
 
-                this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
-
-            }, function (data) {
-
-                this.$notify(data, 'danger');
-            });
+                    }, function (res) {
+                        this.$notify(res.data, 'danger');
+                    }
+                );
         }
 
     },

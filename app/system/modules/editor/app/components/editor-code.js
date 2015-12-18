@@ -1,8 +1,8 @@
 module.exports = {
 
-    ready: function () {
+    created: function () {
 
-        var self = this, $el = $(this.$el), $parent = $el.parent();
+        var self = this, $el = $(this.$parent.$els.editor), $parent = $el.parent();
 
         $parent.addClass('pk-editor');
 
@@ -17,7 +17,7 @@ module.exports = {
 
         }).then(function () {
 
-            this.editor = CodeMirror.fromTextArea(this.$el, _.extend({
+            this.editor = CodeMirror.fromTextArea(this.$parent.$els.editor, _.extend({
                 mode: 'htmlmixed',
                 dragDrop: false,
                 autoCloseTags: true,

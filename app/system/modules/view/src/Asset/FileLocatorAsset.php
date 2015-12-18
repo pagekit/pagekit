@@ -11,7 +11,17 @@ class FileLocatorAsset extends FileAsset
      */
     public function getSource()
     {
-        return ($path = $this->getPath()) ? App::file()->getUrl($path) : parent::getSource();
+        if (!($path = $this->getPath())) {
+            return parent::getSource();
+        }
+
+        $path = App::file()->getUrl($path);
+
+        if ($version = $this->getOption('version')) {
+            $path .= (false === strpos($path, '?') ? '?' : '&') . 'v=' . $version;
+        }
+
+        return $path;
     }
 
     /**

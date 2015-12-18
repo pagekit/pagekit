@@ -38,11 +38,12 @@ window.Settings = {
 
         save: function () {
             this.$broadcast('save', this.$data);
-            this.$resource('admin/system/settings/save').save({config: this.config, options: this.options}, function () {
-                this.$notify('Settings saved.');
-            }, function (data) {
-                this.$notify(data, 'danger');
-            });
+            this.$resource('admin/system/settings/save').save({config: this.config, options: this.options}).then(function () {
+                        this.$notify('Settings saved.');
+                    }, function (res) {
+                        this.$notify(res.data, 'danger');
+                    }
+                );
         }
 
     },

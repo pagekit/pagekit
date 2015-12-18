@@ -91,9 +91,9 @@
 
                     } else {
 
-                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, function (data) {
+                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}).then(function (res) {
 
-                            this.imageSrc = this.$session[id] = data.thumbnail_url;
+                            this.imageSrc = this.$session[id] = res.data.thumbnail_url;
 
                         });
 

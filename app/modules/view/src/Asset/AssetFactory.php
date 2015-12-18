@@ -13,6 +13,21 @@ class AssetFactory
     ];
 
     /**
+     * @var string
+     */
+    protected $version;
+
+    /**
+     * Set a version number for cache breaking.
+     *
+     * @param $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
+    }
+
+    /**
      * Create an asset instance.
      *
      * @param  string $name
@@ -34,6 +49,10 @@ class AssetFactory
 
         if (!isset($options['type'])) {
             $options['type'] = 'file';
+        }
+
+        if ($options['type'] === 'file' && !isset($options['version'])) {
+            $options['version'] = $this->version;
         }
 
         if (isset($this->types[$options['type']])) {

@@ -116,8 +116,8 @@
                 handler: function (id) {
 
                     if (id) {
-                        this.$resource('api/site/page/:id').get({id: id}, function (page) {
-                            this.$set('page', page);
+                        this.$http.get('api/site/page/:id', {id: id}).then(function (res) {
+                            this.$set('page', res.data);
                         });
                     }
 

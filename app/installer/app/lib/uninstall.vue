@@ -35,15 +35,15 @@
             uninstall: function (pkg, packages) {
                 this.$set('pkg', pkg);
 
-                var vm = this;
-                return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, null, {xhr: this.init()}).success(function () {
-                    if (this.status === 'success' && packages) {
-                        packages.splice(packages.indexOf(pkg), 1);
-                    }
-                }).error(function (msg) {
-                    this.$notify(msg, 'danger');
-                    this.close();
-                });
+                return this.$http.post('admin/system/package/uninstall', {name: pkg.name}, {xhr: this.init()}).then(function () {
+                            if (this.status === 'success' && packages) {
+                                packages.splice(packages.indexOf(pkg), 1);
+                            }
+                        }, function (msg) {
+                            this.$notify(msg.data, 'danger');
+                            this.close();
+                        }
+                    );
             }
 
         }

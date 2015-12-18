@@ -54,7 +54,10 @@ module.exports = {
 
         save: function () {
             this.$broadcast('save', {widget: this.widget});
-            this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}, function (data) {
+            this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}).then(function (res) {
+
+                var data = res.data;
+
                 this.$dispatch('saved');
 
                 if (!this.widget.id) {
@@ -64,8 +67,8 @@ module.exports = {
                 this.$set('widget', data.widget);
 
                 this.$notify('Widget saved.');
-            }, function (data) {
-                this.$notify(data, 'danger');
+            }, function (res) {
+                this.$notify(res.data, 'danger');
             });
         },
 

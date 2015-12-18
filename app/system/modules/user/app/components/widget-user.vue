@@ -148,14 +148,14 @@
                     }
                 }
 
-                this.$resource('api/user/count').query(query, function (data) {
-                    this.$set('userscount', data.count);
+                this.$http.get('api/user/count', query).then(function (res) {
+                    this.$set('userscount', res.data.count);
                 });
 
                 query.limit = this.$get('widget.count');
 
-                this.$resource('api/user/:id').query(query, function (data) {
-                    this.$set('users', data.users.slice(0, this.$get('widget.count')));
+                this.$http.get('api/user/:id', query).then(function (res) {
+                    this.$set('users', res.data.users.slice(0, this.$get('widget.count')));
                 });
             }
 

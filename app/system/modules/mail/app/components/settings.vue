@@ -113,11 +113,13 @@
 
             test: function (driver) {
 
-                this.$http.post('admin/system/' + driver, {option: this.options}, function (data) {
-                    this.$notify(data.message, data.success ? '' : 'danger');
-                }).error(function () {
-                    this.$notify('Ajax request to server failed.', 'danger');
-                });
+                this.$http.post('admin/system/' + driver, {option: this.options}).then(function (res) {
+                            var data = res.data;
+                            this.$notify(data.message, data.success ? '' : 'danger');
+                        }, function () {
+                            this.$notify('Ajax request to server failed.', 'danger');
+                        }
+                    );
 
             }
 

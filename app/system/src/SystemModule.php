@@ -31,6 +31,16 @@ class SystemModule extends Module
             return $view->addGlobal('theme', $app['theme']);
         });
 
+        $app->extend('assets', function ($factory) use ($app) {
+
+            $secret = $this->config['secret'];
+            $version = substr(sha1($app['version'] . $secret), 0, 4);
+            $factory->setVersion($version);
+
+            return $factory;
+
+        });
+
         $theme = $this->config('site.theme');
 
         $app['module']->addLoader(function ($module) use ($app, $theme) {
@@ -46,8 +56,8 @@ class SystemModule extends Module
 
                 $module['type'] = 'theme';
 
-                $app['locator']->add("theme:", $module['path']);
-                $app['locator']->add("views:", "{$module['path']}/views");
+                $app['locator']->add('theme:', $module['path']);
+                $app['locator']->add('views:', "{$module['path']}/views");
             }
 
             return $module;

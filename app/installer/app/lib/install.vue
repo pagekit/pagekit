@@ -36,20 +36,20 @@
                 this.$set('pkg', pkg);
                 this.cb = onClose;
 
-                return this.$http.post('admin/system/package/install', {package: pkg},null, {xhr: this.init()}).success(function () {
-                    if (this.status === 'success' && packages) {
-                        var index = _.findIndex(packages, 'name', pkg.name);
+                return this.$http.post('admin/system/package/install', {package: pkg},null, {xhr: this.init()}).then(function () {
+                            if (this.status === 'success' && packages) {
+                                var index = _.findIndex(packages, 'name', pkg.name);
 
-                        if (-1 !== index) {
-                            packages.splice(index, 1, pkg);
-                        } else {
-                            packages.push(pkg);
-                        }
-                    }
-                }).error(function (msg) {
-                    this.$notify(msg, 'danger');
-                    this.close();
-                });
+                                if (-1 !== index) {
+                                    packages.splice(index, 1, pkg);
+                                } else {
+                                    packages.push(pkg);
+                                }
+                            }
+                        }, function (msg) {
+                            this.$notify(msg.data, 'danger');
+                            this.close();
+                        });
             },
 
             enable: function () {

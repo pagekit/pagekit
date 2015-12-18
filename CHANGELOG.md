@@ -1,9 +1,25 @@
 # Changelog
 
+## 0.10.1 (Dezember 17, 2015)
+
+### Added
+- Version cache break for JS and CSS
+- 'storage:' file path
+
+### Changed
+- Updated Vue-Resource
+- Improved handling of Gravatar images
+
+### Fixed
+- Admin panel for IE
+- System Messages
+- Editor preview handles Vuejs markup
+- Redirects on login and logout
+
 ## 0.10.0 (Dezember 15, 2015)
 
 ### Added
-- Added options to video picker
+- Options in video picker
 
 ### Changed
 - Switched to Vuejs 1.0
@@ -12,7 +28,7 @@
 
 ### Fixed
 - On widget copy, theme settings are copied too
-- Fixed password edit on user view
+- Password edit on user view
 
 ## 0.9.5 (October 30, 2015)
 

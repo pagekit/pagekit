@@ -90,9 +90,9 @@
             },
 
             clear: function () {
-                this.$http.post('admin/system/cache/clear', {caches: this.cache}, function () {
-                    this.$notify('Cache cleared.')
-                });
+                this.$http.post('admin/system/cache/clear', {caches: this.cache}).then(function () {
+                        this.$notify('Cache cleared.')
+                    });
 
                 this.$refs.modal.close();
             }

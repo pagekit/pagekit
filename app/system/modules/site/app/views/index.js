@@ -37,7 +37,7 @@ module.exports = {
                 vm.Nodes.save({id: 'updateOrder'}, {
                     menu: vm.menu.id,
                     nodes: nestable.list()
-                }, vm.load).error(function () {
+                }).then(vm.load, function () {
                     this.$notify('Reorder failed.', 'danger');
                 });
             }
@@ -80,7 +80,7 @@ module.exports = {
         },
 
         removeMenu: function (menu) {
-            this.Menus.delete({id: menu.id}, this.load);
+            this.Menus.delete({id: menu.id}).finally(this.load);
         },
 
         editMenu: function (menu) {
@@ -99,8 +99,8 @@ module.exports = {
 
         saveMenu: function (menu) {
 
-            this.Menus.save({menu: menu}, this.load).error(function (msg) {
-                this.$notify(msg, 'danger');
+            this.Menus.save({menu: menu}).then(this.load, function (res) {
+                this.$notify(res.data, 'danger');
             });
 
             this.cancel();
@@ -124,7 +124,7 @@ module.exports = {
                 node.status = status;
             });
 
-            this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
+            this.Nodes.save({id: 'bulk'}, {nodes: nodes}).then(function () {
                 this.load();
                 this.$notify('Page(s) saved.');
             });
@@ -138,7 +138,7 @@ module.exports = {
                 node.menu = menu;
             });
 
-            this.Nodes.save({id: 'bulk'}, {nodes: nodes}, function () {
+            this.Nodes.save({id: 'bulk'}, {nodes: nodes}).then(function () {
                 this.load();
                 this.$notify(this.$trans('Pages moved to %menu%.', {
                     menu: _.find(this.menus.concat({
@@ -162,7 +162,7 @@ module.exports = {
                 this.moveNodes('trash');
 
             } else {
-                this.Nodes.delete({id: 'bulk'}, {ids: this.selected}, function () {
+                this.Nodes.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                     this.load();
                     this.$notify('Page(s) deleted.');
                 });
@@ -281,7 +281,7 @@ module.exports = {
 
                     this.node.status = this.node.status === 1 ? 0 : 1;
 
-                    this.$root.Nodes.save({id: this.node.id}, {node: this.node}, function () {
+                    this.$root.Nodes.save({id: this.node.id}, {node: this.node}).then(function () {
                         this.$root.load();
                         this.$notify('Page saved.');
                     });
