@@ -102,7 +102,7 @@
 
         created: function () {
             this.query();
-            this.queryUpdates(this.installed).then(function (res) {
+            this.queryUpdates(this.installed, function (res) {
                 var data = res.data;
                 this.$set('updates', data.packages.length ? data.packages : null);
             });
