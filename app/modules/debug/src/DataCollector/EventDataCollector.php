@@ -36,7 +36,7 @@ class EventDataCollector implements DataCollectorInterface
     {
         foreach ($listeners as &$listener) {
             if (isset($listener['file'], $listener['line'])) {
-                $listener['file'] = substr($listener['file'], strlen($this->base) + 1);
+                $listener['relative'] = substr($listener['file'], strlen($this->base) + 1);
                 $listener['link'] = $this->getFileLink($listener['file'], $listener['line']);
             }
         }
@@ -46,8 +46,7 @@ class EventDataCollector implements DataCollectorInterface
 
     protected function getFileLink($file, $line)
     {
-        $fileLinkFormat = ini_get('xdebug.file_link_format');
-        if ($fileLinkFormat && file_exists($file)) {
+        if ($fileLinkFormat = ini_get('xdebug.file_link_format') and file_exists($file)) {
             return strtr($fileLinkFormat, array('%f' => $file, '%l' => $line));
         }
 

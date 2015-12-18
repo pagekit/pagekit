@@ -22,15 +22,18 @@
                 </tr>
                 <tr v-for="listener in called">
                     <td><code>{{ listener.event }}</code></td>
-                    <td v-if="listener.type === 'Closure'">Closure::{{ listener.file }} {{ listener.line }}</td>
+                    <td v-if="listener.type === 'Closure'">
+                        <a :href="listener.link" v-if="listener.link">{{ listener.relative }}</a>
+                        <span v-else>{{ listener.relative }}</span>
+                         {{ listener.line }} - {{ listener.endline }}
+                    </td>
                     <td v-if="listener.type === 'Function'">
-                        <a :href"listener.link" v-if="listener.link">{{ listener.function }}</a>
+                        <a :href="listener.link" v-if="listener.link">{{ listener.function }}</a>
                         <span v-else>{{ listener.function }}</span>
                     </td>
                     <td v-if="listener.type === 'Method'">
-                        <abbr :title="listener.class">{{ listener.class | short }}</abbr>::
-                        <a :href"listener.link" v-if="listener.link">{{ listener.method }}</a>
-                        <span v-else>{{ listener.method }}</span>
+                        <a :href="listener.link" v-if="listener.link"><abbr :title="listener.class">{{ listener.class | short }}</abbr>::{{ listener.method }}</a>
+                        <span v-else><abbr :title="listener.class">{{ listener.class | short }}</abbr>::{{ listener.method }}</span>
                     </td>
                     <td>{{ listener.priority }}</td>
                 </tr>
@@ -50,15 +53,18 @@
                 </tr>
                 <tr v-for="listener in notcalled">
                     <td><code>{{ listener.event }}</code></td>
-                    <td v-if="listener.type === 'Closure'">Closure ({{ listener.file }} {{ listener.line }})</td>
+                    <td v-if="listener.type === 'Closure'">
+                        <a :href="listener.link" v-if="listener.link">{{ listener.relative }}</a>
+                        <span v-else>{{ listener.relative }}</span>
+                        {{ listener.line }} - {{ listener.endline }}
+                    </td>
                     <td v-if="listener.type === 'Function'">
-                        <a :href"listener.link" v-if="listener.link">{{ listener.function }}</a>
+                        <a :href="listener.link" v-if="listener.link">{{ listener.function }}</a>
                         <span v-else>{{ listener.function }}</span>
                     </td>
                     <td v-if="listener.type === 'Method'">
-                        <abbr :title="listener.class">{{ listener.class | short }}</abbr>::
-                        <a :href"listener.link" v-if="listener.link">{{ listener.method }}</a>
-                        <span v-else>{{ listener.method }}</span>
+                        <a :href="listener.link" v-if="listener.link"><abbr :title="listener.class">{{ listener.class | short }}</abbr>::{{ listener.method }}</a>
+                        <span v-else><abbr :title="listener.class">{{ listener.class | short }}</abbr>::{{ listener.method }}</span>
                     </td>
                     <td>{{ listener.priority }}</td>
                 </tr>

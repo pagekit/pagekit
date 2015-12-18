@@ -8,7 +8,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 use Psr\Log\LoggerInterface;
 
 /**
- * @author Fabien Potencier <fabien@symfony.com>
+ * @author    Fabien Potencier <fabien@symfony.com>
  * @copyright Copyright (c) 2004-2015 Fabien Potencier
  */
 class TraceableEventDispatcher implements EventDispatcherInterface
@@ -309,6 +309,7 @@ class TraceableEventDispatcher implements EventDispatcherInterface
                 'type' => 'Closure',
                 'file' => $refl->getFileName(),
                 'line' => $refl->getStartLine(),
+                'endline' => $refl->getEndLine(),
                 'pretty' => (string) $refl
             ];
         } elseif (is_string($listener)) {
