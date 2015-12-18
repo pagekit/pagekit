@@ -20,8 +20,6 @@ class SystemModule extends Module
             return Finder::create();
         });
 
-        $app['db.em']; // -TODO- fix me
-
         $app->extend('view', function ($view) use ($app) {
 
             $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
@@ -80,7 +78,6 @@ class SystemModule extends Module
                 'layout' => 'views:system/blank.php'
             ]);
         }
-
 
     }
 

@@ -2,6 +2,72 @@
 
     <a title="Events"><span class="pf-icon pf-icon-events"></span> Events</a>
 
+    <script id="panel-events" type="text/template">
+
+        <h1>Events</h1>
+
+        <p v-if="!called && !notcalled">
+            <em>No events have been recorded. Are you sure that debugging is enabled in the kernel?</em>
+        </p>
+
+        <template v-if="called">
+            <h2>Called Listeners</h2>
+
+            <table class="pf-table">
+                <tbody>
+                <tr>
+                    <th>Event name</th>
+                    <th>Listener</th>
+                    <th>Priority</th>
+                </tr>
+                <tr v-for="listener in called">
+                    <td><code>{{ listener.event }}</code></td>
+                    <td v-if="listener.type === 'Closure'">Closure::{{ listener.file }} {{ listener.line }}</td>
+                    <td v-if="listener.type === 'Function'">
+                        <a :href"listener.link" v-if="listener.link">{{ listener.function }}</a>
+                        <span v-else>{{ listener.function }}</span>
+                    </td>
+                    <td v-if="listener.type === 'Method'">
+                        <abbr :title="listener.class">{{ listener.class | short }}</abbr>::
+                        <a :href"listener.link" v-if="listener.link">{{ listener.method }}</a>
+                        <span v-else>{{ listener.method }}</span>
+                    </td>
+                    <td>{{ listener.priority }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </template>
+        <template v-if="notcalled">
+
+            <h2>Not Called Listeners</h2>
+
+            <table class="pf-table">
+                <tbody>
+                <tr>
+                    <th>Event name</th>
+                    <th>Listener</th>
+                    <th>Priority</th>
+                </tr>
+                <tr v-for="listener in notcalled">
+                    <td><code>{{ listener.event }}</code></td>
+                    <td v-if="listener.type === 'Closure'">Closure ({{ listener.file }} {{ listener.line }})</td>
+                    <td v-if="listener.type === 'Function'">
+                        <a :href"listener.link" v-if="listener.link">{{ listener.function }}</a>
+                        <span v-else>{{ listener.function }}</span>
+                    </td>
+                    <td v-if="listener.type === 'Method'">
+                        <abbr :title="listener.class">{{ listener.class | short }}</abbr>::
+                        <a :href"listener.link" v-if="listener.link">{{ listener.method }}</a>
+                        <span v-else>{{ listener.method }}</span>
+                    </td>
+                    <td>{{ listener.priority }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </template>
+
+    </script>
+
 </template>
 
 <script>
@@ -9,13 +75,22 @@
     module.exports = {
 
         section: {
-            priority: 10
+            priority: 15,
+            panel: '#panel-events'
         },
 
         props: ['data'],
 
         data: function () {
             return this.data;
+        },
+
+        filters: {
+
+            short: function (name) {
+                return name.split('\\').pop();
+            }
+
         }
 
     };

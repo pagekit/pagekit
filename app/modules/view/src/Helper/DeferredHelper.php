@@ -2,13 +2,13 @@
 
 namespace Pagekit\View\Helper;
 
-use Pagekit\Event\EventDispatcher;
+use Pagekit\Event\EventDispatcherInterface;
 use Pagekit\View\View;
 
 class DeferredHelper implements HelperInterface
 {
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     protected $events;
 
@@ -25,9 +25,9 @@ class DeferredHelper implements HelperInterface
     /**
      * Constructor.
 
-     * @param EventDispatcher $events
+     * @param EventDispatcherInterface $events
      */
-    public function __construct(EventDispatcher $events)
+    public function __construct(EventDispatcherInterface $events)
     {
         $this->events = $events;
     }
