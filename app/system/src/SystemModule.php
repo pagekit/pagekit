@@ -67,7 +67,8 @@ class SystemModule extends Module
             try {
                 $app['module']->load($module);
             } catch (\RuntimeException $e) {
-                $app['log']->warn("Unable to load extension: $module");
+                $module = ucfirst($module);
+                $app['log']->error("[$module exception]: {$e->getMessage()}");
             }
         }
 
