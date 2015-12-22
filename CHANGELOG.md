@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.1 (Dezember 17, 2015)
+## 0.10.1 (December 17, 2015)
 
 ### Added
 - Version cache break for JS and CSS
@@ -16,7 +16,7 @@
 - Editor preview handles Vuejs markup
 - Redirects on login and logout
 
-## 0.10.0 (Dezember 15, 2015)
+## 0.10.0 (December 15, 2015)
 
 ### Added
 - Options in video picker
