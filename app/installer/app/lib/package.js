@@ -18,13 +18,6 @@ module.exports = {
             }, options).then(success, this.error);
         },
 
-        queryPackage: function (pkg, success) {
-            return this.$http.get(this.api + '/api/package/:name', {
-                name: _.isObject(pkg) ? pkg.name : pkg
-            }).then(success, this.error);
-        },
-
-
         enable: function (pkg) {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}).then(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
@@ -57,12 +50,6 @@ module.exports = {
         error: function (message) {
             this.$notify(message.data, 'danger');
         }
-
-    },
-
-    components: {
-
-        'package-details': require('../components/package-details.vue')
 
     }
 

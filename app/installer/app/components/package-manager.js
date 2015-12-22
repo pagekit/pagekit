@@ -113,7 +113,8 @@ module.exports = {
 
     components: {
 
-        'package-upload': require('./package-upload.vue')
+        'package-upload': require('./package-upload.vue'),
+        'package-details': require('./package-details.vue')
 
     }
 

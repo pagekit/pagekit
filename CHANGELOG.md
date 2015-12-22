@@ -4,6 +4,7 @@
 
 ### Fixed
 - Add new roles (#512)
+- Package upload
 
 ## 0.10.1 (December 17, 2015)
 
