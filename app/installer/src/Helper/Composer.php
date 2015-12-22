@@ -108,6 +108,7 @@ class Composer
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
         $composer = $this->getComposer();
+        $composer->getDownloadManager()->setOutputProgress(false);
 
         $installer = Installer::create($this->getIO(), $composer)
             ->setAdditionalInstalledRepository($internal)
