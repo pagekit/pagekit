@@ -37,7 +37,9 @@ module.exports = {
                 return;
             }
 
-            this.Roles.save({ id: this.role.id }, { role: this.role }, function (data) {
+            this.Roles.save({ id: this.role.id }, { role: this.role }).then(function (res) {
+
+                var data = res.data;
 
                 if (this.role.id) {
 
@@ -50,8 +52,8 @@ module.exports = {
                     this.$notify('Role added');
                 }
 
-            }, function (data) {
-                this.$notify(data, 'danger');
+            }, function (res) {
+                this.$notify(res.data, 'danger');
             });
 
             this.$refs.modal.close();

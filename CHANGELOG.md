@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Add new roles (#512)
+
 ## 0.10.1 (December 17, 2015)
 
 ### Added
