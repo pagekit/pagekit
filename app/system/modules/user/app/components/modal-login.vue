@@ -47,10 +47,10 @@
 
         created: function () {
             this.$mount().$appendTo('body');
-            this.promise = new Vue.Promise(function (fulfill, reject) {
+            this.promise = this.$promise(function (fulfill, reject) {
                     this.fulfill = fulfill;
                     this.reject = reject;
-                }, this);
+                });
         },
 
         ready: function () {

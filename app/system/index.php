@@ -154,7 +154,7 @@ return [
         },
 
         'view.head' => [function ($event, $view) {
-            $view->script('auth', 'app/system/modules/user/app/bundle/auth.js', ['vue']);
+            $view->script('auth', 'app/system/modules/user/app/bundle/interceptor.js', ['vue']);
         }, 50]
 
     ]
