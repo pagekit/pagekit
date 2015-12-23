@@ -21,7 +21,7 @@
     </p>
 
     <ul class="uk-list">
-        <li><label><input type="checkbox" name="<?= $remember_me_param ?>"> <?= __('Remember Me') ?></label></li>
+        <li><label><input type="checkbox" name="_remember_me"> <?= __('Remember Me') ?></label></li>
         <li class="uk-margin-small-top"> <?= __('Forgot Password?') ?> <a href="<?= $view->url('@user/resetpassword') ?>"><?= __('Request Password') ?></a></li>
         <?php if ($app->module('system/user')->config('registration') != 'admin') : ?>
         <li class="uk-margin-small-top"><?= __('No account yet?') ?> <a href="<?= $view->url('@user/registration') ?>"><?= __('Sign up now') ?></a></li>

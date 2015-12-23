@@ -26,7 +26,6 @@ class AuthController
                 'name'  => 'system/user/login.php'
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'remember_me_param' => Auth::REMEMBER_ME_PARAM,
             'redirect' => $redirect
         ];
     }
@@ -41,9 +40,9 @@ class AuthController
 
     /**
      * @Route(methods="POST", defaults={"_maintenance" = true})
-     * @Request({"credentials": "array"})
+     * @Request({"credentials": "array", "_remember_me": "boolean"})
      */
-    public function authenticateAction($credentials)
+    public function authenticateAction($credentials, $remember = false)
     {
         $isXml = App::request()->isXmlHttpRequest();
 
@@ -56,9 +55,9 @@ class AuthController
             App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
 
             if (!$isXml) {
-                return App::auth()->login($user, App::request()->get(Auth::REMEMBER_ME_PARAM));
+                return App::auth()->login($user, $remember);
             } else {
-                App::auth()->setUser($user, App::request()->get(Auth::REMEMBER_ME_PARAM));
+                App::auth()->setUser($user, $remember);
                 return ['success' => true];
             }
 

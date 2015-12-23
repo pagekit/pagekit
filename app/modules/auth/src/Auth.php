@@ -15,7 +15,6 @@ class Auth
 {
     const REDIRECT_PARAM    = 'redirect';
     const LAST_USERNAME     = '_auth.last_username';
-    const REMEMBER_ME_PARAM = '_remember_me';
 
     /**
      * @var EventDispatcherInterface

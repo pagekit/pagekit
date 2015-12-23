@@ -32,8 +32,7 @@ class AdminController
                 'layout' => false
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'redirect' => App::request()->get('redirect') ? : App::url('@system', [], true),
-            'remember_me_param' => Auth::REMEMBER_ME_PARAM
+            'redirect' => App::request()->get('redirect') ? : App::url('@system', [], true)
         ];
     }
 
