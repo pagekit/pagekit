@@ -6,8 +6,10 @@ use Composer\Installer;
 use Composer\IO\ConsoleIO;
 use Composer\Json\JsonFile;
 use Composer\Package\Locker;
+use Composer\Package\Package;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\InstalledFilesystemRepository;
+use Composer\Semver\VersionParser;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
@@ -59,7 +61,14 @@ class Composer
     {
         $this->addPackages($install);
 
-        $this->composerUpdate(array_keys($install));
+        $refresh = [];
+        $versionParser = new VersionParser();
+        foreach ($install as $name => $version) {
+            $normalized = $versionParser->normalize($version);
+            $refresh[] = new Package($name, $normalized, $version);
+        }
+
+        $this->composerUpdate(array_keys($install), $refresh);
         $this->writeConfig();
     }
 
@@ -69,7 +78,7 @@ class Composer
      */
     public function uninstall($uninstall)
     {
-        $uninstall = (array)$uninstall;
+        $uninstall = (array) $uninstall;
 
         $this->removePackages($uninstall);
 
@@ -99,9 +108,10 @@ class Composer
      * Runs Composer Update command.
      *
      * @param  array|bool $updates
+     * @param array $refresh
      * @return bool
      */
-    protected function composerUpdate($updates = false)
+    protected function composerUpdate($updates = false, $refresh = [])
     {
         $installed = new JsonFile($this->paths['path.vendor'] . '/composer/installed.json');
         $internal = new CompositeRepository([]);
@@ -109,6 +119,11 @@ class Composer
 
         $composer = $this->getComposer();
         $composer->getDownloadManager()->setOutputProgress(false);
+
+        $local = $composer->getRepositoryManager()->getLocalRepository();
+        foreach ($refresh as $package) {
+            $local->removePackage($package);
+        }
 
         $installer = Installer::create($this->getIO(), $composer)
             ->setAdditionalInstalledRepository($internal)
@@ -131,7 +146,7 @@ class Composer
     protected function getComposer()
     {
         $config = $this->blueprint;
-        $config['config'] = ['vendor-dir' => $this->paths['path.packages']];
+        $config['config'] = ['vendor-dir' => $this->paths['path.packages'], 'cache-files-ttl' => 0];
         $config['require'] = $this->packages;
 
         // set memory limit, if < 512M
@@ -211,7 +226,7 @@ class Composer
     protected function memoryInBytes($value)
     {
         $unit = strtolower(substr($value, -1, 1));
-        $value = (int)$value;
+        $value = (int) $value;
 
         switch ($unit) {
             case 'g':

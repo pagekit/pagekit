@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Changed
+- Enforce reinstall of packages (#479)
+
 ### Fixed
 - Add new roles (#512)
 - Package upload
