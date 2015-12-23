@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="uk-form-row">
-                        <label class="uk-form"><input type="checkbox" name=""> {{ 'Remember Me' | trans }}</label>
+                        <label class="uk-form"><input type="checkbox" v-model="remember"> {{ 'Remember Me' | trans }}</label>
                     </div>
 
                     <p class="uk-form-row tm-panel-marginless-bottom">
@@ -41,16 +41,17 @@
 
         data: function () {
             return {
-                credentials: {}
+                credentials: {},
+                remember: false
             };
         },
 
         created: function () {
             this.$mount().$appendTo('body');
             this.promise = this.$promise(function (fulfill, reject) {
-                    this.fulfill = fulfill;
-                    this.reject = reject;
-                });
+                this.fulfill = fulfill;
+                this.reject = reject;
+            });
         },
 
         ready: function () {
@@ -67,8 +68,10 @@
 
             login: function () {
 
-                // TODO: RememberMe
-                this.$http.post('user/authenticate', {credentials: this.credentials}).then(function () {
+                this.$http.post('user/authenticate', {
+                    credentials: this.credentials,
+                    _remember_me: this.remember
+                }).then(function () {
                     this.fulfill();
                     this.$refs.login.close();
                 }, function (res) {
