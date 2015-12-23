@@ -2,6 +2,7 @@ module.exports = [
 
     {
         entry: {
+            "auth": "./app/auth",
             "registration": "./app/views/registration",
             "profile": "./app/views/profile",
             "permission-index": "./app/views/admin/permission-index",

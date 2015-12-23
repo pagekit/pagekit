@@ -45,6 +45,8 @@ class AuthController
      */
     public function authenticateAction($credentials)
     {
+        $isXml = App::request()->isXmlHttpRequest();
+
         try {
 
             if (!App::csrf()->validate()) {
@@ -53,14 +55,24 @@ class AuthController
 
             App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
 
-            return App::auth()->login($user, App::request()->get(Auth::REMEMBER_ME_PARAM));
+            if (!$isXml) {
+                return App::auth()->login($user, App::request()->get(Auth::REMEMBER_ME_PARAM));
+            } else {
+                App::auth()->setUser($user, App::request()->get(Auth::REMEMBER_ME_PARAM));
+                return ['success' => true];
+            }
 
         } catch (BadCredentialsException $e) {
-            App::message()->error(__('Invalid username or password.'));
+            $error = __('Invalid username or password.');
         } catch (AuthException $e) {
-            App::message()->error($e->getMessage());
+            $error = $e->getMessage();
         }
 
-        return App::redirect(App::url()->previous());
+        if (!$isXml) {
+            App::message()->error($error);
+            return App::redirect(App::url()->previous());
+        } else {
+            App::abort(400, $error);
+        }
     }
 }

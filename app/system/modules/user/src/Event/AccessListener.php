@@ -110,6 +110,10 @@ class AccessListener implements EventSubscriberInterface
             return;
         }
 
+        if ($request->isXmlHttpRequest()) {
+            App::abort(401, 'Unauthorized');
+        }
+
         $params = [];
 
         // redirect to default URL for POST requests and don't explicitly redirect the default URL
