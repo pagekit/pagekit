@@ -10,11 +10,11 @@
                     <h3 class="uk-panel-title">{{ 'Session expired' | trans }}</h3>
 
                     <div class="uk-form-row">
-                        <input class="uk-form uk-width-1-1" type="text" placeholder="{{ 'Username' | trans }}" autofocus v-model="credentials.username">
+                        <input class="uk-form uk-width-1-1" type="text" name="credentials[username]" placeholder="{{ 'Username' | trans }}" autofocus v-model="credentials.username">
                     </div>
 
                     <div class="uk-form-row">
-                        <input class="uk-form uk-width-1-1" type="password" placeholder="{{ 'Password' | trans }}" v-model="credentials.password">
+                        <input class="uk-form uk-width-1-1" type="password" name="credentials[password]" placeholder="{{ 'Password' | trans }}" v-model="credentials.password">
                     </div>
 
                     <div class="uk-form-row">
