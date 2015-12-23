@@ -27,7 +27,7 @@ Vue.http.interceptors.push(function () {
 
             return mutex.then(function () {
                 return Vue.http(options);
-            })
+            });
 
         }
 
