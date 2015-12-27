@@ -227,7 +227,7 @@ class User implements UserInterface, \JsonSerializable
             throw new Exception(__('Password required.'));
         }
 
-        if (strlen($this->username) < 3 || !preg_match('/^[a-zA-Z0-9_\-]+$/', $this->username)) {
+        if (strlen($this->username) < 3 || !preg_match('/^[a-zA-Z0-9._\-]+$/', $this->username)) {
             throw new Exception(__('Username is invalid.'));
         }
 
