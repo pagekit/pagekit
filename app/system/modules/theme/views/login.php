@@ -24,11 +24,11 @@
                     <div class="uk-panel uk-panel-box">
 
                         <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
+                            <input class="uk-text-center uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
                         </div>
 
                         <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
+                            <input class="uk-text-center uk-form-large uk-width-1-1" type="password" name="credentials[password]" value="" placeholder="<?= __('Password') ?>">
                         </div>
 
                         <p class="uk-form-row tm-panel-marginless-bottom">
