@@ -36,13 +36,13 @@ class VideoPlugin implements EventSubscriberInterface
         $src = $options['src'];
         unset($options['src']);
 
-        $html = '<video class="uk-width-1-1" src="%s"';
+        $html = '<div class="pk-embed-container"><video class="uk-width-1-1" src="%s"';
         foreach ($options as $attr => $value) {
             if ($value) {
                 $html .= ' ' . $attr . (is_bool($value) ? '' : '="' . $value . '"');
             }
         }
-        $html .= '></video>';
+        $html .= '></video></div>';
 
         $options['wmode'] = 'transparent';
         if (preg_match(self::REGEX_YOUTUBE, $src, $matches)) {
@@ -53,7 +53,7 @@ class VideoPlugin implements EventSubscriberInterface
 
             $query = http_build_query($options);
             $src = "$matches[1]/embed/$matches[2]" . ($matches[3] ? "?$matches[3]" . '&' . $query : '?' . $query);
-            $html = '<iframe class="uk-width-1-1" src="%s" height="360"></iframe>';
+            $html = '<div class="pk-embed-container"><iframe src="%s" frameborder="0" allowfullscreen></iframe></div>';
 
         } elseif (preg_match(self::REGEX_YOUTUBE_SHORT, $src, $matches)) {
 
@@ -63,13 +63,13 @@ class VideoPlugin implements EventSubscriberInterface
 
             $query = http_build_query($options);
             $src = '//www.youtube.com/embed/' . array_pop(explode('/', $matches[1])) . '?' . $query;
-            $html = '<iframe class="uk-width-1-1" src="%s" height="360"></iframe>';
+            $html = '<div class="pk-embed-container"><iframe src="%s" frameborder="0" allowfullscreen></iframe></div>';
 
         } elseif (preg_match(self::REGEX_VIMEO, $src, $matches)) {
 
             $query = http_build_query($options);
             $src = "$matches[1]player.vimeo.com/video/$matches[2]?$query";
-            $html = '<iframe class="uk-width-1-1" src="%s" height="360"></iframe>';
+            $html = '<div class="pk-embed-container"><iframe src="%s" frameborder="0" allowfullscreen></iframe></div>';
 
         }
 
