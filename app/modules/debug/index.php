@@ -51,7 +51,7 @@ return [
 
             $app['debugbar']->addCollector(new MemoryCollector());
             $app['debugbar']->addCollector(new TimeDataCollector());
-            $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
+            $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['events'], $app['path.cache']));
             $app['debugbar']->addCollector(new EventDataCollector($app['events'], $app['path']));
 
             if (isset($app['auth'])) {

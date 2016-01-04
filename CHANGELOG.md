@@ -1,5 +1,11 @@
 # Changelog
 
+## WIP
+
+### Added
+- Events to DebugBar
+- Current Route Info to DebugBar
+
 ## 0.10.1 (Dezember 17, 2015)
 
 ### Added

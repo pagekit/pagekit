@@ -5,7 +5,6 @@ namespace Pagekit\Debug\DataCollector;
 use DebugBar\DataCollector\DataCollectorInterface;
 use Pagekit\Debug\Event\TraceableEventDispatcher;
 use Pagekit\Event\EventDispatcherInterface;
-use Pagekit\Routing\Router;
 
 class EventDataCollector implements DataCollectorInterface
 {
