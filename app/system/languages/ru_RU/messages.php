@@ -127,7 +127,7 @@
   '(Currently set to: %menu%)' => '(Установлены в %menu%)',
   'Pages' => 'Страницы',
   '%d TB' => '%d ТБ',
-  'Mail' => 'Письмо',
+  'Mail' => 'Почта',
   'Logout Redirect' => 'Перенаправление при выходе',
   'Invalid id.' => 'Недопустимый id.',
   'Weather Widget' => 'Виджет погоды',
