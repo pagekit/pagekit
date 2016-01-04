@@ -11,7 +11,16 @@ trait EventTrait
      */
     public static function on($event, $callback, $priority = 0)
     {
-        static::events()->on($event, $callback, $priority);
+        if (static::$instance->booted) {
+            static::events()->on($event, $callback, $priority);
+            return;
+        }
+
+        static::$instance->extend('events', function ($dispatcher) use ($event, $callback, $priority) {
+            $dispatcher->on($event, $callback, $priority);
+            return $dispatcher;
+        });
+
     }
 
     /**
@@ -21,8 +30,22 @@ trait EventTrait
     {
         $subscribers = func_num_args() > 1 ? func_get_args() : [$subscriber];
 
-        foreach ($subscribers as $sub) {
-            static::events()->subscribe($sub);
+        if (static::$instance->booted) {
+            foreach ($subscribers as $sub) {
+                static::events()->subscribe($sub);
+            }
+            return;
+        }
+
+        try {
+            static::$instance->extend('events', function ($dispatcher) use ($subscribers) {
+                foreach ($subscribers as $sub) {
+                    $dispatcher->subscribe($sub);
+                }
+                return $dispatcher;
+            });
+        } catch (\Exception $e) {
+            $test = $e;
         }
     }
 

@@ -375,6 +375,8 @@
 #pk-profiler .pf-table-dropdown td:first-child { font-weight: bold; }
 #pk-profiler .pf-table-dropdown tbody tr:last-child td { border-bottom: none; }
 
+#pk-profiler .pf-table tr.pf-active { background: #eee; }
+
 
 /* ========================================================================
    Component: Dropdown

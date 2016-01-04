@@ -83,6 +83,8 @@ return [
                 $app->subscribe(new ExceptionListener('Pagekit\System\Controller\ExceptionController::showAction'));
             }
 
+            $app['db.em']; // -TODO- fix me
+
         },
 
         'request' => [

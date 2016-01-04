@@ -1,6 +1,6 @@
 <template>
 
-    <a title="Memory"><span class="pf-icon pf-icon-memory"></span> {{ peak_usage_str }}</a>
+    <a title="Memory"><span class="pf-icon pf-icon-memory"></span> {{ data.peak_usage_str }}</a>
 
 </template>
 
@@ -12,11 +12,7 @@
             priority: 40
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 

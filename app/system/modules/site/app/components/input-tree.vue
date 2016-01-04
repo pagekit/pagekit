@@ -30,7 +30,7 @@
 
             var vm = this;
 
-            Vue.promise.all([
+            Vue.Promise.all([
                     this.$http.get('api/site/node'),
                     this.$http.get('api/site/menu')
                 ])

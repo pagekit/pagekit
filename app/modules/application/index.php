@@ -29,13 +29,9 @@ return [
 
         $app['exception'] = ExceptionHandler::register($app['debug']);
 
-        ErrorHandler::register(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
+        ErrorHandler::register()->throwAt(E_ERROR | E_CORE_ERROR | E_COMPILE_ERROR | E_RECOVERABLE_ERROR);
 
-        if ($app->inConsole() || $app['debug']) {
-            ini_set('display_errors', 1);
-        } else {
-            ini_set('display_errors', 0);
-        }
+        ini_set('display_errors', $app->inConsole() || $app['debug'] ? 1 : 0);
 
     },
 
