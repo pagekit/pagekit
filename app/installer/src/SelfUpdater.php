@@ -35,10 +35,8 @@ class SelfUpdater
 
         if (PHP_SAPI != 'cli') {
 
-            if (ob_get_level()) {
-                ob_end_flush();
-            }
             ob_implicit_flush(true);
+            @ob_end_flush();
 
             $this->output->setFormatter(new HtmlOutputFormatter());
         }
