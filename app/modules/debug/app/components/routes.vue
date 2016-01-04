@@ -8,7 +8,7 @@
             <tbody>
             <tr>
                 <td>Route</td>
-                <td>{{ route ? route : 'n/a' }}</td>
+                <td>{{ data.route ? data.route : 'n/a' }}</td>
             </tr>
             <template v-if="active">
             <tr>
@@ -60,15 +60,11 @@
 
         props: ['data'],
 
-        data: function () {
-            return this.data;
-        },
-
         computed: {
 
             active: function () {
-                return this.routes.filter(function(route) {
-                    return route.name === this.route;
+                return this.data.routes.filter(function(route) {
+                    return route.name === this.data.route;
                 }, this)[0];
             }
 

@@ -87,10 +87,6 @@
 
         props: ['data'],
 
-        data: function () {
-            return this.data;
-        },
-
         filters: {
 
             short: function (name) {

@@ -12,11 +12,7 @@
             priority: 10
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 

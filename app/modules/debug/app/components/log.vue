@@ -1,6 +1,6 @@
 <template>
 
-    <a title="Log">Log ({{ records.length }})</a>
+    <a title="Log">Log ({{ data.records.length }})</a>
 
     <script id="panel-log" type="text/template">
 
@@ -34,11 +34,7 @@
             panel: '#panel-log'
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 

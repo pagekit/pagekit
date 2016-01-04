@@ -79,11 +79,7 @@
             panel: '#panel-system'
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 
