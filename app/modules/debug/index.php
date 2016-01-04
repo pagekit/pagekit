@@ -4,10 +4,14 @@ use DebugBar\DataCollector\MemoryCollector;
 use DebugBar\DataCollector\TimeDataCollector;
 use Pagekit\Debug\DataCollector\AuthDataCollector;
 use Pagekit\Debug\DataCollector\DatabaseDataCollector;
+use Pagekit\Debug\DataCollector\EventDataCollector;
+use Pagekit\Debug\DataCollector\ProfileDataCollector;
 use Pagekit\Debug\DataCollector\RoutesDataCollector;
 use Pagekit\Debug\DataCollector\SystemDataCollector;
 use Pagekit\Debug\DebugBar;
+use Pagekit\Debug\Event\TraceableEventDispatcher;
 use Pagekit\Debug\Storage\SqliteStorage;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 return [
 
@@ -28,6 +32,14 @@ return [
             return new SqliteStorage($this->config['file']);
         };
 
+        $app['debugbar.stopwatch'] = function() {
+            return new Stopwatch();
+        };
+
+        $app->extend('events', function($dispatcher, $app) {
+            return new TraceableEventDispatcher($dispatcher, $app['debugbar.stopwatch']);
+        });
+
     },
 
     'events' => [
@@ -40,7 +52,9 @@ return [
 
             $app['debugbar']->addCollector(new MemoryCollector());
             $app['debugbar']->addCollector(new TimeDataCollector());
-            $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['path.cache']));
+            $app['debugbar']->addCollector(new RoutesDataCollector($app['router'], $app['events'], $app['path.cache']));
+            $app['debugbar']->addCollector(new EventDataCollector($app['events'], $app['path']));
+            $app['debugbar']->addCollector(new ProfileDataCollector($app['debugbar.storage']));
 
             if (isset($app['auth'])) {
                 $app['debugbar']->addCollector(new AuthDataCollector($app['auth']));
@@ -65,7 +79,7 @@ return [
                     return;
                 }
 
-                $view->data('$debugbar', ['url' => $app['router']->generate('_debugbar', ['id' => $app['debugbar']->getCurrentRequestId()])]);
+                $view->data('$debugbar', ['current' => $app['debugbar']->getCurrentRequestId()]);
                 $view->style('debugbar', 'app/modules/debug/assets/css/debugbar.css');
                 $view->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue']);
             }, 50);

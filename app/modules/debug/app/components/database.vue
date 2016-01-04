@@ -1,6 +1,6 @@
 <template>
 
-    <a title="Database" class="pf-parent"><span class="pf-icon pf-icon-database"></span>{{ nb_statements }}</a>
+    <a title="Database" class="pf-parent"><span class="pf-icon pf-icon-database"></span>{{ data.nb_statements }}</a>
 
     <div class="pf-dropdown">
 
@@ -8,15 +8,15 @@
             <tbody>
             <tr>
                 <td>Queries</td>
-                <td>{{ nb_statements }}</td>
+                <td>{{ data.nb_statements }}</td>
             </tr>
             <tr>
                 <td>Time</td>
-                <td>{{ accumulated_duration_str }}</td>
+                <td>{{ data.accumulated_duration_str }}</td>
             </tr>
             <tr>
                 <td>Driver</td>
-                <td>{{ driver }}</td>
+                <td>{{ data.driver }}</td>
             </tr>
             </tbody>
         </table>
@@ -55,11 +55,7 @@
             panel: '#panel-database'
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 

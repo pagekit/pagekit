@@ -87,4 +87,20 @@ class PrefixEventDispatcher implements EventDispatcherInterface
     {
         return $this->events->getListeners($event);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListenerPriority($event, $listener)
+    {
+        return $this->events->getListenerPriority($event, $listener);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEventClass()
+    {
+        return $this->events->getEventClass();
+    }
 }
