@@ -33,14 +33,14 @@ module.exports = function (Vue) {
 
         });
 
-        return Vue.promise.all(promises).bind(this);
+        return Vue.Promise.all(promises).bind(this);
     }
 
     _.extend(Asset, {
 
         css: function (url) {
 
-            return new Vue.promise(function (resolve, reject) {
+            return new Vue.Promise(function (resolve, reject) {
 
                 var link = document.createElement('link');
 
@@ -62,7 +62,7 @@ module.exports = function (Vue) {
 
         js: function (url) {
 
-            return new Vue.promise(function (resolve, reject) {
+            return new Vue.Promise(function (resolve, reject) {
 
                 var script = document.createElement('script');
 
@@ -81,7 +81,7 @@ module.exports = function (Vue) {
 
         image: function (url) {
 
-            return new Vue.promise(function (resolve, reject) {
+            return new Vue.Promise(function (resolve, reject) {
 
                 var img = new Image();
 

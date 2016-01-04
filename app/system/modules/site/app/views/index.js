@@ -50,7 +50,7 @@ module.exports = {
         load: function () {
 
             var vm = this;
-            return Vue.promise.all([
+            return Vue.Promise.all([
                 this.Menus.query(),
                 this.Nodes.query()
             ]).then(function (responses) {
