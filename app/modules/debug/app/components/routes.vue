@@ -2,6 +2,29 @@
 
     <a :title="'Routes' | trans"><span class="pf-icon pf-icon-routes"></span>Routes</a>
 
+    <div class="pf-dropdown">
+
+        <table class="pf-table pf-table-dropdown">
+            <tbody>
+            <tr>
+                <td>Route</td>
+                <td>{{ data.route ? data.route : 'n/a' }}</td>
+            </tr>
+            <template v-if="active">
+            <tr>
+                <td>Pattern</td>
+                <td>{{ active.pattern }} {{ active.methods | str }}</td>
+            </tr>
+            <tr>
+                <td>Controller</td>
+                <td><abbr :title="active.controller">{{ active.controller | short }}</abbr></td>
+            </tr>
+            </template>
+            </tbody>
+        </table>
+
+    </div>
+
     <script id="panel-routes" type="text/template">
 
         <h1>Routes</h1>
@@ -14,10 +37,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="route in routes">
-                    <td>{{ route.name }}</td>
-                    <td>{{ route.pattern }} {{ route.methods | str }}</td>
-                    <td><abbr :title="route.controller">{{ route.controller | short }}</abbr></td>
+                <tr v-for="r in routes" :class="{ 'pf-active': r.name == route }">
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.pattern }} {{ r.methods | str }}</td>
+                    <td><abbr :title="r.controller">{{ r.controller | short }}</abbr></td>
                 </tr>
             </tbody>
         </table>
@@ -37,8 +60,14 @@
 
         props: ['data'],
 
-        data: function () {
-            return this.data;
+        computed: {
+
+            active: function () {
+                return this.data.routes.filter(function(route) {
+                    return route.name === this.data.route;
+                }, this)[0];
+            }
+
         },
 
         filters: {

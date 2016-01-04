@@ -2,6 +2,11 @@
 
 ## WIP
 
+### Added
+- Events to DebugBar
+- Current Route Info to DebugBar
+- Request Switcher to DebugBar
+
 ### Changed
 - Enforce reinstall of packages (#479)
 
@@ -9,7 +14,7 @@
 - Add new roles (#512)
 - Package upload
 
-## 0.10.1 (December 17, 2015)
+## 0.10.1 (Dezember 17, 2015)
 
 ### Added
 - Version cache break for JS and CSS

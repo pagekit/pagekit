@@ -5,7 +5,7 @@
         <div class="pf-navbar">
 
             <ul class="pf-navbar-nav">
-                <li v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
+                <li v-if="data" v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
                     <component :is="section.name" :data="data[section.name]"></component>
                 </li>
             </ul>
@@ -29,7 +29,8 @@
 
         data: function () {
             return {
-                data: {},
+                request: null,
+                data: null,
                 panel: null,
                 sections: {}
             }
@@ -37,18 +38,17 @@
 
         created: function () {
 
-            this.$http.get(config.url).then(function (res) {
-                var data = res.data;
-                this.$set('data', data);
+            _.forIn(this.$options.components, function (component, name) {
 
-                _.forIn(this.$options.components, function (component, name) {
-                    if (data[name]) {
-                        Vue.set(this.sections, name, _.merge({name: name}, component.options.section));
-                    }
-                }, this);
+                if (component.options && component.options.section) {
+                    Vue.set(this.sections, name, _.merge({name: name}, component.options.section));
+                }
 
+            }, this);
+
+            this.load(config.current).then(function (res) {
+                this.$set('request', res.data.__meta);
             });
-
         },
 
         computed: {
@@ -60,6 +60,13 @@
         },
 
         methods: {
+
+            load: function (id) {
+                return this.$http.get('_debugbar/{id}', {id: id}).then(function (res) {
+                    this.$set('data', res.data);
+                    return res;
+                });
+            },
 
             open: function (name) {
 
