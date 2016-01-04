@@ -6,9 +6,10 @@
 
 </template>
 
-
 <script>
 
-    module.exports = {};
+    module.exports = {
+        name: 'loader'
+    };
 
 </script>
