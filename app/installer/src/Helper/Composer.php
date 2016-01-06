@@ -134,7 +134,7 @@ class Composer
             ->setUpdate(true);
 
         if ($updates) {
-            $installer->setUpdateWhitelist($updates);
+            $installer->setUpdateWhitelist($updates)->setWhitelistDependencies();
         }
 
         $installer->run();

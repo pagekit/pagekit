@@ -14,6 +14,7 @@
 ### Fixed
 - Add new roles (#512)
 - Package upload
+- Cleanup package dependencies (#488)
 
 ## 0.10.1 (Dezember 17, 2015)
 
