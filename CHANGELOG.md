@@ -9,6 +9,7 @@
 
 ### Changed
 - Enforce reinstall of packages (#479)
+- Allow comment posting for 'authenticated' users by default (#518)
 
 ### Fixed
 - Add new roles (#512)

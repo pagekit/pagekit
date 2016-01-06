@@ -68,7 +68,7 @@ return [
             });
 
             $db->insert('@system_role', ['id' => 1, 'name' => 'Anonymous', 'priority' => 0]);
-            $db->insert('@system_role', ['id' => 2, 'name' => 'Authenticated', 'priority' => 1]);
+            $db->insert('@system_role', ['id' => 2, 'name' => 'Authenticated', 'priority' => 1, 'permissions' => 'blog: post comments']);
             $db->insert('@system_role', ['id' => 3, 'name' => 'Administrator', 'priority' => 2]);
         }
 
