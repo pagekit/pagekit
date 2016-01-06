@@ -64,8 +64,10 @@ class Composer
         $refresh = [];
         $versionParser = new VersionParser();
         foreach ($install as $name => $version) {
-            $normalized = $versionParser->normalize($version);
-            $refresh[] = new Package($name, $normalized, $version);
+            try {
+                $normalized = $versionParser->normalize($version);
+                $refresh[] = new Package($name, $normalized, $version);
+            } catch (\UnexpectedValueException $e) {}
         }
 
         $this->composerUpdate(array_keys($install), $refresh);
