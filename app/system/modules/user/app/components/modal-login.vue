@@ -71,7 +71,8 @@
                 this.$http.post('user/authenticate', {
                     credentials: this.credentials,
                     _remember_me: this.remember
-                }).then(function () {
+                }).then(function (res) {
+                    this.$cache.set('_csrf', res.data.csrf);
                     this.fulfill();
                     this.$refs.login.close();
                 }, function (res) {

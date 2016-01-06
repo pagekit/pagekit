@@ -53,8 +53,12 @@ class AuthorizationListener implements EventSubscriberInterface
     public function onLogin(LoginEvent $event)
     {
         App::session()->migrate();
+        if(App::request()->isXmlHttpRequest()) {
+            $event->setResponse(App::response()->json(['csrf' => App::csrf()->generate()]));
+        } else {
+            $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
+        }
 
-        $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     /**

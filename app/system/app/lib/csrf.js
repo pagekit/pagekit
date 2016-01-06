@@ -5,7 +5,7 @@ module.exports = function (Vue) {
         request: function (request) {
 
             if (!request.crossOrigin) {
-                request.headers['X-XSRF-TOKEN'] = this.$cache.get('_csrf');
+                request.headers['X-XSRF-TOKEN'] = Vue.cache.get('_csrf');
             }
 
             return request;

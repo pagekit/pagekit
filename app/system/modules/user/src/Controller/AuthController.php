@@ -23,7 +23,7 @@ class AuthController
         return [
             '$view' => [
                 'title' => __('Login'),
-                'name'  => 'system/user/login.php'
+                'name' => 'system/user/login.php'
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
             'redirect' => $redirect
@@ -44,8 +44,6 @@ class AuthController
      */
     public function authenticateAction($credentials, $remember = false)
     {
-        $isXml = App::request()->isXmlHttpRequest();
-
         try {
 
             if (!App::csrf()->validate()) {
@@ -54,12 +52,7 @@ class AuthController
 
             App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
 
-            if (!$isXml) {
-                return App::auth()->login($user, $remember);
-            } else {
-                App::auth()->setUser($user, $remember);
-                return ['success' => true];
-            }
+            return App::auth()->login($user, $remember);
 
         } catch (BadCredentialsException $e) {
             $error = __('Invalid username or password.');
@@ -67,11 +60,11 @@ class AuthController
             $error = $e->getMessage();
         }
 
-        if (!$isXml) {
+        if (App::request()->isXmlHttpRequest()) {
+            App::abort(400, $error);
+        } else {
             App::message()->error($error);
             return App::redirect(App::url()->previous());
-        } else {
-            App::abort(400, $error);
         }
     }
 }
