@@ -73,17 +73,19 @@
 
             login: function () {
 
-                var args = {
-                    credentials: this.credentials,
-                    _remember_me: this.remember
-                };
+                var login = function () {
+                    return this.$http.post('user/authenticate', {
+                        credentials: this.credentials,
+                        _remember_me: this.remember
+                    }, {headers: {'X-LOGIN': true}});
+                }.bind(this);
 
-                this.$http.post('user/authenticate', args, {headers: {'X-LOGIN': true}}).then(null, function (res) {
+                login().then(null, function (res) {
 
                     if (res.data.csrf) {
 
                         this.$cache.set('_csrf', res.data.csrf);
-                        return this.$http.post('user/authenticate', args, {headers: {'X-LOGIN': true}});
+                        return login();
 
                     }
 
