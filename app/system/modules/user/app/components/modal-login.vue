@@ -70,7 +70,7 @@
 
                 this.$http.post('user/authenticate', {
                     credentials: this.credentials,
-                    _remember_me: this.remember
+                    remember_me: this.remember
                 }).then(function (res) {
                     this.$cache.set('_csrf', res.data.csrf);
                     this.fulfill();

@@ -32,17 +32,22 @@ class AuthController
 
     /**
      * @Route(defaults={"_maintenance" = true})
+     * @Request({"redirect": "string"})
      */
-    public function logoutAction()
+    public function logoutAction($redirect = '')
     {
-        return App::auth()->logout();
+        if (($event = App::auth()->logout()) && $event->hasResponse()) {
+            return $event->getResponse();
+        }
+
+        return App::redirect($redirect);
     }
 
     /**
      * @Route(methods="POST", defaults={"_maintenance" = true})
-     * @Request({"credentials": "array", "_remember_me": "boolean"})
+     * @Request({"credentials": "array", "remember_me": "boolean", "redirect": "string"})
      */
-    public function authenticateAction($credentials, $remember = false)
+    public function authenticateAction($credentials, $remember = false, $redirect = '')
     {
         try {
 
@@ -52,7 +57,15 @@ class AuthController
 
             App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
 
-            return App::auth()->login($user, $remember);
+            if (($event = App::auth()->login($user, $remember)) && $event->hasResponse()) {
+                return $event->getResponse();
+            }
+
+            if (App::request()->isXmlHttpRequest()) {
+                return App::response()->json(['csrf' => App::csrf()->generate()]);
+            } else {
+                return App::redirect($redirect);
+            }
 
         } catch (BadCredentialsException $e) {
             $error = __('Invalid username or password.');

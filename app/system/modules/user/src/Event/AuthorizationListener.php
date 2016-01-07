@@ -6,8 +6,6 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\Event\AuthenticateEvent;
 use Pagekit\Auth\Event\AuthorizeEvent;
-use Pagekit\Auth\Event\LoginEvent;
-use Pagekit\Auth\Event\LogoutEvent;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Event\EventSubscriberInterface;
 use Pagekit\User\Auth\UserProvider;
@@ -47,28 +45,10 @@ class AuthorizationListener implements EventSubscriberInterface
 
     /**
      * Redirects a user after successful login.
-     *
-     * @param LoginEvent $event
      */
-    public function onLogin(LoginEvent $event)
+    public function onLogin()
     {
         App::session()->migrate();
-        if(App::request()->isXmlHttpRequest()) {
-            $event->setResponse(App::response()->json(['csrf' => App::csrf()->generate()]));
-        } else {
-            $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
-        }
-
-    }
-
-    /**
-     * Redirects a user after successful logout.
-     *
-     * @param LogoutEvent $event
-     */
-    public function onLogout(LogoutEvent $event)
-    {
-        $event->setResponse(App::redirect(App::request()->get(Auth::REDIRECT_PARAM)));
     }
 
     public function onSuccess()
@@ -94,7 +74,6 @@ class AuthorizationListener implements EventSubscriberInterface
             ],
             'auth.authorize' => 'onAuthorize',
             'auth.login'     => ['onLogin', -8],
-            'auth.logout'    => ['onLogout', -8],
             'auth.success'    => 'onSuccess',
             'auth.failure'    => 'onFailure'
         ];
