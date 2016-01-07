@@ -3,32 +3,37 @@
     <div>
         <v-modal v-ref:login>
 
-            <form class="js-login js-toggle uk-form tm-form" @submit.prevent="login" v-el:login>
+            <div class="uk-text-center">
 
-                <div class="uk-panel uk-panel-box">
+                <img class="uk-margin" :src="$url('app/system/assets/images/pagekit-logo-text-black.svg')" alt="Pagekit">
 
-                    <h3 class="uk-panel-title">{{ 'Session expired' | trans }}</h3>
+                <p class="uk-text-danger">{{ 'Session expired. Please login again.' | trans }}</p>
 
-                    <div class="uk-form-row">
-                        <input class="uk-form uk-width-1-1" type="text" name="credentials[username]" placeholder="{{ 'Username' | trans }}" autofocus v-model="credentials.username">
+                <form class="js-login js-toggle uk-form tm-form" @submit.prevent="login" v-el:login>
+
+                    <div class="uk-panel uk-panel-box">
+
+                        <div class="uk-form-row">
+                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" placeholder="{{ 'Username' | trans }}" autofocus v-model="credentials.username">
+                        </div>
+
+                        <div class="uk-form-row">
+                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" placeholder="{{ 'Password' | trans }}" v-model="credentials.password">
+                        </div>
+
+                        <p class="uk-form-row tm-panel-marginless-bottom">
+                            <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">{{ 'Login' | trans }}</button>
+                        </p>
+
                     </div>
 
-                    <div class="uk-form-row">
-                        <input class="uk-form uk-width-1-1" type="password" name="credentials[password]" placeholder="{{ 'Password' | trans }}" v-model="credentials.password">
-                    </div>
-
-                    <div class="uk-form-row">
+                    <p>
                         <label class="uk-form"><input type="checkbox" v-model="remember"> {{ 'Remember Me' | trans }}</label>
-                    </div>
-
-                    <p class="uk-form-row tm-panel-marginless-bottom">
-                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1">{{ 'Login' | trans }}
-                        </button>
                     </p>
 
-                </div>
+                </form>
 
-            </form>
+            </div>
 
         </v-modal>
     </div>
@@ -70,7 +75,7 @@
 
                 this.$http.post('user/authenticate', {
                     credentials: this.credentials,
-                    remember_me: this.remember
+                    _remember_me: this.remember
                 }).then(function (res) {
                     this.$cache.set('_csrf', res.data.csrf);
                     this.fulfill();
