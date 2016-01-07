@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref:login modifier="pk-modal-login">
+        <v-modal v-ref:login>
 
             <div class="uk-text-center">
 

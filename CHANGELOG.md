@@ -3,6 +3,7 @@
 ## WIP
 
 ### Added
+- Show login modal for unauthorized Ajax requests
 - Events to DebugBar
 - Current Route Info to DebugBar
 - Request Switcher to DebugBar
