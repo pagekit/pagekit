@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <v-modal v-ref:login>
+        <v-modal v-ref:login modifier="pk-modal-login">
 
             <div class="uk-text-center">
 
@@ -9,7 +9,7 @@
 
                 <p class="uk-text-danger">{{ 'Session expired. Please login again.' | trans }}</p>
 
-                <form class="js-login js-toggle uk-form tm-form" @submit.prevent="login" v-el:login>
+                <form class="uk-form tm-form" @submit.prevent="login" v-el:login>
 
                     <div class="uk-panel uk-panel-box">
 
@@ -18,7 +18,7 @@
                         </div>
 
                         <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" placeholder="{{ 'Password' | trans }}" v-model="credentials.password">
+                            <input class="uk-form-large uk-width-1-1" type="password" name="credentials[password]" placeholder="{{ 'Password' | trans }}" v-model="credentials.password" v-el:password>
                         </div>
 
                         <p class="uk-form-row tm-panel-marginless-bottom">
@@ -99,6 +99,11 @@
 
                 }, function (res) {
                     this.$notify(res.data, 'danger');
+                    this.$els.login.classList.remove('uk-animation-shake');
+                    this.$nextTick(function () {
+                        this.$els.login.classList.add('uk-animation-shake');
+                    });
+                    this.$els.password.focus();
                 });
 
             }
