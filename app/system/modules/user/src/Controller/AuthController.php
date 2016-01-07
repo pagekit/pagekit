@@ -6,6 +6,7 @@ use Pagekit\Application as App;
 use Pagekit\Auth\Auth;
 use Pagekit\Auth\Exception\AuthException;
 use Pagekit\Auth\Exception\BadCredentialsException;
+use Pagekit\Session\Csrf\Exception\CsrfException;
 
 class AuthController
 {
@@ -52,7 +53,7 @@ class AuthController
         try {
 
             if (!App::csrf()->validate()) {
-                throw new AuthException(__('Invalid token. Please try again.'));
+                throw new CsrfException(__('Invalid token. Please try again.'));
             }
 
             App::auth()->authorize($user = App::auth()->authenticate($credentials, false));
@@ -67,6 +68,11 @@ class AuthController
                 return App::redirect($redirect);
             }
 
+        } catch (CsrfException $e) {
+            if (App::request()->isXmlHttpRequest()) {
+                return App::response()->json(['csrf' => App::csrf()->generate()], 401);
+            }
+            $error = $e->getMessage();
         } catch (BadCredentialsException $e) {
             $error = __('Invalid username or password.');
         } catch (AuthException $e) {
@@ -74,7 +80,7 @@ class AuthController
         }
 
         if (App::request()->isXmlHttpRequest()) {
-            App::abort(400, $error);
+            App::abort(401, $error);
         } else {
             App::message()->error($error);
             return App::redirect(App::url()->previous());

@@ -3,7 +3,7 @@
 namespace Pagekit\Session\Csrf\Event;
 
 use Pagekit\Event\EventSubscriberInterface;
-use Pagekit\Kernel\Exception\UnauthorizedException;
+use Pagekit\Session\Csrf\Exception\CsrfException;
 use Pagekit\Session\Csrf\Provider\CsrfProviderInterface;
 
 class CsrfListener implements EventSubscriberInterface
@@ -34,7 +34,7 @@ class CsrfListener implements EventSubscriberInterface
         $this->provider->setToken($request->get('_csrf', $request->headers->get('X-XSRF-TOKEN')));
 
         if ($request->attributes->get('_request[csrf]', false, true) && !$this->provider->validate()) {
-            new UnauthorizedException('Invalid CSRF token.');
+            throw new CsrfException('Invalid CSRF token.');
         }
     }
 
