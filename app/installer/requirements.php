@@ -364,6 +364,7 @@ class PagekitRequirements extends RequirementCollection
         $installedPhpVersion = phpversion();
 
         $this->addPhpIniRequirement('detect_unicode', false);
+        $this->addPhpIniRequirement('allow_url_fopen', true);
 
         $this->addRequirement(
             version_compare($installedPhpVersion, self::REQUIRED_PHP_VERSION, '>='),

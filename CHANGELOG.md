@@ -8,6 +8,7 @@
 - Request Switcher to DebugBar
 
 ### Changed
+- Requirements
 - Enforce reinstall of packages (#479)
 - Allow comment posting for 'authenticated' users by default (#518)
 
