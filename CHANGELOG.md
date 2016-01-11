@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Changed
+- Hide Trash menu from Site node picker
+
 ## 0.10.2 (January 11, 2016)
 
 ### Added
