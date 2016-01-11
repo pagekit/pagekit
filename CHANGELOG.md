@@ -14,6 +14,7 @@
 - Allow comment posting for 'authenticated' users by default (#518)
 
 ### Fixed
+- Auto updater
 - Add new roles (#512)
 - Package upload
 - Cleanup package dependencies (#488)
