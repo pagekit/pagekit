@@ -48,7 +48,7 @@ class Composer
         $this->blueprint = [
             'repositories' => [
                 ['type' => 'artifact', 'url' => $config['path.artifact']],
-                ['type' => 'composer', 'url' => str_replace('https', 'https?', $config['system.api']), 'allow_ssl_downgrade' => true]
+                ['type' => 'composer', 'url' => $config['system.api']]
             ]
         ];
     }

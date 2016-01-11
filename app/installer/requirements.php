@@ -382,6 +382,12 @@ class PagekitRequirements extends RequirementCollection
         );
 
         $this->addRequirement(
+            extension_loaded('openssl'),
+            'OpenSSL must be available',
+            'Install and enable the <strong>OpenSSL</strong> extension.'
+        );
+
+        $this->addRequirement(
             function_exists('session_start'),
             'session_start() must be available',
             'Install and enable the <strong>session</strong> extension.'
