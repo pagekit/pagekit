@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.10.2 (January 11, 2016)
 
 ### Added
 - Show login modal for unauthorized Ajax requests
