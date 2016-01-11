@@ -115,7 +115,7 @@ return [
         'auth.login' => [function ($event) use ($app) {
             if ($event->getUser()->hasAccess('system: software updates') && version_compare($this->config('version'), $app->version(), '<')) {
 
-                $scripts = new PackageScripts($this->path.'/scripts.php', $this->config('version'));
+                $scripts = new PackageScripts($this->path . '/scripts.php', $this->config('version'));
 
                 if ($scripts->hasUpdates()) {
                     $event->setResponse($app['response']->redirect('@system/migration', ['redirect' => $app['url']->getRoute('@system')]));
@@ -153,7 +153,11 @@ return [
             }
 
             $meta->add('title', implode(' | ', $title));
-        }
+        },
+
+        'view.head' => [function ($event, $view) {
+            $view->script('auth', 'app/system/modules/user/app/bundle/interceptor.js', ['vue']);
+        }, 50]
 
     ]
 

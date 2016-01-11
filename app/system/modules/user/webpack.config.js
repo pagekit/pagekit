@@ -2,6 +2,7 @@ module.exports = [
 
     {
         entry: {
+            "interceptor": "./app/interceptor",
             "registration": "./app/views/registration",
             "profile": "./app/views/profile",
             "permission-index": "./app/views/admin/permission-index",
