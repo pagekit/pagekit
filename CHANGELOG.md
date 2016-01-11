@@ -16,6 +16,7 @@
 - Add new roles (#512)
 - Package upload
 - Cleanup package dependencies (#488)
+- Installation without PDO_MYSQL (#516)
 
 ## 0.10.1 (Dezember 17, 2015)
 

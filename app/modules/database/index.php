@@ -8,7 +8,7 @@ use Pagekit\Database\ORM\Loader\AnnotationLoader;
 use Pagekit\Database\ORM\MetadataManager;
 use Pagekit\Event\PrefixEventDispatcher;
 
-return [
+$config = [
 
     'name' => 'database',
 
@@ -23,7 +23,7 @@ return [
             $dbs = [];
 
             foreach ($this->config['connections'] as $name => $params) {
-                 $dbs[$name] = DriverManager::getConnection(array_replace($default, $params));
+                $dbs[$name] = DriverManager::getConnection(array_replace($default, $params));
             }
 
             return $dbs;
@@ -80,10 +80,7 @@ return [
                 'engine'   => 'InnoDB',
                 'charset'  => 'utf8',
                 'collate'  => 'utf8_unicode_ci',
-                'prefix'   => '',
-                'driverOptions' => [
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8 COLLATE utf8_unicode_ci'
-                ]
+                'prefix'   => ''
 
             ]
 
@@ -92,3 +89,11 @@ return [
     ]
 
 ];
+
+if (defined('PDO::MYSQL_ATTR_INIT_COMMAND')) {
+    $config['config']['connections']['mysql']['driverOptions'] = [
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8 COLLATE utf8_unicode_ci'
+    ];
+}
+
+return $config;
