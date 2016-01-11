@@ -25,7 +25,7 @@ class UninstallCommand extends Command
      */
     protected function configure()
     {
-        $this->addArgument('packages', InputArgument::IS_ARRAY, '[Package name]');
+        $this->addArgument('packages', InputArgument::IS_ARRAY | InputArgument::REQUIRED, '[Package name]');
     }
 
     /**

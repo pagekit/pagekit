@@ -25,7 +25,7 @@ class InstallCommand extends Command
      */
     protected function configure()
     {
-        $this->addArgument('packages', InputArgument::IS_ARRAY, '[Package name]:[Version constraint]');
+        $this->addArgument('packages', InputArgument::IS_ARRAY | InputArgument::REQUIRED, '[Package name]:[Version constraint]');
     }
 
     /**
