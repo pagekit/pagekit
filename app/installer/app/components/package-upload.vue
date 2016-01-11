@@ -25,6 +25,10 @@
 
     module.exports = {
 
+        mixins: [
+            require('../lib/package')
+        ],
+
         props: {
             api: {type: String, default: ''},
             packages: Array,
@@ -106,10 +110,11 @@
 
         },
 
-        mixins: [
-            require('../lib/package')
-        ]
+        components: {
 
+            'package-details': require('./package-details.vue')
+
+        }
     };
 
 </script>

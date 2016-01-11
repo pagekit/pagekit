@@ -214,7 +214,8 @@ class PackageController
                         $package = App::package()->load($json);
                         $extra = $package->get('extra');
 
-                        if (isset($extra['image'])) {
+                        if (isset($extra['icon']) || isset($extra['image'])) {
+                            unset($extra['icon']);
                             unset($extra['image']);
                             $package->set('extra', $extra);
                         }

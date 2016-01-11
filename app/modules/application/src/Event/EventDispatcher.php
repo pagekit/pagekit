@@ -157,6 +157,30 @@ class EventDispatcher implements EventDispatcherInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getListenerPriority($event, $listener)
+    {
+        if (!isset($this->listeners[$event])) {
+            return;
+        }
+
+        foreach ($this->listeners[$event] as $priority => $listeners) {
+            if (false !== array_search($listener, $listeners, true)) {
+                return $priority;
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEventClass()
+    {
+        return $this->event;
+    }
+
+    /**
      * Sorts all listeners of an event by their priority.
      *
      * @param  string $event

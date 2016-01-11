@@ -21,9 +21,8 @@ return [
         $user              = $app['user'];
         $redirect          = $widget->get($user->isAuthenticated() ? 'redirect_logout' : 'redirect_login') ?: $app['url']->current(true);
         $last_username     = $app['session']->get(Auth::LAST_USERNAME);
-        $remember_me_param = Auth::REMEMBER_ME_PARAM;
 
-        return $app['view']('system/user/widget-login.php', compact('widget', 'options', 'user', 'last_username', 'remember_me_param', 'redirect'));
+        return $app['view']('system/user/widget-login.php', compact('widget', 'options', 'user', 'last_username', 'redirect'));
     }
 
 ];

@@ -62,7 +62,7 @@ module.exports = {
             var vm = this;
 
             this.$set('progress', 66);
-            this.$http.get('admin/system/update/update', {
+            this.$http.get('admin/system/update/update', null, {
                 xhr: {
                     onprogress: function () {
                         vm.setOutput(this.responseText);

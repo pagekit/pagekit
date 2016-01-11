@@ -1,6 +1,6 @@
 <template>
 
-    <a title="Time"><span class="pf-icon pf-icon-time"></span>{{ duration_str }}</a>
+    <a title="Time"><span class="pf-icon pf-icon-time"></span>{{ data.duration_str }}</a>
 
 </template>
 
@@ -12,11 +12,7 @@
             priority: 30
         },
 
-        props: ['data'],
-
-        data: function () {
-            return this.data;
-        }
+        props: ['data']
 
     };
 

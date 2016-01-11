@@ -4,6 +4,10 @@ function install (Vue) {
 
     Vue.config.debug = false;
 
+    Vue.prototype.$session = window.sessionStorage || {};
+    Vue.prototype.$cache = require('lscache');
+    Vue.cache = require('lscache');
+
     /**
      * Libraries
      */
@@ -12,6 +16,7 @@ function install (Vue) {
     require('vue-intl');
     require('vue-resource');
     require('./lib/asset')(Vue);
+    require('./lib/csrf')(Vue);
     require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
     require('./lib/filters')(Vue);
@@ -49,7 +54,6 @@ function install (Vue) {
     Vue.url.options.root = config.url.replace(/\/index.php$/i, '');
     Vue.http.options.root = config.url;
     Vue.http.options.emulateHTTP = true;
-    Vue.http.headers.custom = {'X-XSRF-TOKEN': config.csrf};
 
     Vue.url.route = function (url, params) {
 
@@ -67,9 +71,6 @@ function install (Vue) {
     };
 
     Vue.url.current = Vue.url.parse(window.location.href);
-
-    Vue.prototype.$session = window.sessionStorage || {};
-    Vue.prototype.$cache = require('lscache');
 
     Vue.ready = function (fn) {
 

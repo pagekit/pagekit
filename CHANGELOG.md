@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.10.2 (January 11, 2016)
+
+### Added
+- Show login modal for unauthorized Ajax requests
+- Events to DebugBar
+- Current Route Info to DebugBar
+- Request Switcher to DebugBar
+
+### Changed
+- Requirements
+- Enforce reinstall of packages (#479)
+- Allow comment posting for 'authenticated' users by default (#518)
+
+### Fixed
+- Add new roles (#512)
+- Package upload
+- Cleanup package dependencies (#488)
+- Installation without PDO_MYSQL (#516)
+
 ## 0.10.1 (Dezember 17, 2015)
 
 ### Added
@@ -16,7 +35,7 @@
 - Editor preview handles Vuejs markup
 - Redirects on login and logout
 
-## 0.10.0 (Dezember 15, 2015)
+## 0.10.0 (December 15, 2015)
 
 ### Added
 - Options in video picker

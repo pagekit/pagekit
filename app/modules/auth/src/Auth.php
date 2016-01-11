@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Auth
 {
-    const REDIRECT_PARAM    = 'redirect';
     const LAST_USERNAME     = '_auth.last_username';
-    const REMEMBER_ME_PARAM = '_remember_me';
 
     /**
      * @var EventDispatcherInterface
@@ -157,7 +155,7 @@ class Auth
     {
         $this->setUser($user, $remember);
 
-        return $this->events->trigger(new LoginEvent(AuthEvents::LOGIN, $user))->getResponse();
+        return $this->events->trigger(new LoginEvent(AuthEvents::LOGIN, $user));
     }
 
     /**
@@ -170,6 +168,6 @@ class Auth
         $event = $this->events->trigger(new LogoutEvent(AuthEvents::LOGOUT, $this->getUser()));
         $this->removeUser();
 
-        return $event->getResponse();
+        return $event;
     }
 }

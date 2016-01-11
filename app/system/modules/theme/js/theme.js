@@ -41,9 +41,7 @@ Vue.ready(function () {
             data[$(this).data('id')] = i;
         });
 
-        Vue.http.post('admin/adminmenu', {order: data}, function () {
-            // TODO message?
-        });
+        Vue.http.post('admin/adminmenu', {order: data});
     });
 
     // show system messages

@@ -96,7 +96,11 @@ class AccessListener implements EventSubscriberInterface
 
         foreach ($access as $expression) {
             if (!App::user()->hasAccess($expression)) {
-                App::abort(403, __('Insufficient User Rights.'));
+                if (!App::user()->isAuthenticated()) {
+                    App::abort(401, __('Unauthorized'));
+                } else {
+                    App::abort(403, __('Insufficient User Rights.'));
+                }
             }
         }
     }
@@ -106,7 +110,7 @@ class AccessListener implements EventSubscriberInterface
      */
     public function onRequest($event, $request)
     {
-        if (App::auth()->getUser() or !in_array('system: access admin area', $request->attributes->get('_access', []))) {
+        if ($request->isXmlHttpRequest() || App::auth()->getUser() || !in_array('system: access admin area', $request->attributes->get('_access', []))) {
             return;
         }
 
