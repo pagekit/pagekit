@@ -213,26 +213,19 @@
                     }
                 );
 
-                var timezoneKey = 'timezone-' + this.widget.coords.lat + this.widget.coords.lon;
+                this.$http.get('https://maps.googleapis.com/maps/api/timezone/json',
+                    {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)},
+                    {cache: {key: 'timezone-' + this.widget.coords.lat + this.widget.coords.lon, lifetime: 1440}}).then(function (res) {
 
-                if (this.$cache.get(timezoneKey)) {
+                    var data = res.data;
+                    data.offset = data.rawOffset + data.dstOffset;
 
-                    this.$set('timezone', this.$cache.get(timezoneKey));
+                    this.$set('timezone', data);
 
-                } else {
-                    // TODO: Change to resource caching (timestamp param is a problem)
-                    this.$http.get('https://maps.googleapis.com/maps/api/timezone/json', {location: this.widget.coords.lat + ',' + this.widget.coords.lon, timestamp: Math.floor(Date.now() / 1000)}).then(function (res) {
-                                var data = res.data;
-                                data.offset = data.rawOffset + data.dstOffset;
+                }, function () {
+                    this.$set('status', 'error');
+                });
 
-                                this.$cache.set(timezoneKey, data, 1440);
-                                this.$set('timezone', data);
-
-                            }, function () {
-                                this.$set('status', 'error');
-                            });
-
-                }
 
             },
 
