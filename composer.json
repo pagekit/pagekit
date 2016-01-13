@@ -22,7 +22,7 @@
         "lusitanian/oauth": "~0.3.5",
         "maximebf/debugbar": "~1.11.0",
         "monolog/monolog": "~1.13",
-        "nikic/php-parser": "~1.2.2",
+        "nikic/php-parser": "~2.0.0",
         "psr/log": "~1.0.0",
         "swiftmailer/swiftmailer": "~5.4.1",
         "symfony/debug": "~2.7.3",

@@ -25,7 +25,7 @@
 - Cleanup package dependencies (#488)
 - Installation without PDO_MYSQL (#516)
 
-## 0.10.1 (Dezember 17, 2015)
+## 0.10.1 (December 17, 2015)
 
 ### Added
 - Version cache break for JS and CSS
