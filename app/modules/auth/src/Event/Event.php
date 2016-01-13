@@ -15,6 +15,7 @@ class Event extends BaseEvent
     /**
      * Constructor.
      *
+     * @param string $name	 
      * @param UserInterface $user
      */
     public function __construct($name, UserInterface $user = null)
