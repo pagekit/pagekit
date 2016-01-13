@@ -1,32 +1,42 @@
 module.exports = function (Vue) {
 
-    Vue.http.interceptors.unshift({
+    Vue.http.interceptors.unshift(function () {
 
-            request: function (request) {
+            var hit, key, lifetime;
 
-                if (request.cache !== undefined && /^(GET|JSONP)$/i.test(request.method)) {
+            return {
+                request: function (request) {
 
-                    var hit = Vue.cache.get(request.url);
+                    if (request.cache !== undefined && /^(GET|JSONP)$/i.test(request.method)) {
 
-                    if (hit) {
-                        delete request.cache;
-                        request.client = function () {
-                            return hit;
-                        };
+                        if (_.isObject(request.cache)) {
+                            lifetime = request.cache.lifetime;
+                            key = '_resource.' + request.cache.key;
+                        } else {
+                            lifetime = request.cache;
+                            key = request.url;
+                        }
+
+                        hit = Vue.cache.get(key);
+                        if (hit) {
+                            request.client = function () {
+                                return hit;
+                            };
+                        }
                     }
+
+                    return request;
+                },
+
+                response: function (response) {
+
+                    if (!hit && response.ok) {
+                        Vue.cache.set(key, response, lifetime);
+                    }
+
+                    return response;
                 }
-
-                return request;
-            },
-
-            response: function (response) {
-
-                if (response.request.cache !== undefined && response.ok) {
-                    Vue.cache.set(response.request.url, response, response.request.cache);
-                }
-
-                return response;
-            }
+            };
 
         }
     );
