@@ -175,7 +175,7 @@
 
 ### Removed
 - 'settings' from extension/theme config, use 'parameters' instead
-- GLOB_BRACE for Solaris compatiblity
+- GLOB_BRACE for Solaris compatibility
 
 ### Fixed
 - Blog/Page url handling
