@@ -14,8 +14,8 @@ module.exports = {
     },
 
     created: function () {
-        this.Menus = this.$resource('api/site/menu/:id');
-        this.Nodes = this.$resource('api/site/node/:id');
+        this.Menus = this.$resource('api/site/menu/{id}');
+        this.Nodes = this.$resource('api/site/node/{id}');
 
         var vm = this;
         this.load().then(function () {
