@@ -12,6 +12,7 @@ module.exports = {
             update: false,
             output: '',
             progress: 0,
+            changelog: [],
             errors: []
         }, window.$data);
     },
@@ -33,18 +34,18 @@ module.exports = {
         getVersions: function () {
 
             this.$http.get(this.api + '/api/update').then(
-                    function (res) {
-                        var data = res.data;
-                        var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+                function (res) {
+                    var data = res.data;
+                    var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
-                        if (channel) {
-                            this.$set('update', channel);
-                        } else {
-                            this.error(this.$trans('Cannot obtain versions. Please try again later.'));
-                        }
-                    }, function () {
-                        this.error(this.$trans('Cannot connect to the server. Please try again later.'));
-                    });
+                    if (channel) {
+                        this.$set('update', channel);
+                    } else {
+                        this.error(this.$trans('Cannot obtain versions. Please try again later.'));
+                    }
+                }, function () {
+                    this.error(this.$trans('Cannot connect to the server. Please try again later.'));
+                });
 
         },
 
@@ -55,7 +56,10 @@ module.exports = {
 
         doDownload: function (update) {
             this.$set('progress', 33);
-            this.$http.post('admin/system/update/download', {url: update.url, shasum: update.shasum}).then(this.doInstall, this.error);
+            this.$http.post('admin/system/update/download', {
+                url: update.url,
+                shasum: update.shasum
+            }).then(this.doInstall, this.error);
         },
 
         doInstall: function () {
@@ -103,6 +107,40 @@ module.exports = {
 
             this.status = 'error';
             this.finished = true;
+        }
+
+    },
+
+    filters: {
+        marked: marked
+    },
+
+    watch: {
+
+        update: function (update) {
+
+            var changelog;
+
+            this.$http.get('https://api.github.com/repos/pagekit/pagekit/releases', null, {
+                cache: {
+                    key: 'changelog-' + update.version,
+                    lifetime: 60
+                }
+            }).then(function (res) {
+
+                var vm = this, changelog = [];
+
+                res.data.forEach(function (release) {
+
+                    if (Version.compare(release.name, vm.version, '>')) {
+                        changelog.push({version: release.name, desc: release.body})
+                    }
+
+                });
+
+                this.changelog = changelog;
+
+            });
         }
 
     }

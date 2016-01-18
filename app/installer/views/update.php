@@ -1,4 +1,4 @@
-<?php $view->script('update', 'installer:app/bundle/update.js', 'vue') ?>
+<?php $view->script('update', 'installer:app/bundle/update.js', ['vue', 'marked']) ?>
 
 <div id="update" v-cloak>
 
@@ -22,6 +22,14 @@
             </a>
             <a class="uk-button uk-button-success" :href="update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
+
+        <h1 v-show="changelog.length">{{ 'Changelog' | trans }}</h1>
+        <div v-for="release in changelog">
+
+            <h2>{{ release.version }}</h2>
+            <div v-html="release.desc | marked"></div>
+
+        </div>
 
     </div>
 
