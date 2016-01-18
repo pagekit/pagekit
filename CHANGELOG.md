@@ -5,6 +5,9 @@
 ### Changed
 - Hide Trash menu from Site node picker
 
+### Fixed
+- Username validation in installer and backend (#513)
+
 ## 0.10.2 (January 11, 2016)
 
 ### Added
