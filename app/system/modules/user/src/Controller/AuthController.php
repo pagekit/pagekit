@@ -83,7 +83,7 @@ class AuthController
             App::abort(401, $error);
         } else {
             App::message()->error($error);
-            return App::redirect(App::url()->previous());
+            return App::redirect((preg_replace('#(https?:)?//[^/]+#', '', App::url()->previous())));
         }
     }
 }
