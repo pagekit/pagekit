@@ -7,6 +7,7 @@
 
 ### Fixed
 - Username validation in installer and backend (#513)
+- Widget Settings
 
 ## 0.10.2 (January 11, 2016)
 

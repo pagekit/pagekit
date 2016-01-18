@@ -4,7 +4,7 @@
     "lodash": "~3.10.1",
     "lscache": "~1.0.5",
     "uikit": "#master",
-    "vue": "~1.0.11",
+    "vue": "~1.0.14",
     "vue-form": "pagekit/vue-form#master",
     "vue-intl": "~0.1.1",
     "vue-resource": "#develop"

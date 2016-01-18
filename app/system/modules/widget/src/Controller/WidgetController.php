@@ -23,8 +23,7 @@ class WidgetController
                 'types' => App::widget()->all(),
                 'config' => [
                     'menus' => App::menu(),
-                    'nodes' => array_values(Node::query()->get()),
-                    'positions' => array_values(App::position()->all())
+                    'nodes' => array_values(Node::query()->get())
                 ]
             ]
         ];

@@ -7,19 +7,7 @@ window.Widgets = module.exports = {
     },
 
     created: function () {
-        this.resource = this.$resource('api/site/widget/:id');
-    },
-
-    methods: {
-
-        load: function () {
-
-            return this.resource.query().then(function (res) {
-                this.$set('widgets', res.data);
-            });
-
-        }
-
+        this.resource = this.$resource('api/site/widget/{id}');
     },
 
     partials: {
