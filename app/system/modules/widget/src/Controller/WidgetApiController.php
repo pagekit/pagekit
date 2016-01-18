@@ -17,7 +17,6 @@ class WidgetApiController
     {
         $widgets = Widget::findAll();
         $positions = App::position()->all();
-        $assigned = [];
 
         foreach ($positions as &$position) {
             $position['widgets'] = [];
