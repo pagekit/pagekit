@@ -8,6 +8,7 @@ module.exports = [{
     },
     externals: {
         "jquery": "jQuery",
+        "lodash": "_",
         "vue": "Vue"
     },
     module: {
