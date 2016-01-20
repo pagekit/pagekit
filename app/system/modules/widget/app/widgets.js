@@ -7,7 +7,7 @@ window.Widgets = module.exports = {
     },
 
     created: function () {
-        this.resource = this.$resource('api/site/widget/{id}');
+        this.resource = this.$resource('api/site/widget{/id}');
     },
 
     partials: {
