@@ -1,3 +1,5 @@
+var md5 = require('md5');
+
 module.exports = function (Vue) {
 
     Vue.http.interceptors.unshift(function () {
@@ -14,7 +16,7 @@ module.exports = function (Vue) {
                             key = '_resource.' + request.cache.key;
                         } else {
                             lifetime = request.cache;
-                            key = request.url;
+                            key = md5(JSON.stringify(request));
                         }
 
                         hit = Vue.cache.get(key);
