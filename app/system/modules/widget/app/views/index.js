@@ -6,7 +6,7 @@ module.exports = {
 
     data: function () {
         return _.merge({
-            position: undefined,
+            position:  this.$cache.get('widget.position'),
             selected: [],
             config: {positions: [], filter: {search: '', node: ''}},
             unassignedWidgets: [],
@@ -108,6 +108,7 @@ module.exports = {
             }
 
             this.$set('position', position);
+            this.$cache.set('widget.position', position, 60);
         },
 
         assign: function (position, ids) {
