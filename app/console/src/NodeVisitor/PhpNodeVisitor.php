@@ -15,7 +15,6 @@ class PhpNodeVisitor extends NodeVisitor implements BaseVisitor
      */
     public function traverse(array $files)
     {
-        $lexer  = new Lexer;
         $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP5);
 
         $traverser = new NodeTraverser(true);
