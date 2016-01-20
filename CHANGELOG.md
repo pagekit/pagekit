@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Added
+- Navigation cache for widget and site settings
+
 ### Changed
 - Hide Trash menu from Site node picker
 - Deny cross site redirects after login and logout
