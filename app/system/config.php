@@ -31,7 +31,8 @@ return [
         'files' => "$path/tmp/sessions",
         'table' => '@system_session',
         'cookie' => [
-            'name' => 'pagekit_session'
+            'name' => 'pagekit_session',
+            'httponly' => true
         ]
 
     ],
