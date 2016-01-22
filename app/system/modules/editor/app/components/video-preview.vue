@@ -17,7 +17,7 @@
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
-        <img class="uk-responsive-width" :src="imageSrc" :width="width" :height="height" v-if="imageSrc">
+        <img :src="imageSrc" v-if="imageSrc">
         <video class="uk-responsive-width" :src="videoSrc" :width="width" :height="height" v-if="videoSrc"></video>
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
