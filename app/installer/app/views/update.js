@@ -33,7 +33,7 @@ module.exports = {
 
         getVersions: function () {
 
-            this.$http.get(this.api + '/api/update').then(
+            this.$http.get(this.api + '/api/update', {version: this.version}).then(
                 function (res) {
                     var data = res.data;
                     var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
