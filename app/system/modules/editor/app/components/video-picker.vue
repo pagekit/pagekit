@@ -26,7 +26,7 @@
                     </div>
                     <div>
                         <label for="form-src" class="uk-form-label">{{ 'Height' | trans }}</label>
-                        <input class="uk-width-1-1" id="form-height" type="text" :placeholder="'Height' | trans"v-model="video.data.height">
+                        <input class="uk-width-1-1" id="form-height" type="text" :disabled="!isVimeo && !isYoutube" :placeholder="'Height' | trans"v-model="video.data.height">
                     </div>
                 </div>
 

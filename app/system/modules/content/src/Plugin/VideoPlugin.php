@@ -36,6 +36,14 @@ class VideoPlugin implements EventSubscriberInterface
         $src = $options['src'];
         unset($options['src']);
 
+        $html = '<video class="uk-responsive-width" src="%s"';
+        foreach ($options as $attr => $value) {
+            if ($value) {
+                $html .= ' ' . $attr . (is_bool($value) ? '' : '="' . $value . '"');
+            }
+        }
+        $html .= '></video>';
+
         if (isset($options['width'])) {
             $width = $options['width'];
             unset($options['width']);
@@ -49,14 +57,6 @@ class VideoPlugin implements EventSubscriberInterface
         } else {
             $height = '390';
         }
-
-        $html = '<video class="uk-responsive-width" src="%s" width="%s" height="%s"';
-        foreach ($options as $attr => $value) {
-            if ($value) {
-                $html .= ' ' . $attr . (is_bool($value) ? '' : '="' . $value . '"');
-            }
-        }
-        $html .= '></video>';
 
         $options['wmode'] = 'transparent';
         if (preg_match(self::REGEX_YOUTUBE, $src, $matches)) {
