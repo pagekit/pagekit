@@ -20,6 +20,11 @@
                 </div>
 
                 <div class="uk-form-row">
+                    <label for="form-src" class="uk-form-label">{{ 'Size' | trans }}</label>
+                    <input type="text" :placeholder="'Width' | trans" v-model="video.data.width"> x <input type="text" :placeholder="'Height' | trans"v-model="video.data.height">
+                </div>
+
+                <div class="uk-form-row">
                     <label><input type="checkbox" v-model="video.data.autoplay"> {{ 'Autoplay' | trans }}</label>
                     <label class="uk-margin-small-left" v-show="!isVimeo"><input type="checkbox" v-model="video.data.controls"> {{ 'Controls' | trans }}</label>
                     <label class="uk-margin-small-left"><input type="checkbox" v-model="video.data.loop"> {{ 'Loop' | trans }}</label>

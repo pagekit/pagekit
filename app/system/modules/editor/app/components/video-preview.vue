@@ -17,8 +17,8 @@
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
-        <img class="uk-width-1-1" :src="imageSrc" v-if="imageSrc">
-        <video class="uk-width-1-1" :src="videoSrc" v-if="videoSrc"></video>
+        <img class="uk-responsive-width" :src="imageSrc" :width="width" :height="height" v-if="imageSrc">
+        <video class="uk-responsive-width" :src="videoSrc" :width="width" :height="height" v-if="videoSrc"></video>
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 
@@ -41,13 +41,14 @@
         props: ['index'],
 
         data: function() {
-            return {imageSrc: undefined, videoSrc: undefined};
+            return {imageSrc: false, videoSrc: false, width: '', height: ''};
         },
 
         watch: {
-            'video.data.src': {
+            'video.data': {
                 handler: 'update',
-                immediate: true
+                immediate: true,
+                deep: true
             }
         },
 
@@ -69,14 +70,16 @@
                 this.video.replace('');
             },
 
-            update: function (src) {
+            update: function (data) {
 
                 var matches;
 
-                this.$set('imageSrc', undefined);
-                this.$set('videoSrc', undefined);
+                this.$set('imageSrc', false);
+                this.$set('videoSrc', false);
+                this.$set('width', data.width || 690);
+                this.$set('height', data.height || 390);
 
-                src = src || '';
+                var src = data.src || '';
                 if (matches = (src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || src.match(/youtu\.be\/(.*)/))) {
 
                     this.imageSrc = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
@@ -91,7 +94,7 @@
 
                     } else {
 
-                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}).then(function (res) {
+                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, {cache: 10}).then(function (res) {
 
                             this.imageSrc = this.$session[id] = res.data.thumbnail_url;
 
