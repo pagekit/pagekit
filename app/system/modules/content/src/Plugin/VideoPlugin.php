@@ -47,7 +47,7 @@ class VideoPlugin implements EventSubscriberInterface
         $options['wmode'] = 'transparent';
         if (preg_match(self::REGEX_YOUTUBE, $src, $matches)) {
 
-            if ($options['loop']) {
+            if (isset($options['loop']) && $options['loop']) {
                 $options['playlist'] = $matches[2];
             }
 
@@ -57,7 +57,7 @@ class VideoPlugin implements EventSubscriberInterface
 
         } elseif (preg_match(self::REGEX_YOUTUBE_SHORT, $src, $matches)) {
 
-            if ($options['loop']) {
+            if (isset($options['loop']) && $options['loop']) {
                 $options['playlist'] = $matches[1];
             }
 

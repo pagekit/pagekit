@@ -13,6 +13,7 @@
 ### Fixed
 - Username validation in installer and backend (#513)
 - Widget Settings
+- Embedded Youtube videos
 
 ## 0.10.2 (January 11, 2016)
 
