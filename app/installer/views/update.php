@@ -25,10 +25,10 @@
         </p>
 
         <h1 v-show="changelog.length">{{ 'Changelog' | trans }}</h1>
-        <div v-for="release in changelog">
+        <div v-for="release in releases" v-if="release.version | showChangelog">
 
             <h2>{{ release.version }}</h2>
-            <div v-html="release.desc | marked"></div>
+            <div v-html="release.changelog | marked"></div>
 
         </div>
 

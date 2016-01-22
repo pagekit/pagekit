@@ -12,7 +12,7 @@ module.exports = {
             update: false,
             output: '',
             progress: 0,
-            changelog: [],
+            releases: [],
             errors: []
         }, window.$data);
     },
@@ -39,7 +39,8 @@ module.exports = {
                     var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
                     if (channel) {
-                        this.$set('update', channel);
+                        this.update = channel;
+                        this.releases = data.versions;
                     } else {
                         this.error(this.$trans('Cannot obtain versions. Please try again later.'));
                     }
@@ -111,35 +112,11 @@ module.exports = {
     },
 
     filters: {
-        marked: marked
-    },
 
-    watch: {
+        marked: marked,
 
-        update: function (update) {
-
-            var changelog;
-
-            this.$http.get('https://api.github.com/repos/pagekit/pagekit/releases', null, {
-                cache: {
-                    key: 'changelog-' + update.version,
-                    lifetime: 60
-                }
-            }).then(function (res) {
-
-                var vm = this, changelog = [];
-
-                res.data.forEach(function (release) {
-
-                    if (Version.compare(release.name, vm.version, '>')) {
-                        changelog.push({version: release.name, desc: release.body})
-                    }
-
-                });
-
-                this.changelog = changelog;
-
-            });
+        showChangelog: function (version) {
+            return Version.compare(version, this.version, '>');
         }
 
     }
