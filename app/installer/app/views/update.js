@@ -57,8 +57,7 @@ module.exports = {
         doDownload: function (update) {
             this.$set('progress', 33);
             this.$http.post('admin/system/update/download', {
-                url: update.url,
-                shasum: update.shasum
+                url: update.url
             }).then(this.doInstall, this.error);
         },
 
