@@ -22,11 +22,11 @@
                 <div class="uk-grid uk-grid-width-1-2 uk-form-row">
                     <div>
                         <label for="form-src" class="uk-form-label">{{ 'Width' | trans }}</label>
-                        <input class="uk-width-1-1" id ="form-width" type="text" :placeholder="'Width' | trans" v-model="video.data.width">
+                        <input class="uk-width-1-1" id="form-width" type="text" :placeholder="'Width' | trans" v-model="video.data.width">
                     </div>
                     <div>
                         <label for="form-src" class="uk-form-label">{{ 'Height' | trans }}</label>
-                        <input class="uk-width-1-1" id ="form-height" type="text" :placeholder="'Height' | trans"v-model="video.data.height">
+                        <input class="uk-width-1-1" id="form-height" type="text" :placeholder="'Height' | trans"v-model="video.data.height">
                     </div>
                 </div>
 
