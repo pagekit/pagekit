@@ -5,7 +5,7 @@ module.exports = {
     data: function () {
         return _.merge({
             edit: undefined,
-            menu: this.$cache.get('site.menu') || {},
+            menu: this.$session.get('site.menu') || {},
             menus: [],
             nodes: [],
             tree: false,
@@ -77,7 +77,7 @@ module.exports = {
             this.$set('selected', []);
             this.$set('menu', menu);
 
-            this.$cache.set('site.menu', menu, 60);
+            this.$session.set('site.menu', menu);
         },
 
         removeMenu: function (menu) {

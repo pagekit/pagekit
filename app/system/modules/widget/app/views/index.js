@@ -6,9 +6,9 @@ module.exports = {
 
     data: function () {
         return _.merge({
-            position:  this.$cache.get('widget.position'),
+            position: this.$session.get('widget.position') || undefined,
             selected: [],
-            config: {positions: [], filter: {search: '', node: ''}},
+            config: {positions: [], filter: this.$session.get('widget.filter') || {}},
             unassignedWidgets: [],
             type: {}
         }, window.$data)
@@ -108,7 +108,11 @@ module.exports = {
             }
 
             this.$set('position', position);
-            this.$cache.set('widget.position', position, 60);
+            if (position) {
+                this.$session.set('widget.position', position);
+            } else {
+                this.$session.remove('widget.position');
+            }
         },
 
         assign: function (position, ids) {
@@ -210,6 +214,15 @@ module.exports = {
             return this.selected.indexOf(id) !== -1;
         }
 
+    },
+
+    watch: {
+        'config.filter': {
+            handler: function (filter) {
+                this.$session.set('widget.filter', filter);
+            },
+            deep: true
+        }
     },
 
     filters: {
