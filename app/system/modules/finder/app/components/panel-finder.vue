@@ -73,9 +73,9 @@
 
         props: {
             root: {type: String, default: '/'},
-            path: {type: String, default: '/'},
             mode: {type: String, default: 'write'},
-            view: {type: String, default: 'table'},
+            path: {type: String},
+            view: {type: String},
             modal: Boolean
         },
 
@@ -86,6 +86,17 @@
                 items: false,
                 search: ''
             };
+        },
+
+        created: function () {
+
+            if (!this.path) {
+                this.path = this.$session.get('finder.' + this.root + '.path') || '/';
+            }
+
+            if (!this.view) {
+                this.view = this.$session.get('finder.' + this.root + '.view') || 'table';
+            }
         },
 
         ready: function () {
@@ -101,8 +112,13 @@
 
         watch: {
 
-            path: function () {
+            path: function (path) {
                 this.load();
+                this.$session.set('finder.' + this.root + '.path', path);
+            },
+
+            view: function (view) {
+                this.$session.set('finder.' + this.root + '.view', view);
             },
 
             selected: function () {

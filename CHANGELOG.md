@@ -3,7 +3,8 @@
 ## WIP
 
 ### Added
-- Navigation cache for widget and site settings
+- Filter cache for widget and site settings
+- Remember last finder position and view setting
 
 ### Changed
 - Hide Trash menu from Site node picker
