@@ -9,7 +9,7 @@
     <div class="uk-form-row">
         <label for="form-username" class="uk-form-label"><?= __('Username') ?></label>
         <div class="uk-form-controls">
-            <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-validate:required>
+            <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]+$/">
             <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid"><?= __('Username cannot be blank.') ?></p>
         </div>
     </div>
