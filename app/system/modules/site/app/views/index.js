@@ -76,8 +76,8 @@ module.exports = {
 
             this.$set('selected', []);
             this.$set('menu', menu);
-
             this.$session.set('site.menu', menu);
+
         },
 
         removeMenu: function (menu) {
