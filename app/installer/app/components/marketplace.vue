@@ -46,8 +46,7 @@
                         <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <div>{{ pkg.description }}</div>
-
+                        <div v-html="pkg.description"></div>
 
                         <ul class="uk-list">
                             <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
