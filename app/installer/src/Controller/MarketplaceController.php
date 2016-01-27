@@ -13,7 +13,7 @@ class MarketplaceController
     /**
      * @Request({"page":"int"})
      */
-    public function themesAction($page = 0)
+    public function themesAction($page = null)
     {
         return [
             '$view' => [
@@ -33,7 +33,7 @@ class MarketplaceController
     /**
      * @Request({"page":"int"})
      */
-    public function extensionsAction($page = 0)
+    public function extensionsAction($page = null)
     {
         return [
             '$view' => [
