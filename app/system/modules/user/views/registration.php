@@ -1,48 +1,38 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="uk-article uk-form uk-form-stacked" v-validator="form" @submit.prevent="submit | valid" v-cloak>
+<form id="user-registration" class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" @submit.prevent="submit | valid" v-cloak>
 
-    <h1 class="uk-article-title"><?= __('Registration') ?></h1>
+    <h1 class="uk-h2 uk-text-center"><?= __('Create an account') ?></h1>
 
     <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
     <div class="uk-form-row">
-        <label for="form-username" class="uk-form-label"><?= __('Username') ?></label>
-        <div class="uk-form-controls">
-            <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
-            <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid"><?= __('Username is invalid.') ?></p>
-        </div>
+        <input class="uk-width-1-1" type="text" name="username" placeholder="<?= __('Username') ?>" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
+        <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid"><?= __('Username is invalid.') ?></p>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-name" class="uk-form-label"><?= __('Name') ?></label>
-        <div class="uk-form-controls">
-            <input id="form-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-validate:required>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid"><?= __('Name cannot be blank.') ?></p>
-        </div>
+        <input class="uk-width-1-1" type="text" name="name" placeholder="<?= __('Name') ?>" v-model="user.name" v-validate:required>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid"><?= __('Name cannot be blank.') ?></p>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-email" class="uk-form-label"><?= __('Email') ?></label>
-        <div class="uk-form-controls">
-            <input id="form-email" class="uk-form-width-large" type="email" name="email" v-model="user.email" v-validate:email v-validate:required>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid"><?= __('Email address is invalid.') ?></p>
-        </div>
+        <input class="uk-width-1-1" type="email" name="email" placeholder="<?= __('Email') ?>" v-model="user.email" v-validate:email v-validate:required>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid"><?= __('Email address is invalid.') ?></p>
     </div>
 
     <div class="uk-form-row">
-        <label for="form-password" class="uk-form-label"><?= __('Password') ?></label>
-        <div class="uk-form-controls">
-            <div class="uk-form-password">
-                <input id="form-password" class="uk-form-width-large" type="password" name="password" v-model="user.password" v-validate:required>
-                <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
-            </div>
-            <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
+        <div class="uk-form-password uk-width-1-1">
+            <input class="uk-width-1-1" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required>
+            <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
         </div>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
     </div>
 
     <p class="uk-form-row">
-        <button class="uk-button uk-button-primary" type="submit"><?= __('Submit') ?></button>
+        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1" type="submit"><?= __('Sign up') ?></button>
     </p>
+
+    <p class="uk-text-center"><?= __('Already have an account?') ?> <a href="<?= $view->url('@user/login') ?>"><?= __('Login!') ?></a></p>
 
 </form>
