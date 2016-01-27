@@ -11,6 +11,7 @@
 - Deny cross site redirects after login and logout
 - Session Cookie uses HttpOnly flag now
 - Nicer login, registration and profile pages
+- Translation files removed, fetched during build. Run `./pagekit translation:fetch` during development
 
 ### Fixed
 - Username validation in installer and backend (#513)

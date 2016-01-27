@@ -4,6 +4,7 @@ namespace Pagekit\Console\Commands;
 
 use Pagekit\Application as App;
 use Pagekit\Application\Console\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Finder\Finder;
@@ -47,6 +48,11 @@ class BuildCommand extends Command
         $this->line(sprintf('Starting: webpack'));
 
         exec('webpack -p');
+
+        $this->line('Updating language files.');
+        $command = $this->getApplication()->find('translation:fetch');
+        $input = new ArrayInput([]);
+        $command->run($input, $output);
 
         $this->line(sprintf('Building Package.'));
 

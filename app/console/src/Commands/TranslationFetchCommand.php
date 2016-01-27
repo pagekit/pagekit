@@ -19,22 +19,14 @@ class TranslationFetchCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Fetches current translation files from Transifex';
-
-    /**
-     * The Transifex Api
-     * @var TransifexApi
-     */
-    protected $api;
+    protected $description = 'Fetches current translation files from languages repository';
 
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->addArgument('extension', InputArgument::OPTIONAL, 'Extension name');
-        $this->addOption('username', null, InputOption::VALUE_REQUIRED, 'Transifex user name');
-        $this->addOption('password', null, InputOption::VALUE_REQUIRED, 'Transifex password');
+
     }
 
     /**
@@ -50,47 +42,33 @@ class TranslationFetchCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $extensions = $this->argument('extension') ? [$this->argument('extension')] : ['system', 'pagekit/blog'];
-        $username   = $this->option('username');
-        $password   = $this->option('password');
+        $tmp  = '/tmp/pagekit-languages';
+        $repo = 'git@github.com:pagekit/languages.git';
 
-        if (!$username || !$password) {
-            throw new \InvalidArgumentException('Credentials missing.');
+        // if cloned repo exists? rm
+        if(file_exists($tmp)) {
+            exec(sprintf('rm -rf %s', $tmp));
         }
 
-        $this->api  = new TransifexApi($username, $password, "pagekit-cms");
+        // git clone to tmp
+        exec(sprintf("git clone %s %s", $repo, $tmp));
 
-        foreach ($extensions as $extension) {
-            $this->line("Translations for ${extension} ...");
-            $this->transifexPull($extension);
+        // foreach resource:
+        $resources = ['system', 'blog', 'theme-one'];
+
+        // mv translation files to correct folder
+        foreach ($resources as $resource) {
+            $from = sprintf("%s/%s/*", $tmp, $resource);
+            $to   = $this->getPath($resource);
+
+            $this->line("Moving languages files to: ".$to);
+            exec(sprintf('rsync -av %s %s', $from, $to));
         }
+
+        // rm git repo from tmp
+        exec(sprintf('rm -rf %s', $tmp));
     }
 
-    /**
-     * Fetches all translations for the specified extension.
-     */
-    protected function transifexPull($extension)
-    {
-        $resource = basename($extension);
-
-        foreach ($this->api->fetchLocales($resource) as $locale) {
-
-            $this->line("Fetching for ${locale} ...");
-            $translations = $this->api->fetchTranslations($resource, $locale);
-
-            // New languages don't have a folder yet
-            $folder = sprintf('%s/languages/%s/', $this->getPath($extension), $locale);
-            if (!is_dir($folder)) {
-                mkdir($folder, 0755, true);
-            }
-
-            // Write translation file
-            $filename = sprintf('%s/messages.php', $folder);
-            $content  = sprintf('<?php return %s;', var_export($translations, true));
-            file_put_contents($filename, $content);
-
-        }
-    }
 
     /**
      * Returns the extension path.
@@ -98,15 +76,21 @@ class TranslationFetchCommand extends Command
      * @param  string $path
      * @return array
      */
-    protected function getPath($path)
+    protected function getPath($resource)
     {
         $root = $this->container['path.packages'];
+        $vendor = 'pagekit';
 
-        if ($path == "system") {
-            $root = $this->container['path'].'/app';
+        if ($resource == "system") {
+            $path = sprintf('%s/app/system', $this->container['path']);
+        } else {
+            $path = sprintf('%s/%s/%s',
+                $this->container['path.packages'],
+                $vendor,
+                $resource);
         }
 
-        if (!is_dir($path = "$root/$path")) {
+        if (!is_dir($path)) {
             $this->abort("Can't find extension in '$path'");
         }
 
