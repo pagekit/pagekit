@@ -7,9 +7,13 @@
     <div v-show="update && view == 'index'">
 
         <div v-show="hasUpdate">
-            <h2>{{ 'There is an update available.' | trans }}</h2>
-            <p v-html="update.msg" v-show="update.msg"></p>
-            <p v-else>{{ 'Please update Pagekit to version %version%!' | trans update }}</p>
+
+            <template v-if="!update.msg">
+                <h2>{{ 'There is an update available.' | trans }}</h2>
+                <p>{{ 'Please update Pagekit to version %version%!' | trans update }}</p>
+            </template>
+
+            <p v-html="update.msg" v-else></p>
         </div>
 
         <div v-show="!hasUpdate">
