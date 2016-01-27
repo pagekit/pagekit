@@ -79,6 +79,7 @@
         props: {
             api: {type: String, default: ''},
             search: {type: String, default: ''},
+            page: {type: Number, default: 0},
             type: {type: String, default: 'pagekit-extension'},
             installed: {
                 type: Array, default: function () {
@@ -92,7 +93,6 @@
                 pkg: null,
                 packages: null,
                 updates: null,
-                page: 0,
                 pages: 0,
                 iframe: '',
                 status: ''
@@ -100,7 +100,7 @@
         },
 
         created: function () {
-            this.query();
+            this.query(this.page);
             this.queryUpdates(this.installed, function (res) {
                 var data = res.data;
                 this.$set('updates', data.packages.length ? data.packages : null);
