@@ -1,4 +1,5 @@
 **/languages/**/*.json
+**/languages/**/*.php
 **/app/bundle/**/*.js
 /app/vendor/*
 /app/assets/*
