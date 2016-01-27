@@ -8,7 +8,7 @@
 
         <div v-show="hasUpdate">
             <h2>{{ 'There is an update available.' | trans }}</h2>
-            <p v-show="update.msg">{{ update.msg }}</p>
+            <p v-html="update.msg" v-show="update.msg"></p>
             <p v-else>{{ 'Please update Pagekit to version %version%!' | trans update }}</p>
         </div>
 
