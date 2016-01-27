@@ -5,6 +5,9 @@ module.exports = {
     data: function () {
         return _.merge({
             users: false,
+            config: {
+              filter: this.$session.get('user.filter') || {}
+            },
             pages: 0,
             count: '',
             selected: []
@@ -23,8 +26,9 @@ module.exports = {
         'config.page': 'load',
 
         'config.filter': {
-            handler: function () {
+            handler: function (filter) {
                 this.load(0);
+                this.$session.set('user.filter', filter);
             },
             deep: true
         }
