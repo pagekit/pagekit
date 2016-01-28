@@ -60,7 +60,7 @@
                     <h1 class="tm-heading uk-h3">{{ item.label | trans }}</h1>
 
                     <a href="#offcanvas-flip" data-uk-offcanvas>
-                        <img class="uk-border-circle" height="36" width="36" :alt="user.username" v-gravatar="user.email">
+                        <img class="uk-border-circle" height="32" width="32" :alt="user.username" v-gravatar="user.email">
                     </a>
                 </div>
 
