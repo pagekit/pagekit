@@ -6,7 +6,7 @@ module.exports = {
         return _.merge({
             users: false,
             config: {
-              filter: this.$session.get('user.filter') || {}
+              filter: this.$session.get('user.filter') || {order: 'username asc'}
             },
             pages: 0,
             count: '',
@@ -14,10 +14,10 @@ module.exports = {
         }, window.$data);
     },
 
-    created: function () {
+    ready: function () {
 
         this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({order: 'name asc'}, this.config.filter);
+        this.load();
 
     },
 

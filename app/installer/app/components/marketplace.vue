@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <v-pagination :page.sync="page" :pages="pages" v-show="pages > 1"></v-pagination>
+        <v-pagination :page.sync="page" :pages="pages" v-show="pages > 1 || page > 0"></v-pagination>
 
         <div class="uk-modal" v-el:modal>
             <div class="uk-modal-dialog uk-modal-dialog-large">
@@ -100,6 +100,10 @@
         },
 
         created: function () {
+            this.$options.name = this.type;
+        },
+
+        ready: function () {
             this.query(this.page);
             this.queryUpdates(this.installed, function (res) {
                 var data = res.data;
