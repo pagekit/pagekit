@@ -31,7 +31,7 @@
         <h1 v-show="changelog.length">{{ 'Changelog' | trans }}</h1>
         <div class="uk-margin-large" v-for="release in releases" v-if="release.version | showChangelog">
 
-            <h2>{{ release.version }} <small class="uk-text-muted">/ <time :datetime="release.published_at" :title="release.published_at | date">{{ release.published_at | relativeDate }}</time></small></h2>
+            <h2>{{ release.version }} <small class="uk-text-muted">/ <time :datetime="release.published_at" :title="release.published_at | date">{{ release.published_at | relativeDate {max:2592000} }}</time></small></h2>
             <ul class="uk-list uk-list-space" v-html="release.changelog | changelog"></ul>
 
         </div>
