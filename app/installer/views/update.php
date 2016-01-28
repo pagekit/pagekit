@@ -32,7 +32,7 @@
         <div v-for="release in releases" v-if="release.version | showChangelog">
 
             <h2>{{ release.version }}</h2>
-            <div v-html="release.changelog | marked"></div>
+            <ul class="uk-list uk-list-line" v-html="release.changelog | changelog"></ul>
 
         </div>
 

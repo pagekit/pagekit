@@ -46,7 +46,8 @@ module.exports = {
                     }
                 }, function () {
                     this.error(this.$trans('Cannot connect to the server. Please try again later.'));
-                });
+                }
+            );
 
         },
 
@@ -113,7 +114,26 @@ module.exports = {
 
     filters: {
 
-        marked: marked,
+        changelog: function (md) {
+
+            var renderer = new marked.Renderer(),
+                section;
+
+            renderer.heading = function (text) {
+                section = text;
+                return ''
+            };
+
+            renderer.listitem = function (text) {
+                return '<li><span class="uk-badge">' + section + '</span> ' + text + '</li>'
+            };
+
+            renderer.list = function (text) {
+                return text;
+            };
+
+            return marked(md, {renderer: renderer});
+        },
 
         showChangelog: function (version) {
             return Version.compare(version, this.version, '>');
