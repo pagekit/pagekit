@@ -8,7 +8,7 @@ module.exports = {
 
     update: function (value) {
 
-        var el = this.el, vm = this, cache = this.vm.$cache, img = new Image(),
+        var el = this.el, vm = this, cache = this.vm.$session, img = new Image(),
             name = this.el.getAttribute('title') || this.el.getAttribute('alt'),
             colored = this.params.colored,
             size = this.el.getAttribute('height') || 50,
