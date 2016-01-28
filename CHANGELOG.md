@@ -21,6 +21,7 @@
 - Embedded Youtube videos (#533)
 - Gravatar retina resolution
 - Gravatar mutual exclusion
+- Finder: Thumbnails for file names containing HTML special chars
 
 ## 0.10.2 (January 11, 2016)
 
