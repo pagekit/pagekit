@@ -121,11 +121,11 @@ module.exports = {
 
             renderer.heading = function (text) {
                 section = text;
-                return ''
+                return '';
             };
 
             renderer.listitem = function (text) {
-                return '<li><span class="uk-badge">' + section + '</span> ' + text + '</li>'
+                return '<li><span class="uk-badge">' + section + '</span> ' + text + '</li>';
             };
 
             renderer.list = function (text) {
