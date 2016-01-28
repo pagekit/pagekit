@@ -17,7 +17,7 @@
 ### Fixed
 - Username validation in installer and backend (#513)
 - Widget Settings
-- Embedded Youtube videos
+- Embedded Youtube videos (#533)
 - Gravatar retina resolution
 - Gravatar mutual exclusion
 
