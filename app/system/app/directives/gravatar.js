@@ -8,7 +8,7 @@ module.exports = {
 
     update: function (value) {
 
-        var el = this.el, vm = this, cache = this.vm.$session, img = new Image(),
+        var el = this.el, vm = this, cache = this.vm.$cache, img = new Image(),
             name = this.el.getAttribute('title') || this.el.getAttribute('alt'),
             colored = this.params.colored,
             size = this.el.getAttribute('height') || 50,
@@ -16,21 +16,21 @@ module.exports = {
             key = 'gravatar.' + [url, colored, name, size].join('.');
 
         // load image url from cache if exists
-        if (cache[key]) {
-            el.setAttribute('src', cache[key]);
+        if (cache.get(key)) {
+            el.setAttribute('src', cache.get(key));
             return;
         }
 
-        cache[key] = vm.letterAvatar(name, size, colored);
-        el.setAttribute('src', cache[key]);
+        cache.set(key, vm.letterAvatar(name, size, colored));
+        el.setAttribute('src', cache.get(key));
 
         if (img.crossOrigin !== undefined) {
 
             img.crossOrigin = 'anonymous';
             url += '&d=blank';
             img.onload = function () {
-                cache[key] = vm.letterAvatar(name, size, colored, img);
-                el.setAttribute('src', cache[key]);
+                cache.set(key, vm.letterAvatar(name, size, colored, img));
+                el.setAttribute('src', cache.get(key));
                 el.classList.remove('uk-invisible');
             };
 
@@ -39,7 +39,7 @@ module.exports = {
             // IE Fallback (no CORS support for img):
             url += '&d=404';
             img.onload = function () {
-                delete cache[key]; // remove dummy image from cache
+                delete cache.remove(key); // remove dummy image from cache
                 el.setAttribute('src', url);
                 el.classList.remove('uk-invisible');
             };
