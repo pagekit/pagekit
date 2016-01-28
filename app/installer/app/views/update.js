@@ -125,18 +125,19 @@ module.exports = {
             };
 
             renderer.listitem = function (text) {
-                if (section === 'Added'){
-                    return '<li><span class="uk-badge pk-badge-justify uk-badge-success uk-margin-right">' + section + '</span> ' + text + '</li>';
-                } if (section === 'Deprecated') {
-                    return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
-                } if (section === 'Removed') {
-                    return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
-                } if (section === 'Fixed') {
-                    return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
-                } if (section === 'Security') {
-                    return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
-                } else {
-                    return '<li><span class="uk-badge pk-badge-justify uk-margin-right">' + section + '</span> ' + text + '</li>';
+                switch (section) {
+                    case 'Added':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-success uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Deprecated':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Removed':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Fixed':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Security':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    default:
+                        return '<li><span class="uk-badge pk-badge-justify uk-margin-right">' + section + '</span> ' + text + '</li>';
                 }
             };
 
