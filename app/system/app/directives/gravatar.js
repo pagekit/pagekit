@@ -1,4 +1,5 @@
 var md5 = require('md5');
+var mutex = {};
 
 module.exports = {
 
@@ -8,12 +9,12 @@ module.exports = {
 
     update: function (value) {
 
-        var el = this.el, vm = this, cache = this.vm.$session, img = new Image(),
+        var el = this.el, vm = this, cache = this.vm.$session,
             name = this.el.getAttribute('title') || this.el.getAttribute('alt'),
             colored = this.params.colored,
-            size = this.el.getAttribute('height') || 50,
-            url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size * 2)].join('&'),
-            key = 'gravatar.' + [url, colored, name, size].join('.');
+            size = (this.el.getAttribute('height') || 50) * 2,
+            url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size)].join('&'),
+            key = 'gravatar.' + [value, size].join('.');
 
         // load image url from cache if exists
         if (cache.get(key)) {
@@ -21,35 +22,39 @@ module.exports = {
             return;
         }
 
-        cache.set(key, vm.letterAvatar(name, size, colored));
-        el.setAttribute('src', cache.get(key));
+        el.setAttribute('src', this.draw(name, size, colored));
 
-        if (img.crossOrigin !== undefined) {
+        if (!mutex[key]) {
 
-            img.crossOrigin = 'anonymous';
-            url += '&d=blank';
-            img.onload = function () {
-                cache.set(key, vm.letterAvatar(name, size, colored, img));
-                el.setAttribute('src', cache.get(key));
-                el.classList.remove('uk-invisible');
-            };
+            mutex[key] = new Vue.Promise(function (resolve) {
+                var img = new Image();
+                if (img.crossOrigin !== undefined) {
+                    img.crossOrigin = 'anonymous';
+                    url += '&d=blank';
+                    img.onload = function () {
+                        cache.set(key, vm.draw(name, size, colored, img));
+                        resolve();
+                    };
+                } else {
+                    // IE Fallback (no CORS support for img):
+                    url += '&d=404';
+                    img.onload = function () {
+                        resolve(url);
+                    };
+                }
 
-        } else {
-
-            // IE Fallback (no CORS support for img):
-            url += '&d=404';
-            img.onload = function () {
-                delete cache.remove(key); // remove dummy image from cache
-                el.setAttribute('src', url);
-                el.classList.remove('uk-invisible');
-            };
-
+                img.src = url;
+            });
         }
 
-        img.src = url;
+        mutex[key].then(function (url) {
+            el.setAttribute('src', url || cache.get(key));
+            return url;
+        });
+
     },
 
-    letterAvatar: function (name, size, colored, img) {
+    draw: function (name, size, colored, img) {
         name = name || '';
         size = size || 60;
 
