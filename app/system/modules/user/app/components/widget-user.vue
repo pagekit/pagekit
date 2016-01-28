@@ -72,7 +72,7 @@
     <ul v-if="users.length && widget.display == 'thumbnail'" data-user class="uk-grid uk-grid-small uk-grid-width-1-4 uk-grid-width-small-1-6 uk-grid-width-medium-1-4 uk-grid-width-xlarge-1-6" v-stack-margin="users">
         <li v-for="user in users">
             <a :href="$url.route('admin/user/edit', {id: user.id})" :title="user.username">
-                <img class="uk-border-rounded" width="200" height="200" :alt="user.name" v-gravatar="user.email">
+                <img class="uk-border-rounded" width="100" height="100" :alt="user.name" v-gravatar="user.email">
             </a>
         </li>
     </ul>
