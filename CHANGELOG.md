@@ -6,6 +6,7 @@
 - Filter cache for widget and site settings
 - Remember last finder position and view setting
 - Pagination cache and pagination links
+- Added changelog to update view
 
 ### Changed
 - Hide Trash menu from Site node picker

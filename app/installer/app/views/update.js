@@ -125,7 +125,19 @@ module.exports = {
             };
 
             renderer.listitem = function (text) {
-                return '<li><span class="uk-badge">' + section + '</span> ' + text + '</li>';
+                if (section === 'Added'){
+                    return '<li><span class="uk-badge pk-badge-justify uk-badge-success uk-margin-right">' + section + '</span> ' + text + '</li>';
+                } if (section === 'Deprecated') {
+                    return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                } if (section === 'Removed') {
+                    return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                } if (section === 'Fixed') {
+                    return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                } if (section === 'Security') {
+                    return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                } else {
+                    return '<li><span class="uk-badge pk-badge-justify uk-margin-right">' + section + '</span> ' + text + '</li>';
+                }
             };
 
             renderer.list = function (text) {

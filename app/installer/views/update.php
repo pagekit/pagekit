@@ -29,10 +29,10 @@
         </p>
 
         <h1 v-show="changelog.length">{{ 'Changelog' | trans }}</h1>
-        <div v-for="release in releases" v-if="release.version | showChangelog">
+        <div class="uk-margin-large" v-for="release in releases" v-if="release.version | showChangelog">
 
-            <h2>{{ release.version }}</h2>
-            <ul class="uk-list uk-list-line" v-html="release.changelog | changelog"></ul>
+            <h2>{{ release.version }} <small class="uk-text-muted">/ 9 days ago</small></h2>
+            <ul class="uk-list uk-list-space" v-html="release.changelog | changelog"></ul>
 
         </div>
 
