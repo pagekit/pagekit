@@ -1,8 +1,8 @@
 {
   "name": "pagekit",
   "dependencies": {
+    "JSONStorage": "~1.0.0",
     "lodash": "~3.10.1",
-    "lscache": "~1.0.5",
     "uikit": "#master",
     "vue": "~1.0.14",
     "vue-form": "pagekit/vue-form#master",

@@ -1,46 +1,31 @@
-var md5 = require('md5');
+var storage = require('JSONStorage');
 
-module.exports = function (Vue) {
+module.exports = function (bucket, adapter) {
 
-    Vue.http.interceptors.unshift(function () {
+    var db = storage.select(bucket, adapter || 'local');
 
-            var hit, key, lifetime;
+    return {
 
-            return {
-                request: function (request) {
+        set: function (key, value, minutes) {
+            if (minutes){
+                return db.setex(key, minutes * 60, value);
+            } else  {
+                return db.set(key, value);
+            }
+        },
 
-                    if (request.cache !== undefined && /^(GET|JSONP)$/i.test(request.method)) {
+        get: function () {
+            return db.get.apply(db, arguments);
+        },
 
-                        if (_.isObject(request.cache)) {
-                            lifetime = request.cache.lifetime;
-                            key = '_resource.' + request.cache.key;
-                        } else {
-                            lifetime = request.cache;
-                            key = md5(JSON.stringify(request));
-                        }
+        remove: function (key) {
+            return db.del.apply(db, arguments);
+        },
 
-                        hit = Vue.cache.get(key);
-                        if (hit) {
-                            request.client = function () {
-                                return hit;
-                            };
-                        }
-                    }
-
-                    return request;
-                },
-
-                response: function (response) {
-
-                    if (!hit && response.ok) {
-                        Vue.cache.set(key, response, lifetime);
-                    }
-
-                    return response;
-                }
-            };
-
+        flush: function () {
+            return db.flushdb.apply(db, arguments);
         }
-    );
+
+    };
 
 };

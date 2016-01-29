@@ -3,10 +3,25 @@ function install (Vue) {
     var config = window.$pagekit;
 
     Vue.config.debug = false;
-    Vue.cache = Vue.prototype.$cache = require('./lib/lscache')(config.url);
-    Vue.session = Vue.prototype.$session = require('./lib/lscache')(function () {
-        return 'session-' + Vue.cache.get('_csrf');
-    });
+    Vue.cache = Vue.prototype.$cache = require('./lib/cache')(config.url);
+    Vue.session = Vue.prototype.$session = require('./lib/cache')('session',
+        {
+
+            load: function (name) {
+
+                if (Vue.cache.get('_session') !== Vue.cache.get('_csrf')) {
+                    Vue.cache.remove(name);
+                }
+                Vue.cache.set('_session', Vue.cache.get('_csrf'));
+
+                return Vue.cache.get(name, {});
+            },
+
+            store: function (name, data) {
+                return Vue.cache.set(name, data);
+            }
+
+        });
 
     /**
      * Libraries
@@ -16,7 +31,7 @@ function install (Vue) {
     require('vue-intl');
     require('vue-resource');
     require('./lib/asset')(Vue);
-    require('./lib/cache')(Vue);
+    require('./lib/resourceCache')(Vue);
     require('./lib/csrf')(Vue);
     require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
