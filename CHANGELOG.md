@@ -22,6 +22,7 @@
 - Gravatar retina resolution
 - Gravatar mutual exclusion
 - Finder: Thumbnails for file names containing HTML special chars
+- Distinguish Pagekit instances at same domain
 
 ## 0.10.2 (January 11, 2016)
 
