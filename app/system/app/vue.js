@@ -3,11 +3,11 @@ function install (Vue) {
     var config = window.$pagekit;
 
     Vue.config.debug = false;
-    Vue.cache = Vue.prototype.$cache = require('./lib/lscache')('pagekit');
+    Vue.cache = Vue.prototype.$cache = require('./lib/lscache')(config.url);
     Vue.session = Vue.prototype.$session = require('./lib/lscache')(function () {
-        return Vue.cache.get('_csrf');
+        return 'session-' + Vue.cache.get('_csrf');
     });
- 
+
     /**
      * Libraries
      */
