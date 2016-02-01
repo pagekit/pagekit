@@ -44,6 +44,12 @@ To watch for JS module changes, run `webpack --watch`.
 
 When the installer has finished, point your browser to the Pagekit URL on your web server and follow the installer.
 
+When you have a running Pagekit installation, use the Pagekit CLI to fetch translations. Without, the interface will appear in English only.
+
+```
+php pagekit translation:fetch
+```
+
 ## Stay up to date
 
 If you've set up Pagekit from source, run these commands to get new commits and to rebuild everything you need.

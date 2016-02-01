@@ -24,14 +24,6 @@ class TranslationFetchCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
-    {
-
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         parent::initialize($input, $output);
@@ -59,10 +51,17 @@ class TranslationFetchCommand extends Command
         // mv translation files to correct folder
         foreach ($resources as $resource) {
             $from = sprintf("%s/%s/*", $tmp, $resource);
-            $to   = $this->getPath($resource);
 
-            $this->line("Moving languages files to: ".$to);
-            exec(sprintf('rsync -av %s %s', $from, $to));
+            if($to = $this->getPath($resource)) {
+
+                $this->info("[${resource}] Moving languages files to: ".$to);
+                exec(sprintf('rsync -av %s %s', $from, $to));
+
+            } else {
+
+                $this->error("[$resource] Package not found. Skipping.");
+
+            }
         }
 
         // rm git repo from tmp
@@ -91,7 +90,7 @@ class TranslationFetchCommand extends Command
         }
 
         if (!is_dir($path)) {
-            $this->abort("Can't find extension in '$path'");
+            return false;
         }
 
         return $path;
