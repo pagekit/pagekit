@@ -26,23 +26,40 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
-            <span class="uk-form-label">{{ 'Unit' | trans }}</span>
+        <div class="uk-grid uk-grid-width-1-2 uk-form-row">
+            <div>
+                <span class="uk-form-label">{{ 'Unit' | trans }}</span>
 
-            <div class="uk-form-controls uk-form-controls-text">
-                <p class="uk-form-controls-condensed">
-                    <label><input type="radio" value="metric" v-model="widget.units"> {{ 'Metric' | trans }}</label>
-                </p>
+                <div class="uk-form-controls uk-form-controls-text">
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="metric" v-model="widget.units"> {{ 'Metric' | trans }}</label>
+                    </p>
 
-                <p class="uk-form-controls-condensed">
-                    <label><input type="radio" value="imperial" v-model="widget.units"> {{ 'Imperial' | trans }}</label>
-                </p>
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="imperial" v-model="widget.units"> {{ 'Imperial' | trans }}</label>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <span class="uk-form-label">{{ 'Background' | trans }}</span>
+
+                <div class="uk-form-controls uk-form-controls-text">
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="random" v-model="widget.background"> {{ 'Random' | trans }}</label>
+                    </p>
+
+                    <p class="uk-form-controls-condensed">
+                        <label><input type="radio" value="static" v-model="widget.background"> {{ 'Static' | trans }}</label>
+                    </p>
+                </div>
             </div>
         </div>
 
+        <div class="uk-text-right uk-text-bold uk-margin-top">© {{ name }} / 500px</div>
+
     </form>
 
-    <div class="pk-panel-background uk-contrast" v-if="status != 'loading'">
+    <div class="pk-panel-background uk-contrast" v-if="status != 'loading'" v-el:background>
         <h1 class="uk-margin-large-top uk-margin-small-bottom uk-text-center pk-text-xlarge" v-if="time">{{ time | date format }}</h1>
 
         <h2 class="uk-text-center uk-h4 uk-margin-remove" v-if="time">{{ time | date 'longDate' }}</h2>
@@ -60,7 +77,8 @@
 
 <script>
 
-    var api = 'http://api.openweathermap.org/data/2.5', apiKey = '08c012f513db564bd6d4bae94b73cc94';
+    var weatherApi = 'http://api.openweathermap.org/data/2.5', weatherApiKey = '08c012f513db564bd6d4bae94b73cc94',
+        imageApi = 'https://api.500px.com/v1', imageApiKey = 'e7aa046e20479f759626e891249853de790a8e54';
 
     module.exports = {
 
@@ -72,7 +90,8 @@
             description: function () {
             },
             defaults: {
-                units: 'metric'
+                units: 'metric',
+                background: 'random'
             }
 
         },
@@ -101,7 +120,7 @@
 
                     source: function (release) {
 
-                        vm.$http.get(api + '/find', {q: this.input.val(), type: 'like', APPID: apiKey}).then(
+                        vm.$http.get(weatherApi + '/find', {q: this.input.val(), type: 'like', APPID: weatherApiKey}).then(
                             function (res) {
 
                                 var data = res.data;
@@ -142,6 +161,7 @@
                     vm.$set('widget.uid', location.id);
                     vm.$set('widget.city', location.name);
                     vm.$set('widget.country', location.sys.country);
+                    vm.$set('widget.country', location.sys.country);
                     vm.$set('widget.coords', location.coord);
                 });
 
@@ -168,6 +188,8 @@
                 immediate: true
 
             },
+
+            'widget.background': 'load',
 
             'timezone': 'updateClock'
 
@@ -198,7 +220,7 @@
                     return;
                 }
 
-                this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric', APPID: apiKey}, {cache: 60}).then(
+                this.$http.get(weatherApi + '/weather', {id: this.widget.uid, units: 'metric', APPID: weatherApiKey}, {cache: 60}).then(
                     function (res) {
                         var data = res.data;
                         if (data.cod == 200) {
@@ -226,7 +248,44 @@
                     this.$set('status', 'error');
                 });
 
+                if(this.widget.background === 'random') {
 
+                    this.$http.get(imageApi + '/photos/search', {
+                            only: 'City and Architecture,Urban Exploration',
+                            exclude: 'People,Nude',
+                            geo: this.widget.coords.lat + ',' + this.widget.coords.lon + ',10km',
+                            //    term: weather.weather[0].main,
+                            image_size: 21,
+                            sdk_key: imageApiKey
+                        }, {cache: 60}
+                    ).then(function (res) {
+                        this.loadBackground(res.data);
+                    }, function () {
+                        this.$set('status', 'error');
+                    });
+
+                }
+
+            },
+
+            loadBackground: function(data) {
+                if (data.photos && data.photos.length) {
+                    var vm = this;
+                    var photo = data.photos[Math.floor(Math.random() * data.photos.length)];
+
+                    this.$set('name', photo.user.fullname)
+
+                    var $img = $('<img src="' + photo.image_url + '">');
+                    $img.bind('load', function () {
+                        $(vm.$els.background).css('background-image', 'linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6)), url(' + photo.image_url + ')');
+                        vm.$set('status', 'done');
+                    });
+                    if ($img[0].width) {
+                        $img.trigger('load');
+                    }
+                } else {
+                    this.$set('status', 'done');
+                }
             },
 
             init: function (data) {
@@ -262,7 +321,7 @@
 
                 };
 
-                return this.$url('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
+                return this.$url('app/system/modules/dashboard/assets/images/weather-{icon}', {icon: icons[icon]});
             },
 
             updateClock: function () {
