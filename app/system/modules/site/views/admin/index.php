@@ -120,7 +120,7 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': $root.isSelected(node)}" :data-id="node.id">
+    <li class="uk-nestable-item check-item" :class="{'uk-parent': tree[node.id], 'uk-active': $root.isSelected(node)}" :data-id="node.id">
         <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>
