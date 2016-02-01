@@ -100,8 +100,8 @@
 
                 <div class="uk-margin-bottom" :data-pos="pos.name" v-for="pos in positions" track-by="name" v-if="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}" v-if="position || (!position && !emptyafterfilter(pos.widgets))">
-                        <div class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected="'[data-pos='+ pos.name +'] input[name=id]'" number></div>
+                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}">
+                        <div class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected="'input[name=id]'" :group="'[data-pos='+ pos.name +']'" number></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
                         <div class="pk-table-width-150">{{ 'Type' | trans }}</div>
@@ -113,7 +113,7 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-if="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-sortable v-if="!emptyafterfilter(pos.widgets)" :data-position="pos.name">
-                        <li :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" v-var:type="widget | type" :data-id="widget.id" v-show="infilter(widget)">
+                        <li class="check-item" :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" v-var:type="widget | type" :data-id="widget.id" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id"></div>
