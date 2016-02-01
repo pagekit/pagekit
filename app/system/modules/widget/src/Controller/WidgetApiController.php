@@ -21,10 +21,10 @@ class WidgetApiController
         foreach ($positions as &$position) {
             $position['widgets'] = [];
 
-            foreach ($widgets as $key => $widget) {
-                if (in_array($widget->id, $position['assigned'])){
-                    $position['widgets'][] = $widget;
-                    unset($widgets[$key]);
+            foreach ($position['assigned'] as $id) {
+                if (isset($widgets[$id])) {
+                    $position['widgets'][] = $widgets[$id];
+                    unset($widgets[$id]);
                 }
             }
         }
