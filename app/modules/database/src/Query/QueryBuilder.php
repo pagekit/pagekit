@@ -335,9 +335,8 @@ class QueryBuilder
      * @param  string $type
      * @return self
      */
-    public function having($having, $type = null)
+    public function having($having, $type = CompositeExpression::TYPE_AND)
     {
-        $type   = $type ?: CompositeExpression::TYPE_AND;
         $args   = func_get_args();
         $having = $this->getPart('having');
 
