@@ -1,0 +1,28 @@
+<?php
+
+{% block namespace %}
+namespace {{ namespace }}\Controller;
+{% endblock namespace %}
+
+use Pagekit\Application as App;
+
+{% block route %}
+/**
+ * @Route("/{{ name }}")
+ */
+{% endblock route %}
+
+{% block class_definition %}
+class Controller
+{% endblock class_definition %}
+{
+    public function indexAction()
+    {
+        return "Index View";
+    }
+
+    public function settingsAction()
+    {
+        return "Settings View"
+    }
+}
