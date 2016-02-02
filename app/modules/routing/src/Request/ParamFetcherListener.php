@@ -30,8 +30,8 @@ class ParamFetcherListener implements EventSubscriberInterface
     {
         $controller = $event->getController();
         $attributes = $request->attributes->get('_request', []);
-        $parameters = array_key_exists('value', $attributes) ? $attributes['value'] : false;
-        $options = array_key_exists('options', $attributes) ? $attributes['options'] : [];
+        $parameters = isset($attributes['value']) ? $attributes['value'] : false;
+        $options = isset($attributes['options']) ? $attributes['options'] : [];
 
         if (is_array($controller) && $parameters) {
 
