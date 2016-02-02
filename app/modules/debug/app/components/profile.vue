@@ -17,6 +17,27 @@
 
     <script id="panel-requests" type="text/template">
 
+        <h1>XHR</h1>
+        <table class="pf-table">
+            <thead>
+            <tr>
+                <th>Method</th>
+                <th>URL</th>
+                <th>Time</th>
+                <th>Request Id</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="request in $parent.xhr">
+                <td>{{ request.method }}</td>
+                <td>{{ request.uri }}</td>
+                <td>{{ request.datetime }}</td>
+                <td><a @click.prevent="$root.load(request.id)">{{ request.id }}</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+
         <h1>Requests</h1>
         <table class="pf-table">
             <thead>
@@ -59,7 +80,11 @@
             panel: '#panel-requests'
         },
 
-        props: ['data']
+        props: ['data', 'xhr'],
+
+        ready: function () {
+            console.log(this.xhr)
+        }
 
     };
 

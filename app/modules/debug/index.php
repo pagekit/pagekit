@@ -84,6 +84,12 @@ return [
                 $view->script('debugbar', 'app/modules/debug/app/bundle/debugbar.js', ['vue']);
             }, 50);
 
+            $app->on('response', function ($event, $request, $response) use ($app) {
+                if($request->isXmlHttpRequest()){
+                    $response->headers->set('X-Debug', $app['debugbar']->getCurrentRequestId());
+                }
+            });
+
             $app->on('terminate', function ($event, $request) use ($app) {
 
                 $route = $request->attributes->get('_route');

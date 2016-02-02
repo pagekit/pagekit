@@ -17,4 +17,17 @@ Vue.ready(function () {
 
 });
 
+Vue.http.interceptors.push({
+
+    response: function (response) {
+
+        if (!response.request.crossOrigin && response.headers('X-Debug')) {
+            $debugbar.addRequest({method:  response.request.method, uri: response.request.url, datetime: response.headers('Date'), id: response.headers('X-Debug')})
+        }
+
+        return response;
+    }
+
+});
+
 module.exports = Debugbar;

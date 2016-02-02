@@ -6,7 +6,7 @@
 
             <ul class="pf-navbar-nav">
                 <li v-if="data" v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
-                    <component :is="section.name" :data="data[section.name]"></component>
+                    <component :is="section.name" :data="data[section.name]" :xhr="xhr"></component>
                 </li>
             </ul>
 
@@ -29,6 +29,7 @@
 
         data: function () {
             return {
+                xhr: [],
                 request: null,
                 data: null,
                 panel: null,
@@ -37,6 +38,8 @@
         },
 
         created: function () {
+
+            window.$debugbar = this;
 
             _.forIn(this.$options.components, function (component, name) {
 
@@ -60,6 +63,10 @@
         },
 
         methods: {
+
+            addRequest: function (request) {
+                this.xhr.unshift(request);
+            },
 
             load: function (id) {
                 return this.$http.get('_debugbar/{id}', {id: id}).then(function (res) {
