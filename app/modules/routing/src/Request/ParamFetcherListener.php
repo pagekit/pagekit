@@ -29,10 +29,11 @@ class ParamFetcherListener implements EventSubscriberInterface
     public function onController($event, $request)
     {
         $controller = $event->getController();
-        $parameters = $request->attributes->get('_request[value]', [], true);
-        $options    = $request->attributes->get('_request[options]', [], true);
+        $attributes = $request->attributes->get('_request', []);
+        $parameters = isset($attributes['value']) ? $attributes['value'] : false;
+        $options = isset($attributes['options']) ? $attributes['options'] : [];
 
-        if (is_array($controller) && is_array($parameters)) {
+        if (is_array($controller) && $parameters) {
 
             $this->paramFetcher->setRequest($request);
             $this->paramFetcher->setParameters($parameters, $options);

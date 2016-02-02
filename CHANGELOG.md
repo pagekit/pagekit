@@ -9,6 +9,7 @@
 - Added changelog to update view
 
 ### Changed
+- Updated to Symfony 3.0
 - Hide Trash menu from Site node picker
 - Deny cross site redirects after login and logout
 - Session Cookie uses HttpOnly flag now
