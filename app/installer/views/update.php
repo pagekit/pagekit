@@ -10,7 +10,7 @@
 
             <template v-if="!update.msg">
                 <h2>{{ 'There is an update available.' | trans }}</h2>
-                <p>{{ 'Please update Pagekit to version %version%!' | trans update }}</p>
+                <p>{{ 'Update to Pagekit %version% automatically or download the package and install it manually! Read the changelog below to see what\'s new.' | trans update }}</p>
             </template>
 
             <p v-html="update.msg" v-else></p>
@@ -25,10 +25,12 @@
             <a class="uk-button uk-button-primary" @click.prevent="install" v-show="hasUpdate">
                 <span>{{ 'Update' | trans }}</span>
             </a>
-            <a class="uk-button uk-button-success" :href="update.url">{{ 'Download %version%' | trans update }}</a>
+            <a class="uk-button" :href="update.url">{{ 'Download %version%' | trans update }}</a>
         </p>
 
-        <h1 v-show="changelog.length">{{ 'Changelog' | trans }}</h1>
+        <hr class="uk-margin-large">
+
+        <h2 v-show="hasUpdate">{{ 'Changelog' | trans }}</h2>
         <div class="uk-margin-large" v-for="release in releases" v-if="release.version | showChangelog">
 
             <h2>{{ release.version }} <small class="uk-text-muted">/ <time :datetime="release.published_at" :title="release.published_at | date">{{ release.published_at | relativeDate {max:2592000} }}</time></small></h2>
