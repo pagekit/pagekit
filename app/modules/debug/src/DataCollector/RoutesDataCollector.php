@@ -45,7 +45,7 @@ class RoutesDataCollector implements DataCollectorInterface
             foreach ($this->router->getRouteCollection() as $name => $route) {
                 $routes[] = [
                     'name' => $name,
-                    'pattern' => $route->getPattern(),
+                    'path' => $route->getPath(),
                     'methods' => $route->getMethods(),
                     'controller' => is_string($ctrl = $route->getDefault('_controller')) ? $ctrl : 'Closure',
                 ];

@@ -12,8 +12,8 @@
             </tr>
             <template v-if="active">
             <tr>
-                <td>Pattern</td>
-                <td>{{ active.pattern }} {{ active.methods | str }}</td>
+                <td>Path</td>
+                <td>{{ active.path }} {{ active.methods | str }}</td>
             </tr>
             <tr>
                 <td>Controller</td>
@@ -32,14 +32,14 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Pattern</th>
+                    <th>Path</th>
                     <th>Controller</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="r in routes" :class="{ 'pf-active': r.name == route }">
                     <td>{{ r.name }}</td>
-                    <td>{{ r.pattern }} {{ r.methods | str }}</td>
+                    <td>{{ r.path }} {{ r.methods | str }}</td>
                     <td><abbr :title="r.controller">{{ r.controller | short }}</abbr></td>
                 </tr>
             </tbody>
