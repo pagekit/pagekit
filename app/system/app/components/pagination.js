@@ -20,7 +20,7 @@ module.exports = {
 
         if (this.page === undefined && this.$session.get(this.key)) {
             this.$set('page', this.$session.get(this.key));
-            history.replaceState({page: this.$session.get(this.key)}, '', '?page=' + this.$session.get(this.key));
+            history.replaceState({page: this.$session.get(this.key)}, '', modifyQuery(location.search, 'page', this.$session.get(this.key)));
         }
 
         var vm = this;
@@ -50,7 +50,7 @@ module.exports = {
 
         page: function (page) {
             this.pagination.selectPage(page);
-            history.pushState({page: page}, '', '?page=' + page);
+            history.pushState({page: page}, '', modifyQuery(location.search, 'page', page));
             this.$session.set(this.key, page);
         },
 
@@ -61,3 +61,14 @@ module.exports = {
     }
 
 };
+
+function modifyQuery(current, key, value) {
+    current = current.substr(1);
+    current = current.replace(new RegExp(key + '=\\d+&?'), '');
+
+    if (current.length && current[current.length - 1] !== '&') {
+        current = current.concat('&');
+    }
+
+    return '?' + current + [key, value].join('=');
+}
