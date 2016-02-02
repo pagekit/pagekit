@@ -244,7 +244,12 @@ class IntlModule extends Module
     protected function getData($name, $locale = null)
     {
         $locale = $locale ?: $this->getLocale();
-        return $this->parse("app/system/languages/{$locale}/{$name}.json");
+
+        if (!($data = $this->parse("app/system/languages/{$locale}/{$name}.json"))) {
+            $data = $this->parse("app/system/languages/en_GB/{$name}.json");
+        }
+
+        return $data;
     }
 
     /**
