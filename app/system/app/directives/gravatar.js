@@ -14,7 +14,7 @@ module.exports = {
             colored = this.params.colored,
             size = (this.el.getAttribute('height') || 50) * 2,
             url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size)].join('&'),
-            key = 'gravatar.' + [value, size].join('.');
+            key = 'gravatar.' + [value, size, name].join('.');
 
         // load image url from cache if exists
         if (cache.get(key)) {
