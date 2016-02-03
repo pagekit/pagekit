@@ -142,7 +142,7 @@ class UrlProvider
     {
         try {
 
-            $url = $this->router->generate($name, $parameters, $referenceType);
+            $url = $this->router->generate($name, $parameters, $referenceType === self::BASE_PATH ? UrlGenerator::ABSOLUTE_PATH : $referenceType);
 
             if ($referenceType === self::BASE_PATH) {
                 $url = substr($url, strlen($this->router->getRequest()->getBaseUrl()));
@@ -168,7 +168,7 @@ class UrlProvider
      */
     public function getStatic($path, $parameters = [], $referenceType = UrlGenerator::ABSOLUTE_PATH)
     {
-        $url = $this->file->getUrl($this->locator->get($path) ?: $path, $referenceType === self::BASE_PATH ? false : $referenceType);
+        $url = $this->file->getUrl($this->locator->get($path) ?: $path, $referenceType === self::BASE_PATH ? UrlGenerator::ABSOLUTE_PATH : $referenceType);
 
         if ($referenceType === self::BASE_PATH) {
             $url = substr($url, strlen($this->router->getRequest()->getBasePath()));
