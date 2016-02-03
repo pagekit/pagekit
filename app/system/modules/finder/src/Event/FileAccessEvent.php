@@ -3,7 +3,6 @@
 namespace Pagekit\Finder\Event;
 
 use Pagekit\Event\Event;
-use Symfony\Component\Finder\Expression\Expression;
 
 class FileAccessEvent extends Event
 {
@@ -93,7 +92,22 @@ class FileAccessEvent extends Event
      */
     protected function isRegex($str)
     {
-        return Expression::create($str)->isRegex();
+        if (preg_match('/^(.{3,}?)[imsxuADU]*$/', $str, $m)) {
+            $start = substr($m[1], 0, 1);
+            $end = substr($m[1], -1);
+
+            if ($start === $end) {
+                return !preg_match('/[*?[:alnum:] \\\\]/', $start);
+            }
+
+            foreach (array(array('{', '}'), array('(', ')'), array('[', ']'), array('<', '>')) as $delimiters) {
+                if ($start === $delimiters[0] && $end === $delimiters[1]) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
