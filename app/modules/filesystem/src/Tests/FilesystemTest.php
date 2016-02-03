@@ -30,7 +30,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testGetUrlLocal()
     {
         $this->assertSame('/Fixtures', $this->file->getUrl($this->fixtures));
-        $this->assertSame('//localhost/Fixtures', $this->file->getUrl($this->fixtures, 'network'));
+        $this->assertSame('//localhost/Fixtures', $this->file->getUrl($this->fixtures, 3));
         $this->assertSame('http://localhost/Fixtures', $this->file->getUrl($this->fixtures, true));
     }
 
@@ -44,7 +44,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($ftp, $this->file->getUrl($ftp, true));
 
         $this->assertSame('/path?arg=value#anchor', $this->file->getUrl($http));
-        $this->assertSame('//username:password@example.com/path?arg=value#anchor', $this->file->getUrl($http, 'network'));
+        $this->assertSame('//username:password@example.com/path?arg=value#anchor', $this->file->getUrl($http, 3));
         $this->assertSame($http, $this->file->getUrl($http, true));
     }
 
