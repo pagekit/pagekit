@@ -100,7 +100,7 @@
 
                 <div class="uk-margin-bottom" :data-pos="pos.name" v-for="pos in positions" track-by="name" v-if="pos | show">
 
-                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}">
+                    <div class="pk-table-fake pk-table-fake-header" :class="{'pk-table-fake-border': !pos.widgets.length || (position && emptyafterfilter(pos.widgets))}" v-show="position || !emptyafterfilter(pos.widgets)">
                         <div class="pk-table-width-minimum"><input type="checkbox" v-check-all:selected="'input[name=id]'" :group="'[data-pos='+ pos.name +']'" number></div>
                         <div class="pk-table-min-width-100">{{ position ? 'Title' : pos.label | trans }}</div>
                         <div class="pk-table-width-100 uk-text-center">{{ 'Status' | trans }}</div>
