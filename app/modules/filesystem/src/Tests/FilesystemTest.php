@@ -40,7 +40,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $http = 'http://username:password@example.com/path?arg=value#anchor';
 
         $this->assertSame('/', $this->file->getUrl($ftp));
-        $this->assertSame('//example.com', $this->file->getUrl($ftp, 'network'));
+        $this->assertSame('//example.com', $this->file->getUrl($ftp, 3));
         $this->assertSame($ftp, $this->file->getUrl($ftp, true));
 
         $this->assertSame('/path?arg=value#anchor', $this->file->getUrl($http));
