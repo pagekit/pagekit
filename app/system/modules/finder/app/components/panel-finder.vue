@@ -97,6 +97,12 @@
             if (!this.view) {
                 this.view = this.$session.get('finder.' + this.root + '.view') || 'table';
             }
+
+            this.$watch('path', function (path) {
+                this.load();
+                this.$session.set('finder.' + this.root + '.path', path);
+            });
+
         },
 
         ready: function () {
@@ -111,11 +117,6 @@
         },
 
         watch: {
-
-            path: function (path) {
-                this.load();
-                this.$session.set('finder.' + this.root + '.path', path);
-            },
 
             view: function (view) {
                 this.$session.set('finder.' + this.root + '.view', view);
@@ -268,24 +269,24 @@
             command: function (cmd, params) {
 
                 return this.resource.save({cmd: cmd}, $.extend({path: this.path, root: this.getRoot()}, params)).then(function (res) {
-                            this.load();
-                            this.$notify(res.data.message, res.data.error ? 'danger' : '');
-                        }, function (res) {
-                            this.$notify(res.status == 500 ? 'Unknown error.' : res.data, 'danger');
-                        }
-                    );
+                        this.load();
+                        this.$notify(res.data.message, res.data.error ? 'danger' : '');
+                    }, function (res) {
+                        this.$notify(res.status == 500 ? 'Unknown error.' : res.data, 'danger');
+                    }
+                );
             },
 
             load: function () {
 
                 return this.resource.get({path: this.path, root: this.getRoot()}).then(function (res) {
-                            this.$set('items', res.data.items || []);
-                            this.$set('selected', []);
-                            this.$dispatch('path.finder', this.getFullPath(), this);
-                        }, function () {
-                            this.$notify('Unable to access directory.', 'danger');
-                        }
-                    );
+                        this.$set('items', res.data.items || []);
+                        this.$set('selected', []);
+                        this.$dispatch('path.finder', this.getFullPath(), this);
+                    }, function () {
+                        this.$notify('Unable to access directory.', 'danger');
+                    }
+                );
             }
 
         },
