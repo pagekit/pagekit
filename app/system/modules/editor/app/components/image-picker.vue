@@ -43,7 +43,7 @@
 
         data: function () {
             return {
-                image: {src: '', alt: ''}
+                image: {src: '', alt: '', cls: ''}
             }
         },
 

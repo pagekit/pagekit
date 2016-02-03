@@ -68,7 +68,7 @@ module.exports = {
                 .$on('select', function (image) {
                     image.replace(this.$interpolate(
                         (image.tag || editor.getCursorMode()) == 'html' ?
-                            '<img src="{{ image.src }}" alt="{{ image.alt }}">'
+                            '<img src="{{ image.src }}" alt="{{ image.alt }}"{{ image.cls ? \' class="'+image.cls+'"\' : "" }}>'
                             : '![{{ image.alt }}]({{ image.src }})'
                         )
                     );
@@ -78,6 +78,9 @@ module.exports = {
         replaceInPreview: function (data, index) {
 
             if (data.matches[0][0] == '<') {
+
+                var cls = data.matches[0].match(/class="(.*?)"/);
+                data.cls = cls && cls.length ? cls[1] : '';
                 data.src = data.matches[0].match(/src="(.*?)"/)[1];
                 data.alt = data.matches[0].match(/alt="(.*?)"/)[1];
                 data.tag = 'html';

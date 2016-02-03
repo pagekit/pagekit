@@ -26,6 +26,7 @@
 - Fixed Finder thumbnails for file names containing HTML special chars
 - Fixed distinguish Pagekit instances at same domain
 - Fixed selecting items at site tree and widget settings
+- Fixed image picker in editor now keeps class attributes
 
 ## 0.10.2 (January 11, 2016)
 
