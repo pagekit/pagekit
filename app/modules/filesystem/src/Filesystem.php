@@ -3,6 +3,7 @@
 namespace Pagekit\Filesystem;
 
 use Pagekit\Filesystem\Adapter\AdapterInterface;
+use Pagekit\Routing\Generator\UrlGenerator;
 
 class Filesystem
 {
@@ -18,15 +19,15 @@ class Filesystem
      * @param  mixed  $referenceType
      * @return string|false
      */
-    public function getUrl($file, $referenceType = false)
+    public function getUrl($file, $referenceType = UrlGenerator::ABSOLUTE_PATH)
     {
         if (!$url = $this->getPathInfo($file, 'url')) {
             return false;
         }
 
-        if ($referenceType === false) {
+        if ($referenceType === UrlGenerator::ABSOLUTE_PATH) {
             $url = strlen($path = parse_url($url, PHP_URL_PATH)) > 1 ? substr($url, strpos($url, $path)) : '/';
-        } elseif ($referenceType === 'network') {
+        } elseif ($referenceType === UrlGenerator::NETWORK_PATH) {
             $url = substr($url, strpos($url, '//'));
         }
 
