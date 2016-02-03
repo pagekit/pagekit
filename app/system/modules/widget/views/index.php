@@ -113,7 +113,7 @@
                     <h3 class="uk-h1 uk-text-muted uk-text-center" v-if="!pos.widgets.length || (position && emptyafterfilter(pos.widgets))">{{ 'No widgets found.' | trans }}</h3>
 
                     <ul class="uk-sortable uk-list uk-margin-remove" v-sortable v-if="!emptyafterfilter(pos.widgets)" :data-position="pos.name">
-                        <li class="check-item" :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" v-var:type="widget | type" :data-id="widget.id" v-show="infilter(widget)">
+                        <li class="check-item" :class="{'uk-active': isSelected(widget.id)}" v-for="widget in pos.widgets" :data-id="widget.id" v-show="infilter(widget)">
 
                             <div class="uk-nestable-panel pk-table-fake uk-form">
                                 <div class="pk-table-width-minimum"><input type="checkbox" name="id" :value="widget.id"></div>
