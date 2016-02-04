@@ -31,6 +31,7 @@ function install (Vue) {
     require('vue-intl');
     require('vue-resource');
     require('./lib/asset')(Vue);
+    require('./lib/state')(Vue);
     require('./lib/resourceCache')(Vue);
     require('./lib/csrf')(Vue);
     require('./lib/notify')(Vue);
