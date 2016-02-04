@@ -15,7 +15,7 @@ window.Dashboard = {
 
         var self = this;
 
-        this.Widgets = this.$resource('admin/dashboard/:id');
+        this.Widgets = this.$resource('admin/dashboard{/id}');
 
         this.$set('widgets', this.widgets.filter(function (widget, idx) {
 

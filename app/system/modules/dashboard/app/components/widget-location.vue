@@ -262,7 +262,7 @@
 
                 };
 
-                return this.$url('app/system/modules/dashboard/assets/images/weather-:icon', {icon: icons[icon]});
+                return this.$url('app/system/modules/dashboard/assets/images/weather-{icon}', {icon: icons[icon]});
             },
 
             updateClock: function () {

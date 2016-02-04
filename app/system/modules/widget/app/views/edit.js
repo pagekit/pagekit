@@ -54,7 +54,7 @@ module.exports = {
 
         save: function () {
             this.$broadcast('save', {widget: this.widget});
-            this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}).then(function (res) {
+            this.$resource('api/site/widget{/id}').save({id: this.widget.id}, {widget: this.widget}).then(function (res) {
 
                 var data = res.data;
 

@@ -16,7 +16,7 @@ module.exports = {
 
     ready: function () {
 
-        this.resource = this.$resource('api/user/:id');
+        this.resource = this.$resource('api/user{/id}');
         this.load();
 
     },

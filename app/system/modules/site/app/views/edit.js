@@ -36,7 +36,7 @@ window.Site = {
     },
 
     ready: function () {
-        this.Nodes = this.$resource('api/site/node/:id');
+        this.Nodes = this.$resource('api/site/node{/id}');
         this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
     },
 

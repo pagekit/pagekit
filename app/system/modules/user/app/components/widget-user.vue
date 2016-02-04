@@ -154,7 +154,7 @@
 
                 query.limit = this.$get('widget.count');
 
-                this.$http.get('api/user/:id', query).then(function (res) {
+                this.$http.get('api/user{/id}', query).then(function (res) {
                     this.$set('users', res.data.users.slice(0, this.$get('widget.count')));
                 });
             }
