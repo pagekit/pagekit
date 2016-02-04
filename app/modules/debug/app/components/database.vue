@@ -55,6 +55,8 @@
             panel: '#panel-database'
         },
 
+        replace: false,
+
         props: ['data']
 
     };

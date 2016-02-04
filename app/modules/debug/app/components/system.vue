@@ -79,6 +79,8 @@
             panel: '#panel-system'
         },
 
+        replace: false,
+
         props: ['data']
 
     };

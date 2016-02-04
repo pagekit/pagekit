@@ -39,6 +39,8 @@
 
         props: ['data'],
 
+        replace: false,
+
         computed: {
 
             label: function () {

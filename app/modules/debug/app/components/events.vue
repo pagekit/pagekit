@@ -87,6 +87,8 @@
 
         props: ['data'],
 
+        replace: false,
+
         filters: {
 
             short: function (name) {

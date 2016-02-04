@@ -60,6 +60,8 @@
 
         props: ['data'],
 
+        replace: false,
+
         computed: {
 
             active: function () {
