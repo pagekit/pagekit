@@ -107,7 +107,7 @@
 
         ready: function () {
 
-            this.resource = this.$resource('system/finder/:cmd');
+            this.resource = this.$resource('system/finder{/cmd}');
 
             this.load().then(function () {
                 this.$dispatch('ready.finder', this);
