@@ -27,6 +27,7 @@
 - Fixed distinguish Pagekit instances at same domain
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
+- Fixed ExceptionHandler response
 
 ## 0.10.2 (January 11, 2016)
 

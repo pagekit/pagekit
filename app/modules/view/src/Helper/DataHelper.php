@@ -35,6 +35,7 @@ class DataHelper implements HelperInterface
     /**
      * Gets the data values or a value by name.
      *
+     * @param  null|string $name
      * @return array
      */
     public function get($name = null)

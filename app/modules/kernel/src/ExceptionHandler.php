@@ -29,6 +29,6 @@ class ExceptionHandler extends DebugExceptionHandler
             $exception = FlattenException::create($exception, $exception->getCode());
         }
 
-        parent::createResponse($exception);
+        return parent::createResponse($exception);
     }
 }
