@@ -28,6 +28,7 @@
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
+- Fixed an issue which could lead to an open_basedir restriction exception 
 
 ## 0.10.2 (January 11, 2016)
 
