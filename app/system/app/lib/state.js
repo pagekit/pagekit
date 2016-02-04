@@ -4,6 +4,11 @@ module.exports = function (Vue) {
 
         var vm = this;
 
+        var current = (new RegExp(key + '=([^&]*)&?')).exec(location.search);
+        if (!value && current) {
+            vm.$set(key, current[1]);
+        }
+
         history.replaceState({key: key, value: this[key]}, '', value ? modifyQuery(location.search, key, value) : undefined);
 
         this.$watch(key, function (value) {
@@ -32,7 +37,7 @@ module.exports = function (Vue) {
 
 function modifyQuery(query, key, value) {
     query = query.substr(1);
-    query = query.replace(new RegExp(key + '=\\d+&?'), '');
+    query = query.replace(new RegExp(key + '=[^&]*&?'), '');
 
     if (query.length && query[query.length - 1] !== '&') {
         query += '&';
