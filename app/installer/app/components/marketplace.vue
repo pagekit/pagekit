@@ -26,7 +26,7 @@
         <v-pagination :page.sync="page" :pages="pages" v-show="pages > 1 || page > 0"></v-pagination>
 
         <div class="uk-modal" v-el:modal>
-            <div class="uk-modal-dialog uk-modal-dialog-large">
+            <div class="uk-modal-dialog uk-modal-dialog-large" v-if="pkg">
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
@@ -46,7 +46,7 @@
                         <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <div v-html="pkg.description"></div>
+                        <div v-html="pkg.description | marked" v-if="pkg.description"></div>
 
                         <ul class="uk-list">
                             <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
@@ -165,6 +165,10 @@
             isInstalled: function (pkg) {
                 return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
             }
+        },
+
+        filters: {
+            marked: marked
         }
 
     };
