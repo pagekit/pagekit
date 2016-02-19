@@ -1,7 +1,7 @@
 <template>
 
     <div>
-        <textarea autocomplete="off" :style="{height: height + 'px'}" :class="{'uk-invisible': !show}" v-el:editor v-model="value"></textarea>
+        <component :is="type" :value.sync="value" :height.sync="height" v-ref:editor></component>
     </div>
 
 </template>
@@ -14,12 +14,40 @@
 
         data: function () {
             return {
-                editor: {},
+                editor: '',
                 height: 500
             }
         },
 
+        created: function () {
+
+            var components = this.$options.components;
+
+            if (components['editor-' + this.type]) {
+                this.type = 'editor-' + this.type;
+            } else if (components['editor-' + window.$pagekit.editor]) {
+                this.type = 'editor-' + window.$pagekit.editor;
+            } else {
+                this.type = 'editor-textarea';
+            }
+
+        },
+
         compiled: function () {
+
+            var vm = this;
+
+            this.$on('ready', function () {
+                _.forIn(this.$options.components, function (Component) {
+                    if (Component.options && Component.options.plugin) {
+                        new Component({parent: vm.$refs.editor});
+                    }
+                }, this);
+            });
+
+        },
+
+        ready: function () {
 
             if (this.options && this.options.height) {
                 this.height = this.options.height
@@ -36,36 +64,23 @@
 
             }
 
-            var components = this.$options.components, type = 'editor-' + this.type, self = this,
-                Editor = components[type] || components['editor-' + window.$pagekit.editor] || components['editor-textarea'];
-
-            new Editor({parent: this}).$on('ready', function () {
-
-                _.forIn(self.$options.components, function (Component) {
-                    if (Component.options && Component.options.plugin) {
-                        new Component({parent: self});
-                    }
-                }, this);
-
-            });
         },
 
         components: {
 
+            'plugin-link': require('./html/link'),
+            'plugin-image': require('./html/image'),
+            'plugin-video': require('./html/video'),
+            'plugin-url': require('./html/url'),
+            'editor-html': require('./editor-html.vue'),
+            'editor-code': require('./editor-code.vue'),
             'editor-textarea': {
 
-                created: function () {
-                    this.$emit('ready');
-                    this.$parent.$set('show', true);
-                }
+                props: ['value', 'height'],
 
-            },
-            'editor-html': require('./editor-html'),
-            'editor-code': require('./editor-code'),
-            'plugin-link': require('./link'),
-            'plugin-image': require('./image'),
-            'plugin-video': require('./video'),
-            'plugin-url': require('./url')
+                template: '<textarea autocomplete="off" :style="{height: height + \'px\'}" v-model="value"></textarea>'
+
+            }
 
         }
 

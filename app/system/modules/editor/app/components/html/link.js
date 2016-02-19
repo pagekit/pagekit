@@ -2,7 +2,7 @@
  * Editor Link plugin.
  */
 
-var Picker = Vue.extend(require('./link-picker.vue'));
+var Picker = Vue.extend(require('../link-picker.vue'));
 
 module.exports = {
 
@@ -106,7 +106,7 @@ module.exports = {
 
     components: {
 
-        'link-preview': require('./link-preview.vue')
+        'link-preview': require('../link-preview.vue')
 
     }
 
