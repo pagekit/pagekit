@@ -1,44 +1,51 @@
 # Changelog
 
+## 0.10.3 (February 19 2016)
+
+### Changed
+- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
+- Prepared self updater for bundled versions of Pagekit
+
 ## 0.10.2 (January 11, 2016)
 
 ### Added
-- Show login modal for unauthorized Ajax requests
-- Events to DebugBar
-- Current Route Info to DebugBar
-- Request Switcher to DebugBar
+- Show login modal for unauthorized ajax requests
+- Added events to DebugBar
+- Added current route info to DebugBar
+- Added request switcher to DebugBar
 
 ### Changed
-- Requirements
+- Updated requirements
 - Enforce reinstall of packages (#479)
 - Allow comment posting for 'authenticated' users by default (#518)
 
 ### Fixed
-- Add new roles (#512)
-- Package upload
+- Fixed auto updater
+- Fixed "Add" new roles (#512)
+- Fixed package upload
 - Cleanup package dependencies (#488)
-- Installation without PDO_MYSQL (#516)
+- Fixed installation without PDO_MYSQL (#516)
 
-## 0.10.1 (Dezember 17, 2015)
+## 0.10.1 (December 17, 2015)
 
 ### Added
-- Version cache break for JS and CSS
-- 'storage:' file path
+- Added version cache break for JS and CSS
+- Added 'storage:' file path
 
 ### Changed
 - Updated Vue-Resource
 - Improved handling of Gravatar images
 
 ### Fixed
-- Admin panel for IE
-- System Messages
-- Editor preview handles Vuejs markup
-- Redirects on login and logout
+- Fixed admin panel for IE
+- Fixed system messages
+- Fixed editor preview handles Vuejs markup
+- Fixed redirects on login and logout
 
 ## 0.10.0 (December 15, 2015)
 
 ### Added
-- Options in video picker
+- Added options in video picker
 
 ### Changed
 - Switched to Vuejs 1.0
@@ -47,13 +54,13 @@
 
 ### Fixed
 - On widget copy, theme settings are copied too
-- Password edit on user view
+- Fixed password edit on user view
 
 ## 0.9.5 (October 30, 2015)
 
 ### Added
-- Widget copy API function
-- Preliminary update notifications to dashboard
+- Added widget copy API function
+- Added preliminary update notifications to dashboard
 
 ### Changed
 - Random string generator uses low strength now (#478)
@@ -65,152 +72,152 @@
 ## 0.9.4 (October 14, 2015)
 
 ### Added
-- Twig support
+- Added Twig support
 - Resource paths for themes are added by default
 
 ### Changed
 - Made type in module definition for extensions/themes obsolete
 
 ### Fixed
-- Date conversion to ISO8601
-- Feed charset and feed title escaping
+- Fixed date conversion to ISO8601
+- Fixed feed charset and feed title escaping
 - Openweathermap.org requires Api key now
 
 ## 0.9.3 (October 8, 2015)
 
 ### Fixed
-- Freezing browser in marketplace
+- Fixed freezing browser in marketplace
 
 ## 0.9.2 (October 8, 2015)
 
 ### Added
-- Https for Pagekit API (#415)
-- Site title to browser title
-- Mysql character set compatibility (#434, #465)
-- Sections tabs in user edit view (#390)
+- Added Https for Pagekit API (#415)
+- Added site title to browser title
+- Added Mysql character set compatibility (#434, #465)
+- Added sections tabs in user edit view (#390)
 
 ### Changed
 - Site tree adds its leaf node routes first (#420)
 - User authentication uses separate table
-- Config file generation
+- Changed config file generation
 
 ### Removed
-- Usage of environment variables (#428)
-- Site description
-- Pagekit version from generator tag
+- Removed usage of environment variables (#428)
+- Removed site description
+- Removed Pagekit version from generator tag
 
 ### Fixed
-- User widget ordering
-- Nodes reordering
-- Finder component for non Unix OS's (#448)
-- HttpExceptions returning with Code 500
-- Internal URLs not being resolved in feeds (#466)
-- Theme updates (#472)
-- Extensions and themes view in IE
-- Permissions issue on site edit (#471)
-- Redirect to login, if failed, due to insufficient user rights
+- Fixed user widget ordering
+- Fixed nodes reordering
+- Fixed Finder component for non Unix OS's (#448)
+- Fixed HttpExceptions returning with Code 500
+- Fixed internal URLs not being resolved in feeds (#466)
+- Fixed theme updates (#472)
+- Fixed extensions and themes view in IE
+- Fixed permissions issue on site edit (#471)
+- Fixed redirect to login, if failed, due to insufficient user rights
 
 ## 0.9.1 (September 11, 2015)
 
 ### Added
-- Additional system requirements (#410)
-- Link to gitter chat
+- Added additional system requirements (#410)
+- Added link to gitter chat
 
 ### Changed
 - By default "display errors" are set to "off"
 
 ### Fixed
-- Auto login
-- Login widget (#423)
+- Fixed auto login
+- Fixed login widget (#423)
 
 ## 0.9.0 (September 10, 2015)
 
 ### Added
-- Site tree
-- New default theme
-- New admin panel
-- Data-reactive components with Vue.js
-- Package management using Composer
+- Added site tree
+- Added new default theme
+- Added new admin panel
+- Added data-reactive components with Vue.js
+- Added package management using Composer
 
 ### Changed
-- Codebase
+- Major codebase update
 
 ## 0.8.8 (November 17, 2014)
 
 ### Added
-- Pagination in Blog extension
-- Languages from Transifex
+- Added pagination in Blog extension
+- Added languages from Transifex
 
 ### Changed
 - Updated UIkit to 2.11.1
 
 ### Fixed
-- Comment status bug
-- Reordering menu bug
-- Marketplace grid
-- Thumbnail grid in Storage
-- Several issues for shared hosters
+- Fixed comment status bug
+- Fixed reordering menu bug
+- Fixed Marketplace grid
+- Fixed thumbnail grid in Storage
+- Fixed several issues for shared hosters
 
 ## 0.8.7 (September 8, 2014)
 
 ### Added
-- OAuth api
+- Added OAuth API
 
 ### Changed
-- Library dependencies
+- Updated library dependencies
 
 ### Fixed
-- Option cache issue
+- Fixed option cache issue
 
 ## 0.8.6 (August 28, 2014)
 
 ### Changed
-- Requirejs scripts ordering
+- Changed requirejs scripts ordering
 
 ### Removed
-- 'settings' from extension/theme config, use 'parameters' instead
-- GLOB_BRACE for Solaris compatiblity
+- Removed 'settings' from extension/theme config, use 'parameters' instead
+- Removed GLOB_BRACE for Solaris compatibility
 
 ### Fixed
-- Blog/Page url handling
-- Blog extension settings
+- Fixed Blog/Page url handling
+- Fixed Blog extension settings
 
 ## 0.8.5 (August 22, 2014)
 
 ### Added
-- Marketplace pagination
+- Added Marketplace pagination
 - Beautified system emails
-- Admin theme font subset latin, latin-ext
+- Added admin theme font subset latin, latin-ext
 
 ### Changed
 - Updated UIkit to 2.9
 
 ### Removed
-- Username in password reset
+- Removed username in password reset
 
 ### Fixed
 - Simple plugin regex
-- Gravatar on https
+- Fixed Gravatar on https
 
 ## 0.8.4 (July 25, 2014)
 
 ### Added
-- Finnish, French, Spanish, Russian translations
-- Pagination in user manager
+- Added Finnish, French, Spanish, Russian translations
+- Added pagination in user manager
 
 ### Changed
-- mod_rewrite check
+- Changed mod_rewrite check
 - Widgets render themselves now
-- Comments settings in blog
+- Changed comments settings in blog
 - The app root no longer needs to be writable if the config already exists
 
 ### Fixed
-- Comments ordering (blog)
-- Comments auto approval (blog)
-- Finder (Windows)
-- Demo data for SQLite versions < 3.7.11
-- Language registration for Themes and Extensions
-- Blank renderer in theme skeleton
-- Redirect after installation
-- Apache configuration to serve SVG files with correct mime type
-- Verify mail action
+- Fixed Comments ordering (blog)
+- Fixed Comments auto approval (blog)
+- Fixed Finder (Windows)
+- Fixed demo data for SQLite versions < 3.7.11
+- Fixed language registration for themes and extensions
+- Fixed blank renderer in theme skeleton
+- Fixed redirect after installation
+- Fixed Apache configuration to serve SVG files with correct mime type
+- Fixed verify mail action
