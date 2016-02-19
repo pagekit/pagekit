@@ -47,6 +47,7 @@ class Composer
         $this->file = $config['path.packages'] . '/' . $this->file;
         $this->blueprint = [
             'repositories' => [
+                ['packagist' => false],
                 ['type' => 'artifact', 'url' => $config['path.artifact']],
                 ['type' => 'composer', 'url' => $config['system.api']]
             ]
