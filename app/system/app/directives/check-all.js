@@ -23,7 +23,6 @@ module.exports = {
             },
             function (e) {
                 if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
-                    console.log('click', e)
                     $(this).find(subSelector).trigger('click');
                 }
             }
