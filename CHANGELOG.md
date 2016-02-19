@@ -15,7 +15,6 @@
 - Session Cookie uses HttpOnly flag now
 - Nicer login, registration and profile pages
 - Nicer update notification on dashboard
-- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
 
 ### Fixed
 - Fixed username validation in installer and backend (#513)
@@ -29,6 +28,12 @@
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
 - Fixed an issue which could lead to an open_basedir restriction exception 
+
+## 0.10.3 (February 19 2016)
+
+### Changed
+- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
+- Prepared self updater for bundled versions of Pagekit
 
 ## 0.10.2 (January 11, 2016)
 

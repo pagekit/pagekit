@@ -66,7 +66,7 @@ class SelfUpdater
             $fileList = $this->getFileList($file);
             unset($fileList[array_search('.htaccess', $fileList)]);
 
-            $fileList = array_filter($fileList, function ($file) {
+            $fileList = array_values(array_filter($fileList, function ($file) {
                 foreach ($this->ignoreFolder as $ignore) {
                     if(strpos($file, $ignore) === 0) {
                         return false;
@@ -74,7 +74,7 @@ class SelfUpdater
                 }
 
                 return true;
-            });
+            }));
 
             if ($this->isWritable($fileList, $path) !== true) {
                 throw new \RuntimeException(array_reduce($fileList, function ($carry, $file) {
