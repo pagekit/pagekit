@@ -28,9 +28,9 @@ class UpdateController
     }
 
     /**
-     * @Request({"url": "string", "shasum": "string"}, csrf=true)
+     * @Request({"url": "string"}, csrf=true)
      */
-    public function downloadAction($url, $shasum)
+    public function downloadAction($url)
     {
         try {
 
@@ -40,10 +40,6 @@ class UpdateController
             $client = new Client;
 
             $data = $client->get($url)->getBody();
-
-            if (sha1($data) !== $shasum) {
-                throw new \RuntimeException('Package checksum verification failed.');
-            }
 
             if (!file_put_contents($file, $data)) {
                 throw new \RuntimeException('Path is not writable.');
