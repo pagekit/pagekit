@@ -15,6 +15,11 @@ class SelfUpdater
     protected $cleanFolder = ['app'];
 
     /**
+     * @var array
+     */
+    protected $ignoreFolder = ['packages'];
+
+    /**
      * @var string
      */
     protected $path;
@@ -60,6 +65,17 @@ class SelfUpdater
             $this->output->write('Preparing update...');
             $fileList = $this->getFileList($file);
             unset($fileList[array_search('.htaccess', $fileList)]);
+
+            $fileList = array_filter($fileList, function ($file) {
+                foreach ($this->ignoreFolder as $ignore) {
+                    if(strpos($file, $ignore) === 0) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+
             if ($this->isWritable($fileList, $path) !== true) {
                 throw new \RuntimeException(array_reduce($fileList, function ($carry, $file) {
                     return $carry . sprintf("'%s' not writable\n", $file);
