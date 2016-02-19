@@ -41,10 +41,6 @@ class UpdateController
 
             $data = $client->get($url)->getBody();
 
-            if (sha1($data) !== $shasum) {
-                throw new \RuntimeException('Package checksum verification failed.');
-            }
-
             if (!file_put_contents($file, $data)) {
                 throw new \RuntimeException('Path is not writable.');
             }
