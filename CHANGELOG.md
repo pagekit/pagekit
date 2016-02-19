@@ -16,6 +16,7 @@
 - Nicer login, registration and profile pages
 - Nicer update notification on dashboard
 - Translation files removed, fetched during build. Run `./pagekit translation:fetch` during development
+- Increased package installation by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies). 
 
 ### Fixed
 - Fixed username validation in installer and backend (#513)
