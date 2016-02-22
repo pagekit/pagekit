@@ -28,6 +28,7 @@
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
 - Fixed an issue which could lead to an open_basedir restriction exception 
+- Fixed registration verification mail
 
 ## 0.10.3 (February 19 2016)
 
