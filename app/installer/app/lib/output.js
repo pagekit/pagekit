@@ -54,7 +54,7 @@ module.exports = {
 
         onClose: function () {
             if (this.cb) {
-                cb(this);
+                this.cb(this);
             }
 
             this.$destroy();
