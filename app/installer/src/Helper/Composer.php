@@ -38,6 +38,7 @@ class Composer
     /**
      * @param $config
      * @param null $output
+     * @param bool $packagist
      */
     public function __construct($config, $output = null)
     {
@@ -55,9 +56,11 @@ class Composer
 
     /**
      * @param array $install [name => version, name => version, ...]
+     * @param bool $packagist
+     * @param bool $writeConfig
      * @return bool
      */
-    public function install(array $install, $packagist = false)
+    public function install(array $install, $packagist = false, $writeConfig = true)
     {
         $this->addPackages($install);
 
@@ -71,21 +74,28 @@ class Composer
         }
 
         $this->composerUpdate(array_keys($install), $refresh, $packagist);
-        $this->writeConfig();
+
+        if ($writeConfig) {
+            $this->writeConfig();
+        }
     }
 
 
     /**
      * @param array|string $uninstall [name, name, ...]
+     * @param bool $writeConfig
      */
-    public function uninstall($uninstall)
+    public function uninstall($uninstall, $writeConfig = true)
     {
         $uninstall = (array) $uninstall;
 
         $this->removePackages($uninstall);
 
         $this->composerUpdate($uninstall);
-        $this->writeConfig();
+
+        if ($writeConfig) {
+            $this->writeConfig();
+        }
     }
 
     /**
