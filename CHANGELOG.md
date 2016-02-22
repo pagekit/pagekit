@@ -29,6 +29,7 @@
 - Fixed ExceptionHandler response
 - Fixed an issue which could lead to an open_basedir restriction exception 
 - Fixed registration verification mail
+- Fixed user authenticated role assignment
 
 ## 0.10.3 (February 19 2016)
 
