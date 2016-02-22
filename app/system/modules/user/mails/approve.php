@@ -96,7 +96,7 @@
                                     <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="<?= $view->url('@user/registration/activate', ['user' => $user->username, 'key' => $user->activation], 0) ?>"><?= __('Approve Account') ?></a>
                                 </p>
 
-                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="<?= $view->url('@user/registration/activate', ['user' => $user->username, 'key' => $user->activation], 0) ?>"><?= __('Approve Account') ?><?= $app['url']->base(0) ?>"><?= $app['url']->base(0) ?></a></p>
+                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="<?= $app['url']->base(0) ?>"><?= $app['url']->base(0) ?></a></p>
 
                             </td>
                         </tr>
