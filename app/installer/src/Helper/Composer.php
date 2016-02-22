@@ -47,7 +47,6 @@ class Composer
         $this->file = $config['path.packages'] . '/' . $this->file;
         $this->blueprint = [
             'repositories' => [
-                ['packagist' => false],
                 ['type' => 'artifact', 'url' => $config['path.artifact']],
                 ['type' => 'composer', 'url' => $config['system.api']]
             ]
@@ -58,7 +57,7 @@ class Composer
      * @param array $install [name => version, name => version, ...]
      * @return bool
      */
-    public function install(array $install)
+    public function install(array $install, $packagist = false)
     {
         $this->addPackages($install);
 
@@ -71,7 +70,7 @@ class Composer
             } catch (\UnexpectedValueException $e) {}
         }
 
-        $this->composerUpdate(array_keys($install), $refresh);
+        $this->composerUpdate(array_keys($install), $refresh, $packagist);
         $this->writeConfig();
     }
 
@@ -114,13 +113,13 @@ class Composer
      * @param array $refresh
      * @return bool
      */
-    protected function composerUpdate($updates = false, $refresh = [])
+    protected function composerUpdate($updates = false, $refresh = [], $packagist = false)
     {
         $installed = new JsonFile($this->paths['path.vendor'] . '/composer/installed.json');
         $internal = new CompositeRepository([]);
         $internal->addRepository(new InstalledFilesystemRepository($installed));
 
-        $composer = $this->getComposer();
+        $composer = $this->getComposer($packagist);
         $composer->getDownloadManager()->setOutputProgress(false);
 
         $local = $composer->getRepositoryManager()->getLocalRepository();
@@ -144,13 +143,18 @@ class Composer
     /**
      * Returns composer instance.
      *
+     * @param bool $packagist
      * @return null
      */
-    protected function getComposer()
+    protected function getComposer($packagist = false)
     {
         $config = $this->blueprint;
         $config['config'] = ['vendor-dir' => $this->paths['path.packages'], 'cache-files-ttl' => 0];
         $config['require'] = $this->packages;
+
+        if (!$packagist) {
+            $config['repositories'][] = ['packagist' => false];
+        }
 
         // set memory limit, if < 512M
         $memory = trim(ini_get('memory_limit'));

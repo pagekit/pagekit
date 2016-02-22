@@ -38,11 +38,12 @@ class PackageManager
 
     /**
      * @param  array $install
+     * @param bool $packagist
      * @return bool
      */
-    public function install(array $install = [])
+    public function install(array $install = [], $packagist = false)
     {
-        $this->composer->install($install);
+        $this->composer->install($install, $packagist);
 
         $packages = App::package()->all(null, true);
         foreach ($install as $name => $version) {
