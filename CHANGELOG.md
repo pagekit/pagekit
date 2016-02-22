@@ -15,6 +15,7 @@
 - Session Cookie uses HttpOnly flag now
 - Nicer login, registration and profile pages
 - Nicer update notification on dashboard
+- Improved ORM Metadata cache breaker
 
 ### Fixed
 - Fixed username validation in installer and backend (#513)
