@@ -95,7 +95,7 @@ class PackageManager
         }
 
         foreach ($packages as $package) {
-            if (!$current = App::module('system')->config('packages.' . $package->get('module'))) {
+            if (!$current = App::config('system')->get('packages.' . $package->get('module'))) {
                 $current = $this->doInstall($package);
             }
 
