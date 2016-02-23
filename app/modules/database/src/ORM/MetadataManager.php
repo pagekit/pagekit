@@ -118,14 +118,14 @@ class MetadataManager
 
             if ($this->cache) {
 
-                $hash = (string) filemtime($class->getFileName());
+                $hash = filemtime($class->getFileName());
                 foreach ($class->getTraits() as $trait) {
-                    $hash += (string) filemtime($trait->getFileName());
+                    $hash += filemtime($trait->getFileName());
                 }
 
                 $current = $class;
                 while ($parent = $current->getParentClass()) {
-                    $hash += (string) filemtime($parent->getFileName());
+                    $hash += filemtime($parent->getFileName());
                     $current = $parent;
                 }
 
