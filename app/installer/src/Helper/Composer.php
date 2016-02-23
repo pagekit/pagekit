@@ -58,9 +58,10 @@ class Composer
      * @param array $install [name => version, name => version, ...]
      * @param bool $packagist
      * @param bool $writeConfig
+     * @param bool $preferSource
      * @return bool
      */
-    public function install(array $install, $packagist = false, $writeConfig = true)
+    public function install(array $install, $packagist = false, $writeConfig = true, $preferSource = false)
     {
         $this->addPackages($install);
 
@@ -73,7 +74,7 @@ class Composer
             } catch (\UnexpectedValueException $e) {}
         }
 
-        $this->composerUpdate(array_keys($install), $refresh, $packagist);
+        $this->composerUpdate(array_keys($install), $refresh, $packagist, $preferSource);
 
         if ($writeConfig) {
             $this->writeConfig();
@@ -121,9 +122,12 @@ class Composer
      *
      * @param  array|bool $updates
      * @param array $refresh
+     * @param bool $packagist
+     * @param bool $preferSource
      * @return bool
+     * @throws \Exception
      */
-    protected function composerUpdate($updates = false, $refresh = [], $packagist = false)
+    protected function composerUpdate($updates = false, $refresh = [], $packagist = false, $preferSource = false)
     {
         $installed = new JsonFile($this->paths['path.vendor'] . '/composer/installed.json');
         $internal = new CompositeRepository([]);
@@ -139,9 +143,14 @@ class Composer
 
         $installer = Installer::create($this->getIO(), $composer)
             ->setAdditionalInstalledRepository($internal)
-            ->setPreferDist(true)
             ->setOptimizeAutoloader(true)
             ->setUpdate(true);
+
+        if ($preferSource) {
+            $installer->setPreferSource(true);
+        } else {
+            $installer->setPreferDist(true);
+        }
 
         if ($updates) {
             $installer->setUpdateWhitelist($updates)->setWhitelistDependencies();
