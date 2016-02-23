@@ -68,7 +68,7 @@ class PackageManager
 
             $this->disable($package);
             $this->getScripts($package)->uninstall();
-            App::config('system')->remove('packages.'.$package->get('module'));
+            App::config('system')->remove('packages.' . $package->get('module'));
 
             if ($this->composer->isInstalled($package->getName())) {
                 $this->composer->uninstall($package->getName());
@@ -90,7 +90,11 @@ class PackageManager
      */
     public function enable($packages)
     {
-        foreach ((array) $packages as $package) {
+        if (!is_array($packages)) {
+            $packages = [$packages];
+        }
+
+        foreach ($packages as $package) {
             if (!$current = App::module('system')->config('packages.' . $package->get('module'))) {
                 $current = $this->doInstall($package);
             }
@@ -118,7 +122,11 @@ class PackageManager
      */
     public function disable($packages)
     {
-        foreach ((array) $packages as $package) {
+        if (!is_array($packages)) {
+            $packages = [$packages];
+        }
+
+        foreach ($packages as $package) {
             $this->getScripts($package)->disable();
 
             if ($package->getType() == 'pagekit-extension') {
@@ -128,7 +136,7 @@ class PackageManager
     }
 
     /**
-     * @param  array  $package
+     * @param  array $package
      * @param  string $current
      * @return PackageScripts
      */
@@ -142,7 +150,7 @@ class PackageManager
             throw new \RuntimeException(__('Package path is missing.'));
         }
 
-        return new PackageScripts($path.'/'.$scripts, $current);
+        return new PackageScripts($path . '/' . $scripts, $current);
     }
 
     /**
@@ -154,7 +162,7 @@ class PackageManager
         $this->getScripts($package)->install();
         $version = $this->getVersion($package);
 
-        App::config('system')->set('packages.'.$package->get('module'), $version);
+        App::config('system')->set('packages.' . $package->get('module'), $version);
 
         return $version;
     }
@@ -171,7 +179,7 @@ class PackageManager
             throw new \RuntimeException(__('Package path is missing.'));
         }
 
-        if (!file_exists($file = $path.'/composer.json')) {
+        if (!file_exists($file = $path . '/composer.json')) {
             throw new \RuntimeException(__('\'composer.json\' is missing.'));
         }
 
@@ -180,7 +188,7 @@ class PackageManager
             return $package['version'];
         }
 
-        if (file_exists(App::get('path.packages').'/composer/installed.json')) {
+        if (file_exists(App::get('path.packages') . '/composer/installed.json')) {
             $installed = json_decode(file_get_contents($file), true);
 
             foreach ($installed as $package) {
