@@ -86,40 +86,44 @@ class PackageManager
     }
 
     /**
-     * @param $package
+     * @param $packages
      */
-    public function enable($package)
+    public function enable($packages)
     {
-        if (!$current = App::module('system')->config('packages.'.$package->get('module'))) {
-            $current = $this->doInstall($package);
-        }
+        foreach ((array) $packages as $package) {
+            if (!$current = App::module('system')->config('packages.' . $package->get('module'))) {
+                $current = $this->doInstall($package);
+            }
 
-        $scripts = $this->getScripts($package, $current);
-        if ($scripts->hasUpdates()) {
-            $scripts->update();
-        }
+            $scripts = $this->getScripts($package, $current);
+            if ($scripts->hasUpdates()) {
+                $scripts->update();
+            }
 
-        $version = $this->getVersion($package);
-        App::config('system')->set('packages.'.$package->get('module'), $version);
+            $version = $this->getVersion($package);
+            App::config('system')->set('packages.' . $package->get('module'), $version);
 
-        $scripts->enable();
+            $scripts->enable();
 
-        if ($package->getType() == 'pagekit-theme') {
-            App::config('system')->set('site.theme', $package->get('module'));
-        } elseif ($package->getType() == 'pagekit-extension') {
-            App::config('system')->push('extensions', $package->get('module'));
+            if ($package->getType() == 'pagekit-theme') {
+                App::config('system')->set('site.theme', $package->get('module'));
+            } elseif ($package->getType() == 'pagekit-extension') {
+                App::config('system')->push('extensions', $package->get('module'));
+            }
         }
     }
 
     /**
-     * @param $package
+     * @param $packages
      */
-    public function disable($package)
+    public function disable($packages)
     {
-        $this->getScripts($package)->disable();
+        foreach ((array) $packages as $package) {
+            $this->getScripts($package)->disable();
 
-        if ($package->getType() == 'pagekit-extension') {
-            App::config('system')->pull('extensions', $package->get('module'));
+            if ($package->getType() == 'pagekit-extension') {
+                App::config('system')->pull('extensions', $package->get('module'));
+            }
         }
     }
 
