@@ -7,8 +7,11 @@
 - Remember last finder position and view setting
 - Added pagination cache and pagination links
 - Added changelog to update view
+- Added extension dependency update command for developer
+- Added prefer-source option to package install and update command
 
 ### Changed
+- Bundled Pagekit installer
 - Updated to Symfony 3.0
 - Hide Trash menu from Site node picker
 - Deny cross site redirects after login and logout
@@ -16,6 +19,7 @@
 - Nicer login, registration and profile pages
 - Nicer update notification on dashboard
 - Improved ORM Metadata cache breaker
+- Reenabled Packagist for zip uploads
 
 ### Fixed
 - Fixed username validation in installer and backend (#513)
@@ -31,6 +35,7 @@
 - Fixed an issue which could lead to an open_basedir restriction exception 
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
+- Fixed package upload zip verification
 
 ## 0.10.3 (February 19 2016)
 
