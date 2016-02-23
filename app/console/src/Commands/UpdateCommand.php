@@ -6,6 +6,7 @@ use Pagekit\Application\Console\Command;
 use Pagekit\Installer\Helper\Composer;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateCommand extends Command
@@ -26,6 +27,7 @@ class UpdateCommand extends Command
     protected function configure()
     {
         $this->addArgument('packages', InputArgument::IS_ARRAY | InputArgument::REQUIRED, '[Package name]');
+        $this->addOption('prefer-source', null, InputOption::VALUE_NONE, 'Forces installation from package sources when possible, including VCS information.');
     }
 
     /**
@@ -54,6 +56,6 @@ class UpdateCommand extends Command
         }
 
         $composer = new Composer($config, $output);
-        $composer->install($packages, true, false);
+        $composer->install($packages, true, false, $this->option('prefer-source'));
     }
 }
