@@ -121,8 +121,13 @@
                 this.query();
             },
 
-            page: function () {
-                this.query(this.page);
+            page: function (page, old) {
+
+                if (page == old) {
+                    return;
+                }
+
+                this.query(page);
             }
 
         },
