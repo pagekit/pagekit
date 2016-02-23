@@ -30,7 +30,7 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      * Gets a package.
      *
      * @param  string $name
-     * @param  bool $force
+     * @param  bool   $force
      * @return mixed|null
      */
     public function get($name, $force = false)
@@ -46,7 +46,7 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
      * Gets all packages.
      *
      * @param  string $type
-     * @param bool $force
+     * @param bool    $force
      * @return array
      */
     public function all($type = null, $force = false)
@@ -83,10 +83,6 @@ class PackageFactory implements \ArrayAccess, \IteratorAggregate
 
         if (is_string($data)) {
             $data = @json_decode($data, true);
-        }
-
-        if (!isset($data['type']) || ($data['type'] !== 'pagekit-extension' && $data['type'] !== 'pagekit-theme')) {
-            return false;
         }
 
         if (is_array($data) && isset($data['name'])) {
