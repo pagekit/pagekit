@@ -1,5 +1,4 @@
 **/app/bundle/**/*.js
-**/languages/**/*
 /app/vendor/*
 /app/assets/*
 !/app/assets/codemirror
