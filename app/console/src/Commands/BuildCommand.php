@@ -62,11 +62,6 @@ class BuildCommand extends Command
 
         exec('webpack -p');
 
-        $this->line('Updating language files.');
-        $command = $this->getApplication()->find('translation:fetch');
-        $input = new ArrayInput([]);
-        $command->run($input, $output);
-
         $this->line(sprintf('Building Package.'));
 
         $finder = Finder::create()->files()->in($path)->ignoreVCS(true)->filter(function ($file) use ($filter) {
