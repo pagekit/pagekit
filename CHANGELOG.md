@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.10.4 (February 24 2016)
 
 ### Added
 - Added filter cache for widget and site settings
