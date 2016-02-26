@@ -29,7 +29,7 @@
             label: 'Settings'
         },
 
-        props: ['widget', 'form'],
+        props: ['widget', 'form', 'config'],
 
         created: function () {
             this.$options.partials = this.$parent.$options.partials;
