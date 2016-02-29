@@ -49,6 +49,8 @@
                         <div v-html="pkg.description | marked" v-if="pkg.description"></div>
 
                         <ul class="uk-list">
+                            <li v-if="pkg.demo"><strong>{{ 'Demo:' | trans }}</strong> <a :href="pkg.demo">{{ pkg.demo }}</a></li>
+                            <li v-if="pkg.support"><strong>{{ 'Support:' | trans }}</strong> <a :href="pkg.support">{{ pkg.support }}</a></li>
                             <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
                             <li v-if="pkg.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a :href="pkg.author.homepage" target="_blank">{{ pkg.author.homepage }}</a></li>
                             <li v-if="pkg.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ pkg.author.email }}">{{ pkg.author.email }}</a></li>

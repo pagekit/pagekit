@@ -9,6 +9,7 @@
 - Added changelog to update view
 - Added extension dependency update command for developer
 - Added prefer-source option to package install and update command
+- Added demo and support links to marketplace packages
 
 ### Changed
 - Bundled Pagekit installer
