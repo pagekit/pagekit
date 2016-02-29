@@ -16,6 +16,8 @@ class ResponseListener implements EventSubscriberInterface
                         \2                              # match the previous quote
                        /xiU';
 
+    const REGEX_BODY = '/<body(?<attributes>[^>]*)>(?<body>.*)<\/body>/xsi';
+
     /**
      * Filter the response content.
      */
@@ -25,9 +27,16 @@ class ResponseListener implements EventSubscriberInterface
             return;
         }
 
-        $response->setContent(preg_replace_callback(self::REGEX_URL, function ($matches) {
-            return sprintf(' %s=%s%s%s', $matches['attr'], $matches['quote'], App::url($matches['url']), $matches['quote']);
+        $response->setContent(preg_replace_callback(self::REGEX_BODY, function($matches) {
+
+            $body = preg_replace_callback(self::REGEX_URL, function ($matches) {
+                return sprintf(' %s=%s%s%s', $matches['attr'], $matches['quote'], App::url($matches['url']), $matches['quote']);
+            }, $matches['body']);
+
+            return sprintf('<body%s>%s</body>', $matches['attributes'], $body);
+
         }, $content));
+
     }
 
     /**
