@@ -1,15 +1,15 @@
 # Changelog
 
-## WIP
+## 0.10.4 (March 1 2016)
 
 ### Added
-- Added filter cache for widget and site settings
+- Added filter cache for lists and searches
 - Remember last finder position and view setting
 - Added pagination cache and pagination links
 - Added changelog to update view
 - Added extension dependency update command for developer
 - Added prefer-source option to package install and update command
-- Added demo and support links to marketplace packages
+- Added filter and ordering highlighting
 
 ### Changed
 - Bundled Pagekit installer
@@ -37,6 +37,7 @@
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification
+- Fixed single quote issue by using RFC4627-compliant JSON within embedded script tags (#551)
 
 ## 0.10.3 (February 19 2016)
 
