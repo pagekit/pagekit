@@ -123,7 +123,7 @@
 
             page: function (page, old) {
 
-                if (page == old) {
+                if (page == old || (!old && !page)) {
                     return;
                 }
 
