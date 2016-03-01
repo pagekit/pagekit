@@ -1,9 +1,9 @@
 # Changelog
 
-## 0.10.4 (February 24 2016)
+## 0.10.4 (March 1 2016)
 
 ### Added
-- Added filter cache for widget and site settings
+- Added filter cache for lists
 - Remember last finder position and view setting
 - Added pagination cache and pagination links
 - Added changelog to update view
