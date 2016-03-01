@@ -3,7 +3,7 @@
 ## 0.10.4 (March 1 2016)
 
 ### Added
-- Added filter cache for lists
+- Added filter cache for lists and searches
 - Remember last finder position and view setting
 - Added pagination cache and pagination links
 - Added changelog to update view
