@@ -12,7 +12,7 @@ module.exports = {
             package: {},
             view: false,
             updates: null,
-            search: this.$session.get(this.$options.name + '.search') || '',
+            search: this.$session.get(this.$options.name + '.search', ''),
             status: ''
         }, window.$data);
     },

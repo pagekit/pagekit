@@ -91,11 +91,11 @@
         created: function () {
 
             if (!this.path) {
-                this.path = this.$session.get('finder.' + this.root + '.path') || '/';
+                this.path = this.$session.get('finder.' + this.root + '.path', '/');
             }
 
             if (!this.view) {
-                this.view = this.$session.get('finder.' + this.root + '.view') || 'table';
+                this.view = this.$session.get('finder.' + this.root + '.view', 'table');
             }
 
             this.$watch('path', function (path) {

@@ -6,7 +6,7 @@ module.exports = {
         return _.merge({
             users: false,
             config: {
-              filter: this.$session.get('user.filter') || {order: 'username asc'}
+              filter: this.$session.get('user.filter', {order: 'username asc'})
             },
             pages: 0,
             count: '',

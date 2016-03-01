@@ -5,7 +5,7 @@ module.exports = {
     data: function () {
         return _.merge({
             edit: undefined,
-            menu: this.$session.get('site.menu') || {},
+            menu: this.$session.get('site.menu', {}),
             menus: [],
             nodes: [],
             tree: false,

@@ -6,9 +6,9 @@ module.exports = {
 
     data: function () {
         return _.merge({
-            position: this.$session.get('widget.position') || undefined,
+            position: this.$session.get('widget.position'),
             selected: [],
-            config: {positions: [], filter: this.$session.get('widget.filter') || {}},
+            config: {positions: [], filter: this.$session.get('widget.filter', {})},
             unassignedWidgets: [],
             type: {}
         }, window.$data)
