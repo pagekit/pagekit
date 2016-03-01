@@ -33,11 +33,10 @@
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
-- Fixed an issue which could lead to an open_basedir restriction exception
+- Fixed an issue which could lead to an open_basedir restriction exception 
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification
-- Fixed single quotes issue in URL rewrites (#551)
 
 ## 0.10.3 (February 19 2016)
 
