@@ -37,8 +37,7 @@
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification
-- Fixed single quotes issue in editor (#551)
-- Fixed url rewrites only happening for body content
+- Fixed single quotes issue in URL rewrites (#551)
 
 ## 0.10.3 (February 19 2016)
 
