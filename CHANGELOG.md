@@ -36,6 +36,7 @@
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification
+- Fixed single quote issue by using RFC4627-compliant JSON within embedded script tags (#551)
 
 ## 0.10.3 (February 19 2016)
 
