@@ -11,6 +11,10 @@
     module.exports = {
 
         props: {
+            trash: {
+                type: Boolean,
+                default: false,
+            },
             active: {
                 type: Array,
                 default: function() {
@@ -36,7 +40,7 @@
                 ])
                 .then(function(responses) {
                     vm.$set('nodes', responses[0].data);
-                    vm.$set('menus', responses[1].data);
+                    vm.$set('menus', vm.trash ? responses[1].data : _.reject(responses[1].data, 'id', 'trash'));
                 }, function () {
                     vm.$notify('Could not load config.', 'danger');
                 });

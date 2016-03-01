@@ -12,6 +12,7 @@ module.exports = {
             update: false,
             output: '',
             progress: 0,
+            releases: [],
             errors: []
         }, window.$data);
     },
@@ -32,19 +33,21 @@ module.exports = {
 
         getVersions: function () {
 
-            this.$http.get(this.api + '/api/update').then(
-                    function (res) {
-                        var data = res.data;
-                        var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+            this.$http.get(this.api + '/api/update', {version: this.version}).then(
+                function (res) {
+                    var data = res.data;
+                    var channel = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
-                        if (channel) {
-                            this.$set('update', channel);
-                        } else {
-                            this.error(this.$trans('Cannot obtain versions. Please try again later.'));
-                        }
-                    }, function () {
-                        this.error(this.$trans('Cannot connect to the server. Please try again later.'));
-                    });
+                    if (channel) {
+                        this.update = channel;
+                        this.releases = data.versions;
+                    } else {
+                        this.error(this.$trans('Cannot obtain versions. Please try again later.'));
+                    }
+                }, function () {
+                    this.error(this.$trans('Cannot connect to the server. Please try again later.'));
+                }
+            );
 
         },
 
@@ -103,6 +106,48 @@ module.exports = {
 
             this.status = 'error';
             this.finished = true;
+        }
+
+    },
+
+    filters: {
+
+        changelog: function (md) {
+
+            var renderer = new marked.Renderer(),
+                section;
+
+            renderer.heading = function (text) {
+                section = text;
+                return '';
+            };
+
+            renderer.listitem = function (text) {
+                switch (section) {
+                    case 'Added':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-success uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Deprecated':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Removed':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-warning uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Fixed':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    case 'Security':
+                        return '<li><span class="uk-badge pk-badge-justify uk-badge-danger uk-margin-right">' + section + '</span> ' + text + '</li>';
+                    default:
+                        return '<li><span class="uk-badge pk-badge-justify uk-margin-right">' + section + '</span> ' + text + '</li>';
+                }
+            };
+
+            renderer.list = function (text) {
+                return text;
+            };
+
+            return marked(md, {renderer: renderer});
+        },
+
+        showChangelog: function (version) {
+            return Version.compare(version, this.version, '>');
         }
 
     }

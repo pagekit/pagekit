@@ -1,8 +1,10 @@
 module.exports = {
 
-    update: function (selector) {
+    params: ['group'],
 
-        var self = this, keypath = this.arg;
+    update: function (subSelector) {
+
+        var self = this, keypath = this.arg, group = this.params.group ? this.params.group + ' ' : '', selector = group + subSelector;
 
         this.selector = selector;
         this.$el = this.vm.$el;
@@ -21,17 +23,17 @@ module.exports = {
             },
             function (e) {
                 if (!$(e.target).is(':input, a') && !window.getSelection().toString()) {
-                    $(this).find(selector).trigger('click');
+                    $(this).find(subSelector).trigger('click');
                 }
             }
         ];
 
         $(this.$el).on('change.check-all', selector, this.handler[0]);
-        $(this.$el).on('click.check-all', '.check-item', this.handler[1]);
+        $(this.$el).on('click.check-all', group + '.check-item', this.handler[1]);
 
         this.unbindWatcher = this.vm.$watch(keypath, function (selected) {
 
-            $(selector, this.$el).prop('checked', function () {
+            $(subSelector, this.$el).prop('checked', function () {
                 return selected.indexOf(self.toNumber($(this).val())) !== -1;
             });
 

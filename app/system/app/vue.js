@@ -3,10 +3,25 @@ function install (Vue) {
     var config = window.$pagekit;
 
     Vue.config.debug = false;
+    Vue.cache = Vue.prototype.$cache = require('./lib/cache')(config.url);
+    Vue.session = Vue.prototype.$session = require('./lib/cache')('session',
+        {
 
-    Vue.prototype.$session = window.sessionStorage || {};
-    Vue.prototype.$cache = require('lscache');
-    Vue.cache = require('lscache');
+            load: function (name) {
+
+                if (Vue.cache.get('_session') !== Vue.cache.get('_csrf')) {
+                    Vue.cache.remove(name);
+                }
+                Vue.cache.set('_session', Vue.cache.get('_csrf'));
+
+                return Vue.cache.get(name, {});
+            },
+
+            store: function (name, data) {
+                return Vue.cache.set(name, data);
+            }
+
+        });
 
     /**
      * Libraries
@@ -16,6 +31,8 @@ function install (Vue) {
     require('vue-intl');
     require('vue-resource');
     require('./lib/asset')(Vue);
+    require('./lib/state')(Vue);
+    require('./lib/resourceCache')(Vue);
     require('./lib/csrf')(Vue);
     require('./lib/notify')(Vue);
     require('./lib/trans')(Vue);
@@ -45,7 +62,6 @@ function install (Vue) {
     Vue.directive('order', require('./directives/order'));
     Vue.directive('lazy-background', require('./directives/lazy-background'));
     Vue.directive('stack-margin', require('./directives/stack-margin'));
-    Vue.directive('var', require('./directives/var'));
 
     /**
      * Resource

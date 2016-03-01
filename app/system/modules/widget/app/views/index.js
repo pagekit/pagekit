@@ -6,9 +6,10 @@ module.exports = {
 
     data: function () {
         return _.merge({
-            position: undefined,
+            position: this.$session.get('widget.position'),
             selected: [],
-            config: {filter: {search: '', node: ''}},
+            config: {positions: [], filter: this.$session.get('widget.filter', {})},
+            unassignedWidgets: [],
             type: {}
         }, window.$data)
     },
@@ -20,17 +21,6 @@ module.exports = {
 
     },
 
-    watch: {
-
-        widgets: 'attachWidgets',
-
-        'config.positions': {
-            handler: 'attachWidgets',
-            immediate: true
-        }
-
-    },
-
     computed: {
 
         positions: function () {
@@ -38,9 +28,7 @@ module.exports = {
         },
 
         unassigned: function () {
-            var widgets = this.get('unassigned');
-
-            return {name: '_unassigned', label: 'Unassigned', assigned: _.pluck(widgets, 'id'), widgets: widgets};
+            return {name: '_unassigned', label: this.$trans('Unassigned'), assigned: _.pluck(this.unassignedWidgets, 'id'), widgets: this.unassignedWidgets};
         },
 
         empty: function () {
@@ -84,13 +72,13 @@ module.exports = {
                 },
 
                 assigned: function (widget) {
-                    return this.config.positions.some(function (position) {
+                    return this.positions.some(function (position) {
                         return position.assigned.indexOf(widget.id) !== -1;
                     });
                 },
 
                 unassigned: function (widget) {
-                    return !this.config.positions.some(function (position) {
+                    return !this.positions.some(function (position) {
                         return position.assigned.indexOf(widget.id) !== -1;
                     });
                 }
@@ -98,6 +86,15 @@ module.exports = {
             };
 
             return filters[filter] ? this.widgets.filter(filters[filter], this) : this.widgets;
+        },
+
+        load: function () {
+
+            return this.resource.query().then(function (res) {
+                this.$set('config.positions', res.data.positions);
+                this.$set('unassignedWidgets', res.data.unassigned);
+            });
+
         },
 
         active: function (position) {
@@ -111,12 +108,16 @@ module.exports = {
             }
 
             this.$set('position', position);
+            if (position) {
+                this.$session.set('widget.position', position);
+            } else {
+                this.$session.remove('widget.position');
+            }
         },
 
         assign: function (position, ids) {
-            return this.resource.save({id: 'assign'}, {position: position, ids: ids}, function (data) {
+            return this.resource.save({id: 'assign'}, {position: position, ids: ids}).then(function () {
                 this.load();
-                this.$set('config.positions', data.positions);
                 this.$set('selected', []);
             });
         },
@@ -125,23 +126,23 @@ module.exports = {
 
             position = _.find(this.positions, 'name', position);
 
-            this.assign(position.name, position.assigned.concat(ids)).success(function () {
+            this.assign(position.name, position.assigned.concat(ids)).then(function () {
                 this.$notify(this.$transChoice('{1} %count% Widget moved|]1,Inf[ %count% Widgets moved', ids.length, {count: ids.length}));
             });
         },
 
         copy: function () {
-            this.resource.save({id: 'copy'}, {ids: this.selected}, function (data) {
-                this.load();
-                this.$set('config.positions', data.positions);
+            this.resource.save({id: 'copy'}, {ids: this.selected}).then(function (res) {
+                this.load().then();
                 this.$set('selected', []);
                 this.$notify('Widget(s) copied.');
             });
         },
 
         remove: function () {
-            this.resource.delete({id: 'bulk'}, {ids: this.selected}, function () {
+            this.resource.delete({id: 'bulk'}, {ids: this.selected}).then(function () {
                 this.load();
+                this.$notify('Widget(s) removed.');
                 this.$set('selected', []);
             });
         },
@@ -154,7 +155,7 @@ module.exports = {
                 widget.status = status;
             });
 
-            this.resource.save({id: 'bulk'}, {widgets: widgets}, function () {
+            this.resource.save({id: 'bulk'}, {widgets: widgets}).then(function () {
                 this.load();
                 this.$set('selected', []);
                 this.$notify('Widget(s) saved.');
@@ -165,7 +166,7 @@ module.exports = {
 
             widget.status = widget.status ? 0 : 1;
 
-            this.resource.save({id: widget.id}, {widget: widget}, function () {
+            this.resource.save({id: widget.id}, {widget: widget}).then(function () {
                 this.load();
                 this.$notify('Widget saved.');
             });
@@ -188,7 +189,9 @@ module.exports = {
 
         emptyafterfilter: function (widgets) {
 
-            widgets = widgets || this.widgets;
+            widgets = widgets || this.config.positions.reduce(function (result, position) {
+                    return  result.concat(position.widgets);
+                }, []);
 
             return !widgets.some(function (widget) {
                 return this.infilter(widget);
@@ -209,15 +212,17 @@ module.exports = {
 
         isSelected: function (id) {
             return this.selected.indexOf(id) !== -1;
-        },
-
-        attachWidgets: function () {
-
-            this.config.positions.forEach(function (position) {
-                Vue.set(position, 'widgets', this.$options.filters.assigned.bind(this)(position.assigned));
-            }, this);
         }
 
+    },
+
+    watch: {
+        'config.filter': {
+            handler: function (filter) {
+                this.$session.set('widget.filter', filter);
+            },
+            deep: true
+        }
     },
 
     filters: {

@@ -1,4 +1,4 @@
-<?php $view->script('marketplace', 'installer:app/bundle/marketplace.js', 'vue') ?>
+<?php $view->script('marketplace', 'installer:app/bundle/marketplace.js', ['vue', 'marked']) ?>
 
 <div id="marketplace" v-cloak data-uk-observe>
 
@@ -16,6 +16,6 @@
         </div>
     </div>
 
-    <marketplace :api="api" :search="search" :type="type" :installed="installed"></marketplace>
+    <marketplace :api="api" :search="search" :page="page" :type="type" :installed="installed"></marketplace>
 
 </div>

@@ -23,11 +23,13 @@ module.exports = {
             dir   = parts[1] || 'asc';
 
         this.indicator.removeClass('pk-icon-arrow-up pk-icon-arrow-down');
+        $(this.el).removeClass('uk-active');
 
         if (field == this.arg) {
             this.active = true;
             this.dir    = dir;
 
+            $(this.el).addClass('uk-active');
             this.indicator.removeClass('uk-invisible').addClass(dir == 'asc' ? 'pk-icon-arrow-down':'pk-icon-arrow-up');
         } else {
             this.indicator.addClass('pk-icon-arrow-down uk-invisible');

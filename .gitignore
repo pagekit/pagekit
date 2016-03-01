@@ -1,4 +1,3 @@
-**/languages/**/*.json
 **/app/bundle/**/*.js
 /app/vendor/*
 /app/assets/*

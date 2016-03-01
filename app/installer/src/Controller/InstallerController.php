@@ -25,14 +25,6 @@ class InstallerController
     protected $configFile = 'config.php';
 
     /**
-     * @var array
-     */
-    protected $packages = [
-        'pagekit/blog' => '0.10.*',
-        'pagekit/theme-one' => '0.10.*'
-    ];
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -144,16 +136,17 @@ class InstallerController
             ]);
 
             $option['system']['version'] = App::version();
-            $option['system']['extensions'] = ['blog'];
-            $option['system']['site']['theme'] = 'theme-one';
 
             foreach ($option as $name => $values) {
                 App::config()->set($name, App::config($name)->merge($values));
             }
 
-            if ($this->packages) {
-                $installer = new PackageManager(new NullOutput());
-                $installer->install($this->packages);
+            $packageManager = new PackageManager(new NullOutput());
+            foreach (glob(App::get('path.packages') . '/*/*/composer.json') as $package) {
+                $package = App::package()->load($package);
+                if ($package->get('type') === 'pagekit-extension' || $package->get('type') === 'pagekit-theme' ) {
+                    $packageManager->enable($package);
+                }
             }
 
             if (file_exists(__DIR__.'/../../install.php')) {

@@ -4,7 +4,7 @@ return [
 
     'application' => [
 
-        'version' => '0.10.3'
+        'version' => '0.10.4'
 
     ],
 
@@ -31,7 +31,8 @@ return [
         'files' => "$path/tmp/sessions",
         'table' => '@system_session',
         'cookie' => [
-            'name' => 'pagekit_session'
+            'name' => 'pagekit_session',
+            'httponly' => true
         ]
 
     ],

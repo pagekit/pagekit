@@ -39,6 +39,16 @@ class Utility
     }
 
     /**
+     * Return the DBAL schema manager.
+     *
+     * @return Doctrine\DBAL\Schema\AbstractSchemaManager
+     */
+    public function getSchemaManager()
+    {
+        return $this->manager;
+    }
+
+    /**
      * Returns true if the given table exists.
      *
      * @param  string $table
@@ -47,6 +57,20 @@ class Utility
     public function tableExists($table)
     {
         return $this->tablesExist($table);
+    }
+
+    /**
+     * Returns an existing database table.
+     *
+     * @param string $table
+     *
+     * @return \Doctrine\DBAL\Schema\Table
+     *
+     * @throws \Doctrine\DBAL\Schema\SchemaException
+     */
+    public function getTable($table)
+    {
+        return $this->schema->getTable($this->replacePrefix($table));
     }
 
     /**

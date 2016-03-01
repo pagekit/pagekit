@@ -6,6 +6,7 @@ use Pagekit\Application\Console\Command;
 use Pagekit\Installer\Package\PackageManager;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class InstallCommand extends Command
@@ -26,6 +27,7 @@ class InstallCommand extends Command
     protected function configure()
     {
         $this->addArgument('packages', InputArgument::IS_ARRAY | InputArgument::REQUIRED, '[Package name]:[Version constraint]');
+        $this->addOption('prefer-source', null, InputOption::VALUE_NONE, 'Forces installation from package sources when possible, including VCS information.');
     }
 
     /**
@@ -41,6 +43,6 @@ class InstallCommand extends Command
         }
 
         $installer = new PackageManager($output);
-        $installer->install($packages);
+        $installer->install($packages, true, $this->option('prefer-source'));
     }
 }

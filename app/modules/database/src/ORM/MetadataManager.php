@@ -118,7 +118,18 @@ class MetadataManager
 
             if ($this->cache) {
 
-                $id = sprintf('%s%s.%s', $this->prefix, filemtime($class->getFileName()), $name);
+                $hash = filemtime($class->getFileName());
+                foreach ($class->getTraits() as $trait) {
+                    $hash += filemtime($trait->getFileName());
+                }
+
+                $current = $class;
+                while ($parent = $current->getParentClass()) {
+                    $hash += filemtime($parent->getFileName());
+                    $current = $parent;
+                }
+
+                $id = sprintf('%s%s.%s', $this->prefix, $hash, $name);
 
                 if ($config = $this->cache->fetch($id)) {
                     $this->metadata[$name] = new Metadata($this, $name, $config);

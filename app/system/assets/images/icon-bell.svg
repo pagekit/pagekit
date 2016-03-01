@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="icon-bell" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="35px" height="35px" viewBox="0 0 35 35" enable-background="new 0 0 35 35" xml:space="preserve">
+<path fill="#FFFFFF" d="M25.441,23l-0.969-1.637L23,18.717V14c0-0.08,0.015-5.2-5.5-5.2S12,13.92,12,13.972v4.745l-1.473,2.646
+	L9.559,23H11.5h2.743c0.423,1.468,1.743,2.475,3.32,2.475c1.576,0,2.896-1.007,3.319-2.475H23.5H25.441z M17.562,24.275
+	c-1,0-1.842-0.191-2.146-1.275h4.292C19.404,24.084,18.562,24.275,17.562,24.275z M19.838,22h-4.55h-1.2H11.5l1.5-3v-5
+	c0,0,0.094-4,4.5-4s4.5,4,4.5,4v5l1.5,3h-2.463H19.838z"/>
+</svg>

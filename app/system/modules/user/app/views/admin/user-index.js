@@ -5,16 +5,19 @@ module.exports = {
     data: function () {
         return _.merge({
             users: false,
+            config: {
+              filter: this.$session.get('user.filter', {order: 'username asc'})
+            },
             pages: 0,
             count: '',
             selected: []
         }, window.$data);
     },
 
-    created: function () {
+    ready: function () {
 
-        this.resource = this.$resource('api/user/:id');
-        this.config.filter = _.extend({order: 'name asc'}, this.config.filter);
+        this.resource = this.$resource('api/user{/id}');
+        this.load();
 
     },
 
@@ -23,8 +26,9 @@ module.exports = {
         'config.page': 'load',
 
         'config.filter': {
-            handler: function () {
+            handler: function (filter) {
                 this.load(0);
+                this.$session.set('user.filter', filter);
             },
             deep: true
         }

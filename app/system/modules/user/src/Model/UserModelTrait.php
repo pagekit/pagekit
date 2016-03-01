@@ -58,9 +58,9 @@ trait UserModelTrait
     }
 
     /**
-     * @Saved
+     * @Saving
      */
-    public static function saved($event, User $user)
+    public static function saving($event, User $user)
     {
         if (!$user->hasRole(Role::ROLE_AUTHENTICATED)) {
             $user->roles[] = Role::ROLE_AUTHENTICATED;

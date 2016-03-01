@@ -5,9 +5,7 @@
         <div class="pf-navbar">
 
             <ul class="pf-navbar-nav">
-                <li v-if="data" v-for="section in sections | orderBy 'priority'" @click="open(section.name)">
-                    <component :is="section.name" :data="data[section.name]"></component>
-                </li>
+                <li v-if="data" v-for="section in sections | orderBy 'priority'" :is="section.name" :data="data[section.name]" @click="open(section.name)"></li>
             </ul>
 
             <a class="pf-close" @click.prevent="close"></a>

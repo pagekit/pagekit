@@ -156,8 +156,8 @@
                             <div class="uk-form-row">
                                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                                 <div class="uk-form-controls">
-                                    <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-validate:required>
-                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.user.invalid">{{ 'Username cannot be blank.' | trans }}</p>
+                                    <input id="form-username" class="uk-width-1-1" type="text" name="user" value="admin" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
+                                    <p class="uk-form-help-block uk-text-danger" v-show="formSite.user.invalid">{{ 'Username cannot be blank and may only contain alphanumeric characters (A-Z, 0-9) and some special characters ("._-")' | trans }}</p>
                                 </div>
                             </div>
                             <div class="uk-form-row">

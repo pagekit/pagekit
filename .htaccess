@@ -1,5 +1,5 @@
 # Restricted access to files
-<FilesMatch "((\.(lock|cache|db))|installed.json)$">
+<FilesMatch "((\.(lock|cache|db))|installed.json|composer.json|package.json|bower.json|CHANGELOG.md|README.md|gulpfile.js|webpack.config.js)$">
     Order allow,deny
 </FilesMatch>
 

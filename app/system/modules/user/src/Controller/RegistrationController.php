@@ -185,7 +185,7 @@ class RegistrationController
         try {
 
             $mail = App::mailer()->create();
-            $mail->setTo(App::module('mail')->config('from_address'))
+            $mail->setTo(App::module('system/mail')->config('from_address'))
                 ->setSubject(__('Approve an account at %site%.', ['%site%' => App::module('system/site')->config('title')]))
                 ->setBody(App::view('system/user:mails/approve.php', compact('user', 'mail')), 'text/html')
                 ->send();

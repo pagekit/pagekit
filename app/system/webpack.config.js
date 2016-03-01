@@ -15,7 +15,7 @@ module.exports = [
                 "vue-form$": assets + "/vue-form/src/index.js",
                 "vue-intl$": assets + "/vue-intl/src/index.js",
                 "vue-resource$": assets + "/vue-resource/src/index.js",
-                "lscache$": assets + "/lscache/lscache.js"
+                "JSONStorage$": assets + "/JSONStorage/storage.js"
             }
         },
         module: {

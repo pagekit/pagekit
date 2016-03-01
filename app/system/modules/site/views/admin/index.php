@@ -102,8 +102,8 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Menu Positions' | trans }}</span>
                 <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-for="m in config.menus" v-var:assigned="getMenu(m.name)">
-                        <label><input type="checkbox" :value="m.name" v-model="edit.positions"> {{ m.label }}</label> <span class="uk-text-muted" v-if="assigned && assigned.id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:assigned.label} }}</span>
+                    <p class="uk-form-controls-condensed" v-for="m in config.menus">
+                        <label><input type="checkbox" :value="m.name" v-model="edit.positions"> {{ m.label }}</label> <span class="uk-text-muted" v-if="getMenu(m.name) && getMenu(m.name).id != edit.id">{{ '(Currently set to: %menu%)' | trans {menu:getMenu(m.name).label} }}</span>
                     </p>
                 </div>
             </div>
@@ -120,7 +120,7 @@
 
 <script id="node" type="text/template">
 
-    <li class="uk-nestable-item" :class="{'uk-parent': tree[node.id], 'uk-active': $root.isSelected(node)}" :data-id="node.id">
+    <li class="uk-nestable-item check-item" :class="{'uk-parent': tree[node.id], 'uk-active': $root.isSelected(node)}" :data-id="node.id">
         <div class="uk-nestable-panel pk-table-fake uk-form uk-visible-hover">
             <div class="pk-table-width-minimum pk-table-collapse">
                 <div class="uk-nestable-toggle" data-nestable-action="toggle"></div>

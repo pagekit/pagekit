@@ -6,6 +6,7 @@
 Pagekit is a modular and lightweight CMS built with Symfony components.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
+* [Documentation](http://pagekit.com/docs) - User and developer guides
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 * [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
@@ -43,6 +44,12 @@ To watch for JS module changes, run `webpack --watch`.
 
 When the installer has finished, point your browser to the Pagekit URL on your web server and follow the installer.
 
+When you have a running Pagekit installation, use the Pagekit CLI to fetch translations. Without, the interface will appear in English only.
+
+```
+php pagekit translation:fetch
+```
+
 ## Stay up to date
 
 If you've set up Pagekit from source, run these commands to get new commits and to rebuild everything you need.
@@ -62,7 +69,6 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 ```
 ./pagekit --help
 ```
-You can find further information about the command line tools in the [pagekit documentation](http://www.pagekit.com/docs/quickstart)
 
 ## Contributing
 

@@ -12,6 +12,8 @@
             priority: 30
         },
 
+        replace: false,
+
         props: ['data']
 
     };

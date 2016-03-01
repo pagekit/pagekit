@@ -1,6 +1,6 @@
 <template>
 
-    <div class="uk-form-select pk-filter">
+    <div class="uk-form-select pk-filter" :class="{'uk-active': value }">
         <span>{{ label }}</span>
         <select v-if="isNumber" v-model="value" number>
             <template v-for="option in list">

@@ -1,7 +1,10 @@
 window.Themes = _.merge(
     require('../components/package-manager.js'),
     {
+        name: 'themes',
+
         el: '#themes',
+
         filters: {
             themeorder: function (packages) {
 
@@ -14,6 +17,7 @@ window.Themes = _.merge(
                 return packages;
             }
         }
+
     }
 );
 

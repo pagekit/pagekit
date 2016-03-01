@@ -116,7 +116,7 @@
                 handler: function (id) {
 
                     if (id) {
-                        this.$http.get('api/site/page/:id', {id: id}).then(function (res) {
+                        this.$http.get('api/site/page{/id}', {id: id}).then(function (res) {
                             this.$set('page', res.data);
                         });
                     }

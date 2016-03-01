@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Pagekit UNKNOWN (system, messages)\n"
-"POT-Creation-Date: 2015-09-17 15:35+0000\n"
+"Project-Id-Version: Pagekit 0.10.2 (system, messages)\n"
+"POT-Creation-Date: 2016-02-01 17:35+0000\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9,19 +9,16 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Placeholder Image"
-msgstr ""
-
-msgid "Ok"
+msgid "Select Image"
 msgstr ""
 
 msgid "Cancel"
 msgstr ""
 
-msgid "Add Image"
+msgid "Select"
 msgstr ""
 
-msgid "Delete"
+msgid "Add Image"
 msgstr ""
 
 msgid "Image"
@@ -36,13 +33,10 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-msgid "Select Image"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
 msgid "Select Video"
+msgstr ""
+
+msgid "Ok"
 msgstr ""
 
 msgid "1"
@@ -183,22 +177,13 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-msgid "Location"
+msgid "Edit"
 msgstr ""
 
-msgid "Feed Widget"
-msgstr ""
-
-msgid "Weather Widget"
-msgstr ""
-
-msgid "Are you sure?"
+msgid "Close"
 msgstr ""
 
 msgid "Title"
-msgstr ""
-
-msgid "No location found."
 msgstr ""
 
 msgid "Number of Posts"
@@ -222,10 +207,7 @@ msgstr ""
 msgid "No URL given."
 msgstr ""
 
-msgid "Edit"
-msgstr ""
-
-msgid "Close"
+msgid "Location"
 msgstr ""
 
 msgid "Unit"
@@ -237,6 +219,9 @@ msgstr ""
 msgid "Imperial"
 msgstr ""
 
+msgid "No location found."
+msgstr ""
+
 msgid "Dashboard"
 msgstr ""
 
@@ -246,10 +231,7 @@ msgstr ""
 msgid "Widgets reordered."
 msgstr ""
 
-msgid "Add Video"
-msgstr ""
-
-msgid "Placeholder Video"
+msgid "Pagekit %version% is available! Please update now."
 msgstr ""
 
 msgid "Add Link"
@@ -258,28 +240,28 @@ msgstr ""
 msgid "Url"
 msgstr ""
 
-msgid "Name"
+msgid "Add Video"
 msgstr ""
 
-msgid "{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files"
+msgid "Width"
 msgstr ""
 
-msgid "Home"
+msgid "Height"
 msgstr ""
 
-msgid "Folder Name"
+msgid "Autoplay"
 msgstr ""
 
-msgid "Rename"
+msgid "Controls"
 msgstr ""
 
-msgid "Unknown error."
+msgid "Loop"
 msgstr ""
 
-msgid "Table View"
+msgid "Muted"
 msgstr ""
 
-msgid "Thumbnails View"
+msgid "Poster Image"
 msgstr ""
 
 msgid "Add Folder"
@@ -291,7 +273,28 @@ msgstr ""
 msgid "No files found."
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
+msgid "{0} %count% Files|{1} %count% File|]1,Inf[ %count% Files"
+msgstr ""
+
 msgid "{1} %count% File selected|]1,Inf[ %count% Files selected"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Folder Name"
+msgstr ""
+
+msgid "Rename"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Modified"
 msgstr ""
 
 msgid "Invalid path."
@@ -504,42 +507,6 @@ msgstr ""
 msgid "Mail delivery failed! (%s)"
 msgstr ""
 
-msgid "Menu"
-msgstr ""
-
-msgid "OAuth"
-msgstr ""
-
-msgid "Version %version%"
-msgstr ""
-
-msgid "\"%title%\" enabled."
-msgstr ""
-
-msgid "\"%title%\" disabled."
-msgstr ""
-
-msgid "Installing \"%title%\""
-msgstr ""
-
-msgid "Uninstalling \"%title%\""
-msgstr ""
-
-msgid "Installed"
-msgstr ""
-
-msgid "Cannot connect to the server. Please try again later."
-msgstr ""
-
-msgid "Updating to Pagekit %version%"
-msgstr ""
-
-msgid "View"
-msgstr ""
-
-msgid "Enter Title"
-msgstr ""
-
 msgid "Localization"
 msgstr ""
 
@@ -564,45 +531,6 @@ msgstr ""
 msgid "Menu Title"
 msgstr ""
 
-msgid "%type% saved."
-msgstr ""
-
-msgid "Pages moved to %menu%."
-msgstr ""
-
-msgid "Trash"
-msgstr ""
-
-msgid "- Select Type -"
-msgstr ""
-
-msgid "Extension"
-msgstr ""
-
-msgid "Code"
-msgstr ""
-
-msgid "General"
-msgstr ""
-
-msgid "Maintenance"
-msgstr ""
-
-msgid "Create Menu"
-msgstr ""
-
-msgid "Add %type%"
-msgstr ""
-
-msgid "Frontpage"
-msgstr ""
-
-msgid "Order updated."
-msgstr ""
-
-msgid "Select Link"
-msgstr ""
-
 msgid "Invalid url."
 msgstr ""
 
@@ -616,6 +544,21 @@ msgid "URL Alias"
 msgstr ""
 
 msgid "Redirect"
+msgstr ""
+
+msgid "%type% saved."
+msgstr ""
+
+msgid "Pages moved to %menu%."
+msgstr ""
+
+msgid "Trash"
+msgstr ""
+
+msgid "Select Link"
+msgstr ""
+
+msgid "View"
 msgstr ""
 
 msgid "Title cannot be blank."
@@ -636,7 +579,16 @@ msgstr ""
 msgid "Restrict Access"
 msgstr ""
 
+msgid "Menu"
+msgstr ""
+
 msgid "Hide in menu"
+msgstr ""
+
+msgid "Extension"
+msgstr ""
+
+msgid "Code"
 msgstr ""
 
 msgid "Insert code in the header and footer of your theme. This is useful for tracking codes and meta tags."
@@ -648,7 +600,10 @@ msgstr ""
 msgid "Footer"
 msgstr ""
 
-msgid "Description"
+msgid "General"
+msgstr ""
+
+msgid "Site title cannot be blank."
 msgstr ""
 
 msgid "Logo"
@@ -658,6 +613,9 @@ msgid "Favicon"
 msgstr ""
 
 msgid "Appicon"
+msgstr ""
+
+msgid "Maintenance"
 msgstr ""
 
 msgid "Offline"
@@ -688,6 +646,9 @@ msgid "Show all"
 msgstr ""
 
 msgid "Show only for active item"
+msgstr ""
+
+msgid "Invalid name."
 msgstr ""
 
 msgid "Invalid id."
@@ -726,25 +687,16 @@ msgstr ""
 msgid "Edit %type%"
 msgstr ""
 
+msgid "Add %type%"
+msgstr ""
+
 msgid "Add Menu"
-msgstr ""
-
-msgid "Publish"
-msgstr ""
-
-msgid "Unpublish"
-msgstr ""
-
-msgid "Move"
 msgstr ""
 
 msgid "Add Page"
 msgstr ""
 
 msgid "No pages found."
-msgstr ""
-
-msgid "Invalid name."
 msgstr ""
 
 msgid "Menu Positions"
@@ -754,9 +706,6 @@ msgid "(Currently set to: %menu%)"
 msgstr ""
 
 msgid "Hidden"
-msgstr ""
-
-msgid "Set as frontpage"
 msgstr ""
 
 msgid "_subset"
@@ -795,49 +744,13 @@ msgstr ""
 msgid "Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version."
 msgstr ""
 
-msgid "Get Help"
-msgstr ""
-
 msgid "Visit Site"
 msgstr ""
 
 msgid "Logout"
 msgstr ""
 
-msgid "Profile"
-msgstr ""
-
-msgid "Permissions saved"
-msgstr ""
-
-msgid "Role saved"
-msgstr ""
-
-msgid "Role added"
-msgstr ""
-
-msgid "Roles saved"
-msgstr ""
-
-msgid "Failed to save roles."
-msgstr ""
-
-msgid "User Type"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "Filter by"
-msgstr ""
-
-msgid "{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users"
-msgstr ""
-
-msgid "Login Redirect"
-msgstr ""
-
-msgid "{0} No users registered|{1} Last %users% registered user|]1,Inf[ Last %users% registered users"
+msgid "Session expired. Please login again."
 msgstr ""
 
 msgid "User Login"
@@ -855,7 +768,37 @@ msgstr ""
 msgid "User Password Reset"
 msgstr ""
 
+msgid "Username cannot be blank and may only contain alphanumeric characters (A-Z, 0-9) and some special characters (\"._-\")"
+msgstr ""
+
+msgid "Name cannot be blank."
+msgstr ""
+
+msgid "Field must be a valid email address."
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Last login"
+msgstr ""
+
+msgid "Registered since"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Filter by"
+msgstr ""
+
+msgid "Login Redirect"
+msgstr ""
+
 msgid "Logout Redirect"
+msgstr ""
+
+msgid "User Type"
 msgstr ""
 
 msgid "Logged in"
@@ -886,6 +829,9 @@ msgid "Latest registered Users"
 msgstr ""
 
 msgid "Latest logged in Users"
+msgstr ""
+
+msgid "{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users"
 msgstr ""
 
 msgid "{0} Logged in Users|{1} Logged in User|]1,Inf[ Logged in Users"
@@ -1029,6 +975,9 @@ msgstr ""
 msgid "You do not have access to the administration area of this site."
 msgstr ""
 
+msgid "Unauthorized"
+msgstr ""
+
 msgid "Your account is blocked."
 msgstr ""
 
@@ -1062,13 +1011,7 @@ msgstr ""
 msgid "Email not available."
 msgstr ""
 
-msgid "This permission has security implications. Give it trusted roles only."
-msgstr ""
-
 msgid "Add Role"
-msgstr ""
-
-msgid "Name cannot be blank."
 msgstr ""
 
 msgid "Registration"
@@ -1083,34 +1026,7 @@ msgstr ""
 msgid "Require e-mail verification when a guest creates an account."
 msgstr ""
 
-msgid "Username cannot be blank."
-msgstr ""
-
-msgid "Field must be a valid email address."
-msgstr ""
-
-msgid "Change password"
-msgstr ""
-
-msgid "Last login"
-msgstr ""
-
-msgid "Registered since"
-msgstr ""
-
-msgid "Verified email address"
-msgstr ""
-
-msgid "Activate"
-msgstr ""
-
-msgid "Block"
-msgstr ""
-
 msgid "User"
-msgstr ""
-
-msgid "Verified Email Address"
 msgstr ""
 
 msgid "No user found."
@@ -1120,6 +1036,12 @@ msgid "{0} %count% Users|{1} %count% User|]1,Inf[ %count% Users"
 msgstr ""
 
 msgid "{1} %count% User selected|]1,Inf[ %count% Users selected"
+msgstr ""
+
+msgid "Sign in to your account"
+msgstr ""
+
+msgid "Sign in"
 msgstr ""
 
 msgid "No account yet?"
@@ -1137,22 +1059,37 @@ msgstr ""
 msgid "New Password"
 msgstr ""
 
+msgid "Create an account"
+msgstr ""
+
 msgid "Email address is invalid."
 msgstr ""
 
 msgid "Password cannot be blank."
 msgstr ""
 
-msgid "Submit"
+msgid "Sign up"
+msgstr ""
+
+msgid "Already have an account?"
+msgstr ""
+
+msgid "Login!"
 msgstr ""
 
 msgid "Password Confirmation"
+msgstr ""
+
+msgid "Confirm"
 msgstr ""
 
 msgid "Forgot Password"
 msgstr ""
 
 msgid "Please enter your email address. You will receive a link to create a new password via email."
+msgstr ""
+
+msgid "Request password"
 msgstr ""
 
 msgid "Hi %username%"
@@ -1164,7 +1101,7 @@ msgstr ""
 msgid "password"
 msgstr ""
 
-msgid "Sign up"
+msgid "Unassigned"
 msgstr ""
 
 msgid "{1} %count% Widget moved|]1,Inf[ %count% Widgets moved"
@@ -1176,31 +1113,22 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-msgid "Add Widget"
-msgstr ""
-
 msgid "Position"
 msgstr ""
 
 msgid "- Assign -"
 msgstr ""
 
-msgid "Unassigned Widgets"
-msgstr ""
-
-msgid "Extension not loaded"
+msgid "Copy"
 msgstr ""
 
 msgid "Edit Widget"
 msgstr ""
 
-msgid "Unassigned"
+msgid "Add Widget"
 msgstr ""
 
 msgid "Positions"
-msgstr ""
-
-msgid "Copy"
 msgstr ""
 
 msgid "No widgets found."
@@ -1221,19 +1149,31 @@ msgstr ""
 msgid "Your Pagekit database has been updated successfully."
 msgstr ""
 
+msgid "Your database is up to date."
+msgstr ""
+
 msgid "Installing %title% %version%"
+msgstr ""
+
+msgid "Successfully installed."
+msgstr ""
+
+msgid "Enable"
 msgstr ""
 
 msgid "Removing %title% %version%"
 msgstr ""
 
-msgid "Cannot obtain versions. Please try again later."
-msgstr ""
-
-msgid "Whoops, something went wrong."
+msgid "Successfully removed."
 msgstr ""
 
 msgid "Install"
+msgstr ""
+
+msgid "Version %version%"
+msgstr ""
+
+msgid "There is an update available for the package."
 msgstr ""
 
 msgid "License:"
@@ -1245,25 +1185,28 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
+msgid "\"%title%\" enabled."
+msgstr ""
+
+msgid "\"%title%\" disabled."
+msgstr ""
+
+msgid "Installed"
+msgstr ""
+
 msgid "Nothing found."
 msgstr ""
 
 msgid "Cannot connect to the marketplace. Please try again later."
 msgstr ""
 
-msgid "The checksum of the uploaded package does not match the one from the marketplace. The file might be manipulated."
+msgid "Cannot obtain versions. Please try again later."
 msgstr ""
 
-msgid "There is an update available for the uploaded package. Please consider installing it instead."
+msgid "Cannot connect to the server. Please try again later."
 msgstr ""
 
-msgid "Successfully installed."
-msgstr ""
-
-msgid "Enable"
-msgstr ""
-
-msgid "Successfully removed."
+msgid "Whoops, something went wrong."
 msgstr ""
 
 msgid "Pagekit Installer"
@@ -1332,12 +1275,6 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-msgid "View Details"
-msgstr ""
-
-msgid "View Permissions"
-msgstr ""
-
 msgid "No extension found."
 msgstr ""
 
@@ -1374,19 +1311,13 @@ msgstr ""
 msgid "Table Prefix"
 msgstr ""
 
-msgid "Create your account"
-msgstr ""
-
-msgid "You will be the site administrator."
-msgstr ""
-
 msgid "Setup your site"
 msgstr ""
 
-msgid "Enter your website details."
+msgid "Choose a title and create the administrator account."
 msgstr ""
 
-msgid "Site name cannot be blank."
+msgid "Site Title"
 msgstr ""
 
 msgid "Installation failed!"
@@ -1411,5 +1342,8 @@ msgid "You have the latest version of Pagekit. You do not need to update. Howeve
 msgstr ""
 
 msgid "Download %version%"
+msgstr ""
+
+msgid "Changelog"
 msgstr ""
 

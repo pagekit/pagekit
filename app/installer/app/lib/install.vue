@@ -32,11 +32,12 @@
 
         methods: {
 
-            install: function (pkg, packages, onClose) {
+            install: function (pkg, packages, onClose, packagist) {
                 this.$set('pkg', pkg);
                 this.cb = onClose;
 
-                return this.$http.post('admin/system/package/install', {package: pkg},null, {xhr: this.init()}).then(function () {
+
+                return this.$http.post('admin/system/package/install', {package: pkg, packagist: Boolean(packagist)},null , {xhr: this.init()}).then(function () {
                             if (this.status === 'success' && packages) {
                                 var index = _.findIndex(packages, 'name', pkg.name);
 

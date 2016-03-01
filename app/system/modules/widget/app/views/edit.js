@@ -5,7 +5,7 @@ module.exports = {
     mixins: [window.Widgets],
 
     data: function () {
-        return _.merge({form: {}, sections: []}, window.$data);
+        return _.merge({form: {}, sections: [], active: 0}, window.$data);
     },
 
     created: function () {
@@ -39,8 +39,19 @@ module.exports = {
 
     ready: function () {
 
-        UIkit.tab(this.$els.tab, {connect: this.$els.content});
-        // this.$set('widget.data', _.defaults({}, this.widget.data, this.type.defaults));
+        var tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
+
+        var vm = this;
+
+        tab.on('change.uk.tab', function (tab, current) {
+            vm.active = current.index();
+        });
+
+        this.$watch('active', function (active) {
+            tab.switcher.show(active);
+        });
+
+        this.$state('active');
 
         // set position from get param
         if (!this.widget.id) {
@@ -54,7 +65,7 @@ module.exports = {
 
         save: function () {
             this.$broadcast('save', {widget: this.widget});
-            this.$resource('api/site/widget/:id').save({id: this.widget.id}, {widget: this.widget}).then(function (res) {
+            this.$resource('api/site/widget{/id}').save({id: this.widget.id}, {widget: this.widget}).then(function (res) {
 
                 var data = res.data;
 

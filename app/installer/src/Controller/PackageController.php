@@ -152,11 +152,11 @@ class PackageController
     }
 
     /**
-     * @Request({"package": "array"}, csrf=true)
+     * @Request({"package": "array", "packagist": "boolean"}, csrf=true)
      */
-    public function installAction($package = [])
+    public function installAction($package = [], $packagist = false)
     {
-        return App::response()->stream(function () use ($package) {
+        return App::response()->stream(function () use ($package, $packagist) {
 
             try {
 
@@ -166,7 +166,7 @@ class PackageController
                     throw new \RuntimeException('Invalid parameters.');
                 }
 
-                $this->manager->install([(string) $package->getName() => $package->get('version')]);
+                $this->manager->install([(string) $package->getName() => $package->get('version')], $packagist);
 
                 echo "\nstatus=success";
 
@@ -201,41 +201,34 @@ class PackageController
 
     protected function loadPackage($file)
     {
-        try {
+        if (is_file($file)) {
 
-            if (is_file($file)) {
+            $zip = new \ZipArchive;
 
-                $zip = new \ZipArchive;
+            if ($zip->open($file) === true) {
+                $json = $zip->getFromName('composer.json');
 
-                if ($zip->open($file) === true) {
-                    $json = $zip->getFromName('composer.json');
+                if ($json && $package = App::package()->load($json)) {
+                    $extra = $package->get('extra');
 
-                    if ($json) {
-                        $package = App::package()->load($json);
-                        $extra = $package->get('extra');
-
-                        if (isset($extra['icon']) || isset($extra['image'])) {
-                            unset($extra['icon']);
-                            unset($extra['image']);
-                            $package->set('extra', $extra);
-                        }
-
-                        $package->set('shasum', sha1_file($file));
+                    if (isset($extra['icon']) || isset($extra['image'])) {
+                        unset($extra['icon']);
+                        unset($extra['image']);
+                        $package->set('extra', $extra);
                     }
 
-                    $zip->close();
+                    $package->set('shasum', sha1_file($file));
                 }
+
+                $zip->close();
             }
-
-            if (isset($package)) {
-                return $package;
-            }
-
-            App::abort(400);
-
-        } catch (\Exception $e) {
-            App::abort(400, __('Can\'t load json file from package.'));
         }
+
+        if (isset($package) && $package) {
+            return $package;
+        }
+
+        App::abort(400, __('Can\'t load json file from package.'));
     }
 
     /**

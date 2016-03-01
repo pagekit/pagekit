@@ -93,10 +93,10 @@
                                 <p style="margin: 20px 0; text-align: left;"><?= __('A new user signed up for %site% with the username %username%. Please click the button below to approve the account.', ['%site%' => '<strong style="color: #444">'.$app->module('system/site')->config('title').'</strong>', '%username%' => '<strong style="color: #444">'.$user->username.'</strong>']) ?></p>
 
                                 <p style="margin: 40px 0 0 0; text-align: center;">
-                                    <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="<?= $view->url('@user/registration/activate', ['user' => $user->username, 'key' => $user->activation], true) ?>"><?= __('Approve Account') ?></a>
+                                    <a style="padding: 15px 20px; background: #37a5e4; border-radius: 3px; color: #fff; text-decoration: none;" href="<?= $view->url('@user/registration/activate', ['user' => $user->username, 'key' => $user->activation], 0) ?>"><?= __('Approve Account') ?></a>
                                 </p>
 
-                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="<?= $view->url('@user/registration/activate', ['user' => $user->username, 'key' => $user->activation], true) ?>"><?= __('Approve Account') ?><?= $app['url']->base(true) ?>"><?= $app['url']->base(true) ?></a></p>
+                                <p style="margin: 50px 0 0 0; padding-top: 30px; border-top: 1px solid #e5e5e5; font-size: 14px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #999;"><a style="color: #777; text-decoration: none;" href="<?= $app['url']->base(0) ?>"><?= $app['url']->base(0) ?></a></p>
 
                             </td>
                         </tr>

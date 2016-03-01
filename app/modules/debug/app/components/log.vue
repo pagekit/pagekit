@@ -34,6 +34,8 @@
             panel: '#panel-log'
         },
 
+        replace: false,
+
         props: ['data']
 
     };

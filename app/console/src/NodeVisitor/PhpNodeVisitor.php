@@ -6,7 +6,7 @@ use PhpParser\Lexer;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor as BaseVisitor;
-use PhpParser\Parser;
+use PhpParser\ParserFactory;
 
 class PhpNodeVisitor extends NodeVisitor implements BaseVisitor
 {
@@ -15,8 +15,9 @@ class PhpNodeVisitor extends NodeVisitor implements BaseVisitor
      */
     public function traverse(array $files)
     {
-        $parser    = new Parser(new Lexer);
-        $traverser = new NodeTraverser;
+        $parser = (new ParserFactory)->create(ParserFactory::PREFER_PHP5);
+
+        $traverser = new NodeTraverser(true);
         $traverser->addVisitor($this);
 
         foreach ($files as $file) {

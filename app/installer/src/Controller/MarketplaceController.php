@@ -9,7 +9,11 @@ use Pagekit\Application as App;
  */
 class MarketplaceController
 {
-    public function themesAction()
+
+    /**
+     * @Request({"page":"int"})
+     */
+    public function themesAction($page = null)
     {
         return [
             '$view' => [
@@ -20,12 +24,16 @@ class MarketplaceController
                 'title' => 'Themes',
                 'type' => 'pagekit-theme',
                 'api' => App::get('system.api'),
-                'installed' => array_values(App::package()->all('pagekit-theme'))
+                'installed' => array_values(App::package()->all('pagekit-theme')),
+                'page' => $page
             ]
         ];
     }
 
-    public function extensionsAction()
+    /**
+     * @Request({"page":"int"})
+     */
+    public function extensionsAction($page = null)
     {
         return [
             '$view' => [
@@ -36,7 +44,8 @@ class MarketplaceController
                 'title' => 'Extensions',
                 'type' => 'pagekit-extension',
                 'api' => App::get('system.api'),
-                'installed' => array_values(App::package()->all('pagekit-extension'))
+                'installed' => array_values(App::package()->all('pagekit-extension')),
+                'page' => $page
             ]
         ];
     }

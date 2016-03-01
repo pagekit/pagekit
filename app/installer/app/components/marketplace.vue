@@ -23,10 +23,10 @@
             </div>
         </div>
 
-        <v-pagination :page.sync="page" :pages="pages" v-show="pages > 1"></v-pagination>
+        <v-pagination :page.sync="page" :pages="pages" v-show="pages > 1 || page > 0"></v-pagination>
 
         <div class="uk-modal" v-el:modal>
-            <div class="uk-modal-dialog uk-modal-dialog-large">
+            <div class="uk-modal-dialog uk-modal-dialog-large" v-if="pkg">
 
                 <div class="pk-modal-dialog-badge">
                     <button class="uk-button" disabled v-show="isInstalled(pkg)">{{ 'Installed' | trans }}</button>
@@ -46,8 +46,7 @@
                         <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <div>{{ pkg.description }}</div>
-
+                        <div v-html="pkg.description | marked" v-if="pkg.description"></div>
 
                         <ul class="uk-list">
                             <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
@@ -80,6 +79,7 @@
         props: {
             api: {type: String, default: ''},
             search: {type: String, default: ''},
+            page: {type: Number, default: 0},
             type: {type: String, default: 'pagekit-extension'},
             installed: {
                 type: Array, default: function () {
@@ -93,7 +93,6 @@
                 pkg: null,
                 packages: null,
                 updates: null,
-                page: 0,
                 pages: 0,
                 iframe: '',
                 status: ''
@@ -101,7 +100,11 @@
         },
 
         created: function () {
-            this.query();
+            this.$options.name = this.type;
+        },
+
+        ready: function () {
+            this.query(this.page);
             this.queryUpdates(this.installed, function (res) {
                 var data = res.data;
                 this.$set('updates', data.packages.length ? data.packages : null);
@@ -118,8 +121,13 @@
                 this.query();
             },
 
-            page: function () {
-                this.query(this.page);
+            page: function (page, old) {
+
+                if (page == old || (!old && !page)) {
+                    return;
+                }
+
+                this.query(page);
             }
 
         },
@@ -162,6 +170,10 @@
             isInstalled: function (pkg) {
                 return _.isObject(pkg) ? _.find(this.installed, 'name', pkg.name) : undefined;
             }
+        },
+
+        filters: {
+            marked: marked
         }
 
     };

@@ -41,7 +41,7 @@ class AuthController
             return $event->getResponse();
         }
 
-        return App::redirect($redirect);
+        return App::redirect(preg_replace('#(https?:)?//[^/]+#', '', $redirect));
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthController
             if (App::request()->isXmlHttpRequest()) {
                 return App::response()->json(['csrf' => App::csrf()->generate()]);
             } else {
-                return App::redirect($redirect);
+                return App::redirect(preg_replace('#(https?:)?//[^/]+#', '', $redirect));
             }
 
         } catch (CsrfException $e) {
@@ -83,7 +83,7 @@ class AuthController
             App::abort(401, $error);
         } else {
             App::message()->error($error);
-            return App::redirect(App::url()->previous());
+            return App::redirect((preg_replace('#(https?:)?//[^/]+#', '', App::url()->previous())));
         }
     }
 }

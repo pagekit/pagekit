@@ -59,6 +59,8 @@
             panel: '#panel-requests'
         },
 
+        replace: false,
+
         props: ['data']
 
     };

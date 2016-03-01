@@ -5,17 +5,26 @@ module.exports = {
     ],
 
     data: function () {
+
+        console.log(this)
+
         return _.extend({
             package: {},
             view: false,
             updates: null,
-            search: '',
+            search: this.$session.get(this.$options.name + '.search', ''),
             status: ''
         }, window.$data);
     },
 
     ready: function () {
         this.load();
+    },
+
+    watch: {
+        search: function (search) {
+            this.$session.set(this.$options.name + '.search', search);
+        }
     },
 
     methods: {

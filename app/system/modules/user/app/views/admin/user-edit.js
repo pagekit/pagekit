@@ -36,7 +36,7 @@ window.User = {
 
             this.$broadcast('save', data);
 
-            this.$resource('api/user/:id').save({id: this.user.id}, data).then(function (res) {
+            this.$resource('api/user{/id}').save({id: this.user.id}, data).then(function (res) {
                         if (!this.user.id) {
                             window.history.replaceState({}, '', this.$url.route('admin/user/edit', {id: res.data.user.id}))
                         }

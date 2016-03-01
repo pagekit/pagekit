@@ -10,13 +10,9 @@ class NativePasswordEncoder implements PasswordEncoderInterface
     /**
      * {@inheritdoc}
      */
-    public function hash($raw, $salt = null)
+    public function hash($raw)
     {
         $options = ['cost' => $this->cost];
-
-        if (null !== $salt) {
-            $options['salt'] = $salt;
-        }
 
         return password_hash($raw, $this->algorithm, $options);
     }

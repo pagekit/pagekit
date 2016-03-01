@@ -15,7 +15,7 @@ class UserController
      * @Access("user: manage users")
      * @Request({"filter": "array", "page":"int"})
      */
-    public function indexAction($filter = null, $page = 0)
+    public function indexAction($filter = [], $page = 0)
     {
         $roles = $this->getRoles();
         unset($roles[Role::ROLE_AUTHENTICATED]);
@@ -30,7 +30,7 @@ class UserController
                     'statuses' => User::getStatuses(),
                     'roles' => array_values($roles),
                     'emailVerification' => App::module('system/user')->config('require_verification'),
-                    'filter' => $filter,
+                    'filter' => (object) $filter,
                     'page' => $page
                 ]
             ]

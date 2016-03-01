@@ -2,18 +2,28 @@
 
 <div id="dashboard" v-cloak>
 
-    <div class="uk-alert uk-alert-info" v-show="hasUpdate"><a href="admin/system/update">{{ 'Pagekit %version% is available! Please update now.' | trans update }}</a></div>
+    <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap uk-flex-middle">
+        <div>
 
-    <div class="uk-margin uk-flex uk-flex-right" data-uk-margin>
-        <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-            <a class="uk-button uk-button-primary" @click.prevent>{{ 'Add Widget' || trans }}</a>
-            <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
-                <ul class="uk-nav uk-nav-dropdown">
-                    <li v-for="type in getTypes()">
-                        <a class="uk-dropdown-close" @click="add(type)">{{ type.label }}</a>
-                    </li>
-                </ul>
+            <div v-show="hasUpdate">
+                <span class="pk-icon-bell uk-margin-small-right"></span>
+                {{ 'Pagekit %version% is available.' | trans update }} <a href="admin/system/update">{{ 'Update now!' | trans }}</a>
             </div>
+
+        </div>
+        <div>
+
+            <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
+                <a class="uk-button uk-button-primary" @click.prevent>{{ 'Add Widget' || trans }}</a>
+                <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li v-for="type in getTypes()">
+                            <a class="uk-dropdown-close" @click="add(type)">{{ type.label }}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 

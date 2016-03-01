@@ -6,7 +6,7 @@ module.exports = {
 
     created: function () {
 
-        this.Roles = this.$resource('api/user/role/:id');
+        this.Roles = this.$resource('api/user/role{/id}');
 
         this.debounced = [];
 

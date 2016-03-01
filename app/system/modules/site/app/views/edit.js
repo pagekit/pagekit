@@ -3,7 +3,7 @@ window.Site = {
     el: '#site-edit',
 
     data: function () {
-        return _.merge({sections: [], form: {}}, window.$data);
+        return _.merge({sections: [], form: {}, active: 0}, window.$data);
     },
 
     created: function () {
@@ -36,8 +36,22 @@ window.Site = {
     },
 
     ready: function () {
-        this.Nodes = this.$resource('api/site/node/:id');
+
+        var vm = this;
+
+        this.Nodes = this.$resource('api/site/node{/id}');
         this.tab = UIkit.tab(this.$els.tab, {connect: this.$els.content});
+
+        this.tab.on('change.uk.tab', function (tab, current) {
+            vm.active = current.index();
+        });
+
+        this.$watch('active', function (active) {
+            this.tab.switcher.show(active);
+        });
+
+        this.$state('active');
+
     },
 
     computed: {
@@ -56,19 +70,19 @@ window.Site = {
             this.$broadcast('save', data);
 
             this.Nodes.save({id: this.node.id}, data).then(function (res) {
-                        var data = res.data;
-                        if (!this.node.id) {
-                            window.history.replaceState({}, '', this.$url.route('admin/site/page/edit', {id: data.node.id}));
-                        }
-
-                        this.$set('node', data.node);
-
-                        this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
-
-                    }, function (res) {
-                        this.$notify(res.data, 'danger');
+                    var data = res.data;
+                    if (!this.node.id) {
+                        window.history.replaceState({}, '', this.$url.route('admin/site/page/edit', {id: data.node.id}));
                     }
-                );
+
+                    this.$set('node', data.node);
+
+                    this.$notify(this.$trans('%type% saved.', {type: this.type.label}));
+
+                }, function (res) {
+                    this.$notify(res.data, 'danger');
+                }
+            );
         }
 
     },

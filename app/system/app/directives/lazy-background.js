@@ -8,7 +8,7 @@ module.exports = {
             el.css('background-image', "url('"+value+"')");
         };
 
-        img.src = encodeURI(value);
+        img.src = value;
     }
 
 };

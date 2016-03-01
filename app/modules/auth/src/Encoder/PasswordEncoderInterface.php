@@ -8,10 +8,9 @@ interface PasswordEncoderInterface
      * Encodes the raw password.
      *
      * @param  string $raw  The password to hash
-     * @param  string $salt The salt
      * @return string
      */
-    public function hash($raw, $salt = null);
+    public function hash($raw);
 
     /**
      * Checks a raw password against an encoded password.

@@ -5,7 +5,7 @@ module.exports = {
     data: function () {
         return _.merge({
             edit: undefined,
-            menu: {},
+            menu: this.$session.get('site.menu', {}),
             menus: [],
             nodes: [],
             tree: false,
@@ -14,8 +14,8 @@ module.exports = {
     },
 
     created: function () {
-        this.Menus = this.$resource('api/site/menu/:id');
-        this.Nodes = this.$resource('api/site/node/:id');
+        this.Menus = this.$resource('api/site/menu{/id}');
+        this.Nodes = this.$resource('api/site/node{/id}');
 
         var vm = this;
         this.load().then(function () {
@@ -76,6 +76,7 @@ module.exports = {
 
             this.$set('selected', []);
             this.$set('menu', menu);
+            this.$session.set('site.menu', menu);
 
         },
 

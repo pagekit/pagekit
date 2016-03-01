@@ -12,6 +12,14 @@ class DataHelper implements HelperInterface
     protected $data = [];
 
     /**
+     * Encode <, >, ', &, and " for RFC4627-compliant JSON, which may also be embedded into HTML.
+     * 15 === JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT
+     *
+     * @var int
+     */
+    protected $encodingOptions = 15;
+
+    /**
      * {@inheritdoc}
      */
     public function register(View $view)
@@ -35,6 +43,7 @@ class DataHelper implements HelperInterface
     /**
      * Gets the data values or a value by name.
      *
+     * @param  null|string $name
      * @return array
      */
     public function get($name = null)
@@ -72,7 +81,7 @@ class DataHelper implements HelperInterface
         $output = '';
 
         foreach ($this->data as $name => $value) {
-            $output .= sprintf("        <script>var %s = %s;</script>\n", $name, json_encode($value));
+            $output .= sprintf("        <script>var %s = %s;</script>\n", $name, json_encode($value, $this->encodingOptions));
         }
 
         return $output;

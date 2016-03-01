@@ -15,7 +15,18 @@
                 <div class="uk-form-row">
                     <label for="form-src" class="uk-form-label">{{ 'URL' | trans }}</label>
                     <div class="uk-form-controls">
-                        <input id="form-src" class="uk-width-1-1" type="text" :placeholder="'URL' | trans" v-model="video.data.src" debounce="500">
+                        <input id="form-src" class="uk-width-1-1" type="text" v-model="video.data.src" debounce="500">
+                    </div>
+                </div>
+
+                <div class="uk-grid uk-grid-width-1-2 uk-form-row">
+                    <div>
+                        <label for="form-src" class="uk-form-label">{{ 'Width' | trans }}</label>
+                        <input class="uk-width-1-1" id="form-width" type="text" :placeholder="'auto' | trans" v-model="video.data.width">
+                    </div>
+                    <div>
+                        <label for="form-src" class="uk-form-label">{{ 'Height' | trans }}</label>
+                        <input class="uk-width-1-1" id="form-height" type="text" :disabled="!isVimeo && !isYoutube" :placeholder="'auto' | trans"v-model="video.data.height">
                     </div>
                 </div>
 
