@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Added
+ - Added redirect after login to user settings
+
 ## 0.10.4 (March 1 2016)
 
 ### Added
@@ -33,7 +38,7 @@
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
-- Fixed an issue which could lead to an open_basedir restriction exception 
+- Fixed an issue which could lead to an open_basedir restriction exception
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification

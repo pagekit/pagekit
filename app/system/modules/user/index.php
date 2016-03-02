@@ -132,6 +132,7 @@ return [
         'registration' => 'admin',
         'require_verification' => true,
         'users_per_page' => 20,
+        'login_redirect' => '', // use route syntax, i.e. @page/1. empty string for index
 
         'auth' => [
             'refresh_token' => false
