@@ -22,12 +22,10 @@ class RegistrationController
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
-            App::message()->info(__('You are already logged in.'));
             return App::redirect();
         }
 
         if ($this->module->config('registration') == 'admin') {
-            App::message()->info(__('Public user registration is disabled.'));
             return App::redirect();
         }
 
