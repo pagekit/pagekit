@@ -60,7 +60,7 @@ class InfoHelper
             $result[$this->getRelativePath($directory)] = is_writable($directory);
 
             if (is_dir($directory)) {
-                foreach (App::finder()->in($directory)->directories() as $dir) {
+                foreach (App::finder()->depth('< 2')->in($directory)->directories() as $dir) {
                     if (!is_writable($dir->getPathname())) {
                         $result[$this->getRelativePath($dir->getPathname())] = false;
                     }
