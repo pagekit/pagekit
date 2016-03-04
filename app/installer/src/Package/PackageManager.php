@@ -111,6 +111,29 @@ class PackageManager
             $scripts->enable();
 
             if ($package->getType() == 'pagekit-theme') {
+
+                $new = App::config($package->get('module'));
+                $old = App::config(App::config('system')->get('site.theme'));
+                $assigned = [];
+
+                foreach ((array) $new->get('_positions') as $position => $modules) {
+                    $assigned = array_merge($assigned, $modules);
+                }
+
+                foreach ((array) $old->get('_positions') as $position => $modules) {
+                    foreach ((array) $modules as $module) {
+                        if (!in_array($module, $assigned)) {
+                            $new->push('_positions.' . $position, $module);
+                        }
+                    }
+                }
+
+                foreach ((array) $old->get('_menus') as $menu => $position) {
+                    if (!$new->has('_menus.' . $menu)) {
+                        $new->set('_menus.' . $menu, $position);
+                    }
+                }
+
                 App::config('system')->set('site.theme', $package->get('module'));
             } elseif ($package->getType() == 'pagekit-extension') {
                 App::config('system')->push('extensions', $package->get('module'));
