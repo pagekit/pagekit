@@ -3,6 +3,7 @@
 use Pagekit\Site\Event\MaintenanceListener;
 use Pagekit\Site\Event\NodesListener;
 use Pagekit\Site\Event\PageListener;
+use Pagekit\Site\MenuHelper;
 use Pagekit\Site\Model\Node;
 
 return [
@@ -161,12 +162,11 @@ return [
                 $event->addResult($this->config('code.footer'));
             }, -10);
 
-            $app->on('view.layout', function ($event) use ($app) {
-                $event
-                    ->addParameters($this->config('view'))
-                    ->addParameters($app['theme']->config)
-                    ->addParameters($app['node']->theme);
-            }, 50);
+            $app->on('view.init', function ($event, $view) use ($app) {
+                $view->params->merge($this->config('view'));
+                $view->params->merge($app['theme']->config);
+                $view->params->merge($app['node']->theme);
+            }, 10);
 
         },
 
@@ -182,6 +182,10 @@ return [
                 }
             }
         },
+
+        'view.init' => [function ($event, $view) use ($app) {
+            $view->addHelper(new MenuHelper($app['menu']));
+        }, 100],
 
         'view.meta' => function ($event, $meta) use ($app) {
 

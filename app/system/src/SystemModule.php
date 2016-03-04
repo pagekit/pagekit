@@ -20,15 +20,6 @@ class SystemModule extends Module
             return Finder::create();
         });
 
-        $app->extend('view', function ($view) use ($app) {
-
-            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
-
-            $view->map('layout', $theme->get('layout', 'views:template.php'));
-
-            return $view->addGlobal('theme', $app['theme']);
-        });
-
         $app->extend('assets', function ($factory) use ($app) {
 
             $secret = $this->config['secret'];

@@ -36,39 +36,7 @@ return [
     'main' => function ($app) {
 
         $app['view'] = function ($app) {
-
-            $view = new View(new PrefixEventDispatcher('view.', $app['events']));
-
-            $view->addEngine(new PhpEngine(null, isset($app['locator']) ? new FilesystemLoader($app['locator']) : null));
-
-            if (isset($app['twig'])) {
-                $view->addEngine(new TwigEngine($app['twig'], new TemplateNameParser()));
-            }
-
-            $view->addGlobal('app', $app);
-            $view->addGlobal('view', $view);
-
-            $view->addHelpers([
-                new DataHelper(),
-                new DeferredHelper($app['events']),
-                new GravatarHelper(),
-                new MapHelper(),
-                new MetaHelper(),
-                new ScriptHelper($app['scripts']),
-                new SectionHelper(),
-                new StyleHelper($app['styles']),
-                new UrlHelper($app['url'])
-            ]);
-
-            if (isset($app['csrf'])) {
-                $view->addHelper(new TokenHelper($app['csrf']));
-            }
-
-            if (isset($app['markdown'])) {
-                $view->addHelper(new MarkdownHelper($app['markdown']));
-            }
-
-            return $view;
+            return new View(new PrefixEventDispatcher('view.', $app['events']));
         };
 
         $app['assets'] = function () {
@@ -155,6 +123,39 @@ return [
 
             if (isset($response)) {
                 $event->setResponse(new Response($response));
+            }
+
+        }, 50],
+
+        'view.init' => [function ($event, $view) use ($app) {
+
+            $view->addEngine(new PhpEngine(null, isset($app['locator']) ? new FilesystemLoader($app['locator']) : null));
+
+            if (isset($app['twig'])) {
+                $view->addEngine(new TwigEngine($app['twig'], new TemplateNameParser()));
+            }
+
+            $view->addGlobal('app', $app);
+            $view->addGlobal('view', $view);
+
+            $view->addHelpers([
+                new DataHelper(),
+                new DeferredHelper($app['events']),
+                new GravatarHelper(),
+                new MapHelper(),
+                new MetaHelper(),
+                new ScriptHelper($app['scripts']),
+                new SectionHelper(),
+                new StyleHelper($app['styles']),
+                new UrlHelper($app['url'])
+            ]);
+
+            if (isset($app['csrf'])) {
+                $view->addHelper(new TokenHelper($app['csrf']));
+            }
+
+            if (isset($app['markdown'])) {
+                $view->addHelper(new MarkdownHelper($app['markdown']));
             }
 
         }, 50]

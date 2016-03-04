@@ -4,6 +4,8 @@
 
 ### Added
  - Added redirect after login to user settings
+ - Added view.init event
+ - Added global params object to view
 
 ## 0.10.4 (March 1 2016)
 

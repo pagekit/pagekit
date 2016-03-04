@@ -32,10 +32,6 @@ class IntlModule extends Module
             return $translator;
         };
 
-        $app->extend('view', function ($view) {
-            return $view->addGlobal('intl', $this);
-        });
-
         require __DIR__.'/../functions.php';
     }
 

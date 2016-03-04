@@ -35,10 +35,6 @@ return [
             return $module;
         });
 
-        $app->extend('view', function ($view) use ($app) {
-            return $view->addHelper(new PositionHelper($app['position']));
-        });
-
     },
 
     'autoload' => [
@@ -135,6 +131,10 @@ return [
                     }
                 }
             }
+        },
+
+        'view.init' => function ($event, $view) use ($app) {
+            $view->addHelper(new PositionHelper($app['position']));
         },
 
         'view.scripts' => function ($event, $scripts) {

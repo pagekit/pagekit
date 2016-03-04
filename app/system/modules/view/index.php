@@ -1,5 +1,6 @@
 <?php
 
+use Pagekit\Util\ArrObject;
 use Pagekit\View\Event\ResponseListener;
 
 return [
@@ -7,14 +8,6 @@ return [
     'name' => 'system/view',
 
     'main' => function ($app) {
-
-        $app->extend('view', function ($view) use ($app) {
-
-            $view->defer('head');
-            $view->meta(['generator' => 'Pagekit']);
-
-            return $view;
-        });
 
         $app->extend('twig', function ($twig) use ($app) {
 
@@ -57,6 +50,12 @@ return [
 
             });
         },
+
+        'view.init' => [function ($event, $view) {
+            $view->defer('head');
+            $view->meta(['generator' => 'Pagekit']);
+            $view->addGlobal('params', new ArrObject());
+        }, 20],
 
         'view.data' => function ($event, $data) use ($app) {
             $data->add('$pagekit', [

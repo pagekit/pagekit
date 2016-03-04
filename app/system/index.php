@@ -125,6 +125,12 @@ return [
             }
         }, 8],
 
+        'view.init' => function ($event, $view) use ($app) {
+            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
+            $view->map('layout', $theme->get('layout', 'views:template.php'));
+            $view->addGlobal('theme', $app['theme']);
+        },
+
         'view.messages' => function ($event) use ($app) {
 
             $result = '';
