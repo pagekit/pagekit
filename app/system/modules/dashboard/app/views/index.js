@@ -161,19 +161,13 @@ window.Dashboard = {
 
         checkVersion: function () {
 
-            if (this.$cache.get('pagekit.update')) {
-                this.$set('update', this.$cache.get('pagekit.update'));
-            } else {
-                this.$http.get(this.api + '/api/update').then(function (res) {
-                    var data = res.data;
-                    var update = data[this.channel == 'nightly' ? 'nightly' : 'latest'];
+            this.$http.get(this.api + '/api/update', {}, {cache: 60}).then(function (res) {
+                var update = res.data[this.channel == 'nightly' ? 'nightly' : 'latest'];
 
-                    if (update) {
-                        this.$cache.set('pagekit.update', update, 1440);
-                        this.$set('update', update);
-                    }
-                });
-            }
+                if (update) {
+                    this.$set('update', update);
+                }
+            });
 
         }
 

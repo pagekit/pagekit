@@ -16,9 +16,11 @@ class AuthController
      */
     public function loginAction($redirect = '')
     {
+
         if (App::user()->isAuthenticated()) {
-            App::message()->info(__('You are already logged in.'));
-            return App::redirect();
+            $module = App::module('system/user');
+            $url = App::url($module->config['login_redirect']);
+            return App::redirect($url);
         }
 
         return [
@@ -82,7 +84,6 @@ class AuthController
         if (App::request()->isXmlHttpRequest()) {
             App::abort(401, $error);
         } else {
-            App::message()->error($error);
             return App::redirect((preg_replace('#(https?:)?//[^/]+#', '', App::url()->previous())));
         }
     }

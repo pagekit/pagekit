@@ -35,10 +35,10 @@ module.exports = {
                 }, this.error);
         },
 
-        install: function (pkg, packages) {
+        install: function (pkg, packages, onClose, packagist) {
             var install = new Install({parent: this});
 
-            return install.install(pkg, packages);
+            return install.install(pkg, packages, onClose, packagist);
         },
 
         uninstall: function (pkg, packages) {

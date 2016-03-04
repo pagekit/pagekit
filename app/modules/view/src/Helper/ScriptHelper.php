@@ -47,7 +47,7 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
      * Proxies all method calls to the manager.
      *
      * @param  string $method
-     * @param  array  $args
+     * @param  array $args
      * @return mixed
      */
     public function __call($method, $args)
@@ -70,7 +70,13 @@ class ScriptHelper implements HelperInterface, \IteratorAggregate
 
         foreach ($this->scripts as $script) {
             if ($source = $script->getSource()) {
-                $output .= sprintf("        <script src=\"%s\"></script>\n", $source);
+
+                $attributes = '';
+                foreach (['async', 'defer'] as $attribute) {
+                    $attributes .= $script->getOption($attribute) ? ' ' . $attribute : '';
+                }
+
+                $output .= sprintf("        <script src=\"%s\"%s></script>\n", $source, $attributes);
             } elseif ($content = $script->getContent()) {
                 $output .= sprintf("        <script>%s</script>\n", $content);
             }

@@ -113,7 +113,7 @@
 
                         // verify checksum
                         if (pkg && this.package.shasum) {
-                            this.messages.checksum = pkg.dist.shasum != this.package.shasum;
+                            this.$set('messages.checksum', pkg.dist.shasum != this.package.shasum);
                         }
 
                         // check version
@@ -123,7 +123,7 @@
                             }
                         });
 
-                        this.messages.update = version != this.package.version;
+                        this.$set('messages.update', version != this.package.version);
                     });
                 },
 

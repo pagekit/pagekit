@@ -3,19 +3,29 @@
 ## WIP
 
 ### Added
-- Added filter cache for widget and site settings
+ - Added redirect after login to user settings
+
+## 0.10.4 (March 1 2016)
+
+### Added
+- Added filter cache for lists and searches
 - Remember last finder position and view setting
 - Added pagination cache and pagination links
 - Added changelog to update view
+- Added extension dependency update command for developer
+- Added prefer-source option to package install and update command
+- Added filter and ordering highlighting
 
 ### Changed
+- Bundled Pagekit installer
 - Updated to Symfony 3.0
 - Hide Trash menu from Site node picker
 - Deny cross site redirects after login and logout
 - Session Cookie uses HttpOnly flag now
 - Nicer login, registration and profile pages
 - Nicer update notification on dashboard
-- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
+- Improved ORM Metadata cache breaker
+- Reenabled Packagist for zip uploads
 
 ### Fixed
 - Fixed username validation in installer and backend (#513)
@@ -28,7 +38,17 @@
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
-- Fixed an issue which could lead to an open_basedir restriction exception 
+- Fixed an issue which could lead to an open_basedir restriction exception
+- Fixed registration verification mail
+- Fixed user authenticated role assignment
+- Fixed package upload zip verification
+- Fixed single quote issue by using RFC4627-compliant JSON within embedded script tags (#551)
+
+## 0.10.3 (February 19 2016)
+
+### Changed
+- Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)
+- Prepared self updater for bundled versions of Pagekit
 
 ## 0.10.2 (January 11, 2016)
 

@@ -105,7 +105,7 @@
                                 location.reload();
                             }, 300);
                         }
-                    });
+                    }, true);
             }
 
         },

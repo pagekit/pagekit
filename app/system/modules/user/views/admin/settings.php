@@ -1,4 +1,4 @@
-<?php $view->script('settings', 'system/user:app/bundle/settings.js', 'vue') ?>
+<?php $view->script('settings', 'system/user:app/bundle/settings.js', ['vue', 'input-link']) ?>
 
 <div id="settings" class="uk-form uk-form-horizontal" v-cloak>
 
@@ -27,6 +27,13 @@
             <p class="uk-form-controls-condensed">
                 <label><input type="radio" v-model="config.registration" value="approval"> {{ 'Enabled, but approval is required.' | trans }}</label>
             </p>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <span class="uk-form-label">{{ 'Login Redirect' | trans }}</span>
+        <div class="uk-form-controls">
+           <input-link :link.sync="config.login_redirect"></input-link>
         </div>
     </div>
 

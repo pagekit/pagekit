@@ -152,11 +152,11 @@ class PackageController
     }
 
     /**
-     * @Request({"package": "array"}, csrf=true)
+     * @Request({"package": "array", "packagist": "boolean"}, csrf=true)
      */
-    public function installAction($package = [])
+    public function installAction($package = [], $packagist = false)
     {
-        return App::response()->stream(function () use ($package) {
+        return App::response()->stream(function () use ($package, $packagist) {
 
             try {
 
@@ -166,7 +166,7 @@ class PackageController
                     throw new \RuntimeException('Invalid parameters.');
                 }
 
-                $this->manager->install([(string) $package->getName() => $package->get('version')]);
+                $this->manager->install([(string) $package->getName() => $package->get('version')], $packagist);
 
                 echo "\nstatus=success";
 

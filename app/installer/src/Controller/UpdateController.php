@@ -28,9 +28,9 @@ class UpdateController
     }
 
     /**
-     * @Request({"url": "string", "shasum": "string"}, csrf=true)
+     * @Request({"url": "string"}, csrf=true)
      */
-    public function downloadAction($url, $shasum)
+    public function downloadAction($url)
     {
         try {
 
