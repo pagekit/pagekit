@@ -117,6 +117,26 @@ return [
             }, true);
         },
 
+        'package.enable' => function ($event, $package) use ($app) {
+            if ($package->getType() === 'pagekit-theme') {
+                $new = $app->config($package->get('module'));
+                $old = $app->config($app['theme']->name);
+                $assigned = [];
+
+                foreach ((array) $new->get('_positions') as $position => $modules) {
+                    $assigned = array_merge($assigned, $modules);
+                }
+
+                foreach ((array) $old->get('_positions') as $position => $modules) {
+                    foreach ((array) $modules as $module) {
+                        if (!in_array($module, $assigned)) {
+                            $new->push('_positions.' . $position, $module);
+                        }
+                    }
+                }
+            }
+        },
+
         'view.scripts' => function ($event, $scripts) {
             $scripts->register('widgets', 'system/widget:app/bundle/widgets.js', 'vue');
         },

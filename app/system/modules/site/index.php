@@ -170,6 +170,19 @@ return [
 
         },
 
+        'package.enable' => function ($event, $package) use ($app) {
+            if ($package->getType() === 'pagekit-theme') {
+                $new = $app->config($package->get('module'));
+                $old = $app->config($app['theme']->name);
+
+                foreach ((array) $old->get('_menus') as $menu => $position) {
+                    if (!$new->has('_menus.' . $menu)) {
+                        $new->set('_menus.' . $menu, $position);
+                    }
+                }
+            }
+        },
+
         'view.meta' => function ($event, $meta) use ($app) {
 
             $meta->add('link:favicon', [
