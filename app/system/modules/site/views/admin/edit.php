@@ -17,8 +17,6 @@
         </div>
     </div>
 
-    <panel-finder :root="storage" v-ref:finder :modal="true"></panel-finder>
-
     <ul class="uk-tab" v-el:tab v-show="sections.length > 1">
         <li v-for="section in sections"><a>{{ section.label | trans }}</a></li>
     </ul>
