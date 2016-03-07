@@ -2,8 +2,6 @@
  * Editor Image plugin.
  */
 
-var Picker = Vue.extend(require('./image-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -58,7 +56,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['image-picker']({
                 parent: this,
                 data: {
                     image: image

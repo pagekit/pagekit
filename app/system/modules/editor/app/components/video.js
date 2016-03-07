@@ -2,8 +2,6 @@
  * Editor Video plugin.
  */
 
-var Picker = Vue.extend(require('./video-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -66,7 +64,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['video-picker']({
                 parent: this,
                 data: {
                     video: video

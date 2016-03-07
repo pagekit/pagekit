@@ -2,8 +2,6 @@
  * Editor Link plugin.
  */
 
-var Picker = Vue.extend(require('./link-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -59,7 +57,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['link-picker']({
                 parent: this,
                 data: {
                     link: link
