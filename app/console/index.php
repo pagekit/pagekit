@@ -25,6 +25,12 @@ return [
 
     ],
 
-    'require' => 'application'
+    'require' => [
+
+        'application',
+        'system/intl',
+        'system/cache'
+
+    ]
 
 ];
