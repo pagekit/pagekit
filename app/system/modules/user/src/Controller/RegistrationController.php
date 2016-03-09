@@ -130,8 +130,10 @@ class RegistrationController
             return [
                 '$view' => [
                     'title' => $title,
-                    'name' => 'system/user/activate-error.php'
+                    'name' => 'system/user/message.php'
                 ],
+                'success' => false,
+                'link'    => '',
                 'message' => __('Invalid key.')
             ];
         }
@@ -162,8 +164,10 @@ class RegistrationController
         return [
             '$view' => [
                 'title' => $title,
-                'name' => 'system/user/activate-success.php'
+                'name' => 'system/user/message.php'
             ],
+            'link'    => App::url('@user/login'),
+            'success' => true,
             'message' => $message
         ];
     }
