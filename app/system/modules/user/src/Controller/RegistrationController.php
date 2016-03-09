@@ -42,6 +42,8 @@ class RegistrationController
      */
     public function registerAction($data)
     {
+        $message = '';
+
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
@@ -108,9 +110,10 @@ class RegistrationController
             App::abort(400, $e->getMessage());
         }
 
-        App::message()->success($message);
-
-        return ['redirect' => App::url('@user/login', [], true)];
+        return [
+            'message' => $message,
+            'redirect' => App::url('@user/login', [], true)
+        ];
     }
 
     /**
@@ -118,9 +121,19 @@ class RegistrationController
      */
     public function activateAction($username, $activation)
     {
+
+        $title   = __('Account activation');
+        $message = '';
+
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
-            App::message()->error(__('Invalid key.'));
-            return App::redirect();
+
+            return [
+                '$view' => [
+                    'title' => $title,
+                    'name' => 'system/user/activate-error.php'
+                ],
+                'message' => __('Invalid key.')
+            ];
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -128,7 +141,7 @@ class RegistrationController
             $user->activation = App::get('auth.random')->generateString(32);
             $this->sendApproveMail($user);
 
-            App::message()->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
+            $message = __('Your email has been verified. Once an administrator approves your account, you will be notified by email.');
 
         } else {
 
@@ -138,15 +151,21 @@ class RegistrationController
             $this->sendWelcomeEmail($user);
 
             if ($admin) {
-                App::message()->success(__('The user\'s account has been activated and the user has been notified about it.'));
+                $message = __('The user\'s account has been activated and the user has been notified about it.');
             } else {
-                App::message()->success(__('Your account has been activated.'));
+                $message = __('Your account has been activated.');
             }
         }
 
         $user->save();
 
-        return App::redirect('@user/login');
+        return [
+            '$view' => [
+                'title' => $title,
+                'name' => 'system/user/activate-success.php'
+            ],
+            'message' => $message
+        ];
     }
 
     protected function sendWelcomeEmail($user)

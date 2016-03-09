@@ -1,10 +1,17 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" @submit.prevent="submit | valid" v-cloak>
+<form id="user-registration" class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" v-cloak @submit.prevent="submit | valid">
 
     <h1 class="uk-h2 uk-text-center"><?= __('Create an account') ?></h1>
 
     <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
+
+    <div class="uk-alert uk-alert-success uk-text-center" v-show="success">
+        {{ success }}
+        <div class="uk-margin-top">
+            <a :href="redirect" class="uk-button" v-show="redirect">{{ 'Login' | trans}}</a>
+        </div>
+    </div>
 
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="text" name="username" placeholder="<?= __('Username') ?>" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
