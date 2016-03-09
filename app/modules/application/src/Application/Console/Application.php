@@ -3,6 +3,8 @@
 namespace Pagekit\Application\Console;
 
 use Pagekit\Application as Container;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 
@@ -23,13 +25,22 @@ class Application extends BaseApplication
      */
     public function __construct(Container $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
+        $this->container = $container;
         parent::__construct($name, $version);
 
-        $this->container = $container;
 
         if (isset($container['events'])) {
             $container['events']->trigger('console.init', [$this]);
         }
+    }
+
+    public function run(InputInterface $input = null, OutputInterface $output = null)
+    {
+        if (!$this->container->isBooted()) {
+            $this->container->boot();
+        }
+
+        return parent::run($input, $output);
     }
 
     /**

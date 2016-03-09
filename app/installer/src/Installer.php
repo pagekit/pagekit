@@ -5,7 +5,7 @@ namespace Pagekit\Installer;
 use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\Exception\ConnectionException;
-use Pagekit\Application as App;
+use Pagekit\Application;
 use Pagekit\Config\Config;
 use Pagekit\Installer\Package\PackageManager;
 use Pagekit\Installer\Package\PackageScripts;
@@ -21,13 +21,21 @@ class Installer
      */
     protected $configFile = 'config.php';
 
+
+    /**
+     * @var Application Pagekit Application instance
+     */
+    protected $app;
+
     /**
      * @var bool
      */
     protected $config;
 
-    public function __construct()
+    public function __construct(Application $app)
     {
+        $this->app = $app;
+
         if (function_exists('opcache_reset')) {
             opcache_reset();
         }
@@ -46,15 +54,15 @@ class Installer
 
                 if (!$this->config) {
                     foreach ($config as $name => $values) {
-                        if ($module = App::module($name)) {
+                        if ($module = $this->app->module($name)) {
                             $module->config = Arr::merge($module->config, $values);
                         }
                     }
                 }
 
-                App::db()->connect();
+                $this->app->db()->connect();
 
-                if (App::db()->getUtility()->tableExists('@system_config')) {
+                if ($this->app->db()->getUtility()->tableExists('@system_config')) {
                     $status = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
@@ -92,35 +100,35 @@ class Installer
         try {
 
             if ('no-connection' == $status) {
-                App::abort(400, __('No database connection.'));
+                $this->app->abort(400, __('No database connection.'));
             }
 
             if ('tables-exist' == $status) {
-                App::abort(400, $message);
+                $this->app->abort(400, $message);
             }
 
-            $scripts = new PackageScripts(App::path().'/app/system/scripts.php');
+            $scripts = new PackageScripts($this->app->path().'/app/system/scripts.php');
             $scripts->install();
 
-            App::db()->insert('@system_user', [
+            $this->app->db()->insert('@system_user', [
                 'name' => $user['username'],
                 'username' => $user['username'],
-                'password' => App::get('auth.password')->hash($user['password']),
+                'password' => $this->app->get('auth.password')->hash($user['password']),
                 'status' => 1,
                 'email' => $user['email'],
                 'registered' => date('Y-m-d H:i:s'),
                 'roles' => '2,3'
             ]);
 
-            $option['system']['version'] = App::version();
+            $option['system']['version'] = $this->app->version();
 
             foreach ($option as $name => $values) {
-                App::config()->set($name, App::config($name)->merge($values));
+                $this->app->config()->set($name, $this->app->config($name)->merge($values));
             }
 
             $packageManager = new PackageManager(new NullOutput());
-            foreach (glob(App::get('path.packages') . '/*/*/composer.json') as $package) {
-                $package = App::package()->load($package);
+            foreach (glob($this->app->get('path.packages') . '/*/*/composer.json') as $package) {
+                $package = $this->app->package()->load($package);
                 if ($package->get('type') === 'pagekit-extension' || $package->get('type') === 'pagekit-theme' ) {
                     $packageManager->enable($package);
                 }
@@ -139,17 +147,17 @@ class Installer
                     $configuration->set($key, $value);
                 }
 
-                $configuration->set('system.secret', App::get('auth.random')->generateString(64));
+                $configuration->set('system.secret', $this->app->get('auth.random')->generateString(64));
 
                 if (!file_put_contents($this->configFile, $configuration->dump())) {
 
                     $status = 'write-failed';
 
-                    App::abort(400, __('Can\'t write config.'));
+                    $this->app->abort(400, __('Can\'t write config.'));
                 }
             }
 
-            App::module('system/cache')->clearCache();
+            $this->app->module('system/cache')->clearCache();
 
             $status = 'success';
 
@@ -172,7 +180,7 @@ class Installer
      */
     protected function createDatabase()
     {
-        $module = App::module('database');
+        $module = $this->app->module('database');
         $params = $module->config('connections')[$module->config('default')];
 
         $name = $params['dbname'];

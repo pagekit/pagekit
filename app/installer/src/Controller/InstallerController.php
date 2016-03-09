@@ -17,7 +17,8 @@ class InstallerController
      */
     public function __construct()
     {
-        $this->installer = new Installer();
+        $app = App::getInstance();
+        $this->installer = new Installer($app);
     }
 
     public function indexAction()

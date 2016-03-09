@@ -50,6 +50,16 @@ class Application extends Container
     }
 
     /**
+     * Checks if the application instance has been booted.
+     *
+     * @return bool
+     */
+    public function isBooted()
+    {
+        return $this->booted;
+    }
+
+    /**
      * Handles the request.
      *
      * @param Request $request

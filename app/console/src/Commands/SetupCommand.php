@@ -2,7 +2,7 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Application;
+use Pagekit\Application\Console\Application;
 use Pagekit\Application\Console\Command;
 use Pagekit\Installer\Installer;
 use Pagekit\Installer\Package\PackageManager;
@@ -23,17 +23,6 @@ class SetupCommand extends Command
      */
     protected $description = 'Setup a Pagekit installation.';
 
-    /**
-     * @var Installer   The installer instance
-     */
-    protected $installer;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->installer = new Installer();
-    }
 
     /**
      * {@inheritdoc}
@@ -57,6 +46,8 @@ class SetupCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
+        $installer = new Installer($this->container);
 
         $dbDriver = $this->option('dbdriver');
 
@@ -92,12 +83,12 @@ class SetupCommand extends Command
             ]
         ];
 
-        $result = $this->installer->install($config, $options, $user);
+        $result = $installer->install($config, $options, $user);
         $status = $result['status'];
         $message = $result['message'];
 
         if($status == 'success') {
-            $this->line($message);
+            $this->line("Done");
         } else {
             $this->error($message);
         }
