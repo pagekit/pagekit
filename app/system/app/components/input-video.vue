@@ -89,13 +89,10 @@
 
                 } else if (src.match(/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/)) {
 
-
-
                     this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, {cache: 10}).then(function (res) {
                         var data = res.data;
                         this.image = data.thumbnail_url;
                     });
-
 
                 } else {
 
