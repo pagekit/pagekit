@@ -4,6 +4,6 @@
 
 <?php if ($link): ?>
 <div class="uk-margin-top uk-text-center">
-    <a href="<?= $link ?>" class="uk-button"><?= __('Login')?></a>
+    <a href="<?= $link ?>" class="uk-button"><?= $label ?></a>
 </div>
 <?php endif; ?>

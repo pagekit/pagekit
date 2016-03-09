@@ -122,20 +122,12 @@ class RegistrationController
     public function activateAction($username, $activation)
     {
 
-        $title   = __('Account activation');
         $message = '';
 
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
 
-            return [
-                '$view' => [
-                    'title' => $title,
-                    'name' => 'system/user/message.php'
-                ],
-                'success' => false,
-                'link'    => '',
-                'message' => __('Invalid key.')
-            ];
+            return $this->messageView(__('Invalid key.'), $success = false);
+
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -161,15 +153,7 @@ class RegistrationController
 
         $user->save();
 
-        return [
-            '$view' => [
-                'title' => $title,
-                'name' => 'system/user/message.php'
-            ],
-            'link'    => App::url('@user/login'),
-            'success' => true,
-            'message' => $message
-        ];
+        return $this->messageView($message, $link=App::url('@user/login'), $label=__('Login'));
     }
 
     protected function sendWelcomeEmail($user)
@@ -213,5 +197,21 @@ class RegistrationController
 
         } catch (\Exception $e) {
         }
+    }
+
+    protected function messageView($message, $success = true, $link = '', $label = '')
+    {
+        $title = __('Account activation');
+
+        return [
+            '$view' => [
+                'title' => $title,
+                'name' => 'system/user/message.php'
+            ],
+            $message => $message,
+            $success => $success,
+            $link    => $link,
+            $label   => $label,
+        ];
     }
 }

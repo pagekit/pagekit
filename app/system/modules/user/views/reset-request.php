@@ -2,6 +2,12 @@
 
     <h1 class="uk-h2 uk-text-center"><?= __('Forgot Password') ?></h1>
 
+    <?php if($error): ?>
+    <div class="uk-alert uk-alert-danger">
+        <?= $error; ?>
+    </div>
+    <?php endif; ?>
+
     <p><?= __('Please enter your email address. You will receive a link to create a new password via email.') ?></p>
 
     <div class="uk-form-row">
