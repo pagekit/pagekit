@@ -80,7 +80,7 @@
                 this.$set('height', data.height || 390);
 
                 var src = data.src || '';
-                if (matches = (src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || src.match(/youtu\.be\/(.*)/))) {
+                if (matches = (src.match(/.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/))) {
 
                     this.imageSrc = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
 

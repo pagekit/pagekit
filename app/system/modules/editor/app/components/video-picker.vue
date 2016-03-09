@@ -73,11 +73,11 @@
         computed: {
 
             isYoutube: function () {
-                return Boolean(this.video.data.src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || this.video.data.src.match(/youtu\.be\/(.*)/));
+                return this.video.data.src.match(/.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/);
             },
 
             isVimeo: function () {
-                return Boolean(this.video.data.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/));
+                return this.video.data.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/);
             }
 
         },
