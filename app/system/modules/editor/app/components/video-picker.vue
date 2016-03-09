@@ -77,7 +77,7 @@
             },
 
             isVimeo: function () {
-                return this.video.data.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/);
+                return this.video.data.src.match(/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/);
             }
 
         },

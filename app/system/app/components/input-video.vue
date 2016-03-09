@@ -87,22 +87,15 @@
 
                     this.image = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
 
-                } else if (src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/)) {
+                } else if (src.match(/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/)) {
 
-                    var id = btoa(src);
 
-                    if (this.$session[id]) {
 
-                        this.image = this.$session[id];
+                    this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, {cache: 10}).then(function (res) {
+                        var data = res.data;
+                        this.image = data.thumbnail_url;
+                    });
 
-                    } else {
-
-                        this.$http.get('http://vimeo.com/api/oembed.json', {url: src}).then(function (res) {
-                            var data = res.data;
-                            this.image = this.$session[id] = data.thumbnail_url;
-                        });
-
-                    }
 
                 } else {
 

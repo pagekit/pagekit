@@ -84,7 +84,7 @@
 
                     this.imageSrc = '//img.youtube.com/vi/' + matches[1] + '/hqdefault.jpg';
 
-                } else if (src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/)) {
+                } else if (src.match(/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/)) {
 
                     this.$http.get('http://vimeo.com/api/oembed.json', {url: src}, {cache: 10}).then(function (res) {
                         this.imageSrc = res.data.thumbnail_url;
