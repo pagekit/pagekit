@@ -1,15 +1,13 @@
 <template>
 
     <div class="uk-form-row">
-        <label for="form-link-page" class="uk-form-label">{{ 'File' | trans }}</label>
-
+        <label for="form-link-file" class="uk-form-label">{{ 'File' | trans }}</label>
         <div class="uk-form-controls">
             <div class="pk-form-link uk-width-1-1">
-                <input class="uk-width-1-1" type="text" v-model="file" v-validate:required="isRequired" v-el:input lazy>
+                <input id="form-link-file" class="uk-width-1-1" type="text" v-model="file" v-validate:required="isRequired" v-el:input lazy>
                 <a class="pk-form-link-toggle pk-link-icon uk-flex-middle" @click.prevent="pick">{{ 'Select' | trans }} <i class="pk-icon-link pk-icon-hover uk-margin-small-left"></i></a>
             </div>
         </div>
-
     </div>
 
     <v-modal v-ref:modal large>
