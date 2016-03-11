@@ -30,7 +30,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                vm.videos = editor.replaceInPreview(/<video([^>]*)><\/video>/gi, vm.replaceInPreview);
+                vm.videos = editor.replaceInPreview(/<(video|iframe)([^>]*)>[^<]*<\/(?:video|iframe)>/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
 
@@ -96,9 +96,11 @@ module.exports = {
                             src += attr + '=' + video.data[attr] + '&';
                         });
 
+                        video.attributes = video.attributes || {};
+
                         video.attributes.src = src.slice(0, -1);
-                        video.attributes.width = video.data.width;
-                        video.attributes.height = video.data.height;
+                        video.attributes.width = video.data.width || 690;
+                        video.attributes.height = video.data.height || 390;
                         video.attributes.allowfullscreen = true;
 
                         content = '<iframe';
@@ -127,12 +129,35 @@ module.exports = {
 
         replaceInPreview: function (data, index) {
 
-            var matches,
+            var matches, src, query,
                 regex = /([^=\s"']+)\s*=(?:"([^"]*)"|'([^']*)')|([^=\s"']+)/gi;
 
-            data.data = {};
-            while ((matches = regex.exec(data.matches[1])) !== null) {
-                data.data[matches[1]] = matches[2] === undefined || matches[2];
+            data.attributes = {};
+            while ((matches = regex.exec(data.matches[2])) !== null) {
+                data.attributes[matches[1] || matches[4]] = matches[2] === undefined || matches[2];
+            }
+
+            if (data.matches[1] === 'video') {
+                data.data = data.attributes;
+            } else if (data.matches[1] === 'iframe') {
+                data.data = {};
+                src = data.attributes.src || '';
+                src = src.split('?');
+                query = src[1] || '';
+                src = src[0];
+                query.split('&').forEach(function (param) {
+                    param = param.split('=');
+                    data.data[param[0]] = param[1];
+                });
+
+                data.data.src = src;
+                if (data.attributes.width) {
+                    data.data.width = data.attributes.width;
+                }
+                if (data.attributes.height) {
+                    data.data.height = data.attributes.height;
+                }
+
             }
 
             return '<video-preview index="' + index + '"></video-preview>';
