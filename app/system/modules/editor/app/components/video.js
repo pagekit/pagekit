@@ -2,8 +2,6 @@
  * Editor Video plugin.
  */
 
-var Picker = Vue.extend(require('./video-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -32,7 +30,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                vm.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, vm.replaceInPreview);
+                vm.videos = editor.replaceInPreview(/<(video|iframe)([^>]*)>[^<]*<\/(?:video|iframe)>/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
 
@@ -47,7 +45,6 @@ module.exports = {
                 });
 
             });
-
 
         editor.debouncedRedraw();
     },
@@ -66,7 +63,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            var picker = new this.$parent.$options.utils['video-picker']({
                 parent: this,
                 data: {
                     video: video
@@ -74,24 +71,97 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (video) {
-                    video.replace('(video)' + JSON.stringify(video.data));
+
+                    var content, src, match;
+
+                    delete video.data.playlist;
+
+                    if (match = picker.isYoutube) {
+                        src = 'https://www.youtube.com/embed/' + match[1] + '?';
+
+                        if (video.data.loop) {
+                            video.data.playlist = match[1];
+                        }
+                    } else if (match = picker.isVimeo) {
+                        src = 'https://player.vimeo.com/video/' + match[3] + '?';
+                    }
+
+                    if (src) {
+
+                        Object.keys(video.data).forEach(function (attr) {
+                            if (attr === 'src' || attr === 'width' || attr === 'height') {
+                                return;
+                            }
+
+                            src += attr + '=' + video.data[attr] + '&';
+                        });
+
+                        video.attributes = video.attributes || {};
+
+                        video.attributes.src = src.slice(0, -1);
+                        video.attributes.width = video.data.width || 690;
+                        video.attributes.height = video.data.height || 390;
+                        video.attributes.allowfullscreen = true;
+
+                        content = '<iframe';
+                        Object.keys(video.attributes).forEach(function (attr) {
+                            content += ' ' + attr + ( _.isBoolean(video.attributes[attr]) ? '' : '="' + video.attributes[attr] + '"');
+                        });
+
+                        content += '></iframe>';
+
+                    } else {
+
+                        content = '<video';
+
+                        Object.keys(video.data).forEach(function (attr) {
+                            var value = video.data[attr];
+                            content += ' ' + attr + (_.isBoolean(value) ? '' : '="' + value + '"');
+                        });
+
+                        content += '></video>';
+                    }
+
+                    video.replace(content);
+
                 });
         },
 
         replaceInPreview: function (data, index) {
 
-            var settings;
+            var matches, src, query,
+                regex = /([^=\s"']+)\s*=(?:"([^"]*)"|'([^']*)')|([^=\s"']+)/gi;
 
-            try {
-
-                settings = JSON.parse(data.matches[1]);
-
-            } catch (e) {
+            data.attributes = {};
+            while ((matches = regex.exec(data.matches[2])) !== null) {
+                data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
             }
 
-            data.data = settings || {src: ''};
+            if (data.matches[1] === 'video') {
+                data.data = data.attributes;
+            } else if (data.matches[1] === 'iframe') {
+                data.data = {};
+                src = data.attributes.src || '';
+                src = src.split('?');
+                query = src[1] || '';
+                src = src[0];
+                query.split('&').forEach(function (param) {
+                    param = param.split('=');
+                    data.data[param[0]] = param[1];
+                });
+
+                data.data.src = src;
+                if (data.attributes.width) {
+                    data.data.width = data.attributes.width;
+                }
+                if (data.attributes.height) {
+                    data.data.height = data.attributes.height;
+                }
+
+            }
 
             return '<video-preview index="' + index + '"></video-preview>';
+
         }
 
     },

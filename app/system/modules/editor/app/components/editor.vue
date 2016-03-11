@@ -67,6 +67,12 @@
             'plugin-video': require('./video'),
             'plugin-url': require('./url')
 
+        },
+
+        utils: {
+            'image-picker': Vue.extend(require('./image-picker.vue')),
+            'video-picker': Vue.extend(require('./video-picker.vue')),
+            'link-picker': Vue.extend(require('./link-picker.vue'))
         }
 
     };

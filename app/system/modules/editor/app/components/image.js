@@ -2,8 +2,6 @@
  * Editor Image plugin.
  */
 
-var Picker = Vue.extend(require('./image-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -41,7 +39,6 @@ module.exports = {
                     });
                 });
             });
-
     },
 
     methods: {
@@ -58,7 +55,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['image-picker']({
                 parent: this,
                 data: {
                     image: image
@@ -66,27 +63,43 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (image) {
-                    image.replace(this.$interpolate(
-                        (image.tag || editor.getCursorMode()) == 'html' ?
-                            '<img src="{{ image.src }}" alt="{{ image.alt }}"{{ image.cls ? \' class="'+image.cls+'"\' : "" }}>'
-                            : '![{{ image.alt }}]({{ image.src }})'
-                        )
-                    );
+
+                    var content;
+
+                    if ((image.tag || editor.getCursorMode()) == 'html' ) {
+                        content = '<img';
+
+                        Object.keys(image.data).forEach(function (attr) {
+                            var value = image.data[attr];
+                            content += ' ' + attr + (_.isBoolean(value) ? '' : '="' + value + '"');
+                        });
+
+                        content += '>';
+                    } else {
+                        content = '![' + image.data.alt + '](' + image.data.src + ')';
+                    }
+
+                    image.replace(content);
                 });
         },
 
         replaceInPreview: function (data, index) {
 
+            data.data = {};
             if (data.matches[0][0] == '<') {
 
-                var cls = data.matches[0].match(/class="(.*?)"/);
-                data.cls = cls && cls.length ? cls[1] : '';
-                data.src = data.matches[0].match(/src="(.*?)"/)[1];
-                data.alt = data.matches[0].match(/alt="(.*?)"/)[1];
+                var matches,
+                    regex = /([^=\s"']+)\s*=(?:"([^"]*)"|'([^']*)')|([^=\s"']+)/gi;
+
+                data.data = {};
+                while ((matches = regex.exec(data.matches[1])) !== null) {
+                    data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
+                }
+
                 data.tag = 'html';
             } else {
-                data.src = data.matches[3];
-                data.alt = data.matches[2];
+                data.data.src = data.matches[3];
+                data.data.alt = data.matches[2];
                 data.tag = 'gfm';
             }
 
