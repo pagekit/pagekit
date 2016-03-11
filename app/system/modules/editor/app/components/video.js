@@ -134,7 +134,7 @@ module.exports = {
 
             data.attributes = {};
             while ((matches = regex.exec(data.matches[2])) !== null) {
-                data.attributes[matches[1] || matches[4]] = matches[2] === undefined || matches[2];
+                data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
             }
 
             if (data.matches[1] === 'video') {

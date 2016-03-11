@@ -93,7 +93,7 @@ module.exports = {
 
                 data.data = {};
                 while ((matches = regex.exec(data.matches[1])) !== null) {
-                    data.data[matches[1] || matches[4]] = matches[2] === undefined || matches[2];
+                    data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
                 }
 
                 data.tag = 'html';
