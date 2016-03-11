@@ -3,9 +3,9 @@
 <form class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
 
     <?php if($error): ?>
-        <div class="uk-alert uk-alert-danger">
-            <?= $error; ?>
-        </div>
+    <div class="uk-alert uk-alert-danger">
+        <?= $error; ?>
+    </div>
     <?php endif; ?>
 
     <h1 class="uk-h2 uk-text-center"><?= __('Password Confirmation') ?></h1>
