@@ -126,11 +126,10 @@ class RegistrationController
 
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
 
-            return $this->messageView([
+            return AuthController::messageView([
                 'message' => __('Invalid key.'),
                 'success' => false
             ]);
-
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -156,11 +155,9 @@ class RegistrationController
 
         $user->save();
 
-        return $this->messageView([
-            'message' => $message,
-            'link' => App::url('@user/login'),
-            'label' => __('Login')
-        ]);
+        App::message()->success($message);
+
+        return App::redirect('@user/login');
     }
 
     protected function sendWelcomeEmail($user)
@@ -206,25 +203,5 @@ class RegistrationController
         }
     }
 
-    protected function messageView($args = [])
-    {
-        $args = array_merge([
-            'title' => __('Account activation'),
-            'message' => '',
-            'success' => true,
-            'link' => '',
-            'label' => ''
-        ], $args);
 
-        return [
-            '$view' => [
-                'title' => $args['title'],
-                'name' => 'system/user/message.php'
-            ],
-            'message' => $args['message'],
-            'success' => $args['success'],
-            'link'    => $args['link'],
-            'label'   => $args['label'],
-        ];
-    }
 }
