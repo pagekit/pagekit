@@ -119,7 +119,9 @@ class ResetPasswordController
                 $user->activation = null;
                 $user->save();
 
-                return $this->messageView(__('Your password has been reset.'), $success=true, $link = App::url('@user/login'), $label = __('Login'));
+                App::message()->success(__('Your password has been reset.'));
+                return App::redirect('@user/login');
+
 
             } catch (Exception $e) {
                 $error = $e->getMessage();
@@ -137,17 +139,12 @@ class ResetPasswordController
         ];
     }
 
-    protected function messageView($message, $success = true, $link = '', $label = '')
+    protected function messageView($message, $success = true)
     {
-        return [
-            '$view' => [
-                'title' => __('Reset password'),
-                'name' => 'system/user/message.php'
-            ],
+        return AuthController::messageView([
+            'title' => __('Reset password'),
             'message' => $message,
-            'success' => $success,
-            'link'    => $link,
-            'label'   => $label
-        ];
+            'success' => $success
+        ]);
     }
 }
