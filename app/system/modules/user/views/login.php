@@ -2,6 +2,8 @@
 
     <h1 class="uk-h2 uk-text-center"><?= __('Sign in to your account') ?></h1>
 
+    <?= $view->render('messages') ?>
+
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" required autofocus>
     </div>
