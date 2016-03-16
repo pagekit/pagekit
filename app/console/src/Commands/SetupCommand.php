@@ -2,14 +2,13 @@
 
 namespace Pagekit\Console\Commands;
 
-use Pagekit\Application\Console\Application;
 use Pagekit\Application\Console\Command;
 use Pagekit\Installer\Installer;
-use Pagekit\Installer\Package\PackageManager;
-use Symfony\Component\Console\Input\InputArgument;
+use Pagekit\Installer\Package\PackageFactory;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+
 
 class SetupCommand extends Command
 {
@@ -23,13 +22,11 @@ class SetupCommand extends Command
      */
     protected $description = 'Setup a Pagekit installation.';
 
-
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-
         $this->addOption('adminpass', null, InputOption::VALUE_REQUIRED, 'Admin account password.');
         $this->addOption('adminmail', null, InputOption::VALUE_OPTIONAL, 'Admin account email.', $default='admin@example.com');
         $this->addOption('dbdriver',  null, InputOption::VALUE_REQUIRED, 'DB driver (sqlite or mysql). Default: mysql', $default='mysql');
@@ -47,7 +44,13 @@ class SetupCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $installer = new Installer($this->container);
+        $app = $this->container;
+
+        $this->container['package'] = function ($app) {
+            return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
+        };
+
+        $installer = new Installer($app);
 
         $dbDriver = $this->option('dbdriver');
 
