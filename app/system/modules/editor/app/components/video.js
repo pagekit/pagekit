@@ -72,7 +72,7 @@ module.exports = {
                 .$appendTo('body')
                 .$on('select', function (video) {
 
-                    var content, src, match;
+                    var src, match;
 
                     delete video.data.playlist;
 
@@ -88,12 +88,16 @@ module.exports = {
 
                     if (src) {
 
-                        Object.keys(video.data).forEach(function (attr) {
-                            if (attr === 'src' || attr === 'width' || attr === 'height') {
+                        if (!video.anchor) {
+                            video.anchor = $('<iframe></iframe>');
+                        }
+
+                        _.forEach(video.data, function (value, key) {
+                            if (key === 'src' || key === 'width' || key === 'height') {
                                 return;
                             }
 
-                            src += attr + '=' + video.data[attr] + '&';
+                            src += key + '=' + _.isBoolean(value) ? Number(value) : value + '&';
                         });
 
                         video.attributes = video.attributes || {};
@@ -103,44 +107,47 @@ module.exports = {
                         video.attributes.height = video.data.height || 390;
                         video.attributes.allowfullscreen = true;
 
-                        content = '<iframe';
-                        Object.keys(video.attributes).forEach(function (attr) {
-                            content += ' ' + attr + ( _.isBoolean(video.attributes[attr]) ? '' : '="' + video.attributes[attr] + '"');
+                        _.forEach(video.attributes, function (value, key) {
+                            video.anchor.attr(key, value);
                         });
-
-                        content += '></iframe>';
 
                     } else {
 
-                        content = '<video';
+                        if (!video.anchor) {
+                            video.anchor = $('<video></video>');
+                        }
 
-                        Object.keys(video.data).forEach(function (attr) {
-                            var value = video.data[attr];
-                            content += ' ' + attr + (_.isBoolean(value) ? '' : '="' + value + '"');
+                        _.forEach(video.data, function (value, key) {
+                            video.anchor.attr(key, value);
                         });
 
-                        content += '></video>';
                     }
 
-                    video.replace(content);
+                    video.replace(video.anchor[0].outerHTML);
 
                 });
         },
 
         replaceInPreview: function (data, index) {
 
-            var matches, src, query,
-                regex = /([^=\s"']+)\s*=(?:"([^"]*)"|'([^']*)')|([^=\s"']+)/gi;
+            var src, query, anchor = $(data.matches[0]);
 
-            data.attributes = {};
-            while ((matches = regex.exec(data.matches[2])) !== null) {
-                data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
-            }
+            data.data = {};
+            data.anchor = anchor;
 
-            if (data.matches[1] === 'video') {
-                data.data = data.attributes;
-            } else if (data.matches[1] === 'iframe') {
-                data.data = {};
+            if (anchor[0].nodeName === 'VIDEO') {
+
+                _.forEach(anchor[0].attributes, function (attr) {
+                    data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                });
+
+            } else if (anchor[0].nodeName === 'IFRAME') {
+
+                data.attributes = {};
+                _.forEach(anchor[0].attributes, function (attr) {
+                    data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                });
+
                 src = data.attributes.src || '';
                 src = src.split('?');
                 query = src[1] || '';
