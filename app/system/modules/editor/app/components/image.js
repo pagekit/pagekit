@@ -45,7 +45,7 @@ module.exports = {
 
         openModal: function (image) {
 
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!image) {
                 image = {
@@ -69,13 +69,13 @@ module.exports = {
                     if ((image.tag || editor.getCursorMode()) == 'html') {
 
                         if (!image.anchor) {
-                            image.anchor = $('<img>');
+                            image.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];;
                         }
 
-                        image.anchor.attr('src', image.data.src);
-                        image.anchor.attr('alt', image.data.alt);
+                        image.anchor.setAttribute('src', image.data.src);
+                        image.anchor.setAttribute('alt', image.data.alt);
 
-                        content = image.anchor[0].outerHTML;
+                        content = image.anchor.outerHTML;
 
                     } else {
                         content = '![' + image.data.alt + '](' + image.data.src + ')';
@@ -86,12 +86,13 @@ module.exports = {
         },
 
         replaceInPreview: function (data, index) {
+            var parser = new DOMParser();
 
             data.data = {};
             if (data.matches[0][0] == '<') {
-                data.anchor = $(data.matches[0]);
-                data.data.src = data.anchor.attr('src');
-                data.data.alt = data.anchor.attr('alt');
+                data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
+                data.data.src = data.anchor.attributes.src ? data.anchor.attributes.src.nodeValue : '';
+                data.data.alt = data.anchor.attributes.alt ? data.anchor.attributes.alt.nodeValue : '';
                 data.tag = 'html';
             } else {
                 data.data.src = data.matches[3];
