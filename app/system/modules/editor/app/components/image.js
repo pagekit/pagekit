@@ -66,15 +66,17 @@ module.exports = {
 
                     var content;
 
-                    if ((image.tag || editor.getCursorMode()) == 'html' ) {
-                        content = '<img';
+                    if ((image.tag || editor.getCursorMode()) == 'html') {
 
-                        Object.keys(image.data).forEach(function (attr) {
-                            var value = image.data[attr];
-                            content += ' ' + attr + (_.isBoolean(value) ? '' : '="' + value + '"');
-                        });
+                        if (!image.anchor) {
+                            image.anchor = $('<img>');
+                        }
 
-                        content += '>';
+                        image.anchor.attr('src', image.data.src);
+                        image.anchor.attr('alt', image.data.alt);
+
+                        content = image.anchor[0].outerHTML;
+
                     } else {
                         content = '![' + image.data.alt + '](' + image.data.src + ')';
                     }
@@ -87,15 +89,9 @@ module.exports = {
 
             data.data = {};
             if (data.matches[0][0] == '<') {
-
-                var matches,
-                    regex = /([^=\s"']+)\s*=(?:"([^"]*)"|'([^']*)')|([^=\s"']+)/gi;
-
-                data.data = {};
-                while ((matches = regex.exec(data.matches[1])) !== null) {
-                    data.data[matches[1] || matches[4]] = matches[2] === undefined && matches[3] === undefined || matches[2] || matches[3];
-                }
-
+                data.anchor = $(data.matches[0]);
+                data.data.src = data.anchor.attr('src');
+                data.data.alt = data.anchor.attr('alt');
                 data.tag = 'html';
             } else {
                 data.data.src = data.matches[3];
