@@ -130,21 +130,21 @@ module.exports = {
 
         replaceInPreview: function (data, index) {
 
-            var src, query, anchor = $(data.matches[0]);
+            var src, query;
 
             data.data = {};
-            data.anchor = anchor;
+            data.anchor = $(data.matches[0]);
 
-            if (anchor[0].nodeName === 'VIDEO') {
+            if (data.anchor[0].nodeName === 'VIDEO') {
 
-                _.forEach(anchor[0].attributes, function (attr) {
+                _.forEach(data.anchor[0].attributes, function (attr) {
                     data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
                 });
 
-            } else if (anchor[0].nodeName === 'IFRAME') {
+            } else if (data.anchor[0].nodeName === 'IFRAME') {
 
                 data.attributes = {};
-                _.forEach(anchor[0].attributes, function (attr) {
+                _.forEach(data.anchor[0].attributes, function (attr) {
                     data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
                 });
 
