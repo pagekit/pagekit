@@ -41,7 +41,7 @@
             this.modal = UIkit.modal(this.$el, _.extend({modal: false}, this.options));
             this.modal.on('hide.uk.modal', function () {
 
-                vm.opened = false;
+                vm.$set('opened', false);
 
                 if (vm.closed) {
                     vm.closed();
@@ -71,18 +71,11 @@
         methods: {
 
             open: function () {
-                this.opened = true;
+                this.$set('opened', true);
                 this.modal.show();
-
-                this.observer = new MutationObserver(function () {
-                    this.modal.resize();
-                }.bind(this));
-
-                this.observer.observe(this.$el, {childList: true, subtree: true});
             },
 
             close: function () {
-                this.observer.disconnect();
                 this.modal.hide();
             }
 
