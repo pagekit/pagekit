@@ -11,6 +11,7 @@
  
 ### Changed
 - Transfer widget and menu positions on theme change
+- Image-, video-, link-picker: Preserve existing attributes
 
 ## 0.10.4 (March 1 2016)
 
