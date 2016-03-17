@@ -41,7 +41,7 @@
             this.modal = UIkit.modal(this.$el, _.extend({modal: false}, this.options));
             this.modal.on('hide.uk.modal', function () {
 
-                vm.$set('opened', false);
+                vm.opened = false;
 
                 if (vm.closed) {
                     vm.closed();
@@ -71,7 +71,7 @@
         methods: {
 
             open: function () {
-                this.$set('opened', true);
+                this.opened = true;
                 this.modal.show();
             },
 
