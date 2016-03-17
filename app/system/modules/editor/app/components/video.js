@@ -53,7 +53,7 @@ module.exports = {
 
         openModal: function (video) {
 
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!video) {
                 video = {
@@ -72,7 +72,7 @@ module.exports = {
                 .$appendTo('body')
                 .$on('select', function (video) {
 
-                    var src, match;
+                    var attributes, src, match;
 
                     delete video.data.playlist;
 
@@ -89,7 +89,7 @@ module.exports = {
                     if (src) {
 
                         if (!video.anchor) {
-                            video.anchor = $('<iframe></iframe>');
+                            video.anchor = parser.parseFromString('<iframe></iframe>', "text/html").body.childNodes[0];
                         }
 
                         _.forEach(video.data, function (value, key) {
@@ -107,44 +107,51 @@ module.exports = {
                         video.attributes.height = video.data.height || 390;
                         video.attributes.allowfullscreen = true;
 
-                        _.forEach(video.attributes, function (value, key) {
-                            video.anchor.attr(key, value);
-                        });
+                        attributes = video.attributes;
 
                     } else {
 
                         if (!video.anchor) {
-                            video.anchor = $('<video></video>');
+                            video.anchor = parser.parseFromString('<video></video>', "text/html").body.childNodes[0];
                         }
 
-                        _.forEach(video.data, function (value, key) {
-                            video.anchor.attr(key, value);
-                        });
+                        attributes = video.data;
 
                     }
 
-                    video.replace(video.anchor[0].outerHTML);
+
+                    _.forEach(attributes, function (value, key) {
+                        if (value) {
+                            video.anchor.setAttribute(key, _.isBoolean(value) ? '' : value);
+                        } else {
+                            video.anchor.removeAttribute(key);
+                        }
+                    });
+
+                    video.replace(video.anchor.outerHTML);
 
                 });
         },
 
         replaceInPreview: function (data, index) {
 
-            var src, query;
+            var parser = new DOMParser(), src, query;
 
             data.data = {};
-            data.anchor = $(data.matches[0]);
+            data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
 
-            if (data.anchor[0].nodeName === 'VIDEO') {
+            if (data.anchor.nodeName === 'VIDEO') {
 
-                _.forEach(data.anchor[0].attributes, function (attr) {
+                _.forEach(data.anchor.attributes, function (attr) {
                     data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
                 });
 
-            } else if (data.anchor[0].nodeName === 'IFRAME') {
+                data.data['controls'] = data.data['controls'] !== undefined;
+
+            } else if (data.anchor.nodeName === 'IFRAME') {
 
                 data.attributes = {};
-                _.forEach(data.anchor[0].attributes, function (attr) {
+                _.forEach(data.anchor.attributes, function (attr) {
                     data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
                 });
 

@@ -90,16 +90,6 @@
 
             update: function () {
                 this.$refs.modal.close();
-
-                var vm = this;
-                _.forEach(this.video.data, function (value, key) {
-
-                    if ((!value && (key !== 'controls' || !vm.isYoutube))) {
-                        Vue.delete(vm.video.data, key);
-                    }
-
-                });
-
                 this.$emit('select', this.video);
             }
 
