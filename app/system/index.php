@@ -15,10 +15,8 @@ return [
 
         'application',
         'feed',
-        'markdown',
         'installer',
-        'system/view',
-        'system/widget',
+        'markdown',
         'system/cache',
         'system/comment',
         'system/content',
@@ -28,11 +26,13 @@ return [
         'system/info',
         'system/intl',
         'system/mail',
+        'system/meta',
         'system/settings',
         'system/site',
         'system/theme',
         'system/user',
-        'system/ogp'
+        'system/view',
+        'system/widget'
 
     ],
 

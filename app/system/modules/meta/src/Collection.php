@@ -1,8 +1,8 @@
 <?php
 
-namespace Pagekit\Ogp;
+namespace Pagekit\Meta;
 
-class Manager implements \ArrayAccess
+class Collection implements \ArrayAccess
 {
 
     protected $meta;
