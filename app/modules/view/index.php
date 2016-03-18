@@ -54,7 +54,7 @@ return [
         $app['module']->addLoader(function ($module) use ($app) {
 
             if (isset($module['views'])) {
-                $app->extend('view', function($view) use ($module) {
+                $app->extend('view', function ($view) use ($module) {
                     foreach ((array) $module['views'] as $name => $path) {
                         $view->map($name, $path);
                     }
@@ -71,7 +71,7 @@ return [
 
         'controller' => [function ($event) use ($app) {
 
-            $view   = $app['view'];
+            $view = $app['view'];
             $layout = true;
             $result = $event->getControllerResult();
 
@@ -90,7 +90,9 @@ return [
                             unset($value['layout']);
                         }
 
-                        $view->meta($value);
+                        $app->on('view.meta', function ($event, $meta) use ($value) {
+                            $meta($value);
+                        });
 
                     } elseif ($key[0] === '$') {
 
