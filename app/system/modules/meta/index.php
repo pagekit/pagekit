@@ -15,7 +15,7 @@ return [
                 $meta([
                     'og:site_name' => $config->get('title'),
                     'og:title' => $app['node']->title,
-                    'og:image' => $config->get('meta.image') ? $app['url']->getStatic($config->get('meta.image'), [], 0) : '',
+                    'og:image' => $config->get('meta.image') ? $app['url']->getStatic($config->get('meta.image'), [], 0) : false,
                     'og:description' => $config->get('meta.description'),
                     'og:url' => $meta->get('canonical'),
                 ]);
