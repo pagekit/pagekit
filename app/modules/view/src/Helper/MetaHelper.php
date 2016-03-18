@@ -73,6 +73,10 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
 
         foreach ($this->metas as $name => $value) {
 
+            if (!$value) {
+                continue;
+            }
+
             if (preg_match('/^link:?/i', $name)) {
 
                 if (!isset($value['rel'])) {
