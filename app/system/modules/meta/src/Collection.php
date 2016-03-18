@@ -55,8 +55,10 @@ class Collection implements \ArrayAccess
             if ($this->prefix) {
                 $name = implode(':', [$this->prefix, $name]);
             }
-            
-            $values[$name] = $value;
+
+            if ($value) {
+                $values[$name] = $value;
+            }
         }
         
         return $values;
