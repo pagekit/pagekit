@@ -56,7 +56,7 @@ If you've set up Pagekit from source, run these commands to get new commits and 
 
 ```
 git pull
-composer update
+composer install
 npm install
 ```
 
