@@ -57,7 +57,9 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
      */
     public function add($name, $value = '')
     {
-        $this->metas[$name] = $value;
+        if ($value) {
+            $this->metas[$name] = $value;
+        }
 
         return $this;
     }
@@ -72,10 +74,6 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
         $output = '';
 
         foreach ($this->metas as $name => $value) {
-
-            if (!$value) {
-                continue;
-            }
 
             if (preg_match('/^link:?/i', $name)) {
 
