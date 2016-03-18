@@ -12,7 +12,7 @@
         <div class="uk-form-row">
             <label for="form-class" class="uk-form-label">{{ 'Description' | trans }}</label>
             <div class="uk-form-controls">
-                <textarea id="form-class" class="uk-form-width-large" type="text" v-model="node.data.meta['og:description']"></textarea>
+                <textarea id="form-class" class="uk-form-width-large" rows="5" type="text" v-model="node.data.meta['og:description']"></textarea>
             </div>
         </div>
 
