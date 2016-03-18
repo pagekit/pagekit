@@ -24,7 +24,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                var regexp = editor.getMode() != 'gfm' ? /<a(?:.+?)>(?:[^<]*)<\/a>/gi : /<a(?:.+?)>(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
+                var regexp = editor.getMode() != 'gfm' ? /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>/gi : /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
                 vm.links = editor.replaceInPreview(regexp, vm.replaceInPreview);
             })
             .on('renderLate', function () {
