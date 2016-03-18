@@ -27,7 +27,7 @@ return [
             $app['meta']['site_name'] = $app->config('system/site')->get('title');
             $app['meta']['title'] = $app['node']->title;
 
-            $app['meta']['image'] = $app->config('system/site')->get('meta.logo') ? $app['url']->getStatic($app->config('system/site')->get('meta.logo'), [], 0) : '';
+            $app['meta']['image'] = $app->config('system/site')->get('meta.image') ? $app['url']->getStatic($app->config('system/site')->get('meta.image'), [], 0) : '';
             $app['meta']['description'] = $app->config('system/site')->get('meta.description');
 
             $app['meta']->merge($app['node']->get('meta'));
