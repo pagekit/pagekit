@@ -25,22 +25,13 @@ class Application extends BaseApplication
      */
     public function __construct(Container $container, $name = 'UNKNOWN', $version = 'UNKNOWN')
     {
-        $this->container = $container;
         parent::__construct($name, $version);
 
+        $this->container = $container;
 
         if (isset($container['events'])) {
             $container['events']->trigger('console.init', [$this]);
         }
-    }
-
-    public function run(InputInterface $input = null, OutputInterface $output = null)
-    {
-        if (!$this->container->isBooted()) {
-            $this->container->boot();
-        }
-
-        return parent::run($input, $output);
     }
 
     /**

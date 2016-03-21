@@ -13,14 +13,12 @@ $app['autoloader'] = $loader;
 $app['module']->register([
     'packages/*/*/index.php',
     'app/modules/*/index.php',
-    'app/installer/index.php',
     'app/system/index.php',
     'app/console/index.php'
 ], $path);
 
 $app['module']->addLoader(new AutoLoader($app['autoloader']));
 $app['module']->addLoader(new ConfigLoader(require $path.'/app/system/config.php'));
-$app['module']->addLoader(new ConfigLoader(require __DIR__.'/../installer/config.php'));
 
 if ($app['config.file']) {
     $app['module']->addLoader(new ConfigLoader(require $app['config.file']));

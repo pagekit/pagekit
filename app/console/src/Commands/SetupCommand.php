@@ -4,10 +4,11 @@ namespace Pagekit\Console\Commands;
 
 use Pagekit\Application\Console\Command;
 use Pagekit\Installer\Installer;
-use Pagekit\Installer\Package\PackageFactory;
+use Pagekit\Application as App;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Pagekit\Module\Loader\ConfigLoader;
 
 
 class SetupCommand extends Command
@@ -41,14 +42,19 @@ class SetupCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
-    {
+    protected function execute(InputInterface $input, OutputInterface $output) {
 
         $app = $this->container;
 
-        $this->container['package'] = function ($app) {
-            return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
-        };
+        $app['module']->addLoader(new ConfigLoader(require $app['path'].'/app/installer/config.php'));
+
+        $app['module']->register([
+            'app/installer/index.php'
+        ], $app['path']);
+
+        $app->boot();
+
+        $app['module']->load('installer');
 
         $installer = new Installer($app);
 
