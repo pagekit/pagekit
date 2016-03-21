@@ -1,6 +1,6 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" v-cloak @submit.prevent="submit | valid">
+<form id="user-registration" class="pk-user pk-user-registration uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" v-cloak @submit.prevent="submit | valid">
 
     <h1 class="uk-h2 uk-text-center"><?= __('Create an account') ?></h1>
 

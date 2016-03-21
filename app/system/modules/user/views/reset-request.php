@@ -1,4 +1,4 @@
-<form class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/resetpassword/request') ?>" method="post">
+<form class="pk-user pk-user-reset uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/resetpassword/request') ?>" method="post">
 
     <h1 class="uk-h2 uk-text-center"><?= __('Forgot Password') ?></h1>
 

@@ -1,6 +1,6 @@
 <?php $view->script('uikit-form-password') ?>
 
-<form class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
+<form class="pk-user pk-user-reset uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/resetpassword/confirm', ['user' => $username, 'key' => $activation]) ?>" method="post">
 
     <?php if($error): ?>
     <div class="uk-alert uk-alert-danger">
