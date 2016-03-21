@@ -46,16 +46,16 @@ class SetupCommand extends Command
 
         $app = $this->container;
 
-        $app['module']->addLoader(new ConfigLoader(require $app['path'].'/app/installer/config.php'));
-
         $app['module']->register([
             'app/installer/index.php'
         ], $app['path']);
 
+        App::module('session')->config['storage'] = 'array';
+
         $app->boot();
 
         $app['module']->load('installer');
-
+        
         $installer = new Installer($app);
 
         $dbDriver = $this->option('dbdriver');
