@@ -25,7 +25,7 @@ class ResetPasswordController
     }
 
     /**
-     * @Request({"email"})
+     * @Request({"email": "string"})
      */
     public function requestAction($email)
     {
@@ -40,11 +40,11 @@ class ResetPasswordController
             }
 
             if (empty($email)) {
-                throw new Exception(__('Enter a email address.'));
+                throw new Exception(__('Enter a valid email address.'));
             }
 
             if (!$user = User::findByEmail($email)) {
-                throw new Exception(__('Invalid email address.'));
+                throw new Exception(__('Unknown email address.'));
             }
 
             if ($user->isBlocked()) {
@@ -69,16 +69,12 @@ class ResetPasswordController
 
             $user->save();
 
-            return $this->messageView(__('Check your email for the confirmation link.'));
+            return [
+                'message' => __('Check your email for the confirmation link.')
+            ];
 
         } catch (Exception $e) {
-            return [
-                '$view' => [
-                    'title' => __('Reset'),
-                    'name'  => 'system/user/reset-request.php',
-                ],
-                'error' => $e->getMessage()
-            ];
+            App::abort(400, $e->getMessage());
         }
     }
 
@@ -120,8 +116,8 @@ class ResetPasswordController
                 $user->save();
 
                 App::message()->success(__('Your password has been reset.'));
-                return App::redirect('@user/login');
 
+                return App::redirect('@user/login');
 
             } catch (Exception $e) {
                 $error = $e->getMessage();

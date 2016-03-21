@@ -4,23 +4,17 @@ module.exports = {
 
     data: {
         user: {},
-        error: null,
-        success: '',
-        redirect: ''
+        error: null
     },
 
     methods: {
-
 
         submit: function () {
 
             this.error = null;
 
             this.$http.post('user/registration/register', {user: this.user}).then(function (res) {
-
-                    this.success = res.data.message;
-                    this.redirect = res.data.redirect;
-
+                    window.location.replace(res.data.redirect);
             }, function (error) {
                     this.error = error.data;
                 }

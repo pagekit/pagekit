@@ -55,8 +55,8 @@ class RegistrationController
             }
 
             $password = @$data['password'];
-            if (trim($password) != $password || strlen($password) < 3) {
-                throw new Exception(__('Invalid Password.'));
+            if (trim($password) != $password || strlen($password) < 6) {
+                throw new Exception(__('Password must be 6 characters or longer.'));
             }
 
             $user = User::create([
@@ -92,7 +92,7 @@ class RegistrationController
             if ($verify) {
 
                 $this->sendVerificationMail($user);
-                $message = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
+                $message = __('Complete your registration by clicking the link provided in the mail that has been sent to you.');
 
             } elseif ($admin) {
 
@@ -109,6 +109,8 @@ class RegistrationController
         } catch (Exception $e) {
             App::abort(400, $e->getMessage());
         }
+
+        App::message()->success($message);
 
         return [
             'message' => $message,

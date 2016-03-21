@@ -6,13 +6,6 @@
 
     <div class="uk-alert uk-alert-danger" v-show="error">{{ error }}</div>
 
-    <div class="uk-alert uk-alert-success uk-text-center" v-show="success">
-        {{ success }}
-        <div class="uk-margin-top">
-            <a :href="redirect" class="uk-button" v-show="redirect">{{ 'Login' | trans}}</a>
-        </div>
-    </div>
-
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="text" name="username" placeholder="<?= __('Username') ?>" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]{3,}$/">
         <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid"><?= __('Username is invalid.') ?></p>
@@ -30,10 +23,10 @@
 
     <div class="uk-form-row">
         <div class="uk-form-password uk-width-1-1">
-            <input class="uk-width-1-1" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required>
+            <input class="uk-width-1-1" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required v-validate:pattern.literal="/^.{6,}$/">
             <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
         </div>
-        <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password must be 6 characters or longer.') ?></p>
     </div>
 
     <p class="uk-form-row">
