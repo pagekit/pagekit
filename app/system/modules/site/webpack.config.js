@@ -23,6 +23,7 @@ module.exports = [
             "input-tree": "./app/components/input-tree.vue",
             "link-page": "./app/components/link-page.vue",
             "node-page": "./app/components/node-page.vue",
+            "node-meta": "./app/components/node-meta.vue",
             "settings": "./app/views/settings",
             "widget-menu": "./app/components/widget-menu.vue",
             "widget-text": "./app/components/widget-text.vue"
