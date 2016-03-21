@@ -31,8 +31,7 @@ return [
         'system/settings',
         'system/site',
         'system/theme',
-        'system/user',
-        'system/meta'
+        'system/user'
 
     ],
 
