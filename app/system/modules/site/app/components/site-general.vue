@@ -41,7 +41,7 @@
         </div>
 
         <div class="uk-form-row">
-            <label for="form-image" class="uk-form-label">{{ 'Meta Image' | trans }}</label>
+            <label for="form-meta-image" class="uk-form-label">{{ 'Meta Image' | trans }}</label>
             <div class="uk-form-controls uk-form-width-large">
                 <input-image :source.sync="config.meta.image"></input-image>
             </div>
