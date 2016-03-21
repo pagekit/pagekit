@@ -19,6 +19,7 @@ $app['module']->register([
 
 $app['module']->addLoader(new AutoLoader($app['autoloader']));
 $app['module']->addLoader(new ConfigLoader(require $path.'/app/system/config.php'));
+$app['module']->addLoader(new ConfigLoader(require $path.'/app/installer/config.php'));
 
 if ($app['config.file']) {
     $app['module']->addLoader(new ConfigLoader(require $app['config.file']));
