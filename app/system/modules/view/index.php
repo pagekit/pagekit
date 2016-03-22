@@ -42,7 +42,7 @@ return [
         'site' => function ($event, $app) {
             $app->on('view.meta', function ($event, $meta) use ($app) {
                 $meta->add('canonical', $app['url']->get($app['request']->attributes->get('_route'), $app['request']->attributes->get('_route_params', []), 0));
-            });
+            }, 60);
         },
 
         'view.init' => [function ($event, $view) {
