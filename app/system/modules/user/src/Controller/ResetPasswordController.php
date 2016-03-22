@@ -53,7 +53,7 @@ class ResetPasswordController
 
             $user->activation = App::get('auth.random')->generateString(32);
 
-            $url = App::url('@user/resetpassword/confirm', ['user' => $user->username, 'key' => $user->activation], true);
+            $url = App::url('@user/resetpassword/confirm', ['user' => $user->username, 'key' => $user->activation], 0);
 
             try {
 
