@@ -42,6 +42,8 @@ class RegistrationController
      */
     public function registerAction($data)
     {
+        $message = '';
+
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
@@ -53,8 +55,8 @@ class RegistrationController
             }
 
             $password = @$data['password'];
-            if (trim($password) != $password || strlen($password) < 3) {
-                throw new Exception(__('Invalid Password.'));
+            if (trim($password) != $password || strlen($password) < 6) {
+                throw new Exception(__('Password must be 6 characters or longer.'));
             }
 
             $user = User::create([
@@ -90,7 +92,7 @@ class RegistrationController
             if ($verify) {
 
                 $this->sendVerificationMail($user);
-                $message = __('Your user account has been created. Complete your registration, by clicking the link provided in the mail that has been sent to you.');
+                $message = __('Complete your registration by clicking the link provided in the mail that has been sent to you.');
 
             } elseif ($admin) {
 
@@ -110,7 +112,10 @@ class RegistrationController
 
         App::message()->success($message);
 
-        return ['redirect' => App::url('@user/login', [], true)];
+        return [
+            'message' => $message,
+            'redirect' => App::url('@user/login', [], true)
+        ];
     }
 
     /**
@@ -118,9 +123,15 @@ class RegistrationController
      */
     public function activateAction($username, $activation)
     {
+
+        $message = '';
+
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
-            App::message()->error(__('Invalid key.'));
-            return App::redirect();
+
+            return AuthController::messageView([
+                'message' => __('Invalid key.'),
+                'success' => false
+            ]);
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -128,7 +139,7 @@ class RegistrationController
             $user->activation = App::get('auth.random')->generateString(32);
             $this->sendApproveMail($user);
 
-            App::message()->success(__('Your email has been verified. Once an administrator approves your account, you will be notified by email.'));
+            $message = __('Your email has been verified. Once an administrator approves your account, you will be notified by email.');
 
         } else {
 
@@ -138,13 +149,15 @@ class RegistrationController
             $this->sendWelcomeEmail($user);
 
             if ($admin) {
-                App::message()->success(__('The user\'s account has been activated and the user has been notified about it.'));
+                $message = __('The user\'s account has been activated and the user has been notified about it.');
             } else {
-                App::message()->success(__('Your account has been activated.'));
+                $message = __('Your account has been activated.');
             }
         }
 
         $user->save();
+
+        App::message()->success($message);
 
         return App::redirect('@user/login');
     }
@@ -191,4 +204,6 @@ class RegistrationController
         } catch (\Exception $e) {
         }
     }
+
+
 }

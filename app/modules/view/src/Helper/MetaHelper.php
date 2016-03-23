@@ -57,7 +57,9 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
      */
     public function add($name, $value = '')
     {
-        $this->metas[$name] = $value;
+        if ($value) {
+            $this->metas[$name] = $value;
+        }
 
         return $this;
     }

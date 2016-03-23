@@ -1,6 +1,6 @@
 <?php $view->script('registration', 'system/user:app/bundle/registration.js', ['vue', 'uikit-form-password']) ?>
 
-<form id="user-registration" class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" @submit.prevent="submit | valid" v-cloak>
+<form id="user-registration" class="pk-user pk-user-registration uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" v-validator="form" v-cloak @submit.prevent="submit | valid">
 
     <h1 class="uk-h2 uk-text-center"><?= __('Create an account') ?></h1>
 
@@ -23,10 +23,10 @@
 
     <div class="uk-form-row">
         <div class="uk-form-password uk-width-1-1">
-            <input class="uk-width-1-1" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required>
+            <input class="uk-width-1-1" type="password" name="password" placeholder="<?= __('Password') ?>" v-model="user.password" v-validate:required v-validate:pattern.literal="/^.{6,}$/">
             <a href="" class="uk-form-password-toggle" tabindex="-1" data-uk-form-password="{ lblShow: '<?= __('Show') ?>', lblHide: '<?= __('Hide') ?>' }"><?= __('Show') ?></a>
         </div>
-        <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password cannot be blank.') ?></p>
+        <p class="uk-form-help-block uk-text-danger" v-show="form.password.invalid"><?= __('Password must be 6 characters or longer.') ?></p>
     </div>
 
     <p class="uk-form-row">

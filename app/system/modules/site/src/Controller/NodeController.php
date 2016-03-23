@@ -91,7 +91,7 @@ class NodeController
                 'name'  => 'system/site/admin/settings.php'
             ],
             '$data' => [
-                'config' => $this->site->config(['title', 'description', 'maintenance.', 'logo', 'icons.', 'code.', 'view.'])
+                'config' => $this->site->config(['title', 'description', 'maintenance.', 'meta.', 'logo', 'icons.', 'code.', 'view.'])
             ]
         ];
     }

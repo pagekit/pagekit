@@ -168,6 +168,24 @@ return [
                 $view->params->merge($app['node']->theme);
             }, 10);
 
+            $app->on('view.meta', function ($event, $meta) use ($app) {
+
+                $config = $app->config('system/site');
+
+                $meta([
+                    'og:site_name' => $config->get('title'),
+                    'og:title' => $app['node']->title,
+                    'og:image' => $config->get('meta.image') ? $app['url']->getStatic($config->get('meta.image'), [], 0) : false,
+                    'og:description' => $config->get('meta.description'),
+                    'og:url' => $meta->get('canonical'),
+                ]);
+
+                if ($app['node']->get('meta')) {
+                    $meta($app['node']->get('meta'));
+                }
+
+            }, 50);
+
         },
 
         'package.enable' => function ($event, $package) use ($app) {
@@ -208,6 +226,7 @@ return [
             $scripts->register('input-tree', 'system/site:app/bundle/input-tree.js', 'vue');
             $scripts->register('link-page', 'system/site:app/bundle/link-page.js', '~panel-link');
             $scripts->register('node-page', 'system/site:app/bundle/node-page.js', ['~site-edit', 'editor']);
+            $scripts->register('node-meta', 'system/site:app/bundle/node-meta.js', '~site-edit');
         },
 
         'model.node.saved' => function ($event, $node) use ($app) {

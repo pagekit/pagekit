@@ -73,11 +73,11 @@
         computed: {
 
             isYoutube: function () {
-                return Boolean(this.video.data.src.match(/(?:\/\/.*?youtube\.[a-z]+)\/watch\?v=([^&]+)&?(.*)/) || this.video.data.src.match(/youtu\.be\/(.*)/));
+                return this.video.data.src ? this.video.data.src.match(/.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/) : false;
             },
 
             isVimeo: function () {
-                return Boolean(this.video.data.src.match(/(\/\/.*?)vimeo\.[a-z]+\/([0-9]+).*?/));
+                return this.video.data.src ? this.video.data.src.match(/https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/) : false;
             }
 
         },
@@ -90,20 +90,6 @@
 
             update: function () {
                 this.$refs.modal.close();
-
-                var vm = this;
-                _.forEach(this.video.data, function (value, key) {
-
-                    if (_.isBoolean(value)) {
-                        vm.video.data[key] = Number(value);
-                    }
-
-                    if ((!value && (key !== 'controls' || !vm.isYoutube))) {
-                        Vue.delete(vm.video.data, key);
-                    }
-
-                });
-
                 this.$emit('select', this.video);
             }
 
