@@ -22,8 +22,7 @@ App::db()->insert('@system_page', [
     'data' => '{"title":true}'
 ]);
 
-// blog installed?
-if(App::db()->getUtility()->tableExists('@blog_post')) {
+if (App::db()->getUtility()->tableExists('@blog_post')) {
     App::db()->insert('@blog_post', [
         'user_id' => 1,
         'slug' => 'hello-pagekit',
