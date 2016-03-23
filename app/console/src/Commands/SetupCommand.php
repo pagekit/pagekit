@@ -44,6 +44,8 @@ class SetupCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
+        $this->line("Setting up Pagekit installation...");
+
         $app = $this->container;
 
         App::module('session')->config['storage'] = 'array';
@@ -97,6 +99,5 @@ class SetupCommand extends Command
         } else {
             $this->error($message);
         }
-
     }
 }

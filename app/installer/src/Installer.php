@@ -62,7 +62,10 @@ class Installer
 
                 $this->app->db()->connect();
 
-                if ($this->app->db()->getUtility()->tableExists('@system_config')) {
+                if ($config['database']['default'] == 'sqlite') {
+                    $status = 'tables-exist';
+                    $message = __('SQLite only supports one installation per database.');
+                } else if ($this->app->db()->getUtility()->tableExists('@system_config')) {
                     $status = 'tables-exist';
                     $message = __('Existing Pagekit installation detected. Choose different table prefix?');
                 } else {
