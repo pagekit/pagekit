@@ -13,6 +13,7 @@ $app['autoloader'] = $loader;
 $app['module']->register([
     'packages/*/*/index.php',
     'app/modules/*/index.php',
+    'app/installer/index.php',
     'app/system/index.php',
     'app/console/index.php'
 ], $path);

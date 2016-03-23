@@ -46,10 +46,6 @@ class SetupCommand extends Command
 
         $app = $this->container;
 
-        $app['module']->register([
-            'app/installer/index.php'
-        ], $app['path']);
-
         App::module('session')->config['storage'] = 'array';
 
         $app->boot();

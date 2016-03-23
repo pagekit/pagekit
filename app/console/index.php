@@ -25,12 +25,6 @@ return [
 
     ],
 
-    'require' => [
-
-        'application',
-        'system/intl',
-        'system/cache'
-
-    ]
+    'require' => 'application'
 
 ];
