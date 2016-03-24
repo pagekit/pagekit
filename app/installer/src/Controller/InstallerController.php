@@ -60,48 +60,43 @@ class InstallerController
         $status = 'no-connection';
         $message = '';
 
-        if (isset($config['database']['connections']['sqlite']['path']) && file_exists($config['database']['connections']['sqlite']['path'])) {
-            $status = 'database-exist';
-            $message = __('Existing Database detected. Choose different file path?');
-        } else {
+        try {
+
             try {
 
-                try {
-
-                    if (!$this->config) {
-                        foreach ($config as $name => $values) {
-                            if ($module = App::module($name)) {
-                                $module->config = Arr::merge($module->config, $values);
-                            }
+                if (!$this->config) {
+                    foreach ($config as $name => $values) {
+                        if ($module = App::module($name)) {
+                            $module->config = Arr::merge($module->config, $values);
                         }
                     }
-
-                    App::db()->connect();
-
-                    if (App::db()->getUtility()->tableExists('@system_config')) {
-                        $status = 'tables-exist';
-                        $message = __('Existing Pagekit installation detected. Choose different table prefix?');
-                    } else {
-                        $status = 'no-tables';
-                    }
-
-                } catch (ConnectionException $e) {
-
-                    if ($e->getPrevious()->getCode() == 1049) {
-                        $this->createDatabase();
-                        $status = 'no-tables';
-                    } else {
-                        throw $e;
-                    }
                 }
 
-            } catch (\Exception $e) {
+                App::db()->connect();
 
-                $message = __('Database connection failed!');
-
-                if ($e->getCode() == 1045) {
-                    $message = __('Database access denied!');
+                if (App::db()->getUtility()->tableExists('@system_config')) {
+                    $status = 'tables-exist';
+                    $message = __('Existing Pagekit installation detected. Choose different table prefix?');
+                } else {
+                    $status = 'no-tables';
                 }
+
+            } catch (ConnectionException $e) {
+
+                if ($e->getPrevious()->getCode() == 1049) {
+                    $this->createDatabase();
+                    $status = 'no-tables';
+                } else {
+                    throw $e;
+                }
+            }
+
+        } catch (\Exception $e) {
+
+            $message = __('Database connection failed!');
+
+            if ($e->getCode() == 1045) {
+                $message = __('Database access denied!');
             }
         }
 

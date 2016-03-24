@@ -115,10 +115,9 @@
                             </div>
                             <div class="uk-form-row" v-show="config.database.default == 'sqlite'">
                                 <div class="uk-form-row">
-                                    <label for="form-sqlite-dbpath" class="uk-form-label">{{ 'File Name' | trans }}</label>
+                                    <label for="form-sqlite-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-sqlite-dbpath" class="uk-width-1-1" type="text" name="sqlitepath" value="pagekit.db" v-model="config.database.connections.sqlite.path" v-validate:required>
-                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.sqlitepath.invalid">{{ 'File path cannot be blank.' | trans }}</p>
+                                        <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="sqliteprefix" value="pk_" v-model="config.database.connections.sqlite.prefix">
                                     </div>
                                 </div>
                             </div>
