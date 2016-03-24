@@ -37,33 +37,6 @@ return [
 
     ],
 
-    'database' => [
-
-        'connections' => [
-
-            'sqlite' => [
-
-                'driver' => 'pdo_sqlite',
-                'path' => "$path/pagekit.db",
-                'charset' => 'utf8',
-                'prefix' => '',
-                'driverOptions' => [
-                    'userDefinedFunctions' => [
-                        'REGEXP' => [
-                            'callback' => function ($pattern, $subject) {
-                                return preg_match("/$pattern/", $subject);
-                            },
-                            'numArgs' => 2
-                        ]
-                    ]
-                ]
-
-            ],
-
-        ]
-
-    ],
-
     'filesystem' => [
 
         'path' => $path
