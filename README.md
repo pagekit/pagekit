@@ -18,7 +18,7 @@ Run the Pagekit installation by accessing the URL where you uploaded the Pagekit
 
 ## Install Pagekit from Source
 
-Make sure you have the following [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix) and [npm](https://www.npmjs.com/) installed.
+Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix) and [npm](https://www.npmjs.com/) installed.
 
 Clone the repository.
 
