@@ -121,6 +121,7 @@ class SelfUpdater
             @unlink($file);
 
             $this->output->writeln(sprintf("\n<error>%s</error>", $e->getMessage()));
+            $this->output->write("status=error");
         }
 
     }
