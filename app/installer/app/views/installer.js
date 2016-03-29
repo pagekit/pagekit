@@ -16,6 +16,7 @@ var Installer = {
     ready: function () {
 
         this.resource = this.$resource('installer/:action', {}, {post: {method: 'POST'}});
+        this.$set('config.database', {default: this.sqlite ? 'sqlite' : 'mysql'})
 
     },
 

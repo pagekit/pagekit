@@ -70,7 +70,7 @@
                                 <label for="form-dbdriver" class="uk-form-label">{{ 'Driver' | trans }}</label>
                                 <div class="uk-form-controls">
                                     <select id="form-dbdriver" class="uk-width-1-1" name="dbdriver" v-model="config.database.default">
-                                        <option value="sqlite" selected>SQLite</option>
+                                        <option value="sqlite" v-if="sqlite">SQLite</option>
                                         <option value="mysql">MySql</option>
                                     </select>
                                 </div>
