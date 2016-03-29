@@ -82,9 +82,7 @@ class SelfUpdater
                 }));
             }
 
-            $requirements = $file . '#app/installer/requirements.php';
-            $requirements = include 'zip://' . $requirements;
-
+            $requirements = include "zip://{$file}#app/installer/requirements.php";
             if ($failed = $requirements->getFailedRequirements()) {
 
                 throw new \RuntimeException(array_reduce($failed, function ($carry, $problem) {
