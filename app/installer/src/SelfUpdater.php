@@ -119,9 +119,7 @@ class SelfUpdater
 
         } catch (\Exception $e) {
             @unlink($file);
-
-            $this->output->writeln(sprintf("\n<error>%s</error>", $e->getMessage()));
-            $this->output->write("status=error");
+            throw $e;
         }
 
     }
