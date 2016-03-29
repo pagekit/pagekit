@@ -3,7 +3,7 @@
 ## 0.10.5 (March 29 2016)
 
 ### Added
-- Added OpenGraph
+- Added OpenGraph and Twitter Cards
 - Added redirect after login to user settings
 - Added view.init event
 - Added global params object to view
