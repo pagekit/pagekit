@@ -97,7 +97,7 @@ module.exports = {
                                 return;
                             }
 
-                            src += key + '=' + _.isBoolean(value) ? Number(value) : value + '&';
+                            src += key + '=' + (_.isBoolean(value) ? Number(value) : value) + '&';
                         });
 
                         video.attributes = video.attributes || {};
