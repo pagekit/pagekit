@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.10.5 (March 29 2016)
+## 0.11.0 (March 29 2016)
 
 ### Added
 - Added OpenGraph and Twitter Cards
