@@ -18,6 +18,7 @@
 - Link preview: Support for html
 - Editor preview: Remove script and style tags
 - Installer: SQLite is now default
+- Installer: Show SQLite only if available
 - SelfUpdater: Check new requirements before update
 - Removed system messages from template.php
 
@@ -25,7 +26,7 @@
 - Fixed info page for high directory depths
 - Fixed overflow container in modals
 - Fixed password reset link
-- Fixed cannonical links
+- Fixed canonical links
 
 ## 0.10.4 (March 1 2016)
 
