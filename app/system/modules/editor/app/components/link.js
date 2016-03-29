@@ -2,8 +2,6 @@
  * Editor Link plugin.
  */
 
-var Picker = Vue.extend(require('./link-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -26,7 +24,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                var regexp = editor.getMode() != 'gfm' ? /<a(?:.+?)>(?:[^<]*)<\/a>/gi : /<a(?:.+?)>(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
+                var regexp = editor.getMode() != 'gfm' ? /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>/gi : /<a(?:\s.+?>|\s*>)(?:[^<]*)<\/a>|(?:\[([^\n\]]*)\])(?:\(([^\n\]]*)\))?/gi;
                 vm.links = editor.replaceInPreview(regexp, vm.replaceInPreview);
             })
             .on('renderLate', function () {
@@ -49,7 +47,7 @@ module.exports = {
 
         openModal: function (link) {
 
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!link) {
                 link = {
@@ -59,7 +57,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['link-picker']({
                 parent: this,
                 data: {
                     link: link
@@ -68,34 +66,31 @@ module.exports = {
                 .$appendTo('body')
                 .$on('select', function (link) {
 
-                    link.replace(this.$interpolate(
-                        (link.tag || editor.getCursorMode()) == 'html' ?
-                            (link.outerHTML ? link.outerHTML : '<a href="{{ link.link }}">{{ link.txt }}</a>')
-                            : '[{{ link.txt }}]({{ link.link }})'
-                        )
-                    );
+                    if (!link.anchor) {
+                        link.anchor = parser.parseFromString('<a></a>', "text/html").body.childNodes[0];
+                    }
+
+                    link.anchor.setAttribute('href', link.link);
+                    link.anchor.innerHTML = link.txt;
+
+                    link.replace(link.anchor.outerHTML);
                 });
         },
 
         replaceInPreview: function (data, index) {
+            var parser = new DOMParser();
 
+            data.data = {};
             if (data.matches[0][0] == '<') {
-
-                var anchor = $(data.matches[0]);
-
-                data.link = anchor.attr('href');
-                data.txt = anchor.html();
-                data.class = anchor.attr('class') || '';
-
-                data.outerHTML = anchor.attr('href', '{{ link.link }}').text('{{ link.txt }}')[0].outerHTML;
-
+                data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
+                data.link = data.anchor.attributes.href ? data.anchor.attributes.href.nodeValue : '';
+                data.txt = data.anchor.innerHTML;
             } else {
 
                 if (data.matches[data.matches.length - 1][data.matches[data.matches.length - 2] - 1] == '!') return false;
 
                 data.link = data.matches[2];
                 data.txt = data.matches[1];
-                data.class = '';
 
             }
 

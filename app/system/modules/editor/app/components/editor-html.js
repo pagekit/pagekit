@@ -32,6 +32,11 @@ module.exports = {
                     }
                 });
 
+            editor.on('render', function () {
+                var regexp = /<script(.*)>[^<]+<\/script>|<style(.*)>[^<]+<\/style>/gi;
+                editor.replaceInPreview(regexp, '');
+            });
+
             this.$watch('$parent.value', function (value) {
                 if (value != editor.editor.getValue()) {
                     editor.editor.setValue(value);

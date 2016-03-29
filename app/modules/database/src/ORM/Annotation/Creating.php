@@ -6,6 +6,6 @@ namespace Pagekit\Database\ORM\Annotation;
  * @Annotation
  * @Target("METHOD")
  */
-final class Created implements Annotation
+final class Creating implements Annotation
 {
 }

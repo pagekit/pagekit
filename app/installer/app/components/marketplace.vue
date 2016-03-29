@@ -36,8 +36,10 @@
                 <div class="uk-modal-header">
                     <h2 class="uk-margin-small-bottom">{{ pkg.title }}</h2>
                     <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
-                        <li class="uk-text-muted">{{ pkg.author.name }}</li>
+                        <li v-if="pkg.author.homepage"><a class="uk-link-muted" :href="pkg.author.homepage" target="_blank">{{ pkg.author.name }}</a></li>
+                        <li class="uk-text-muted" v-else>{{ pkg.author.name }}</li>
                         <li class="uk-text-muted">{{ 'Version %version%' | trans {version:pkg.version} }}</li>
+                        <li class="uk-text-muted" v-if="pkg.license">{{ pkg.license }}</li>
                     </ul>
                 </div>
 
@@ -46,14 +48,13 @@
                         <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
+
                         <div v-html="pkg.description | marked" v-if="pkg.description"></div>
 
-                        <ul class="uk-list">
-                            <li v-if="pkg.demo"><strong>{{ 'Demo:' | trans }}</strong> <a :href="pkg.demo">{{ pkg.demo }}</a></li>
-                            <li v-if="pkg.support"><strong>{{ 'Support:' | trans }}</strong> <a :href="pkg.support">{{ pkg.support }}</a></li>
-                            <li v-if="pkg.license"><strong>{{ 'License:' | trans }}</strong> {{ pkg.license }}</li>
-                            <li v-if="pkg.author.homepage"><strong>{{ 'Homepage:' | trans }}</strong> <a :href="pkg.author.homepage" target="_blank">{{ pkg.author.homepage }}</a></li>
-                            <li v-if="pkg.author.email"><strong>{{ 'Email:' | trans }}</strong> <a href="mailto:{{ pkg.author.email }}">{{ pkg.author.email }}</a></li>
+                        <ul class="uk-grid uk-grid-small" data-uk-grid-margin>
+                            <li v-if="pkg.demo"><a class="uk-button" :href="pkg.demo" target="_blank">{{ 'Demo' | trans }}</a></li>
+                            <li v-if="pkg.support"><a class="uk-button" :href="pkg.support" target="_blank">{{ 'Support' | trans }}</a></li>
+                            <li v-if="pkg.documentation"><a class="uk-button" :href="pkg.documentation" target="_blank">{{ 'Documentation' | trans }}</a></li>
                         </ul>
 
                     </div>

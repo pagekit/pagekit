@@ -7,7 +7,7 @@
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover {{ class }}" v-else>
 
-        <img :src="$url(source)">
+        <img :src="source.indexOf('blob:') !== 0  ? $url(source) : source">
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 

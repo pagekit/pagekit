@@ -25,7 +25,11 @@
             lightbox: Boolean,
             closed: Function,
             modifier: {type: String, default: ''},
-            options: {type: Object, default: function () {return {};}}
+            options: {
+                type: Object, default: function () {
+                    return {};
+                }
+            }
         },
 
         ready: function () {
@@ -42,14 +46,6 @@
                 if (vm.closed) {
                     vm.closed();
                 }
-            });
-
-            this.modal.on('show.uk.modal', function () {
-
-                // catch .uk-overflow-container
-                setTimeout(function () {
-                    vm.modal.resize();
-                }, 250)
             });
 
         },

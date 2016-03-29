@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.11.0 (March 29 2016)
+
+### Added
+- Added OpenGraph and Twitter Cards
+- Added redirect after login to user settings
+- Added view.init event
+- Added global params object to view
+- Added file picker
+- Added support for script tag attributes 'defer' and 'async'
+ 
+### Changed
+- Transfer widget and menu positions on theme change
+- Image-, video-, link-picker: Preserve existing attributes
+- Video-picker: Switched from shortcodes to html representation
+- Video-picker: Improved URL matching
+- Link preview: Support for html
+- Editor preview: Remove script and style tags
+- Installer: SQLite is now default
+- SelfUpdater: Check new requirements before update
+- Removed system messages from template.php
+
+### Fixed
+- Fixed info page for high directory depths
+- Fixed overflow container in modals
+- Fixed password reset link
+- Fixed cannonical links
+
 ## 0.10.4 (March 1 2016)
 
 ### Added
@@ -33,7 +60,7 @@
 - Fixed selecting items at site tree and widget settings
 - Fixed image picker in editor now keeps class attributes
 - Fixed ExceptionHandler response
-- Fixed an issue which could lead to an open_basedir restriction exception 
+- Fixed an issue which could lead to an open_basedir restriction exception
 - Fixed registration verification mail
 - Fixed user authenticated role assignment
 - Fixed package upload zip verification

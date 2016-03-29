@@ -2,8 +2,6 @@
  * Editor Image plugin.
  */
 
-var Picker = Vue.extend(require('./image-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -41,14 +39,13 @@ module.exports = {
                     });
                 });
             });
-
     },
 
     methods: {
 
         openModal: function (image) {
 
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!image) {
                 image = {
@@ -58,7 +55,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            new this.$parent.$options.utils['image-picker']({
                 parent: this,
                 data: {
                     image: image
@@ -66,27 +63,40 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (image) {
-                    image.replace(this.$interpolate(
-                        (image.tag || editor.getCursorMode()) == 'html' ?
-                            '<img src="{{ image.src }}" alt="{{ image.alt }}"{{ image.cls ? \' class="'+image.cls+'"\' : "" }}>'
-                            : '![{{ image.alt }}]({{ image.src }})'
-                        )
-                    );
+
+                    var content;
+
+                    if ((image.tag || editor.getCursorMode()) == 'html') {
+
+                        if (!image.anchor) {
+                            image.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];;
+                        }
+
+                        image.anchor.setAttribute('src', image.data.src);
+                        image.anchor.setAttribute('alt', image.data.alt);
+
+                        content = image.anchor.outerHTML;
+
+                    } else {
+                        content = '![' + image.data.alt + '](' + image.data.src + ')';
+                    }
+
+                    image.replace(content);
                 });
         },
 
         replaceInPreview: function (data, index) {
+            var parser = new DOMParser();
 
+            data.data = {};
             if (data.matches[0][0] == '<') {
-
-                var cls = data.matches[0].match(/class="(.*?)"/);
-                data.cls = cls && cls.length ? cls[1] : '';
-                data.src = data.matches[0].match(/src="(.*?)"/)[1];
-                data.alt = data.matches[0].match(/alt="(.*?)"/)[1];
+                data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
+                data.data.src = data.anchor.attributes.src ? data.anchor.attributes.src.nodeValue : '';
+                data.data.alt = data.anchor.attributes.alt ? data.anchor.attributes.alt.nodeValue : '';
                 data.tag = 'html';
             } else {
-                data.src = data.matches[3];
-                data.alt = data.matches[2];
+                data.data.src = data.matches[3];
+                data.data.alt = data.matches[2];
                 data.tag = 'gfm';
             }
 

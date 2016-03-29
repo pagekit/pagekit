@@ -2,8 +2,6 @@
  * Editor Video plugin.
  */
 
-var Picker = Vue.extend(require('./video-picker.vue'));
-
 module.exports = {
 
     plugin: true,
@@ -32,7 +30,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                vm.videos = editor.replaceInPreview(/\(video\)(\{.+?})/gi, vm.replaceInPreview);
+                vm.videos = editor.replaceInPreview(/<(video|iframe)([^>]*)>[^<]*<\/(?:video|iframe)>|\(video\)(\{.+?})/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
 
@@ -48,7 +46,6 @@ module.exports = {
 
             });
 
-
         editor.debouncedRedraw();
     },
 
@@ -56,7 +53,7 @@ module.exports = {
 
         openModal: function (video) {
 
-            var editor = this.$parent.editor, cursor = editor.editor.getCursor();
+            var parser = new DOMParser(), editor = this.$parent.editor, cursor = editor.editor.getCursor();
 
             if (!video) {
                 video = {
@@ -66,7 +63,7 @@ module.exports = {
                 };
             }
 
-            new Picker({
+            var picker = new this.$parent.$options.utils['video-picker']({
                 parent: this,
                 data: {
                     video: video
@@ -74,24 +71,120 @@ module.exports = {
             }).$mount()
                 .$appendTo('body')
                 .$on('select', function (video) {
-                    video.replace('(video)' + JSON.stringify(video.data));
+
+                    var attributes, src, match;
+
+                    delete video.data.playlist;
+
+                    if (match = picker.isYoutube) {
+                        src = 'https://www.youtube.com/embed/' + match[1] + '?';
+
+                        if (video.data.loop) {
+                            video.data.playlist = match[1];
+                        }
+                    } else if (match = picker.isVimeo) {
+                        src = 'https://player.vimeo.com/video/' + match[3] + '?';
+                    }
+
+                    if (src) {
+
+                        if (!video.anchor) {
+                            video.anchor = parser.parseFromString('<iframe></iframe>', "text/html").body.childNodes[0];
+                        }
+
+                        _.forEach(video.data, function (value, key) {
+                            if (key === 'src' || key === 'width' || key === 'height') {
+                                return;
+                            }
+
+                            src += key + '=' + (_.isBoolean(value) ? Number(value) : value) + '&';
+                        });
+
+                        video.attributes = video.attributes || {};
+
+                        video.attributes.src = src.slice(0, -1);
+                        video.attributes.width = video.data.width || 690;
+                        video.attributes.height = video.data.height || 390;
+                        video.attributes.allowfullscreen = true;
+
+                        attributes = video.attributes;
+
+                    } else {
+
+                        if (!video.anchor) {
+                            video.anchor = parser.parseFromString('<video></video>', "text/html").body.childNodes[0];
+                        }
+
+                        attributes = video.data;
+
+                    }
+
+
+                    _.forEach(attributes, function (value, key) {
+                        if (value) {
+                            video.anchor.setAttribute(key, _.isBoolean(value) ? '' : value);
+                        } else {
+                            video.anchor.removeAttribute(key);
+                        }
+                    });
+
+                    video.replace(video.anchor.outerHTML);
+
                 });
         },
 
         replaceInPreview: function (data, index) {
 
-            var settings;
+            var parser = new DOMParser(), settings, src, query;
 
-            try {
+            if (!data.matches[3]) {
 
-                settings = JSON.parse(data.matches[1]);
+                data.data = {};
+                data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
 
-            } catch (e) {
+                if (data.anchor.nodeName === 'VIDEO') {
+
+                    _.forEach(data.anchor.attributes, function (attr) {
+                        data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                    });
+
+                    data.data['controls'] = data.data['controls'] !== undefined;
+
+                } else if (data.anchor.nodeName === 'IFRAME') {
+
+                    data.attributes = {};
+                    _.forEach(data.anchor.attributes, function (attr) {
+                        data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                    });
+
+                    src = data.attributes.src || '';
+                    src = src.split('?');
+                    query = src[1] || '';
+                    src = src[0];
+                    query.split('&').forEach(function (param) {
+                        param = param.split('=');
+                        data.data[param[0]] = param[1];
+                    });
+
+                    data.data.src = src;
+                    if (data.attributes.width) {
+                        data.data.width = data.attributes.width;
+                    }
+                    if (data.attributes.height) {
+                        data.data.height = data.attributes.height;
+                    }
+                }
+            } else {
+
+                try {
+                    settings = JSON.parse(data.matches[3]);
+                } catch (e) {}
+
+                data.data = settings || {src: ''};
             }
 
-            data.data = settings || {src: ''};
-
             return '<video-preview index="' + index + '"></video-preview>';
+
         }
 
     },

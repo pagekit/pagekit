@@ -19,6 +19,6 @@ class StringAsset extends Asset
      */
     public function hash($salt = '')
     {
-        return hash('crc32b', $this->content.$salt);
+        return hash('crc32b', $this->getContent().$salt);
     }
 }

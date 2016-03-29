@@ -6,8 +6,6 @@ module.exports = {
 
     data: function () {
 
-        console.log(this)
-
         return _.extend({
             package: {},
             view: false,

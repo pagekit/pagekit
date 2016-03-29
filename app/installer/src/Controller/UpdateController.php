@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\TransferException;
 use Pagekit\Application as App;
 use Pagekit\Installer\SelfUpdater;
+use Symfony\Component\Console\Output\StreamOutput;
 
 /**
  * @Access("system: software updates", admin=true)
@@ -70,20 +71,19 @@ class UpdateController
         App::session()->remove('system.update');
 
         return App::response()->stream(function () use ($file) {
-
+            $output = new StreamOutput(fopen('php://output', 'w'));
             try {
 
                 if (!file_exists($file) || !is_file($file)) {
                     throw new \RuntimeException('File does not exist.');
                 }
 
-                $updater = new SelfUpdater();
+                $updater = new SelfUpdater($output);
                 $updater->update($file);
 
             } catch (\Exception $e) {
-
-                http_response_code(400);
-                echo $e->getMessage();
+                $output->writeln(sprintf("\n<error>%s</error>", $e->getMessage()));
+                $output->write("status=error");
             }
 
         });

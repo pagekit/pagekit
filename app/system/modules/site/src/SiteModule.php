@@ -35,9 +35,6 @@ class SiteModule extends Module
             return $menus;
         };
 
-        $app->extend('view', function ($view) use ($app) {
-            return $view->addHelper(new MenuHelper($app['menu']));
-        });
     }
 
     /**

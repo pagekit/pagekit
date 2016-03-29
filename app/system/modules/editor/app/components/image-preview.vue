@@ -1,6 +1,6 @@
 <template>
 
-    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!image.src">
+    <div class="uk-panel uk-placeholder uk-placeholder-large uk-text-center uk-visible-hover" v-if="!image.data.src">
 
         <img width="60" height="60" :alt="'Placeholder Image' | trans" :src="$url('app/system/assets/images/placeholder-image.svg')">
         <p class="uk-text-muted uk-margin-small-top">{{ 'Add Image' | trans }}</p>
@@ -17,7 +17,7 @@
 
     <div class="uk-overlay uk-overlay-hover uk-visible-hover" v-else>
 
-        <img :src="$url(image.src)" :alt="image.alt">
+        <img :src="$url(image.data.src)" :alt="image.data.alt">
 
         <div class="uk-overlay-panel uk-overlay-background uk-overlay-fade"></div>
 

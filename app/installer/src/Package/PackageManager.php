@@ -96,6 +96,9 @@ class PackageManager
         }
 
         foreach ($packages as $package) {
+
+            App::trigger('package.enable', [$package]);
+
             if (!$current = App::config('system')->get('packages.' . $package->get('module'))) {
                 $current = $this->doInstall($package);
             }

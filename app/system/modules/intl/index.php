@@ -29,6 +29,14 @@ return [
 
         'locale' => 'en_US'
 
+    ],
+
+    'events' => [
+
+        'view.init' => function ($event, $view) {
+            $view->addGlobal('intl', $this);
+        }
+
     ]
 
 ];

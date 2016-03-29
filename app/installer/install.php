@@ -22,15 +22,17 @@ App::db()->insert('@system_page', [
     'data' => '{"title":true}'
 ]);
 
-App::db()->insert('@blog_post', [
-    'user_id' => 1,
-    'slug' => 'hello-pagekit',
-    'title' => 'Hello Pagekit',
-    'status' => 2,
-    'date' => date('Y-m-d H:i:s'),
-    'modified' => date('Y-m-d H:i:s'),
-    'content' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    'excerpt' => '',
-    'comment_status' => 1,
-    'data' => '{"title":null,"markdown":true}'
-]);
+if (App::db()->getUtility()->tableExists('@blog_post')) {
+    App::db()->insert('@blog_post', [
+        'user_id' => 1,
+        'slug' => 'hello-pagekit',
+        'title' => 'Hello Pagekit',
+        'status' => 2,
+        'date' => date('Y-m-d H:i:s'),
+        'modified' => date('Y-m-d H:i:s'),
+        'content' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        'excerpt' => '',
+        'comment_status' => 1,
+        'data' => '{"title":null,"markdown":true}'
+    ]);
+}

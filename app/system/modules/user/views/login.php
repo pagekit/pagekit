@@ -1,6 +1,8 @@
-<form class="uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/authenticate') ?>" method="post">
+<form class="pk-user pk-user-login uk-form uk-form-stacked uk-width-medium-1-2 uk-width-large-1-3 uk-container-center" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
-    <h1 class="uk-h2 uk-text-center"><?= __('Sign in to your account') ?></h1>
+    <h1 class="uk-h2 uk-text-center"><?= $message ?></h1>
+
+    <?= $view->render('messages') ?>
 
     <div class="uk-form-row">
         <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" required autofocus>

@@ -1,4 +1,4 @@
-<?php $view->script('settings', 'system/user:app/bundle/settings.js', 'vue') ?>
+<?php $view->script('settings', 'system/user:app/bundle/settings.js', ['vue', 'input-link']) ?>
 
 <div id="settings" class="uk-form uk-form-horizontal" v-cloak>
 
@@ -34,6 +34,13 @@
         <label for="form-user-verification" class="uk-form-label">{{ 'Verification' | trans }}</label>
         <div class="uk-form-controls uk-form-controls-text">
             <label><input id="form-user-verification" type="checkbox" v-model="config.require_verification"> {{ 'Require e-mail verification when a guest creates an account.' | trans }}</label>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label for="form-redirect" class="uk-form-label">{{ 'Login Redirect' | trans }}</label>
+        <div class="uk-form-controls">
+           <input-link id="form-redirect" class="uk-form-width-large" :link.sync="config.login_redirect"></input-link>
         </div>
     </div>
 

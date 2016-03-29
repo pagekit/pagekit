@@ -125,6 +125,12 @@ return [
             }
         }, 8],
 
+        'view.init' => function ($event, $view) use ($app) {
+            $theme = $app->isAdmin() ? $app->module('system/theme') : $app['theme'];
+            $view->map('layout', $theme->get('layout', 'views:template.php'));
+            $view->addGlobal('theme', $app['theme']);
+        },
+
         'view.messages' => function ($event) use ($app) {
 
             $result = '';
@@ -142,7 +148,7 @@ return [
             $event->setResult(sprintf('<div class="pk-system-messages">%s</div>', $result));
         },
 
-        'view.meta' => function ($event, $meta) use ($app) {
+        'view.meta' => [function ($event, $meta) use ($app) {
 
             if ($meta->get('title')) {
                 $title[] = $meta->get('title');
@@ -153,7 +159,7 @@ return [
             }
 
             $meta->add('title', implode(' | ', $title));
-        },
+        }, -50],
 
         'view.head' => [function ($event, $view) {
             $view->script('auth', 'app/system/modules/user/app/bundle/interceptor.js', ['vue']);
