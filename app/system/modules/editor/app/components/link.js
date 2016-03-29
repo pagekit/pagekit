@@ -73,7 +73,8 @@ module.exports = {
                     link.anchor.setAttribute('href', link.link);
                     link.anchor.innerHTML = link.txt;
 
-                    link.replace(link.anchor.outerHTML);
+                    // Workaround for html entities 
+                    link.replace(jQuery('<textarea>').html(link.anchor.outerHTML).text());
                 });
         },
 

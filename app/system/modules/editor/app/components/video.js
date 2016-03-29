@@ -128,7 +128,8 @@ module.exports = {
                         }
                     });
 
-                    video.replace(video.anchor.outerHTML);
+                    // Workaround for html entities 
+                    video.replace(jQuery('<textarea>').html(video.anchor.outerHTML).text());
 
                 });
         },

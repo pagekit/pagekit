@@ -75,8 +75,8 @@ module.exports = {
                         image.anchor.setAttribute('src', image.data.src);
                         image.anchor.setAttribute('alt', image.data.alt);
 
-                        content = image.anchor.outerHTML;
-
+                        // Workaround for html entities
+                        content = jQuery('<textarea>').html(image.anchor.outerHTML).text();
                     } else {
                         content = '![' + image.data.alt + '](' + image.data.src + ')';
                     }
