@@ -4,7 +4,7 @@ return [
 
     'application' => [
 
-        'version' => '0.10.4'
+        'version' => '0.11.0'
 
     ],
 
@@ -33,33 +33,6 @@ return [
         'cookie' => [
             'name' => 'pagekit_session',
             'httponly' => true
-        ]
-
-    ],
-
-    'database' => [
-
-        'connections' => [
-
-            'sqlite' => [
-
-                'driver' => 'pdo_sqlite',
-                'path' => "$path/pagekit.db",
-                'charset' => 'utf8',
-                'prefix' => '',
-                'driverOptions' => [
-                    'userDefinedFunctions' => [
-                        'REGEXP' => [
-                            'callback' => function ($pattern, $subject) {
-                                return preg_match("/$pattern/", $subject);
-                            },
-                            'numArgs' => 2
-                        ]
-                    ]
-                ]
-
-            ],
-
         ]
 
     ],

@@ -52,6 +52,7 @@ window.Site = {
     components: {
 
         'site-code': require('../components/site-code.vue'),
+        'site-meta': require('../components/site-meta.vue'),
         'site-general': require('../components/site-general.vue'),
         'site-maintenance': require('../components/site-maintenance.vue')
 

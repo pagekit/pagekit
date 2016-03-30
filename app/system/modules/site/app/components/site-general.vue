@@ -40,20 +40,6 @@
             </div>
         </div>
 
-        <div class="uk-form-row">
-            <label for="form-meta-image" class="uk-form-label">{{ 'Meta Image' | trans }}</label>
-            <div class="uk-form-controls uk-form-width-large">
-                <input-image :source.sync="config.meta.image"></input-image>
-            </div>
-        </div>
-
-        <div class="uk-form-row">
-            <label for="form-meta-description" class="uk-form-label">{{ 'Meta Description' | trans }}</label>
-            <div class="uk-form-controls uk-form-width-large">
-                <textarea id="form-meta-description" class="uk-form-width-large" rows="5" v-model="config.meta.description"></textarea>
-            </div>
-        </div>
-
     </div>
 
 </template>

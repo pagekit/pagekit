@@ -173,6 +173,7 @@ return [
                 $config = $app->config('system/site');
 
                 $meta([
+                    'twitter:card' => 'summary_large_image',
                     'og:site_name' => $config->get('title'),
                     'og:title' => $app['node']->title,
                     'og:image' => $config->get('meta.image') ? $app['url']->getStatic($config->get('meta.image'), [], 0) : false,

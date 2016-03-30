@@ -81,9 +81,19 @@ class SelfUpdater
                     return $carry . sprintf("'%s' not writable\n", $file);
                 }));
             }
-            $this->output->writeln('<info>done.</info>');
 
+            $requirements = include "zip://{$file}#app/installer/requirements.php";
+            if ($failed = $requirements->getFailedRequirements()) {
+
+                throw new \RuntimeException(array_reduce($failed, function ($carry, $problem) {
+                    return $carry . "\n" . $problem->getHelpText();
+                }));
+
+            }
+
+            $this->output->writeln('<info>done.</info>');
             $this->output->write('Entering update mode...');
+
             $this->setUpdateMode(true);
             $this->output->writeln('<info>done.</info>');
 
@@ -109,8 +119,7 @@ class SelfUpdater
 
         } catch (\Exception $e) {
             @unlink($file);
-
-            $this->output->writeln(sprintf("\n<error>%s</error>", $e->getMessage()));
+            throw $e;
         }
 
     }

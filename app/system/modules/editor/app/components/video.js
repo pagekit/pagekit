@@ -30,7 +30,7 @@ module.exports = {
                 }));
             })
             .on('render', function () {
-                vm.videos = editor.replaceInPreview(/<(video|iframe)([^>]*)>[^<]*<\/(?:video|iframe)>/gi, vm.replaceInPreview);
+                vm.videos = editor.replaceInPreview(/<(video|iframe)([^>]*)>[^<]*<\/(?:video|iframe)>|\(video\)(\{.+?})/gi, vm.replaceInPreview);
             })
             .on('renderLate', function () {
 
@@ -97,7 +97,7 @@ module.exports = {
                                 return;
                             }
 
-                            src += key + '=' + _.isBoolean(value) ? Number(value) : value + '&';
+                            src += key + '=' + (_.isBoolean(value) ? Number(value) : value) + '&';
                         });
 
                         video.attributes = video.attributes || {};
@@ -135,43 +135,52 @@ module.exports = {
 
         replaceInPreview: function (data, index) {
 
-            var parser = new DOMParser(), src, query;
+            var parser = new DOMParser(), settings, src, query;
 
-            data.data = {};
-            data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
+            if (!data.matches[3]) {
 
-            if (data.anchor.nodeName === 'VIDEO') {
+                data.data = {};
+                data.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];
 
-                _.forEach(data.anchor.attributes, function (attr) {
-                    data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
-                });
+                if (data.anchor.nodeName === 'VIDEO') {
 
-                data.data['controls'] = data.data['controls'] !== undefined;
+                    _.forEach(data.anchor.attributes, function (attr) {
+                        data.data[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                    });
 
-            } else if (data.anchor.nodeName === 'IFRAME') {
+                    data.data['controls'] = data.data['controls'] !== undefined;
 
-                data.attributes = {};
-                _.forEach(data.anchor.attributes, function (attr) {
-                    data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
-                });
+                } else if (data.anchor.nodeName === 'IFRAME') {
 
-                src = data.attributes.src || '';
-                src = src.split('?');
-                query = src[1] || '';
-                src = src[0];
-                query.split('&').forEach(function (param) {
-                    param = param.split('=');
-                    data.data[param[0]] = param[1];
-                });
+                    data.attributes = {};
+                    _.forEach(data.anchor.attributes, function (attr) {
+                        data.attributes[attr.name] = attr.nodeValue === '' || attr.nodeValue;
+                    });
 
-                data.data.src = src;
-                if (data.attributes.width) {
-                    data.data.width = data.attributes.width;
+                    src = data.attributes.src || '';
+                    src = src.split('?');
+                    query = src[1] || '';
+                    src = src[0];
+                    query.split('&').forEach(function (param) {
+                        param = param.split('=');
+                        data.data[param[0]] = param[1];
+                    });
+
+                    data.data.src = src;
+                    if (data.attributes.width) {
+                        data.data.width = data.attributes.width;
+                    }
+                    if (data.attributes.height) {
+                        data.data.height = data.attributes.height;
+                    }
                 }
-                if (data.attributes.height) {
-                    data.data.height = data.attributes.height;
-                }
+            } else {
 
+                try {
+                    settings = JSON.parse(data.matches[3]);
+                } catch (e) {}
+
+                data.data = settings || {src: ''};
             }
 
             return '<video-preview index="' + index + '"></video-preview>';

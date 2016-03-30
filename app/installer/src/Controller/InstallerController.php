@@ -32,7 +32,8 @@ class InstallerController
             ],
             '$installer' => [
                 'locale' => $intl->getLocale(),
-                'locales' => $intl->getAvailableLanguages()
+                'locales' => $intl->getAvailableLanguages(),
+                'sqlite' => class_exists('SQLite3') || (class_exists('PDO') && in_array('sqlite', \PDO::getAvailableDrivers(), true))
             ]
         ];
     }

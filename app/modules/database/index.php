@@ -66,7 +66,7 @@ $config = [
 
     'config' => [
 
-        'default' => 'mysql',
+        'default' => 'sqlite',
 
         'connections' => [
 
@@ -81,6 +81,25 @@ $config = [
                 'charset'  => 'utf8',
                 'collate'  => 'utf8_unicode_ci',
                 'prefix'   => ''
+
+            ],
+
+            'sqlite' => [
+
+                'driver' => 'pdo_sqlite',
+                'path' => "pagekit.db",
+                'charset' => 'utf8',
+                'prefix' => 'pk_',
+                'driverOptions' => [
+                    'userDefinedFunctions' => [
+                        'REGEXP' => [
+                            'callback' => function ($pattern, $subject) {
+                                return preg_match("/$pattern/", $subject);
+                            },
+                            'numArgs' => 2
+                        ]
+                    ]
+                ]
 
             ]
 

@@ -55,7 +55,6 @@
                             <li v-if="pkg.demo"><a class="uk-button" :href="pkg.demo" target="_blank">{{ 'Demo' | trans }}</a></li>
                             <li v-if="pkg.support"><a class="uk-button" :href="pkg.support" target="_blank">{{ 'Support' | trans }}</a></li>
                             <li v-if="pkg.documentation"><a class="uk-button" :href="pkg.documentation" target="_blank">{{ 'Documentation' | trans }}</a></li>
-                            <li v-if="pkg.author.email"><a class="uk-button" href="mailto:{{ pkg.author.email }}">{{ 'Email' | trans }}</a></li>
                         </ul>
 
                     </div>

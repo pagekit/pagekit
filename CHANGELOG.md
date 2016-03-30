@@ -1,8 +1,9 @@
 # Changelog
 
-## WIP
+## 0.11.0 (March 29 2016)
 
 ### Added
+- Added OpenGraph and Twitter Cards
 - Added redirect after login to user settings
 - Added view.init event
 - Added global params object to view
@@ -12,6 +13,20 @@
 ### Changed
 - Transfer widget and menu positions on theme change
 - Image-, video-, link-picker: Preserve existing attributes
+- Video-picker: Switched from shortcodes to html representation
+- Video-picker: Improved URL matching
+- Link preview: Support for html
+- Editor preview: Remove script and style tags
+- Installer: SQLite is now default
+- Installer: Show SQLite only if available
+- SelfUpdater: Check new requirements before update
+- Removed system messages from template.php
+
+### Fixed
+- Fixed info page for high directory depths
+- Fixed overflow container in modals
+- Fixed password reset link
+- Fixed canonical links
 
 ## 0.10.4 (March 1 2016)
 
