@@ -4,6 +4,7 @@
 
 ### Added
 - Added OpenGraph and Twitter Cards
+- Added CLI command to setup Pagekit installation
 - Added redirect after login to user settings
 - Added view.init event
 - Added global params object to view
