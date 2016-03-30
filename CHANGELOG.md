@@ -1,9 +1,10 @@
 # Changelog
 
-## 0.11.0 (March 29 2016)
+## 0.11.0 (March 30, 2016)
 
 ### Added
 - Added OpenGraph and Twitter Cards
+- Added CLI command to setup Pagekit installation
 - Added redirect after login to user settings
 - Added view.init event
 - Added global params object to view
@@ -28,7 +29,7 @@
 - Fixed password reset link
 - Fixed canonical links
 
-## 0.10.4 (March 1 2016)
+## 0.10.4 (March 1, 2016)
 
 ### Added
 - Added filter cache for lists and searches
@@ -67,7 +68,7 @@
 - Fixed package upload zip verification
 - Fixed single quote issue by using RFC4627-compliant JSON within embedded script tags (#551)
 
-## 0.10.3 (February 19 2016)
+## 0.10.3 (February 19, 2016)
 
 ### Changed
 - Increased package installation speed by disabling usage of Packagist repository (Pagekit API now provides a subset of required Packagist dependencies)

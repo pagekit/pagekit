@@ -174,6 +174,8 @@ return [
 
                 $meta([
                     'twitter:card' => 'summary_large_image',
+                    'twitter:site' => $config->get('meta.twitter'),
+                    'fb:app_id' => $config->get('meta.facebook'),
                     'og:site_name' => $config->get('title'),
                     'og:title' => $app['node']->title,
                     'og:image' => $config->get('meta.image') ? $app['url']->getStatic($config->get('meta.image'), [], 0) : false,

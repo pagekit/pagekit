@@ -18,8 +18,7 @@ var merge = require('merge-stream'),
 // paths of the packages for the compile-task
 var pkgs = [
     {path: 'app/installer/', data: '../../composer.json'},
-    {path: 'app/system/modules/theme/', data: '../../../../composer.json'},
-    {path: 'packages/pagekit/theme-one/', data: 'composer.json'}
+    {path: 'app/system/modules/theme/', data: '../../../../composer.json'}
 ];
 
 // banner for the css files
