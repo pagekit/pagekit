@@ -26,16 +26,16 @@
         </div>
 
         <div class="uk-form-row">
-            <label for="form-meta-facebook" class="uk-form-label">{{ 'Facebook ID' | trans }}</label>
+            <label for="form-meta-facebook" class="uk-form-label">Facebook</label>
             <div class="uk-form-controls uk-form-width-large">
-                <input id="form-meta-facebook" type="text" class="uk-form-width-large" v-model="config.meta.fb_id"></input>
+                <input id="form-meta-facebook" type="text" class="uk-form-width-large" placeholder="app_id" v-model="config.meta.facebook"></input>
             </div>
         </div>
 
         <div class="uk-form-row">
-            <label for="form-meta-twitter" class="uk-form-label">{{ 'Twitter Site' | trans }}</label>
+            <label for="form-meta-twitter" class="uk-form-label">Twitter</label>
             <div class="uk-form-controls">
-                <input id="form-meta-twitter" type="text" class="uk-form-width-large" v-model="config.meta.twitter"></input>
+                <input id="form-meta-twitter" type="text" class="uk-form-width-large" placeholder="@username" v-model="config.meta.twitter"></input>
             </div>
         </div>
 
