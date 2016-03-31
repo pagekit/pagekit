@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Changed
+- Dashboard: Use drag handle
+
 ### Fixed
 - Fixed wrapping sidebar if content in main column is to large
 - Fixed adding of new images in editor
