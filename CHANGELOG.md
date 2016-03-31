@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed wrapping sidebar if content in main column is to large
+- Fixed adding of new images in editor
 
 ## 0.11.0 (March 30, 2016)
 
