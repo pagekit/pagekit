@@ -29,7 +29,7 @@
             </div>
 
         </div>
-        <div class="uk-flex-item-1">
+        <div class="pk-width-content">
 
             <div class="uk-margin uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
                 <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>

@@ -1,7 +1,7 @@
 <template>
 
-    <div class="uk-grid pk-grid-large" data-uk-grid-margin>
-        <div class="uk-flex-item-1 uk-form-stacked">
+    <div class="uk-grid pk-grid-large pk-width-sidebar-large" data-uk-grid-margin>
+        <div class="pk-width-content uk-form-stacked">
 
             <div class="uk-form-row">
 
@@ -18,7 +18,7 @@
             </div>
 
         </div>
-        <div class="pk-width-sidebar pk-width-sidebar-large">
+        <div class="pk-width-sidebar">
 
             <partial name="settings"></partial>
 

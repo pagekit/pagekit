@@ -8,7 +8,8 @@
 /* Sidebar
 ========================================================================== */
 
-.pk-width-sidebar {
+.pk-width-sidebar,
+.pk-width-content {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
@@ -22,6 +23,7 @@
      */
 
     .pk-width-sidebar { width: (200px + @global-grid-gutter); }
+    .pk-width-content { width: ~'calc(100% - @{global-grid-gutter} - 200px)'; }
 
 }
 
@@ -50,6 +52,7 @@
      */
 
     .pk-width-sidebar { width: (250px + 40px); }
+    .pk-width-content { width: ~'calc(100% - 290px)'; }
 
 }
 
@@ -74,8 +77,10 @@
      */
 
     .pk-width-sidebar { width: (250px + 50px); }
+    .pk-width-content { width: ~'calc(100% - 300px)'; }
 
-    .pk-width-sidebar-large { width: (270px + 50px); }
+    .pk-width-sidebar-large .pk-width-sidebar { width: (270px + 50px); }
+    .pk-width-sidebar-large .pk-width-content { width: ~'calc(100% - 320px)'; }
 
 }
 
