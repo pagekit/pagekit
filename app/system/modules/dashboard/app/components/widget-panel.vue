@@ -5,6 +5,7 @@
         <div class="uk-panel-badge" v-if="!type.disableToolbar">
             <ul class="uk-subnav pk-subnav-icon">
                 <li v-show="type.editable !== false && !editing">
+                    <a class="pk-icon-drag pk-icon-hover uk-hidden" title="{{ 'Drag' | trans }}" data-uk-tooltip="{delay: 500}"></a>
                     <a class="pk-icon-edit pk-icon-hover uk-hidden" title="{{ 'Edit' | trans }}" data-uk-tooltip="{delay: 500}" @click.prevent="edit"></a>
                 </li>
                 <li v-show="editing">
