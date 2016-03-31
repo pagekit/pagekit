@@ -32,7 +32,7 @@ var cldr = {
     languages: path.join(__dirname, 'app/system/languages/')
 };
 
-gulp.task('default', ['compile', 'cldr']);
+gulp.task('default', ['compile']);
 
 /**
  * Compile all less files
