@@ -69,7 +69,7 @@ module.exports = {
                     if ((image.tag || editor.getCursorMode()) == 'html') {
 
                         if (!image.anchor) {
-                            image.anchor = parser.parseFromString(data.matches[0], "text/html").body.childNodes[0];;
+                            image.anchor = parser.parseFromString('<img>', "text/html").body.childNodes[0];;
                         }
 
                         image.anchor.setAttribute('src', image.data.src);
