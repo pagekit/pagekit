@@ -3,6 +3,7 @@
     <div class="uk-panel-badge">
         <ul class="uk-subnav pk-subnav-icon">
             <li v-show="!editing">
+                <a class="pk-icon-contrast pk-icon-drag pk-icon-hover uk-hidden" title="{{ 'Drag' | trans }}" data-uk-tooltip="{delay: 500}"></a>
                 <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
             </li>
             <li v-show="editing">
