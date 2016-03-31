@@ -4,7 +4,7 @@
         <ul class="uk-subnav pk-subnav-icon">
             <li v-show="!editing">
                 <a class="pk-icon-contrast pk-icon-edit pk-icon-hover uk-hidden" :title="'Edit' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.edit"></a>
-                <a class="pk-icon-contrast pk-icon-handle pk-icon-hover uk-hidden" title="{{ 'Drag' | trans }}" data-uk-tooltip="{delay: 500}"></a>
+                <a class="pk-icon-contrast pk-icon-handle pk-icon-hover uk-hidden uk-sortable-handle" title="{{ 'Drag' | trans }}" data-uk-tooltip="{delay: 500}"></a>
             </li>
             <li v-show="editing">
                 <a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click.prevent="$parent.remove" v-confirm="'Delete widget?'"></a>
