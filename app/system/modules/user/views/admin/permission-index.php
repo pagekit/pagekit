@@ -19,7 +19,7 @@
                         <span :title="permission.description | trans" data-uk-tooltip="{pos:'top-left'}">{{ permission.title | trans }}</span>
                     </td>
                     <td>
-                        <i class="pk-icon-warning uk-invisible" :title="'This permission has security implications. Give it trusted roles only.' | trans" data-uk-tooltip v-if="permission.trusted"></i>
+                        <i class="pk-icon-warning uk-invisible" :title="'Grant this permission to trusted roles only to avoid security implications.' | trans" data-uk-tooltip v-if="permission.trusted"></i>
                     </td>
                     <td class="uk-text-center" v-for="role in roles">
 

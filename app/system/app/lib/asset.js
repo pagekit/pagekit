@@ -8,7 +8,7 @@ module.exports = function (Vue) {
      */
     function Asset(assets) {
 
-        var promises = [], $url = (this.$url || Vue.url), _assets = [], promise;
+        var promises = [], $url = (this.$url || Vue.url), _assets = [];
 
         Object.keys(assets).forEach(function (type) {
 

@@ -7,7 +7,7 @@
 
                 <img class="uk-margin" :src="$url('app/system/assets/images/pagekit-logo-text-black.svg')" alt="Pagekit">
 
-                <p class="uk-text-danger">{{ 'Session expired. Please login again.' | trans }}</p>
+                <p class="uk-text-danger">{{ 'Session expired. Please log in again.' | trans }}</p>
 
                 <form class="uk-form tm-form" @submit.prevent="login" v-el:login>
 
