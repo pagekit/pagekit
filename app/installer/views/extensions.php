@@ -38,7 +38,7 @@
                     <td class="pk-table-width-minimum">
                         <div class="uk-position-relative">
                             <div class="uk-cover-background uk-position-cover" :style="{'background-image': 'url('+icon(pkg)+')'}"></div>
-                            <canvas class="uk-display-block" width="50" height="50"></canvas>
+                            <canvas class="uk-display-block uk-img-preserve" width="50" height="50"></canvas>
                         </div>
                     </td>
                     <td class="uk-text-nowrap">

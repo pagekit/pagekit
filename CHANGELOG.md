@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.2 (April 1, 2016)
+
+### Fixed
+- Fixed missing extension icons
+
 ## 0.11.1 (April 1, 2016)
 
 ### Changed
