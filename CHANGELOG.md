@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.11.1 (April 1, 2016)
+
+### Changed
+- Dashboard: Use drag handle
+
+### Fixed
+- Fixed wrapping sidebar if content in main column is to large
+- Fixed adding of new images in editor
+
 ## 0.11.0 (March 30, 2016)
 
 ### Added
@@ -10,7 +19,7 @@
 - Added global params object to view
 - Added file picker
 - Added support for script tag attributes 'defer' and 'async'
- 
+
 ### Changed
 - Transfer widget and menu positions on theme change
 - Image-, video-, link-picker: Preserve existing attributes

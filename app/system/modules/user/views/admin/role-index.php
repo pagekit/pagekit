@@ -24,7 +24,7 @@
             </div>
 
         </div>
-        <div class="uk-flex-item-1">
+        <div class="pk-width-content">
 
             <h2>{{ current.name }}</h2>
 

@@ -14,7 +14,7 @@
             </div>
 
         </div>
-        <div class="uk-flex-item-1">
+        <div class="pk-width-content">
 
             <ul class="uk-switcher uk-margin" v-el:content>
                 <li v-for="section in sections | orderBy 'priority'">

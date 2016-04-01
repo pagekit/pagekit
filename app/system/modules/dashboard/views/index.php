@@ -14,7 +14,7 @@
         <div>
 
             <div class="uk-button-dropdown" data-uk-dropdown="{ mode: 'click' }">
-                <a class="uk-button uk-button-primary" @click.prevent>{{ 'Add Widget' || trans }}</a>
+                <a class="uk-button uk-button-primary" @click.prevent>{{ 'Add Widget' | trans }}</a>
                 <div class="uk-dropdown uk-dropdown-small uk-dropdown-flip">
                     <ul class="uk-nav uk-nav-dropdown">
                         <li v-for="type in getTypes()">

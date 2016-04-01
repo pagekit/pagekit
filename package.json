@@ -26,7 +26,7 @@
     "style-loader": "*",
     "vue-hot-reload-api": "^1.2.0",
     "vue-html-loader": "^1.0.0",
-    "vue-loader": "^7.2.0",
+    "vue-loader": "^8.2.0",
     "webpack": "^1.12.9"
   }
 }
