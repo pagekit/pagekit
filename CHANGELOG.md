@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.11.1 (April 1, 2016)
 
 ### Changed
 - Dashboard: Use drag handle
