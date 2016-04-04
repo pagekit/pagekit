@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed missing marketplace icons
+
 ## 0.11.2 (April 1, 2016)
 
 ### Fixed
