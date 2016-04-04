@@ -10,7 +10,7 @@
 
     module.exports = {
 
-        props: ['node'],
+        props: ['node', 'roles'],
 
         section: {
             label: 'Settings'
