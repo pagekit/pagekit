@@ -54,7 +54,7 @@ class FileAdapter implements AdapterInterface
 
         if ($info['localpath'] and file_exists($info['localpath'])) {
             if (strpos($info['localpath'], $this->path) === 0) {
-                $info['url'] = $this->url.substr($info['localpath'], strlen($this->path));
+                $info['url'] = $this->url.strtr(rawurlencode(substr($info['localpath'], strlen($this->path))), ['%2F' => '/']);
             }
         }
 
