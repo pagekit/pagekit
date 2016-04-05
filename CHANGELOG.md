@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed missing marketplace icons
+- Fixed RFC 3986 encoding of static URLs
 
 ## 0.11.2 (April 1, 2016)
 
