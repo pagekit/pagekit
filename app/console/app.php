@@ -4,9 +4,6 @@ use Pagekit\Application as App;
 use Pagekit\Application\Console\Application as Console;
 use Pagekit\Module\Loader\AutoLoader;
 use Pagekit\Module\Loader\ConfigLoader;
-use Pagekit\Event\Event;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Console\ConsoleEvents;
 
 $loader = require $path.'/autoload.php';
 
@@ -30,12 +27,5 @@ if ($app['config.file']) {
 }
 $app['module']->load('console');
 
-// Listen to console termination and terminate main application
-$dispatcher = new EventDispatcher();
-$dispatcher->addListener(ConsoleEvents::TERMINATE, function() use ($app) {
-    $app->trigger(new Event('terminate'));
-});
-
 $console = new Console($app, 'Pagekit', $app->version());
-$console->setDispatcher($dispatcher);
 $console->run();
