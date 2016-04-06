@@ -7,6 +7,7 @@
 - Fixed RFC 3986 encoding of static URLs
 - Fixed render params
 - Fixed CLI command enables extensions
+- Fixed db prefix check in installer
 
 ### Changed
 - CLI setup command requires admin password to be specified

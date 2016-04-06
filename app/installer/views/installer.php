@@ -109,7 +109,8 @@
                                 <div class="uk-form-row">
                                     <label for="form-mysql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.mysql.prefix">
+                                        <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.mysql.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
+                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.mysqlprefix.invalid">{{ 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' | trans }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +118,8 @@
                                 <div class="uk-form-row">
                                     <label for="form-sqlite-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="sqliteprefix" value="pk_" v-model="config.database.connections.sqlite.prefix">
+                                        <input id="form-sqlite-dbprefix" class="uk-width-1-1" type="text" name="sqliteprefix" value="pk_" v-model="config.database.connections.sqlite.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
+                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.sqliteprefix.invalid">{{ 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' | trans }}</p>
                                     </div>
                                 </div>
                             </div>
