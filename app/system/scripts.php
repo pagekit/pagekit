@@ -24,7 +24,7 @@ return [
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('value', 'text');
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
+                $table->addUniqueIndex(['name'], '@SYSTEM_CONFIG_NAME');
             });
         }
 
@@ -63,8 +63,8 @@ return [
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('permissions', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_ROLE_NAME');
-                $table->addIndex(['name', 'priority'], 'SYSTEM_ROLE_NAME_PRIORITY');
+                $table->addUniqueIndex(['name'], '@SYSTEM_ROLE_NAME');
+                $table->addIndex(['name', 'priority'], '@SYSTEM_ROLE_NAME_PRIORITY');
             });
 
             $db->insert('@system_role', ['id' => 1, 'name' => 'Anonymous', 'priority' => 0]);
@@ -96,8 +96,8 @@ return [
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['username'], 'SYSTEM_USER_USERNAME');
-                $table->addUniqueIndex(['email'], 'SYSTEM_USER_EMAIL');
+                $table->addUniqueIndex(['username'], '@SYSTEM_USER_USERNAME');
+                $table->addUniqueIndex(['email'], '@SYSTEM_USER_EMAIL');
             });
         }
 
