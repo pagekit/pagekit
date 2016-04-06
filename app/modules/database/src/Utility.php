@@ -70,7 +70,7 @@ class Utility
      */
     public function getTable($table)
     {
-        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this->name);
+        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this);
     }
 
     /**
