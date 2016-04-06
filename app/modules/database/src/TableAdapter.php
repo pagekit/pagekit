@@ -10,20 +10,20 @@ class TableAdapter
     protected $table;
 
     /**
-     * @var Utility
+     * @var Connection
      */
-    protected $util;
+    protected $connection;
 
     /**
      * Constructor.
      *
      * @param Table $table
-     * @param Utility $util
+     * @param Connection $connection
      */
-    public function __construct($table, $util)
+    public function __construct($table, $connection)
     {
         $this->table = $table;
-        $this->util = $util;
+        $this->connection = $connection;
     }
 
     /**
@@ -37,7 +37,7 @@ class TableAdapter
     public function addIndex(array $columnNames, $indexName = null, array $flags = array(), array $options = array())
     {
         if ($indexName) {
-            $indexName = $this->util->replacePrefix($indexName);
+            $indexName = $this->connection->replacePrefix($indexName);
         }
 
         $this->table->addIndex($columnNames, $indexName, $flags, $options);
@@ -55,7 +55,7 @@ class TableAdapter
     public function addUniqueIndex(array $columnNames, $indexName = null, array $options = array())
     {
         if ($indexName) {
-            $indexName = $this->util->replacePrefix($indexName);
+            $indexName = $this->connection->replacePrefix($indexName);
         }
 
         $this->table->addUniqueIndex($columnNames, $indexName, $options);
@@ -72,10 +72,7 @@ class TableAdapter
      */
     public function addColumn($columnName, $typeName, array $options = array())
     {
-        if ($this->util->getName() === 'sqlite' && $typeName === 'string' || $typeName === 'text') {
-            if (!isset($options['customSchemaOptions'])) {
-                $options['customSchemaOptions'] = [];
-            }
+        if ($this->connection->getDatabasePlatform()->getName() === 'sqlite' && in_array($typeName, ['string', 'text'])) {
             $options['customSchemaOptions']['collation'] = 'NOCASE';
         }
 

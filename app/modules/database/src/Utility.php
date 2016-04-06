@@ -70,7 +70,7 @@ class Utility
      */
     public function getTable($table)
     {
-        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this);
+        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this->connection);
     }
 
     /**
@@ -96,7 +96,7 @@ class Utility
     {
         $table = $this->schema->createTable($this->replacePrefix($table));
 
-        $callback(new TableAdapter($table, $this));
+        $callback(new TableAdapter($table, $this->connection));
 
         $this->manager->createTable($table);
     }
@@ -252,18 +252,8 @@ class Utility
      * @param  string $query
      * @return string
      */
-    public function replacePrefix($query)
+    protected function replacePrefix($query)
     {
         return $this->connection->replacePrefix($query);
-    }
-
-    /**
-     * Returns database type.
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->connection->getDatabasePlatform()->getName();
     }
 }
