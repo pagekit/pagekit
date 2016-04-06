@@ -102,7 +102,7 @@ module.exports = {
         },
 
         error: function (error) {
-            this.errors.push(error || this.$trans('Whoops, something went wrong.'));
+            this.errors.push(error.data || this.$trans('Whoops, something went wrong.'));
 
             this.status = 'error';
             this.finished = true;
