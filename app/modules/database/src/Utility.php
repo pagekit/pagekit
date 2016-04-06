@@ -70,13 +70,13 @@ class Utility
      *
      * @param string $table
      *
-     * @return \Doctrine\DBAL\Schema\Table
+     * @return TableAdapter
      *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function getTable($table)
     {
-        return $this->schema->getTable($this->replacePrefix($table));
+        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this->name);
     }
 
     /**
