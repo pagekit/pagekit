@@ -27,11 +27,6 @@ class Utility
     protected $schema;
 
     /**
-     * @var string
-     */
-    protected $name;
-
-    /**
      * Constructor.
      *
      * @param Connection $connection
@@ -41,7 +36,6 @@ class Utility
         $this->connection = $connection;
         $this->manager = $this->connection->getSchemaManager();
         $this->schema = $this->manager->createSchema();
-        $this->name = $connection->getDatabasePlatform()->getName();
     }
 
     /**
@@ -102,7 +96,7 @@ class Utility
     {
         $table = $this->schema->createTable($this->replacePrefix($table));
 
-        $callback(new TableAdapter($table, $this->name));
+        $callback(new TableAdapter($table, $this));
 
         $this->manager->createTable($table);
     }
@@ -258,8 +252,18 @@ class Utility
      * @param  string $query
      * @return string
      */
-    protected function replacePrefix($query)
+    public function replacePrefix($query)
     {
         return $this->connection->replacePrefix($query);
+    }
+
+    /**
+     * Returns database type.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->connection->getDatabasePlatform()->getName();
     }
 }

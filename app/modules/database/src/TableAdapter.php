@@ -10,20 +10,57 @@ class TableAdapter
     protected $table;
 
     /**
-     * @var string
+     * @var Utility
      */
-    protected $name;
+    protected $util;
 
     /**
      * Constructor.
      *
      * @param Table $table
-     * @param string $name
+     * @param Utility $util
      */
-    public function __construct($table, $name)
+    public function __construct($table, $util)
     {
         $this->table = $table;
-        $this->name = $name;
+        $this->util = $util;
+    }
+
+    /**
+     * @param array $columnNames
+     * @param string|null $indexName
+     * @param array $flags
+     * @param array $options
+     *
+     * @return self
+     */
+    public function addIndex(array $columnNames, $indexName = null, array $flags = array(), array $options = array())
+    {
+        if ($indexName) {
+            $indexName = $this->util->replacePrefix($indexName);
+        }
+
+        $this->table->addIndex($columnNames, $indexName, $flags, $options);
+
+        return $this;
+    }
+
+    /**
+     * @param array $columnNames
+     * @param string|null $indexName
+     * @param array $options
+     *
+     * @return self
+     */
+    public function addUniqueIndex(array $columnNames, $indexName = null, array $options = array())
+    {
+        if ($indexName) {
+            $indexName = $this->util->replacePrefix($indexName);
+        }
+
+        $this->table->addUniqueIndex($columnNames, $indexName, $options);
+
+        return $this;
     }
 
     /**
@@ -35,7 +72,7 @@ class TableAdapter
      */
     public function addColumn($columnName, $typeName, array $options = array())
     {
-        if ($this->name === 'sqlite' && $typeName === 'string' || $typeName === 'text') {
+        if ($this->util->getName() === 'sqlite' && $typeName === 'string' || $typeName === 'text') {
             if (!isset($options['customSchemaOptions'])) {
                 $options['customSchemaOptions'] = [];
             }
