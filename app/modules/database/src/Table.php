@@ -2,7 +2,7 @@
 
 namespace Pagekit\Database;
 
-class TableAdapter
+class Table
 {
     /**
      * @var Table

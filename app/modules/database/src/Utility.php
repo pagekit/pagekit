@@ -64,13 +64,13 @@ class Utility
      *
      * @param string $table
      *
-     * @return TableAdapter
+     * @return Table
      *
      * @throws \Doctrine\DBAL\Schema\SchemaException
      */
     public function getTable($table)
     {
-        return new TableAdapter($this->schema->getTable($this->replacePrefix($table)), $this->connection);
+        return new Table($this->schema->getTable($this->replacePrefix($table)), $this->connection);
     }
 
     /**
@@ -96,7 +96,7 @@ class Utility
     {
         $table = $this->schema->createTable($this->replacePrefix($table));
 
-        $callback(new TableAdapter($table, $this->connection));
+        $callback(new Table($table, $this->connection));
 
         $this->manager->createTable($table);
     }
