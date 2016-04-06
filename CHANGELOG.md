@@ -6,9 +6,10 @@
 - Fixed missing marketplace icons
 - Fixed RFC 3986 encoding of static URLs
 - Fixed render params
+- Fixed CLI command enables extensions
 
 ### Changed
-- CLI command requires admin password to be specified
+- CLI setup command requires admin password to be specified
 
 ## 0.11.2 (April 1, 2016)
 
