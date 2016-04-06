@@ -7,6 +7,9 @@
 - Fixed RFC 3986 encoding of static URLs
 - Fixed render params
 
+### Changed
+- CLI command requires admin password to be specified
+
 ## 0.11.2 (April 1, 2016)
 
 ### Fixed

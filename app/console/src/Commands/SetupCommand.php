@@ -44,6 +44,17 @@ class SetupCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output) {
 
+        // Check parameters
+        if(empty($this->option('adminpass'))) {
+            $this->error("Missing admin password.");
+            exit;
+        }
+
+        if( !in_array($this->option('dbdriver'), ['mysql', 'sqlite'])) {
+            $this->error("Unsupported db driver.");
+            exit;
+        }
+
         $this->line("Setting up Pagekit installation...");
 
         $app = $this->container;
