@@ -51,10 +51,6 @@ return [
             $view->addGlobal('params', new ArrObject());
         }, 20],
 
-        'view.render' => [function (\Pagekit\View\Event\ViewEvent $event, $view) {
-            $event->addParameters($view->params->toArray());
-        }, 10],
-
         'view.data' => function ($event, $data) use ($app) {
             $data->add('$pagekit', [
                 'url' => $app['router']->getContext()->getBaseUrl(),

@@ -208,7 +208,7 @@ class View
         $params = $this->parameters[] = $event->getParameters();
 
         if ($result === null && $this->engine->supports($event->getTemplate())) {
-            $result = $this->engine->render($event->getTemplate(), array_replace($params, ['params' => new ArrObject($params)]));
+            $result = $this->engine->render($event->getTemplate(), $params);
         }
 
         array_pop($this->parameters);
