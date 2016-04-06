@@ -2,7 +2,7 @@
 
     <div>
 
-        <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin id="123">
+        <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin="observe:true" id="123">
             <div v-for="pkg in packages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 

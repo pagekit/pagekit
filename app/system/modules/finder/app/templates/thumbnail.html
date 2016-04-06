@@ -1,4 +1,4 @@
-<ul v-if="items.length" class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin>
+<ul v-if="items.length" class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-4" data-uk-grid-margin="observe:true">
 
     <li v-for="folder in searched | filterBy 'application/folder' in 'mime'">
         <div class="uk-panel uk-panel-box uk-text-center" @click.prevent="toggleSelect(folder.name)">
