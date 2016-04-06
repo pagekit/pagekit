@@ -112,8 +112,6 @@
             this.load().then(function () {
                 this.$dispatch('ready.finder', this);
             });
-
-            UIkit.init(this.$el);
         },
 
         watch: {
