@@ -7,7 +7,6 @@ use Doctrine\DBAL\Schema\Constraint;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Doctrine\DBAL\Schema\Index;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\DBAL\Schema\Table;
 
 class Utility
 {
@@ -152,7 +151,7 @@ class Utility
     /**
      * {@see AbstractSchemaManager::dropAndCreateTable}
      */
-    public function dropAndCreateTable(Table $table)
+    public function dropAndCreateTable($table)
     {
         $this->manager->dropAndCreateTable($table);
     }
@@ -244,6 +243,15 @@ class Utility
         }
 
         return call_user_func_array([$this->manager, $method], $args);
+    }
+
+    /**
+     * Retruns schema.
+     *
+     * @return Schema
+     */
+    public function getSchema() {
+        return $this->schema;   
     }
 
     /**
