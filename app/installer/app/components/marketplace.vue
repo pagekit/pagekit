@@ -2,14 +2,14 @@
 
     <div>
 
-        <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin id="123">
+        <div class="uk-grid uk-grid-medium uk-grid-match uk-grid-width-small-1-2 uk-grid-width-xlarge-1-3" data-uk-grid-margin="observe:true">
             <div v-for="pkg in packages">
                 <div class="uk-panel uk-panel-box uk-overlay-hover">
 
                     <div class="uk-panel-teaser">
                         <div class="uk-overlay uk-display-block">
-                            <div class="uk-cover-background uk-position-cover" :style="{'background-image': 'url('+pkg.extra.image+')'}"></div>
-                            <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
+                            <div class="uk-cover-background uk-position-cover" :style="{ 'background-image': 'url(' + pkg.extra.image + ')' }"></div>
+                            <canvas class="uk-responsive-width uk-display-block" width="1200" height="800"></canvas>
                             <div class="uk-overlay-panel uk-overlay-background pk-overlay-background uk-overlay-fade"></div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
 
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-2">
-                        <img width="800" height="600" :alt="pkg.title" :src="pkg.extra.image">
+                        <img width="1200" height="800" :alt="pkg.title" :src="pkg.extra.image">
                     </div>
                     <div class="uk-width-medium-1-2">
 

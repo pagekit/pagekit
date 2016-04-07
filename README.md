@@ -1,9 +1,11 @@
+[![Pagekit Banner](https://cloud.githubusercontent.com/assets/1716665/14317675/ba034b8c-fc09-11e5-81ed-f10f37d86ea5.png)](https://pagekit.com)
+
 # Pagekit
 
 [![Build Status](https://travis-ci.org/pagekit/pagekit.svg?branch=develop)](https://travis-ci.org/pagekit/pagekit)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
 
-Pagekit is a modular and lightweight CMS built with Symfony components.
+Pagekit is a modular and lightweight CMS built with Symfony components and Vue.js.
 
 * [Homepage](http://pagekit.com) - Learn more about Pagekit
 * [Documentation](http://pagekit.com/docs) - User and developer guides
@@ -11,54 +13,15 @@ Pagekit is a modular and lightweight CMS built with Symfony components.
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 * [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
 
-## Getting started
+## Download release (recommended)
 
-Download the [latest release](http://www.pagekit.com) and extract the archive, then copy the extracted folder to your webserver. Create a database for Pagekit.
-Run the Pagekit installation by accessing the URL where you uploaded the Pagekit files in a browser.
+1. Download the [latest release](https://www.pagekit.com/download).
+2. Extract the archive and copy the extracted folder to your webserver.
+3. Open the extracted url in your browser, i.e. `http://localhost/pagekit` and follow the installer. 
 
-## Install Pagekit from Source
+## Install from source
 
-Make sure you have [Composer](https://getcomposer.org/doc/00-intro.md#installation-nix) and [npm](https://www.npmjs.com/) installed.
-
-Clone the repository.
-
-```
-git clone --branch develop git://github.com/pagekit/pagekit.git
-```
-
-Navigate to the cloned directory and install PHP dependencies.
-
-```
-composer install
-```
-
-Install Node dependencies and build the front-end components:
-
-```
-npm install
-```
-
-To watch for local LESS asset changes, run `gulp watch`.
-
-To watch for JS module changes, run `webpack --watch`.
-
-When the installer has finished, point your browser to the Pagekit URL on your web server and follow the installer.
-
-When you have a running Pagekit installation, use the Pagekit CLI to fetch translations. Without, the interface will appear in English only.
-
-```
-php pagekit translation:fetch
-```
-
-## Stay up to date
-
-If you've set up Pagekit from source, run these commands to get new commits and to rebuild everything you need.
-
-```
-git pull
-composer install
-npm install
-```
+If you want to run the current development version, you can [install Pagekit from source](https://pagekit.com/docs/developer-basics/source).  
 
 ## CLI
 
@@ -69,10 +32,9 @@ Pagekit offers a set of commands to run usual tasks on the command line. You can
 
 ## Contributing
 
-Finding bugs, sending pull requests, translating Pagekit or improving our docs.
-Any contribution is welcome and highly appreciated. To get started, head over
+Finding bugs, sending pull requests, translating Pagekit or improving our docs - 
+any contribution is welcome and highly appreciated. To get started, head over
 to our [contribution guidelines](CONTRIBUTING.md). Thanks!
-
 
 ## Copyright and License
 

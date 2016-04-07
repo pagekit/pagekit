@@ -16,7 +16,6 @@ module.exports = {
 
     ready: function () {
 
-        UIkit.init();
         this.load();
 
     },

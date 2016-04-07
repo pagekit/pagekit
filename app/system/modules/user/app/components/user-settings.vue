@@ -116,7 +116,7 @@
         },
 
         ready: function () {
-            UIkit.init(this.$el);
+    
         },
 
         computed: {

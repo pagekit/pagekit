@@ -4,10 +4,10 @@
     "JSONStorage": "~1.0.0",
     "lodash": "~3.10.1",
     "uikit": "master",
-    "vue": "~1.0.14",
+    "vue": "1.0.18",
     "vue-form": "pagekit/vue-form#master",
     "vue-intl": "~0.1.1",
-    "vue-resource": "#develop"
+    "vue-resource": "#master"
   },
   "devDependencies": {
     "js-md5": "~1.1.0"

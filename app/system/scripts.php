@@ -24,7 +24,7 @@ return [
                 $table->addColumn('name', 'string', ['length' => 255, 'default' => '']);
                 $table->addColumn('value', 'text');
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_CONFIG_NAME');
+                $table->addUniqueIndex(['name'], '@SYSTEM_CONFIG_NAME');
             });
         }
 
@@ -63,8 +63,8 @@ return [
                 $table->addColumn('priority', 'integer', ['default' => 0]);
                 $table->addColumn('permissions', 'simple_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['name'], 'SYSTEM_ROLE_NAME');
-                $table->addIndex(['name', 'priority'], 'SYSTEM_ROLE_NAME_PRIORITY');
+                $table->addUniqueIndex(['name'], '@SYSTEM_ROLE_NAME');
+                $table->addIndex(['name', 'priority'], '@SYSTEM_ROLE_NAME_PRIORITY');
             });
 
             $db->insert('@system_role', ['id' => 1, 'name' => 'Anonymous', 'priority' => 0]);
@@ -96,8 +96,8 @@ return [
                 $table->addColumn('roles', 'simple_array', ['notnull' => false]);
                 $table->addColumn('data', 'json_array', ['notnull' => false]);
                 $table->setPrimaryKey(['id']);
-                $table->addUniqueIndex(['username'], 'SYSTEM_USER_USERNAME');
-                $table->addUniqueIndex(['email'], 'SYSTEM_USER_EMAIL');
+                $table->addUniqueIndex(['username'], '@SYSTEM_USER_USERNAME');
+                $table->addUniqueIndex(['email'], '@SYSTEM_USER_EMAIL');
             });
         }
 
@@ -124,6 +124,36 @@ return [
             'menus' => ['main' => ['id' => 'main', 'label' => 'Main']]
         ]);
 
-    }
+    },
+
+    'updates' => [
+
+        '0.11.3' => function ($app) {
+
+            $db = $app['db'];
+            $util = $db->getUtility();
+
+            foreach (['@system_auth', '@system_config', '@system_node', '@system_page', '@system_role', '@system_session', '@system_user', '@system_widget'] as $name) {
+                $table = $util->getTable($name);
+
+                foreach ($table->getIndexes() as $name => $index) {
+                    if ($name !== 'primary') {
+                        $table->renameIndex($index->getName(), $app['db']->getPrefix() . $index->getName());
+                    }
+                }
+
+                if ($app['db']->getDatabasePlatform()->getName() === 'sqlite') {
+                    foreach ($table->getColumns() as $column) {
+                        if (in_array($column->getType()->getName(), ['string', 'text'])) {
+                            $column->setOptions(['customSchemaOptions' => ['collation' => 'NOCASE']]);
+                        }
+                    }
+                }
+            }
+
+            $util->migrate();
+        }
+
+    ]
 
 ];
