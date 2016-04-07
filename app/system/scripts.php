@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Doctrine\DBAL\Schema\Comparator;
 
@@ -157,7 +158,14 @@ return [
             $schema = $util->getSchema();
             $oldSchema = $db->getSchemaManager()->createSchema();
             $diff = Comparator::compareSchemas($oldSchema, $schema);
-            $queries = $diff->toSaveSql(new SqlitePlatform());
+
+            if ($app['db']->getDatabasePlatform()->getName() === 'sqlite') {
+                $platform = new SqlitePlatform();
+            } else {
+                $platform = new MySqlPlatform();
+            }
+
+            $queries = $diff->toSaveSql($platform);
 
             foreach ($queries as $query) {
                 $app['db']->executeQuery($query);
