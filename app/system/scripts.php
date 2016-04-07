@@ -135,26 +135,34 @@ return [
 
             $db = $app['db'];
             $util = $db->getUtility();
-            if ($app['db']->getDatabasePlatform()->getName() === 'sqlite') {
-                foreach (['@system_auth', '@system_config', '@system_node', '@system_page', '@system_role', '@system_session', '@system_user', '@system_widget'] as $name) {
-                    $table = $util->getTable($name);
+
+            foreach (['@system_auth', '@system_config', '@system_node', '@system_page', '@system_role', '@system_session', '@system_user', '@system_widget'] as $name) {
+                $table = $util->getTable($name);
+
+                foreach ($table->getIndexes() as $name => $index) {
+                    if ($name !== 'primary') {
+                        $table->renameIndex($index->getName(), $app['db']->getPrefix() . $index->getName());
+                    }
+                }
+
+                if ($app['db']->getDatabasePlatform()->getName() === 'sqlite') {
                     foreach ($table->getColumns() as $column) {
                         if (in_array($column->getType()->getName(), ['string', 'text'])) {
                             $column->setOptions(['customSchemaOptions' => ['collation' => 'NOCASE']]);
                         }
                     }
                 }
-
-                $schema = $util->getSchema();
-                $oldSchema = $db->getSchemaManager()->createSchema();
-                $diff = Comparator::compareSchemas($oldSchema, $schema);
-                $queries = $diff->toSaveSql(new SqlitePlatform());
-
-                foreach ($queries as $query) {
-                    $app['db']->executeQuery($query);
-                }
-
             }
+
+            $schema = $util->getSchema();
+            $oldSchema = $db->getSchemaManager()->createSchema();
+            $diff = Comparator::compareSchemas($oldSchema, $schema);
+            $queries = $diff->toSaveSql(new SqlitePlatform());
+
+            foreach ($queries as $query) {
+                $app['db']->executeQuery($query);
+            }
+
         }
 
     ]
