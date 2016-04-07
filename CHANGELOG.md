@@ -3,6 +3,7 @@
 ## 0.11.3 (April 7, 2016)
 
 ### Fixed
+- Fixed blank widget settings page
 - Fixed missing marketplace icons
 - Fixed RFC 3986 encoding of static URLs
 - Fixed render params
