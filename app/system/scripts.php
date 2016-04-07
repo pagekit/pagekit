@@ -158,14 +158,7 @@ return [
             $schema = $util->getSchema();
             $oldSchema = $db->getSchemaManager()->createSchema();
             $diff = Comparator::compareSchemas($oldSchema, $schema);
-
-            if ($app['db']->getDatabasePlatform()->getName() === 'sqlite') {
-                $platform = new SqlitePlatform();
-            } else {
-                $platform = new MySqlPlatform();
-            }
-
-            $queries = $diff->toSaveSql($platform);
+            $queries = $diff->toSaveSql($app['db']->getDatabasePlatform());
 
             foreach ($queries as $query) {
                 $app['db']->executeQuery($query);
