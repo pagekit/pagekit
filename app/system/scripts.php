@@ -1,7 +1,5 @@
 <?php
 
-use Doctrine\DBAL\Schema\Comparator;
-
 return [
 
     'install' => function ($app) {
@@ -153,15 +151,7 @@ return [
                 }
             }
 
-            $schema = $util->getSchema();
-            $oldSchema = $db->getSchemaManager()->createSchema();
-            $diff = Comparator::compareSchemas($oldSchema, $schema);
-            $queries = $diff->toSaveSql($app['db']->getDatabasePlatform());
-
-            foreach ($queries as $query) {
-                $app['db']->executeQuery($query);
-            }
-
+            $util->migrate();
         }
 
     ]

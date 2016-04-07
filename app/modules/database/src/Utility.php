@@ -3,6 +3,7 @@
 namespace Pagekit\Database;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\DBAL\Schema\Constraint;
 use Doctrine\DBAL\Schema\ForeignKeyConstraint;
 use Doctrine\DBAL\Schema\Index;
@@ -246,12 +247,16 @@ class Utility
     }
 
     /**
-     * Retruns schema.
+     * Migrates the database.
      *
      * @return Schema
      */
-    public function getSchema() {
-        return $this->schema;   
+    public function migrate() {
+        $diff = Comparator::compareSchemas($this->manager->createSchema(), $this->schema);
+
+        foreach ($diff->toSaveSql($this->connection->getDatabasePlatform()) as $query) {
+            $this->connection->executeQuery($query);
+        }
     }
 
     /**
