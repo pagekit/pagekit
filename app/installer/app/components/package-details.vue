@@ -31,7 +31,7 @@
             <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
     </ul>
 
-    <img width="800" height="600" :alt="package.title" :src="package | image" v-if="package.extra.image">
+    <img width="1200" height="800" :alt="package.title" :src="package | image" v-if="package.extra.image">
 
 </template>
 

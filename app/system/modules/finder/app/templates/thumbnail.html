@@ -4,7 +4,7 @@
         <div class="uk-panel uk-panel-box uk-text-center" @click.prevent="toggleSelect(folder.name)">
             <div class="uk-panel-teaser uk-position-relative">
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-folder"></div>
-                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
+                <canvas class="uk-responsive-width uk-display-block" width="1200" height="800"></canvas>
             </div>
             <div class="uk-text-truncate">
                 <input type="checkbox" :value="folder.name" v-model="selected" @click.stop>
@@ -18,7 +18,7 @@
             <div class="uk-panel-teaser uk-position-relative">
                 <div class="pk-background-contain uk-position-cover" v-if="isImage(file.path)" v-lazy-background="$url(file.url)"></div>
                 <div class="uk-cover-background uk-position-cover pk-thumbnail-file" v-else></div>
-                <canvas class="uk-responsive-width uk-display-block" width="800" height="550"></canvas>
+                <canvas class="uk-responsive-width uk-display-block" width="1200" height="800"></canvas>
             </div>
             <div class="uk-text-nowrap uk-text-truncate">
                 <input type="checkbox" :value="file.name" v-model="selected" @click.stop>
