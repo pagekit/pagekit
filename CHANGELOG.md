@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 0.11.3 (April 7, 2016)
 
 ### Fixed
 - Fixed missing marketplace icons
@@ -8,6 +8,11 @@
 - Fixed render params
 - Fixed CLI command enables extensions
 - Fixed db prefix check in installer
+- Fixed different prefixes with SQLLite
+- Fixed SQLite collations
+
+### Removed
+- Removed Guzzle dependency
 
 ### Changed
 - CLI setup command requires admin password to be specified
