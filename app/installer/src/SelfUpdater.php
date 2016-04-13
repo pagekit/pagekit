@@ -52,6 +52,7 @@ class SelfUpdater
      * Runs Pagekit self update.
      *
      * @param $file
+     * @throws \Exception
      */
     public function update($file)
     {
