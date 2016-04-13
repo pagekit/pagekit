@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.0 (April 13, 2016)
 
 ### Fixed
 - Temporarily fixed menu params bug
