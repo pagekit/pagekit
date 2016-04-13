@@ -17,7 +17,7 @@ class SelfUpdater
     /**
      * @var array
      */
-    protected $ignoreFolder = ['packages'];
+    protected $ignoreFolder = ['packages', 'storage'];
 
     /**
      * @var string
