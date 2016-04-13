@@ -38,10 +38,10 @@
 
                 <div>
                     <button class="uk-button uk-margin-small-right" @click.prevent="createFolder()">{{ 'Add Folder' | trans }}</button>
-                    <span class="uk-button uk-form-file" :class="{'uk-button-primary': !modal}">
-                        {{ 'Upload' | trans }}
+                    <div class="uk-form-file">
+                        <button class="uk-button" :class="{'uk-button-primary': !modal}">{{ 'Upload' | trans }}</button>
                         <input type="file" name="files[]" multiple="multiple">
-                    </span>
+                    </div>
                 </div>
 
             </div>

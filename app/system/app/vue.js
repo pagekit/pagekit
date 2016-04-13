@@ -106,7 +106,7 @@ function install (Vue) {
             fn();
         };
 
-        if (document.readyState === 'complete') {
+        if (document.readyState === 'complete' || document.readyState !== 'loading' && !document.documentElement.doScroll) {
             fn();
         } else {
             document.addEventListener('DOMContentLoaded', handle);
