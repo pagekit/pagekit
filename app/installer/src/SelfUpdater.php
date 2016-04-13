@@ -47,7 +47,6 @@ class SelfUpdater
         }
     }
 
-
     /**
      * Runs Pagekit self update.
      *
