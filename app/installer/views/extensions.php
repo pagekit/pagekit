@@ -47,7 +47,7 @@
                         <div class="uk-text-muted">{{ pkg.authors[0].name }}</div>
                     </td>
                     <td>
-                        <a class="uk-button uk-button-success uk-button-small" @click="update(updates[pkg.name])" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</a>
+                        <a class="uk-button uk-button-success uk-button-small" @click="update(pkg, updates)" v-show="updates && updates[pkg.name]">{{ 'Update' | trans }}</a>
                     </td>
                     <td class="uk-text-center">
                         <a class="pk-icon-circle-success" :title="'Enabled' | trans" v-show="pkg.enabled" @click="disable(pkg)"></a>

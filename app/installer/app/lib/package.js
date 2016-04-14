@@ -1,5 +1,6 @@
 var Install = Vue.extend(require('./install.vue'));
 var Uninstall = Vue.extend(require('./uninstall.vue'));
+var Update = Vue.extend(require('./update.vue'));
 
 module.exports = {
 
@@ -39,6 +40,12 @@ module.exports = {
             var install = new Install({parent: this});
 
             return install.install(pkg, packages, onClose, packagist);
+        },
+
+        update: function (pkg, updates, onClose, packagist) {
+            var update = new Update({parent: this});
+
+            return update.update(pkg, updates, onClose, packagist);
         },
 
         uninstall: function (pkg, packages) {
