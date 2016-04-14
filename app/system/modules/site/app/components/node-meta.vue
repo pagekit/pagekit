@@ -16,6 +16,13 @@
             </div>
         </div>
 
+        <div class="uk-form-row">
+            <label for="form-meta-image" class="uk-form-label">{{ 'Image' | trans }}</label>
+            <div class="uk-form-controls uk-form-width-large">
+                <input-image :source.sync="node.data.meta['og:image']"></input-image>
+            </div>
+        </div>
+
     </div>
 
 </template>

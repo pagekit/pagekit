@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Added
+- OpenGraph image option for site nodes
+
 ### Fixed
 - Fixed save shortcut in Firefox
 - Fixed reordering in site tree
