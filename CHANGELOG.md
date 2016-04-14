@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed save shortcut in Firefox
+- Fixed reordering in site tree
 
 ## 1.0.0 (April 13, 2016)
 
