@@ -185,7 +185,13 @@ return [
                 ]);
 
                 if ($app['node']->get('meta')) {
-                    $meta($app['node']->get('meta'));
+                    $config = $app['node']->get('meta');
+
+                    if ($config['og:image']) {
+                        $config['og:image'] = $app['url']->getStatic($config['og:image'], [], 0);
+                    }
+
+                    $meta($config);
                 }
 
             }, 50);
