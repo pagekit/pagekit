@@ -29,11 +29,11 @@
         "symfony/stopwatch": "~3.0.0",
         "symfony/templating": "~3.0.0",
         "symfony/translation": "~3.0.0",
-        "symfony/var-dumper": "~3.0.0",
         "twig/twig": "^1.22"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.7.3"
+        "phpunit/phpunit": "~4.7.3",
+        "symfony/var-dumper": "~3.0.0"
     },
     "autoload": {
         "psr-4": {
