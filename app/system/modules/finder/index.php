@@ -82,7 +82,9 @@ return [
 
     'config' => [
 
-        'storage' => false
+        'storage' => false,
+
+        'extensions' => 'jpg,jpeg,png,gif,mp4'
 
     ]
 
