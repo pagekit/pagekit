@@ -74,7 +74,7 @@
 
 # Normalize javascript mime type
 <IfModule mod_mime.c>
-    AddType application/javascript                      js
+    AddType application/javascript js
 </IfModule>
 
 # Compression
@@ -97,20 +97,23 @@
                                       "image/x-icon" \
                                       "text/css" \
                                       "text/html" \
-                                      "text/plain" \
-                                      "text/xml"
-    </IfModule>
-
-    <IfModule mod_mime.c>
-        AddEncoding gzip              svgz
+                                      "text/plain"
     </IfModule>
 </IfModule>
 
-# Use expires far in the future for css and javascript because Pagekit uses filenames to break the cache
+# Expire headers
 <IfModule mod_expires.c>
     ExpiresActive on
-    ExpiresByType text/css                              "access plus 1 year"
-    ExpiresByType application/javascript                "access plus 1 year"
+    ExpiresDefault                        "access plus 1 week"
+
+    ExpiresByType application/json        "access plus 0 seconds"
+    ExpiresByType application/rss+xml     "access plus 0 seconds"
+    ExpiresByType text/html               "access plus 0 seconds"
+    ExpiresByType text/plain              "access plus 0 seconds"
+
+    # Use expires far in the future for css and javascript because Pagekit uses filenames to break the cache
+    ExpiresByType text/css                "access plus 1 year"
+    ExpiresByType application/javascript  "access plus 1 year"
 </IfModule>
 
 # Avoid PHP 5.6 deprecated $HTTP_RAW_POST_DATA warnings
