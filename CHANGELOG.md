@@ -8,6 +8,7 @@
 ### Fixed
 - Fixed save shortcut in Firefox
 - Fixed reordering in site tree
+- Fixed missing territory data
 
 ### Changed
 - Smoothed packages updates
