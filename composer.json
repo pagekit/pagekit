@@ -29,7 +29,6 @@
         "symfony/stopwatch": "~3.0.0",
         "symfony/templating": "~3.0.0",
         "symfony/translation": "~3.0.0",
-        "symfony/var-dumper": "~3.0.0",
         "twig/twig": "^1.22"
     },
     "require-dev": {
