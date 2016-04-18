@@ -17,11 +17,13 @@ class AuthController
     public function loginAction($redirect = '')
     {
 
-        if (App::user()->isAuthenticated()) {
-            $module = App::module('system/user');
-            $url = App::url($module->config['login_redirect']);
-            return App::redirect($url);
-        }
+		$module = App::module('system/user');
+		$url = App::url($module->config['login_redirect']);
+		$redirect = $redirect ? : $url;
+
+		if (App::user()->isAuthenticated()) {
+			return App::redirect($redirect);
+		}
 
         return self::loginView([
             'last_username' => App::session()->get(Auth::LAST_USERNAME),

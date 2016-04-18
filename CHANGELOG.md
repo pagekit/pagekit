@@ -1,6 +1,7 @@
 # Changelog
 
 ## WIP
+- Fixed redirect after login
 
 ### Added
 - OpenGraph image option for site nodes
