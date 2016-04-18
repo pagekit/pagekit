@@ -18,7 +18,7 @@
     Options -Indexes
 </IfModule>
 
-## URL rewrites
+# URL rewrites
 <IfModule mod_rewrite.c>
     Options -MultiViews
 
