@@ -6,6 +6,9 @@
 - Added OpenGraph image option for site nodes
 - Added file extension check for storage uploads
 
+### Changed
+- Smoothed packages updates
+
 ### Fixed
 - Fixed save shortcut in Firefox
 - Fixed reordering in site tree
@@ -13,9 +16,6 @@
 - Fixed redirect after login
 - Fixed missing initial active state at pagination
 - Fixed duplicated request occasionally caused by pagination
-
-### Changed
-- Smoothed packages updates
 
 ## 1.0.0 (April 13, 2016)
 
