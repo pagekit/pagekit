@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "composer/composer": "dev-master#7a9eb02190d334513e99a479510f87eed18cf958",
+        "composer/composer": "1.0.1",
         "doctrine/annotations": "~1.2.3",
         "doctrine/dbal": "~2.5.1",
         "ircmaxell/random-lib": "~1.0.0",
