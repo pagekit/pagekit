@@ -137,10 +137,13 @@ class ResetPasswordController
 
     protected function messageView($message, $success = true)
     {
-        return AuthController::messageView([
-            'title' => __('Reset password'),
+        return [
+            '$view' => [
+                'title' => __('Reset Password'),
+                'name' => 'system/user/message.php'
+            ],
             'message' => $message,
             'success' => $success
-        ]);
+        ];
     }
 }
