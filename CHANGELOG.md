@@ -12,7 +12,7 @@
 - Fixed missing territory data
 - Fixed redirect after login
 - Fixed missing initial active state at pagination
-- Fixed duplicated request occasionally caused under by pagination
+- Fixed duplicated request occasionally caused by pagination
 
 ### Changed
 - Smoothed packages updates
