@@ -3,7 +3,8 @@
 ## WIP
 
 ### Added
-- OpenGraph image option for site nodes
+- Added OpenGraph image option for site nodes
+- Added file extension check for storage uploads
 
 ### Fixed
 - Fixed save shortcut in Firefox
