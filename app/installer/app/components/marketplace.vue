@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!packages.length">{{ 'Nothing found.' | trans }}</h3>
+        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages && !packages.length">{{ 'Nothing found.' | trans }}</h3>
 
         <p class="uk-alert uk-alert-warning" v-show="status == 'error'">{{ 'Cannot connect to the marketplace. Please try again later.' | trans }}</p>
 
