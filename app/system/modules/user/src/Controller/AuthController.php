@@ -30,8 +30,7 @@ class AuthController
                 'name' => 'system/user/login.php'
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'redirect' => $redirect,
-            'message' => __('Sign in to your account')
+            'redirect' => $redirect
         ];
     }
 
