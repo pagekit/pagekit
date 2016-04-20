@@ -17,6 +17,13 @@
     </div>
 
     <div class="uk-form-row">
+        <label for="form-uploadfolder" class="uk-form-label">{{ 'Allowed file extensions' | trans }}</label>
+        <div class="uk-form-controls">
+            <input id="form-uploadfolder" class="uk-form-width-large" type="text" v-model="$root.options['system/finder']['extensions']">
+        </div>
+    </div>
+
+    <div class="uk-form-row">
         <span class="uk-form-label">{{ 'Developer' | trans }}</span>
         <div class="uk-form-controls uk-form-controls-text">
             <p class="uk-form-controls-condensed">
