@@ -4,12 +4,10 @@ module.exports = {
 
     props: {
         page: {
-            type: Number,
             default: 0
         },
 
         pages: {
-            type: Number,
             default: 1
         }
     },
@@ -18,9 +16,9 @@ module.exports = {
 
         this.key = this.$parent.$options.name + '.pagination';
 
-        if (this.page === undefined && this.$session.get(this.key)) {
+        if (this.page === null && this.$session.get(this.key)) {
             this.$set('page', this.$session.get(this.key));
-        } else if (this.page === undefined) {
+        } else if (this.page === null) {
             this.page = 0;
         }
 
