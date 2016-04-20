@@ -11,6 +11,8 @@
 - Fixed reordering in site tree
 - Fixed missing territory data
 - Fixed redirect after login
+- Fixed missing initial active state at pagination
+- Fixed duplicated request occasionally caused under by pagination
 
 ### Changed
 - Smoothed packages updates
