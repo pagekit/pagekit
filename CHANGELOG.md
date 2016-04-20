@@ -5,13 +5,11 @@
 ### Added
 - OpenGraph image option for site nodes
 
-#### Fixed
-- Fixed redirect after login
-
 ### Fixed
 - Fixed save shortcut in Firefox
 - Fixed reordering in site tree
 - Fixed missing territory data
+- Fixed redirect after login
 
 ### Changed
 - Smoothed packages updates
