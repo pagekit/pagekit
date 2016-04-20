@@ -246,7 +246,7 @@ class FinderController
             return false;
         }
 
-        $extension = pathinfo($name, PATHINFO_EXTENSION);
+        $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
         $allowed = App::module('system/finder')->config['extensions'];
         if (!empty($extension) && !in_array($extension, explode(',', $allowed))) {
             return false;
