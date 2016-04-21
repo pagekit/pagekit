@@ -10,6 +10,7 @@
 
 ### Changed
 - Smoothed packages updates
+- Optimized .htaccess
 
 ### Fixed
 - Fixed save shortcut in Firefox
