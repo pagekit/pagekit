@@ -18,11 +18,17 @@
             </div>
         </div>
 
-
         <div class="uk-form-row">
             <label for="form-offlinemessage" class="uk-form-label">{{ 'Message' | trans }}</label>
             <div class="uk-form-controls">
                 <textarea id="form-offlinemessage" class="uk-form-width-large" :placeholder="'We\'ll be back soon.' | trans" rows="5" v-model="config.maintenance.msg"></textarea>
+            </div>
+        </div>
+
+        <div class="uk-form-row">
+            <label for="form-logo" class="uk-form-label">{{ 'Logo' | trans }}</label>
+            <div class="uk-form-controls uk-form-width-large">
+                <input-image :source.sync="config.maintenance.logo"></input-image>
             </div>
         </div>
 

@@ -166,6 +166,10 @@ class FinderController
                     return $this->error(sprintf(__('Uploaded file invalid. (%s)'), $file->getErrorMessage()));
                 }
 
+                if (!$this->isValidFilename($file->getClientOriginalName())) {
+                    return $this->error(__('Invalid file name.'));
+                }
+
                 $file->move($path, $file->getClientOriginalName());
             }
 
@@ -239,6 +243,12 @@ class FinderController
     protected function isValidFilename($name)
     {
         if (empty($name)) {
+            return false;
+        }
+
+        $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+        $allowed = App::module('system/finder')->config['extensions'];
+        if (!empty($extension) && !in_array($extension, explode(',', $allowed))) {
             return false;
         }
 

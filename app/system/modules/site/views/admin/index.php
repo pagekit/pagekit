@@ -146,7 +146,7 @@
             </div>
         </div>
 
-        <ul class="uk-nestable-list" v-if="tree[node.id]">
+        <ul class="uk-nestable-list" v-show="tree[node.id]">
             <node v-for="node in tree[node.id]" :tree="tree" :node="node"></node>
         </ul>
 

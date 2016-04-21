@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.1 (April 21, 2016)
+
+### Added
+- Added OpenGraph image option for site nodes
+- Added file extension check for storage uploads
+- Added maintenance logo option
+- Added cache break for language file
+
+### Changed
+- Smoothed packages updates
+- Optimized .htaccess
+
+### Fixed
+- Fixed save shortcut in Firefox
+- Fixed reordering in site tree
+- Fixed missing territory data
+- Fixed redirect after login
+- Fixed missing initial active state at pagination
+- Fixed duplicated request occasionally caused by pagination
+
 ## 1.0.0 (April 13, 2016)
 
 ### Fixed

@@ -74,7 +74,6 @@ class NodesListener implements EventSubscriberInterface
     {
         return [
             'request' => ['onRequest', 110],
-            'enable' => 'onEnable',
             'model.node.init' => 'onNodeInit',
             'model.role.deleted' => 'onRoleDelete'
         ];

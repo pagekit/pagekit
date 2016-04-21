@@ -159,11 +159,7 @@ return [
             }
 
             $meta->add('title', implode(' | ', $title));
-        }, -50],
-
-        'view.head' => [function ($event, $view) {
-            $view->script('auth', 'app/system/modules/user/app/bundle/interceptor.js', ['vue']);
-        }, 50]
+        }, -50]
 
     ]
 

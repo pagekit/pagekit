@@ -94,20 +94,6 @@ module.exports = {
                 window.location = pkg.settings;
             }
 
-        },
-
-        update: function (pkg) {
-            var vm = this;
-
-            this.install(pkg, this.packages, function (output) {
-                if (output.status === 'success') {
-                    vm.updates.$delete(pkg.name);
-                }
-
-                setTimeout(function () {
-                    location.reload();
-                }, 300);
-            });
         }
 
     },

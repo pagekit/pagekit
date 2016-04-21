@@ -17,7 +17,7 @@ class SelfUpdater
     /**
      * @var array
      */
-    protected $ignoreFolder = ['packages'];
+    protected $ignoreFolder = ['packages', 'storage'];
 
     /**
      * @var string
@@ -47,11 +47,11 @@ class SelfUpdater
         }
     }
 
-
     /**
      * Runs Pagekit self update.
      *
      * @param $file
+     * @throws \Exception
      */
     public function update($file)
     {

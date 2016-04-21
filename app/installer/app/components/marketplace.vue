@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="!packages.length">{{ 'Nothing found.' | trans }}</h3>
+        <h3 class="uk-h1 uk-text-muted uk-text-center" v-show="packages && !packages.length">{{ 'Nothing found.' | trans }}</h3>
 
         <p class="uk-alert uk-alert-warning" v-show="status == 'error'">{{ 'Cannot connect to the marketplace. Please try again later.' | trans }}</p>
 
@@ -107,7 +107,9 @@
         },
 
         ready: function () {
-            this.query(this.page);
+
+            this.$watch('page', this.query, {immediate: true});
+
             this.queryUpdates(this.installed, function (res) {
                 var data = res.data;
                 this.$set('updates', data.packages.length ? data.packages : null);
@@ -117,31 +119,30 @@
         watch: {
 
             search: function () {
-                this.query();
+                if (this.page) {
+                    this.page = 0;
+                } else {
+                    this.query();
+                }
             },
 
             type: function () {
-                this.query();
-            },
-
-            page: function (page, old) {
-
-                if (page == old || (!old && !page)) {
-                    return;
+                if (this.page) {
+                    this.page = 0;
+                } else {
+                    this.query();
                 }
-
-                this.query(page);
             }
 
         },
 
         methods: {
 
-            query: function (page) {
+            query: function () {
 
                 var url = this.api + '/api/package/search', options = {emulateJSON: true};
 
-                this.$http.post(url, {q: this.search, type: this.type, page: page || 0}, options).then(function (res) {
+                this.$http.post(url, {q: this.search, type: this.type, page: this.page}, options).then(function (res) {
                             var data = res.data;
                             this.$set('packages', data.packages);
                             this.$set('pages', data.pages);

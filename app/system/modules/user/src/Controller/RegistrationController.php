@@ -123,15 +123,17 @@ class RegistrationController
      */
     public function activateAction($username, $activation)
     {
-
-        $message = '';
-
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
 
-            return AuthController::messageView([
+            return [
+                '$view' => [
+                    'title' => __('User Activation'),
+                    'name' => 'system/user/message.php'
+                ],
                 'message' => __('Invalid key.'),
                 'success' => false
-            ]);
+            ];
+
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
@@ -204,6 +206,4 @@ class RegistrationController
         } catch (\Exception $e) {
         }
     }
-
-
 }

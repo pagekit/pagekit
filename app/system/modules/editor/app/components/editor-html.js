@@ -27,7 +27,7 @@ module.exports = {
                 .on('htmleditor-save', function (e, editor) {
                     if (editor.element[0].form) {
                         var event = document.createEvent('HTMLEvents');
-                        event.initEvent('submit', true, false);
+                        event.initEvent('submit', true, true);
                         editor.element[0].form.dispatchEvent(event);
                     }
                 });

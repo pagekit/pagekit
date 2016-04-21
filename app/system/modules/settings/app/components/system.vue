@@ -10,9 +10,17 @@
     </div>
 
     <div class="uk-form-row">
-        <label for="form-uploadfolder" class="uk-form-label">{{ 'Storage' | trans }}</label>
+        <label for="form-storage" class="uk-form-label">{{ 'Storage' | trans }}</label>
         <div class="uk-form-controls">
-            <input id="form-uploadfolder" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config['system/finder'].storage">
+            <input id="form-storage" class="uk-form-width-large" type="text" placeholder="/storage" v-model="$root.config['system/finder'].storage">
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label for="form-fileextensions" class="uk-form-label">{{ 'File Extensions' | trans }}</label>
+        <div class="uk-form-controls">
+            <input id="form-fileextensions" class="uk-form-width-large" type="text" v-model="$root.options['system/finder']['extensions']">
+            <p class="uk-form-help-block">{{ 'Allowed file extensions for the storage upload.' | trans }}</p>
         </div>
     </div>
 

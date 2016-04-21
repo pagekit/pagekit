@@ -4,12 +4,10 @@ module.exports = {
 
     props: {
         page: {
-            type: Number,
             default: 0
         },
 
         pages: {
-            type: Number,
             default: 1
         }
     },
@@ -18,13 +16,11 @@ module.exports = {
 
         this.key = this.$parent.$options.name + '.pagination';
 
-        if (this.page === undefined && this.$session.get(this.key)) {
+        if (this.page === null && this.$session.get(this.key)) {
             this.$set('page', this.$session.get(this.key));
-        } else if (this.page === undefined) {
-            this.page = 0;
         }
 
-        this.$state('page', this.page ? this.page : undefined);
+        this.$state('page', this.page);
 
     },
 
@@ -32,7 +28,7 @@ module.exports = {
 
         var vm = this;
 
-        this.pagination = UIkit.pagination(this.$el, {pages: this.pages, currentPage: this.page});
+        this.pagination = UIkit.pagination(this.$el, {pages: this.pages, currentPage: this.page || 0});
         this.pagination.on('select.uk.pagination', function (e, page) {
             vm.$set('page', page);
         });
@@ -42,8 +38,8 @@ module.exports = {
     watch: {
 
         page: function (page) {
-            this.pagination.selectPage(page);
-            this.$session.set(this.key, page);
+            this.pagination.selectPage(page || 0);
+            this.$session.set(this.key, page || 0);
         },
 
         pages: function (pages) {
