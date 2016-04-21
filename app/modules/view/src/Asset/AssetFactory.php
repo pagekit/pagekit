@@ -29,6 +29,14 @@ class AssetFactory
     }
 
     /**
+     * Returns version number for cache breaking.
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
      * Create an asset instance.
      *
      * @param  string $name
