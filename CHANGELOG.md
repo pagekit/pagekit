@@ -1,6 +1,7 @@
 # Changelog
 
 ## WIP
+- Fixed exception when no og:image
 
 ### Added
 - Added OpenGraph image option for site nodes
