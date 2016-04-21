@@ -3,6 +3,8 @@
 ## WIP
 - Fixed exception when no og:image
 
+## 1.0.1 (April 21, 2016)
+
 ### Added
 - Added OpenGraph image option for site nodes
 - Added file extension check for storage uploads
@@ -11,6 +13,7 @@
 
 ### Changed
 - Smoothed packages updates
+- Optimized .htaccess
 
 ### Fixed
 - Fixed save shortcut in Firefox

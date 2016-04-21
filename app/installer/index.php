@@ -13,15 +13,15 @@ return [
             return (new PackageFactory())->addPath($app['path'].'/packages/*/*/composer.json');
         };
 
-        $app->extend('assets', function ($factory) use ($app) {
-
-            $factory->setVersion($app['version']);
-
-            return $factory;
-
-        });
-
         if ($this->config['enabled']) {
+
+            $app->extend('assets', function ($factory) use ($app) {
+
+                $factory->setVersion($app['version']);
+
+                return $factory;
+
+            });
 
             $app['routes']->add([
                 'path' => '/installer',
