@@ -20,8 +20,9 @@ class MaintenanceListener implements EventSubscriberInterface
 
         if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access'))) {
 
-            $message  = $site->config('maintenance.msg') ?: __("We'll be back soon.");
-            $response = App::view('system/theme:views/maintenance.php', compact('message'));
+            $message = $site->config('maintenance.msg') ?: __("We'll be back soon.");
+            $logo = $site->config('maintenance.logo') ?: 'app/system/assets/images/pagekit-logo-large-black.svg';
+            $response = App::view('system/theme:views/maintenance.php', compact('message', 'logo'));
 
             $request->attributes->set('_disable_debugbar', true);
 

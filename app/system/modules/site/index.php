@@ -111,6 +111,7 @@ return [
 
         'maintenance' => [
             'enabled' => false,
+            'logo' => '',
             'msg' => ''
         ],
 
