@@ -6,6 +6,7 @@
 - Added OpenGraph image option for site nodes
 - Added file extension check for storage uploads
 - Added maintenance logo option
+- Added cache break for language file
 
 ### Changed
 - Smoothed packages updates
