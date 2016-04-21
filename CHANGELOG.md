@@ -5,6 +5,7 @@
 ### Added
 - Added OpenGraph image option for site nodes
 - Added file extension check for storage uploads
+- Added maintenance logo option
 
 ### Changed
 - Smoothed packages updates
