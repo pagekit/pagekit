@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.1 (April 21, 2016)
 
 ### Added
 - Added OpenGraph image option for site nodes
@@ -10,6 +10,7 @@
 
 ### Changed
 - Smoothed packages updates
+- Optimized .htaccess
 
 ### Fixed
 - Fixed save shortcut in Firefox
