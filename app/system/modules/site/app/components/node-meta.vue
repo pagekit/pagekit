@@ -36,7 +36,15 @@
             priority: 100
         },
 
-        props: ['node']
+        props: ['node'],
+
+        created: function () {
+
+            if (!this.node.data.meta) {
+                this.node.data.meta = {};
+            }
+
+        }
 
     };
 
