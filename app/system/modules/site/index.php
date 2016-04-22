@@ -185,10 +185,9 @@ return [
                     'og:url' => $meta->get('canonical'),
                 ]);
 
-                if ($app['node']->get('meta')) {
-                    $config = $app['node']->get('meta');
+				if ($config = $app['node']->get('meta')) {
 
-                    if ($config['og:image']) {
+					if (!empty($config['og:image'])) {
                         $config['og:image'] = $app['url']->getStatic($config['og:image'], [], 0);
                     }
 
