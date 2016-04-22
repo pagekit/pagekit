@@ -1,5 +1,8 @@
 # Changelog
 
+## WIP
+- Fixed exception when no og:image
+
 ## 1.0.1 (April 21, 2016)
 
 ### Added
