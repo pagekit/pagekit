@@ -1,7 +1,9 @@
 # Changelog
 
 ## WIP
-- Fixed exception when no og:image
+
+### Fixed
+- Fixed notice when og:image in site meta settings not defined
 
 ## 1.0.1 (April 21, 2016)
 
