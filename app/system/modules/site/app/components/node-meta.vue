@@ -41,7 +41,7 @@
         created: function () {
 
             if (!this.node.data.meta) {
-                this.node.data.meta = {};
+                this.$set('node.data.meta', {'og:title': ''});
             }
 
         }
