@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed superfluous request caching
+
 ## 1.0.2 (April 22, 2016)
 
 ### Fixed
