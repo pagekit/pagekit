@@ -73,6 +73,7 @@ return [
             $scripts->register('uikit-datepicker', 'app/assets/uikit/js/components/datepicker.min.js', 'uikit');
             $scripts->register('uikit-form-password', 'app/assets/uikit/js/components/form-password.min.js', 'uikit');
             $scripts->register('uikit-form-select', 'app/assets/uikit/js/components/form-select.min.js', 'uikit');
+            $scripts->register('uikit-grid', 'app/assets/uikit/js/components/grid.min.js', 'uikit');
             $scripts->register('uikit-htmleditor', 'app/assets/uikit/js/components/htmleditor.min.js', ['uikit', 'marked', 'codemirror']);
             $scripts->register('uikit-nestable', 'app/assets/uikit/js/components/nestable.min.js', 'uikit');
             $scripts->register('uikit-notify', 'app/assets/uikit/js/components/notify.min.js', 'uikit');
