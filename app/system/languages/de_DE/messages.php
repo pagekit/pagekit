@@ -314,7 +314,7 @@
   'Invalid password.' => 'Ungültiges Passwort.',
   'Edit %type%' => '%type% bearbeiten',
   'From Email' => 'Email-Absender',
-  'Put the site offline and show the offline message.' => 'Den Wartungsmodus aktivierem und eine Benachrichtigung anzeigen.',
+  'Put the site offline and show the offline message.' => 'Den Wartungsmodus aktivieren und eine Benachrichtigung anzeigen.',
   'Cannot connect to the marketplace. Please try again later.' => 'Eine Verbindung zum Marktplatz konnte leider nicht hergestellt werden. Bitte versuche es später noch einmal.',
   'Insufficient User Rights.' => 'Nicht ausreichende Zugangsrechte.',
   'Copy' => 'Kopieren',
