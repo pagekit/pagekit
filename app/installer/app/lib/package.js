@@ -23,7 +23,7 @@ module.exports = {
             return this.$http.post('admin/system/package/enable', {name: pkg.name}).then(function () {
                     this.$notify(this.$trans('"%title%" enabled.', {title: pkg.title}));
                     Vue.set(pkg, 'enabled', true);
-                    document.location.reload();
+                    document.location.assign(this.$url('admin/system/package/' + (pkg.type === 'pagekit-theme' ? 'themes' : 'extensions')));
                 }, this.error);
         },
 
