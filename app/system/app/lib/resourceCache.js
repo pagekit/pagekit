@@ -4,7 +4,7 @@ module.exports = function (Vue) {
 
     Vue.http.interceptors.unshift(function () {
 
-            var hit, key, lifetime;
+            var hit = true, key, lifetime;
 
             return {
                 request: function (request) {
