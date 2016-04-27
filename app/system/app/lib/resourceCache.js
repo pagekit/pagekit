@@ -4,7 +4,7 @@ module.exports = function (Vue) {
 
     Vue.http.interceptors.unshift(function () {
 
-            var hit = true, key, lifetime;
+            var hit, key, lifetime;
 
             return {
                 request: function (request) {
@@ -32,7 +32,7 @@ module.exports = function (Vue) {
 
                 response: function (response) {
 
-                    if (!hit && response.ok) {
+                    if (key && !hit && response.ok) {
                         Vue.cache.set(key, response, lifetime);
                     }
 
