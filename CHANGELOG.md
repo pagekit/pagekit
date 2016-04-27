@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed superfluous request caching
+- Fixed widget settings validation
 
 ### Changed
 - Improved widget visibility settings
