@@ -5,6 +5,9 @@
 ### Fixed
 - Fixed superfluous request caching
 
+### Changed
+- Improved widget visibility settings
+
 ## 1.0.2 (April 22, 2016)
 
 ### Fixed
