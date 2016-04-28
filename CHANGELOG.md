@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Added
+- Parse MySQL Port from hostname in installer
+
 ### Fixed
 - Fixed superfluous request caching
 - Fixed widget settings validation
