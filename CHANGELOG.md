@@ -4,6 +4,7 @@
 
 ### Added
 - Parse MySQL Port from hostname in installer
+- SSL support for location widget
 
 ### Fixed
 - Fixed superfluous request caching

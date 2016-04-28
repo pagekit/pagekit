@@ -16,6 +16,16 @@ class DashboardController
     protected $dashboard;
 
     /**
+     * @var string
+     */
+    protected $api = 'http://api.openweathermap.org/data/2.5';
+
+    /**
+     * @var string
+     */
+    protected $apiKey = '08c012f513db564bd6d4bae94b73cc94';
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -31,7 +41,7 @@ class DashboardController
         return [
             '$view' => [
                 'title' => __('Dashboard'),
-                'name'  => 'system/dashboard:views/index.php'
+                'name' => 'system/dashboard:views/index.php'
             ],
             '$data' => [
                 'widgets' => array_values($this->dashboard->getWidgets()),
@@ -108,5 +118,24 @@ class DashboardController
         }
 
         return ['message' => __('Widgets reordered.')];
+    }
+
+    /**
+     * @Request({"data": "array", "action": "string",})
+     */
+    public function weatherAction($data, $action)
+    {
+        $url = $this->api;
+
+        if ($action === 'weather') {
+            $url .= '/weather';
+        } elseif ($action === 'find') {
+            $url .= '/find';
+        }
+
+        $data['APPID'] = $this->apiKey;
+        $url .= '?' . http_build_query($data);
+
+        return App::response(file_get_contents($url), 200, ['Content-Type' => 'application/json']);
     }
 }
