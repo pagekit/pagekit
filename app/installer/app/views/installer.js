@@ -59,14 +59,13 @@ var Installer = {
         stepDatabase: function () {
 
             var config = _.cloneDeep(this.config);
-            var connections = config.database.connections;
 
-            Object.keys(connections).forEach(function (name) {
+            _.forEach(config.database.connections, function (connection, name) {
                 if (name != config.database.default) {
-                    delete(connections[name]);
-                } else if (connections[name].host) {
-                    connections[name].host = connections[name].host.replace(/:(\d+)$/, function (match, port) {
-                        connections[name].port = port;
+                    delete(config.database.connections[name]);
+                } else if (connection.host) {
+                    connection.host = connection.host.replace(/:(\d+)$/, function (match, port) {
+                        connection.port = port;
                         return '';
                     });
                 }
