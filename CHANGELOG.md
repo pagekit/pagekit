@@ -5,6 +5,7 @@
 ### Fixed
 - Fixed superfluous request caching
 - Fixed widget settings validation
+- Fixed relative date for languages without plural
 
 ### Changed
 - Improved widget visibility settings
