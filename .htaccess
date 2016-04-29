@@ -20,10 +20,6 @@
 
 # URL rewrites
 <IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews
-    </IfModule>
-
     RewriteEngine On
 
     # Set base if your site is running in a VirtualDocumentRoot
@@ -51,9 +47,11 @@
         SetEnv HTTP_MOD_REWRITE On
     </IfModule>
 
-    <IfModule mod_headers.c>
-        RequestHeader set MOD_REWRITE "On"
-    </IfModule>
+     <IfModule !mod_env.c>
+        <IfModule mod_headers.c>
+            RequestHeader set MOD_REWRITE "On"
+        </IfModule>
+     </IfModule>
 </IfModule>
 
 # Redirect admin URL, if rewrite is not enabled
