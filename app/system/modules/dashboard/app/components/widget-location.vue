@@ -102,7 +102,7 @@
 
                     source: function (release) {
 
-                        vm.$http.get( 'admin/dashboard/weather', {action: 'find', data: {q: this.input.val(), type: 'like'}}).then(
+                        vm.$http.get('admin/dashboard/weather', {action: 'find', data: {q: this.input.val(), type: 'like'}}).then(
                             function (res) {
 
                                 var data = res.data;
