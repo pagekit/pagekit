@@ -442,7 +442,7 @@ class PagekitRequirements extends RequirementCollection
         );
 
         if (version_compare($installedPhpVersion, '5.6', '>=') && version_compare($installedPhpVersion, '7.0.0', '<')) {
-            $this->addRequirement(!(ini_get('display_startup_errors') && ini_get('always_populate_raw_post_data') !== "-1"),
+            $this->addRequirement(!(ini_get('display_startup_errors') === "1" && ini_get('always_populate_raw_post_data') !== "-1"),
                 '\'display_startup_errors\' is enabled and \'always_populate_raw_post_data\' is not set to \'-1\'',
                 'Disable startup errors or set \'always_populate_raw_post_data\' to \'-1\' in php.ini.'
             );
