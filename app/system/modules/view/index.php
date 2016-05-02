@@ -69,6 +69,7 @@ return [
             $scripts->register('lodash', 'app/assets/lodash/lodash.min.js');
             $scripts->register('marked', 'app/assets/marked/marked.js');
             $scripts->register('uikit', 'app/assets/uikit/js/uikit.min.js', 'jquery');
+            $scripts->register('uikit-accordion', 'app/assets/uikit/js/components/accordion.min.js', 'uikit');
             $scripts->register('uikit-autocomplete', 'app/assets/uikit/js/components/autocomplete.min.js', 'uikit');
             $scripts->register('uikit-datepicker', 'app/assets/uikit/js/components/datepicker.min.js', 'uikit');
             $scripts->register('uikit-form-password', 'app/assets/uikit/js/components/form-password.min.js', 'uikit');
