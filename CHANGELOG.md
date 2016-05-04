@@ -10,6 +10,7 @@
 - Fixed superfluous request caching
 - Fixed widget settings validation
 - Fixed relative date for languages without plural
+- Fixed non expiring local storage
 
 ### Changed
 - Improved widget visibility settings
