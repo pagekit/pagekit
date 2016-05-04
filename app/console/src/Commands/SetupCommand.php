@@ -32,7 +32,7 @@ class SetupCommand extends Command
         $this->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Admin account password');
         $this->addOption('title', 't', InputOption::VALUE_OPTIONAL, 'Site title', $default = 'Pagekit');
         $this->addOption('mail', 'm', InputOption::VALUE_OPTIONAL, 'Admin account email', $default = 'admin@example.com');
-        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'mysql');
+        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'sqlite');
         $this->addOption('db-prefix', null, InputOption::VALUE_OPTIONAL, 'DB prefix', $default = 'pk_');
         $this->addOption('db-host', 'H', InputOption::VALUE_OPTIONAL, 'MySQL host');
         $this->addOption('db-name', 'N', InputOption::VALUE_OPTIONAL, 'MySQL database name');
