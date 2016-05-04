@@ -81,6 +81,7 @@ return [
             $scripts->register('uikit-tooltip', 'app/assets/uikit/js/components/tooltip.min.js', 'uikit');
             $scripts->register('uikit-pagination', 'app/assets/uikit/js/components/pagination.min.js', 'uikit');
             $scripts->register('uikit-slider', 'app/assets/uikit/js/components/slider.min.js', 'uikit');
+            $scripts->register('uikit-slideshow', 'app/assets/uikit/js/components/slideshow.min.js', 'uikit');
             $scripts->register('uikit-sortable', 'app/assets/uikit/js/components/sortable.min.js', 'uikit');
             $scripts->register('uikit-sticky', 'app/assets/uikit/js/components/sticky.min.js', 'uikit');
             $scripts->register('uikit-upload', 'app/assets/uikit/js/components/upload.min.js', 'uikit');
