@@ -21,7 +21,7 @@ class ArchiveCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Archives an extension or theme.';
+    protected $description = 'Archives an extension or theme';
 
     /**
      * {@inheritdoc}

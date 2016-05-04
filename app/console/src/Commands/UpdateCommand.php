@@ -19,7 +19,7 @@ class UpdateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Updates dependencies of Pagekit packages.';
+    protected $description = 'Updates dependencies of Pagekit packages';
 
     /**
      * {@inheritdoc}
