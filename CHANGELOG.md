@@ -15,6 +15,7 @@
 ### Changed
 - Improved widget visibility settings
 - Redirect to extensions/themes overview after install and activation from marketplace
+- Changed signature of setup command
 
 ## 1.0.2 (April 22, 2016)
 
