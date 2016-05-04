@@ -21,24 +21,24 @@ class SetupCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Setup a Pagekit installation.';
+    protected $description = 'Setup a Pagekit installation';
 
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->addOption('username', null, InputOption::VALUE_REQUIRED, 'Admin username', $default = 'admin');
-        $this->addOption('password', null, InputOption::VALUE_REQUIRED, 'Admin account password');
-        $this->addOption('title', null, InputOption::VALUE_OPTIONAL, 'Site title', $default = 'Pagekit');
-        $this->addOption('mail', null, InputOption::VALUE_OPTIONAL, 'Admin account email', $default = 'admin@example.com');
-        $this->addOption('db-driver', null, InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'mysql');
+        $this->addOption('username', 'u', InputOption::VALUE_REQUIRED, 'Admin username', $default = 'admin');
+        $this->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Admin account password');
+        $this->addOption('title', 't', InputOption::VALUE_OPTIONAL, 'Site title', $default = 'Pagekit');
+        $this->addOption('mail', 'm', InputOption::VALUE_OPTIONAL, 'Admin account email', $default = 'admin@example.com');
+        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'mysql');
         $this->addOption('db-prefix', null, InputOption::VALUE_OPTIONAL, 'DB prefix', $default = 'pk_');
-        $this->addOption('db-host', null, InputOption::VALUE_OPTIONAL, 'MySQL host');
-        $this->addOption('db-name', null, InputOption::VALUE_OPTIONAL, 'MySQL database name');
-        $this->addOption('db-user', null, InputOption::VALUE_OPTIONAL, 'MySQL user');
-        $this->addOption('db-pass', null, InputOption::VALUE_OPTIONAL, 'MySQL password');
-        $this->addOption('locale', null, InputOption::VALUE_OPTIONAL, 'Locale');
+        $this->addOption('db-host', 'H', InputOption::VALUE_OPTIONAL, 'MySQL host');
+        $this->addOption('db-name', 'N', InputOption::VALUE_OPTIONAL, 'MySQL database name');
+        $this->addOption('db-user', 'U', InputOption::VALUE_OPTIONAL, 'MySQL user');
+        $this->addOption('db-pass', 'P', InputOption::VALUE_OPTIONAL, 'MySQL password');
+        $this->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Locale');
     }
 
     /**
