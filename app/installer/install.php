@@ -10,8 +10,6 @@ App::db()->insert('@system_config', ['name' => 'theme-one', 'value' => '{"logo_c
 
 App::db()->insert('@system_node', ['priority' => 1, 'status' => 1, 'title' => 'Home', 'slug' => 'home', 'path' => '/home', 'link' => '@page/1', 'type' => 'page', 'menu' => 'main', 'data' => "{\"defaults\":{\"id\":1}}"]);
 
-App::db()->insert('@system_node', ['priority' => 2, 'status' => 1, 'title' => 'Blog', 'slug' => 'blog', 'path' => '/blog', 'link' => '@blog', 'type' => 'blog', 'menu' => 'main']);
-
 App::db()->insert('@system_widget', ['title' => 'Hello, I\'m Pagekit', 'type' => 'system/text', 'status' => 1, 'nodes' => 1, 'data' => '{"content":"<h1 class=\"uk-heading-large uk-margin-large-bottom\">Hello, I\'m Pagekit,<br class=\"uk-hidden-small\"> your new favorite CMS.<\/h1>\n\n<a class=\"uk-button uk-button-large\" href=\"http:\/\/www.pagekit.com\">Get started<\/a>"}']);
 
 App::db()->insert('@system_widget', ['title' => 'Powered by Pagekit', 'type' => 'system/text', 'status' => 1, 'data' => '{"content":"<ul class=\"uk-grid uk-grid-medium uk-flex uk-flex-center\">\n    <li><a href=\"https:\/\/github.com\/pagekit\" class=\"uk-icon-hover uk-icon-small uk-icon-github\"><\/a><\/li>\n    <li><a href=\"https:\/\/twitter.com\/pagekit\" class=\"uk-icon-hover uk-icon-small uk-icon-twitter\"><\/a><\/li>\n    <li><a href=\"https:\/\/gitter.im\/pagekit\/pagekit\" class=\"uk-icon-hover uk-icon-small uk-icon-comment-o\"><\/a><\/li>\n    <li><a href=\"https:\/\/plus.google.com\/communities\/104125443335488004107\" class=\"uk-icon-hover uk-icon-small uk-icon-google-plus\"><\/a><\/li>\n<\/ul>\n\n<p>Powered by <a href=\"https:\/\/pagekit.com\">Pagekit<\/a><\/p>"}']);
