@@ -11,6 +11,7 @@
 - Fixed widget settings validation
 - Fixed relative date for languages without plural
 - Fixed non expiring local storage
+- Fixed style and script helper for use in Twig templates
 
 ### Changed
 - Improved widget visibility settings

@@ -37,4 +37,9 @@ class FileAsset extends Asset
     {
         return file_exists($this->source) ? $this->source : false;
     }
+
+    public function __toString()
+    {
+        return '';
+    }
 }
