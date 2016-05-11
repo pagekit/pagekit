@@ -7,6 +7,7 @@
 - SSL support for location widget
 
 ### Fixed
+- Fixed touch support in backend
 - Fixed superfluous request caching
 - Fixed widget settings validation
 - Fixed relative date for languages without plural
