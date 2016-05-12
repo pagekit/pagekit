@@ -6,6 +6,11 @@
 - Parse MySQL Port from hostname in installer
 - SSL support for location widget
 
+### Changed
+- Improved widget visibility settings
+- Redirect to extensions/themes overview after install and activation from marketplace
+- Changed signature of setup command
+
 ### Fixed
 - Fixed touch support in backend
 - Fixed superfluous request caching
@@ -13,11 +18,6 @@
 - Fixed relative date for languages without plural
 - Fixed non expiring local storage
 - Fixed style and script helper for use in Twig templates
-
-### Changed
-- Improved widget visibility settings
-- Redirect to extensions/themes overview after install and activation from marketplace
-- Changed signature of setup command
 
 ## 1.0.2 (April 22, 2016)
 
