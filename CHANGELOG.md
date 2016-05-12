@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.3 (May 11, 2016)
 
 ### Added
 - Parse MySQL Port from hostname in installer
