@@ -17,7 +17,7 @@ class StartCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Starts the built-in web server.';
+    protected $description = 'Starts the built-in web server';
 
     /**
      * {@inheritdoc}

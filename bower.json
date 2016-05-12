@@ -1,7 +1,7 @@
 {
   "name": "pagekit",
   "dependencies": {
-    "JSONStorage": "~1.0.0",
+    "JSONStorage": "~1.0.2",
     "lodash": "~3.10.1",
     "uikit": "master",
     "vue": "~1.0.21",

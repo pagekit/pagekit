@@ -58,15 +58,20 @@ var Installer = {
 
         stepDatabase: function () {
 
-            var database = this.config.database;
+            var config = _.cloneDeep(this.config);
 
-            Object.keys(database.connections).forEach(function(name) {
-                if (name != database.default) {
-                    delete(database.connections[name]);
+            _.forEach(config.database.connections, function (connection, name) {
+                if (name != config.database.default) {
+                    delete(config.database.connections[name]);
+                } else if (connection.host) {
+                    connection.host = connection.host.replace(/:(\d+)$/, function (match, port) {
+                        connection.port = port;
+                        return '';
+                    });
                 }
             });
 
-            this.resource.post({action: 'check'}, {config: this.config, locale: this.locale}).then(function (res) {
+            this.resource.post({action: 'check'}, {config: config, locale: this.locale}).then(function (res) {
 
                 var data = res.data;
                 if (!Vue.util.isPlainObject(data)) {
@@ -75,6 +80,7 @@ var Installer = {
 
                 if (data.status == 'no-tables') {
                     this.gotoStep('site');
+                    this.config = config;
                 } else {
                     this.$set('status', data.status);
                     this.$set('message', data.message);

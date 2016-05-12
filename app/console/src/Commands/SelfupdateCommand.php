@@ -23,7 +23,7 @@ class SelfupdateCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Checks for newer Pagekit versions and installs the latest.';
+    protected $description = 'Checks for newer Pagekit versions and installs the latest';
 
     /**
      * {@inheritdoc}

@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.3 (May 11, 2016)
+
+### Added
+- Parse MySQL Port from hostname in installer
+- SSL support for location widget
+
+### Changed
+- Improved widget visibility settings
+- Redirect to extensions/themes overview after install and activation from marketplace
+- Changed signature of setup command
+
+### Fixed
+- Fixed touch support in backend
+- Fixed superfluous request caching
+- Fixed widget settings validation
+- Fixed relative date for languages without plural
+- Fixed non expiring local storage
+- Fixed style and script helper for use in Twig templates
+
 ## 1.0.2 (April 22, 2016)
 
 ### Fixed

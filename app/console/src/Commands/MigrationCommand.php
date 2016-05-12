@@ -17,7 +17,7 @@ class MigrationCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Migrates Pagekit.';
+    protected $description = 'Migrates Pagekit';
 
     /**
      * {@inheritdoc}

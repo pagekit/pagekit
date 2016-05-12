@@ -71,7 +71,7 @@
                                 <div class="uk-form-controls">
                                     <select id="form-dbdriver" class="uk-width-1-1" name="dbdriver" v-model="config.database.default">
                                         <option value="sqlite" v-if="sqlite">SQLite</option>
-                                        <option value="mysql">MySql</option>
+                                        <option value="mysql">MySQL</option>
                                     </select>
                                 </div>
                             </div>

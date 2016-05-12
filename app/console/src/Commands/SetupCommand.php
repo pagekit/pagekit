@@ -21,36 +21,33 @@ class SetupCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Setup a Pagekit installation.';
+    protected $description = 'Setup a Pagekit installation';
 
     /**
      * {@inheritdoc}
      */
     protected function configure()
     {
-        $this->addOption('adminpass', null, InputOption::VALUE_REQUIRED, 'Admin account password.');
-        $this->addOption('adminmail', null, InputOption::VALUE_OPTIONAL, 'Admin account email.', $default='admin@example.com');
-        $this->addOption('dbdriver',  null, InputOption::VALUE_REQUIRED, 'DB driver (sqlite or mysql). Default: mysql', $default='mysql');
-        $this->addOption('dbprefix',  null, InputOption::VALUE_OPTIONAL, 'DB prefix. Default: pk_', $default='pk_');
-        $this->addOption('dbhost',    null, InputOption::VALUE_OPTIONAL, 'MySQL host.', $default='localhost');
-        $this->addOption('dbname',    null, InputOption::VALUE_OPTIONAL, 'MySQL database name.', $default='pagekit');
-        $this->addOption('dbuser',    null, InputOption::VALUE_OPTIONAL, 'MySQL user. Default: root', $default='root');
-        $this->addOption('dbpass',    null, InputOption::VALUE_OPTIONAL, 'MySQL password. Default: <empty>', $default='');
-        $this->addOption('locale',    null, InputOption::VALUE_OPTIONAL, 'Locale. Default: en_US', $default='en_US');
+        $this->addOption('username', 'u', InputOption::VALUE_REQUIRED, 'Admin username', $default = 'admin');
+        $this->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Admin account password');
+        $this->addOption('title', 't', InputOption::VALUE_OPTIONAL, 'Site title', $default = 'Pagekit');
+        $this->addOption('mail', 'm', InputOption::VALUE_OPTIONAL, 'Admin account email', $default = 'admin@example.com');
+        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'sqlite');
+        $this->addOption('db-prefix', null, InputOption::VALUE_OPTIONAL, 'DB prefix', $default = 'pk_');
+        $this->addOption('db-host', 'H', InputOption::VALUE_OPTIONAL, 'MySQL host');
+        $this->addOption('db-name', 'N', InputOption::VALUE_OPTIONAL, 'MySQL database name');
+        $this->addOption('db-user', 'U', InputOption::VALUE_OPTIONAL, 'MySQL user');
+        $this->addOption('db-pass', 'P', InputOption::VALUE_OPTIONAL, 'MySQL password');
+        $this->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Locale');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
 
-        // Check parameters
-        if(empty($this->option('adminpass'))) {
-            $this->error("Missing admin password.");
-            exit;
-        }
-
-        if( !in_array($this->option('dbdriver'), ['mysql', 'sqlite'])) {
+        if (!in_array($this->option('db-driver'), ['mysql', 'sqlite'])) {
             $this->error("Unsupported db driver.");
             exit;
         }
@@ -64,10 +61,10 @@ class SetupCommand extends Command
         $app->boot();
 
         $app['module']->load('installer');
-        
+
         $installer = new Installer($app);
 
-        $dbDriver = $this->option('dbdriver');
+        $dbDriver = $this->option('db-driver');
 
         $config = [
             'locale' => $this->option('locale'),
@@ -75,20 +72,20 @@ class SetupCommand extends Command
                 'default' => $dbDriver,
                 'connections' => [
                     $dbDriver => [
-                        'dbname' => $this->option('dbname'),
-                        'host' => $this->option('dbhost'),
-                        'user' => $this->option('dbuser'),
-                        'password' => $this->option('dbpass'),
-                        'prefix' => $this->option('dbprefix')
+                        'dbname' => $this->option('db-name'),
+                        'host' => $this->option('db-host'),
+                        'user' => $this->option('db-user'),
+                        'password' => $this->option('db-pass'),
+                        'prefix' => $this->option('db-prefix')
                     ]
                 ]
             ]
         ];
 
         $user = [
-            'username' => 'admin',
-            'password' => $this->option('adminpass'),
-            'email' => $this->option('adminmail'),
+            'username' => $this->option('username'),
+            'password' => $this->option('password'),
+            'email' => $this->option('mail'),
         ];
 
         $options = [
@@ -97,7 +94,7 @@ class SetupCommand extends Command
                 'admin' => ['locale' => $this->option('locale')]
             ],
             'system/site' => [
-                'title' => 'Pagekit'
+                'title' => $this->option('title')
             ]
         ];
 
@@ -105,7 +102,7 @@ class SetupCommand extends Command
         $status = $result['status'];
         $message = $result['message'];
 
-        if($status == 'success') {
+        if ($status == 'success') {
             $this->line("Done");
         } else {
             $this->error($message);

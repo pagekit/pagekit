@@ -16,7 +16,7 @@ class ClearCacheCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Clears the system cache.';
+    protected $description = 'Clears the system cache';
 
     /**
      * {@inheritdoc}

@@ -20,7 +20,7 @@ class BuildCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Builds a .zip release file.';
+    protected $description = 'Builds a .zip release file';
 
     /**
      * @var string[]

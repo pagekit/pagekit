@@ -63,8 +63,6 @@
 
 <script>
 
-    var api = 'http://api.openweathermap.org/data/2.5', apiKey = '08c012f513db564bd6d4bae94b73cc94';
-
     module.exports = {
 
         type: {
@@ -104,7 +102,7 @@
 
                     source: function (release) {
 
-                        vm.$http.get(api + '/find', {q: this.input.val(), type: 'like', APPID: apiKey}).then(
+                        vm.$http.get('admin/dashboard/weather', {action: 'find', data: {q: this.input.val(), type: 'like'}}).then(
                             function (res) {
 
                                 var data = res.data;
@@ -201,7 +199,7 @@
                     return;
                 }
 
-                this.$http.get(api + '/weather', {id: this.widget.uid, units: 'metric', APPID: apiKey}, {cache: 60}).then(
+                this.$http.get('admin/dashboard/weather', {action: 'weather', data: {id: this.widget.uid, units: 'metric'}}, {cache: 60}).then(
                     function (res) {
                         var data = res.data;
                         if (data.cod == 200) {

@@ -16,7 +16,7 @@ module.exports = function (Vue) {
                             key = '_resource.' + request.cache.key;
                         } else {
                             lifetime = request.cache;
-                            key = md5(JSON.stringify(request));
+                            key = '_resource.' + md5(JSON.stringify(request));
                         }
 
                         hit = Vue.cache.get(key);
@@ -32,7 +32,7 @@ module.exports = function (Vue) {
 
                 response: function (response) {
 
-                    if (!hit && response.ok) {
+                    if (key && !hit && response.ok) {
                         Vue.cache.set(key, response, lifetime);
                     }
 

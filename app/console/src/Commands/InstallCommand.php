@@ -19,7 +19,7 @@ class InstallCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected $description = 'Installs a Pagekit package.';
+    protected $description = 'Installs a Pagekit package';
 
     /**
      * {@inheritdoc}

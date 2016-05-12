@@ -35,7 +35,7 @@
             label: 'Settings'
         },
 
-        props: ['widget', 'config'],
+        props: ['widget', 'config', 'form'],
 
         created: function () {
             this.$options.partials = this.$parent.$options.partials;

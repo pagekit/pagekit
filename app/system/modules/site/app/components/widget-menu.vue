@@ -95,7 +95,7 @@
             label: 'Settings'
         },
 
-        props: ['widget', 'config'],
+        props: ['widget', 'config', 'form'],
 
         data: function () {
             return {
