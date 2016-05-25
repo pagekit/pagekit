@@ -8,7 +8,6 @@ use Composer\IO\IOInterface;
 
 class Factory extends BaseFactory
 {
-
     protected static $config = [];
 
     public static function bootstrap($config)
@@ -23,5 +22,4 @@ class Factory extends BaseFactory
 
         return $config;
     }
-
 }

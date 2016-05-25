@@ -153,6 +153,12 @@ return [
 
         },
 
+        'request' => [function() use ($app) {
+            if (!$app['node']->hasAccess($app['user'])) {
+                $app['kernel']->abort(403, __('Insufficient User Rights.'));
+            }
+        }, -100],
+
         'site' => function ($event, $app) {
 
             $app->on('view.head', function ($event) use ($app) {

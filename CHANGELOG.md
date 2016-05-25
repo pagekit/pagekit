@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Added
+- Added node's access check
+
 ## 1.0.3 (May 11, 2016)
 
 ### Added

@@ -13,10 +13,6 @@ class PageController
             App::abort(404, __('Page not found.'));
         }
 
-        if (!App::node()->hasAccess(App::user())) {
-            App::abort(403, __('Insufficient User Rights.'));
-        }
-
         $page->content = App::content()->applyPlugins($page->content, ['page' => $page, 'markdown' => $page->get('markdown')]);
 
         return [
