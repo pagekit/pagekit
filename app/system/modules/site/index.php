@@ -80,7 +80,7 @@ return [
             'label' => 'Site',
             'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site/page',
-            'access' => 'site: manage site || system: manage widgets || system: manage storage || system: manage settings',
+            'access' => 'site: manage site || system: manage widgets || system: manage storage || system: access settings',
             'active' => '@site*',
             'priority' => 105
         ],
@@ -95,7 +95,7 @@ return [
             'label' => 'Settings',
             'parent' => 'site',
             'url' => '@site/settings',
-            'access' => 'system: manage settings',
+            'access' => 'system: access settings',
             'priority' => 30
         ]
 

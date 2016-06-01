@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Fixed
+- Fixed access check for user and site settings
+
 ### Added
 - Added node's access check
 
