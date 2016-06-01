@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed access check for user and site settings
+- Fixed admin dashboard for Safari private window
 
 ### Added
 - Added node's access check
