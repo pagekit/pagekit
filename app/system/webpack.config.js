@@ -14,7 +14,7 @@ module.exports = [
                 "md5$": assets + "/js-md5/js/md5.min.js",
                 "vue-form$": assets + "/vue-form/src/index.js",
                 "vue-intl$": assets + "/vue-intl/src/index.js",
-                "vue-resource$": assets + "/vue-resource/src/index.js",
+                "vue-resource$": assets + "/vue-resource/dist/vue-resource.common.js",
                 "JSONStorage$": assets + "/JSONStorage/storage.js"
             }
         },
