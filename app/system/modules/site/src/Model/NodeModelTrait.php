@@ -90,6 +90,11 @@ trait NodeModelTrait
             $node->slug = $node->title;
         }
 
+        // A node cannot have itself as a parent
+        if ($node->parent_id === $node->id) {
+            $node->parent_id = 0;
+        }
+
         // Ensure unique slug
         while (self::where(['slug = ?', 'parent_id= ?'], [$node->slug, $node->parent_id])->where(function ($query) use ($id) {
             if ($id) $query->where('id <> ?', [$id]);

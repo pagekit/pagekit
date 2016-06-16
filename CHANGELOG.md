@@ -5,6 +5,7 @@
 ### Fixed
 - Fixed access check for user and site settings
 - Fixed admin dashboard for Safari private window
+- Fixed a situation where a node could be assigned as its own parent
 
 ### Added
 - Added node's access check
