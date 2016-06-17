@@ -4,20 +4,22 @@ module.exports = {
 
     data: {
         email: '',
-        error: '',
-        success: ''
+        message: '',
+        success: false,
+        form: {}
     },
 
     methods: {
 
         submit: function () {
 
-            this.error = null;
-
+            this.message = '';
             this.$http.post('user/resetpassword/request', { email: this.email }).then(function (res) {
-                    this.success = res.data.message;
+                    this.message = res.data.message;
+                    this.success = true;
                 }, function (error) {
-                    this.error = error.data;
+                    this.message = error.data;
+                    this.success = false;
                 }
             );
         }
