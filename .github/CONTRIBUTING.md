@@ -44,7 +44,7 @@ Pagekit's backend is available in multiple languages. As the backend evolves, we
 need active help of native speakers in all languages to keep translations up to date
 and improve the wording if possible.
 
-Although translation files are included in the main repository, please ***do not**
+Although translation files are included in the main repository, please **do not**
 change the translation files directly. Instead, please use Transifex to translate
 to your language: [https://www.transifex.com/pagekit/pagekit-cms/](https://www.transifex.com/pagekit/pagekit-cms/)
 
