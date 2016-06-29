@@ -105,15 +105,14 @@ class RegistrationController
      */
     public function activateAction($username, $activation)
     {
-        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
+        if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'login IS NULL'])->first()) {
             App::abort(400, __('Invalid key.'));
         }
 
+        $verifying = false;
         if ($this->module->config('require_verification') && !$user->get('verified')) {
-            $verifying = true;
             $user->set('verified', true);
-        } else {
-            $verifying = false;
+            $verifying = true;
         }
 
         if ($this->module->config('registration') === 'approval' && $user->status === User::STATUS_BLOCKED && $verifying) {
