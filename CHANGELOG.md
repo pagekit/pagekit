@@ -2,6 +2,9 @@
 
 ## 1.0.4 (June 29, 2016)
 
+### Added
+- Added node's access check
+
 ### Fixed
 - Fixed access check for user and site settings
 - Fixed admin dashboard for Safari private window
@@ -9,9 +12,6 @@
 - Fixed backend password recovery
 - Fixed user approval if verification is activated as well
 - Fixed user verification state
-
-### Added
-- Added node's access check
 
 ## 1.0.3 (May 11, 2016)
 
