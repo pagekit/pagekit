@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.4 (June 29, 2016)
 
 ### Fixed
 - Fixed access check for user and site settings
