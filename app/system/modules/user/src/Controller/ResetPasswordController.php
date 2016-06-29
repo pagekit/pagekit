@@ -89,8 +89,6 @@ class ResetPasswordController
      */
     public function confirmAction($username = "", $activation = "")
     {
-        $error = '';
-
         if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
             App::abort(400, __('Invalid key.'));
         }
@@ -99,7 +97,7 @@ class ResetPasswordController
             App::abort(400, __('Your account has not been activated or is blocked.'));
         }
 
-        if (!error && 'POST' === App::request()->getMethod()) {
+        if ('POST' === App::request()->getMethod()) {
 
             try {
 
@@ -137,7 +135,7 @@ class ResetPasswordController
             ],
             'username' => $username,
             'activation' => $activation,
-            'error' => $error
+            'error' => isset($error) ? $error : ''
         ];
     }
 
