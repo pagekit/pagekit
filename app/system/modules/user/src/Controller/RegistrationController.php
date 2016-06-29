@@ -116,7 +116,7 @@ class RegistrationController
             $verifying = false;
         }
 
-        if ($this->module->config('registration') == 'approval' && !$user->status === User::STATUS_ACTIVE && $verifying) {
+        if ($this->module->config('registration') === 'approval' && $user->status === User::STATUS_BLOCKED && $verifying) {
             $user->activation = App::get('auth.random')->generateString(32);
             $this->sendApproveMail($user);
             $message = __('Your email has been verified. Once an administrator approves your account, you will be notified by email.');
