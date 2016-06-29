@@ -47,7 +47,7 @@
 
                 </form>
 
-                <form class="js-toggle uk-form tm-form uk-hidden" action="<?= $view->url('@system/resetpassword/reset') ?>" method="post">
+                <form class="js-toggle uk-form tm-form uk-hidden" action="<?= $view->url('@user/resetpassword/request') ?>" method="post">
 
                     <div class="uk-panel uk-panel-box">
 

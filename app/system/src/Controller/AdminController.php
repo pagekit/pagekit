@@ -18,9 +18,9 @@ class AdminController
 
     /**
      * @Route("/admin/login", defaults={"_maintenance"=true})
-     * @Request({"redirect": "string"})
+     * @Request({"redirect": "string", "message": "string"})
      */
-    public function loginAction($redirect = '')
+    public function loginAction($redirect = '', $message = '')
     {
         if (App::user()->isAuthenticated()) {
             return App::redirect('@system');
@@ -33,7 +33,8 @@ class AdminController
                 'layout' => false
             ],
             'last_username' => App::session()->get(Auth::LAST_USERNAME),
-            'redirect' => $redirect ?: App::url('@system')
+            'redirect' => $redirect ?: App::url('@system'),
+            'message' => $message
         ];
     }
 

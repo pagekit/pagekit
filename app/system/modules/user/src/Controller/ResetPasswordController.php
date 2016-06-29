@@ -18,7 +18,7 @@ class ResetPasswordController
         return [
             '$view' => [
                 'title' => __('Reset'),
-                'name'  => 'system/user/reset-request.php',
+                'name' => 'system/user/reset-request.php',
             ],
             'error' => ''
         ];
@@ -59,9 +59,9 @@ class ResetPasswordController
 
                 $mail = App::mailer()->create();
                 $mail->setTo($user->email)
-                     ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
-                     ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
-                     ->send();
+                    ->setSubject(__('Reset password for %site%.', ['%site%' => App::module('system/site')->config('title')]))
+                    ->setBody(App::view('system/user:mails/reset.php', compact('user', 'url', 'mail')), 'text/html')
+                    ->send();
 
             } catch (\Exception $e) {
                 throw new Exception(__('Unable to send confirmation link.'));
@@ -69,12 +69,18 @@ class ResetPasswordController
 
             $user->save();
 
-            return [
-                'message' => __('Check your email for the confirmation link.')
-            ];
+            App::message()->success(__('Check your email for the confirmation link.'));
+
+            return App::redirect('@user/login');
 
         } catch (Exception $e) {
-            App::abort(400, $e->getMessage());
+            return [
+                '$view' => [
+                    'title' => __('Reset'),
+                    'name' => 'system/user/reset-request.php',
+                ],
+                'error' => $e->getMessage()
+            ];
         }
     }
 
@@ -83,17 +89,17 @@ class ResetPasswordController
      */
     public function confirmAction($username = "", $activation = "")
     {
+        $error = '';
+
         if (empty($username) || empty($activation) || !$user = User::where(compact('username', 'activation'))->first()) {
-            return $this->messageView(__('Invalid key.'), $success = false);
+            App::abort(400, __('Invalid key.'));
         }
 
         if ($user->isBlocked()) {
-            return $this->messageView(__('Your account has not been activated or is blocked.'), $success = false);
+            App::abort(400, __('Your account has not been activated or is blocked.'));
         }
 
-        $error = '';
-
-        if ('POST' === App::request()->getMethod()) {
+        if (!error && 'POST' === App::request()->getMethod()) {
 
             try {
 
@@ -127,7 +133,7 @@ class ResetPasswordController
         return [
             '$view' => [
                 'title' => __('Reset Confirm'),
-                'name'  => 'system/user/reset-confirm.php'
+                'name' => 'system/user/reset-confirm.php'
             ],
             'username' => $username,
             'activation' => $activation,
@@ -135,15 +141,4 @@ class ResetPasswordController
         ];
     }
 
-    protected function messageView($message, $success = true)
-    {
-        return [
-            '$view' => [
-                'title' => __('Reset Password'),
-                'name' => 'system/user/message.php'
-            ],
-            'message' => $message,
-            'success' => $success
-        ];
-    }
 }

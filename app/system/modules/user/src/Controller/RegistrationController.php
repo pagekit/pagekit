@@ -42,8 +42,6 @@ class RegistrationController
      */
     public function registerAction($data)
     {
-        $message = '';
-
         try {
 
             if (App::user()->isAuthenticated() || $this->module->config('registration') == 'admin') {
@@ -113,8 +111,7 @@ class RegistrationController
         App::message()->success($message);
 
         return [
-            'message' => $message,
-            'redirect' => App::url('@user/login', [], true)
+            'redirect' => App::url('@user/login')
         ];
     }
 
@@ -124,16 +121,7 @@ class RegistrationController
     public function activateAction($username, $activation)
     {
         if (empty($username) || empty($activation) || !$user = User::where(['username' => $username, 'activation' => $activation, 'status' => User::STATUS_BLOCKED, 'login IS NULL'])->first()) {
-
-            return [
-                '$view' => [
-                    'title' => __('User Activation'),
-                    'name' => 'system/user/message.php'
-                ],
-                'message' => __('Invalid key.'),
-                'success' => false
-            ];
-
+            App::abort(400, __('Invalid key.'));
         }
 
         if ($admin = $this->module->config('registration') == 'approval' and !$user->get('verified')) {
