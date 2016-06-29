@@ -96,7 +96,7 @@ return [
             'icon' => 'system/user:assets/images/icon-users.svg',
             'url' => '@user',
             'active' => '@user(/*)?',
-            'access' => 'user: manage users || user: manage user permissions || system: manage settings',
+            'access' => 'user: manage users || user: manage user permissions || system: access settings',
             'priority' => 115
         ],
         'user: users' => [
@@ -122,7 +122,7 @@ return [
             'label' => 'Settings',
             'parent' => 'user',
             'url' => '@user/settings',
-            'access' => 'system: manage settings'
+            'access' => 'system: access settings'
         ]
 
     ],

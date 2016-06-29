@@ -4,7 +4,6 @@ namespace Pagekit\View\Asset;
 
 class UrlAsset extends Asset
 {
-
     /**
      * {@inheritdoc}
      */
@@ -12,5 +11,4 @@ class UrlAsset extends Asset
     {
         return hash('crc32b', $this->source . $salt);
     }
-
 }

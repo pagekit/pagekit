@@ -36,9 +36,8 @@ class Composer
     protected $file = 'packages.php';
 
     /**
-     * @param $config
-     * @param null $output
-     * @param bool $packagist
+     * @param array $config
+     * @param null  $output
      */
     public function __construct($config, $output = null)
     {

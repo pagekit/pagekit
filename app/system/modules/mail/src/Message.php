@@ -109,11 +109,11 @@ class Message extends Swift_Message implements MessageInterface
 	 * Prepare and attach the given attachment.
 	 *
 	 * @param  Swift_Mime_Attachment $attachment
-	 * @param  string                $mime
-     * @param  string                $name
+	 * @param  string                $name
+     * @param  string                $mime
 	 * @return self
 	 */
-	protected function prepareAttachment(Swift_Mime_Attachment $attachment, $mime = null, $name = null)
+	protected function prepareAttachment(Swift_Mime_Attachment $attachment, $name = null, $mime = null)
 	{
 		if (null !== $mime) {
 			$attachment->setContentType($mime);

@@ -28,17 +28,17 @@ class SetupCommand extends Command
      */
     protected function configure()
     {
-        $this->addOption('username', 'u', InputOption::VALUE_REQUIRED, 'Admin username', $default = 'admin');
+        $this->addOption('username', 'u', InputOption::VALUE_REQUIRED, 'Admin username', 'admin');
         $this->addOption('password', 'p', InputOption::VALUE_REQUIRED, 'Admin account password');
-        $this->addOption('title', 't', InputOption::VALUE_OPTIONAL, 'Site title', $default = 'Pagekit');
-        $this->addOption('mail', 'm', InputOption::VALUE_OPTIONAL, 'Admin account email', $default = 'admin@example.com');
-        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', $default = 'sqlite');
-        $this->addOption('db-prefix', null, InputOption::VALUE_OPTIONAL, 'DB prefix', $default = 'pk_');
+        $this->addOption('title', 't', InputOption::VALUE_OPTIONAL, 'Site title', 'Pagekit');
+        $this->addOption('mail', 'm', InputOption::VALUE_OPTIONAL, 'Admin account email', 'admin@example.com');
+        $this->addOption('db-driver', 'd', InputOption::VALUE_REQUIRED, 'DB driver (\'sqlite\' or \'mysql\')', 'sqlite');
+        $this->addOption('db-prefix', null, InputOption::VALUE_OPTIONAL, 'DB prefix', 'pk_');
         $this->addOption('db-host', 'H', InputOption::VALUE_OPTIONAL, 'MySQL host');
         $this->addOption('db-name', 'N', InputOption::VALUE_OPTIONAL, 'MySQL database name');
         $this->addOption('db-user', 'U', InputOption::VALUE_OPTIONAL, 'MySQL user');
         $this->addOption('db-pass', 'P', InputOption::VALUE_OPTIONAL, 'MySQL password');
-        $this->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Locale');
+        $this->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Locale', 'en_GB');
     }
 
     /**

@@ -81,7 +81,7 @@ class NodeController
 
     /**
      * @Route("site/settings")
-     * @Access("system: manage settings", admin=true)
+     * @Access("system: access settings", admin=true)
      */
     public function settingsAction()
     {

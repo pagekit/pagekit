@@ -1,13 +1,13 @@
 {
   "name": "pagekit",
   "dependencies": {
-    "JSONStorage": "~1.0.2",
+    "JSONStorage": "~1.0.3",
     "lodash": "~3.10.1",
     "uikit": "master",
     "vue": "~1.0.21",
     "vue-form": "pagekit/vue-form#master",
-    "vue-intl": "~0.1.1",
-    "vue-resource": "#master"
+    "vue-intl": "~0.2.1",
+    "vue-resource": "~0.7.4"
   },
   "devDependencies": {
     "js-md5": "~1.1.0"
