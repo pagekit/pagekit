@@ -26,7 +26,7 @@ class BuildCommand extends Command
      * @var string[]
      */
     protected $excludes = [
-        '^(tmp|config\.php|pagekit.+\.zip|pagekit.db)',
+        '^(tmp|config\.php|pagekit.+\.zip|pagekit.db|.+\.map)',
         '^app\/assets\/[^\/]+\/(dist\/vue-.+\.js|dist\/jquery\.js|lodash\.js)',
         '^app\/assets\/(jquery|vue)\/(src|perf|external)',
         '^app\/vendor\/lusitanian\/oauth\/examples',
