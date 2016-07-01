@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 (July 1, 2016)
+
+### Fixed
+- Fixed asset upload
+
 ## 1.0.4 (June 29, 2016)
 
 ### Added
