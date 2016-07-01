@@ -1,0 +1,6 @@
+
+machine:
+  node:
+    version: 5
+  php:
+    version: 7.0.4
