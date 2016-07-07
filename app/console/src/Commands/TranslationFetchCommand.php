@@ -72,12 +72,11 @@ class TranslationFetchCommand extends Command
     /**
      * Returns the extension path.
      *
-     * @param  string $path
-     * @return array
+     * @param $resource
+     * @return string|boolean
      */
     protected function getPath($resource)
     {
-        $root = $this->container['path.packages'];
         $vendor = 'pagekit';
 
         if ($resource == "system") {
