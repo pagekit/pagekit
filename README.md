@@ -38,7 +38,7 @@ to our [contribution guidelines](.github/CONTRIBUTING.md). Thanks!
 
 ## Copyright and License
 
-Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE.md).
+Copyright [YOOtheme](http://www.yootheme.com) GmbH under the [MIT license](LICENSE).
 
 ## Credits
 
