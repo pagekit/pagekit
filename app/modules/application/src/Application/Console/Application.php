@@ -62,4 +62,13 @@ class Application extends BaseApplication
 
         return parent::add($command);
     }
+    
+    /**
+     *  Get the current container
+     *  @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;   
+    }
 }
