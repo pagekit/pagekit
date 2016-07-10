@@ -1,5 +1,5 @@
 <template>
-    <div :class="modifier">
+    <div :class="classes">
         <label type="button" class="uk-button" v-for="option in options" :class="getButtonClass($index)"><input type="checkbox" style="display: none;" v-model="field" :value="option.value" :disabled="disabled || option.disabled" /> {{ option.label | trans }}</label>
     </div>
 </template>
@@ -43,6 +43,16 @@
                 }
 
                 return button_class;
+            }
+        },
+
+        computed: {
+            classes: function () {
+                var classes = this.modifier.split(' ');
+
+                classes.push('uk-button-group')
+
+                return classes;
             }
         }
     };

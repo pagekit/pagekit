@@ -43,14 +43,14 @@
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
                 <div class="uk-form-controls">
-                    <button-radio :field.sync="user.status" :options="statuses" modifier="uk-button-group uk-form-width-large" button="uk-width-1-2" :active="user.status == 1 ? 'uk-button-success' : 'uk-button-danger'" :disabled="config.currentUser == user.id"></button-radio>
+                    <button-radio :field.sync="user.status" :options="statuses" modifier="uk-form-width-large" button="uk-width-1-2" :active="user.status == 1 ? 'uk-button-success' : 'uk-button-danger'" :disabled="config.currentUser == user.id"></button-radio>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
                 <div class="uk-form-controls" v-if="config.roles.length <= 3">
-                    <button-checkbox :field.sync="user.roles" :options="roles" modifier="uk-button-group uk-form-width-large" :button="'uk-width-1-'+config.roles.length"></button-checkbox>
+                    <button-checkbox :field.sync="user.roles" :options="roles" modifier="uk-form-width-large" :button="'uk-width-1-'+config.roles.length"></button-checkbox>
                 </div>
                 <div class="uk-form-controls uk-form-controls-text" v-else>
                     <p class="uk-form-controls-condensed" v-for="role in config.roles">
