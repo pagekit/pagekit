@@ -42,16 +42,17 @@
 
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Status' | trans }}</span>
-                <div class="uk-form-controls uk-form-controls-text">
-                    <p class="uk-form-controls-condensed" v-for="status in config.statuses">
-                        <label><input type="radio" v-model="user.status" :value="parseInt($key)" :disabled="config.currentUser == user.id"> {{ status }}</label>
-                    </p>
+                <div class="uk-form-controls">
+                    <button-radio :field.sync="user.status" :options="statuses" modifier="uk-button-group uk-form-width-large" button="uk-width-1-2" :active="user.status == 1 ? 'uk-button-success' : 'uk-button-danger'" :disabled="config.currentUser == user.id"></button-radio>
                 </div>
             </div>
 
             <div class="uk-form-row">
                 <span class="uk-form-label">{{ 'Roles' | trans }}</span>
-                <div class="uk-form-controls uk-form-controls-text">
+                <div class="uk-form-controls" v-if="config.roles.length <= 3">
+                    <button-checkbox :field.sync="user.roles" :options="roles" modifier="uk-button-group uk-form-width-large" :button="'uk-width-1-'+config.roles.length" :active="user.status == 1 ? 'uk-button-success' : 'uk-button-danger'"></button-checkbox>
+                </div>
+                <div class="uk-form-controls uk-form-controls-text" v-else>
                     <p class="uk-form-controls-condensed" v-for="role in config.roles">
                         <label><input type="checkbox" :value="role.id" :disabled="role.disabled" v-model="user.roles"> {{ role.name }}</label>
                     </p>
@@ -116,13 +117,33 @@
         },
 
         ready: function () {
-    
+
         },
 
         computed: {
 
             isNew: function () {
                 return !this.user.login && this.user.status;
+            },
+
+            statuses: function () {
+                var statuses = [], vm = this;
+
+                $.each(vm.config.statuses, function (index, value) {
+                    statuses.push({ label: value, value: index });
+                });
+
+                return statuses;
+            },
+
+            roles: function () {
+                var roles = [], vm = this;
+
+                $.each(vm.config.roles, function (key, value) {
+                    roles.push({ label: value.name, value: value.id, disabled: value.disabled });
+                });
+
+                return roles;
             }
 
         },
