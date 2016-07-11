@@ -77,6 +77,23 @@ class ModuleManager implements \IteratorAggregate
     }
 
     /**
+     * Gets all modules of a specific type
+     *
+     * @param string $type
+     * @return array
+     */
+    public function getType($type)
+    {
+        $modules = [];
+        foreach ($this->registered as $module) {
+            if (isset($module['type']) && $module['type'] === $type) {
+                $modules[] = $module['name'];
+            }
+        }
+        return $modules;
+    }
+
+    /**
      * Gets all modules.
      *
      * @return array
