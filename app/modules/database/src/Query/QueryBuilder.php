@@ -5,6 +5,7 @@ namespace Pagekit\Database\Query;
 use Closure;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Types\Type;
 use Pagekit\Database\Connection;
 use PDO;
@@ -251,6 +252,11 @@ class QueryBuilder
         $values = (array) $values;
 
         if (count($values) === 1 && $this->connection->getDatabasePlatform() instanceof MySqlPlatform) {
+            $value = $this->connection->quote(current($values));
+            return $this->addWhere("{$not} FIND_IN_SET({$value}, {$column})", [], $type);
+        }
+
+        if (count($values) === 1 && $this->connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
             $value = $this->connection->quote(current($values));
             return $this->addWhere("{$not} FIND_IN_SET({$value}, {$column})", [], $type);
         }

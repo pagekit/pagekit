@@ -84,6 +84,20 @@ $config = [
 
             ],
 
+            'pgsql' => [
+
+                'driver'   => 'pdo_pgsql',
+                'dbname'   => '',
+                'host'     => 'localhost',
+                'user'     => 'root',
+                'password' => '',
+//                'engine'   => 'InnoDB',
+                'charset'  => 'utf8',
+                'collate'  => 'utf8_unicode_ci',
+                'prefix'   => ''
+
+            ],
+
             'sqlite' => [
 
                 'driver' => 'pdo_sqlite',

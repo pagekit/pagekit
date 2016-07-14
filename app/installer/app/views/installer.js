@@ -16,7 +16,15 @@ var Installer = {
     ready: function () {
 
         this.resource = this.$resource('installer/:action', {}, {post: {method: 'POST'}});
-        this.$set('config.database', {default: this.sqlite ? 'sqlite' : 'mysql'})
+        if (this.sqlite) {
+            db = 'sqlite';
+        } else if (this.mysql) {
+            db = 'mysql';
+        } else if (this.pgsql) {
+            db = 'pgsql';
+        }
+        this.$set('config.database', {default: db})
+        // this.$set('config.database', {default: this.sqlite ? 'sqlite' : 'mysql'})
 
     },
 

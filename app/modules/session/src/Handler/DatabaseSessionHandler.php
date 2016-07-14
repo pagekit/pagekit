@@ -4,6 +4,7 @@ namespace Pagekit\Session\Handler;
 
 use Doctrine\DBAL\ConnectionException;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
+use Doctrine\DBAL\Platforms\PostgreSqlPlatform;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use Pagekit\Database\Connection;
 
@@ -142,6 +143,11 @@ class DatabaseSessionHandler implements \SessionHandlerInterface
         if ($platform instanceof MySqlPlatform) {
             return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
             . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
+
+        } elseif ($platform instanceof PostgreSqlPlatform) {
+            return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
+            . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
+
         } elseif ($platform instanceof SqlitePlatform) {
             return  "INSERT OR REPLACE INTO {$this->table} (id, data, time) VALUES (:id, :data, :time)";
         }

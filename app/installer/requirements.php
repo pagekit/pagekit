@@ -451,8 +451,8 @@ class PagekitRequirements extends RequirementCollection
         if (class_exists('PDO')) {
             $drivers = PDO::getAvailableDrivers();
             $this->addRequirement(
-                (in_array('mysql', $drivers) || in_array('sqlite', $drivers)),
-                sprintf('PDO should have MySQL or SQLite drivers installed (currently available: %s)', count($drivers) ? implode(', ', $drivers) : 'none'),
+                (in_array('mysql', $drivers) || in_array('sqlite', $drivers) || in_array('pgsql', $drivers)),
+                sprintf('PDO should have MySQL, SQLite or PostgreSQL drivers installed (currently available: %s)', count($drivers) ? implode(', ', $drivers) : 'none'),
                 'Install <strong>PDO drivers</strong>.'
             );
         }
