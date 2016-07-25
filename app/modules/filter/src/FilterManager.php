@@ -16,6 +16,7 @@ class FilterManager
         'digits'         => 'Pagekit\Filter\DigitsFilter',
         'int'            => 'Pagekit\Filter\IntFilter',
         'integer'        => 'Pagekit\Filter\IntFilter',
+        'float'          => 'Pagekit\Filter\FloatFilter',
         'json'           => 'Pagekit\Filter\JsonFilter',
         'pregreplace'    => 'Pagekit\Filter\PregReplaceFilter',
         'slugify'        => 'Pagekit\Filter\SlugifyFilter',
