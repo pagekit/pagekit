@@ -12,6 +12,6 @@ class FloatFilter extends AbstractFilter
      */
     public function filter($value)
     {
-        return floatval( (string) $value);
+        return floatval((string) $value);
     }
 }
