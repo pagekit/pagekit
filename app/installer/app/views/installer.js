@@ -16,14 +16,14 @@ var Installer = {
     ready: function () {
 
         this.resource = this.$resource('installer/:action', {}, {post: {method: 'POST'}});
-        if (this.sqlite) {
-            db = 'sqlite';
-        } else if (this.mysql) {
-            db = 'mysql';
-        } else if (this.pgsql) {
-            db = 'pgsql';
-        }
-        this.$set('config.database', {default: db})
+        // if (this.sqlite) {
+        //     db = 'sqlite';
+        // } else if (this.mysql) {
+        //     db = 'mysql';
+        // } else if (this.pgsql) {
+        //     db = 'pgsql';
+        // }
+        this.$set('config.database', {default: 'pgsql'})
         // this.$set('config.database', {default: this.sqlite ? 'sqlite' : 'mysql'})
 
     },

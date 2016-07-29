@@ -126,39 +126,39 @@
                             </div>
                             <div class="uk-form-row" v-if="config.database.default == 'pgsql'">
                                 <div class="uk-form-row">
-                                    <label for="form-mysql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
+                                    <label for="form-pgsql-dbhost" class="uk-form-label">{{ 'Hostname' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.mysql.host" v-validate:required>
+                                        <input id="form-pgsql-dbhost" class="uk-width-1-1" type="text" name="host" value="localhost" v-model="config.database.connections.phsql.host" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.host.invalid">{{ 'Host cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
-                                    <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
+                                    <label for="form-pgsql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-validate:required>
+                                        <input id="form-pgsql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.pgsql.user" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.user.invalid">{{ 'User cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
-                                    <label for="form-mysql-dbpassword" class="uk-form-label">{{ 'Password' | trans }}</label>
+                                    <label for="form-pgsql-dbpassword" class="uk-form-label">{{ 'Password' | trans }}</label>
                                     <div class="uk-form-controls">
                                         <div class="uk-form-password uk-width-1-1">
-                                            <input id="form-mysql-dbpassword" class="uk-width-1-1" type="password" name="password" value="" autocomplete="off" v-model="config.database.connections.mysql.password">
+                                            <input id="form-pgsql-dbpassword" class="uk-width-1-1" type="password" name="password" value="" autocomplete="off" v-model="config.database.connections.pgsql.password">
                                             <a class="uk-form-password-toggle" href="" tabindex="-1" data-uk-form-password="{ lblShow: 'Show', lblHide: 'Hide' }">{{ 'Show' | trans }}</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
-                                    <label for="form-mysql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
+                                    <label for="form-pgsql-dbname" class="uk-form-label">{{ 'Database Name' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbname" class="uk-width-1-1" type="text" name="dbname" value="pagekit" v-model="config.database.connections.mysql.dbname" v-validate:required>
+                                        <input id="form-pgsql-dbname" class="uk-width-1-1" type="text" name="dbname" value="pagekit" v-model="config.database.connections.pgsql.dbname" v-validate:required>
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.dbname.invalid">{{ 'Database name cannot be blank.' | trans }}</p>
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
-                                    <label for="form-mysql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
+                                    <label for="form-pgsql-dbprefix" class="uk-form-label">{{ 'Table Prefix' | trans }}</label>
                                     <div class="uk-form-controls">
-                                        <input id="form-mysql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.mysql.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
+                                        <input id="form-pgsql-dbprefix" class="uk-width-1-1" type="text" name="mysqlprefix" value="pk_" v-model="config.database.connections.pgsql.prefix" v-validate:pattern.literal="/^[a-zA-Z][a-zA-Z0-9._\-]*$/">
                                         <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.mysqlprefix.invalid">{{ 'Prefix must start with a letter and can only contain alphanumeric characters (A-Z, 0-9) and underscore (_)' | trans }}</p>
                                     </div>
                                 </div>
