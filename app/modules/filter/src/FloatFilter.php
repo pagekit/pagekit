@@ -3,7 +3,7 @@
 namespace Pagekit\Filter;
 
 /**
- * This filter converts the value to integer.
+ * This filter converts the value to float.
  */
 class FloatFilter extends AbstractFilter
 {
