@@ -118,7 +118,7 @@ class DatabaseHandler implements HandlerInterface
     public function destroy()
     {
         if ($token = $this->getToken()) {
-            $this->connection->update($this->config['table'], ['status' => 0], ['id' => sha1($token)]);
+            $this->connection->update($this->config['table'], ['status' => self::STATUS_INACTIVE], ['id' => sha1($token)]);
         }
     }
 

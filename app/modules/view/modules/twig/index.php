@@ -13,12 +13,19 @@ return [
 
         $app['twig'] = function ($app) {
 
-            return new Twig_Environment(new TwigLoader(isset($app['locator']) ? new FilesystemLoader($app['locator']) : new SymfonyFilesystemLoader([])), [
+            $twig = new Twig_Environment(new TwigLoader(isset($app['locator']) ? new FilesystemLoader($app['locator']) : new SymfonyFilesystemLoader([])), [
                 'cache' => new TwigCache($app['path.cache']),
-                'auto_reload' => true
+                'auto_reload' => true,
+                'debug' => $app['debug'],
             ]);
 
-        };
+            if (isset($app['debug']) && $app['debug']) {
+                $twig->addExtension(new Twig_Extension_Debug());
+            }
+
+            return $twig;
+
+         };
 
     },
 

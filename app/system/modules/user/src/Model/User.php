@@ -11,7 +11,7 @@ use Pagekit\System\Model\DataModelTrait;
  */
 class User implements UserInterface, \JsonSerializable
 {
-    use DataModelTrait, UserModelTrait;
+    use AccessModelTrait, DataModelTrait, UserModelTrait;
 
     /**
      * The blocked status.
@@ -57,9 +57,6 @@ class User implements UserInterface, \JsonSerializable
     /** @Column */
     public $activation;
 
-    /** @Column(type="simple_array") */
-    public $roles = [];
-
     /**
      * @var array
      */
@@ -102,11 +99,6 @@ class User implements UserInterface, \JsonSerializable
             self::STATUS_ACTIVE => __('Active'),
             self::STATUS_BLOCKED => __('Blocked')
         ];
-    }
-
-    public function hasRole($role)
-    {
-        return in_array($role, $this->roles);
     }
 
     /**

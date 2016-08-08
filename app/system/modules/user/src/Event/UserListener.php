@@ -17,13 +17,19 @@ class UserListener implements EventSubscriberInterface
         User::updateLogin($event->getUser());
     }
 
+    public function onRoleDelete($event, $role)
+    {
+        User::removeRole($role);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function subscribe()
     {
         return [
-            'auth.login' => 'onUserLogin'
+            'auth.login' => 'onUserLogin',
+            'model.role.deleted' => 'onRoleDelete'
         ];
     }
 }

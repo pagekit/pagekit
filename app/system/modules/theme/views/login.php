@@ -24,7 +24,7 @@
                     <div class="uk-panel uk-panel-box">
 
                         <div class="uk-form-row">
-                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('Username') ?>" autofocus>
+                            <input class="uk-form-large uk-width-1-1" type="text" name="credentials[username]" value="<?= htmlspecialchars($last_username) ?>" placeholder="<?= __('Username') ?>" autofocus>
                         </div>
 
                         <div class="uk-form-row">
@@ -36,7 +36,7 @@
                         </p>
 
                         <?php $view->token()->get() ?>
-                        <input type="hidden" name="redirect" value="<?= $redirect ?>">
+                        <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
 
                     </div>
 

@@ -8,7 +8,7 @@
 <form class="uk-form" action="<?= $view->url('@user/authenticate') ?>" method="post">
 
     <div class="uk-form-row">
-        <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $last_username ?>" placeholder="<?= __('username') ?>">
+        <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= htmlspecialchars($last_username) ?>" placeholder="<?= __('username') ?>">
     </div>
 
     <div class="uk-form-row">
@@ -27,7 +27,7 @@
         <?php endif ?>
     </p>
 
-    <input type="hidden" name="redirect" value="<?= $redirect ?>">
+    <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
     <?php $view->token()->get() ?>
 
 </form>
