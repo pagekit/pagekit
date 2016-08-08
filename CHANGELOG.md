@@ -10,7 +10,7 @@
 - Fixed wrong user role assignment in very rare cases (SQLite)
 
 ### Security
-- XSS vulnerabilities at 404 page, discovered by Robert Abela (https://www.netsparker.com)
+- XSS vulnerabilities at 404 page, discovered by Onur Yilmaz (https://www.netsparker.com)
 - XSS vulnerabilities at login page, discovered by Raphael de la Vienne and Luuk Spreeuwenberg
 - SQL injection vulnerability, which can be misused by users with admin privileges, discovered by Raphael de la Vienne and Luuk Spreeuwenberg
 
