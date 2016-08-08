@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.6 (August 8, 2016)
+
+### Added
+- Twig debug mode
+- Float filter for request arguments
+
+### Fixed
+- Fixed wrong user role assignment in very rare cases (SQLite)
+
+### Security
+- XSS vulnerabilities at 404 page, discovered by Robert Abela (https://www.netsparker.com)
+- XSS vulnerabilities at login page, discovered by Raphael de la Vienne and Luuk Spreeuwenberg
+- SQL injection vulnerability, which can be misused by users with admin privileges, discovered by Raphael de la Vienne and Luuk Spreeuwenberg
+
 ## 1.0.5 (July 1, 2016)
 
 ### Fixed
