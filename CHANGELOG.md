@@ -4,6 +4,7 @@
 
 ### Fixed
 - Fixed user role sorting
+- Fixed unintentional duplication of dashboard widgets in rare cases
 
 ## 1.0.6 (August 8, 2016)
 
