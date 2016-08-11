@@ -2,9 +2,14 @@
 
 ## WIP
 
+### Changed
+- Permission to access admin area now includes the right to use the site in maintenance mode
+
 ### Fixed
 - Fixed user role sorting
 - Fixed unintentional duplication of dashboard widgets in rare cases
+- Fixed re-login in maintenance mode for certain API routes
+- Fixed login interceptor to not intercept CORS requests
 
 ## 1.0.6 (August 8, 2016)
 
