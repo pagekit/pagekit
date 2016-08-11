@@ -84,6 +84,7 @@ return [
         ],
         'system: access admin area' => [
             'title' => 'Access admin area',
+            'description' => 'Allows to access the admin area and to use the site in maintenance mode',
             'trusted' => true
         ]
 
