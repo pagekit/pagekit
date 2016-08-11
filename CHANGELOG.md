@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed user role sorting
+
 ## 1.0.6 (August 8, 2016)
 
 ### Added

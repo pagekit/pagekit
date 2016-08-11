@@ -73,10 +73,10 @@ module.exports = {
             }
 
             sortable.element.children().each(function(i) {
-                this.__vfrag__.scope.$set('role.priority', i);
+                this.__v_frag.raw.priority = i;
             });
 
-            this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function (data) {
+            this.Roles.save({ id: 'bulk' }, { roles: this.roles }, function () {
                 this.$notify('Roles reordered.');
             }, function (data) {
                 this.$notify(data, 'danger');
