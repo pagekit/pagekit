@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.7 (August 11, 2016)
 
 ### Changed
 - Permission to access admin area now includes the right to use the site in maintenance mode
