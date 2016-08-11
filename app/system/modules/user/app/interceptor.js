@@ -15,7 +15,7 @@ Vue.http.interceptors.push(function () {
 
         response: function (response) {
 
-            if (response.status !== 401 || options.headers['X-LOGIN']) {
+            if (response.request.crossOrigin || response.status !== 401 || options.headers['X-LOGIN']) {
                return response;
             }
 

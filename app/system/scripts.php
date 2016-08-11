@@ -152,6 +152,19 @@ return [
             }
 
             $util->migrate();
+        },
+
+        '1.0.7' => function ($app) {
+
+            $dashboard = $app->module('system/dashboard');
+            $widgets = $dashboard->getWidgets();
+
+            $ids = array_filter(array_keys($widgets), function ($id) use ($widgets){
+                return $id == $widgets[$id]['id'];
+            });
+
+            $dashboard->saveWidgets(array_intersect_key($widgets, array_flip($ids)));
+
         }
 
     ]

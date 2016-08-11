@@ -18,7 +18,7 @@ class MaintenanceListener implements EventSubscriberInterface
 
         $site = App::module('system/site');
 
-        if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access'))) {
+        if ($site->config('maintenance.enabled') && !(App::isAdmin() || $request->attributes->get('_maintenance') || App::user()->hasAccess('site: maintenance access') || App::user()->hasAccess('system: access admin area'))) {
 
             $message = $site->config('maintenance.msg') ?: __("We'll be back soon.");
             $logo = $site->config('maintenance.logo') ?: 'app/system/assets/images/pagekit-logo-large-black.svg';
@@ -28,7 +28,9 @@ class MaintenanceListener implements EventSubscriberInterface
 
             $types = $request->getAcceptableContentTypes();
 
-            if ('json' == $request->getFormat(array_shift($types))) {
+            if (!App::user()->isAuthenticated() && $request->isXMLHttpRequest()) {
+                App::abort('401', 'Unauthorized');
+            } elseif ('json' == $request->getFormat(array_shift($types))) {
                 $response = App::response()->json($message, 503);
             } else {
                 $response = App::response($response, 503);

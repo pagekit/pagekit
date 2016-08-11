@@ -120,10 +120,11 @@ class PackageScripts
     {
         $updates = $this->get('updates');
 
-        $updates = array_filter($updates, function () use (&$updates) {
-            return version_compare(key($updates), $this->current, '>');
+        $versions = array_filter(array_keys($updates), function ($version) {
+            return version_compare($version, $this->current, '>');
         });
 
+        $updates = array_intersect_key($updates, array_flip($versions));
         uksort($updates, 'version_compare');
 
         return $updates;

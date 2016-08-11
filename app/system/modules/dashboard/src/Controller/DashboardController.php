@@ -58,7 +58,7 @@ class DashboardController
     public function saveWidgetsAction($widgets = [])
     {
 
-        $widgets = array_merge($this->dashboard->getWidgets(), $widgets);
+        $widgets = array_replace($this->dashboard->getWidgets(), $widgets);
 
         $this->dashboard->saveWidgets($widgets);
 
@@ -79,7 +79,7 @@ class DashboardController
 
         $widget['id'] = $id;
 
-        $this->dashboard->saveWidgets(array_merge($this->dashboard->getWidgets(), [$id => $widget]));
+        $this->dashboard->saveWidgets(array_replace($this->dashboard->getWidgets(), [$id => $widget]));
 
         return $widget;
     }
