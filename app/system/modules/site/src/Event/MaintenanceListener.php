@@ -28,7 +28,9 @@ class MaintenanceListener implements EventSubscriberInterface
 
             $types = $request->getAcceptableContentTypes();
 
-            if ('json' == $request->getFormat(array_shift($types))) {
+            if (!App::user()->isAuthenticated() && $request->isXMLHttpRequest()) {
+                App::abort('401', 'Unauthorized');
+            } elseif ('json' == $request->getFormat(array_shift($types))) {
                 $response = App::response()->json($message, 503);
             } else {
                 $response = App::response($response, 503);
