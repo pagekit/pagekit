@@ -160,8 +160,10 @@ return [
         },
 
         'admin' => function () use ($app) {
-            $app->on('view.scripts', function($event, $scripts) {
-                $scripts('auth', 'system/user:app/bundle/interceptor.js', ['vue']);
+            $app->on('view.scripts', function($event, $scripts) use ($app) {
+                if ($app->user()->isAuthenticated()) {
+                    $scripts->register('auth', 'system/user:app/bundle/interceptor.js', ['~vue']);
+                }
             });
         }
 
