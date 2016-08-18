@@ -1,5 +1,14 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed internalization route in maintenance mode
+- Fixed admin logout if an route alias exists
+
+### Changed
+- Make re-login modal available in front end by default
+
 ## 1.0.7 (August 11, 2016)
 
 ### Changed
