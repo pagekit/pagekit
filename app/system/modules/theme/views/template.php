@@ -100,7 +100,7 @@
                     <li class="uk-nav-header">{{ user.username }}</li>
                     <li><a :href="$url.route('')" target="_blank">{{ 'Visit Site' | trans }}</a></li>
                     <li><a :href="$url.route('admin/user/edit', {id: user.id})">{{ 'Settings' | trans }}</a></li>
-                    <li><a :href="$url.route('user/logout', {redirect: 'admin/login'})">{{ 'Logout' | trans }}</a></li>
+                    <li><a href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>">{{ 'Logout' | trans }}</a></li>
                 </ul>
 
             </div>
