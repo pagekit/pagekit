@@ -39,7 +39,7 @@
                         <ul class="uk-grid uk-grid-small uk-flex-middle">
                             <li><a class="tm-icon-help" href="https://gitter.im/pagekit/pagekit" :title="'Get Help' | trans" target="_blank"></a></li>
                             <li><a class="tm-icon-visit" :href="$url.route('')" :title="'Visit Site' | trans" target="_blank"></a></li>
-                            <li><a class="tm-icon-logout" :href="$url.route('user/logout', {redirect: 'admin/login'})" :title="'Logout' | trans"></a></li>
+                            <li><a class="tm-icon-logout" href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>" :title="'Logout' | trans"></a></li>
                             <li class="uk-margin-small-left"><a :href="$url.route('admin/user/edit', {id: user.id})" :title="'Profile' | trans"><img class="uk-border-circle uk-margin-small-right" height="32" width="32" :title="user.name" v-gravatar="user.email"> <span v-text="user.username"></span></a></li>
                         </ul>
 
@@ -100,7 +100,7 @@
                     <li class="uk-nav-header">{{ user.username }}</li>
                     <li><a :href="$url.route('')" target="_blank">{{ 'Visit Site' | trans }}</a></li>
                     <li><a :href="$url.route('admin/user/edit', {id: user.id})">{{ 'Settings' | trans }}</a></li>
-                    <li><a :href="$url.route('user/logout', {redirect: 'admin/login'})">{{ 'Logout' | trans }}</a></li>
+                    <li><a href="<?= $view->url('@user/logout', ['redirect' => 'admin/login']) ?>">{{ 'Logout' | trans }}</a></li>
                 </ul>
 
             </div>

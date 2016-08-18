@@ -7,8 +7,8 @@ use Pagekit\Application as App;
 class IntlController
 {
     /**
-     * TODO: does this need a permission?
-     * @Route("/{locale}", requirements={"locale"="[a-zA-Z0-9_-]+"})
+     * TODO: Limit catalogue if maintenance mode is enabled?
+     * @Route("/{locale}", requirements={"locale"="[a-zA-Z0-9_-]+"}, defaults={"_maintenance" = true})
      * @Request({"locale"})
      */
     public function indexAction($locale = null)

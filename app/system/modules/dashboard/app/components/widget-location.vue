@@ -117,7 +117,7 @@
                     },
 
                     template: '<ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">\
-                                  {{~items}}<li :data-value="$item.name" :data-id="$item.id"><a>{{$item.name}} <span>, {{$item.sys.country}}</span></a></li>{{/items}}\
+                                  {{~items}}<li data-id="{{$item.id}}"><a>{{$item.name}} <span>, {{$item.sys.country}}</span></a></li>{{/items}}\
                                   {{^items.length}}<li class="uk-skip"><a class="uk-text-muted">{{msgNoResults}}</a></li>{{/end}} \
                                </ul>',
 
