@@ -5,6 +5,7 @@
 ### Fixed
 - Fixed internalization route in maintenance mode
 - Fixed admin logout if an route alias exists
+- Fixed location widget settings
 
 ### Changed
 - Make re-login modal available in front end by default
