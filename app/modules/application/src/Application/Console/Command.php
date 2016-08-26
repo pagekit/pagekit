@@ -5,6 +5,8 @@ use Pagekit\Container;
 use Symfony\Component\Console\Command\Command as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class Command extends BaseCommand
 {
@@ -123,9 +125,10 @@ class Command extends BaseCommand
      */
     public function confirm($question, $default = true)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
+        $helper = $this->getHelperSet()->get('question');
+        $question = new ConfirmationQuestion("<question>$question</question>", $default);
 
-        return $dialog->askConfirmation($this->output, "<question>$question</question>", $default);
+        return $helper->ask($this->input, $this->output, $question);
     }
 
     /**
@@ -137,9 +140,10 @@ class Command extends BaseCommand
      */
     public function ask($question, $default = null)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
+        $helper = $this->getHelperSet()->get('question');
+        $question = new Question("<question>$question</question>", $default);
 
-        return $dialog->ask($this->output, "<question>$question</question>", $default);
+        return $helper->ask($this->input, $this->output, $question);
     }
 
     /**
@@ -151,9 +155,12 @@ class Command extends BaseCommand
      */
     public function secret($question, $fallback = true)
     {
-        $dialog = $this->getHelperSet()->get('dialog');
+        $helper = $this->getHelperSet()->get('question');
+        $question = new Question("<question>$question</question>");
+        $question->setHidden(true);
+        $question->setHiddenFallback($fallback);
 
-        return $dialog->askHiddenResponse($this->output, "<question>$question</question>", $fallback);
+        return $helper->ask($this->input, $this->output, $question);
     }
 
     /**
