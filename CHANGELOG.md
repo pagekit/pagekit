@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed self update command
+
 ## 1.0.8 (August 18, 2016)
 
 ### Fixed
