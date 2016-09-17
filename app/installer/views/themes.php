@@ -2,7 +2,7 @@
 
 <div id="themes" v-cloak>
 
-    <div class="uk-margin-large uk-flex uk-flex-space-between uk-flex-wrap" data-ukicon-margin>
+    <div class="uk-margin-large uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove">{{ 'Themes' | trans }}</h2>
