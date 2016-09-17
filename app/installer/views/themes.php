@@ -2,7 +2,7 @@
 
 <div id="themes" v-cloak>
 
-    <div class="uk-margin-large uk-flex uk-flex-space-between uk-flex-wrap" data-uk-margin>
+    <div class="uk-margin-large uk-flex uk-flex-space-between uk-flex-wrap" data-ukicon-margin>
         <div class="uk-flex uk-flex-middle uk-flex-wrap" data-uk-margin>
 
             <h2 class="uk-margin-remove">{{ 'Themes' | trans }}</h2>
@@ -46,7 +46,7 @@
 
                 <div class="uk-panel-badge pk-panel-badge uk-hidden" v-if="!pkg.enabled">
                     <ul class="uk-subnav pk-subnav-icon">
-                        <li><a class="pk-icon-star pk-icon-hover" :title="'Enable' | trans" data-uk-tooltip="{delay: 500}" @click="enable(pkg)"></a></li>
+                        <li><a class="pk-icon-check pk-icon-hover" :title="'Enable' | trans" data-uk-tooltip="{delay: 500}" @click="enable(pkg)"></a></li>
                         <li><a class="pk-icon-delete pk-icon-hover" :title="'Delete' | trans" data-uk-tooltip="{delay: 500}" @click="uninstall(pkg, packages)" v-confirm="'Uninstall theme?'"></a></li>
                     </ul>
                 </div>
