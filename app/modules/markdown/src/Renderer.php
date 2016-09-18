@@ -41,7 +41,7 @@ class Renderer
 
     public function heading($text, $level, $raw = '')
     {
-        $id = $this->options['headerPrefix'].preg_replace('/[^\w]+/m', '-', strtolower($raw));
+        $id = $this->options['headerPrefix'].preg_replace('/[^\w\-]+/m', '', preg_replace('/\s+/m', '-', strtolower($raw)));
 
         return "<h{$level} id=\"{$id}\">{$text}</h{$level}>\n";
     }
