@@ -763,7 +763,7 @@ class QueryBuilder
     {
         $types = [];
         foreach ($params as $key => $param) {
-            if ($param instanceof \DateTime) {
+            if ($param instanceof \DateTimeInterface) {
                 $types[is_int($key) ? $key + 1 : $key] = Type::DATETIME;
             }
         }

@@ -51,7 +51,7 @@ class Atom extends Item
     /**
      * {@inheritdoc}
      */
-    public function setDate(\DateTime $date)
+    public function setDate(\DateTimeInterface $date)
     {
         return $this->setElement('updated', date(\DATE_ATOM, $date->getTimestamp()));
     }
