@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.9 (November 9, 2016)
+
+### Fixed
+- Fixed self update command
+- Fixed an localisation issue which could lead to JS crashes (e.g. finder)
+
 ## 1.0.8 (August 18, 2016)
 
 ### Fixed

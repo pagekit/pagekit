@@ -2,9 +2,6 @@
 
 namespace Pagekit\Console\Commands;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\TransferException;
 use Pagekit\Application\Console\Command;
 use Pagekit\Installer\SelfUpdater;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,8 +14,6 @@ class SelfupdateCommand extends Command
      * {@inheritdoc}
      */
     protected $name = 'self-update';
-
-    protected $client;
 
     /**
      * {@inheritdoc}
@@ -39,7 +34,6 @@ class SelfupdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->client = new Client;
 
         try {
             if (!$this->option('url')) {
@@ -48,26 +42,24 @@ class SelfupdateCommand extends Command
                 $output->writeln('<info>done.</info>');
 
                 $output->writeln('');
-                $output->writeln('<comment>Latest Version: '.$versions['latest']['version'].'</comment> ');
+                $output->writeln('<comment>Latest Version: ' . $versions['latest']['version'] . '</comment> ');
                 $output->writeln('');
 
-                if (!$this->confirm('Update to Version '.$versions['latest']['version'].'? [y/n]')) {
+                if (!$this->confirm('Update to Version ' . $versions['latest']['version'] . '? [y/n]')) {
                     return;
                 }
 
                 $output->writeln('');
 
                 $url = $versions['latest']['url'];
-                $shasum = $versions['latest']['shasum'];
             } else {
                 $url = $this->option('url');
-                $shasum = $this->option('shasum');
             }
 
             $tmpFile = tempnam($this->container['path.temp'], 'update_');
 
             $output->write('Downloading...');
-            $this->download($url, $shasum, $tmpFile);
+            $this->download($url, $tmpFile);
             $output->writeln('<info>done.</info>');
 
             $updater = new SelfUpdater($output);
@@ -93,50 +85,26 @@ class SelfupdateCommand extends Command
      */
     protected function getVersions()
     {
-        try {
-            $res = $this->client->get($this->container->get('system.api').'/update');
-        } catch (\Exception $e) {
-            if ($e instanceof TransferException) {
-                throw new \RuntimeException('Could not obtain latest Version.');
-            }
-            throw $e;
+        if (!($res = file_get_contents($this->container->get('system.api') . '/api/update'))) {
+            App::abort(500, 'Could not obtain latest Version.');
         }
 
-        return json_decode($res->getBody(), true);
+        return json_decode($res, true);
     }
 
     /**
      * @param $url
-     * @param $shasum
      * @param $file
      * @throws \Exception
      */
-    public function download($url, $shasum, $file)
+    public function download($url, $file)
     {
-        try {
+        if (!$url) {
+            throw new \RuntimeException('Package url is missing.');
+        }
 
-            if (!$url) {
-                throw new \RuntimeException('Package url is missing.');
-            }
-
-            $data = $this->client->get($url)->getBody();
-
-            if (sha1($data) !== $shasum) {
-                throw new \RuntimeException('Package checksum verification failed.');
-            }
-
-            if (!file_put_contents($file, $data)) {
-                throw new \RuntimeException('Path is not writable.');
-            }
-
-        } catch (\Exception $e) {
-            if ($e instanceof TransferException) {
-                if ($e instanceof BadResponseException) {
-                    throw new \RuntimeException('Invalid API key.');
-                }
-                throw new \RuntimeException('Package download failed.');
-            }
-            throw $e;
+        if (!file_put_contents($file, @fopen($url, 'r'))) {
+            App::abort(500, 'Download failed or Path not writable.');
         }
     }
 }
