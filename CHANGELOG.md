@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.9 (November 9, 2016)
 
 ### Fixed
 - Fixed self update command
