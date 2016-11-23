@@ -12,7 +12,7 @@ class Atom extends Feed
     /**
      * {@inheritdoc}
      */
-    public function setDate(\DateTime $date)
+    public function setDate(\DateTimeInterface $date)
     {
         return $this->setElement('updated', $date->format(\DATE_ATOM));
     }

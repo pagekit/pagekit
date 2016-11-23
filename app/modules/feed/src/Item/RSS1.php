@@ -26,7 +26,7 @@ class RSS1 extends Item
     /**
      * {@inheritdoc}
      */
-    public function setDate(\DateTime $date)
+    public function setDate(\DateTimeInterface $date)
     {
         return $this->setElement('dc:date', date('Y-m-d', $date->getTimestamp()));
     }

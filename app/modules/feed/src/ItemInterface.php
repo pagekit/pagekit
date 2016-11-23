@@ -39,10 +39,10 @@ interface ItemInterface
     /**
      * Sets the date.
      *
-     * @param  \DateTime $date
+     * @param  \DateTimeInterface $date
      * @return self
      */
-    public function setDate(\DateTime $date);
+    public function setDate(\DateTimeInterface $date);
 
     /**
      * Sets the author.
