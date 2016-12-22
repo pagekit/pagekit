@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.10 (December 22, 2016)
+
+### Fixed
+- Fixed Vue Warnings in Debug Bar
+- Fixed URL replacement to undefined when using pagination (IE, Opera)
+
+### Security
+- Stored XSS in email templates, discovered by Raphael de la Vienne
+
 ## 1.0.9 (November 9, 2016)
 
 ### Fixed

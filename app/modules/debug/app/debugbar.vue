@@ -4,8 +4,8 @@
 
         <div class="pf-navbar">
 
-            <ul class="pf-navbar-nav">
-                <li v-if="data" v-for="section in sections | orderBy 'priority'" :is="section.name" :data="data[section.name]" @click="open(section.name)"></li>
+            <ul v-if="data" class="pf-navbar-nav">
+                <li v-for="section in sections | orderBy 'priority'" :is="section.name" :data="data[section.name]" @click="open(section.name)"></li>
             </ul>
 
             <a class="pf-close" @click.prevent="close"></a>

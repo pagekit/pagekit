@@ -134,9 +134,9 @@ class ExtensionTranslateCommand extends Command
         }
 
         // vue, js files
-        // something.$trans('foo', [args])
-        // something.$transChoice('foo'[, args])
-        preg_match_all('/\.\$trans(Choice)?\((\'|")((?:(?!\2).)+)\2/', $content, $matches);
+        // $trans('foo', [args])
+        // $transChoice('foo'[, args])
+        preg_match_all('/\$trans(Choice)?\((\'|")((?:(?!\2).)+)\2/', $content, $matches);
         foreach ($matches[3] as $i => $string) {
             $domain = 'messages'; // TODO: allow custom domain
 

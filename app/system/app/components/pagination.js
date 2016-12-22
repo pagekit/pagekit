@@ -9,6 +9,11 @@ module.exports = {
 
         pages: {
             default: 1
+        },
+        
+        replaceState: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -20,7 +25,9 @@ module.exports = {
             this.$set('page', this.$session.get(this.key));
         }
 
-        this.$state('page', this.page);
+        if (this.replaceState) {
+            this.$state('page', this.page);
+        }
 
     },
 

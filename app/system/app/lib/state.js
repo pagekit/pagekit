@@ -9,8 +9,10 @@ module.exports = function (Vue) {
             vm.$set(key, current[1]);
         }
 
-        history.replaceState({key: key, value: this[key]}, '', value ? modifyQuery(location.search, key, value) : undefined);
-
+        if (value !== undefined) {
+            history.replaceState({key: key, value: this[key]}, '', modifyQuery(location.search, key, value));
+        }
+        
         this.$watch(key, function (value) {
             history.pushState({key: key, value: value}, '', modifyQuery(location.search, key, value));
         });
