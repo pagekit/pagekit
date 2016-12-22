@@ -5,7 +5,7 @@
     <?= $view->render('messages') ?>
 
     <div class="uk-form-row">
-        <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= htmlspecialchars($last_username) ?>" placeholder="<?= __('Username') ?>" required autofocus>
+        <input class="uk-width-1-1" type="text" name="credentials[username]" value="<?= $this->escape($last_username) ?>" placeholder="<?= __('Username') ?>" required autofocus>
     </div>
 
     <div class="uk-form-row">
@@ -29,7 +29,7 @@
     <p class="uk-margin-large-top uk-text-center"><?= __('No account yet?') ?> <a href="<?= $view->url('@user/registration') ?>"><?= __('Sign up now') ?></a></p>
     <?php endif ?>
 
-    <input type="hidden" name="redirect" value="<?= htmlspecialchars($redirect) ?>">
+    <input type="hidden" name="redirect" value="<?= $this->escape($redirect) ?>">
     <?php $view->token()->get() ?>
 
 </form>
