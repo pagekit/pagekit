@@ -87,7 +87,7 @@ class ResetPasswordController
     /**
      * @Request({"key", "password"})
      */
-    public function confirmAction($activation = "", $password = "")
+    public function confirmAction($activation = '', $password = '')
     {
         if ($activation and $user = User::where(compact('activation'))->first()) {
 
