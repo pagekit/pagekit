@@ -3,7 +3,7 @@
 ## 1.0.11 (January 20, 2017)
 
 ### Security
-- Fixed replay attack with password reset links when debug toolbar is enabled, discovered by SecureLayer7 
+- Fixed replay attack with password reset links when debug toolbar is enabled, discovered by SecureLayer7
 
 ## 1.0.10 (December 22, 2016)
 

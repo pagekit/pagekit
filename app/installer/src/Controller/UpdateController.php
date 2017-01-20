@@ -35,7 +35,7 @@ class UpdateController
         App::session()->set('system.update', $file);
 
         if (!file_put_contents($file, @fopen($url, 'r'))) {
-            App::abort(500, 'Download failed or Path not writable.');
+            App::abort(500, 'Download failed or path not writable.');
         }
 
         return [];
