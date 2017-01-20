@@ -34,6 +34,7 @@
                 <label><input type="checkbox" value="1" v-model="$root.config.debug.enabled" :disabled="!sqlite"> {{ 'Enable debug toolbar' | trans }}</label>
             </p>
             <p class="uk-form-help-block" v-if="!sqlite">{{ 'Please enable the SQLite database extension.' | trans }}</p>
+            <p class="uk-form-help-block" v-if="$root.config.application.debug || $root.config.debug.enabled">{{ 'Please note that enabling debug mode or toolbar has serious security implications.' | trans }}</p>
         </div>
     </div>
 
