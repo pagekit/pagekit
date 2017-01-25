@@ -3,7 +3,7 @@
   "dependencies": {
     "JSONStorage": "~1.0.3",
     "lodash": "~3.10.1",
-    "uikit": "master",
+    "uikit": "~2.27.2",
     "vue": "~1.0.21",
     "vue-form": "pagekit/vue-form#master",
     "vue-intl": "~0.2.2",
