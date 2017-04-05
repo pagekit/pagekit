@@ -13,6 +13,18 @@ Pagekit is a modular and lightweight CMS built with Symfony components and Vue.j
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 * [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
 
+---
+
+<p align="center">
+  <b>Pagekit is an Open Source project developed by YOOtheme.</b>
+  <br><br>
+  <a href="https://yootheme.com" align="center">
+      <img width="134" height="30" src="http://yootheme.com/pro/images/logo.svg">
+  </a>
+</p>
+
+---
+
 ## Download release (recommended)
 
 1. Download the [latest release](https://www.pagekit.com/download).
