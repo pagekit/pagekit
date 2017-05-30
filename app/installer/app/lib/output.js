@@ -3,7 +3,7 @@ module.exports = {
     data: function () {
         return {
             pkg: {},
-            update: {},
+            updatePkg: {},
             output: '',
             status: 'loading',
             options: {
