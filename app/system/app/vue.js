@@ -47,6 +47,8 @@ function install (Vue) {
     Vue.component('v-pagination', require('./components/pagination'));
     Vue.component('input-filter', require('./components/input-filter.vue'));
 
+    require('./components/button-radio.vue');
+    require('./components/button-checkbox.vue');
     require('./components/input-date.vue');
     require('./components/input-image.vue');
     require('./components/input-image-meta.vue');
