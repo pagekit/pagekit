@@ -355,7 +355,7 @@
   'View' => 'Wyświetl',
   'Login Redirect' => 'Przekierowanie logowania',
   'General' => 'Ogólne',
-  'Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.' => 'Pagekit został zaktualizowany! Zanim puścimy Cię w drogę, musimy zaktualizować Twoją bazę danych to najnowszej wersji.',
+  'Pagekit has been updated! Before we send you on your way, we have to update your database to the newest version.' => 'Pagekit został zaktualizowany! Zanim puścimy Cię w drogę, musimy zaktualizować Twoją bazę danych do najnowszej wersji.',
   '%d EB' => '%d EB',
   6 => '6',
   '- Assign -' => '- Przypisz -',
