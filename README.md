@@ -12,6 +12,7 @@ Pagekit is a modular and lightweight CMS built with Symfony components and Vue.j
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
 * [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
+* [Forum](https://pagekit-forum.org) - Get help on the inofficial Pagekit-forum
 
 ---
 
