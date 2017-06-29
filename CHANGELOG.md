@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.12 (June 29, 2017)
 
 ### Fixed
 - Fixed active menu matching
