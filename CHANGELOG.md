@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed Facebook App ID meta tag
+
 ## 1.0.12 (June 29, 2017)
 
 ### Fixed
