@@ -1,12 +1,12 @@
 <template>
 
     <div class="uk-modal-header uk-flex uk-flex-middle">
-        <img class="uk-margin-right" width="50" height="50" :alt="package.title" :src="package | icon" v-if="package.extra.icon">
+        <img class="uk-margin-right" width="50" height="50" :alt="package.title" :src="package | icon" v-if="package.extra && package.extra.icon">
 
         <div class="uk-flex-item-1">
             <h2 class="uk-margin-small-bottom">{{ package.title }}</h2>
             <ul class="uk-subnav uk-subnav-line uk-margin-bottom-remove">
-                <li class="uk-text-muted">{{ package.authors[0].name }}</li>
+                <li class="uk-text-muted" v-if="package.authors && package.authors[0]">{{ package.authors[0].name }}</li>
                 <li class="uk-text-muted">{{ 'Version %version%' | trans {version:package.version} }}</li>
             </ul>
         </div>
@@ -25,13 +25,15 @@
 
     <ul class="uk-list">
         <li v-if="package.license"><strong>{{ 'License:' | trans }}</strong> {{ package.license }}</li>
+        <template v-if="package.authors && package.authors[0]">
         <li v-if="package.authors[0].homepage"><strong>{{ 'Homepage:' | trans }}</strong>
             <a :href="package.authors[0].homepage" target="_blank">{{ package.authors[0].homepage }}</a></li>
         <li v-if="package.authors[0].email"><strong>{{ 'Email:' | trans }}</strong>
             <a href="mailto:{{ package.authors[0].email }}">{{ package.authors[0].email }}</a></li>
+        </template>
     </ul>
 
-    <img width="1200" height="800" :alt="package.title" :src="package | image" v-if="package.extra.image">
+    <img width="1200" height="800" :alt="package.title" :src="package | image" v-if="package.extra && package.extra.image">
 
 </template>
 

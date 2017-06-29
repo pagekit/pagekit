@@ -81,7 +81,7 @@ return [
             'icon' => 'system/site:assets/images/icon-site.svg',
             'url' => '@site/page',
             'access' => 'site: manage site || system: manage widgets || system: manage storage || system: access settings',
-            'active' => '@site*',
+            'active' => '@site(/*)?',
             'priority' => 105
         ],
         'site: pages' => [

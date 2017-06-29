@@ -1,9 +1,18 @@
 # Changelog
 
+## 1.0.12 (June 29, 2017)
+
+### Fixed
+- Fixed active menu matching
+- Fixed version displayed during extension updates
+- Fixed overwriting of config defaults
+- Fixed node selection for extensions
+- Fixed form validation (Safari, Firefox and IE)
+
 ## 1.0.11 (January 20, 2017)
 
 ### Security
-- Fixed replay attack with password reset links when debug toolbar is enabled, discovered by SecureLayer7 
+- Fixed replay attack with password reset links when debug toolbar is enabled, discovered by SecureLayer7
 
 ## 1.0.10 (December 22, 2016)
 

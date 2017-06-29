@@ -4,7 +4,7 @@
         <v-modal v-ref:output :options="options">
 
             <div class="uk-modal-header uk-flex uk-flex-middle">
-                <h2>{{ 'Updating %title% to %version%' | trans {title:pkg.title,version:pkg.version} }}</h2>
+                <h2>{{ 'Updating %title% to %version%' | trans {title:pkg.title,version:updatePkg.version} }}</h2>
             </div>
 
             <pre class="pk-pre uk-text-break" v-html="output"></pre>
@@ -33,6 +33,8 @@
 
             update: function (pkg, updates, onClose, packagist) {
                 this.$set('pkg', pkg);
+                this.$set('updatePkg', updates[pkg.name]);
+
                 this.cb = onClose;
 
                 return this.$http.post('admin/system/package/install', {package: updates[pkg.name], packagist: Boolean(packagist)},null , {xhr: this.init()}).then(function () {

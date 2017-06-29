@@ -50,7 +50,7 @@ class SettingsController
      */
     public function configAction($name, $config = [])
     {
-        App::config($name)->merge($config, true);
+        App::config()->set($name, array_replace(App::config($name)->toArray(), $config));
 
         return ['message' => 'success'];
     }
