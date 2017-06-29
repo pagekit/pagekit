@@ -1,5 +1,14 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed active menu matching
+- Fixed version displayed during extension updates
+- Fixed overwriting of config defaults
+- Fixed node selection for extensions
+- Fixed form validation (Safari, Firefox and IE)
+
 ## 1.0.11 (January 20, 2017)
 
 ### Security
