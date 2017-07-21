@@ -400,7 +400,7 @@
   'Maintenance' => 'Συντήρηση',
   'Built On' => 'Δημιουργήθηκε Σε',
   'User Password Reset' => 'Αλλαγή Κωδικού Πρόσβασης Χρήστη',
-  'Meta' => '',
+  'Meta' => 'Μέτα',
   'username' => 'όνομα χρήστη',
   'Localization' => 'Ρυθμίσεις γλώσσας',
   'Unable to activate "%name%".<br>A fatal error occured.' => 'Δεν είναι δυνατή η ενεργοποίηση "% name%". <br> Προέκυψε ανεπανόρθωτο σφάλμα.',

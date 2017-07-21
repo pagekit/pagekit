@@ -256,7 +256,7 @@
   'Unwritable' => 'Недоступен для записи',
   'Title' => 'Заголовок',
   'Sign in to your account' => 'Войдите в свой аккаунт',
-  'Create an account' => 'Создайте ваш аккаунт',
+  'Create an account' => 'Создать учетную запись',
   'User' => 'Пользователь',
   'Password cannot be blank.' => 'Пароль не может быть пустым.',
   'Autoplay' => 'Автовоспроизведение',

@@ -410,7 +410,7 @@
   '{1} %count% File selected|]1,Inf[ %count% Files selected' => '{1} %count% 文件已选|]1,Inf[ %count% 文件已选',
   'Demo' => '演示',
   'Select' => '选择',
-  'Sign in' => '注册',
+  'Sign in' => '登录',
   'Installation failed!' => '安装失败',
   '%type% saved.' => '%type% 已保存。',
   'Unable to send confirmation link.' => '无法发送确认链接。',
