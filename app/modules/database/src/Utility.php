@@ -34,6 +34,7 @@ class Utility
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
+        $this->connection->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
         $this->manager = $this->connection->getSchemaManager();
         $this->schema = $this->manager->createSchema();
     }
