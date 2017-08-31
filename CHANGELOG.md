@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.13 (August 31, 2017)
+
+### Fixed
+- Fixed Facebook App ID meta tag
+- Fixed Gravatar for Blog comments
+
 ## 1.0.12 (June 29, 2017)
 
 ### Fixed

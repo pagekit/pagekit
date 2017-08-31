@@ -83,7 +83,7 @@ class AuthController
         }
 
         if (App::request()->isXmlHttpRequest()) {
-            App::abort(401, $error);
+            return App::response()->json($error, 401);
         } else {
             App::message()->error($error);
             return App::redirect((preg_replace('#(https?:)?//[^/]+#', '', App::url()->previous())));

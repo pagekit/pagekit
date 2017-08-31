@@ -195,7 +195,7 @@
   'Use the site in maintenance mode' => 'Aktiver vedlikeholdsmodus',
   'Successfully removed.' => 'Fjernet.',
   'Access' => 'Tilgang',
-  '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' => '{0} Ingen registrerte brukere|\\{1} registrert bruker]1,Inf[ registrerte brukere',
+  '{0} Registered Users|{1} Registered User|]1,Inf[ Registered Users' => '{0} Ingen registrerte brukere|{1} registrert bruker|]1,Inf[ registrerte brukere',
   'Version %version%' => 'Versjon %version%',
   'Client' => 'Klient',
   'Enter a valid email address.' => 'Skriv inn en gyldig e-post adresse.',

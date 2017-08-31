@@ -10,11 +10,12 @@ module.exports = {
     update: function (value) {
 
         var el = this.el, vm = this, cache = this.vm.$session,
+            hash = value.indexOf('@') !== -1 ? md5(value.toLowerCase()) : value,
             name = this.el.getAttribute('title') || this.el.getAttribute('alt'),
             colored = this.params.colored,
             size = (this.el.getAttribute('height') || 50) * 2,
-            url = '//gravatar.com/avatar/' + md5(value) + '?' + ['r=g', 's=' + (size)].join('&'),
-            key = 'gravatar.' + [value, size, name].join('.');
+            url = '//gravatar.com/avatar/' + hash + '?' + ['r=g', 's=' + (size)].join('&'),
+            key = 'gravatar.' + [hash, size, name].join('.');
 
         // load image url from cache if exists
         if (cache.get(key)) {
