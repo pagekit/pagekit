@@ -6,7 +6,7 @@
             <div class="uk-form-row">
                 <label for="form-username" class="uk-form-label">{{ 'Username' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]+$/">
+                    <input id="form-username" autocomplete="new-username" class="uk-form-width-large" type="text" name="username" v-model="user.username" v-validate:pattern.literal="/^[a-zA-Z0-9._\-]+$/">
                     <p class="uk-form-help-block uk-text-danger" v-show="form.username.invalid">{{ 'Username cannot be blank and may only contain alphanumeric characters (A-Z, 0-9) and some special characters ("._-")' | trans }}</p>
                 </div>
             </div>
@@ -14,7 +14,7 @@
             <div class="uk-form-row">
                 <label for="form-name" class="uk-form-label">{{ 'Name' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-validate:required>
+                    <input id="form-name" autocomplete="new-name" class="uk-form-width-large" type="text" name="name" v-model="user.name" v-validate:required>
                     <p class="uk-form-help-block uk-text-danger" v-show="form.name.invalid">{{ 'Name cannot be blank.' | trans }}</p>
                 </div>
             </div>
@@ -22,7 +22,7 @@
             <div class="uk-form-row">
                 <label for="form-email" class="uk-form-label">{{ 'Email' | trans }}</label>
                 <div class="uk-form-controls">
-                    <input id="form-email" class="uk-form-width-large" type="text" name="email" v-model="user.email" v-validate:email v-validate:required lazy>
+                    <input id="form-email" autocomplete="new-email" class="uk-form-width-large" type="text" name="email" v-model="user.email" v-validate:email v-validate:required lazy>
                     <p class="uk-form-help-block uk-text-danger" v-show="form.email.invalid">{{ 'Field must be a valid email address.' | trans }}</p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="uk-form-controls" :class="{'uk-hidden' : (user.id && !editingPassword)}">
                     <div class="uk-form-password">
-                        <input id="form-password" class="uk-form-width-large" :type="hidePassword ? 'password' : 'text'" v-model="password">
+                        <input id="form-password" autocomplete="new-password" class="uk-form-width-large" :type="hidePassword ? 'password' : 'text'" v-model="password">
                         <a href="#" class="uk-form-password-toggle" @click.prevent="hidePassword = !hidePassword">{{ hidePassword ? 'Show' : 'Hide' | trans }}</a>
                     </div>
                 </div>
