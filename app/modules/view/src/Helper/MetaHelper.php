@@ -49,9 +49,10 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
     }
 
     /**
-     * Removes a meta tag.
+     * Adds a meta tag.
      *
      * @param  string $name
+     * @param  string $value
      * @return self
      */
     public function add($name, $value = '')
@@ -64,10 +65,9 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
     }
     
     /**
-     * Adds a meta tag.
+     * Removes a meta tag.
      *
      * @param  string $name
-     * @param  string $value
      * @return self
      */
 	public function remove( $name )
