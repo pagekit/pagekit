@@ -71,8 +71,8 @@ class MetaHelper implements HelperInterface, \IteratorAggregate
 	 */
 	public function remove( $name )
 	{
-		if ( isset( $this->metas[ $name ] ) ) {
-			unset ( $this->metas[ $name ] );			
+		if (isset($this->metas[$name])) {
+			unset ($this->metas[$name]);			
 		} 
         
         return $this;
