@@ -96,9 +96,7 @@ class ConfigManager implements \IteratorAggregate
 
             $data = ['name' => $name, 'value' => json_encode($config, JSON_UNESCAPED_UNICODE)];
 
-            if ($this->connection->getDatabasePlatform() instanceof MySqlPlatform) {
-                $this->connection->executeQuery("INSERT INTO {$this->table} (name, value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE value = :value", $data);
-            } elseif ($this->connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
+            if ($this->connection->getDatabasePlatform() instanceof MySqlPlatform || $this->connection->getDatabasePlatform() instanceof PostgreSqlPlatform) {
                 $this->connection->executeQuery("INSERT INTO {$this->table} (name, value) VALUES (:name, :value) ON DUPLICATE KEY UPDATE value = :value", $data);
             } elseif (!$this->connection->update($this->table, $data, compact('name'))) {
                 $this->connection->insert($this->table, $data);

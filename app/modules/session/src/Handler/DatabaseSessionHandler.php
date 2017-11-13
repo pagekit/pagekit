@@ -140,11 +140,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface
     {
         $platform = $this->connection->getDatabasePlatform();
 
-        if ($platform instanceof MySqlPlatform) {
-            return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
-            . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
-
-        } elseif ($platform instanceof PostgreSqlPlatform) {
+        if ($platform instanceof MySqlPlatform || $platform instanceof PostgreSqlPlatform) {
             return "INSERT INTO {$this->table} (id, data, time) VALUES (:id, :data, :time) "
             . "ON DUPLICATE KEY UPDATE data = VALUES(data), time = CASE WHEN time = :time THEN (VALUES(time) + INTERVAL 1 SECOND) ELSE VALUES(time) END";
 
