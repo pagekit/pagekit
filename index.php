@@ -8,8 +8,10 @@ if (PHP_SAPI == 'cli-server' && is_file(__DIR__.parse_url($_SERVER['REQUEST_URI'
     return false;
 }
 
-if (!isset($_SERVER['HTTP_MOD_REWRITE'])) {
+if (!isset($_SERVER['HTTP_MOD_REWRITE']) && !isset($_SERVER['REDIRECT_HTTP_MOD_REWRITE'])) {
     $_SERVER['HTTP_MOD_REWRITE'] = 'Off';
+} else {
+    $_SERVER['HTTP_MOD_REWRITE'] = 'On';
 }
 
 date_default_timezone_set('UTC');
