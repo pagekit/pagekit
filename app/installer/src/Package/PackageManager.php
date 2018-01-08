@@ -44,12 +44,17 @@ class PackageManager
      */
     public function install(array $install = [], $packagist = false, $preferSource = false)
     {
+        $previousPackageConfigs = App::package()->all(null, true);
+
         $this->composer->install($install, $packagist, $preferSource);
 
         $packages = App::package()->all(null, true);
         foreach ($install as $name => $version) {
-            if (isset($packages[$name]) && App::module($packages[$name]->get('module'))) {
-                $this->enable($packages[$name]);
+            $moduleAlreadyExisted = isset($previousPackageConfigs[$name]) && App::module($previousPackageConfigs[$name]->get('module'));
+
+            if ($moduleAlreadyExisted == true) {
+                $previousPackageConfig = isset($previousPackageConfigs[$name]) ? $previousPackageConfigs[$name] : null;
+                $this->enable($packages[$name], $previousPackageConfig);
             } elseif (isset($packages[$name])) {
                 $this->doInstall($packages[$name]);
             }
@@ -88,18 +93,32 @@ class PackageManager
 
     /**
      * @param $packages
+     * @param $previousPackageConfigs
      */
-    public function enable($packages)
+    public function enable($packages, $previousPackageConfigs = [])
     {
         if (!is_array($packages)) {
             $packages = [$packages];
         }
 
+        if (!is_array($previousPackageConfigs)) {
+            $previousPackageConfigs = [$previousPackageConfigs];
+        }
+
         foreach ($packages as $package) {
+
+            // Get the old package config if provided. If there is no old config available, then use the new config (usually fist installation).
+            $previousPackageConfig = $package;
+            foreach ($previousPackageConfigs as $packageConfig) {
+                if ($packageConfig->get('name') == $package->get('name')) {
+                    $previousPackageConfig = $packageConfig;
+                    break;
+                }
+            }
 
             App::trigger('package.enable', [$package]);
 
-            if (!$current = App::config('system')->get('packages.' . $package->get('module'))) {
+            if (!$current = App::config('system')->get('packages.' . $previousPackageConfig->get('module'))) {
                 $current = $this->doInstall($package);
             }
 
