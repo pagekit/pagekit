@@ -6,7 +6,7 @@
   'Rename' => 'Renommer',
   'Changelog' => 'Historique des modifications',
   'Removed selected.' => 'La sélection a été supprimée.',
-  'Whoops, looks like something went wrong.' => 'Oups, il semblerait que quelque-chose se soit mal passé.',
+  'Whoops, looks like something went wrong.' => 'Oups, il semblerait que quelque chose se soit mal passé.',
   'Enable' => 'Activer',
   'Manage media files' => 'Gérer les fichiers de la médiathèque',
   'Update' => 'Mise à jour',
