@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.14 (July 17, 2018)
+
+### Security
+- Open redirect vulnerability on login page, discovered by zhihua.yao from DBAPPSecurity
+
 ## 1.0.13 (August 31, 2017)
 
 ### Fixed

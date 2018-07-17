@@ -21,7 +21,7 @@ class AuthController
         }
 
 		if (App::user()->isAuthenticated()) {
-			return App::redirect($redirect);
+			return $this->redirect($redirect);
 		}
 
         return [
@@ -44,7 +44,7 @@ class AuthController
             return $event->getResponse();
         }
 
-        return App::redirect(preg_replace('#(https?:)?//[^/]+#', '', $redirect));
+        return $this->redirect($redirect);
     }
 
     /**
@@ -68,7 +68,7 @@ class AuthController
             if (App::request()->isXmlHttpRequest()) {
                 return App::response()->json(['csrf' => App::csrf()->generate()]);
             } else {
-                return App::redirect(preg_replace('#(https?:)?//[^/]+#', '', $redirect));
+                return $this->redirect($redirect);
             }
 
         } catch (CsrfException $e) {
@@ -86,7 +86,16 @@ class AuthController
             return App::response()->json($error, 401);
         } else {
             App::message()->error($error);
-            return App::redirect((preg_replace('#(https?:)?//[^/]+#', '', App::url()->previous())));
+            return $this->redirect(App::url()->previous());
         }
+    }
+
+    protected function redirect($url)
+    {
+        do {
+            $url = preg_replace('#^(https?:)?//[^/]+#', '', $url, 1, $count);
+        } while ($count);
+
+        return App::redirect($url);
     }
 }
