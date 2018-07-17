@@ -4,6 +4,7 @@
 
 ### Security
 - Open redirect vulnerability on login page, discovered by zhihua.yao from DBAPPSecurity
+- Administrator profiles can only be managed by administrators
 
 ## 1.0.13 (August 31, 2017)
 

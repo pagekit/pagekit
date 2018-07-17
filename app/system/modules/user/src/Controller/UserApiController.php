@@ -149,6 +149,10 @@ class UserApiController
                 $user = User::create(['registered' => new \DateTime]);
             }
 
+            if ($user->isAdministrator() && !App::user()->isAdministrator()) {
+                App::abort(400, __('Unable to edit administrator.'));
+            }
+
             $user->name = @$data['name'];
             $user->username = @$data['username'];
             $user->email = @$data['email'];
@@ -202,6 +206,10 @@ class UserApiController
         }
 
         if ($user = User::find($id)) {
+            if ($user->isAdministrator() && !App::user()->isAdministrator()) {
+                App::abort(400, __('Unable to delete administrator.'));
+            }
+
             $user->delete();
         }
 
