@@ -2,6 +2,10 @@
 
 ## 1.0.14 (July 17, 2018)
 
+### Fixed
+- Fixed browser autocomplete on login page
+- Fixed module renaming on update
+
 ### Security
 - Open redirect vulnerability on login page, discovered by zhihua.yao from DBAPPSecurity
 - Administrator profiles can only be managed by administrators
