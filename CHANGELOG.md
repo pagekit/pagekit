@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Fixed
+- Fixed `isValidFilename` method in FinderController
+
 ## 1.0.14 (July 17, 2018)
 
 ### Fixed
