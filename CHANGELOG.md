@@ -1,6 +1,6 @@
 # Changelog
 
-## WIP
+## 1.0.15 (November 14, 2018)
 
 ### Added
 - Added Google reCAPTCHA for user registration and blog comments
