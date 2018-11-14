@@ -19,6 +19,9 @@ class RegistrationController
         $this->module = App::module('system/user');
     }
 
+    /**
+     * @Captcha(route="@user/registration/register")
+     */
     public function indexAction()
     {
         if (App::user()->isAuthenticated()) {
@@ -38,7 +41,8 @@ class RegistrationController
     }
 
     /**
-     * @Request({"user": "array"})
+     * @Request({"user": "array", "gRecaptchaResponse": "string"})
+     * @Captcha(verify="true")
      */
     public function registerAction($data)
     {

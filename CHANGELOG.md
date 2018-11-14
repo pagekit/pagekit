@@ -2,6 +2,9 @@
 
 ## WIP
 
+### Added
+- Added Google reCAPTCHA for user registration and blog comments
+
 ### Fixed
 - Fixed `isValidFilename` method in FinderController
 
