@@ -17,6 +17,7 @@ return [
         'feed',
         'markdown',
         'installer',
+        'system/captcha',
         'system/view',
         'system/widget',
         'system/cache',

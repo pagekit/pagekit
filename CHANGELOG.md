@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.15 (November 14, 2018)
+
+### Added
+- Added Google reCAPTCHA for user registration and blog comments
+
+### Fixed
+- Fixed `isValidFilename` method in FinderController
+
 ## 1.0.14 (July 17, 2018)
 
 ### Fixed

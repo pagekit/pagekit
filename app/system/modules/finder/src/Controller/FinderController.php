@@ -256,7 +256,7 @@ class FinderController
             return !preg_match('#[\\/:"*?<>|]#', $name);
         }
 
-        return -1 !== strpos($name, '/');
+        return false === strpos($name, '/');
     }
 
     protected function success($message) {
