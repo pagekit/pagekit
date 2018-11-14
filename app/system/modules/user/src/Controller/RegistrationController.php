@@ -41,7 +41,7 @@ class RegistrationController
     }
 
     /**
-     * @Request({"user": "array", "gRecaptchaResponse": "string"})
+     * @Request({"user": "array"})
      * @Captcha(verify="true")
      */
     public function registerAction($data)
