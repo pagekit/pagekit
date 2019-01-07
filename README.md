@@ -3,7 +3,7 @@
 # Pagekit
 
 [![Build Status](https://travis-ci.org/pagekit/pagekit.svg?branch=develop)](https://travis-ci.org/pagekit/pagekit)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/pagekit/pagekit)
+[![Discord](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/e7Kw47E)
 
 Pagekit is a modular and lightweight CMS built with Symfony components and Vue.js.
 
@@ -11,7 +11,7 @@ Pagekit is a modular and lightweight CMS built with Symfony components and Vue.j
 * [Documentation](http://pagekit.com/docs) - User and developer guides
 * [@pagekit](https://twitter.com/pagekit) - Get the latest buzz on Twitter
 * [Google+ Community](https://plus.google.com/communities/104125443335488004107) - Share news and latest work
-* [Gitter Chat](https://gitter.im/pagekit/pagekit) - Join the developer chat on Gitter
+* [Discord Chat](https://discord.gg/e7Kw47E) - Join the developer chat on Discord
 * [Forum](https://pagekit-forum.org) - Get help on the unofficial Pagekit-forum
 
 ---

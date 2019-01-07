@@ -21,7 +21,7 @@ Before you get lost in the repository, here are a few starting points
 for you to check out. You might find that others have had similar
 questions or that your question rather belongs in one place than another.
 
-* Chat: https://gitter.im/pagekit/pagekit
+* Chat: https://discord.gg/e7Kw47E
 * Community: https://plus.google.com/u/0/communities/104125443335488004107
 * Blog: http://pagekit.com/blog
 * Twitter: https://twitter.com/pagekit
@@ -60,7 +60,7 @@ requests](#pull-requests), but please respect the following restriction:
 
 Please **do not** use the issue tracker for personal support requests (use
 [Google+ community](https://plus.google.com/u/0/communities/104125443335488004107) or
-[Gitter chat](https://gitter.im/pagekit/pagekit)).
+[Discord chat](https://discord.gg/e7Kw47E)).
 
 <a name="bugs"></a>
 ## Bug reports
