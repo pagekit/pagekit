@@ -86,7 +86,9 @@ class CaptchaListener implements EventSubscriberInterface
 
     public function onRequest($event, $request)
     {
-        if (!($captcha = $request->attributes->get('_captcha_verify')) || App::user()->isAuthenticated()) {
+        if (!App::module('system/captcha')->config('recaptcha_enable')
+            || !($captcha = $request->attributes->get('_captcha_verify'))
+            || App::user()->isAuthenticated()) {
             return;
         }
 
