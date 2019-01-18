@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.16 (January 18, 2019)
+
+### Fixed
+- Fixed Google reCAPTCHA
+
 ## 1.0.15 (November 14, 2018)
 
 ### Added
