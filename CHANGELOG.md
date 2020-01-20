@@ -1,5 +1,10 @@
 # Changelog
 
+## WIP
+
+### Security
+- CSRF vulnerability in Finder, discovered by Christian Bortone
+
 ## 1.0.17 (July 11, 2019)
 
 ### Added
