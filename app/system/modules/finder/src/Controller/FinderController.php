@@ -58,7 +58,7 @@ class FinderController
     }
 
     /**
-     * @Request({"name"})
+     * @Request({"name"}, csrf=true)
      */
     public function createFolderAction($name)
     {
@@ -91,7 +91,7 @@ class FinderController
     }
 
     /**
-     * @Request({"oldname", "newname"})
+     * @Request({"oldname", "newname"}, csrf=true)
      */
     public function renameAction($oldname, $newname)
     {
@@ -115,7 +115,7 @@ class FinderController
     }
 
     /**
-     * @Request({"names": "array"})
+     * @Request({"names": "array"}, csrf=true)
      */
     public function removeFilesAction($names)
     {
@@ -142,6 +142,9 @@ class FinderController
         return $this->success(__('Removed selected.'));
     }
 
+    /**
+     * @Request(csrf=true)
+     */
     public function uploadAction()
     {
         try {
