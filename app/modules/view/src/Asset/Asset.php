@@ -106,7 +106,7 @@ abstract class Asset implements AssetInterface, \ArrayAccess
      */
     public function getOption($name)
     {
-        return isset($this->options[$name]) ? $this->options[$name] : null;
+        return in_array($name, $this->options) ? $name : null;
     }
 
     /**
