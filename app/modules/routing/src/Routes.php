@@ -195,7 +195,18 @@ class Routes implements \IteratorAggregate, ResourceInterface
                     $refl = new \ReflectionClass($controller);
                 }
 
-                $this->modified = max($this->modified, filemtime($refl->getFileName()));
+                $time = 0;
+
+                try {
+                    $time = filemtime($refl->getFileName());
+                } catch (\Exception $e) {
+                    try {
+                        $time = filemtime(utf8_decode($refl->getFileName()));
+                    } catch (\Exception $ex) {
+                        $time = 0;
+                    }
+                }
+                $this->modified = max($this->modified, $time);
             }
         }
 
