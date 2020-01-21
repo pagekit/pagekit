@@ -32,6 +32,13 @@ class Application extends BaseApplication
 
         $this->container = $container;
 
+        $manager = $container['module'];
+        $toLoad = $manager->getType('console');
+
+        foreach ($toLoad as $module) {
+            $manager->load($module);
+        }
+
         if (isset($container['events'])) {
             $container['events']->trigger('console.init', [$this]);
         }
