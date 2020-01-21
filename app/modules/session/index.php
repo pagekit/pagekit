@@ -82,7 +82,7 @@ return [
 
         'request' => [function ($event, $request) use ($app) {
 
-            if (!isset($app['session.options']['cookie_path'])) {
+            if (session_status() == PHP_SESSION_NONE && !isset($app['session.options']['cookie_path'])) {
                 $app['session.storage']->setOptions(['cookie_path' => $request->getBasePath() ?: '/']);
             }
 
