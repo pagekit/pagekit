@@ -44,7 +44,7 @@ class ResetPasswordController
             }
 
             if (!$user = User::findByEmail($email)) {
-                throw new Exception(__('Unknown email address.'));
+                throw new Exception(__('If this email exists, you will receive an email with the reset instructions.'));
             }
 
             if ($user->isBlocked()) {
@@ -69,7 +69,7 @@ class ResetPasswordController
             $user->activation = $key;
             $user->save();
 
-            App::message()->success(__('Check your email for the confirmation link.'));
+            App::message()->success(__('If this email exists, you will receive an email with the reset instructions.'));
 
             return App::redirect('@user/login');
 
