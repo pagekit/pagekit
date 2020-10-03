@@ -84,6 +84,13 @@
                                     </div>
                                 </div>
                                 <div class="uk-form-row">
+                                    <label for="form-mysql-dbport" class="uk-form-label">{{ 'Port' | trans }}</label>
+                                    <div class="uk-form-controls">
+                                        <input id="form-mysql-dbport" class="uk-width-1-1" type="text" name="port" value="3306" v-model="config.database.connections.mysql.port" v-validate:required>
+                                        <p class="uk-form-help-block uk-text-danger" v-show="formDatabase.port.invalid">{{ 'Port cannot be blank.' | trans }}</p>
+                                    </div>
+                                </div>
+                                <div class="uk-form-row">
                                     <label for="form-mysql-dbuser" class="uk-form-label">{{ 'User' | trans }}</label>
                                     <div class="uk-form-controls">
                                         <input id="form-mysql-dbuser" class="uk-width-1-1" type="text" name="user" value="" v-model="config.database.connections.mysql.user" v-validate:required>
