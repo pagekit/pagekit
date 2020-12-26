@@ -22,7 +22,7 @@ return [
         $redirect          = $widget->get($user->isAuthenticated() ? 'redirect_logout' : 'redirect_login') ?: $app['url']->current(true);
         $last_username     = $app['session']->get(Auth::LAST_USERNAME);
 
-        return $app['view']('system/user/widget-login.php', compact('widget', 'options', 'user', 'last_username', 'redirect'));
+        return $app['view']('system/user/widget-login.php', compact('widget', 'user', 'last_username', 'redirect'));
     }
 
 ];
